@@ -140,8 +140,8 @@ const WerkenBij = () => {
 
       <main className="pt-16 sm:pt-20">
         {/* HERO */}
-        <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-20">
-          <div className="absolute inset-0 opacity-[0.08]">
+        <section className="relative min-h-[70vh] md:min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-16 md:py-20">
+          <div className="absolute inset-0 opacity-[0.08] pointer-events-none">
             <div
               className="absolute inset-0"
               style={{
@@ -154,30 +154,30 @@ const WerkenBij = () => {
             />
           </div>
 
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-4xl">
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Werken bij TerreVolt
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight break-words">
-                Werk mee aan de<br />
+                Werk mee aan de{" "}
                 <span className="text-[#9ed42e]">energie-infrastructuur</span> van Nederland
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-base sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
                 TerreVolt werkt aan laagspannings-, middenspannings- en aardingsprojecten binnen de netbeheerwereld. Wij zoeken vakmensen die veilig, zelfstandig en professioneel kunnen werken.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href="#aanmelden"
-                  className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
+                  className="group w-full sm:w-auto bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Aanmelden als monteur</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
                   href="/contact"
-                  className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
+                  className="w-full sm:w-auto border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
                   Contact opnemen
                 </a>
