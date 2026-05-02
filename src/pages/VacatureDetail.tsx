@@ -509,7 +509,7 @@ const VacatureDetail = () => {
               <div className="bg-white rounded-2xl p-8 border border-gray-200">
                 <div className="flex items-center gap-3 mb-6">
                   <Award className="w-7 h-7 text-[#9ed42e]" strokeWidth={2.5} />
-                  <h2 className="text-2xl text-[#0d3b2e]">Dit breng je mee</h2>
+                  <h2 className="text-2xl text-[#0d3b2e]">Wat breng je mee?</h2>
                 </div>
                 <ul className="space-y-3">
                   {vacature.meebrengen.map((t) => (
@@ -530,9 +530,9 @@ const VacatureDetail = () => {
             <div className="max-w-4xl mx-auto text-center mb-12">
               <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 <Gift className="w-4 h-4" />
-                Wat bieden wij?
+                Wat krijg je van ons?
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Heldere voordelen</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Heldere voorwaarden</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
               {vacature.bieden.map((b) => (
