@@ -34,11 +34,17 @@ const App = () => (
           <Route path="/over" element={<Over />} />
           <Route path="/werken-bij" element={<WerkenBij />} />
           <Route path="/contact" element={<Contact />} />
+          {/* Aliassen voor leesbare URL's */}
+          <Route path="/veiligheid-certificeringen" element={<Veiligheid />} />
+          <Route path="/over-terrevolt" element={<Over />} />
+          <Route path="/zzp-monteurs" element={<WerkenBij />} />
+
           <Route path="/diensten/ls-ms-netmontage" element={<LSMSNetmontage />} />
           <Route path="/diensten/stationsrenovatie" element={<Stationsrenovatie />} />
           <Route path="/diensten/schakelwerk" element={<Schakelwerk />} />
           <Route path="/diensten/aardingsoplossingen" element={<Aardingsoplossingen />} />
           <Route path="/diensten/meten-en-beproeven" element={<MetenEnBeproeven />} />
+          <Route path="/diensten/meten-beproeven-rapportage" element={<MetenEnBeproeven />} />
           <Route path="/diensten/huisaansluitingen" element={<Huisaansluitingen />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
