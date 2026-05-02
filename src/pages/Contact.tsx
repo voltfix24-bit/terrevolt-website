@@ -98,9 +98,7 @@ const Contact = () => {
       const intentLabel =
         intent === "project" ? "Project bespreken" :
         intent === "monteur" ? "Monteur/ploeg nodig" : "Sollicitatie/ZZP";
-      const description = parsed.data.description
-        ? `[Intentie: ${intentLabel}]\n\n${parsed.data.description}`
-        : `[Intentie: ${intentLabel}]`;
+      const description = parsed.data.description || null;
 
       const { error: insErr } = await supabase.from("contact_requests").insert([{
         name: parsed.data.name,
@@ -112,7 +110,9 @@ const Contact = () => {
         start_date: parsed.data.start_date || null,
         description,
         attachment_url,
-      }]);
+        intent,
+        intent_label: intentLabel,
+      } as any]);
       if (insErr) throw insErr;
 
       toast.success("Aanvraag verstuurd. We nemen zo snel mogelijk contact op.");
