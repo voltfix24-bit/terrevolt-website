@@ -346,7 +346,7 @@ const Contact = () => {
                 Bel of mail TerreVolt voor een snelle projectafstemming.
               </p>
               <a
-                href={`tel:${PHONE.replace(/\s|\(|\)/g, "")}`}
+                href={telHref}
                 className="inline-flex items-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-10 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-lg"
               >
                 <Phone className="w-5 h-5" />
