@@ -419,8 +419,8 @@ const WerkenBij = () => {
                     <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform flex-shrink-0">
                       <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
                     </div>
-                    <div className="text-[#0d3b2e] text-base sm:text-lg mb-2 break-words max-w-full">{p.label}</div>
-                    <p className="text-sm text-[#6c757d] leading-snug mb-3 break-words">{desc}</p>
+                    <div className="text-[#0d3b2e] text-base sm:text-lg mb-2 hyphens-nl max-w-full" lang="nl">{p.label}</div>
+                    <p className="text-sm text-[#6c757d] leading-snug mb-3 hyphens-nl" lang="nl">{desc}</p>
                     <span className="inline-block text-[11px] tracking-wider uppercase text-[#0d3b2e] bg-[#f0f7e6] border border-[#9ed42e]/40 rounded-full px-2.5 py-1 mb-4">
                       {labelTag}
                     </span>
