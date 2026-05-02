@@ -1,0 +1,85 @@
+import { Navigate, Outlet, Link, useLocation } from "react-router-dom";
+import { Loader2, LogOut, Briefcase, Inbox, LayoutDashboard } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
+
+export default function AdminLayout() {
+  const { user, isAdmin, loading } = useAuth();
+  const location = useLocation();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#f8f9fa]">
+        <Loader2 className="w-8 h-8 animate-spin text-[#0d3b2e]" />
+      </div>
+    );
+  }
+
+  if (!user) return <Navigate to="/admin/login" replace state={{ from: location }} />;
+  if (!isAdmin) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#f8f9fa] px-6 text-center gap-4">
+        <h1 className="text-2xl text-[#0d3b2e]">Geen toegang</h1>
+        <p className="text-[#6c757d]">Dit account heeft geen adminrechten.</p>
+        <Button onClick={() => supabase.auth.signOut()} variant="outline">Uitloggen</Button>
+      </div>
+    );
+  }
+
+  const nav = [
+    { to: "/admin", label: "Dashboard", icon: LayoutDashboard, end: true },
+    { to: "/admin/vacatures", label: "Vacatures", icon: Briefcase },
+    { to: "/admin/sollicitaties", label: "Sollicitaties", icon: Inbox },
+  ];
+
+  return (
+    <div className="min-h-screen bg-[#f8f9fa]">
+      <header className="bg-[#0d3b2e] text-white">
+        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+          <Link to="/admin" className="flex items-center gap-2">
+            <span className="text-[#9ed42e]">TerreVolt</span>
+            <span className="text-sm opacity-80">Beheer</span>
+          </Link>
+          <div className="flex items-center gap-3">
+            <Link to="/" className="text-sm hover:text-[#9ed42e]">→ Site</Link>
+            <Button
+              size="sm"
+              variant="ghost"
+              className="text-white hover:bg-[#1a4a36]"
+              onClick={() => supabase.auth.signOut()}
+            >
+              <LogOut className="w-4 h-4 mr-1" /> Uitloggen
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <div className="container mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-8">
+        <nav className="space-y-1">
+          {nav.map((n) => {
+            const Icon = n.icon;
+            const active = n.end ? location.pathname === n.to : location.pathname.startsWith(n.to);
+            return (
+              <Link
+                key={n.to}
+                to={n.to}
+                className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition ${
+                  active
+                    ? "bg-[#0d3b2e] text-white"
+                    : "text-[#0d3b2e] hover:bg-white"
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+                {n.label}
+              </Link>
+            );
+          })}
+        </nav>
+        <main className="min-w-0">
+          <Outlet />
+        </main>
+      </div>
+    </div>
+  );
+}
