@@ -509,22 +509,18 @@ const VacatureDetail = () => {
         {/* META */}
         <section className="py-12 sm:py-16 bg-white border-b border-gray-100">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            {/* Mobile: 2-koloms rijen — icoon links, label/waarde rechts */}
-            <ul className="sm:hidden max-w-md mx-auto bg-[#f8f9fa] rounded-xl border border-gray-100 divide-y divide-gray-200 overflow-hidden">
+            {/* Mobile: compacte badges die wrappen — geen horizontale overflow */}
+            <ul className="sm:hidden flex flex-wrap gap-2 max-w-full">
               {meta.map((m) => {
                 const Icon = m.icon;
                 return (
                   <li
                     key={m.label}
-                    className="grid grid-cols-[3rem_1fr] items-center gap-3 px-4 py-3 min-h-[64px]"
+                    className="inline-flex items-center gap-2 max-w-full bg-[#f0f7e6] border border-[#9ed42e]/40 text-[#0d3b2e] rounded-full pl-2.5 pr-3 py-1.5 min-w-0"
                   >
-                    <div className="w-11 h-11 bg-[#f0f7e6] rounded-lg flex items-center justify-center">
-                      <Icon className="w-5 h-5 text-[#0d3b2e]" strokeWidth={2} aria-hidden="true" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="text-[11px] uppercase tracking-wider text-[#6c757d]">{m.label}</div>
-                      <div className="text-[#0d3b2e] text-sm break-words leading-snug">{m.value}</div>
-                    </div>
+                    <Icon className="w-3.5 h-3.5 flex-shrink-0" strokeWidth={2.2} aria-hidden="true" />
+                    <span className="text-[11px] uppercase tracking-wider text-[#6c757d] flex-shrink-0">{m.label}:</span>
+                    <span className="text-xs leading-snug truncate min-w-0" title={m.value}>{m.value}</span>
                   </li>
                 );
               })}
