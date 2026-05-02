@@ -521,41 +521,93 @@ const VacatureDetail = () => {
         <section className="py-12 sm:py-16 bg-white border-b border-gray-100">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             {/* Mobile: compacte badges die wrappen — geen horizontale overflow */}
-            <ul className="sm:hidden flex flex-wrap gap-2 max-w-full">
+            <ul className="sm:hidden flex flex-wrap gap-2 max-w-full items-start">
               {meta.map((m) => {
                 const Icon = m.icon;
+                const long = isLongMeta(m.value);
+                const open = expandedMeta.has(m.label);
+                const baseClass =
+                  "group inline-flex items-center gap-2 max-w-full bg-[#f0f7e6] border border-[#9ed42e] text-[#0d3b2e] rounded-full pl-2.5 pr-3 py-1.5 min-w-0 transition-all duration-200 hover:bg-[#e3f0c9] hover:border-[#0d3b2e] hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2 focus-visible:bg-[#e3f0c9] active:scale-[0.98]";
+
+                if (!long) {
+                  return (
+                    <li
+                      key={m.label}
+                      tabIndex={0}
+                      aria-label={`${m.label}: ${m.value}`}
+                      className={`${baseClass} cursor-default`}
+                    >
+                      <Icon className="w-3.5 h-3.5 flex-shrink-0 text-[#0d3b2e]" strokeWidth={2.4} aria-hidden="true" />
+                      <span className="text-[11px] uppercase tracking-wider text-[#0d3b2e]/80 flex-shrink-0">{m.label}:</span>
+                      <span className="text-xs leading-snug truncate min-w-0 text-[#0d3b2e]" title={m.value}>{m.value}</span>
+                    </li>
+                  );
+                }
+
                 return (
-                  <li
-                    key={m.label}
-                    tabIndex={0}
-                    aria-label={`${m.label}: ${m.value}`}
-                    className="group inline-flex items-center gap-2 max-w-full bg-[#f0f7e6] border border-[#9ed42e] text-[#0d3b2e] rounded-full pl-2.5 pr-3 py-1.5 min-w-0 cursor-default transition-all duration-200 hover:bg-[#e3f0c9] hover:border-[#0d3b2e] hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2 focus-visible:bg-[#e3f0c9] active:scale-[0.98]"
-                  >
-                    <Icon className="w-3.5 h-3.5 flex-shrink-0 text-[#0d3b2e]" strokeWidth={2.4} aria-hidden="true" />
-                    <span className="text-[11px] uppercase tracking-wider text-[#0d3b2e]/80 flex-shrink-0">{m.label}:</span>
-                    <span className="text-xs leading-snug truncate min-w-0 text-[#0d3b2e]" title={m.value}>{m.value}</span>
+                  <li key={m.label} className={open ? "w-full" : "max-w-full min-w-0"}>
+                    <button
+                      type="button"
+                      onClick={() => toggleMeta(m.label)}
+                      aria-expanded={open}
+                      aria-label={`${m.label}: ${m.value}. ${open ? "Minder tonen" : "Lees meer"}`}
+                      className={`${baseClass} cursor-pointer w-full text-left ${open ? "items-start rounded-2xl py-2" : ""}`}
+                    >
+                      <Icon className={`w-3.5 h-3.5 flex-shrink-0 text-[#0d3b2e] ${open ? "mt-0.5" : ""}`} strokeWidth={2.4} aria-hidden="true" />
+                      <span className={`text-[11px] uppercase tracking-wider text-[#0d3b2e]/80 flex-shrink-0 ${open ? "mt-px" : ""}`}>{m.label}:</span>
+                      <span
+                        className={`text-xs leading-snug min-w-0 text-[#0d3b2e] flex-1 ${open ? "whitespace-normal break-words" : "truncate"}`}
+                        title={open ? undefined : m.value}
+                      >
+                        {m.value}
+                      </span>
+                      <ChevronDown
+                        className={`w-3.5 h-3.5 flex-shrink-0 text-[#0d3b2e] transition-transform duration-200 ${open ? "rotate-180 mt-0.5" : ""}`}
+                        strokeWidth={2.4}
+                        aria-hidden="true"
+                      />
+                    </button>
                   </li>
                 );
               })}
             </ul>
 
             {/* Tablet/Desktop: gecentreerd grid */}
-            <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
+            <div className="hidden sm:grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto items-start">
               {meta.map((m) => {
                 const Icon = m.icon;
+                const long = isLongMeta(m.value);
+                const open = expandedMeta.has(m.label);
                 return (
                   <div
                     key={m.label}
-                    tabIndex={0}
-                    aria-label={`${m.label}: ${m.value}`}
+                    tabIndex={long ? -1 : 0}
+                    aria-label={long ? undefined : `${m.label}: ${m.value}`}
                     className="group flex flex-col items-center text-center gap-2 rounded-xl p-3 -m-3 border border-transparent transition-all duration-200 cursor-default hover:border-[#9ed42e] hover:bg-[#f8fbf0] hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2 focus-visible:border-[#9ed42e] focus-visible:bg-[#f8fbf0] active:scale-[0.98]"
                   >
                     <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-200 group-hover:bg-[#9ed42e] group-focus-visible:bg-[#9ed42e]">
                       <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} aria-hidden="true" />
                     </div>
-                    <div className="min-w-0">
+                    <div className="min-w-0 w-full">
                       <div className="text-xs uppercase tracking-wider text-[#0d3b2e]/80">{m.label}</div>
-                      <div className="text-[#0d3b2e] text-sm break-words">{m.value}</div>
+                      <div
+                        className={`text-[#0d3b2e] text-sm break-words ${long && !open ? "line-clamp-2" : ""}`}
+                        title={long && !open ? m.value : undefined}
+                      >
+                        {m.value}
+                      </div>
+                      {long && (
+                        <button
+                          type="button"
+                          onClick={() => toggleMeta(m.label)}
+                          aria-expanded={open}
+                          aria-label={`${m.label}: ${open ? "minder tonen" : "lees meer"}`}
+                          className="mt-1 inline-flex items-center gap-1 text-xs text-[#0d3b2e] underline decoration-[#9ed42e] decoration-2 underline-offset-2 hover:text-[#0d3b2e] hover:decoration-[#0d3b2e] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2 rounded"
+                        >
+                          {open ? "Minder" : "Lees meer"}
+                          <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`} strokeWidth={2.5} aria-hidden="true" />
+                        </button>
+                      )}
                     </div>
                   </div>
                 );
