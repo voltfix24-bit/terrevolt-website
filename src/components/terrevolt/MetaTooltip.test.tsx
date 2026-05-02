@@ -248,6 +248,9 @@ describe("MetaTooltip — auto-hide timing (fake timers)", () => {
     expect(tip).toHaveAttribute("aria-hidden", "true");
   });
 });
+
+/**
+ * iOS Safari heeft een aantal eigenaardigheden t.o.v. desktop browsers:
  *  1. Na een touch-tap synthetiseert iOS Safari een `mouseenter` direct vóór een
  *     eventuele `click`. De tooltip mag daardoor niet dubbel toggelen of crashen.
  *  2. Op niet-interactieve elementen (zoals een <span> badge) krijgt het element
