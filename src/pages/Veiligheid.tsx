@@ -54,11 +54,11 @@ const Veiligheid = () => {
                 Veiligheid
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight hyphens-nl">
-                Veiligheid, certificeringen<br />
-                <span className="text-[#9ed42e]">& normen</span>
+                We doen het veilig,<br />
+                <span className="text-[#9ed42e]">of we doen het niet.</span>
               </h1>
               <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
-                Werken aan elektrotechnische infrastructuur vraagt om vakbekwaamheid, veiligheidsbewustzijn en duidelijke procedures. TerreVolt werkt met aandacht voor geldende normen, aanwijzingen en projectafspraken.
+                Werken aan LS/MS-infrastructuur vraagt om meer dan vakmanschap. Het vraagt om de discipline om stil te staan, risico's te herkennen en pas te starten als het veilig kan. Voor TerreVolt is veiligheid geen formaliteit, maar de afspraak dat iedereen aan het einde van de dag veilig naar huis gaat.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
