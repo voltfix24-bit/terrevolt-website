@@ -26,6 +26,7 @@ import AdminVacancies from "./pages/admin/AdminVacancies.tsx";
 import AdminVacancyForm from "./pages/admin/AdminVacancyForm.tsx";
 import AdminApplications from "./pages/admin/AdminApplications.tsx";
 import { OrganizationJsonLd } from "./components/seo/OrganizationJsonLd.tsx";
+import { HashScroll } from "./components/HashScroll.tsx";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
       <Sonner />
       <OrganizationJsonLd />
       <BrowserRouter>
+        <HashScroll />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/diensten" element={<Diensten />} />
