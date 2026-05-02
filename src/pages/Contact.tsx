@@ -358,14 +358,18 @@ const Contact = () => {
 
                 <button
                   type="submit"
-                  disabled={submitting}
-                  className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                  disabled={submitting || intent === "sollicitatie"}
+                  aria-disabled={intent === "sollicitatie"}
+                  title={intent === "sollicitatie" ? "Voor sollicitaties: ga naar Werken bij TerreVolt" : undefined}
+                  className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 min-h-[54px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {submitting ? (
                     <>
                       <Loader2 className="w-5 h-5 animate-spin" />
                       <span>Versturen...</span>
                     </>
+                  ) : intent === "sollicitatie" ? (
+                    <span>Gebruik formulier op Werken bij</span>
                   ) : (
                     <>
                       <span>Verstuur aanvraag</span>
