@@ -192,3 +192,117 @@ De test slaagt alleen wanneer **alle drie** breakpoints geen
 horizontale scroll vertonen én geen enkel element rechts buiten de
 viewport valt. Faalt er één, dan zie je in de assertion én in
 `report.md` exact welke tag/id/tekst het probleem veroorzaakt.
+
+---
+
+## 9. iOS Safari-specifieke checks
+
+iOS Safari (iPhone, met name iOS 16/17/18 op SE 2/3, 13 mini, 14, 15)
+heeft een aantal afwijkingen t.o.v. Chrome DevTools-emulatie. Loop deze
+checks expliciet door op een **echt toestel** of via Xcode Simulator
+(Simulator → Hardware → Device → iPhone SE 3rd gen + iPhone 15).
+
+### 9.1 Letter-spacing & kerning
+
+iOS Safari past `letter-spacing` ietsje strakker toe dan Chrome, en
+combineert dat met automatische *kerning* die op `-webkit-` prefix kan
+verschillen.
+
+| # | Check | Verwacht |
+|---|---|---|
+| 9.1.1 | Hero-titel "Veiligheid binnen elektrotechnische infrastructuur" — meet visueel of `tracking` (letter-spacing) niet té krap is | Letters raken elkaar niet; geen "samengeplakte" `rn`/`cl`/`li` combinaties |
+| 9.1.2 | Subnav-chips ("Aanpak", "BEI & VWI", "Rollen", "Locatie-eisen", "FAQ", "Contact") | Tekst staat horizontaal gecentreerd in pill, geen 1px afsnijding rechts |
+| 9.1.3 | Hoofdletter-knoptekst ("PROJECT BESPREKEN" / kapitalen) — als aanwezig | Spatie tussen letters voelt gelijk; geen "kleeftekst" tussen `M` en `B` |
+| 9.1.4 | Stapnummer-badges (1–5) | Cijfer staat optisch gecentreerd; geen lichte verschuiving naar links door font-metrics |
+| 9.1.5 | Em-dash `—` houdt rechts en links 1 spatiebreedte aan, **ook na font-fallback** | Niet ingedrukt tegen voorgaande/volgende woord |
+
+**Hulp**: forceer `text-rendering: geometricPrecision` tijdelijk via
+DevTools om te zien of een verschil door font-hinting komt:
+
+```js
+document.documentElement.style.textRendering = "geometricPrecision";
+```
+
+### 9.2 Font fallback (system stack)
+
+Als de webfont nog niet geladen is (eerste bezoek, slechte verbinding,
+of bij `font-display: swap`), valt iOS Safari terug op **San Francisco**
+(`-apple-system`). SF heeft bredere x-hoogte dan bv. Inter/Geist, dus
+lay-outs kunnen kortstondig wider/hoger renderen → mogelijke overflow.
+
+| # | Check | Verwacht |
+|---|---|---|
+| 9.2.1 | Network-throttling **Slow 3G** + harde reload op `/veiligheid` | Tijdens FOUT/FOIT geen horizontale scroll; cards rekken hooguit verticaal |
+| 9.2.2 | Disable webfonts (Safari → Develop → Disable Web Fonts) | Pagina blijft leesbaar; geen knoppen die uit hun container vallen |
+| 9.2.3 | Stappenkaart-titels en FAQ-vragen met SF-fallback | Wrappen op natuurlijke woordgrens; geen ineens verdubbelde regel die buiten card valt |
+| 9.2.4 | `font-feature-settings` (zoals tabular-nums op stapnummers) werkt of degradeert stil | Cijfers blijven gelijke breedte; geen zichtbare jump bij swap |
+| 9.2.5 | Subtiele cursive / italic in citaat ("Iedereen veilig thuis") | Italic fallback (`-apple-system` italic) breekt geen baseline-uitlijning |
+
+**Hulp** — simuleer alleen system stack:
+
+```js
+const s = document.createElement("style");
+s.textContent = `* { font-family: -apple-system, BlinkMacSystemFont,
+  "Segoe UI", Roboto, sans-serif !important; }`;
+document.head.appendChild(s);
+// verwijder weer: s.remove();
+```
+
+### 9.3 Veilige scroll-offset op kleine schermen
+
+iOS Safari heeft drie eigenaardigheden die de offset van anchor-links
+(deeplinks naar `#aanpak`, `#faq`, etc.) breken:
+
+1. **Dynamische URL-bar** die in/uitschuift → `100vh` ≠ visible height,
+   en `scrollIntoView` kan een doel **achter** de URL-bar parkeren.
+2. **Safe-area insets** (notch / Dynamic Island / home indicator) →
+   `env(safe-area-inset-top)` moet meegerekend worden in de
+   sticky-header-offset, anders verschuift de landing 20–47 px.
+3. **Rubber-band scroll** + momentum → een geplande
+   `window.scrollTo({ behavior: "smooth" })` kan worden ingehaald door
+   de inertie van een eerdere swipe.
+
+| # | Check | Verwacht |
+|---|---|---|
+| 9.3.1 | Open `/veiligheid#faq` direct vanuit Safari adresbalk (cold load) | FAQ-titel landt **onder** sticky header **én** safe-area top; niet half eronder |
+| 9.3.2 | Scroll diep, tik dan op subnav-chip "Rollen" terwijl URL-bar **uitgevouwen** is | Doel staat onder de zichtbare header — meet met vinger tegen scherm |
+| 9.3.3 | Scroll tot URL-bar **inklapt**, tik vervolgens op chip "Locatie-eisen" | Doel blijft correct uitgelijnd; geen sprong onder de header |
+| 9.3.4 | Roteer naar landschap (notch links) op iPhone 14/15 | Safe-area-inset-left/right wordt gerespecteerd; subnav valt niet onder de notch |
+| 9.3.5 | Tik op chip terwijl pagina nog momentum-scrollt na een swipe | Smooth-scroll wint; eindpositie klopt (geen "halverwege" stop) |
+| 9.3.6 | Pinch-zoom 150% → tik op chip "Contact" | Scroll-target blijft binnen zichtbaar gebied; pagina re-zoomt niet ongevraagd |
+| 9.3.7 | iOS instelling **"Reduceer beweging"** AAN | Scroll springt direct, geen smooth-animatie, doel nog steeds met juiste offset |
+| 9.3.8 | Safari "Vraag bureaubladsite" UIT (mobiel) vs AAN | In mobiele modus klopt de offset; in desktop-modus mag een kleine afwijking, maar geen overlap |
+
+**Hulpcommando** — visualiseer de werkelijke header-offset:
+
+```js
+// Plak in Safari's Web Inspector (Mac → Safari → Develop → iPhone)
+const header = document.querySelector("header");
+const sub = document.querySelector('[data-subnav], nav[aria-label*="ectie" i]');
+const totalOffset =
+  (header?.getBoundingClientRect().height || 0) +
+  (sub?.getBoundingClientRect().height || 0);
+console.log("Sticky offset:", totalOffset, "px");
+
+// Teken een rode lijn op die hoogte:
+const line = document.createElement("div");
+Object.assign(line.style, {
+  position: "fixed", left: "0", right: "0",
+  top: totalOffset + "px", height: "2px",
+  background: "red", zIndex: "9999", pointerEvents: "none",
+});
+document.body.appendChild(line);
+```
+
+Anchor-doel hoort **net onder** die rode lijn te landen na een
+deeplink. Valt het erboven → offset te klein. Valt het ruim eronder →
+offset te groot (ruimte verspild).
+
+### 9.4 Slaag/zak — iOS Safari
+
+- ✅ **Slaag**: alle 9.1–9.3 checks groen op iPhone SE 3 (375px) **én**
+  iPhone 15 (393px) **én** iPhone 15 Pro Max (430px), zowel met als
+  zonder webfont, en zowel met uit- als ingeklapte URL-bar.
+- ❌ **Zak**: één deeplink landt achter de header, één woord/chip valt
+  buiten viewport in system-font fallback, of letter-spacing zorgt voor
+  visueel kleeftekst in een knop of titel.
