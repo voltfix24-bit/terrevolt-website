@@ -128,7 +128,7 @@ const VacatureDetail = () => {
   useEffect(() => {
     if (!vacature || vacature === "missing") return;
     if (typeof IntersectionObserver === "undefined") return;
-    const formEl = document.getElementById("solliciteer");
+    const formEl = document.getElementById("solliciteren");
     const footerEl = document.querySelector<HTMLElement>("footer");
     const targets: Element[] = [formEl, footerEl].filter((n): n is HTMLElement => !!n);
     if (targets.length === 0) return;
@@ -426,7 +426,7 @@ const VacatureDetail = () => {
     setFile(null);
     formRef.current?.reset();
     setTimeout(() => {
-      document.getElementById("solliciteer")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById("solliciteren")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 50);
   };
 
@@ -471,7 +471,7 @@ const VacatureDetail = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#solliciteer"
+                  href="#solliciteren"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Direct aanmelden</span>
@@ -640,7 +640,7 @@ const VacatureDetail = () => {
                   Vragen?
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl text-[#0d3b2e] mb-4">
-                  Vragen over deze functie?
+                  Liever eerst een vraag stellen?
                 </h2>
                 <p className="text-[#6c757d] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
                   Je hoeft niet direct alles compleet te hebben. Bel, WhatsApp of mail ons gerust. We bespreken je ervaring, certificaten en beschikbaarheid en kijken samen of deze functie of projectinzet past.
@@ -672,6 +672,16 @@ const VacatureDetail = () => {
                   <MailIcon className="w-5 h-5" strokeWidth={2.2} />
                   <span>Mail ons</span>
                 </a>
+              </div>
+
+              <div className="mt-6 flex justify-center">
+                <Link
+                  to="/contact"
+                  className="group inline-flex items-center justify-center gap-2 bg-[#0d3b2e] text-white px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#1a4a36] transition-colors"
+                >
+                  <span>Neem contact op</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </div>
 
               <div className="mt-5 text-center text-xs text-[#6c757d] break-words">
@@ -718,7 +728,7 @@ const VacatureDetail = () => {
         </section>
 
         {/* FORMULIER */}
-        <section id="solliciteer" className="py-16 md:py-16 md:py-24 bg-white">
+        <section id="solliciteren" className="py-16 md:py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10 md:mb-12">
@@ -997,7 +1007,7 @@ const VacatureDetail = () => {
       >
         <div className="px-4 py-3">
           <a
-            href="#solliciteer"
+            href="#solliciteren"
             tabIndex={formInView ? -1 : 0}
             className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2"
           >

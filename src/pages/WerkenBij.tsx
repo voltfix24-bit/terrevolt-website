@@ -346,17 +346,17 @@ const WerkenBij = () => {
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-10">
                 <a
-                  href="#profielen"
+                  href="#aanmelden"
                   className="group w-full sm:w-auto bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px]"
                 >
-                  <span>Bekijk profielen</span>
+                  <span>Aanmelden als monteur</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="#aanmelden"
+                  href="#profielen"
                   className="w-full sm:w-auto border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center min-h-[48px] flex items-center justify-center"
                 >
-                  Direct aanmelden
+                  Bekijk profielen
                 </a>
               </div>
 
@@ -484,7 +484,7 @@ const WerkenBij = () => {
                     href="#aanmelden"
                     className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors text-center min-h-[44px] flex items-center justify-center"
                   >
-                    ZZP'er aanmelden
+                    ZZP'er of ploeg aanmelden
                   </a>
                   <a
                     href="/contact"
