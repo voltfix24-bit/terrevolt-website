@@ -194,9 +194,20 @@ const VacatureDetail = () => {
 
     const parsed = formSchema.safeParse(raw);
     if (!parsed.success) {
+      const fe: FieldErrors = {};
+      parsed.error.errors.forEach((err) => {
+        const k = err.path[0] as keyof FieldErrors;
+        if (k && !fe[k]) fe[k] = err.message;
+      });
+      setErrors(fe);
       toast.error(parsed.error.errors[0]?.message || "Controleer het formulier");
+      const first = Object.keys(fe)[0];
+      if (first && formRef.current) {
+        formRef.current.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
+      }
       return;
     }
+    setErrors({});
 
     if (file && file.size > 10 * 1024 * 1024) {
       toast.error("Bestand mag maximaal 10MB zijn");
@@ -236,8 +247,9 @@ const VacatureDetail = () => {
       if (insErr) throw insErr;
 
       toast.success("Sollicitatie verstuurd. We nemen zo snel mogelijk contact op.");
-      (e.target as HTMLFormElement).reset();
+      formRef.current?.reset();
       setFile(null);
+      setSuccess(true);
     } catch (err) {
       console.error(err);
       toast.error("Er ging iets mis. Probeer het later opnieuw.");
@@ -245,6 +257,17 @@ const VacatureDetail = () => {
       setSubmitting(false);
     }
   };
+
+  const resetForm = () => {
+    setSuccess(false);
+    setErrors({});
+    setFile(null);
+    formRef.current?.reset();
+    setTimeout(() => {
+      document.getElementById("solliciteer")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  };
+
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
