@@ -10,6 +10,7 @@ import Stationsrenovatie from "./pages/diensten/Stationsrenovatie.tsx";
 import Schakelwerk from "./pages/diensten/Schakelwerk.tsx";
 import Aardingsoplossingen from "./pages/diensten/Aardingsoplossingen.tsx";
 import MetenEnBeproeven from "./pages/diensten/MetenEnBeproeven.tsx";
+import Huisaansluitingen from "./pages/diensten/Huisaansluitingen.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/diensten/schakelwerk" element={<Schakelwerk />} />
           <Route path="/diensten/aardingsoplossingen" element={<Aardingsoplossingen />} />
           <Route path="/diensten/meten-en-beproeven" element={<MetenEnBeproeven />} />
+          <Route path="/diensten/huisaansluitingen" element={<Huisaansluitingen />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
