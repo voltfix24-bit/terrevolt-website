@@ -778,13 +778,14 @@ const WerkenBij = () => {
                     <div>
                       <label htmlFor="profile" className="block text-sm text-[#0d3b2e] mb-2">Profiel waarvoor je je aanmeldt *</label>
                       <select id="profile" name="profile" required defaultValue="" aria-invalid={!!errors.profile}
+                        aria-describedby={errors.profile ? "profile-error" : undefined}
                         className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.profile ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`}>
                         <option value="" disabled>Maak een keuze</option>
                         {profielOpties.map((o) => (
                           <option key={o} value={o}>{o}</option>
                         ))}
                       </select>
-                      {errors.profile && <p className="mt-1 text-xs text-red-600">{errors.profile}</p>}
+                      {errors.profile && <p id="profile-error" className="mt-1 text-xs text-red-600">{errors.profile}</p>}
                     </div>
                     <div>
                       <label htmlFor="experience" className="block text-sm text-[#0d3b2e] mb-2">Ervaring</label>
