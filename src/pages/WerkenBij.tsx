@@ -702,6 +702,29 @@ const WerkenBij = () => {
                 </p>
               </div>
 
+              {/* Vragen? — directe contactopties vóór het formulier */}
+              <div className="mb-8 bg-[#f0f7e6] border border-[#9ed42e]/50 rounded-2xl p-5 sm:p-6">
+                <div className="flex items-start gap-3 mb-4">
+                  <HelpCircle className="w-5 h-5 text-[#0d3b2e] flex-shrink-0 mt-0.5" />
+                  <div className="min-w-0">
+                    <div className="text-[#0d3b2e]">Liever eerst even bellen of appen?</div>
+                    <p className="text-sm text-[#0d3b2e]/80 mt-1 leading-relaxed">
+                      Korte lijnen — bel, WhatsApp of mail Team TerreVolt. We bespreken je ervaring en beschikbaarheid.
+                    </p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
+                  <a href={telHref} className="inline-flex items-center justify-center gap-2 bg-[#0d3b2e] text-white px-4 py-3 min-h-[48px] rounded-lg hover:bg-[#1a4a36] transition-colors">
+                    <PhoneIcon className="w-4 h-4 text-[#9ed42e]" /> Bel direct
+                  </a>
+                  <a href={waLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-4 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors">
+                    <MessageSquare className="w-4 h-4" /> WhatsApp
+                  </a>
+                  <a href={mailHref} className="inline-flex items-center justify-center gap-2 bg-white border-2 border-[#0d3b2e] text-[#0d3b2e] px-4 py-3 min-h-[48px] rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors">
+                    <MailIcon className="w-4 h-4" /> Mail ons
+                  </a>
+                </div>
+              </div>
 
               {success ? (
                 <div role="status" aria-live="polite" className="bg-[#f0f7e6] border border-[#9ed42e] rounded-2xl p-6 sm:p-10 shadow-sm text-center">
