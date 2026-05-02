@@ -353,7 +353,7 @@ const Veiligheid = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6 hyphens-nl">Iedereen veilig thuis.</h2>
               <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
-                Geen planning, onderhoudsvenster of commercieel belang zou, naar onze overtuiging, belangrijker moeten zijn dan de veiligheid van mensen. Veiligheid zit in voorbereiding, in gedrag, in elkaar aanspreken en in de ruimte om te stoppen wanneer de situatie daarom vraagt&nbsp;— met aandacht voor de projectafspraken die gelden.
+                Geen planning, onderhoudsvenster of commercieel belang zou, naar onze overtuiging, belangrijker moeten zijn dan de veiligheid van mensen. Veiligheid zit in voorbereiding, in gedrag, in elkaar aanspreken en in de ruimte om te stoppen wanneer de situatie daarom vraagt — met aandacht voor de projectafspraken die gelden.
               </p>
               <p className="mt-8 text-xl sm:text-2xl text-[#0d3b2e] italic">
                 &ldquo;We doen het veilig, of we doen het niet.&rdquo;
