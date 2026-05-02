@@ -55,7 +55,7 @@ export function Header() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="/contact"
               className="bg-[#0d3b2e] text-white px-6 py-2 rounded-lg hover:bg-[#1a4a36] transition-colors"
             >
               Contact
@@ -92,7 +92,7 @@ export function Header() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="/contact"
               onClick={() => setOpen(false)}
               className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors text-center mt-2"
             >
