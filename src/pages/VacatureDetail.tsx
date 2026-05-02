@@ -392,6 +392,7 @@ const VacatureDetail = () => {
         `Profiel: ${vacature.title}`,
         `Vacature: ${vacature.title}`,
         parsed.data.contact_pref ? `Contactvoorkeur: ${parsed.data.contact_pref}` : null,
+        noCv ? `CV: nog niet beschikbaar (kandidaat levert later aan)` : null,
         `Privacy akkoord: ja`,
       ].filter(Boolean);
       const messagePrefix = prefixParts.join(" | ");
