@@ -95,6 +95,13 @@ const Contact = () => {
         attachment_url = path;
       }
 
+      const intentLabel =
+        intent === "project" ? "Project bespreken" :
+        intent === "monteur" ? "Monteur/ploeg nodig" : "Sollicitatie/ZZP";
+      const description = parsed.data.description
+        ? `[Intentie: ${intentLabel}]\n\n${parsed.data.description}`
+        : `[Intentie: ${intentLabel}]`;
+
       const { error: insErr } = await supabase.from("contact_requests").insert([{
         name: parsed.data.name,
         company: parsed.data.company || null,
@@ -103,7 +110,7 @@ const Contact = () => {
         request_type: parsed.data.request_type || null,
         location: parsed.data.location || null,
         start_date: parsed.data.start_date || null,
-        description: parsed.data.description || null,
+        description,
         attachment_url,
       }]);
       if (insErr) throw insErr;
