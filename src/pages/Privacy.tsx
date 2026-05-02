@@ -47,7 +47,7 @@ const Privacy = () => {
               <h2 className="text-xl text-[#0d3b2e] mt-8">Jouw rechten</h2>
               <p>
                 Je hebt recht op inzage, correctie of verwijdering van je gegevens. Stuur hiervoor
-                een e-mail naar <a className="underline" href={mailHref()}>{company.email}</a>.
+                een e-mail naar <a className="underline" href={mailHref}>{company.email}</a>.
               </p>
 
               <p className="text-sm text-[#6c757d] mt-10">
