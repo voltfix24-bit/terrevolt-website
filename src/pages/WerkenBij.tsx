@@ -731,24 +731,27 @@ const WerkenBij = () => {
                 {/* Blok 1 — Contactgegevens */}
                 <div>
                   <h3 className="text-xs uppercase tracking-wider text-[#6c757d] mb-3 pb-2 border-b border-gray-200">Contactgegevens</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                  <div className="flex flex-col gap-4 sm:gap-5">
                     <div>
                       <label htmlFor="name" className="block text-sm text-[#0d3b2e] mb-2">Naam *</label>
                       <input id="name" name="name" required maxLength={100} aria-invalid={!!errors.name}
+                        aria-describedby={errors.name ? "name-error" : undefined}
                         className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.name ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`} />
-                      {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+                      {errors.name && <p id="name-error" className="mt-1 text-xs text-red-600">{errors.name}</p>}
                     </div>
                     <div>
                       <label htmlFor="phone" className="block text-sm text-[#0d3b2e] mb-2">Telefoon *</label>
-                      <input id="phone" name="phone" type="tel" required maxLength={30} inputMode="tel" aria-invalid={!!errors.phone}
+                      <input id="phone" name="phone" type="tel" required maxLength={30} inputMode="tel" autoComplete="tel" aria-invalid={!!errors.phone}
+                        aria-describedby={errors.phone ? "phone-error" : undefined}
                         className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`} />
-                      {errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone}</p>}
+                      {errors.phone && <p id="phone-error" className="mt-1 text-xs text-red-600">{errors.phone}</p>}
                     </div>
-                    <div className="sm:col-span-2">
+                    <div>
                       <label htmlFor="email" className="block text-sm text-[#0d3b2e] mb-2">E-mail *</label>
                       <input id="email" name="email" type="email" required maxLength={255} inputMode="email" autoComplete="email" aria-invalid={!!errors.email}
+                        aria-describedby={errors.email ? "email-error" : undefined}
                         className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.email ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`} />
-                      {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+                      {errors.email && <p id="email-error" className="mt-1 text-xs text-red-600">{errors.email}</p>}
                     </div>
                     <div>
                       <label htmlFor="contact_pref" className="block text-sm text-[#0d3b2e] mb-2">Hoe wil je het liefst benaderd worden?</label>
@@ -762,7 +765,7 @@ const WerkenBij = () => {
                     </div>
                     <div>
                       <label htmlFor="region" className="block text-sm text-[#0d3b2e] mb-2">Woonplaats / regio</label>
-                      <input id="region" name="region" maxLength={100}
+                      <input id="region" name="region" maxLength={100} autoComplete="address-level2"
                         className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
                     </div>
                   </div>
