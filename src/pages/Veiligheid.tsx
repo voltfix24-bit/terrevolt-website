@@ -156,7 +156,7 @@ const Veiligheid = () => {
                       <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
                     </div>
                     <h3 className="text-base text-[#0d3b2e] mb-2">{step.title}</h3>
-                    <p className="text-[#6c757d] text-sm leading-relaxed">{step.description}</p>
+                    <p className="text-[#6c757d] text-sm leading-relaxed hyphens-nl text-pretty">{step.description}</p>
                   </div>
                 );
               })}
@@ -169,7 +169,7 @@ const Veiligheid = () => {
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6 hyphens-nl">Veiligheid in voorbereiding, uitvoering en oplevering</h2>
-              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed">
+              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
                 Veilig werken ontstaat niet vanzelf. Het vraagt om voorbereiding, duidelijke afspraken, vakbekwaamheid en de ruimte om te stoppen wanneer de situatie daarom vraagt.
               </p>
             </div>
@@ -186,7 +186,7 @@ const Veiligheid = () => {
                       <Icon className="w-7 h-7 text-[#0d3b2e] group-hover:text-white transition-colors duration-300" strokeWidth={2} />
                     </div>
                     <h3 className="text-xl text-[#0d3b2e] mb-3">{item.title}</h3>
-                    <p className="text-[#6c757d] leading-relaxed flex-1">{item.description}</p>
+                    <p className="text-[#6c757d] leading-relaxed flex-1 hyphens-nl text-pretty">{item.description}</p>
                     <span className="mt-5 inline-block self-start text-[10px] uppercase tracking-wider text-[#0d3b2e] bg-[#f0f7e6] border border-[#9ed42e]/40 rounded-full px-3 py-1">
                       {item.label}
                     </span>
@@ -217,8 +217,8 @@ const Veiligheid = () => {
                 Bevoegdheden &amp; normen
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 hyphens-nl">Bevoegdheden, rollen en normen</h2>
-              <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                Veilig werken binnen de netbeheerwereld vraagt om duidelijkheid in rollen, aanwijzingen en procedures. TerreVolt sluit aan op de veiligheidsstructuur, projectafspraken en bedrijfsspecifieke eisen van opdrachtgever of netbeheerder waar van toepassing.
+              <p className="text-base sm:text-lg text-gray-300 leading-relaxed hyphens-nl text-pretty">
+                Veilig werken binnen de netbeheerwereld vraagt om duidelijkheid in rollen, aanwijzingen en procedures. TerreVolt sluit aan op de veiligheidsstructuur, projectafspraken en bedrijfsspecifieke eisen van opdrachtgever of netbeheerder, waar van toepassing.
               </p>
             </div>
 
@@ -235,7 +235,7 @@ const Veiligheid = () => {
                     </div>
                     <h3 className="text-lg text-white mb-1">{c.title}</h3>
                     <div className="text-xs uppercase tracking-wider text-[#9ed42e] mb-3">{c.subtitle}</div>
-                    <p className="text-sm text-gray-300 leading-relaxed">{c.description}</p>
+                    <p className="text-sm text-gray-300 leading-relaxed hyphens-nl text-pretty">{c.description}</p>
                   </div>
                 );
               })}
@@ -248,7 +248,7 @@ const Veiligheid = () => {
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl">Projectafspraken en locatie-eisen</h2>
-              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed">
+              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
                 Naast branche-regels kunnen per opdrachtgever of netbeheerder aanvullende afspraken gelden. Denk aan bedrijfsspecifieke procedures, poortinstructies, toegangseisen, sleutelprocedures, werkvergunningen en locatie-instructies.
               </p>
             </div>
@@ -265,7 +265,7 @@ const Veiligheid = () => {
                       <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
                     </div>
                     <h3 className="text-base sm:text-lg text-[#0d3b2e] mb-2">{c.title}</h3>
-                    <p className="text-sm text-[#6c757d] leading-relaxed">{c.description}</p>
+                    <p className="text-sm text-[#6c757d] leading-relaxed hyphens-nl text-pretty">{c.description}</p>
                   </div>
                 );
               })}
@@ -283,8 +283,8 @@ const Veiligheid = () => {
           <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6 hyphens-nl">Iedereen veilig thuis.</h2>
-              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed">
-                Geen planning, onderhoudsvenster of commercieel belang zou, naar onze overtuiging, belangrijker moeten zijn dan de veiligheid van mensen. Veiligheid zit in voorbereiding, in gedrag, in elkaar aanspreken en in de ruimte om te stoppen wanneer de situatie daarom vraagt — met aandacht voor de projectafspraken die gelden.
+              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
+                Geen planning, onderhoudsvenster of commercieel belang zou, naar onze overtuiging, belangrijker moeten zijn dan de veiligheid van mensen. Veiligheid zit in voorbereiding, in gedrag, in elkaar aanspreken en in de ruimte om te stoppen wanneer de situatie daarom vraagt&nbsp;— met aandacht voor de projectafspraken die gelden.
               </p>
               <p className="mt-8 text-xl sm:text-2xl text-[#0d3b2e] italic">
                 &ldquo;We doen het veilig, of we doen het niet.&rdquo;
@@ -307,7 +307,7 @@ const Veiligheid = () => {
                     <AccordionTrigger className="text-left text-[#0d3b2e] hover:no-underline py-5 text-base sm:text-lg rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-white">
                       {f.q}
                     </AccordionTrigger>
-                    <AccordionContent className="text-[#6c757d] leading-relaxed text-sm sm:text-base pb-5">
+                    <AccordionContent className="text-[#6c757d] leading-relaxed text-sm sm:text-base pb-5 hyphens-nl text-pretty">
                       {f.a}
                     </AccordionContent>
                   </AccordionItem>
@@ -337,8 +337,8 @@ const Veiligheid = () => {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6 hyphens-nl">
                 Een LS/MS-project <span className="text-[#9ed42e]">veilig voorbereiden</span>?
               </h2>
-              <p className="text-base sm:text-xl text-gray-300 mb-10 leading-relaxed">
-                Neem contact op met TerreVolt voor projectmatige ondersteuning waarbij veiligheid, vakmanschap en duidelijke afspraken — waar van toepassing — centraal staan.
+              <p className="text-base sm:text-xl text-gray-300 mb-10 leading-relaxed hyphens-nl text-pretty">
+                Neem contact op met TerreVolt voor projectmatige ondersteuning waarbij veiligheid, vakmanschap en duidelijke afspraken&nbsp;— waar van toepassing&nbsp;— centraal staan.
               </p>
               <a
                 href="/contact"
