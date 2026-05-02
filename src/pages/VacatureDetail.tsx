@@ -48,19 +48,100 @@ const proces = [
   { icon: PlayCircle, title: "Start", text: "Inwerken op locatie, daarna zelfstandig aan de slag." },
 ];
 
+type VacatureView = {
+  id?: string;
+  title: string;
+  intro: string;
+  meta: {
+    regio: string;
+    uren: string;
+    dienstverband: string;
+    niveau: string;
+    werkgebied: string;
+    bevoegdheden: string;
+  };
+  taken: string[];
+  meebrengen: string[];
+  bieden: string[];
+  veiligheid: string;
+  process_steps: string[];
+};
+
+const standaardProces = ["Aanmelden", "Kennismaken", "Documenten/check", "Projectmatch", "Start"];
+
 const VacatureDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const vacature = findVacature(slug);
+  const [vacature, setVacature] = useState<VacatureView | null | "missing">(null);
 
-  if (!vacature) return <Navigate to="/werken-bij" replace />;
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const { data } = await supabase
+        .from("vacancies")
+        .select("*")
+        .eq("slug", slug || "")
+        .eq("status", "published")
+        .maybeSingle();
+      if (!active) return;
+      if (data) {
+        setVacature({
+          id: data.id,
+          title: data.title,
+          intro: data.intro || "",
+          meta: {
+            regio: data.region || "—",
+            uren: data.hours || "—",
+            dienstverband: data.employment_type || "—",
+            niveau: data.level || "—",
+            werkgebied: data.work_area || "—",
+            bevoegdheden: "VCA, relevante aanwijzingen",
+          },
+          taken: Array.isArray(data.what_you_do) ? (data.what_you_do as string[]) : [],
+          meebrengen: Array.isArray(data.requirements) ? (data.requirements as string[]) : [],
+          bieden: Array.isArray(data.offer) ? (data.offer as string[]) : [],
+          veiligheid: data.safety_text || "",
+          process_steps: Array.isArray(data.process_steps) && data.process_steps.length > 0
+            ? (data.process_steps as string[])
+            : standaardProces,
+        });
+        return;
+      }
+      const fb = findVacature(slug);
+      if (fb) {
+        setVacature({
+          title: fb.title,
+          intro: fb.intro,
+          meta: fb.meta,
+          taken: fb.taken,
+          meebrengen: fb.meebrengen,
+          bieden: fb.bieden,
+          veiligheid: fb.veiligheid,
+          process_steps: standaardProces,
+        });
+      } else {
+        setVacature("missing");
+      }
+    })();
+    return () => { active = false; };
+  }, [slug]);
 
   usePageMeta(
-    `${vacature.title} | Vacature TerreVolt BV`,
-    `${vacature.title} bij TerreVolt: ${vacature.intro.slice(0, 140)}`
+    vacature && vacature !== "missing"
+      ? `${vacature.title} | Vacature TerreVolt BV`
+      : "Vacature | TerreVolt BV",
+    vacature && vacature !== "missing"
+      ? `${vacature.title} bij TerreVolt: ${vacature.intro.slice(0, 140)}`
+      : undefined
   );
 
-  const [submitting, setSubmitting] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
+  if (vacature === "missing") return <Navigate to="/werken-bij" replace />;
+  if (!vacature) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#f8f9fa]">
+        <Loader2 className="w-8 h-8 animate-spin text-[#0d3b2e]" />
+      </div>
+    );
+  }
 
   const meta = [
     { icon: MapPin, label: "Regio", value: vacature.meta.regio },
