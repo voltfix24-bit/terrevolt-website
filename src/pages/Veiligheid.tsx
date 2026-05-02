@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { ArrowRight, CheckCircle2, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, MessageSquare, Lock, Wrench, ClipboardList, HardHat, KeyRound, DoorOpen, FileText, Building2 } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
@@ -49,6 +50,72 @@ const faqs = [
 
 const Veiligheid = () => {
   usePageMeta("Veiligheid & certificeringen | TerreVolt BV", "Veiligheid, bevoegdheden en normen bij TerreVolt: BEI BLS/BHS, WV/AVP/VP/VOP, VWI's, LMRA, VCA en NEN 1010 / 3140 / 3840.", "/veiligheid");
+
+  const subnavRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    // Bereken dynamische offset: header (sticky boven subnav) + subnav zelf + kleine ademruimte.
+    const getOffset = () => {
+      const header = document.querySelector("header");
+      const headerH = header ? header.getBoundingClientRect().height : 0;
+      const subnavH = subnavRef.current ? subnavRef.current.getBoundingClientRect().height : 0;
+      return Math.round(headerH + subnavH + 12);
+    };
+
+    const scrollToHash = (hash: string, behavior: ScrollBehavior = "smooth") => {
+      if (!hash || hash === "#") return false;
+      const id = decodeURIComponent(hash.slice(1));
+      const el = document.getElementById(id);
+      if (!el) return false;
+      const rect = el.getBoundingClientRect();
+      const top = rect.top + window.scrollY - getOffset();
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top, behavior: prefersReduced ? "auto" : behavior });
+      // Focus op target voor toegankelijkheid (zonder extra scroll).
+      const prevTabIndex = el.getAttribute("tabindex");
+      if (prevTabIndex === null) el.setAttribute("tabindex", "-1");
+      (el as HTMLElement).focus({ preventScroll: true });
+      if (prevTabIndex === null) {
+        // Maak het weer "transparant" voor toetsenbord-tabs nadat focus gezet is.
+        setTimeout(() => el.removeAttribute("tabindex"), 0);
+      }
+      return true;
+    };
+
+    const onClick = (e: MouseEvent) => {
+      // Negeer als modifier-toetsen of niet-linkermuisknop.
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const target = (e.target as HTMLElement | null)?.closest('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!target) return;
+      const href = target.getAttribute("href") || "";
+      if (href.length < 2) return; // alleen "#" zelf negeren
+      if (target.target && target.target !== "" && target.target !== "_self") return;
+      if (scrollToHash(href, "smooth")) {
+        e.preventDefault();
+        if (window.location.hash !== href) {
+          history.pushState(null, "", href);
+        }
+      }
+    };
+
+    document.addEventListener("click", onClick);
+
+    // Deeplink bij paginaload of bij hash-wijziging via browser-navigatie.
+    const onHashChange = () => scrollToHash(window.location.hash, "smooth");
+
+    if (window.location.hash) {
+      // Wacht een frame zodat layout (incl. subnav-hoogte) klaar is.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => scrollToHash(window.location.hash, "auto"));
+      });
+    }
+    window.addEventListener("hashchange", onHashChange);
+
+    return () => {
+      document.removeEventListener("click", onClick);
+      window.removeEventListener("hashchange", onHashChange);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
@@ -104,6 +171,7 @@ const Veiligheid = () => {
 
         {/* STICKY SUBNAV */}
         <nav
+          ref={subnavRef}
           aria-label="Paginanavigatie Veiligheid"
           className="sticky top-16 sm:top-20 z-30 bg-white/90 backdrop-blur-sm border-b border-gray-200"
         >
@@ -131,7 +199,7 @@ const Veiligheid = () => {
         </nav>
 
         {/* SECTIE: Veiligheidsaanpak (5 stappen) */}
-        <section id="veiligheidsaanpak" className="py-16 md:py-24 bg-white scroll-mt-32">
+        <section id="veiligheidsaanpak" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-14 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Onze veiligheidsaanpak</h2>
@@ -198,7 +266,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Bevoegdheden, rollen en normen (donker) */}
-        <section id="bei-vwi" className="relative py-16 md:py-24 bg-[#0d3b2e] overflow-hidden scroll-mt-32">
+        <section id="bei-vwi" className="relative py-16 md:py-24 bg-[#0d3b2e] overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="absolute inset-0 opacity-[0.05]">
             <div
               className="absolute inset-0"
@@ -222,7 +290,7 @@ const Veiligheid = () => {
               </p>
             </div>
 
-            <div id="rollen" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto scroll-mt-32">
+            <div id="rollen" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
               {certs.map((c) => {
                 const Icon = c.icon;
                 return (
@@ -244,7 +312,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Projectafspraken en locatie-eisen */}
-        <section id="locatie-eisen" className="py-16 md:py-24 bg-white scroll-mt-32">
+        <section id="locatie-eisen" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl">Projectafspraken en locatie-eisen</h2>
@@ -294,7 +362,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: FAQ */}
-        <section id="faq" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-32">
+        <section id="faq" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10 sm:mb-12">
@@ -318,7 +386,7 @@ const Veiligheid = () => {
         </section>
 
         {/* CTA */}
-        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-32">
+        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"
