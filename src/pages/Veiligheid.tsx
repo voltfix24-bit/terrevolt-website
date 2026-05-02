@@ -11,39 +11,39 @@ import {
 
 const stappen = [
   { icon: FileSearch, title: "Voorbereiden", description: "Scope, locatie, werkmethode, risico's, bevoegdheden en projectafspraken worden vooraf, met aandacht voor de specifieke situatie, helder gemaakt." },
-  { icon: MessageSquare, title: "Afstemmen", description: "We stemmen, waar van toepassing, af met opdrachtgever, uitvoerder, werkverantwoordelijke en betrokken partijen over toegang, schakelingen, instructies en planning." },
+  { icon: MessageSquare, title: "Afstemmen", description: "We stemmen af met opdrachtgever, uitvoerder, werkverantwoordelijke en betrokken partijen over toegang, schakelingen, instructies en planning." },
   { icon: Lock, title: "Veiligstellen", description: "Werkgebied, installatie en werkzaamheden worden volgens de geldende procedures en projectafspraken veiliggesteld. Bij twijfel wordt niet gestart." },
-  { icon: Wrench, title: "Uitvoeren", description: "Monteurs werken met aandacht voor instructie, LMRA, VCA, BEI/VWI en projectafspraken, waar van toepassing." },
-  { icon: ClipboardList, title: "Controleren", description: "Werkzaamheden worden gecontroleerd, teruggekoppeld en, waar nodig of vereist, aantoonbaar vastgelegd volgens projectafspraken." },
+  { icon: Wrench, title: "Uitvoeren", description: "Monteurs werken met aandacht voor instructie, LMRA, VCA, BEI/VWI en projectafspraken die op de opdracht van toepassing zijn." },
+  { icon: ClipboardList, title: "Controleren", description: "Werkzaamheden worden gecontroleerd, teruggekoppeld en, waar nodig, aantoonbaar vastgelegd volgens de afspraken op het project." },
 ];
 
 const veiligwerken = [
   { icon: FileSearch, title: "LMRA", description: "Voor start van werkzaamheden wordt de situatie, met aandacht voor gewijzigde omstandigheden, gecontroleerd. Ontbreekt informatie of voelt iets niet veilig? Dan wordt er afgestemd voordat er wordt doorgewerkt.", label: "Laatste minuut risicoanalyse" },
-  { icon: MessageSquare, title: "Toolboxen & kennisdeling", description: "Veiligheid vraagt om herhaling en bewustzijn. Toolboxen en kennisdeling helpen om risico's, projectafspraken en werkinstructies, waar van toepassing, actief onder de aandacht te houden.", label: "Veiligheid als gedrag" },
+  { icon: MessageSquare, title: "Toolboxen & kennisdeling", description: "Veiligheid vraagt om herhaling en bewustzijn. Toolboxen en kennisdeling helpen om risico's, projectafspraken en werkinstructies actief onder de aandacht te houden — afgestemd op de opdracht en locatie.", label: "Veiligheid als gedrag" },
   { icon: HardHat, title: "Werkplekinrichting", description: "Een veilige werkplek vraagt, afhankelijk van de situatie, om duidelijke afzetting, orde, verlichting, passend materieel en afspraken met andere partijen op locatie.", label: "Veilige werkplek" },
-  { icon: CheckCircle2, title: "Oplevercontrole", description: "Na uitvoering volgt controle, terugkoppeling en, waar nodig of vereist, meetrapportage of opleverdocumentatie volgens projectafspraken. Veilig werken stopt niet bij de laatste handeling.", label: "Controle en vastlegging" },
+  { icon: CheckCircle2, title: "Oplevercontrole", description: "Na uitvoering volgt controle, terugkoppeling en, waar nodig, meetrapportage of opleverdocumentatie volgens de geldende projectafspraken. Veilig werken stopt niet bij de laatste handeling.", label: "Controle en vastlegging" },
 ];
 
 const certs = [
-  { icon: ShieldCheck, title: "BEI", subtitle: "BLS / BHS", description: "Branche-regels voor veilige bedrijfsvoering in laagspannings-, middenspannings- en hoogspanningssystemen van netbeheerders, toegepast waar van toepassing." },
+  { icon: ShieldCheck, title: "BEI", subtitle: "BLS / BHS", description: "Branche-regels voor veilige bedrijfsvoering in laagspannings-, middenspannings- en hoogspanningssystemen van netbeheerders, afgestemd op de opdracht en locatie." },
   { icon: BadgeCheck, title: "Rollen", subtitle: "WV / AVP / VP / VOP", description: "Passende rollen en aanwijzingen, afhankelijk van project, opdrachtgever, werkgebied en werkzaamheden." },
   { icon: Award, title: "VWI's & LMRA", subtitle: "Werkinstructies", description: "Veiligheidswerkinstructies en laatste-minuut-risicoanalyse helpen om werkzaamheden, met aandacht voor de situatie, bewust en beheerst uit te voeren." },
-  { icon: BookOpen, title: "NEN", subtitle: "1010 / 3140 / 3840", description: "NEN-normen geven, waar van toepassing, richting aan veilig werken, bedrijfsvoering, aanleg, controle en oplevering." },
+  { icon: BookOpen, title: "NEN", subtitle: "1010 / 3140 / 3840", description: "NEN-normen geven richting aan veilig werken, bedrijfsvoering, aanleg, controle en oplevering — afgestemd op de aard van de opdracht." },
 ];
 
 const locatie = [
   { icon: DoorOpen, title: "Poortinstructies", description: "Voor toegang tot stations, bouwplaatsen of technische locaties kunnen, afhankelijk van de locatie, instructies en toetsing verplicht zijn." },
-  { icon: Building2, title: "Bedrijfsspecifieke procedures", description: "Netbeheerders en opdrachtgevers kunnen aanvullende procedures of supplementen hanteren; we sluiten daarop aan waar van toepassing." },
+  { icon: Building2, title: "Bedrijfsspecifieke procedures", description: "Netbeheerders en opdrachtgevers kunnen aanvullende procedures of supplementen hanteren; we sluiten daarop aan volgens de projectafspraken." },
   { icon: KeyRound, title: "Toegang & sleutelbeheer", description: "Toegang tot technische ruimten, stations en terreinen vraagt, afhankelijk van de locatie, om duidelijke afspraken en bevoegdheden." },
-  { icon: FileText, title: "Werkvergunningen & overdracht", description: "Een veilige start vraagt, waar van toepassing, om juiste vrijgave, instructie, overdracht en afstemming met betrokken partijen." },
+  { icon: FileText, title: "Werkvergunningen & overdracht", description: "Een veilige start vraagt om juiste vrijgave, instructie, overdracht en afstemming met betrokken partijen, afgestemd op de opdracht en locatie." },
 ];
 
 const faqs = [
-  { q: "Wat betekent BEI BLS/BHS?", a: "BEI-BLS is de Bedrijfsvoering van Elektrische Installaties voor laagspanning, BEI-BHS voor hoog- en middenspanning binnen de elektriciteitsvoorzieningssystemen van netbeheerders. De norm legt vast welke aanwijzingen (WV, AVP, VP, VOP), procedures en instructies kunnen gelden bij werkzaamheden aan of nabij elektrische installaties. TerreVolt werkt met aandacht voor deze structuur en stemt rollen, bevoegdheden en werkmethodes per project af op de geldende BEI-versie en de eisen van de netbeheerder, waar van toepassing." },
-  { q: "Wat zijn VWI's?", a: "VWI's zijn Veiligheidswerkinstructies: gestandaardiseerde werkbeschrijvingen die binnen de BEI-systematiek richting geven aan hoe een specifieke handeling (zoals schakelen, spanningsloos maken, meten of beproeven) veilig kan worden uitgevoerd. Ze beschrijven, waar van toepassing, de voorbereiding, benodigde PBM's, rolverdeling en controlepunten. TerreVolt gebruikt de VWI die hoort bij de werkzaamheid en de installatie, en wijkt daar volgens projectafspraken niet zonder afstemming van af." },
-  { q: "Werkt TerreVolt volgens netbeheerderseisen?", a: "Ja, waar van toepassing. Per opdracht stemmen we af welke netbeheerder-specifieke procedures, poortinstructies, aanwijsbeleid en kwaliteitseisen gelden. Denk aan eisen rond toegang tot stations, registratie van schakelhandelingen, gebruik van vergrendelingen, oplevering en aantoonbaarheid. We sluiten met aandacht aan op het BEI-regime en de aanvullende bedrijfsvoorschriften van de betreffende netbeheerder of opdrachtgever, volgens projectafspraken." },
+  { q: "Wat betekent BEI BLS/BHS?", a: "BEI-BLS is de Bedrijfsvoering van Elektrische Installaties voor laagspanning, BEI-BHS voor hoog- en middenspanning binnen de elektriciteitsvoorzieningssystemen van netbeheerders. De norm legt vast welke aanwijzingen (WV, AVP, VP, VOP), procedures en instructies kunnen gelden bij werkzaamheden aan of nabij elektrische installaties. TerreVolt werkt met aandacht voor deze structuur en stemt rollen, bevoegdheden en werkmethodes per project af op de geldende BEI-versie en de eisen van de netbeheerder." },
+  { q: "Wat zijn VWI's?", a: "VWI's zijn Veiligheidswerkinstructies: gestandaardiseerde werkbeschrijvingen die binnen de BEI-systematiek richting geven aan hoe een specifieke handeling (zoals schakelen, spanningsloos maken, meten of beproeven) veilig kan worden uitgevoerd. Ze beschrijven, afgestemd op de opdracht en locatie, de voorbereiding, benodigde PBM's, rolverdeling en controlepunten. TerreVolt gebruikt de VWI die hoort bij de werkzaamheid en de installatie, en wijkt daar volgens de geldende projectafspraken niet zonder afstemming van af." },
+  { q: "Werkt TerreVolt volgens netbeheerderseisen?", a: "Ja, afgestemd op de opdracht. Per project stemmen we af welke netbeheerder-specifieke procedures, poortinstructies, aanwijsbeleid en kwaliteitseisen gelden. Denk aan eisen rond toegang tot stations, registratie van schakelhandelingen, gebruik van vergrendelingen, oplevering en aantoonbaarheid. We sluiten met aandacht aan op het BEI-regime en de aanvullende bedrijfsvoorschriften van de betreffende netbeheerder of opdrachtgever, volgens de geldende projectafspraken." },
   { q: "Wat als een situatie niet veilig voelt?", a: "Dan wordt er in principe gestopt. Iedere monteur, uitvoerder of betrokkene heeft, binnen zijn rol, het recht én de verantwoordelijkheid om werk stil te leggen bij twijfel. De situatie wordt gemeld bij de werkverantwoordelijke en/of opdrachtgever, opnieuw beoordeeld via een LMRA en pas hervat als dat verantwoord en aantoonbaar veilig kan. We doen het veilig, of we doen het niet — geen project zou belangrijker moeten zijn dan iemand veilig thuis." },
-  { q: "Is VCA verplicht?", a: "VCA is wettelijk niet altijd verplicht, maar wordt door veel netbeheerders, hoofdaannemers en industriële opdrachtgevers contractueel geëist voor werk aan elektrische infrastructuur. TerreVolt zorgt dat medewerkers en ingehuurde ZZP'ers, waar van toepassing, beschikken over een geldig VCA-certificaat (Basis of VOL), naast de specifieke BEI-aanwijzingen, NEN 3140/3840-instructies en eventuele aanvullende opleidingen die het project volgens projectafspraken vraagt." },
+  { q: "Is VCA verplicht?", a: "VCA is wettelijk niet altijd verplicht, maar wordt door veel netbeheerders, hoofdaannemers en industriële opdrachtgevers contractueel geëist voor werk aan elektrische infrastructuur. TerreVolt zorgt dat medewerkers en ingehuurde ZZP'ers, afgestemd op de opdracht en locatie, beschikken over een geldig VCA-certificaat (Basis of VOL), naast de specifieke BEI-aanwijzingen, NEN 3140/3840-instructies en eventuele aanvullende opleidingen die het project volgens de geldende projectafspraken vraagt." },
   { q: "Wie is verantwoordelijk voor veilig werken?", a: "Veiligheid is een gedeelde verantwoordelijkheid binnen een duidelijke rolverdeling. De Installatieverantwoordelijke (IV) en Werkverantwoordelijke (WV) zijn, waar aangewezen, formeel verantwoordelijk voor de installatie en het werk. De AVP/VP bereidt voor en geeft opdracht, de VOP voert uit binnen zijn bevoegdheid. Daarnaast hebben opdrachtgever, uitvoerder en iedere monteur, met aandacht voor hun rol, de verantwoordelijkheid om risico's te signaleren, een LMRA uit te voeren, elkaar aan te spreken en niet weg te kijken. Bij TerreVolt streven we ernaar dat iedereen verantwoordelijkheid pakt en dat niemand er alleen voor staat." },
 ];
 
@@ -80,7 +80,7 @@ const Veiligheid = () => {
                 <span className="text-[#9ed42e]">of we doen het niet.</span>
               </h1>
               <p className="text-base sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed hyphens-nl text-pretty">
-                Werken aan LS/MS-infrastructuur vraagt om vakmanschap, discipline en het lef om te stoppen wanneer iets niet veilig voelt. Voor TerreVolt is veiligheid geen formaliteit, maar&nbsp;— waar van toepassing&nbsp;— een uitgangspunt van elke opdracht: voor de monteur, de ploeg, de uitvoerende partij en iedereen op locatie.
+                Werken aan LS/MS-infrastructuur vraagt om vakmanschap, discipline en het lef om te stoppen wanneer iets niet veilig voelt. Voor TerreVolt is veiligheid geen formaliteit, maar een uitgangspunt van elke opdracht — voor de monteur, de ploeg, de uitvoerende partij en iedereen op locatie.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -136,7 +136,7 @@ const Veiligheid = () => {
             <div className="text-center mb-14 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Onze veiligheidsaanpak</h2>
               <p className="text-base sm:text-xl text-[#6c757d] max-w-2xl mx-auto leading-relaxed hyphens-nl text-pretty">
-                Een veilige uitvoering begint vóór de eerste handeling. TerreVolt werkt, waar van toepassing, met een gestructureerde aanpak van voorbereiding tot oplevering, afgestemd op de projectafspraken.
+                Een veilige uitvoering begint vóór de eerste handeling. TerreVolt werkt met een gestructureerde aanpak van voorbereiding tot oplevering, afgestemd op de opdracht, locatie en geldende projectafspraken.
               </p>
             </div>
 
@@ -218,7 +218,7 @@ const Veiligheid = () => {
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 hyphens-nl">Bevoegdheden, rollen en normen</h2>
               <p className="text-base sm:text-lg text-gray-300 leading-relaxed hyphens-nl text-pretty">
-                Veilig werken binnen de netbeheerwereld vraagt om duidelijkheid in rollen, aanwijzingen en procedures. TerreVolt sluit aan op de veiligheidsstructuur, projectafspraken en bedrijfsspecifieke eisen van opdrachtgever of netbeheerder, waar van toepassing.
+                Veilig werken binnen de netbeheerwereld vraagt om duidelijkheid in rollen, aanwijzingen en procedures. TerreVolt sluit aan op de veiligheidsstructuur en bedrijfsspecifieke eisen van opdrachtgever of netbeheerder, afgestemd op de opdracht, locatie en geldende projectafspraken.
               </p>
             </div>
 
@@ -338,7 +338,7 @@ const Veiligheid = () => {
                 Een LS/MS-project <span className="text-[#9ed42e]">veilig voorbereiden</span>?
               </h2>
               <p className="text-base sm:text-xl text-gray-300 mb-10 leading-relaxed hyphens-nl text-pretty">
-                Neem contact op met TerreVolt voor projectmatige ondersteuning waarbij veiligheid, vakmanschap en duidelijke afspraken&nbsp;— waar van toepassing&nbsp;— centraal staan.
+                Neem contact op met TerreVolt voor projectmatige ondersteuning waarbij veiligheid, vakmanschap en duidelijke afspraken centraal staan — afgestemd op de opdracht, locatie en geldende projectafspraken.
               </p>
               <a
                 href="/contact"
