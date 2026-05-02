@@ -23,6 +23,7 @@ const App = () => (
           <Route path="/diensten" element={<Diensten />} />
           <Route path="/diensten/ls-ms-netmontage" element={<LSMSNetmontage />} />
           <Route path="/diensten/stationsrenovatie" element={<Stationsrenovatie />} />
+          <Route path="/diensten/schakelwerk" element={<Schakelwerk />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
