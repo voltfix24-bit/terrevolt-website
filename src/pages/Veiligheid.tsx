@@ -338,7 +338,7 @@ const Veiligheid = () => {
                 Een LS/MS-project <span className="text-[#9ed42e]">veilig voorbereiden</span>?
               </h2>
               <p className="text-base sm:text-xl text-gray-300 mb-10 leading-relaxed">
-                Neem contact op met TerreVolt voor projectmatige ondersteuning waarbij veiligheid, vakmanschap en duidelijke afspraken centraal staan.
+                Neem contact op met TerreVolt voor projectmatige ondersteuning waarbij veiligheid, vakmanschap en duidelijke afspraken — waar van toepassing — centraal staan.
               </p>
               <a
                 href="/contact"
