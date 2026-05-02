@@ -100,7 +100,7 @@ type VacatureView = {
   process_steps: string[];
 };
 
-const standaardProces = ["Aanmelden", "Kennismaken", "Documenten/check", "Projectmatch", "Start"];
+const standaardProces = ["Je meldt je aan", "Kennismaking", "Documenten/check", "Projectmatch", "Start op project"];
 
 const VacatureDetail = () => {
   const { slug } = useParams<{ slug: string }>();
