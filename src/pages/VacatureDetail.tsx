@@ -928,24 +928,32 @@ const VacatureDetail = () => {
         </section>
       </main>
 
-      {/* Sticky mobiele CTA — verbergt zodra het formulier in beeld is */}
+      {/* Sticky mobiele CTA — verbergt zodra het formulier of de footer in beeld is */}
       <div
-        className={`lg:hidden fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 ${
+        className={`lg:hidden fixed bottom-0 inset-x-0 z-40 transition-transform duration-300 motion-reduce:transition-none bg-white/95 backdrop-blur-sm border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] ${
           formInView ? "translate-y-full" : "translate-y-0"
         }`}
-        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+        style={{
+          paddingBottom: "max(env(safe-area-inset-bottom), 0px)",
+          paddingLeft: "env(safe-area-inset-left)",
+          paddingRight: "env(safe-area-inset-right)",
+        }}
         aria-hidden={formInView}
       >
-        <div className="bg-white/95 backdrop-blur-sm border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] px-4 py-3">
+        <div className="px-4 py-3">
           <a
             href="#solliciteer"
-            className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors flex items-center justify-center gap-2"
+            tabIndex={formInView ? -1 : 0}
+            className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2"
           >
             <span>Aanmelden voor deze functie</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
         </div>
       </div>
+
+      {/* Spacer zodat sticky CTA onderaan de pagina geen content afdekt op mobile */}
+      <div className="lg:hidden h-20" aria-hidden="true" />
 
       <Footer />
     </div>
