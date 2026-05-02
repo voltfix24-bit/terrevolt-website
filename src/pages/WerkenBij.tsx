@@ -39,7 +39,7 @@ const funnelNav: { label: string; href: string }[] = [
 
 const stappen = [
   { icon: ClipboardList, title: "Aanmelden", text: "Je laat je gegevens, ervaring en beschikbaarheid achter. Een CV mag, maar is niet verplicht." },
-  { icon: UserCheck, title: "Kennismaken & check", text: "We bellen je op en bespreken je ervaring, certificaten, bevoegdheden en voorkeuren." },
+  { icon: UserCheck, title: "Kennismaken & check", text: "We bellen je binnen 2 werkdagen op en bespreken je ervaring, certificaten, bevoegdheden en voorkeuren." },
   { icon: Layers3, title: "Projectmatch", text: "We kijken welke LS/MS-projecten, stationswerkzaamheden, schakelwerk of aardingswerk bij jou passen." },
   { icon: Rocket, title: "Start op project", text: "Je krijgt duidelijke projectinformatie, planning en afspraken voordat je start." },
 ];
