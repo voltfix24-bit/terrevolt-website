@@ -17,6 +17,7 @@ import Over from "./pages/Over.tsx";
 import WerkenBij from "./pages/WerkenBij.tsx";
 import VacatureDetail from "./pages/VacatureDetail.tsx";
 import Contact from "./pages/Contact.tsx";
+import Privacy from "./pages/Privacy.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import AdminLayout from "./pages/admin/AdminLayout.tsx";
 import AdminLogin from "./pages/admin/AdminLogin.tsx";
