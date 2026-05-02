@@ -952,8 +952,6 @@ const VacatureDetail = () => {
         </div>
       </div>
 
-      {/* Spacer zodat sticky CTA onderaan de pagina geen content afdekt op mobile */}
-      <div className="lg:hidden h-20" aria-hidden="true" />
 
       <Footer />
     </div>
