@@ -20,10 +20,10 @@ const targets = [
 
 export function Target() {
   return (
-    <section id="over-ons" className="py-24 bg-[#f8f9fa]">
-      <div className="container mx-auto px-6 lg:px-12">
+    <section id="over-ons" className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+      <div className="container mx-auto px-5 sm:px-6 lg:px-12">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voor wie werken wij?</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voor wie werken wij?</h2>
           <p className="text-xl text-[#6c757d] max-w-2xl mx-auto">
             Ervaren partner in elektrotechnische infrastructuur voor professionele opdrachtgevers
           </p>

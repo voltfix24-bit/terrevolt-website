@@ -25,13 +25,13 @@ const certifications = [
 
 export function Safety() {
   return (
-    <section id="veiligheid" className="py-24 bg-[#f8f9fa]">
-      <div className="container mx-auto px-6 lg:px-12">
+    <section id="veiligheid" className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+      <div className="container mx-auto px-5 sm:px-6 lg:px-12">
         <div className="text-center mb-16">
           <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
             Veiligheid voorop
           </div>
-          <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Veiligheid, certificeringen & normen</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Veiligheid, certificeringen & normen</h2>
           <p className="text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
             Werken aan elektrotechnische infrastructuur vraagt om vakbekwaamheid, veiligheidsbewustzijn en duidelijke procedures. TerreVolt werkt met aandacht voor geldende normen, aanwijzingen en projectafspraken.
           </p>

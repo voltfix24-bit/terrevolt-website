@@ -187,10 +187,10 @@ const WerkenBij = () => {
         </section>
 
         {/* SECTIE 1: Profielen */}
-        <section className="py-16 md:py-24 bg-white">
+        <section className="py-16 md:py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-12 md:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Gezochte profielen</h2>
+              <h2 className="text-3xl sm:text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Gezochte profielen</h2>
               <p className="text-base sm:text-xl text-[#6c757d] max-w-2xl mx-auto">
                 Vakmensen voor uitvoering binnen LS/MS-infrastructuur en aarding.
               </p>
@@ -220,13 +220,13 @@ const WerkenBij = () => {
         </section>
 
         {/* SECTIE 2: Waarom TerreVolt */}
-        <section className="py-24 bg-[#f8f9fa]">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Waarom TerreVolt
               </div>
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Waarom werken met TerreVolt?</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Waarom werken met TerreVolt?</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -250,10 +250,10 @@ const WerkenBij = () => {
         </section>
 
         {/* SECTIE 3: Vereisten */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Wat wij belangrijk vinden</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Wat wij belangrijk vinden</h2>
               <p className="text-xl text-[#6c757d] max-w-2xl mx-auto">
                 De basis voor een prettige en veilige samenwerking.
               </p>
@@ -274,14 +274,14 @@ const WerkenBij = () => {
         </section>
 
         {/* SECTIE 4: Aanmeldformulier */}
-        <section id="aanmelden" className="py-24 bg-[#f8f9fa]">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section id="aanmelden" className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-12">
                 <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                   Aanmelden
                 </div>
-                <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Meld je aan</h2>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Meld je aan</h2>
                 <p className="text-xl text-[#6c757d]">
                   Vul het formulier in. Wij nemen zo snel mogelijk contact op.
                 </p>
@@ -385,7 +385,7 @@ const WerkenBij = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+        <section className="py-16 md:py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"
@@ -399,9 +399,9 @@ const WerkenBij = () => {
             />
           </div>
 
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-4xl lg:text-5xl text-white mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
                 Ook als <span className="text-[#9ed42e]">ZZP'er of ploeg</span> beschikbaar?
               </h2>
               <p className="text-xl text-gray-300 mb-12 leading-relaxed">

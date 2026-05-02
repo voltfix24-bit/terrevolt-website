@@ -47,7 +47,7 @@ const LSMSNetmontage = () => {
             />
           </div>
 
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-4xl">
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Dienst
@@ -79,10 +79,10 @@ const LSMSNetmontage = () => {
         </section>
 
         {/* SECTIE 1: Wat wij uitvoeren */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Netmontage voor laag- en middenspanningsnetten</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Netmontage voor laag- en middenspanningsnetten</h2>
               <p className="text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
                 Netmontage vormt de verbinding tussen ontwerp, uitvoering en bedrijfsvoering. TerreVolt levert vakbekwame ondersteuning bij LS/MS-kabelwerk, van voorbereiding en montage tot controle en oplevering.
               </p>
@@ -109,13 +109,13 @@ const LSMSNetmontage = () => {
         </section>
 
         {/* SECTIE 2: Toepassingen */}
-        <section className="py-24 bg-[#f8f9fa]">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Toepassingen
               </div>
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Waarvoor wordt TerreVolt ingezet?</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Waarvoor wordt TerreVolt ingezet?</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -139,10 +139,10 @@ const LSMSNetmontage = () => {
         </section>
 
         {/* SECTIE 3: Voor wie */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voor wie werken wij?</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voor wie werken wij?</h2>
               <p className="text-xl text-[#6c757d] max-w-2xl mx-auto">
                 Ervaren partner in netmontage voor professionele opdrachtgevers.
               </p>
@@ -169,7 +169,7 @@ const LSMSNetmontage = () => {
         </section>
 
         {/* SECTIE 4: CTA */}
-        <section id="contact" className="py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+        <section id="contact" className="py-16 md:py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"
@@ -183,9 +183,9 @@ const LSMSNetmontage = () => {
             />
           </div>
 
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-4xl lg:text-5xl text-white mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
                 LS/MS-monteurs of <span className="text-[#9ed42e]">netmontageploeg nodig?</span>
               </h2>
               <p className="text-xl text-gray-300 mb-12 leading-relaxed">

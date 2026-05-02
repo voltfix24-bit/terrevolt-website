@@ -25,7 +25,7 @@ export function Hero() {
         </svg>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+      <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
         <div className="max-w-4xl">
           <div className="flex items-center gap-2 mb-6">
             <Zap className="w-8 h-8 text-[#9ed42e]" strokeWidth={2.5} />

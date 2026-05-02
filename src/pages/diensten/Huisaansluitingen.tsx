@@ -47,7 +47,7 @@ const Huisaansluitingen = () => {
             />
           </div>
 
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-4xl">
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Dienst
@@ -80,10 +80,10 @@ const Huisaansluitingen = () => {
         </section>
 
         {/* SECTIE 1: Werkzaamheden */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Laagspanningsaansluitingen projectmatig uitgevoerd</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Laagspanningsaansluitingen projectmatig uitgevoerd</h2>
               <p className="text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
                 Van nieuwe aansluiting tot sanering en storingsherstel — vakbekwaam en gestructureerd.
               </p>
@@ -110,13 +110,13 @@ const Huisaansluitingen = () => {
         </section>
 
         {/* SECTIE 2: Voor wie */}
-        <section className="py-24 bg-[#f8f9fa]">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Doelgroep
               </div>
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voor wie werken wij?</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voor wie werken wij?</h2>
               <p className="text-xl text-[#6c757d] max-w-2xl mx-auto">
                 TerreVolt werkt voor partijen die kwaliteit en betrouwbaarheid verwachten.
               </p>
@@ -143,11 +143,11 @@ const Huisaansluitingen = () => {
         </section>
 
         {/* SECTIE 3: Kwaliteit en uitvoering */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
               <div>
-                <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-6 leading-tight">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6 leading-tight">
                   Veilig, duidelijk <span className="text-[#9ed42e]">en projectmatig</span>
                 </h2>
                 <p className="text-lg text-[#6c757d] leading-relaxed">
@@ -177,7 +177,7 @@ const Huisaansluitingen = () => {
         </section>
 
         {/* CTA */}
-        <section id="contact" className="py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+        <section id="contact" className="py-16 md:py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"
@@ -191,9 +191,9 @@ const Huisaansluitingen = () => {
             />
           </div>
 
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-4xl lg:text-5xl text-white mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
                 Ondersteuning nodig bij <span className="text-[#9ed42e]">LS-aansluitwerk</span>?
               </h2>
               <p className="text-xl text-gray-300 mb-12 leading-relaxed">
