@@ -387,6 +387,10 @@ const WerkenBij = () => {
                   );
                 })}
               </ul>
+
+              <p className="text-gray-400 text-sm mt-4 max-w-xl">
+                Tarieven en salaris bespreken we tijdens de kennismaking — afgestemd op jouw ervaring, bevoegdheden en de manier van samenwerken.
+              </p>
             </div>
           </div>
         </section>
