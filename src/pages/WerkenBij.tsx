@@ -88,18 +88,6 @@ const profielOpties = [
   "Anders",
 ];
 
-const profielOpties = [
-  "Laagspanningsmonteur",
-  "Middenspanningsmonteur",
-  "Schakelmonteur",
-  "Kabelmonteur",
-  "Aardingsmonteur",
-  "Monteur huisaansluitingen",
-  "Werkverantwoordelijke",
-  "ZZP-ploeg",
-  "Anders",
-];
-
 const contactVoorkeurOpties = ["Bellen", "WhatsApp", "E-mail", "Maakt niet uit"];
 
 const formSchema = z.object({
