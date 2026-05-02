@@ -110,8 +110,16 @@ const MetaTooltipImpl = ({ label, enabled = true, children, className }: Props) 
   }, [clearHide]);
 
   const handleMouseLeave = useCallback(() => setOpen(false), []);
-  const handleFocus = useCallback(() => setOpen(true), []);
-  const handleBlur = useCallback(() => setOpen(false), []);
+  const handleFocus = useCallback(() => {
+    clearHide();
+    setOpen(true);
+  }, [clearHide]);
+  const handleBlur = useCallback((e: React.FocusEvent<HTMLSpanElement>) => {
+    // Houd open zolang focus binnen de wrapper blijft (bv. badge → Lees-meer-knop).
+    const next = e.relatedTarget as Node | null;
+    if (next && wrapRef.current?.contains(next)) return;
+    setOpen(false);
+  }, []);
 
   if (!enabled) {
     return <span className={className}>{children}</span>;
