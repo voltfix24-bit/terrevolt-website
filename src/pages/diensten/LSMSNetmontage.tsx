@@ -208,7 +208,7 @@ const LSMSNetmontage = () => {
                 href="/contact"
                 className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-10 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-lg"
               >
-                Project bespreken
+                Netmontageploeg aanvragen
               </a>
             </div>
           </div>
