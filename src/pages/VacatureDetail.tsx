@@ -270,6 +270,34 @@ const VacatureDetail = () => {
     { icon: ShieldCheck, label: "Bevoegdheden", value: vacature.meta.bevoegdheden },
   ];
 
+  const waText = `Hallo TerreVolt, ik heb een vraag over de functie "${vacature.title}".`;
+  const waLink = `https://wa.me/${company.phone.e164.replace("+", "")}?text=${encodeURIComponent(waText)}`;
+  const shareText = `Vacature bij TerreVolt: ${vacature.title}`;
+  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const waShareLink = `https://wa.me/?text=${encodeURIComponent(`${shareText} — ${shareUrl}`)}`;
+
+  const copyShareLink = async () => {
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = shareUrl;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      toast.success("Link gekopieerd");
+    } catch {
+      toast.error("Kopiëren lukte niet. Selecteer de URL handmatig.");
+    }
+  };
+
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
