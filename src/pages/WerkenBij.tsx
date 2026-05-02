@@ -12,6 +12,7 @@ import { EarthSymbol } from "@/components/icons/EarthSymbol";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { Reveal } from "@/components/terrevolt/Reveal";
 import { CopyableContactLink } from "@/components/terrevolt/CopyableContactLink";
 import { supabase } from "@/integrations/supabase/client";
 import { CvUploadField, validateCvFile } from "@/components/CvUploadField";
