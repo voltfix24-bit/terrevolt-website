@@ -233,11 +233,14 @@ const WerkenBij = () => {
       return;
     }
     setErrors({});
-    if (file && file.size > 10 * 1024 * 1024) {
-      const msg = "Bestand mag maximaal 10MB zijn";
-      setSubmitError(msg);
-      toast.error(msg);
-      return;
+    if (file) {
+      const v = validateCvFile(file);
+      if (!v.ok && v.message) {
+        setFileError(v.message);
+        setSubmitError(v.message);
+        toast.error(v.message);
+        return;
+      }
     }
 
     setSubmitting(true);
@@ -280,6 +283,7 @@ const WerkenBij = () => {
       toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");
       formRef.current?.reset();
       setFile(null);
+      setFileError(null);
       setSuccess(true);
     } catch (err) {
       console.error(err);
@@ -298,6 +302,7 @@ const WerkenBij = () => {
     setSuccess(false);
     setErrors({});
     setFile(null);
+    setFileError(null);
     formRef.current?.reset();
     setTimeout(() => {
       document.getElementById("aanmelden")?.scrollIntoView({ behavior: "smooth", block: "start" });
