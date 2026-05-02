@@ -169,9 +169,22 @@ const Projecten = () => {
                         {p.label}
                       </span>
                     </div>
-                    <h3 className="text-xl text-[#0d3b2e] mb-3">{p.title}</h3>
-                    <p className="text-[#6c757d] leading-relaxed mb-6">{p.description}</p>
-                    <ul className="space-y-2 pt-4 border-t border-gray-100">
+                    <h3 className="text-xl text-[#0d3b2e] mb-4">{p.title}</h3>
+
+                    <div>
+                      <div className="text-[#6c757d] text-xs uppercase tracking-wider mb-1">Situatie</div>
+                      <p className="text-[#2d3436] text-sm leading-relaxed">{p.situation}</p>
+                    </div>
+                    <div className="border-t border-gray-100 pt-3 mt-3">
+                      <div className="text-[#6c757d] text-xs uppercase tracking-wider mb-1">Aanpak</div>
+                      <p className="text-[#2d3436] text-sm leading-relaxed">{p.approach}</p>
+                    </div>
+                    <div className="border-t border-gray-100 pt-3 mt-3">
+                      <div className="text-[#9ed42e] text-xs uppercase tracking-wider mb-1">Resultaat</div>
+                      <p className="text-[#0d3b2e] text-sm leading-relaxed">{p.result}</p>
+                    </div>
+
+                    <ul className="space-y-2 pt-4 mt-4 border-t border-gray-100">
                       {p.bullets.map((b) => (
                         <li key={b} className="flex items-start gap-2 text-sm text-[#0d3b2e]">
                           <Check className="w-4 h-4 text-[#9ed42e] mt-0.5 flex-shrink-0" strokeWidth={3} />
