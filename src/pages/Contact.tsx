@@ -49,7 +49,19 @@ const Contact = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
-  const [intent, setIntent] = useState<"project" | "monteur" | "sollicitatie">("project");
+  const [searchParams] = useSearchParams();
+  const initialIntent = (() => {
+    const v = searchParams.get("intent");
+    return v === "monteur" || v === "sollicitatie" || v === "project" ? v : "project";
+  })();
+  const initialType = searchParams.get("type") || "";
+  const [intent, setIntent] = useState<"project" | "monteur" | "sollicitatie">(initialIntent);
+  useEffect(() => {
+    if (initialType) {
+      const sel = document.getElementById("request_type") as HTMLSelectElement | null;
+      if (sel) sel.value = initialType;
+    }
+  }, [initialType]);
 
   const intents: { id: "project" | "monteur" | "sollicitatie"; label: string; icon: typeof Briefcase; helper: string }[] = [
     { id: "project", label: "Project bespreken", icon: Briefcase, helper: "Voor netbeheerders, hoofdaannemers en industrie." },
