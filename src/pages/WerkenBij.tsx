@@ -39,7 +39,7 @@ const funnelNav: { label: string; href: string }[] = [
 
 const stappen = [
   { icon: ClipboardList, title: "Aanmelden", text: "Je laat je gegevens, ervaring en beschikbaarheid achter. Een CV mag, maar is niet verplicht." },
-  { icon: UserCheck, title: "Kennismaken & check", text: "We bellen je op en bespreken je ervaring, certificaten, bevoegdheden en voorkeuren." },
+  { icon: UserCheck, title: "Kennismaken & check", text: "We bellen je binnen 2 werkdagen op en bespreken je ervaring, certificaten, bevoegdheden en voorkeuren." },
   { icon: Layers3, title: "Projectmatch", text: "We kijken welke LS/MS-projecten, stationswerkzaamheden, schakelwerk of aardingswerk bij jou passen." },
   { icon: Rocket, title: "Start op project", text: "Je krijgt duidelijke projectinformatie, planning en afspraken voordat je start." },
 ];
@@ -387,6 +387,10 @@ const WerkenBij = () => {
                   );
                 })}
               </ul>
+
+              <p className="text-gray-400 text-sm mt-4 max-w-xl">
+                Tarieven en salaris bespreken we tijdens de kennismaking — afgestemd op jouw ervaring, bevoegdheden en de manier van samenwerken.
+              </p>
             </div>
           </div>
         </section>
@@ -523,6 +527,40 @@ const WerkenBij = () => {
           </div>
         </section>
 
+        {/* WAT VAKMENSEN BELANGRIJK VINDEN */}
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="text-center mb-10 md:mb-14 max-w-3xl mx-auto">
+              <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+                Wat vakmensen belangrijk vinden
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Werken via TerreVolt</h2>
+              <p className="text-base sm:text-lg text-[#6c757d]">
+                Wat monteurs en ZZP'ers belangrijk vinden bij projectmatig werk binnen LS/MS, stationswerk, schakelwerk en aarding.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {[
+                { title: "Duidelijke afspraken", text: "Je weet vooraf waar je aan toe bent: werkzaamheden, locatie, planning, scope en veiligheidsafspraken." },
+                { title: "Kennis van het vak", text: "Binnen LS/MS-projecten maakt het verschil als planning en uitvoering begrijpen wat stationswerk, kabelwerk en schakelwerk inhoudt." },
+                { title: "Korte lijnen", text: "Bij vragen op locatie wil je snel iemand spreken die weet waar het over gaat en direct kan meedenken." },
+              ].map((c) => (
+                <div
+                  key={c.title}
+                  className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <span aria-hidden="true" className="w-2.5 h-2.5 rounded-full bg-[#9ed42e] flex-shrink-0" />
+                    <h3 className="text-lg text-[#0d3b2e] leading-snug">{c.title}</h3>
+                  </div>
+                  <p className="text-[#6c757d] text-sm leading-relaxed">{c.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* HOE HET WERKT */}
         <section id="hoe-het-werkt" className="py-16 md:py-24 bg-white scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
@@ -614,72 +652,60 @@ const WerkenBij = () => {
         </section>
 
         {/* AANSPREEKPUNT */}
-        <section id="aanspreekpunt" className="py-16 md:py-24 bg-white scroll-mt-24">
+        <section id="aanspreekpunt" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="max-w-5xl mx-auto">
+            <div className="max-w-4xl mx-auto">
               <div className="text-center mb-10 md:mb-12 max-w-3xl mx-auto">
-                <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+                <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                   Direct contact
                 </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Je vaste aanspreekpunt bij TerreVolt</h2>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Spreek direct met ons team</h2>
                 <p className="text-base sm:text-lg text-[#6c757d]">
-                  Heb je interesse om met TerreVolt te werken? Dan houden we het simpel. Je laat je gegevens achter, wij nemen contact met je op en kijken samen welke rol of projectinzet past bij jouw ervaring.
+                  Liever even bellen of appen voor je je aanmeldt? Dat kan. We bespreken je ervaring en kijken samen of er een passende rol of project is.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
-                {/* Bellen */}
-                <div className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-5 sm:p-6 text-center hover:border-[#9ed42e] transition-colors">
-                  <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-3 mx-auto">
-                    <PhoneIcon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+              <div className="bg-white rounded-2xl border-2 border-[#9ed42e] p-8 sm:p-10 shadow-sm max-w-2xl mx-auto">
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <HardHat className="w-8 h-8 text-[#9ed42e]" strokeWidth={2} />
                   </div>
-                  <div className="text-xs uppercase tracking-wider text-[#6c757d] mb-1">Bellen</div>
-                  <CopyableContactLink
-                    type="tel"
-                    value={company.phone.e164}
-                    href={telHref}
-                    className="text-[#0d3b2e] hover:text-[#9ed42e] transition-colors text-base sm:text-lg break-all"
-                    wrapperClassName="inline-flex items-center gap-1 justify-center"
-                  >
-                    {company.phone.display}
-                  </CopyableContactLink>
+                  <div className="text-lg text-[#0d3b2e]">Team TerreVolt</div>
+                  <div className="text-sm text-[#6c757d]">Werving & planning</div>
+                  <div className="inline-flex items-center gap-2 mt-3 text-sm text-[#0d3b2e]">
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#9ed42e] opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#9ed42e]" />
+                    </span>
+                    Reageert binnen 2 werkdagen
+                  </div>
                 </div>
 
-                {/* WhatsApp */}
-                <div className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-5 sm:p-6 text-center hover:border-[#9ed42e] transition-colors">
-                  <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-3 mx-auto">
-                    <MessageSquare className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
-                  </div>
-                  <div className="text-xs uppercase tracking-wider text-[#6c757d] mb-1">WhatsApp</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <a
+                    href={telHref}
+                    className="inline-flex items-center justify-center gap-2 bg-[#0d3b2e] text-white px-4 py-3 min-h-[48px] rounded-lg hover:bg-[#1a4a36] transition-colors"
+                  >
+                    <PhoneIcon className="w-4 h-4 text-[#9ed42e]" /> Bel direct
+                  </a>
                   <a
                     href={waLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#0d3b2e] hover:text-[#9ed42e] transition-colors text-base sm:text-lg break-all"
+                    className="inline-flex items-center justify-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-4 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors"
                   >
-                    Stuur een bericht
+                    <MessageSquare className="w-4 h-4" /> WhatsApp
                   </a>
-                </div>
-
-                {/* E-mail */}
-                <div className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-5 sm:p-6 text-center hover:border-[#9ed42e] transition-colors">
-                  <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-3 mx-auto">
-                    <MailIcon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
-                  </div>
-                  <div className="text-xs uppercase tracking-wider text-[#6c757d] mb-1">E-mail</div>
-                  <CopyableContactLink
-                    type="mail"
-                    value={company.email}
+                  <a
                     href={mailHref}
-                    className="text-[#0d3b2e] hover:text-[#9ed42e] transition-colors text-base sm:text-lg break-all"
-                    wrapperClassName="inline-flex items-center gap-1 justify-center"
+                    className="inline-flex items-center justify-center gap-2 bg-white border-2 border-[#0d3b2e] text-[#0d3b2e] px-4 py-3 min-h-[48px] rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors"
                   >
-                    {company.email}
-                  </CopyableContactLink>
+                    <MailIcon className="w-4 h-4" /> Mail ons
+                  </a>
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
                 <a
                   href="#aanmelden"
                   className="w-full sm:w-auto bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px]"
@@ -745,28 +771,22 @@ const WerkenBij = () => {
                 </p>
               </div>
 
-              {/* Vragen? — directe contactopties vóór het formulier */}
-              <div className="mb-8 bg-[#f0f7e6] border border-[#9ed42e]/50 rounded-2xl p-5 sm:p-6">
-                <div className="flex items-start gap-3 mb-4">
-                  <HelpCircle className="w-5 h-5 text-[#0d3b2e] flex-shrink-0 mt-0.5" />
-                  <div className="min-w-0">
-                    <div className="text-[#0d3b2e]">Liever eerst even bellen of appen?</div>
-                    <p className="text-sm text-[#0d3b2e]/80 mt-1 leading-relaxed">
-                      Korte lijnen — bel, WhatsApp of mail Team TerreVolt. We bespreken je ervaring en beschikbaarheid.
-                    </p>
-                  </div>
+              {/* Snel aanmelden via WhatsApp */}
+              <div className="mb-8 bg-[#f0f7e6] border border-[#9ed42e]/50 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="min-w-0">
+                  <div className="text-[#0d3b2e]">Snel aanmelden via WhatsApp</div>
+                  <p className="text-sm text-[#0d3b2e]/80 mt-1 leading-relaxed">
+                    Stuur ons een kort berichtje. We nemen contact op voor een telefonische kennismaking.
+                  </p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
-                  <a href={telHref} className="inline-flex items-center justify-center gap-2 bg-[#0d3b2e] text-white px-4 py-3 min-h-[48px] rounded-lg hover:bg-[#1a4a36] transition-colors">
-                    <PhoneIcon className="w-4 h-4 text-[#9ed42e]" /> Bel direct
-                  </a>
-                  <a href={waLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-4 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors">
-                    <MessageSquare className="w-4 h-4" /> WhatsApp
-                  </a>
-                  <a href={mailHref} className="inline-flex items-center justify-center gap-2 bg-white border-2 border-[#0d3b2e] text-[#0d3b2e] px-4 py-3 min-h-[48px] rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors">
-                    <MailIcon className="w-4 h-4" /> Mail ons
-                  </a>
-                </div>
+                <a
+                  href={waLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-5 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors w-full sm:w-auto sm:flex-shrink-0"
+                >
+                  <MessageSquare className="w-4 h-4" /> WhatsApp ons
+                </a>
               </div>
 
               {success ? (
