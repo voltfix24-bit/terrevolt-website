@@ -651,35 +651,39 @@ const VacatureDetail = () => {
         <section className="py-16 md:py-24 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-              <div className="bg-white rounded-2xl p-8 border border-gray-200">
-                <div className="flex items-center gap-3 mb-6">
-                  <ListChecks className="w-7 h-7 text-[#9ed42e]" strokeWidth={2.5} />
-                  <h2 className="text-2xl text-[#0d3b2e]">Wat doe je?</h2>
+              <Reveal>
+                <div className="card-lift h-full bg-white rounded-2xl p-8 border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl">
+                  <div className="flex items-center gap-3 mb-6">
+                    <ListChecks className="w-7 h-7 text-[#9ed42e]" strokeWidth={2.5} />
+                    <h2 className="text-2xl text-[#0d3b2e]">Wat doe je?</h2>
+                  </div>
+                  <ul className="space-y-3">
+                    {vacature.taken.map((t) => (
+                      <li key={t} className="flex items-start gap-3 text-[#0d3b2e]">
+                        <CheckCircle2 className="w-5 h-5 text-[#9ed42e] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#6c757d]">{t}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-3">
-                  {vacature.taken.map((t) => (
-                    <li key={t} className="flex items-start gap-3 text-[#0d3b2e]">
-                      <CheckCircle2 className="w-5 h-5 text-[#9ed42e] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#6c757d]">{t}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </Reveal>
 
-              <div className="bg-white rounded-2xl p-8 border border-gray-200">
-                <div className="flex items-center gap-3 mb-6">
-                  <Award className="w-7 h-7 text-[#9ed42e]" strokeWidth={2.5} />
-                  <h2 className="text-2xl text-[#0d3b2e]">Wat breng je mee?</h2>
+              <Reveal delay={100}>
+                <div className="card-lift h-full bg-white rounded-2xl p-8 border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl">
+                  <div className="flex items-center gap-3 mb-6">
+                    <Award className="w-7 h-7 text-[#9ed42e]" strokeWidth={2.5} />
+                    <h2 className="text-2xl text-[#0d3b2e]">Wat breng je mee?</h2>
+                  </div>
+                  <ul className="space-y-3">
+                    {vacature.meebrengen.map((t) => (
+                      <li key={t} className="flex items-start gap-3 text-[#0d3b2e]">
+                        <CheckCircle2 className="w-5 h-5 text-[#9ed42e] flex-shrink-0 mt-0.5" />
+                        <span className="text-[#6c757d]">{t}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-3">
-                  {vacature.meebrengen.map((t) => (
-                    <li key={t} className="flex items-start gap-3 text-[#0d3b2e]">
-                      <CheckCircle2 className="w-5 h-5 text-[#9ed42e] flex-shrink-0 mt-0.5" />
-                      <span className="text-[#6c757d]">{t}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              </Reveal>
             </div>
           </div>
         </section>
