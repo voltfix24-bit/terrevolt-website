@@ -108,6 +108,7 @@ const VacatureDetail = () => {
   const [vacature, setVacature] = useState<VacatureView | null | "missing">(null);
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
   const [uploadingFile, setUploadingFile] = useState(false);
   const [formInView, setFormInView] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -359,11 +360,14 @@ const VacatureDetail = () => {
     }
     setErrors({});
 
-    if (file && file.size > 10 * 1024 * 1024) {
-      const msg = "Bestand mag maximaal 10MB zijn";
-      setSubmitError(msg);
-      toast.error(msg);
-      return;
+    if (file) {
+      const v = validateCvFile(file);
+      if (!v.ok && v.message) {
+        setFileError(v.message);
+        setSubmitError(v.message);
+        toast.error(v.message);
+        return;
+      }
     }
 
     setSubmitting(true);
