@@ -165,10 +165,13 @@ const Veiligheid = () => {
                 Wat dit betekent voor uw project
               </div>
               <h2 className="text-3xl sm:text-4xl text-white mb-6 leading-tight">
-                Veiligheid is geen bijzaak — het is de basis van elke opdracht
+                Iedereen veilig thuis. Altijd.
               </h2>
               <p className="text-lg text-gray-300 leading-relaxed">
-                Elk project start met een heldere veiligheidsstructuur: passende aanwijzingen, duidelijke bevoegdheden en afgesproken procedures. Dat is geen papieren exercitie — het is hoe TerreVolt werkt.
+                BEI, VCA, LMRA, NEN en projectafspraken zijn geen papieren verplichtingen, maar middelen om veilig te werken. Voor de monteur, de ploeg, de uitvoerende partij en iedereen op locatie.
+              </p>
+              <p className="mt-4 text-base sm:text-lg text-[#9ed42e] leading-relaxed">
+                Geen planning of deadline is belangrijker dan veiligheid.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-12 text-left">
