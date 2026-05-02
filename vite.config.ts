@@ -4,6 +4,8 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 // @ts-expect-error - .mjs runtime module zonder TS-declaraties (gedeeld met Vitest).
 import contactLinksPlugin from "./scripts/vite-plugin-contact-links.mjs";
+// @ts-expect-error - .mjs runtime module zonder TS-declaraties.
+import validateRoutesPlugin from "./scripts/vite-plugin-validate-routes.mjs";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -19,6 +21,9 @@ export default defineConfig(({ mode }) => ({
     mode === "development" && componentTagger(),
     // Build-time lint: faalt de build bij afwijkende of dubbele tel:/mailto:-links.
     contactLinksPlugin(),
+    // Build-time lint: faalt de build als <Link to>/<a href>/navigate paden
+    // niet matchen met een Route in src/App.tsx.
+    validateRoutesPlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {
