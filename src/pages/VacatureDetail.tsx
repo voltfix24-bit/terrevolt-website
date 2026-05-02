@@ -411,6 +411,7 @@ const VacatureDetail = () => {
       toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");
       formRef.current?.reset();
       setFile(null);
+      setFileError(null);
       setSuccess(true);
     } catch (err) {
       console.error(err);
@@ -429,6 +430,7 @@ const VacatureDetail = () => {
     setSuccess(false);
     setErrors({});
     setFile(null);
+    setFileError(null);
     formRef.current?.reset();
     setTimeout(() => {
       document.getElementById("solliciteren")?.scrollIntoView({ behavior: "smooth", block: "start" });
