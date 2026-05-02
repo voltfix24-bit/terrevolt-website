@@ -81,7 +81,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE 1: Veilig werken */}
-        <section className="py-16 md:py-24 bg-white">
+        <section id="veilig-werken" className="py-16 md:py-24 bg-white scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6">Veiligheid in voorbereiding, uitvoering en oplevering</h2>
