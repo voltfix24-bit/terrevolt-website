@@ -117,8 +117,8 @@ const VacatureDetail = () => {
     if (!vacature || vacature === "missing") return;
     if (typeof IntersectionObserver === "undefined") return;
     const formEl = document.getElementById("solliciteer");
-    const footerEl = document.querySelector("footer");
-    const targets = [formEl, footerEl].filter((n): n is Element => !!n);
+    const footerEl = document.querySelector<HTMLElement>("footer");
+    const targets: Element[] = [formEl, footerEl].filter((n): n is Element => !!n);
     if (targets.length === 0) return;
 
     const visible = new Set<Element>();
