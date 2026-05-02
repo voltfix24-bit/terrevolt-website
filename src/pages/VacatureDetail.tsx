@@ -516,11 +516,13 @@ const VacatureDetail = () => {
                 return (
                   <li
                     key={m.label}
-                    className="inline-flex items-center gap-2 max-w-full bg-[#f0f7e6] border border-[#9ed42e]/40 text-[#0d3b2e] rounded-full pl-2.5 pr-3 py-1.5 min-w-0"
+                    tabIndex={0}
+                    aria-label={`${m.label}: ${m.value}`}
+                    className="group inline-flex items-center gap-2 max-w-full bg-[#f0f7e6] border border-[#9ed42e] text-[#0d3b2e] rounded-full pl-2.5 pr-3 py-1.5 min-w-0 cursor-default transition-all duration-200 hover:bg-[#e3f0c9] hover:border-[#0d3b2e] hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2 focus-visible:bg-[#e3f0c9] active:scale-[0.98]"
                   >
-                    <Icon className="w-3.5 h-3.5 flex-shrink-0" strokeWidth={2.2} aria-hidden="true" />
-                    <span className="text-[11px] uppercase tracking-wider text-[#6c757d] flex-shrink-0">{m.label}:</span>
-                    <span className="text-xs leading-snug truncate min-w-0" title={m.value}>{m.value}</span>
+                    <Icon className="w-3.5 h-3.5 flex-shrink-0 text-[#0d3b2e]" strokeWidth={2.4} aria-hidden="true" />
+                    <span className="text-[11px] uppercase tracking-wider text-[#0d3b2e]/80 flex-shrink-0">{m.label}:</span>
+                    <span className="text-xs leading-snug truncate min-w-0 text-[#0d3b2e]" title={m.value}>{m.value}</span>
                   </li>
                 );
               })}
@@ -531,12 +533,17 @@ const VacatureDetail = () => {
               {meta.map((m) => {
                 const Icon = m.icon;
                 return (
-                  <div key={m.label} className="flex flex-col items-center text-center gap-2">
-                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div
+                    key={m.label}
+                    tabIndex={0}
+                    aria-label={`${m.label}: ${m.value}`}
+                    className="group flex flex-col items-center text-center gap-2 rounded-xl p-3 -m-3 border border-transparent transition-all duration-200 cursor-default hover:border-[#9ed42e] hover:bg-[#f8fbf0] hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2 focus-visible:border-[#9ed42e] focus-visible:bg-[#f8fbf0] active:scale-[0.98]"
+                  >
+                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-200 group-hover:bg-[#9ed42e] group-focus-visible:bg-[#9ed42e]">
                       <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} aria-hidden="true" />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-xs uppercase tracking-wider text-[#6c757d]">{m.label}</div>
+                      <div className="text-xs uppercase tracking-wider text-[#0d3b2e]/80">{m.label}</div>
                       <div className="text-[#0d3b2e] text-sm break-words">{m.value}</div>
                     </div>
                   </div>
