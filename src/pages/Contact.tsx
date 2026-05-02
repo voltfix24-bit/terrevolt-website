@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { ArrowRight, Phone, Mail, MapPin, Upload, Loader2, Network, HardHat, Factory, Briefcase, Users } from "lucide-react";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
@@ -49,7 +49,19 @@ const Contact = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
-  const [intent, setIntent] = useState<"project" | "monteur" | "sollicitatie">("project");
+  const [searchParams] = useSearchParams();
+  const initialIntent = (() => {
+    const v = searchParams.get("intent");
+    return v === "monteur" || v === "sollicitatie" || v === "project" ? v : "project";
+  })();
+  const initialType = searchParams.get("type") || "";
+  const [intent, setIntent] = useState<"project" | "monteur" | "sollicitatie">(initialIntent);
+  useEffect(() => {
+    if (initialType) {
+      const sel = document.getElementById("request_type") as HTMLSelectElement | null;
+      if (sel) sel.value = initialType;
+    }
+  }, [initialType]);
 
   const intents: { id: "project" | "monteur" | "sollicitatie"; label: string; icon: typeof Briefcase; helper: string }[] = [
     { id: "project", label: "Project bespreken", icon: Briefcase, helper: "Voor netbeheerders, hoofdaannemers en industrie." },
@@ -130,7 +142,7 @@ const Contact = () => {
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
 
-      <main className="pt-16 sm:pt-20">
+      <main id="main-content" className="pt-16 sm:pt-20">
         {/* HERO */}
         <section className="relative sm:min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-14 sm:py-20">
           <div className="absolute inset-0 opacity-[0.08]">
@@ -346,14 +358,18 @@ const Contact = () => {
 
                 <button
                   type="submit"
-                  disabled={submitting}
-                  className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                  disabled={submitting || intent === "sollicitatie"}
+                  aria-disabled={intent === "sollicitatie"}
+                  title={intent === "sollicitatie" ? "Voor sollicitaties: ga naar Werken bij TerreVolt" : undefined}
+                  className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 min-h-[54px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {submitting ? (
                     <>
                       <Loader2 className="w-5 h-5 animate-spin" />
                       <span>Versturen...</span>
                     </>
+                  ) : intent === "sollicitatie" ? (
+                    <span>Gebruik formulier op Werken bij</span>
                   ) : (
                     <>
                       <span>Verstuur aanvraag</span>

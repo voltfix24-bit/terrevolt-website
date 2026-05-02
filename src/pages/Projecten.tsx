@@ -1,4 +1,5 @@
 import { ArrowRight, Cable, Building2, Anchor, ShieldCheck, FileBarChart, HardHat, Users, ShieldAlert, ClipboardCheck, Check } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
@@ -11,6 +12,7 @@ const projecten = [
     description: "Ondersteuning bij demontage, montage, kabelafwerking en oplevering van laagspanningsverdelingen.",
     bullets: ["LS-rek en afgaande velden", "Kabels opnieuw aansluiten", "Controle en oplevering"],
     rol: ["Uitvoering", "Controle", "Oplevering"],
+    serviceHref: "/diensten/ls-ms-netmontage",
   },
   {
     icon: Building2,
@@ -19,6 +21,7 @@ const projecten = [
     description: "Uitvoering en ondersteuning bij renovatie van technische ruimten, schakelinstallaties, transformatoren en aarding.",
     bullets: ["MS-installatie en transformator", "LS-verdeling en kabelwerk", "Stationsaarding"],
     rol: ["Uitvoering", "Ondersteuning", "Oplevering"],
+    serviceHref: "/diensten/stationsrenovatie",
   },
   {
     icon: Anchor,
@@ -27,6 +30,7 @@ const projecten = [
     description: "Inspectie, verbetering en meting van aardingsvoorzieningen voor veilige en betrouwbare installaties.",
     bullets: ["Aardelektroden plaatsen", "Aardverspreidingsweerstand meten", "Meetrapportage opleveren"],
     rol: ["Uitvoering", "Meting", "Rapportage"],
+    serviceHref: "/diensten/aardingsoplossingen",
   },
   {
     icon: ShieldCheck,
@@ -35,6 +39,7 @@ const projecten = [
     description: "Ondersteuning bij vrijschakelen, veiligstellen en terugschakelen tijdens LS/MS-werkzaamheden.",
     bullets: ["In- en uitbedrijf nemen", "Veilig werkgebied", "Afstemming met uitvoering"],
     rol: ["Ondersteuning", "Controle"],
+    serviceHref: "/diensten/schakelwerk",
   },
   {
     icon: Cable,
@@ -43,6 +48,7 @@ const projecten = [
     description: "Kabelinvoer, afmontage, moffen en eindsluitingen binnen technische ruimten en netstructuren.",
     bullets: ["Kabelmontage", "Eindsluitingen", "Oplevercontrole"],
     rol: ["Uitvoering", "Oplevering"],
+    serviceHref: "/diensten/ls-ms-netmontage",
   },
   {
     icon: FileBarChart,
@@ -51,6 +57,7 @@ const projecten = [
     description: "Controlemetingen en duidelijke rapportage voor oplevering van aardings- en kabelwerk.",
     bullets: ["Controlemetingen", "Meetrapportage", "Opleverdossier"],
     rol: ["Meting", "Rapportage", "Oplevering"],
+    serviceHref: "/diensten/meten-en-beproeven",
   },
 ];
 
@@ -68,7 +75,7 @@ const Projecten = () => {
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
 
-      <main className="pt-16 sm:pt-20">
+      <main id="main-content" className="pt-16 sm:pt-20">
         {/* HERO */}
         <section className="relative sm:min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-14 sm:py-20">
           <div className="absolute inset-0 opacity-[0.08]">
@@ -100,14 +107,14 @@ const Projecten = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href="/contact"
-                  className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
+                  className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 min-h-[54px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Project bespreken</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
                   href="/diensten"
-                  className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
+                  className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 min-h-[54px] rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center flex items-center justify-center"
                 >
                   Diensten bekijken
                 </a>
@@ -130,9 +137,11 @@ const Projecten = () => {
               {projecten.map((p) => {
                 const Icon = p.icon;
                 return (
-                  <article
+                  <Link
                     key={p.title}
-                    className="group bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 flex flex-col"
+                    to={p.serviceHref}
+                    aria-label={`Bekijk dienst voor ${p.title}`}
+                    className="group bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 flex flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 active:scale-[0.99]"
                   >
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center group-hover:bg-[#9ed42e] transition-colors duration-300">
@@ -162,7 +171,10 @@ const Projecten = () => {
                         ))}
                       </div>
                     </div>
-                  </article>
+                    <div className="mt-4 text-xs text-[#9ed42e] inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                      Bekijk dienst <ArrowRight className="w-3 h-3" />
+                    </div>
+                  </Link>
                 );
               })}
             </div>
