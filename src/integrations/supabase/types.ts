@@ -22,6 +22,8 @@ export type Database = {
           description: string | null
           email: string
           id: string
+          intent: string | null
+          intent_label: string | null
           location: string | null
           name: string
           phone: string | null
@@ -35,6 +37,8 @@ export type Database = {
           description?: string | null
           email: string
           id?: string
+          intent?: string | null
+          intent_label?: string | null
           location?: string | null
           name: string
           phone?: string | null
@@ -48,6 +52,8 @@ export type Database = {
           description?: string | null
           email?: string
           id?: string
+          intent?: string | null
+          intent_label?: string | null
           location?: string | null
           name?: string
           phone?: string | null
