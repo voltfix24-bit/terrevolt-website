@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import {
   ArrowRight,
@@ -72,6 +72,8 @@ const standaardProces = ["Aanmelden", "Kennismaken", "Documenten/check", "Projec
 const VacatureDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const [vacature, setVacature] = useState<VacatureView | null | "missing">(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
 
   useEffect(() => {
     let active = true;
