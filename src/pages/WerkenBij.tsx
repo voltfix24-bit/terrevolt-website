@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight, Zap, Cable, PlugZap, Power, ClipboardCheck, Users,
   Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert,
   Award, Loader2, Upload, CalendarCheck, Phone as PhoneIcon, HardHat,
-  CheckCircle2,
+  CheckCircle2, FileCheck2, X,
 } from "lucide-react";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
 import { z } from "zod";
@@ -88,17 +88,23 @@ const profielOpties = [
   "Anders",
 ];
 
+const contactVoorkeurOpties = ["Bellen", "WhatsApp", "E-mail", "Maakt niet uit"];
+
 const formSchema = z.object({
   name: z.string().trim().min(2, "Naam is verplicht").max(100),
   phone: z.string().trim().min(6, "Telefoonnummer is verplicht").max(30),
   email: z.string().trim().email("Ongeldig e-mailadres").max(255),
   profile: z.string().trim().min(1, "Kies een profiel").max(100),
   region: z.string().trim().max(100).optional(),
+  contact_pref: z.string().trim().max(50).optional(),
   experience: z.string().trim().max(2000).optional(),
   certifications: z.string().trim().max(1000).optional(),
   availability: z.string().trim().max(200).optional(),
   message: z.string().trim().max(2000).optional(),
+  privacy: z.literal("on", { errorMap: () => ({ message: "Akkoord met privacyverklaring is verplicht" }) }),
 });
+
+type FieldErrors = Partial<Record<keyof z.infer<typeof formSchema>, string>>;
 
 const WerkenBij = () => {
   usePageMeta(
@@ -109,6 +115,9 @@ const WerkenBij = () => {
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [profielen, setProfielen] = useState<ProfielCard[]>([]);
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [success, setSuccess] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     let active = true;
@@ -129,6 +138,13 @@ const WerkenBij = () => {
     return () => { active = false; };
   }, []);
 
+  const focusFirstError = (errs: FieldErrors) => {
+    const first = Object.keys(errs)[0];
+    if (!first || !formRef.current) return;
+    const el = formRef.current.querySelector<HTMLElement>(`[name="${first}"]`);
+    el?.focus();
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
@@ -138,17 +154,27 @@ const WerkenBij = () => {
       email: String(fd.get("email") || ""),
       profile: String(fd.get("profile") || ""),
       region: String(fd.get("region") || ""),
+      contact_pref: String(fd.get("contact_pref") || ""),
       experience: String(fd.get("experience") || ""),
       certifications: String(fd.get("certifications") || ""),
       availability: String(fd.get("availability") || ""),
       message: String(fd.get("message") || ""),
+      privacy: fd.get("privacy") ? "on" : "",
     };
 
     const parsed = formSchema.safeParse(raw);
     if (!parsed.success) {
+      const fe: FieldErrors = {};
+      parsed.error.errors.forEach((err) => {
+        const k = err.path[0] as keyof FieldErrors;
+        if (k && !fe[k]) fe[k] = err.message;
+      });
+      setErrors(fe);
       toast.error(parsed.error.errors[0]?.message || "Controleer het formulier");
+      focusFirstError(fe);
       return;
     }
+    setErrors({});
     if (file && file.size > 10 * 1024 * 1024) {
       toast.error("Bestand mag maximaal 10MB zijn");
       return;
@@ -167,7 +193,11 @@ const WerkenBij = () => {
         cv_url = path;
       }
 
-      const fullMessage = `Profiel: ${parsed.data.profile}${parsed.data.message ? `\n\n${parsed.data.message}` : ""}`;
+      const extras = [
+        `Profiel: ${parsed.data.profile}`,
+        parsed.data.contact_pref ? `Contactvoorkeur: ${parsed.data.contact_pref}` : null,
+      ].filter(Boolean).join(" | ");
+      const fullMessage = parsed.data.message ? `${extras}\n\n${parsed.data.message}` : extras;
 
       const { error: insErr } = await supabase.from("job_applications").insert([{
         name: parsed.data.name,
@@ -183,14 +213,25 @@ const WerkenBij = () => {
       if (insErr) throw insErr;
 
       toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");
-      (e.target as HTMLFormElement).reset();
+      formRef.current?.reset();
       setFile(null);
+      setSuccess(true);
     } catch (err) {
       console.error(err);
       toast.error("Er ging iets mis. Probeer het later opnieuw.");
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const resetForm = () => {
+    setSuccess(false);
+    setErrors({});
+    setFile(null);
+    formRef.current?.reset();
+    setTimeout(() => {
+      document.getElementById("aanmelden")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
   };
 
   const scrollToSlug = (slugs: string[]) => {
@@ -438,106 +479,164 @@ const WerkenBij = () => {
                 </div>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Meld je aan</h2>
                 <p className="text-base sm:text-xl text-[#6c757d]">
-                  Vul het formulier in. Wij nemen zo snel mogelijk contact op.
+                  Laat je gegevens achter. We nemen snel contact met je op om te kijken welke projecten of rollen bij jouw ervaring passen.
                 </p>
               </div>
 
+              {success ? (
+                <div role="status" aria-live="polite" className="bg-[#f0f7e6] border border-[#9ed42e] rounded-2xl p-6 sm:p-10 shadow-sm text-center">
+                  <div className="w-14 h-14 bg-[#9ed42e] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle2 className="w-8 h-8 text-[#0d3b2e]" strokeWidth={2.5} />
+                  </div>
+                  <h3 className="text-2xl text-[#0d3b2e] mb-2">Aanmelding ontvangen</h3>
+                  <p className="text-[#0d3b2e]/80 mb-6 max-w-md mx-auto">
+                    Bedankt! We hebben je gegevens ontvangen. We nemen binnenkort telefonisch of per e-mail contact met je op.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a href="#profielen" className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors min-h-[48px] flex items-center justify-center">
+                      Terug naar profielen
+                    </a>
+                    <button type="button" onClick={resetForm} className="border-2 border-[#0d3b2e] text-[#0d3b2e] px-6 py-3 rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors min-h-[48px] flex items-center justify-center">
+                      Nog iemand aanmelden
+                    </button>
+                  </div>
+                </div>
+              ) : (
               <form
+                ref={formRef}
                 onSubmit={handleSubmit}
-                className="bg-[#f8f9fa] rounded-2xl p-6 sm:p-10 border border-gray-200 shadow-sm space-y-5"
+                noValidate
+                className="bg-[#f8f9fa] rounded-2xl p-5 sm:p-10 border border-gray-200 shadow-sm space-y-6"
               >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div>
-                    <label htmlFor="name" className="block text-sm text-[#0d3b2e] mb-2">Naam *</label>
-                    <input id="name" name="name" required maxLength={100}
-                      className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
-                  </div>
-                  <div>
-                    <label htmlFor="phone" className="block text-sm text-[#0d3b2e] mb-2">Telefoon *</label>
-                    <input id="phone" name="phone" type="tel" required maxLength={30}
-                      className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm text-[#0d3b2e] mb-2">E-mail *</label>
-                    <input id="email" name="email" type="email" required maxLength={255}
-                      className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
-                  </div>
-                  <div>
-                    <label htmlFor="profile" className="block text-sm text-[#0d3b2e] mb-2">
-                      Profiel waarvoor je je aanmeldt *
-                    </label>
-                    <select
-                      id="profile"
-                      name="profile"
-                      required
-                      defaultValue=""
-                      className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition"
-                    >
-                      <option value="" disabled>Maak een keuze</option>
-                      {profielOpties.map((o) => (
-                        <option key={o} value={o}>{o}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div>
-                    <label htmlFor="region" className="block text-sm text-[#0d3b2e] mb-2">Woonplaats / regio</label>
-                    <input id="region" name="region" maxLength={100}
-                      className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
-                  </div>
-                  <div>
-                    <label htmlFor="availability" className="block text-sm text-[#0d3b2e] mb-2">Beschikbaarheid</label>
-                    <input id="availability" name="availability" maxLength={200}
-                      placeholder="Bijv. fulltime per direct, of 3 dagen p/w"
-                      className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                {/* Blok 1 — Contactgegevens */}
+                <div>
+                  <h3 className="text-xs uppercase tracking-wider text-[#6c757d] mb-3 pb-2 border-b border-gray-200">Contactgegevens</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                    <div>
+                      <label htmlFor="name" className="block text-sm text-[#0d3b2e] mb-2">Naam *</label>
+                      <input id="name" name="name" required maxLength={100} aria-invalid={!!errors.name}
+                        className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.name ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`} />
+                      {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-sm text-[#0d3b2e] mb-2">Telefoon *</label>
+                      <input id="phone" name="phone" type="tel" required maxLength={30} inputMode="tel" aria-invalid={!!errors.phone}
+                        className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`} />
+                      {errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone}</p>}
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label htmlFor="email" className="block text-sm text-[#0d3b2e] mb-2">E-mail *</label>
+                      <input id="email" name="email" type="email" required maxLength={255} inputMode="email" autoComplete="email" aria-invalid={!!errors.email}
+                        className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.email ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`} />
+                      {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+                    </div>
+                    <div>
+                      <label htmlFor="contact_pref" className="block text-sm text-[#0d3b2e] mb-2">Hoe wil je het liefst benaderd worden?</label>
+                      <select id="contact_pref" name="contact_pref" defaultValue=""
+                        className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition">
+                        <option value="">Maakt niet uit</option>
+                        {contactVoorkeurOpties.map((o) => (
+                          <option key={o} value={o}>{o}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="region" className="block text-sm text-[#0d3b2e] mb-2">Woonplaats / regio</label>
+                      <input id="region" name="region" maxLength={100}
+                        className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                    </div>
                   </div>
                 </div>
 
+                {/* Blok 2 — Profiel & ervaring */}
                 <div>
-                  <label htmlFor="experience" className="block text-sm text-[#0d3b2e] mb-2">Ervaring</label>
-                  <textarea id="experience" name="experience" rows={3} maxLength={2000}
-                    placeholder="Bijv. 5 jaar ervaring in MS-stationsrenovaties en LS-aansluitwerk."
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition resize-y" />
+                  <h3 className="text-xs uppercase tracking-wider text-[#6c757d] mb-3 pb-2 border-b border-gray-200">Profiel &amp; ervaring</h3>
+                  <div className="space-y-4 sm:space-y-5">
+                    <div>
+                      <label htmlFor="profile" className="block text-sm text-[#0d3b2e] mb-2">Profiel waarvoor je je aanmeldt *</label>
+                      <select id="profile" name="profile" required defaultValue="" aria-invalid={!!errors.profile}
+                        className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.profile ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`}>
+                        <option value="" disabled>Maak een keuze</option>
+                        {profielOpties.map((o) => (
+                          <option key={o} value={o}>{o}</option>
+                        ))}
+                      </select>
+                      {errors.profile && <p className="mt-1 text-xs text-red-600">{errors.profile}</p>}
+                    </div>
+                    <div>
+                      <label htmlFor="experience" className="block text-sm text-[#0d3b2e] mb-2">Ervaring</label>
+                      <textarea id="experience" name="experience" rows={3} maxLength={2000}
+                        placeholder="Bijv. 5 jaar ervaring in MS-stationsrenovaties en LS-aansluitwerk."
+                        className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition resize-y max-h-60" />
+                    </div>
+                    <div>
+                      <label htmlFor="certifications" className="block text-sm text-[#0d3b2e] mb-2">Bevoegdheden / certificaten</label>
+                      <input id="certifications" name="certifications" maxLength={1000}
+                        placeholder="Bijv. VCA, BEI BLS/BHS, NEN 3140 VOP"
+                        className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                    </div>
+                  </div>
                 </div>
 
+                {/* Blok 3 — Beschikbaarheid & documenten */}
                 <div>
-                  <label htmlFor="certifications" className="block text-sm text-[#0d3b2e] mb-2">Bevoegdheden / certificaten</label>
-                  <input id="certifications" name="certifications" maxLength={1000}
-                    placeholder="Bijv. VCA, BEI BLS/BHS, NEN 3140 VOP"
-                    className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                  <h3 className="text-xs uppercase tracking-wider text-[#6c757d] mb-3 pb-2 border-b border-gray-200">Beschikbaarheid &amp; documenten</h3>
+                  <div className="space-y-4 sm:space-y-5">
+                    <div>
+                      <label htmlFor="availability" className="block text-sm text-[#0d3b2e] mb-2">Beschikbaarheid</label>
+                      <input id="availability" name="availability" maxLength={200}
+                        placeholder="Bijv. fulltime per direct, of 3 dagen p/w"
+                        className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                    </div>
+                    <div>
+                      <label htmlFor="message" className="block text-sm text-[#0d3b2e] mb-2">Bericht</label>
+                      <textarea id="message" name="message" rows={4} maxLength={2000}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition resize-y max-h-72" />
+                    </div>
+                    <div>
+                      <label htmlFor="cv" className="block text-sm text-[#0d3b2e] mb-2">CV / certificaten uploaden</label>
+                      {file ? (
+                        <div className="flex items-center gap-3 w-full px-4 py-3 rounded-lg border border-[#9ed42e] bg-[#f0f7e6]">
+                          <FileCheck2 className="w-5 h-5 text-[#0d3b2e] flex-shrink-0" />
+                          <div className="min-w-0 flex-1">
+                            <div className="text-xs uppercase tracking-wider text-[#6c757d]">Bestand geselecteerd</div>
+                            <div className="text-sm text-[#0d3b2e] break-all">{file.name}</div>
+                          </div>
+                          <label htmlFor="cv" className="text-xs text-[#0d3b2e] underline cursor-pointer min-h-[44px] flex items-center px-2">Wijzig</label>
+                          <button type="button" onClick={() => setFile(null)} aria-label="Verwijder bestand" className="text-[#6c757d] hover:text-[#0d3b2e] min-h-[44px] min-w-[44px] flex items-center justify-center">
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ) : (
+                        <label htmlFor="cv" className="flex items-center justify-center gap-3 w-full px-4 py-5 rounded-lg border-2 border-dashed border-gray-300 hover:border-[#9ed42e] hover:bg-[#f0f7e6]/40 cursor-pointer transition bg-white min-h-[88px]">
+                          <Upload className="w-5 h-5 text-[#0d3b2e]" />
+                          <span className="text-[#6c757d] text-sm">Klik om bestand te kiezen</span>
+                        </label>
+                      )}
+                      <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                        onChange={(e) => setFile(e.target.files?.[0] || null)} className="hidden" />
+                      <p className="mt-2 text-xs text-[#6c757d] leading-relaxed">
+                        PDF, DOC, JPG of PNG — maximaal 10MB. Geen CV bij de hand? Geen probleem, je kunt ook zonder bestand aanmelden.
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
+                {/* Privacy */}
                 <div>
-                  <label htmlFor="message" className="block text-sm text-[#0d3b2e] mb-2">Bericht</label>
-                  <textarea id="message" name="message" rows={4} maxLength={2000}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition resize-y" />
-                </div>
-
-                <div>
-                  <label htmlFor="cv" className="block text-sm text-[#0d3b2e] mb-2">CV / certificaten (PDF, DOC, max 10MB)</label>
-                  <label
-                    htmlFor="cv"
-                    className="flex items-center justify-center gap-3 w-full px-4 py-6 rounded-lg border-2 border-dashed border-gray-300 hover:border-[#9ed42e] hover:bg-[#f0f7e6]/40 cursor-pointer transition bg-white"
-                  >
-                    <Upload className="w-5 h-5 text-[#0d3b2e]" />
-                    <span className="text-[#6c757d] text-sm break-all">
-                      {file ? file.name : "Klik om bestand te kiezen"}
+                  <label className="flex items-start gap-3 cursor-pointer text-sm text-[#0d3b2e] leading-relaxed">
+                    <input type="checkbox" name="privacy" required aria-invalid={!!errors.privacy}
+                      className="mt-1 w-5 h-5 rounded border-gray-300 text-[#9ed42e] focus:ring-[#9ed42e] flex-shrink-0" />
+                    <span>
+                      Ik ga akkoord dat TerreVolt mijn gegevens gebruikt om contact met mij op te nemen over werk, projecten of samenwerking.{" "}
+                      <Link to="/privacy" className="underline hover:text-[#0d3b2e]/80">Privacyverklaring</Link>
                     </span>
                   </label>
-                  <input
-                    id="cv"
-                    name="cv"
-                    type="file"
-                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                    onChange={(e) => setFile(e.target.files?.[0] || null)}
-                    className="hidden"
-                  />
+                  {errors.privacy && <p className="mt-1 text-xs text-red-600">{errors.privacy}</p>}
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
-                >
+                <button type="submit" disabled={submitting}
+                  className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
                   {submitting ? (
                     <>
                       <Loader2 className="w-5 h-5 animate-spin" />
@@ -551,6 +650,8 @@ const WerkenBij = () => {
                   )}
                 </button>
               </form>
+              )}
+
             </div>
           </div>
         </section>
