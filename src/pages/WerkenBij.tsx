@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight, Zap, Cable, PlugZap, Power, ClipboardCheck, Users,
   Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert,
-  Award, Loader2, Upload, CalendarCheck, Phone as PhoneIcon, HardHat,
-  CheckCircle2, FileCheck2, X, ClipboardList, UserCheck, Layers3, Rocket,
+  Award, Loader2, CalendarCheck, Phone as PhoneIcon, HardHat,
+  CheckCircle2, ClipboardList, UserCheck, Layers3, Rocket,
   Mail as MailIcon, HelpCircle, AlertCircle,
 } from "lucide-react";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
