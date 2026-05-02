@@ -1,4 +1,5 @@
 import { CheckCircle2 } from "lucide-react";
+import { Reveal } from "@/components/terrevolt/Reveal";
 
 const projects = [
   {
