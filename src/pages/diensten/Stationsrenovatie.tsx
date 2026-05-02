@@ -24,7 +24,7 @@ const trustItems = [
   { icon: ShieldCheck, title: "Veiligheidsbewust", description: "Werken volgens geldende procedures, normen en projectafspraken." },
   { icon: CalendarClock, title: "Projectmatig inzetbaar", description: "Flexibele inzet van monteurs en ploegen binnen uw projectplanning." },
   { icon: MessageCircle, title: "Korte lijnen", description: "Directe communicatie tussen uitvoering, werkverantwoordelijke en opdrachtgever." },
-  { icon: PackageCheck, title: "Oplevergericht", description: "Heldere controle, terugkoppeling en — waar gevraagd — opleverdocumentatie." },
+  { icon: PackageCheck, title: "Oplevergericht", description: "Heldere controle, terugkoppeling en\u00A0— waar gevraagd —\u00A0opleverdocumentatie." },
 ];
 
 const Stationsrenovatie = () => {
