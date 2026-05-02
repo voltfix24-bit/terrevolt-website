@@ -30,7 +30,7 @@ const groundingServices = [
 
 export function Grounding() {
   return (
-    <section className="py-24 bg-[#0d3b2e] relative overflow-hidden">
+    <section id="aarding" className="py-24 bg-[#0d3b2e] relative overflow-hidden">
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
           backgroundImage: `
