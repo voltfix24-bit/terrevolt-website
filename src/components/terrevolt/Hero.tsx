@@ -32,12 +32,12 @@ export function Hero() {
             <span className="text-[#9ed42e] tracking-widest uppercase text-sm">TERREVOLT BV</span>
           </div>
 
-          <h1 className="text-5xl lg:text-7xl text-white mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl text-white mb-6 leading-tight break-words">
             Specialist in LS/MS-infrastructuur<br />
             <span className="text-[#9ed42e]">en aardingsoplossingen</span>
           </h1>
 
-          <p className="text-xl lg:text-2xl text-gray-300 mb-4 max-w-3xl leading-relaxed">
+          <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-4 max-w-3xl leading-relaxed">
             TerreVolt ondersteunt netbeheerders, hoofdaannemers en industrie bij LS/MS-netmontage, stationsrenovaties, schakelwerk en meetbare aardingsoplossingen.
           </p>
 
