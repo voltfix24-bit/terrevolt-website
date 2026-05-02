@@ -64,7 +64,7 @@ const Projecten = () => {
 
       <main className="pt-16 sm:pt-20">
         {/* HERO */}
-        <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-20">
+        <section className="relative sm:min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-14 sm:py-20">
           <div className="absolute inset-0 opacity-[0.08]">
             <div
               className="absolute inset-0"
@@ -78,7 +78,7 @@ const Projecten = () => {
             />
           </div>
 
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-4xl">
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Projecten
@@ -111,10 +111,10 @@ const Projecten = () => {
         </section>
 
         {/* SECTIE 1: Projectcards */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voorbeelden uit de praktijk</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voorbeelden uit de praktijk</h2>
               <p className="text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
                 Een doorsnede van projecttypes waarbinnen TerreVolt vakbekwame ondersteuning levert.
               </p>
@@ -154,13 +154,13 @@ const Projecten = () => {
         </section>
 
         {/* SECTIE 2: Onze rol */}
-        <section className="py-24 bg-[#f8f9fa]">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Onze rol
               </div>
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Onze rol binnen projecten</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Onze rol binnen projecten</h2>
               <p className="text-xl text-[#6c757d] max-w-2xl mx-auto">
                 TerreVolt is inzetbaar op de plek waar vakbekwame uitvoering nodig is.
               </p>
@@ -187,7 +187,7 @@ const Projecten = () => {
         </section>
 
         {/* CTA */}
-        <section id="contact" className="py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+        <section id="contact" className="py-16 md:py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"
@@ -201,9 +201,9 @@ const Projecten = () => {
             />
           </div>
 
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-4xl lg:text-5xl text-white mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
                 Een project bespreken <span className="text-[#9ed42e]">met TerreVolt</span>?
               </h2>
               <p className="text-xl text-gray-300 mb-12 leading-relaxed">

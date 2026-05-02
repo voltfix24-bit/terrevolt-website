@@ -4,7 +4,7 @@ import { company, telHref, mailHref } from "@/config/company";
 export function Footer() {
   return (
     <footer className="bg-[#2d3436] text-gray-400 py-12">
-      <div className="container mx-auto px-6 lg:px-12">
+      <div className="container mx-auto px-5 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <a href="/" className="flex items-center gap-2 mb-4">

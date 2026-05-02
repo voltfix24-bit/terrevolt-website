@@ -60,12 +60,12 @@ export default function AdminVacancies() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl text-[#0d3b2e]">Vacatures</h1>
+          <h1 className="text-2xl sm:text-3xl text-[#0d3b2e]">Vacatures</h1>
           <p className="text-[#6c757d]">Beheer alle vacatures.</p>
         </div>
-        <Button asChild className="bg-[#9ed42e] text-[#0d3b2e] hover:bg-[#8bc41f]">
+        <Button asChild className="bg-[#9ed42e] text-[#0d3b2e] hover:bg-[#8bc41f] w-full sm:w-auto">
           <Link to="/admin/vacatures/nieuw"><Plus className="w-4 h-4 mr-1" /> Nieuwe vacature</Link>
         </Button>
       </div>

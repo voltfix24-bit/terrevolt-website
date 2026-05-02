@@ -242,7 +242,7 @@ const VacatureDetail = () => {
             />
           </div>
 
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-4xl">
               <Link
                 to="/werken-bij"
@@ -253,7 +253,7 @@ const VacatureDetail = () => {
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Vacature
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight break-words">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight hyphens-auto">
                 {vacature.title}
               </h1>
               <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
@@ -281,17 +281,19 @@ const VacatureDetail = () => {
 
         {/* META */}
         <section className="py-16 bg-white border-b border-gray-100">
-          <div className="container mx-auto px-6 lg:px-12">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 max-w-6xl mx-auto">
               {meta.map((m) => {
                 const Icon = m.icon;
                 return (
-                  <div key={m.label} className="flex flex-col items-center text-center gap-2">
-                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                  <div key={m.label} className="flex sm:flex-col items-center sm:text-center gap-3 sm:gap-2 bg-[#f8f9fa] sm:bg-transparent rounded-xl sm:rounded-none p-4 sm:p-0 border border-gray-100 sm:border-0">
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#0d3b2e]" strokeWidth={2} />
                     </div>
-                    <div className="text-xs uppercase tracking-wider text-[#6c757d]">{m.label}</div>
-                    <div className="text-[#0d3b2e] text-sm">{m.value}</div>
+                    <div className="min-w-0 flex-1 sm:flex-none">
+                      <div className="text-[11px] sm:text-xs uppercase tracking-wider text-[#6c757d]">{m.label}</div>
+                      <div className="text-[#0d3b2e] text-sm break-words">{m.value}</div>
+                    </div>
                   </div>
                 );
               })}
@@ -300,8 +302,8 @@ const VacatureDetail = () => {
         </section>
 
         {/* WAT GA JE DOEN + DIT BRENG JE MEE */}
-        <section className="py-24 bg-[#f8f9fa]">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
               <div className="bg-white rounded-2xl p-8 border border-gray-200">
                 <div className="flex items-center gap-3 mb-6">
@@ -337,14 +339,14 @@ const VacatureDetail = () => {
         </section>
 
         {/* WAT BIEDEN WIJ */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-4xl mx-auto text-center mb-12">
               <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 <Gift className="w-4 h-4" />
                 Wat bieden wij?
               </div>
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Heldere voordelen</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Heldere voordelen</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
               {vacature.bieden.map((b) => (
@@ -361,23 +363,23 @@ const VacatureDetail = () => {
         </section>
 
         {/* VEILIGHEID VOOROP */}
-        <section className="py-20 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+        <section className="py-14 md:py-20 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
               <div className="w-16 h-16 bg-[#9ed42e] rounded-2xl flex items-center justify-center mx-auto mb-6">
                 <ShieldAlert className="w-8 h-8 text-[#0d3b2e]" strokeWidth={2.5} />
               </div>
-              <h2 className="text-3xl lg:text-4xl text-white mb-6">Veiligheid voorop</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl text-white mb-6">Veiligheid voorop</h2>
               <p className="text-lg text-gray-300 leading-relaxed">{vacature.veiligheid}</p>
             </div>
           </div>
         </section>
 
         {/* PROCES */}
-        <section className="py-24 bg-[#f8f9fa]">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Zo verloopt het proces</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Zo verloopt het proces</h2>
               <p className="text-xl text-[#6c757d] max-w-2xl mx-auto">
                 Van aanmelding tot start op het project — duidelijk en kort.
               </p>
@@ -410,14 +412,14 @@ const VacatureDetail = () => {
         </section>
 
         {/* FORMULIER */}
-        <section id="solliciteer" className="py-24 bg-white">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section id="solliciteer" className="py-16 md:py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-12">
                 <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                   Solliciteren
                 </div>
-                <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Meld je aan voor: {vacature.title}</h2>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Meld je aan voor: {vacature.title}</h2>
                 <p className="text-xl text-[#6c757d]">Vul het formulier in. Wij reageren snel.</p>
               </div>
 
@@ -517,10 +519,10 @@ const VacatureDetail = () => {
         </section>
 
         {/* CTA naar contact */}
-        <section className="py-20 bg-[#f8f9fa]">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-14 md:py-20 bg-[#f8f9fa]">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl lg:text-4xl text-[#0d3b2e] mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl text-[#0d3b2e] mb-4">
                 Liever eerst een <span className="text-[#9ed42e]">vraag stellen</span>?
               </h2>
               <p className="text-lg text-[#6c757d] mb-8">

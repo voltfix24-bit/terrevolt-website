@@ -69,7 +69,7 @@ export default function AdminApplications() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl text-[#0d3b2e]">Sollicitaties</h1>
+        <h1 className="text-2xl sm:text-3xl text-[#0d3b2e]">Sollicitaties</h1>
         <p className="text-[#6c757d]">Alle binnengekomen aanmeldingen.</p>
       </div>
 

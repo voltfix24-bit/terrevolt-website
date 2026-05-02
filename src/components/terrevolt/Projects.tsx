@@ -35,10 +35,10 @@ const projects = [
 
 export function Projects() {
   return (
-    <section id="projecten" className="py-24 bg-white">
-      <div className="container mx-auto px-6 lg:px-12">
+    <section id="projecten" className="py-16 md:py-16 md:py-24 bg-white">
+      <div className="container mx-auto px-5 sm:px-6 lg:px-12">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Projecttypes en praktijkvoorbeelden</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Projecttypes en praktijkvoorbeelden</h2>
           <p className="text-xl text-[#6c757d] max-w-3xl mx-auto">
             Voorbeelden van werkzaamheden waarbij TerreVolt opdrachtgevers kan ondersteunen.
           </p>

@@ -36,12 +36,12 @@ export default function AdminLayout() {
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <header className="bg-[#0d3b2e] text-white">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between">
-          <Link to="/admin" className="flex items-center gap-2">
+        <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
+          <Link to="/admin" className="flex items-center gap-2 min-w-0">
             <span className="text-[#9ed42e]">TerreVolt</span>
-            <span className="text-sm opacity-80">Beheer</span>
+            <span className="text-sm opacity-80 hidden sm:inline">Beheer</span>
           </Link>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <Link to="/" className="text-sm hover:text-[#9ed42e]">→ Site</Link>
             <Button
               size="sm"
@@ -49,14 +49,14 @@ export default function AdminLayout() {
               className="text-white hover:bg-[#1a4a36]"
               onClick={() => supabase.auth.signOut()}
             >
-              <LogOut className="w-4 h-4 mr-1" /> Uitloggen
+              <LogOut className="w-4 h-4 sm:mr-1" /> <span className="hidden sm:inline">Uitloggen</span>
             </Button>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-6 py-8 grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-8">
-        <nav className="space-y-1">
+      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8 grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-6 lg:gap-8">
+        <nav className="flex lg:block gap-1 lg:gap-0 lg:space-y-1 overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 pb-2 lg:pb-0">
           {nav.map((n) => {
             const Icon = n.icon;
             const active = n.end ? location.pathname === n.to : location.pathname.startsWith(n.to);
@@ -64,7 +64,7 @@ export default function AdminLayout() {
               <Link
                 key={n.to}
                 to={n.to}
-                className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition ${
+                className={`flex items-center gap-2 lg:gap-3 px-3 lg:px-4 py-2.5 rounded-lg text-sm transition whitespace-nowrap flex-shrink-0 ${
                   active
                     ? "bg-[#0d3b2e] text-white"
                     : "text-[#0d3b2e] hover:bg-white"

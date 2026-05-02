@@ -2,7 +2,7 @@ import { ArrowRight, Zap } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e]">
+    <section className="relative min-h-[70vh] sm:min-h-[85vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e]">
       <div className="absolute inset-0 opacity-[0.08]">
         <div className="absolute inset-0" style={{
           backgroundImage: `
@@ -25,7 +25,7 @@ export function Hero() {
         </svg>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+      <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
         <div className="max-w-4xl">
           <div className="flex items-center gap-2 mb-6">
             <Zap className="w-8 h-8 text-[#9ed42e]" strokeWidth={2.5} />

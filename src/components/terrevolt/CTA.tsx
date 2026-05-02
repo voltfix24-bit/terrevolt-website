@@ -3,7 +3,7 @@ import { company, telHref, mailHref } from "@/config/company";
 
 export function CTA() {
   return (
-    <section id="contact" className="py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+    <section id="contact" className="py-16 md:py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
           backgroundImage: `
@@ -14,9 +14,9 @@ export function CTA() {
         }} />
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 relative z-10">
+      <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl lg:text-5xl text-white mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
             Een LS/MS-project of<br />
             <span className="text-[#9ed42e]">aardingsvraagstuk bespreken?</span>
           </h2>

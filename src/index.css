@@ -122,6 +122,34 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 
+  /* Mobiele safety-net: voorkom horizontale overflow en breek lange technische woorden netjes af. */
+  html, body {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  /* Lange technische termen (Aardverspreidingsweerstand, middenspanningsstation, ...) mogen
+     in tekstblokken netjes wrappen zonder de layout te breken. */
+  p, li, span, a, label {
+    overflow-wrap: break-word;
+  }
+
+  /* Voorkom dat heel kleine bodytekst op iOS gaat zoomen / niet leesbaar is. */
+  input, textarea, select {
+    font-size: 16px;
+  }
+  @media (min-width: 640px) {
+    input, textarea, select {
+      font-size: inherit;
+    }
+  }
+
   /* Extra veiligheid: per sectie ook scroll-margin-top instellen voor browsers/contexten
      waar scroll-padding-top op <html> niet werkt (bv. genest scrollende ouders). */
   section[id] {

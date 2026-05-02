@@ -34,7 +34,7 @@ const Stationsrenovatie = () => {
 
       <main className="pt-16 sm:pt-20">
         {/* HERO */}
-        <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-20">
+        <section className="relative sm:min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-14 sm:py-20">
           <div className="absolute inset-0 opacity-[0.08]">
             <div
               className="absolute inset-0"
@@ -48,7 +48,7 @@ const Stationsrenovatie = () => {
             />
           </div>
 
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-4xl">
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Dienst
@@ -81,10 +81,10 @@ const Stationsrenovatie = () => {
         </section>
 
         {/* SECTIE 1: Werkzaamheden */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Uitvoering binnen MS/LS-stations</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Uitvoering binnen MS/LS-stations</h2>
               <p className="text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
                 Vakbekwame ondersteuning bij elke fase van een stationsrenovatie.
               </p>
@@ -111,13 +111,13 @@ const Stationsrenovatie = () => {
         </section>
 
         {/* SECTIE 2: Typische projecttypes */}
-        <section className="py-24 bg-[#f8f9fa]">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Projecttypes
               </div>
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Typische stationsprojecten</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Typische stationsprojecten</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -141,10 +141,10 @@ const Stationsrenovatie = () => {
         </section>
 
         {/* SECTIE 3: Waarom TerreVolt */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 lg:px-12">
+        <section className="py-16 md:py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Praktijkervaring binnen de netbeheerwereld</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Praktijkervaring binnen de netbeheerwereld</h2>
               <p className="text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
                 Stationsrenovatie vraagt om goede voorbereiding, veilige uitvoering en afstemming tussen opdrachtgever, uitvoerder, werkverantwoordelijke en monteurs. TerreVolt levert vakbekwame ondersteuning met kennis van LS/MS-infrastructuur.
               </p>
@@ -171,7 +171,7 @@ const Stationsrenovatie = () => {
         </section>
 
         {/* CTA */}
-        <section id="contact" className="py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+        <section id="contact" className="py-16 md:py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"
@@ -185,9 +185,9 @@ const Stationsrenovatie = () => {
             />
           </div>
 
-          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-4xl lg:text-5xl text-white mb-6">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
                 Een stationsrenovatie<br />
                 <span className="text-[#9ed42e]">voorbereiden of uitvoeren?</span>
               </h2>
