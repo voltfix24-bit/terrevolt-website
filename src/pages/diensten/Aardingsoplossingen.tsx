@@ -122,7 +122,7 @@ const Aardingsoplossingen = () => {
                     className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300"
                   >
                     <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#9ed42e] transition-colors duration-300">
-                      <Icon className="w-6 h-6 text-[#0d3b2e] group-hover:text-white transition-colors duration-300" strokeWidth={2.5} />
+                      <Icon className="w-7 h-7 text-[#0d3b2e] group-hover:text-white transition-colors duration-300" strokeWidth={2} />
                     </div>
                     <h3 className="text-lg text-[#0d3b2e] mb-2">{item.title}</h3>
                     <p className="text-[#6c757d] text-sm leading-relaxed">{item.description}</p>
