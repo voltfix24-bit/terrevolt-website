@@ -148,7 +148,7 @@ const Veiligheid = () => {
                 <span className="text-[#9ed42e]">of we doen het niet.</span>
               </h1>
               <p className="text-base sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed hyphens-nl text-pretty">
-                Werken aan LS/MS-infrastructuur vraagt om vakmanschap, discipline en het lef om te stoppen wanneer iets niet veilig voelt. Voor TerreVolt is veiligheid geen formaliteit, maar een uitgangspunt van elke opdracht — voor de monteur, de ploeg, de uitvoerende partij en iedereen op locatie.
+                Werken aan LS/MS-infrastructuur vraagt om vakmanschap, discipline en het lef om te stoppen wanneer iets niet veilig voelt. Voor TerreVolt is veiligheid geen formaliteit, maar de basis van elke opdracht: voor de monteur, de ploeg, de uitvoerende partij en iedereen op locatie.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -353,7 +353,7 @@ const Veiligheid = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6 hyphens-nl">Iedereen veilig thuis.</h2>
               <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
-                Geen planning, onderhoudsvenster of commercieel belang zou, naar onze overtuiging, belangrijker moeten zijn dan de veiligheid van mensen. Veiligheid zit in voorbereiding, in gedrag, in elkaar aanspreken en in de ruimte om te stoppen wanneer de situatie daarom vraagt — met aandacht voor de projectafspraken die gelden.
+                Geen planning, onderhoudsvenster of commercieel belang zou belangrijker moeten zijn dan de veiligheid van mensen. Veiligheid zit in voorbereiding, in gedrag, in elkaar aanspreken en in de ruimte om te stoppen wanneer de situatie daarom vraagt.
               </p>
               <p className="mt-8 text-xl sm:text-2xl text-[#0d3b2e] italic">
                 &ldquo;We doen het veilig, of we doen het niet.&rdquo;
@@ -407,7 +407,7 @@ const Veiligheid = () => {
                 Een LS/MS-project <span className="text-[#9ed42e]">veilig voorbereiden</span>?
               </h2>
               <p className="text-base sm:text-xl text-gray-300 mb-10 leading-relaxed hyphens-nl text-pretty">
-                Neem contact op met TerreVolt voor projectmatige ondersteuning waarbij veiligheid, vakmanschap en duidelijke afspraken centraal staan — afgestemd op de opdracht, locatie en geldende projectafspraken.
+                Neem contact op met TerreVolt voor projectmatige ondersteuning waarbij veiligheid, vakmanschap en duidelijke afspraken centraal staan.
               </p>
               <a
                 href="/contact"

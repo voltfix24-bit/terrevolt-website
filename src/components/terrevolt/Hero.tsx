@@ -42,7 +42,7 @@ export function Hero() {
           </p>
 
           <p className="text-[15px] sm:text-lg text-gray-400 mb-8 sm:mb-10 max-w-2xl italic leading-relaxed">
-            Van huisaansluiting tot middenspanningsstation. Specialist in LS/MS, schakelwerk en aardingsoplossingen.
+            Van huisaansluiting tot middenspanningsstation, met veiligheid als basis.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
