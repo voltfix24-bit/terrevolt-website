@@ -90,11 +90,11 @@ const Projecten = () => {
                 Projecten
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight hyphens-nl">
-                Projecttypes en<br />
-                <span className="text-[#9ed42e]">praktijkvoorbeelden</span>
+                Projecttypes waarin<br />
+                <span className="text-[#9ed42e]">TerreVolt ondersteunt</span>
               </h1>
               <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
-                TerreVolt ondersteunt opdrachtgevers bij LS/MS-netmontage, stationsrenovaties, schakelwerk, aardingsoplossingen en meetbare oplevering.
+                Een overzicht van werkzaamheden waarbij TerreVolt inzetbaar is voor professionele opdrachtgevers binnen LS/MS-infrastructuur, stationswerk, schakelwerk, aarding en metingen.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -120,9 +120,9 @@ const Projecten = () => {
         <section className="py-16 md:py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voorbeelden uit de praktijk</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Projecttypes uit de praktijk</h2>
               <p className="text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
-                Een doorsnede van projecttypes waarbinnen TerreVolt vakbekwame ondersteuning levert.
+                Een doorsnede van werkzaamheden waarbinnen TerreVolt vakbekwame ondersteuning levert — geen klantnamen, wel concrete projectinzet.
               </p>
             </div>
 
@@ -144,7 +144,7 @@ const Projecten = () => {
                     </div>
                     <h3 className="text-xl text-[#0d3b2e] mb-3">{p.title}</h3>
                     <p className="text-[#6c757d] leading-relaxed mb-6">{p.description}</p>
-                    <ul className="space-y-2 mt-auto pt-4 border-t border-gray-100">
+                    <ul className="space-y-2 pt-4 border-t border-gray-100">
                       {p.bullets.map((b) => (
                         <li key={b} className="flex items-start gap-2 text-sm text-[#0d3b2e]">
                           <Check className="w-4 h-4 text-[#9ed42e] mt-0.5 flex-shrink-0" strokeWidth={3} />
@@ -152,6 +152,16 @@ const Projecten = () => {
                         </li>
                       ))}
                     </ul>
+                    <div className="mt-auto pt-5">
+                      <div className="text-[11px] uppercase tracking-wider text-[#6c757d] mb-2">Onze rol</div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {p.rol.map((r) => (
+                          <span key={r} className="inline-block text-[11px] tracking-wider uppercase text-[#0d3b2e] bg-[#f0f7e6] border border-[#9ed42e]/40 rounded-full px-2.5 py-1">
+                            {r}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </article>
                 );
               })}
