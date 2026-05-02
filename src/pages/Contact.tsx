@@ -49,6 +49,13 @@ const Contact = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [intent, setIntent] = useState<"project" | "monteur" | "sollicitatie">("project");
+
+  const intents: { id: "project" | "monteur" | "sollicitatie"; label: string; icon: typeof Briefcase; helper: string }[] = [
+    { id: "project", label: "Project bespreken", icon: Briefcase, helper: "Voor netbeheerders, hoofdaannemers en industrie." },
+    { id: "monteur", label: "Monteur / ploeg nodig", icon: Users, helper: "Inhuur van vakbekwame uitvoering binnen jouw project." },
+    { id: "sollicitatie", label: "Sollicitatie / ZZP", icon: HardHat, helper: "Aanmelden als monteur of ZZP'er." },
+  ];
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
