@@ -156,8 +156,19 @@ const WerkenBij = () => {
   const [uploadingFile, setUploadingFile] = useState(false);
   const [profielen, setProfielen] = useState<ProfielCard[]>([]);
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const errorBannerRef = useRef<HTMLDivElement>(null);
+
+  const clearFieldError = (field: keyof FieldErrors) => {
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  };
 
   useEffect(() => {
     let active = true;
