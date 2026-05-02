@@ -40,14 +40,15 @@ export default function AdminLogin() {
     }
     setBusy(true);
     try {
+      const credentials = { email: parsed.data.email, password: parsed.data.password };
       if (mode === "in") {
-        const { error } = await supabase.auth.signInWithPassword(parsed.data);
+        const { error } = await supabase.auth.signInWithPassword(credentials);
         if (error) throw error;
         toast.success("Ingelogd");
         navigate("/admin", { replace: true });
       } else {
         const { error } = await supabase.auth.signUp({
-          ...parsed.data,
+          ...credentials,
           options: { emailRedirectTo: `${window.location.origin}/admin` },
         });
         if (error) throw error;
