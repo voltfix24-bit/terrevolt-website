@@ -312,7 +312,7 @@ const VacatureDetail = () => {
       } as any]);
       if (insErr) throw insErr;
 
-      toast.success("Sollicitatie verstuurd. We nemen zo snel mogelijk contact op.");
+      toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");
       formRef.current?.reset();
       setFile(null);
       setSuccess(true);
