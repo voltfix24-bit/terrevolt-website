@@ -184,7 +184,8 @@ const VacatureDetail = () => {
       name: String(formData.get("name") || ""),
       phone: String(formData.get("phone") || ""),
       email: String(formData.get("email") || ""),
-      profile: String(formData.get("profile") || ""),
+      contact_pref: String(formData.get("contact_pref") || ""),
+      privacy: formData.get("privacy") ? "on" : "",
       region: String(formData.get("region") || ""),
       availability: String(formData.get("availability") || ""),
       certifications: String(formData.get("certifications") || ""),
@@ -215,7 +216,7 @@ const VacatureDetail = () => {
         cv_url = path;
       }
 
-      const messagePrefix = `Vacature: ${vacature.title}${parsed.data.profile ? ` | Profiel: ${parsed.data.profile}` : ""}`;
+      const messagePrefix = `Vacature: ${vacature.title}${parsed.data.contact_pref ? ` | Contactvoorkeur: ${parsed.data.contact_pref}` : ""}`;
       const fullMessage = parsed.data.message
         ? `${messagePrefix}\n\n${parsed.data.message}`
         : messagePrefix;
