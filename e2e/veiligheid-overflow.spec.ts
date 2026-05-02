@@ -20,7 +20,12 @@ const BREAKPOINTS = [
 ] as const;
 
 const ROUTE = "/veiligheid";
-const REPORT_DIR = "test-results/veiligheid-overflow";
+// Per Playwright-project een eigen subdirectory zodat WebKit (iOS Safari)
+// en Chromium-runs elkaars rapporten/screenshots niet overschrijven in CI.
+const PROJECT = (process.env.PLAYWRIGHT_PROJECT_NAME || process.env.TEST_PROJECT || "default")
+  .replace(/[^a-z0-9-_]/gi, "-")
+  .toLowerCase();
+const REPORT_DIR = join("test-results/veiligheid-overflow", PROJECT);
 
 type Offender = {
   tag: string;
