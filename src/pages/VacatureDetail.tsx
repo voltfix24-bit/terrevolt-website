@@ -111,8 +111,19 @@ const VacatureDetail = () => {
   const [uploadingFile, setUploadingFile] = useState(false);
   const [formInView, setFormInView] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const errorBannerRef = useRef<HTMLDivElement>(null);
+
+  const clearFieldError = (field: keyof FieldErrors) => {
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  };
   // Verberg de sticky bottom-CTA zodra het sollicitatieformulier OF de footer in beeld is.
   useEffect(() => {
     if (!vacature || vacature === "missing") return;
