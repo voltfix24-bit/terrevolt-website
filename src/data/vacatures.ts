@@ -1,6 +1,16 @@
 export type Vacature = {
   slug: string;
   title: string;
+  shortLabel: string;
+  iconKey:
+    | "ls"
+    | "ms"
+    | "schakel"
+    | "kabel"
+    | "aarding"
+    | "huisaansluiting"
+    | "wv"
+    | "zzp";
   intro: string;
   meta: {
     regio: string;
@@ -16,112 +26,261 @@ export type Vacature = {
   veiligheid: string;
 };
 
+const standaardMeta = {
+  regio: "Nederland / projectlocaties",
+  uren: "32–40 uur of projectbasis",
+  dienstverband: "Loondienst, projectbasis of ZZP",
+  niveau: "MBO / praktijkervaring",
+  werkgebied: "LS/MS-infrastructuur, stationswerk, aarding of aansluitwerk",
+};
+
+const standaardBieden = [
+  "Werk binnen professionele projecten in de netbeheeromgeving",
+  "Marktconforme beloning of ZZP-tarief",
+  "Heldere werkomschrijvingen en planning",
+  "Veiligheidsgerichte werkomgeving (BEI, NEN 3140, VCA)",
+  "Korte lijnen met planning en uitvoering",
+  "Afwisselende projecten binnen LS/MS-infrastructuur",
+];
+
+const standaardVeiligheid =
+  "Bij TerreVolt staat veilig werken voorop. We werken volgens BEI, NEN 3140 en VCA, met duidelijke aanwijzingen, LMRA en passende PBM's voor iedere taak.";
+
 export const vacatures: Vacature[] = [
   {
-    slug: "ls-ms-monteur",
-    title: "LS/MS Monteur",
+    slug: "laagspanningsmonteur",
+    title: "Laagspanningsmonteur",
+    shortLabel: "Laagspanningsmonteurs",
+    iconKey: "ls",
     intro:
-      "Werk mee aan netmontage- en stationsprojecten voor netbeheerders en hoofdaannemers. Je voert LS- en MS-werkzaamheden uit binnen een veilige en goed georganiseerde werkomgeving.",
-    meta: {
-      regio: "Midden-Nederland",
-      uren: "32–40 uur",
-      dienstverband: "Vast of ZZP",
-      niveau: "Mbo 3/4 elektrotechniek",
-      werkgebied: "Heel Nederland",
-      bevoegdheden: "VCA, BEI BLS/BHS, NEN 3140",
-    },
+      "Als laagspanningsmonteur bij TerreVolt werk je aan projecten binnen het LS-net: aansluitingen, verdeelinrichtingen, LS-rekken, kabelwerk en saneringen. Je werkt op projectlocaties voor professionele opdrachtgevers binnen de netbeheerwereld.",
+    meta: { ...standaardMeta, bevoegdheden: "VCA, BEI BLS (pré)" },
     taken: [
-      "Monteren en aansluiten van LS- en MS-kabels",
-      "Werkzaamheden in stations en verdeelinrichtingen",
-      "Uitvoeren van schakelhandelingen onder begeleiding van een WV",
-      "Aansluiten en testen van componenten",
-      "Werken volgens werkomschrijving en veiligheidsregels",
+      "LS-kabels aansluiten en afwerken",
+      "Werkzaamheden uitvoeren aan LS-rekken en verdeelinrichtingen",
+      "Ondersteunen bij huisaansluitingen, saneringen en wijzigingen",
+      "Kabels controleren, labelen en netjes opleveren",
+      "Werken volgens veiligheidsprocedures en projectafspraken",
+      "Afstemmen met uitvoerder, werkverantwoordelijke of ploegleider",
     ],
     meebrengen: [
-      "Mbo-niveau elektrotechniek of vergelijkbare ervaring",
-      "VCA en bij voorkeur BEI/NEN 3140 aanwijzing",
-      "Zelfstandig, veiligheidsbewust en betrouwbaar",
+      "Ervaring met laagspanningswerk",
+      "VCA",
       "Rijbewijs B",
-      "Pré: ervaring binnen netbeheerprojecten",
+      "BEI BLS is een pré",
+      "Je werkt netjes, veilig en zelfstandig",
+      "Je communiceert duidelijk op projectlocaties",
     ],
-    bieden: [
-      "Marktconforme beloning of ZZP-tarief",
-      "Afwisselende projecten binnen LS/MS-infrastructuur",
-      "Korte lijnen met planning en uitvoering",
-      "Heldere werkomschrijvingen en planningen",
-      "Werken met professioneel materieel",
+    bieden: standaardBieden,
+    veiligheid: standaardVeiligheid,
+  },
+  {
+    slug: "middenspanningsmonteur",
+    title: "Middenspanningsmonteur",
+    shortLabel: "Middenspanningsmonteurs",
+    iconKey: "ms",
+    intro:
+      "Als middenspanningsmonteur werk je aan MS-installaties, kabelafmontage, stationsrenovaties en technische ruimten. Je ondersteunt bij projecten waar veiligheid, vakkennis en nauwkeurige uitvoering essentieel zijn.",
+    meta: { ...standaardMeta, bevoegdheden: "VCA, BEI BHS (pré)" },
+    taken: [
+      "MS-kabels voorbereiden, invoeren en afmonteren",
+      "Ondersteunen bij MS-eindsluitingen en verbindingsmoffen",
+      "Werken aan RMU's, MS-velden en transformatorstations",
+      "Ondersteunen bij stationsrenovaties",
+      "Samenwerken met schakelmonteurs, WV/AVP en uitvoerders",
+      "Werkzaamheden controleren en terugkoppelen",
     ],
-    veiligheid:
-      "Bij TerreVolt staat veilig werken voorop. We werken volgens BEI, NEN 3140 en VCA, met duidelijke aanwijzingen, LMRA en passende PBM's voor iedere taak.",
+    meebrengen: [
+      "Ervaring binnen middenspanning of kabelmontage",
+      "VCA",
+      "Relevante BEI BHS-aanwijzing is een pré",
+      "Ervaring met MS-eindsluitingen is een pré",
+      "Veiligheidsbewuste en nauwkeurige werkhouding",
+      "Rijbewijs B",
+    ],
+    bieden: standaardBieden,
+    veiligheid: standaardVeiligheid,
   },
   {
     slug: "schakelmonteur",
-    title: "Schakelmonteur",
+    title: "Schakelmonteur LS/MS",
+    shortLabel: "Schakelmonteurs",
+    iconKey: "schakel",
     intro:
-      "Verantwoordelijk voor schakelhandelingen, veiligstellen en in/uit bedrijf nemen van LS/MS-installaties bij netbeheerders en industriële opdrachtgevers.",
-    meta: {
-      regio: "Heel Nederland",
-      uren: "36–40 uur",
-      dienstverband: "Vast of ZZP",
-      niveau: "Mbo 4 / aanwijzing WV",
-      werkgebied: "Stations & verdeelinrichtingen",
-      bevoegdheden: "BEI WV, NEN 3140 WV, VCA-VOL",
-    },
+      "Als schakelmonteur ondersteun je bij het veilig in- en uitbedrijf nemen, vrijschakelen, veiligstellen en terugschakelen van LS/MS-installaties. Je werkt aan geplande projecten zoals stationsrenovaties, kabelwerk en onderhoud.",
+    meta: { ...standaardMeta, bevoegdheden: "Passende BEI-aanwijzingen, VCA" },
     taken: [
-      "Veiligstellen van LS/MS-installaties",
-      "Uitvoeren van schakelhandelingen volgens schakelplan",
-      "Coördinatie met netbeheerder en uitvoerend monteurs",
-      "Toezicht op veilige werkomgeving",
-      "Documenteren van schakelacties",
+      "Schakelhandelingen voorbereiden en uitvoeren binnen jouw bevoegdheid",
+      "Installaties of netdelen vrijschakelen en veiligstellen",
+      "Ondersteunen bij aarden en kortsluiten",
+      "Werken volgens schakelplan, bedieningsplan en projectafspraken",
+      "Communiceren met WV, uitvoerder en monteurs",
+      "Afwijkingen of onveilige situaties direct melden",
     ],
     meebrengen: [
-      "Aanwijzing WV (BEI en/of NEN 3140)",
-      "Ruime ervaring met MS-schakelwerk",
-      "Sterke veiligheidsfocus en communicatieve vaardigheden",
-      "VCA-VOL en rijbewijs B",
+      "Ervaring met schakelwerk binnen LS en/of MS",
+      "Passende BEI-aanwijzingen",
+      "VCA",
+      "Ervaring met netbeheerprocedures is een pré",
+      "Rust, discipline en duidelijke communicatie",
+      "Bereidheid om projectmatig te werken",
     ],
-    bieden: [
-      "Verantwoordelijke rol in kritische projecten",
-      "Goede beloning of ZZP-tarief",
-      "Doorlopende projectstroom",
-      "Professionele werkomgeving",
+    bieden: standaardBieden,
+    veiligheid: standaardVeiligheid,
+  },
+  {
+    slug: "kabelmonteur",
+    title: "Kabelmonteur LS/MS",
+    shortLabel: "Kabelmonteurs",
+    iconKey: "kabel",
+    intro:
+      "Als kabelmonteur werk je aan kabelverbindingen binnen laag- en middenspanningsprojecten. Je ondersteunt bij aanleg, montage, afwerking en controle van kabelwerk in technische ruimten, stations en tracés.",
+    meta: { ...standaardMeta, bevoegdheden: "VCA, kennis LS/MS-kabelwerk (pré)" },
+    taken: [
+      "LS- en/of MS-kabels monteren en afwerken",
+      "Kabels invoeren in stations en technische ruimten",
+      "Ondersteunen bij verbindingsmoffen, aftakmoffen en eindsluitingen",
+      "Kabels labelen, controleren en opleveren",
+      "Samenwerken met monteurs, uitvoerders en werkvoorbereiding",
+      "Veilig werken volgens projectafspraken",
     ],
-    veiligheid:
-      "Schakelwerk vraagt om procesdiscipline. We werken met duidelijke schakelplannen, dubbele controle en strikte naleving van BEI/NEN 3140.",
+    meebrengen: [
+      "Ervaring met kabelmontage",
+      "Kennis van LS/MS-kabelwerk is een pré",
+      "VCA",
+      "Rijbewijs B",
+      "Je werkt nauwkeurig en veilig",
+      "Je bent fysiek inzetbaar en praktisch ingesteld",
+    ],
+    bieden: standaardBieden,
+    veiligheid: standaardVeiligheid,
   },
   {
     slug: "aardingsmonteur",
     title: "Aardingsmonteur",
+    shortLabel: "Aardingsmonteurs",
+    iconKey: "aarding",
     intro:
-      "Realiseer aardingsoplossingen in stations, bij hoogspanningsmasten en industriële installaties. Je meet, monteert en rapporteert volgens norm.",
-    meta: {
-      regio: "Heel Nederland",
-      uren: "32–40 uur",
-      dienstverband: "Vast of ZZP",
-      niveau: "Mbo 3/4 elektrotechniek",
-      werkgebied: "Stations, masten, industrie",
-      bevoegdheden: "VCA, NEN 3140 VP/VOP",
-    },
+      "Als aardingsmonteur werk je aan de basis van veilige elektrotechnische infrastructuur. Je plaatst, verbetert en controleert aardingsvoorzieningen voor stations, technische ruimten en industriële installaties.",
+    meta: { ...standaardMeta, bevoegdheden: "VCA, ervaring aardingsmetingen (pré)" },
     taken: [
-      "Aanleggen van aardingen en potentiaalvereffening",
-      "Aardweerstandsmetingen uitvoeren",
-      "Monteren van aardingsstrips, -elektroden en -railsystemen",
-      "Opstellen van meet- en montagerapportages",
+      "Aardelektroden plaatsen",
+      "Aardingsvoorzieningen aanleggen of verbeteren",
+      "Potentiaalvereffening aanbrengen",
+      "Ondersteunen bij aardverspreidingsmetingen",
+      "Bestaande aardingssystemen inspecteren",
+      "Meetgegevens en uitvoering terugkoppelen",
     ],
     meebrengen: [
-      "Ervaring met aardingstechniek",
-      "Affiniteit met meten en rapporteren",
-      "VCA en relevante NEN 3140 aanwijzing",
-      "Nauwkeurig en zelfstandig",
+      "Ervaring met elektrotechniek, infra of aarding",
+      "VCA",
+      "Technisch inzicht",
+      "Nauwkeurige en veilige werkhouding",
+      "Rijbewijs B",
+      "Ervaring met aardingsmetingen is een pré",
+    ],
+    bieden: standaardBieden,
+    veiligheid: standaardVeiligheid,
+  },
+  {
+    slug: "monteur-huisaansluitingen",
+    title: "Monteur huisaansluitingen / LS-aansluitwerk",
+    shortLabel: "Monteurs huisaansluitingen",
+    iconKey: "huisaansluiting",
+    intro:
+      "Als monteur huisaansluitingen werk je aan aanleg, wijziging, sanering en herstel van laagspanningsaansluitingen. Je werkt projectmatig aan aansluitingen voor woningen, appartementencomplexen en bedrijfspanden.",
+    meta: { ...standaardMeta, bevoegdheden: "VCA, BEI BLS (pré)" },
+    taken: [
+      "Nieuwe LS-aansluitingen realiseren",
+      "Bestaande aansluitingen wijzigen of saneren",
+      "Werken aan aansluitkabels en meterkastomgeving",
+      "Ondersteunen bij laagbouw- en hoogbouwprojecten",
+      "Storingen of afwijkingen signaleren",
+      "Werkzaamheden netjes afronden en terugkoppelen",
+    ],
+    meebrengen: [
+      "Ervaring met huisaansluitingen of LS-aansluitwerk",
+      "VCA",
+      "BEI BLS is een pré",
+      "Klantgerichte maar zakelijke houding",
+      "Rijbewijs B",
+      "Veilig en zelfstandig kunnen werken",
+    ],
+    bieden: standaardBieden,
+    veiligheid: standaardVeiligheid,
+  },
+  {
+    slug: "werkverantwoordelijke",
+    title: "Werkverantwoordelijke LS/MS",
+    shortLabel: "Werkverantwoordelijken",
+    iconKey: "wv",
+    intro:
+      "Als werkverantwoordelijke ondersteun je bij de veilige voorbereiding en uitvoering van LS/MS-projecten. Je bewaakt de juiste werkmethode, veiligheidsafspraken en afstemming tussen opdrachtgever, uitvoering en monteurs.",
+    meta: {
+      ...standaardMeta,
+      niveau: "MBO 4 elektrotechniek of aantoonbare praktijkervaring",
+      bevoegdheden: "BEI WV LS/MS, VCA",
+    },
+    taken: [
+      "Werkmethodes en risico's beoordelen",
+      "Veiligheidsmaatregelen afstemmen",
+      "Werkplekken vrijgeven binnen jouw rol en bevoegdheid",
+      "Monteurs begeleiden en aanspreken op veilig werken",
+      "Schakelen met uitvoerders, planners en opdrachtgevers",
+      "Afwijkingen registreren en opvolgen",
+    ],
+    meebrengen: [
+      "MBO 4 elektrotechniek of aantoonbare praktijkervaring",
+      "Relevante BEI-aanwijzing als WV LS/MS",
+      "Ervaring binnen netbeheerprojecten",
+      "Leidinggevende of coördinerende ervaring",
+      "Duidelijke communicatie",
+      "Veiligheid staat bij jou altijd op één",
+    ],
+    bieden: standaardBieden,
+    veiligheid: standaardVeiligheid,
+  },
+  {
+    slug: "zzp-ploegen",
+    title: "ZZP-ploegen LS/MS",
+    shortLabel: "ZZP-ploegen",
+    iconKey: "zzp",
+    intro:
+      "TerreVolt werkt samen met zelfstandige monteurs en complete ploegen voor projecten binnen LS/MS-infrastructuur, stationsrenovatie, schakelwerk, kabelmontage en aarding.",
+    meta: {
+      ...standaardMeta,
+      dienstverband: "ZZP / ploeg op projectbasis",
+      bevoegdheden: "VCA, KvK, passende aanwijzingen",
+    },
+    taken: [
+      "LS/MS-netmontage",
+      "Stationsrenovaties",
+      "LS-rekken vervangen",
+      "Kabelmontage",
+      "Huisaansluitingen",
+      "Aardingswerk",
+      "Meten en opleveren",
+      "Projectmatige ondersteuning",
+    ],
+    meebrengen: [
+      "Aantoonbare ervaring",
+      "VCA",
+      "KvK-inschrijving",
+      "Passende verzekeringen",
+      "Relevante aanwijzingen/certificaten waar nodig",
+      "Eigen gereedschap waar van toepassing",
+      "Veilig en professioneel werken",
+      "Duidelijke communicatie en betrouwbare inzet",
     ],
     bieden: [
-      "Specialistische projecten met variatie",
-      "Goede beloning of ZZP-tarief",
-      "Modern meetgereedschap",
-      "Korte lijnen en duidelijke planning",
+      "Projectmatige inzet",
+      "Duidelijke werkopdracht",
+      "Professionele opdrachtgevers",
+      "Korte lijnen",
+      "Heldere afspraken over planning, scope en uren",
+      "Mogelijkheid tot langdurige samenwerking",
     ],
-    veiligheid:
-      "Aardingswerk is veiligheidskritisch. Wij werken met heldere normkaders, controleren metingen en leggen alles aantoonbaar vast.",
+    veiligheid: standaardVeiligheid,
   },
 ];
 

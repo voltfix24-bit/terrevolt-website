@@ -428,6 +428,27 @@ const VacatureDetail = () => {
             </div>
           </div>
         </section>
+
+        {/* CTA naar contact */}
+        <section className="py-20 bg-[#f8f9fa]">
+          <div className="container mx-auto px-6 lg:px-12">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl lg:text-4xl text-[#0d3b2e] mb-4">
+                Liever eerst een <span className="text-[#9ed42e]">vraag stellen</span>?
+              </h2>
+              <p className="text-lg text-[#6c757d] mb-8">
+                Neem contact op met TerreVolt voor inhoudelijke vragen over deze vacature, projecten of samenwerking.
+              </p>
+              <a
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-[#0d3b2e] text-white px-8 py-4 rounded-lg hover:bg-[#1a4a36] transition-all duration-300"
+              >
+                Naar contact
+                <ArrowRight className="w-5 h-5" />
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />
