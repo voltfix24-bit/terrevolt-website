@@ -104,7 +104,7 @@ export function Header() {
                     Bekijk profielen voor monteurs, werkverantwoordelijken en ZZP-ploegen.
                   </div>
                   <div className="inline-flex items-center gap-1.5 text-[#9ed42e] text-sm mt-2">
-                    Bekijk Werken bij <ArrowRight className="w-3.5 h-3.5" />
+                    Werken bij bekijken <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
               </div>
@@ -120,14 +120,6 @@ export function Header() {
                 {l.label}
               </a>
             ))}
-
-            <a
-              href="/werken-bij"
-              onClick={() => setOpen(false)}
-              className="text-[#0d3b2e] bg-[#f0f7e6] border border-[#9ed42e] py-3 px-3 rounded-lg flex items-center gap-2 min-h-[44px] mt-1"
-            >
-              <HardHat className="w-4 h-4" /> Werken bij
-            </a>
             <a
               href="/contact"
               onClick={() => setOpen(false)}
