@@ -861,23 +861,38 @@ const VacatureDetail = () => {
           </div>
         </section>
 
-        {/* CTA naar contact */}
+        {/* DEELBLOK — Ken je iemand voor deze functie? */}
         <section className="py-14 md:py-20 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl text-[#0d3b2e] mb-4">
-                Liever eerst een <span className="text-[#9ed42e]">vraag stellen</span>?
+            <div className="max-w-3xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 text-center">
+              <div className="w-12 h-12 bg-[#f0f7e6] rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Share2 className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.2} />
+              </div>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl text-[#0d3b2e] mb-3">
+                Ken je iemand voor deze functie?
               </h2>
-              <p className="text-lg text-[#6c757d] mb-8">
-                Neem contact op met TerreVolt voor inhoudelijke vragen over deze vacature, projecten of samenwerking.
+              <p className="text-[#6c757d] mb-6 leading-relaxed">
+                Stuur deze functie eenvoudig door naar een collega-monteur of iemand uit je netwerk.
               </p>
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 bg-[#0d3b2e] text-white px-8 py-4 rounded-lg hover:bg-[#1a4a36] transition-all duration-300"
-              >
-                Naar contact
-                <ArrowRight className="w-5 h-5" />
-              </a>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <a
+                  href={waShareLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors"
+                >
+                  <MessageCircle className="w-5 h-5" strokeWidth={2.2} />
+                  Deel via WhatsApp
+                </a>
+                <button
+                  type="button"
+                  onClick={copyShareLink}
+                  className="inline-flex items-center justify-center gap-2 border-2 border-[#0d3b2e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors"
+                >
+                  <LinkIcon className="w-5 h-5" strokeWidth={2.2} />
+                  Kopieer link
+                </button>
+              </div>
             </div>
           </div>
         </section>
