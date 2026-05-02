@@ -1,4 +1,5 @@
 import { Anchor, Gauge, ShieldCheck, GitBranch, FileBarChart } from "lucide-react";
+import { Reveal } from "@/components/terrevolt/Reveal";
 
 const groundingServices = [
   {
