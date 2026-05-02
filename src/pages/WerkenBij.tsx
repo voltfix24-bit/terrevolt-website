@@ -150,6 +150,7 @@ const WerkenBij = () => {
   usePageMeta(
     "Werken bij TerreVolt | Vacatures monteurs LS/MS, schakelwerk & aarding",
     "TerreVolt zoekt monteurs, werkverantwoordelijken en ZZP-ploegen voor LS/MS-projecten binnen de netbeheerwereld. Duidelijke planning, korte lijnen, veiligheid voorop.",
+    "/werken-bij",
   );
 
   const [submitting, setSubmitting] = useState(false);
@@ -265,6 +266,7 @@ const WerkenBij = () => {
       const extras = [
         `Profiel: ${parsed.data.profile}`,
         parsed.data.contact_pref ? `Contactvoorkeur: ${parsed.data.contact_pref}` : null,
+        `Privacy akkoord: ja`,
       ].filter(Boolean).join(" | ");
       const fullMessage = parsed.data.message ? `${extras}\n\n${parsed.data.message}` : extras;
 
@@ -278,7 +280,10 @@ const WerkenBij = () => {
         availability: parsed.data.availability || null,
         message: fullMessage,
         cv_url,
-      }]);
+        profile: parsed.data.profile,
+        contact_preference: parsed.data.contact_pref || null,
+        privacy_consent: true,
+      } as any]);
       if (insErr) throw insErr;
 
       toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");

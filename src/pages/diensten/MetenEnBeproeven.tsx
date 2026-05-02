@@ -29,7 +29,7 @@ const proces = [
 ];
 
 const MetenEnBeproeven = () => {
-  usePageMeta("Meten & beproeven | TerreVolt BV", "Aardingsmetingen, kabelmetingen, isolatiemetingen en opleverrapportages voor LS/MS-installaties.");
+  usePageMeta("Meten & beproeven | TerreVolt BV", "Aardingsmetingen, kabelmetingen, isolatiemetingen en opleverrapportages voor LS/MS-installaties.", "/diensten/meten-en-beproeven");
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">

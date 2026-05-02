@@ -7,7 +7,6 @@ import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
@@ -27,7 +26,7 @@ export default function AdminLogin() {
     return <Navigate to={location.state?.from?.pathname || "/admin"} replace />;
   }
 
-  async function handle(e: React.FormEvent<HTMLFormElement>, mode: "in" | "up") {
+  async function handle(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const parsed = schema.safeParse({
@@ -40,22 +39,15 @@ export default function AdminLogin() {
     }
     setBusy(true);
     try {
-      const credentials = { email: parsed.data.email, password: parsed.data.password };
-      if (mode === "in") {
-        const { error } = await supabase.auth.signInWithPassword(credentials);
-        if (error) throw error;
-        toast.success("Ingelogd");
-        navigate("/admin", { replace: true });
-      } else {
-        const { error } = await supabase.auth.signUp({
-          ...credentials,
-          options: { emailRedirectTo: `${window.location.origin}/admin` },
-        });
-        if (error) throw error;
-        toast.success("Account aangemaakt. Je kunt nu inloggen.");
-      }
+      const { error } = await supabase.auth.signInWithPassword({
+        email: parsed.data.email,
+        password: parsed.data.password,
+      });
+      if (error) throw error;
+      toast.success("Ingelogd");
+      navigate("/admin", { replace: true });
     } catch (err: any) {
-      toast.error(err.message || "Er ging iets mis");
+      toast.error(err.message || "Inloggen mislukt");
     } finally {
       setBusy(false);
     }
@@ -68,38 +60,27 @@ export default function AdminLogin() {
           <div className="text-[#9ed42e] text-sm uppercase tracking-wider mb-2">TerreVolt</div>
           <h1 className="text-2xl text-[#0d3b2e]">Beheer</h1>
           <p className="text-sm text-[#6c757d] mt-2">
-            Het eerste account dat zich registreert wordt automatisch admin.
+            Geen account? Neem contact op met de beheerder.
           </p>
         </div>
 
-        <Tabs defaultValue="in">
-          <TabsList className="grid grid-cols-2 w-full mb-6">
-            <TabsTrigger value="in">Inloggen</TabsTrigger>
-            <TabsTrigger value="up">Registreren</TabsTrigger>
-          </TabsList>
-
-          {(["in", "up"] as const).map((mode) => (
-            <TabsContent key={mode} value={mode}>
-              <form onSubmit={(e) => handle(e, mode)} className="space-y-4">
-                <div>
-                  <Label htmlFor={`email-${mode}`}>E-mail</Label>
-                  <Input id={`email-${mode}`} name="email" type="email" required maxLength={255} />
-                </div>
-                <div>
-                  <Label htmlFor={`password-${mode}`}>Wachtwoord</Label>
-                  <Input id={`password-${mode}`} name="password" type="password" required minLength={8} maxLength={72} />
-                </div>
-                <Button
-                  type="submit"
-                  disabled={busy}
-                  className="w-full bg-[#9ed42e] text-[#0d3b2e] hover:bg-[#8bc41f]"
-                >
-                  {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : mode === "in" ? "Inloggen" : "Registreren"}
-                </Button>
-              </form>
-            </TabsContent>
-          ))}
-        </Tabs>
+        <form onSubmit={handle} className="space-y-4">
+          <div>
+            <Label htmlFor="email">E-mail</Label>
+            <Input id="email" name="email" type="email" autoComplete="email" required maxLength={255} />
+          </div>
+          <div>
+            <Label htmlFor="password">Wachtwoord</Label>
+            <Input id="password" name="password" type="password" autoComplete="current-password" required minLength={8} maxLength={72} />
+          </div>
+          <Button
+            type="submit"
+            disabled={busy}
+            className="w-full bg-[#9ed42e] text-[#0d3b2e] hover:bg-[#8bc41f]"
+          >
+            {busy ? <Loader2 className="w-4 h-4 animate-spin" /> : "Inloggen"}
+          </Button>
+        </form>
       </div>
     </div>
   );
