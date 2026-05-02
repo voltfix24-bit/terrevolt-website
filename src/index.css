@@ -178,6 +178,16 @@ All colors MUST be HSL.
     -webkit-hyphenate-limit-after: 3;
     hyphenate-limit-chars: 8 4 4;
   }
+
+  /* Modernere browsers: betere regel-eindes voor langere alinea's
+     (voorkomt weeswoorden en korte slotregels). Browsers zonder ondersteuning
+     negeren de regel zonder gevolgen. */
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
 }
 
 @layer base {
