@@ -667,31 +667,32 @@ const WerkenBij = () => {
               </div>
             ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
-              {profielCards.map((p) => {
+              {profielCards.map((p, index) => {
                 const Icon = slugIconMap[p.slug] || Briefcase;
                 const desc = slugDescriptionMap[p.slug] || "Bekijk de volledige profielomschrijving.";
                 const isZzp = p.slug === "zzp-ploegen";
                 const labelTag = isZzp ? "Projectbasis" : "Loondienst / ZZP mogelijk";
                 return (
-                  <Link
-                    key={p.slug}
-                    id={`profiel-${p.slug}`}
-                    to={`/vacatures/${p.slug}`}
-                    aria-label={`Bekijk profiel: ${p.label}`}
-                    className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center scroll-mt-24 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 active:scale-[0.99]"
-                  >
-                    <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform flex-shrink-0">
-                      <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
-                    </div>
-                    <div className="text-[#0d3b2e] text-base sm:text-lg mb-2 hyphens-nl max-w-full" lang="nl">{p.label}</div>
-                    <p className="text-sm text-[#6c757d] leading-snug mb-3 hyphens-nl" lang="nl">{desc}</p>
-                    <span className="inline-block text-[11px] tracking-wider uppercase text-[#0d3b2e] bg-[#f0f7e6] border border-[#9ed42e]/40 rounded-full px-2.5 py-1 mb-4">
-                      {labelTag}
-                    </span>
-                    <div className="text-xs text-[#9ed42e] inline-flex items-center gap-1 group-hover:gap-2 transition-all mt-auto">
-                      Bekijk profiel <ArrowRight className="w-3 h-3" />
-                    </div>
-                  </Link>
+                  <Reveal key={p.slug} delay={(index % 4) * 80}>
+                    <Link
+                      id={`profiel-${p.slug}`}
+                      to={`/vacatures/${p.slug}`}
+                      aria-label={`Bekijk profiel: ${p.label}`}
+                      className="group card-lift h-full bg-white border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-xl flex flex-col items-center text-center scroll-mt-24 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2"
+                    >
+                      <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform flex-shrink-0">
+                        <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
+                      </div>
+                      <div className="text-[#0d3b2e] text-base sm:text-lg mb-2 hyphens-nl max-w-full" lang="nl">{p.label}</div>
+                      <p className="text-sm text-[#6c757d] leading-snug mb-3 hyphens-nl" lang="nl">{desc}</p>
+                      <span className="inline-block text-[11px] tracking-wider uppercase text-[#0d3b2e] bg-[#f0f7e6] border border-[#9ed42e]/40 rounded-full px-2.5 py-1 mb-4">
+                        {labelTag}
+                      </span>
+                      <div className="text-xs text-[#9ed42e] inline-flex items-center gap-1 group-hover:gap-2 transition-all mt-auto">
+                        Bekijk profiel <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
+                      </div>
+                    </Link>
+                  </Reveal>
                 );
               })}
             </div>
