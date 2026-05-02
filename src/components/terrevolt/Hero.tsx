@@ -32,7 +32,7 @@ export function Hero() {
             <span className="text-[#9ed42e] tracking-widest uppercase text-sm">TERREVOLT BV</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl text-white mb-6 leading-tight break-words">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl text-white mb-6 leading-tight hyphens-nl">
             Specialist in LS/MS-infrastructuur<br />
             <span className="text-[#9ed42e]">en aardingsoplossingen</span>
           </h1>

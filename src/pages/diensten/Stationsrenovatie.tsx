@@ -53,7 +53,7 @@ const Stationsrenovatie = () => {
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Dienst
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight break-words">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight hyphens-nl">
                 Stationsrenovatie<br />
                 <span className="text-[#9ed42e]">& technische ruimten</span>
               </h1>
