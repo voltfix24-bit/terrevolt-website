@@ -555,6 +555,116 @@ const WerkenBij = () => {
               </p>
             </div>
 
+            {/* Filter & zoek */}
+            <div
+              role="search"
+              aria-label="Vacatures filteren"
+              className="max-w-5xl mx-auto mb-8 md:mb-10 bg-[#f8f9fa] border border-gray-200 rounded-2xl p-4 sm:p-5"
+            >
+              <div className="flex items-center gap-2 mb-3">
+                <SlidersHorizontal className="w-4 h-4 text-[#0d3b2e]" aria-hidden="true" />
+                <span className="text-xs uppercase tracking-wider text-[#0d3b2e]">Zoek &amp; filter</span>
+                {activeFilterCount > 0 && (
+                  <span className="ml-auto inline-flex items-center gap-2">
+                    <span className="text-xs text-[#0d3b2e] bg-[#9ed42e] rounded-full px-2 py-0.5">
+                      {activeFilterCount} actief
+                    </span>
+                    <button
+                      type="button"
+                      onClick={resetFilters}
+                      className="inline-flex items-center gap-1 text-xs text-[#0d3b2e] underline decoration-[#9ed42e] decoration-2 underline-offset-2 hover:decoration-[#0d3b2e] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2 rounded"
+                    >
+                      <X className="w-3 h-3" aria-hidden="true" /> Wis filters
+                    </button>
+                  </span>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                <label className="sm:col-span-2 lg:col-span-3 relative block">
+                  <span className="sr-only">Zoek op trefwoord</span>
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6c757d]" aria-hidden="true" />
+                  <input
+                    type="search"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Zoek op functie, werkgebied, regio…"
+                    className="w-full pl-10 pr-10 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white text-[#0d3b2e] placeholder:text-[#6c757d] focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition"
+                  />
+                  {search && (
+                    <button
+                      type="button"
+                      onClick={() => setSearch("")}
+                      aria-label="Zoekopdracht wissen"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full text-[#6c757d] hover:text-[#0d3b2e] hover:bg-[#f0f7e6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e]"
+                    >
+                      <X className="w-4 h-4" aria-hidden="true" />
+                    </button>
+                  )}
+                </label>
+
+                {(Object.keys(FILTER_LABELS) as FilterKey[]).map((key) => {
+                  const opts = filterOptions[key];
+                  if (opts.length === 0) return null;
+                  return (
+                    <label key={key} className="block">
+                      <span className="block text-xs uppercase tracking-wider text-[#0d3b2e]/80 mb-1">
+                        {FILTER_LABELS[key]}
+                      </span>
+                      <select
+                        value={filters[key]}
+                        onChange={(e) =>
+                          setFilters((prev) => ({ ...prev, [key]: e.target.value }))
+                        }
+                        className="w-full px-3 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white text-[#0d3b2e] focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition"
+                      >
+                        <option value="">Alle</option>
+                        {opts.map((o) => (
+                          <option key={o} value={o}>{o}</option>
+                        ))}
+                      </select>
+                    </label>
+                  );
+                })}
+              </div>
+
+              <div
+                className="mt-3 text-xs text-[#6c757d]"
+                role="status"
+                aria-live="polite"
+              >
+                {profielen.length === 0
+                  ? "Profielen laden…"
+                  : `${filteredProfielen.length} van ${profielen.length} profielen`}
+              </div>
+            </div>
+
+            {profielCards.length === 0 && profielen.length > 0 ? (
+              <div className="max-w-xl mx-auto text-center bg-[#f8f9fa] border border-gray-200 rounded-2xl p-8">
+                <div className="w-12 h-12 bg-[#f0f7e6] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Search className="w-6 h-6 text-[#0d3b2e]" aria-hidden="true" />
+                </div>
+                <h3 className="text-lg text-[#0d3b2e] mb-2">Geen profielen gevonden</h3>
+                <p className="text-sm text-[#6c757d] mb-4">
+                  Probeer een ander trefwoord of wis de actieve filters. Of meld je gewoon open aan — we kijken altijd wat past.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <button
+                    type="button"
+                    onClick={resetFilters}
+                    className="bg-[#0d3b2e] text-white px-5 py-3 min-h-[48px] rounded-lg hover:bg-[#1a4a36] transition-colors"
+                  >
+                    Wis filters
+                  </button>
+                  <a
+                    href="#aanmelden"
+                    className="border-2 border-[#0d3b2e] text-[#0d3b2e] px-5 py-3 min-h-[48px] rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors inline-flex items-center justify-center"
+                  >
+                    Open aanmelden
+                  </a>
+                </div>
+              </div>
+            ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
               {profielCards.map((p) => {
                 const Icon = slugIconMap[p.slug] || Briefcase;
@@ -584,6 +694,7 @@ const WerkenBij = () => {
                 );
               })}
             </div>
+            )}
           </div>
         </section>
 
