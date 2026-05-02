@@ -296,7 +296,7 @@ describe("MetaTooltip — toetsenbordnavigatie", () => {
   });
 
   it("opent op Tab-focus en sluit wanneer Tab focus uit de wrapper haalt", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
 
     render(
       <div>
@@ -328,7 +328,7 @@ describe("MetaTooltip — toetsenbordnavigatie", () => {
   });
 
   it("blijft open wanneer Tab focus binnen de wrapper verschuift (badge → Lees meer)", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
 
     render(
       <div>
@@ -366,7 +366,7 @@ describe("MetaTooltip — toetsenbordnavigatie", () => {
   });
 
   it("opent opnieuw bij Shift+Tab terug in de wrapper", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
 
     render(
       <div>
@@ -397,7 +397,7 @@ describe("MetaTooltip — toetsenbordnavigatie", () => {
   });
 
   it("sluit met Escape terwijl uitgebreide metadata (Lees meer) open staat en focus binnen wrapper is", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
 
     render(
       <MetaTooltip label="Lange metadatawaarde die uitklapbaar is">
