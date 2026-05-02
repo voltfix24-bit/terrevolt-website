@@ -1,0 +1,364 @@
+import { useState } from "react";
+import { ArrowRight, Phone, Mail, MapPin, Upload, Loader2, Network, HardHat, Factory } from "lucide-react";
+import { z } from "zod";
+import { Header } from "@/components/terrevolt/Header";
+import { Footer } from "@/components/terrevolt/Footer";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+
+const PHONE = "+31 (0)20 123 4567";
+const EMAIL = "info@terrevolt.nl";
+
+const contactCards = [
+  { icon: Phone, title: "Telefoon", value: PHONE, href: `tel:${PHONE.replace(/\s|\(|\)/g, "")}` },
+  { icon: Mail, title: "E-mail", value: EMAIL, href: `mailto:${EMAIL}` },
+  { icon: MapPin, title: "Werkgebied", value: "Nederland", href: null },
+];
+
+const requestTypes = [
+  "LS/MS Netmontage",
+  "Stationsrenovatie",
+  "Schakelwerk",
+  "Aardingsoplossingen",
+  "Meten & beproeven",
+  "Huisaansluitingen",
+  "Monteurs/ploeg nodig",
+  "Anders",
+];
+
+const voorWie = [
+  { icon: Network, title: "Netbeheerders", description: "Ondersteuning bij LS/MS-netmontage, stationswerk en aarding." },
+  { icon: HardHat, title: "Hoofdaannemers", description: "Vakbekwame inzet binnen grotere infra- en bouwprojecten." },
+  { icon: Factory, title: "Industrie & grootverbruik", description: "Aansluitingen, aarding en uitvoering binnen industriële omgevingen." },
+];
+
+const schema = z.object({
+  name: z.string().trim().min(2, "Naam is verplicht").max(100),
+  company: z.string().trim().max(150).optional(),
+  phone: z.string().trim().max(30).optional(),
+  email: z.string().trim().email("Ongeldig e-mailadres").max(255),
+  request_type: z.string().trim().max(100).optional(),
+  location: z.string().trim().max(150).optional(),
+  start_date: z.string().trim().max(50).optional(),
+  description: z.string().trim().max(3000).optional(),
+});
+
+const Contact = () => {
+  const [submitting, setSubmitting] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const raw = {
+      name: String(fd.get("name") || ""),
+      company: String(fd.get("company") || ""),
+      phone: String(fd.get("phone") || ""),
+      email: String(fd.get("email") || ""),
+      request_type: String(fd.get("request_type") || ""),
+      location: String(fd.get("location") || ""),
+      start_date: String(fd.get("start_date") || ""),
+      description: String(fd.get("description") || ""),
+    };
+
+    const parsed = schema.safeParse(raw);
+    if (!parsed.success) {
+      toast.error(parsed.error.errors[0]?.message || "Controleer het formulier");
+      return;
+    }
+
+    if (file && file.size > 10 * 1024 * 1024) {
+      toast.error("Bestand mag maximaal 10MB zijn");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      let attachment_url: string | null = null;
+      if (file) {
+        const ext = file.name.split(".").pop() || "bin";
+        const path = `${crypto.randomUUID()}.${ext}`;
+        const { error: upErr } = await supabase.storage
+          .from("contact-attachments")
+          .upload(path, file, { contentType: file.type || undefined });
+        if (upErr) throw upErr;
+        attachment_url = path;
+      }
+
+      const { error: insErr } = await supabase.from("contact_requests").insert([{
+        name: parsed.data.name,
+        company: parsed.data.company || null,
+        phone: parsed.data.phone || null,
+        email: parsed.data.email,
+        request_type: parsed.data.request_type || null,
+        location: parsed.data.location || null,
+        start_date: parsed.data.start_date || null,
+        description: parsed.data.description || null,
+        attachment_url,
+      }]);
+      if (insErr) throw insErr;
+
+      toast.success("Aanvraag verstuurd. We nemen zo snel mogelijk contact op.");
+      (e.target as HTMLFormElement).reset();
+      setFile(null);
+    } catch (err) {
+      console.error(err);
+      toast.error("Er ging iets mis. Probeer het later opnieuw.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#f8f9fa]">
+      <Header />
+
+      <main className="pt-16 sm:pt-20">
+        {/* HERO */}
+        <section className="relative min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-20">
+          <div className="absolute inset-0 opacity-[0.08]">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `
+                  linear-gradient(rgba(158, 212, 46, 0.4) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(158, 212, 46, 0.4) 1px, transparent 1px)
+                `,
+                backgroundSize: "60px 60px",
+              }}
+            />
+          </div>
+
+          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+            <div className="max-w-4xl">
+              <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+                Contact
+              </div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight break-words">
+                Een LS/MS-project of<br />
+                <span className="text-[#9ed42e]">aardingsvraagstuk</span> bespreken?
+              </h1>
+              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
+                Neem contact op met TerreVolt voor ondersteuning bij netmontage, stationsrenovatie, schakelwerk, aardingsoplossingen, metingen of inzet van monteurs en ploegen.
+              </p>
+
+              <a
+                href="#aanvraag"
+                className="group inline-flex bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 items-center justify-center gap-2"
+              >
+                <span>Stuur een aanvraag</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTIE 1: Contactgegevens */}
+        <section className="py-24 bg-white">
+          <div className="container mx-auto px-6 lg:px-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {contactCards.map((c) => {
+                const Icon = c.icon;
+                const Wrapper: any = c.href ? "a" : "div";
+                return (
+                  <Wrapper
+                    key={c.title}
+                    {...(c.href ? { href: c.href } : {})}
+                    className="group bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 text-center block"
+                  >
+                    <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mx-auto mb-6">
+                      <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
+                    </div>
+                    <h3 className="text-sm tracking-wider uppercase text-[#6c757d] mb-2">{c.title}</h3>
+                    <p className="text-xl text-[#0d3b2e]">{c.value}</p>
+                  </Wrapper>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* SECTIE 2: Aanvraagformulier */}
+        <section id="aanvraag" className="py-24 bg-[#f8f9fa]">
+          <div className="container mx-auto px-6 lg:px-12">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-12">
+                <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+                  Projectaanvraag
+                </div>
+                <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Stuur een aanvraag</h2>
+                <p className="text-xl text-[#6c757d]">
+                  Vul het formulier in. We nemen zo snel mogelijk contact op.
+                </p>
+              </div>
+
+              <form
+                onSubmit={handleSubmit}
+                className="bg-white rounded-2xl p-8 sm:p-10 border border-gray-200 shadow-sm space-y-6"
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm text-[#0d3b2e] mb-2">Naam *</label>
+                    <input id="name" name="name" required maxLength={100}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                  </div>
+                  <div>
+                    <label htmlFor="company" className="block text-sm text-[#0d3b2e] mb-2">Bedrijf</label>
+                    <input id="company" name="company" maxLength={150}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="block text-sm text-[#0d3b2e] mb-2">Telefoon</label>
+                    <input id="phone" name="phone" type="tel" maxLength={30}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm text-[#0d3b2e] mb-2">E-mail *</label>
+                    <input id="email" name="email" type="email" required maxLength={255}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                  </div>
+                  <div>
+                    <label htmlFor="request_type" className="block text-sm text-[#0d3b2e] mb-2">Type aanvraag</label>
+                    <select id="request_type" name="request_type" defaultValue=""
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition">
+                      <option value="" disabled>Kies een optie</option>
+                      {requestTypes.map((t) => (
+                        <option key={t} value={t}>{t}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="location" className="block text-sm text-[#0d3b2e] mb-2">Locatie / regio</label>
+                    <input id="location" name="location" maxLength={150}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="start_date" className="block text-sm text-[#0d3b2e] mb-2">Gewenste startdatum</label>
+                  <input id="start_date" name="start_date" maxLength={50}
+                    placeholder="Bijv. zo snel mogelijk, of week 12"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                </div>
+
+                <div>
+                  <label htmlFor="description" className="block text-sm text-[#0d3b2e] mb-2">Korte omschrijving</label>
+                  <textarea id="description" name="description" rows={5} maxLength={3000}
+                    placeholder="Vertel kort over het project, scope en eventuele randvoorwaarden."
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition resize-y" />
+                </div>
+
+                <div>
+                  <label htmlFor="attachment" className="block text-sm text-[#0d3b2e] mb-2">Bijlage (PDF, DOC, afbeelding — max 10MB)</label>
+                  <label
+                    htmlFor="attachment"
+                    className="flex items-center justify-center gap-3 w-full px-4 py-6 rounded-lg border-2 border-dashed border-gray-300 hover:border-[#9ed42e] hover:bg-[#f0f7e6]/40 cursor-pointer transition"
+                  >
+                    <Upload className="w-5 h-5 text-[#0d3b2e]" />
+                    <span className="text-[#6c757d] text-sm">
+                      {file ? file.name : "Klik om bestand te kiezen"}
+                    </span>
+                  </label>
+                  <input
+                    id="attachment"
+                    name="attachment"
+                    type="file"
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.dwg,.zip"
+                    onChange={(e) => setFile(e.target.files?.[0] || null)}
+                    className="hidden"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {submitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <span>Versturen...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Verstuur aanvraag</span>
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTIE 3: Voor wie */}
+        <section className="py-24 bg-white">
+          <div className="container mx-auto px-6 lg:px-12">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voor wie werken wij?</h2>
+              <p className="text-xl text-[#6c757d] max-w-2xl mx-auto">
+                TerreVolt werkt voor partijen binnen de netbeheerwereld.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {voorWie.map((v) => {
+                const Icon = v.icon;
+                return (
+                  <div
+                    key={v.title}
+                    className="group bg-[#f8f9fa] rounded-xl p-8 border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 text-center"
+                  >
+                    <div className="w-16 h-16 bg-[#f0f7e6] rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-[#9ed42e] transition-colors duration-300">
+                      <Icon className="w-8 h-8 text-[#0d3b2e] group-hover:text-white transition-colors duration-300" strokeWidth={2} />
+                    </div>
+                    <h3 className="text-xl text-[#0d3b2e] mb-3">{v.title}</h3>
+                    <p className="text-[#6c757d] leading-relaxed">{v.description}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `
+                  linear-gradient(rgba(158, 212, 46, 0.3) 2px, transparent 2px),
+                  linear-gradient(90deg, rgba(158, 212, 46, 0.3) 2px, transparent 2px)
+                `,
+                backgroundSize: "100px 100px",
+              }}
+            />
+          </div>
+
+          <div className="container mx-auto px-6 lg:px-12 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-4xl lg:text-5xl text-white mb-6">
+                Liever <span className="text-[#9ed42e]">direct contact</span>?
+              </h2>
+              <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+                Bel of mail TerreVolt voor een snelle projectafstemming.
+              </p>
+              <a
+                href={`tel:${PHONE.replace(/\s|\(|\)/g, "")}`}
+                className="inline-flex items-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-10 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-lg"
+              >
+                <Phone className="w-5 h-5" />
+                Bel TerreVolt
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
+};
+
+export default Contact;
