@@ -165,3 +165,30 @@ console.log("viewport:", document.documentElement.clientWidth, "px");
 
 Bewaar dit ingevulde tabel onder `docs/test-runs/veiligheid-YYYY-MM-DD.md`
 voor traceerbaarheid.
+
+---
+
+## 8. Geautomatiseerde overflow-test (Playwright)
+
+Naast de handmatige checks hierboven draait er een Playwright-spec die
+`/veiligheid` op **375 / 414 / 640 px** laadt en programmatisch elk
+element controleert dat buiten de viewport-rechterrand valt (met
+uitsluiting van bewust scrollende containers zoals de subnav-chips).
+
+**Eerste keer (lokaal):**
+
+```bash
+npm run test:e2e:install   # download Chromium
+npm run test:e2e           # bouwt app, start preview, draait spec
+```
+
+**Output** (per run, in `test-results/veiligheid-overflow/`):
+
+- `report.json` — ruwe data per breakpoint (offenders, scrollWidth, ...)
+- `report.md`   — leesbaar overzicht met tabel per breakpoint
+- `veiligheid-375.png` / `-414.png` / `-640.png` — full-page screenshots
+
+De test slaagt alleen wanneer **alle drie** breakpoints geen
+horizontale scroll vertonen én geen enkel element rechts buiten de
+viewport valt. Faalt er één, dan zie je in de assertion én in
+`report.md` exact welke tag/id/tekst het probleem veroorzaakt.
