@@ -10,7 +10,6 @@ import {
   ShieldCheck,
   CheckCircle2,
   Loader2,
-  Upload,
   ListChecks,
   Award,
   Gift,
@@ -20,7 +19,6 @@ import {
   FileCheck2,
   Layers,
   PlayCircle,
-  X,
   Sparkles,
   Phone as PhoneIcon,
   MessageCircle,
@@ -34,6 +32,7 @@ import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { supabase } from "@/integrations/supabase/client";
+import { CvUploadField, validateCvFile } from "@/components/CvUploadField";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { findVacature } from "@/data/vacatures";
@@ -108,6 +107,7 @@ const VacatureDetail = () => {
   const [vacature, setVacature] = useState<VacatureView | null | "missing">(null);
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
   const [uploadingFile, setUploadingFile] = useState(false);
   const [formInView, setFormInView] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
@@ -359,11 +359,14 @@ const VacatureDetail = () => {
     }
     setErrors({});
 
-    if (file && file.size > 10 * 1024 * 1024) {
-      const msg = "Bestand mag maximaal 10MB zijn";
-      setSubmitError(msg);
-      toast.error(msg);
-      return;
+    if (file) {
+      const v = validateCvFile(file);
+      if (!v.ok && v.message) {
+        setFileError(v.message);
+        setSubmitError(v.message);
+        toast.error(v.message);
+        return;
+      }
     }
 
     setSubmitting(true);
@@ -406,6 +409,7 @@ const VacatureDetail = () => {
       toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");
       formRef.current?.reset();
       setFile(null);
+      setFileError(null);
       setSuccess(true);
     } catch (err) {
       console.error(err);
@@ -424,6 +428,7 @@ const VacatureDetail = () => {
     setSuccess(false);
     setErrors({});
     setFile(null);
+    setFileError(null);
     formRef.current?.reset();
     setTimeout(() => {
       document.getElementById("solliciteren")?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -880,45 +885,13 @@ const VacatureDetail = () => {
                       <textarea id="message" name="message" rows={4} maxLength={2000}
                         className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition resize-y max-h-72" />
                     </div>
-                    <div>
-                      <label htmlFor="cv" className="block text-sm text-[#0d3b2e] mb-2">CV / certificaten uploaden</label>
-                      {file ? (
-                        <div className="flex items-center gap-3 w-full px-4 py-3 rounded-lg border border-[#9ed42e] bg-[#f0f7e6]">
-                          <FileCheck2 className="w-5 h-5 text-[#0d3b2e] flex-shrink-0" />
-                          <div className="min-w-0 flex-1">
-                            <div className="text-xs uppercase tracking-wider text-[#6c757d]">Bestand geselecteerd</div>
-                            <div className="text-sm text-[#0d3b2e] break-all">{file.name}</div>
-                          </div>
-                          <label htmlFor="cv" className="text-xs text-[#0d3b2e] underline cursor-pointer min-h-[44px] flex items-center px-2">Wijzig</label>
-                          <button type="button" onClick={() => setFile(null)} disabled={uploadingFile} aria-label="Verwijder bestand" className="text-[#6c757d] hover:text-[#0d3b2e] min-h-[44px] min-w-[44px] flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
-                            <X className="w-4 h-4" />
-                          </button>
-                        </div>
-                      ) : (
-                        <label htmlFor="cv" className="flex items-center justify-center gap-3 w-full px-4 py-5 rounded-lg border-2 border-dashed border-gray-300 hover:border-[#9ed42e] hover:bg-[#f0f7e6]/40 cursor-pointer transition bg-white min-h-[88px]">
-                          <Upload className="w-5 h-5 text-[#0d3b2e]" />
-                          <span className="text-[#6c757d] text-sm">Klik om bestand te kiezen</span>
-                        </label>
-                      )}
-                      <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                        onChange={(e) => setFile(e.target.files?.[0] || null)}
-                        aria-describedby="cv-help"
-                        className="hidden" />
-                      {uploadingFile && (
-                        <div className="mt-3" role="status" aria-live="polite">
-                          <div className="flex items-center gap-2 text-xs text-[#0d3b2e] mb-1.5">
-                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                            <span>Bestand uploaden…</span>
-                          </div>
-                          <div className="h-1.5 w-full overflow-hidden rounded-full bg-gray-200">
-                            <div className="h-full w-1/3 bg-[#9ed42e] rounded-full animate-progress" />
-                          </div>
-                        </div>
-                      )}
-                      <p id="cv-help" className="mt-2 text-xs text-[#6c757d] leading-relaxed">
-                        Toegestane bestanden: <span className="text-[#0d3b2e]">PDF, DOC, DOCX, JPG, PNG</span> — maximaal 10MB. Geen CV bij de hand? Geen probleem, je kunt ook zonder bestand aanmelden.
-                      </p>
-                    </div>
+                    <CvUploadField
+                      file={file}
+                      setFile={setFile}
+                      uploading={uploadingFile}
+                      fileError={fileError}
+                      setFileError={setFileError}
+                    />
                   </div>
                 </div>
 
