@@ -112,16 +112,27 @@ const VacatureDetail = () => {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
-  // Verberg de sticky bottom-CTA zodra het sollicitatieformulier in beeld is.
+  // Verberg de sticky bottom-CTA zodra het sollicitatieformulier OF de footer in beeld is.
   useEffect(() => {
     if (!vacature || vacature === "missing") return;
-    const el = document.getElementById("solliciteer");
-    if (!el || typeof IntersectionObserver === "undefined") return;
+    if (typeof IntersectionObserver === "undefined") return;
+    const formEl = document.getElementById("solliciteer");
+    const footerEl = document.querySelector("footer");
+    const targets = [formEl, footerEl].filter((n): n is Element => !!n);
+    if (targets.length === 0) return;
+
+    const visible = new Set<Element>();
     const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => setFormInView(e.isIntersecting)),
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) visible.add(e.target);
+          else visible.delete(e.target);
+        });
+        setFormInView(visible.size > 0);
+      },
       { threshold: 0.05 },
     );
-    obs.observe(el);
+    targets.forEach((t) => obs.observe(t));
     return () => obs.disconnect();
   }, [vacature]);
 
