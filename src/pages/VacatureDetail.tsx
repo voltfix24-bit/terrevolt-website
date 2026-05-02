@@ -555,9 +555,29 @@ const VacatureDetail = () => {
         </section>
       </main>
 
+      {/* Sticky mobiele CTA — verbergt zodra het formulier in beeld is */}
+      <div
+        className={`lg:hidden fixed bottom-0 left-0 right-0 z-40 transition-transform duration-300 ${
+          formInView ? "translate-y-full" : "translate-y-0"
+        }`}
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+        aria-hidden={formInView}
+      >
+        <div className="bg-white/95 backdrop-blur-sm border-t border-gray-200 shadow-[0_-4px_20px_rgba(0,0,0,0.08)] px-4 py-3">
+          <a
+            href="#solliciteer"
+            className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors flex items-center justify-center gap-2"
+          >
+            <span>Aanmelden voor deze functie</span>
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
+      </div>
+
       <Footer />
     </div>
   );
 };
 
 export default VacatureDetail;
+
