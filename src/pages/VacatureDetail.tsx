@@ -529,45 +529,48 @@ const VacatureDetail = () => {
                 const open = expandedMeta.has(m.label);
                 const baseClass =
                   "group inline-flex items-center gap-2 max-w-full bg-[#f0f7e6] border border-[#9ed42e] text-[#0d3b2e] rounded-full pl-2.5 pr-3 py-1.5 min-w-0 transition-all duration-200 hover:bg-[#e3f0c9] hover:border-[#0d3b2e] hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2 focus-visible:bg-[#e3f0c9] active:scale-[0.98]";
+                const tooltipText = `${m.label}: ${m.value}`;
 
                 if (!long) {
                   return (
-                    <li
-                      key={m.label}
-                      tabIndex={0}
-                      aria-label={`${m.label}: ${m.value}`}
-                      className={`${baseClass} cursor-default`}
-                    >
-                      <Icon className="w-3.5 h-3.5 flex-shrink-0 text-[#0d3b2e]" strokeWidth={2.4} aria-hidden="true" />
-                      <span className="text-[11px] uppercase tracking-wider text-[#0d3b2e]/80 flex-shrink-0">{m.label}:</span>
-                      <span className="text-xs leading-snug truncate min-w-0 text-[#0d3b2e]" title={m.value}>{m.value}</span>
+                    <li key={m.label} className="max-w-full min-w-0">
+                      <MetaTooltip label={tooltipText}>
+                        <span
+                          tabIndex={0}
+                          aria-label={tooltipText}
+                          className={`${baseClass} cursor-default`}
+                        >
+                          <Icon className="w-3.5 h-3.5 flex-shrink-0 text-[#0d3b2e]" strokeWidth={2.4} aria-hidden="true" />
+                          <span className="text-[11px] uppercase tracking-wider text-[#0d3b2e]/80 flex-shrink-0">{m.label}:</span>
+                          <span className="text-xs leading-snug truncate min-w-0 text-[#0d3b2e]">{m.value}</span>
+                        </span>
+                      </MetaTooltip>
                     </li>
                   );
                 }
 
                 return (
                   <li key={m.label} className={open ? "w-full" : "max-w-full min-w-0"}>
-                    <button
-                      type="button"
-                      onClick={() => toggleMeta(m.label)}
-                      aria-expanded={open}
-                      aria-label={`${m.label}: ${m.value}. ${open ? "Minder tonen" : "Lees meer"}`}
-                      className={`${baseClass} cursor-pointer w-full text-left ${open ? "items-start rounded-2xl py-2" : ""}`}
-                    >
-                      <Icon className={`w-3.5 h-3.5 flex-shrink-0 text-[#0d3b2e] ${open ? "mt-0.5" : ""}`} strokeWidth={2.4} aria-hidden="true" />
-                      <span className={`text-[11px] uppercase tracking-wider text-[#0d3b2e]/80 flex-shrink-0 ${open ? "mt-px" : ""}`}>{m.label}:</span>
-                      <span
-                        className={`text-xs leading-snug min-w-0 text-[#0d3b2e] flex-1 ${open ? "whitespace-normal break-words" : "truncate"}`}
-                        title={open ? undefined : m.value}
+                    <MetaTooltip label={tooltipText} enabled={!open} className={open ? "w-full" : ""}>
+                      <button
+                        type="button"
+                        onClick={() => toggleMeta(m.label)}
+                        aria-expanded={open}
+                        aria-label={`${tooltipText}. ${open ? "Minder tonen" : "Lees meer"}`}
+                        className={`${baseClass} cursor-pointer w-full text-left ${open ? "items-start rounded-2xl py-2" : ""}`}
                       >
-                        {m.value}
-                      </span>
-                      <ChevronDown
-                        className={`w-3.5 h-3.5 flex-shrink-0 text-[#0d3b2e] transition-transform duration-200 ${open ? "rotate-180 mt-0.5" : ""}`}
-                        strokeWidth={2.4}
-                        aria-hidden="true"
-                      />
-                    </button>
+                        <Icon className={`w-3.5 h-3.5 flex-shrink-0 text-[#0d3b2e] ${open ? "mt-0.5" : ""}`} strokeWidth={2.4} aria-hidden="true" />
+                        <span className={`text-[11px] uppercase tracking-wider text-[#0d3b2e]/80 flex-shrink-0 ${open ? "mt-px" : ""}`}>{m.label}:</span>
+                        <span className={`text-xs leading-snug min-w-0 text-[#0d3b2e] flex-1 ${open ? "whitespace-normal break-words" : "truncate"}`}>
+                          {m.value}
+                        </span>
+                        <ChevronDown
+                          className={`w-3.5 h-3.5 flex-shrink-0 text-[#0d3b2e] transition-transform duration-200 ${open ? "rotate-180 mt-0.5" : ""}`}
+                          strokeWidth={2.4}
+                          aria-hidden="true"
+                        />
+                      </button>
+                    </MetaTooltip>
                   </li>
                 );
               })}
