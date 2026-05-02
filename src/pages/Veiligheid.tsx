@@ -79,8 +79,8 @@ const Veiligheid = () => {
                 We doen het veilig,<br />
                 <span className="text-[#9ed42e]">of we doen het niet.</span>
               </h1>
-              <p className="text-base sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
-                Werken aan LS/MS-infrastructuur vraagt om vakmanschap, discipline en het lef om te stoppen wanneer iets niet veilig voelt. Voor TerreVolt is veiligheid geen formaliteit, maar — waar van toepassing — een uitgangspunt van elke opdracht: voor de monteur, de ploeg, de uitvoerende partij en iedereen op locatie.
+              <p className="text-base sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed hyphens-nl text-pretty">
+                Werken aan LS/MS-infrastructuur vraagt om vakmanschap, discipline en het lef om te stoppen wanneer iets niet veilig voelt. Voor TerreVolt is veiligheid geen formaliteit, maar&nbsp;— waar van toepassing&nbsp;— een uitgangspunt van elke opdracht: voor de monteur, de ploeg, de uitvoerende partij en iedereen op locatie.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
