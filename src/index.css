@@ -184,3 +184,35 @@ All colors MUST be HSL.
     }
   }
 }
+
+@layer base {
+  /* Mobile tap-target safety net: zorg dat alle interactieve elementen
+     minimaal 44x44px aantikbaar blijven (WCAG 2.5.5 / Apple HIG).
+     Pseudo-element vergroot de hit-area zonder layout te beïnvloeden. */
+  @media (max-width: 767px) {
+    a[href]:not(.no-tap-pad),
+    button:not(.no-tap-pad):not(:disabled),
+    [role="button"]:not(.no-tap-pad),
+    label[for]:not(.no-tap-pad),
+    summary:not(.no-tap-pad) {
+      position: relative;
+      touch-action: manipulation;
+    }
+    a[href]:not(.no-tap-pad)::after,
+    button:not(.no-tap-pad):not(:disabled)::after,
+    [role="button"]:not(.no-tap-pad)::after,
+    label[for]:not(.no-tap-pad)::after,
+    summary:not(.no-tap-pad)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      min-width: 44px;
+      min-height: 44px;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+  }
+}
