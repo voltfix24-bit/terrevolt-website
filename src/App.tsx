@@ -14,6 +14,7 @@ import Huisaansluitingen from "./pages/diensten/Huisaansluitingen.tsx";
 import Projecten from "./pages/Projecten.tsx";
 import Veiligheid from "./pages/Veiligheid.tsx";
 import Over from "./pages/Over.tsx";
+import WerkenBij from "./pages/WerkenBij.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/projecten" element={<Projecten />} />
           <Route path="/veiligheid" element={<Veiligheid />} />
           <Route path="/over" element={<Over />} />
+          <Route path="/werken-bij" element={<WerkenBij />} />
           <Route path="/diensten/ls-ms-netmontage" element={<LSMSNetmontage />} />
           <Route path="/diensten/stationsrenovatie" element={<Stationsrenovatie />} />
           <Route path="/diensten/schakelwerk" element={<Schakelwerk />} />
