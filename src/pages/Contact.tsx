@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { company, addressOneLine, telHref, mailHref } from "@/config/company";
+import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
 
 const contactCards = [
   { icon: Phone, title: "Telefoon", value: company.phone.display, href: telHref },
@@ -160,19 +161,29 @@ const Contact = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {contactCards.map((c) => {
                 const Icon = c.icon;
+                const copyType: "tel" | "mail" | null =
+                  c.href === telHref ? "tel" : c.href === mailHref ? "mail" : null;
                 const Wrapper: any = c.href ? "a" : "div";
                 return (
-                  <Wrapper
-                    key={c.title}
-                    {...(c.href ? { href: c.href, "aria-label": `${c.title}: ${c.value}` } : {})}
-                    className={`group bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 text-center block min-h-[44px] ${c.href ? "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 active:scale-[0.99]" : ""}`}
-                  >
-                    <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform">
-                      <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
-                    </div>
-                    <h3 className="text-sm tracking-wider uppercase text-[#6c757d] mb-2">{c.title}</h3>
-                    <p className={`text-lg sm:text-xl text-[#0d3b2e] break-words ${c.href ? "group-hover:text-[#1a4a36] group-hover:underline underline-offset-4 decoration-[#9ed42e]" : ""}`}>{c.value}</p>
-                  </Wrapper>
+                  <div key={c.title} className="relative">
+                    <Wrapper
+                      {...(c.href ? { href: c.href, "aria-label": copyType ? `${c.title}: ${c.value}. Werkt de app niet? Gebruik de kopieerknop rechtsboven.` : `${c.title}: ${c.value}` } : {})}
+                      className={`group bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 text-center block min-h-[44px] ${c.href ? "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 active:scale-[0.99]" : ""}`}
+                    >
+                      <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform">
+                        <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
+                      </div>
+                      <h3 className="text-sm tracking-wider uppercase text-[#6c757d] mb-2">{c.title}</h3>
+                      <p className={`text-lg sm:text-xl text-[#0d3b2e] break-words ${c.href ? "group-hover:text-[#1a4a36] group-hover:underline underline-offset-4 decoration-[#9ed42e]" : ""}`}>{c.value}</p>
+                    </Wrapper>
+                    {copyType && (
+                      <CopyButton
+                        type={copyType}
+                        value={c.value}
+                        className="absolute top-3 right-3 inline-flex items-center justify-center min-h-[40px] min-w-[40px] p-2 rounded-md bg-white/0 hover:bg-[#f0f7e6] text-[#6c757d] hover:text-[#0d3b2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] transition-colors"
+                      />
+                    )}
+                  </div>
                 );
               })}
             </div>
@@ -345,13 +356,25 @@ const Contact = () => {
               <p className="text-xl text-gray-300 mb-12 leading-relaxed">
                 Bel of mail TerreVolt voor een snelle projectafstemming.
               </p>
-              <a
-                href={telHref}
-                className="inline-flex items-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-10 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-lg"
-              >
-                <Phone className="w-5 h-5" />
-                Bel TerreVolt
-              </a>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a
+                  href={telHref}
+                  aria-label={`Bel TerreVolt op ${company.phone.display}. Werkt de bel-app niet? Gebruik de kopieerknop hiernaast.`}
+                  className="inline-flex items-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-10 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-lg"
+                >
+                  <Phone className="w-5 h-5" />
+                  Bel TerreVolt
+                </a>
+                <CopyButton
+                  type="tel"
+                  value={company.phone.e164}
+                  ariaLabel={`Telefoonnummer kopiëren: ${company.phone.display}`}
+                  className="inline-flex items-center gap-2 px-5 py-3 min-h-[48px] rounded-lg border-2 border-[#9ed42e] text-[#9ed42e] hover:bg-[#9ed42e] hover:text-[#0d3b2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] transition-colors"
+                />
+              </div>
+              <p className="text-sm text-gray-400 mt-4">
+                Geen bel-app op dit apparaat? Kopieer het nummer met de knop hiernaast.
+              </p>
             </div>
           </div>
         </section>

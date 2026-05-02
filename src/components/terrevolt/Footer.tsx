@@ -1,5 +1,6 @@
 import { Zap } from "lucide-react";
 import { company, telHref, mailHref } from "@/config/company";
+import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
 
 export function Footer() {
   return (
@@ -44,23 +45,34 @@ export function Footer() {
           <div>
             <h4 className="text-white mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li>
+              <li className="flex items-center gap-1">
                 <a
                   href={telHref}
-                  aria-label={`Bel TerreVolt op ${company.phone.display}`}
+                  aria-label={`Bel TerreVolt op ${company.phone.display}. Werkt de bel-app niet? Gebruik de kopieerknop hiernaast.`}
                   className="inline-flex items-center min-h-[44px] -my-1 py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 active:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] rounded-md transition-colors"
                 >
                   {company.phone.display}
                 </a>
+                <CopyButton
+                  type="tel"
+                  value={company.phone.e164}
+                  ariaLabel={`Telefoonnummer kopiëren: ${company.phone.display}`}
+                  className="inline-flex items-center justify-center min-h-[40px] min-w-[40px] p-2 rounded-md text-current/70 hover:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] transition-colors"
+                />
               </li>
-              <li>
+              <li className="flex items-center gap-1">
                 <a
                   href={mailHref}
-                  aria-label={`Mail TerreVolt op ${company.email}`}
+                  aria-label={`Mail TerreVolt op ${company.email}. Werkt de mail-app niet? Gebruik de kopieerknop hiernaast.`}
                   className="inline-flex items-center min-h-[44px] -my-1 py-2 break-all hover:text-[#9ed42e] hover:underline underline-offset-4 active:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] rounded-md transition-colors"
                 >
                   {company.email}
                 </a>
+                <CopyButton
+                  type="mail"
+                  value={company.email}
+                  className="inline-flex items-center justify-center min-h-[40px] min-w-[40px] p-2 rounded-md text-current/70 hover:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] transition-colors"
+                />
               </li>
               <li className="not-italic">
                 <address className="not-italic leading-relaxed">
