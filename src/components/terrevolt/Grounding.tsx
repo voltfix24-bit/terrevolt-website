@@ -1,13 +1,13 @@
-import { Cable, Layers, ShieldCheck, GitBranch, FileBarChart } from "lucide-react";
+import { Anchor, Gauge, ShieldCheck, GitBranch, FileBarChart } from "lucide-react";
 
 const groundingServices = [
   {
-    icon: Cable,
+    icon: Anchor,
     title: "Aardelektroden",
     description: "Plaatsen van aardelektroden en aardingsvoorzieningen voor technische installaties."
   },
   {
-    icon: Layers,
+    icon: Gauge,
     title: "Aardverspreidingsweerstand",
     description: "Meten, beoordelen en optimaliseren van aardverspreidingsweerstand."
   },
