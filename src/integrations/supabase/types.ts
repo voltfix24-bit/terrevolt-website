@@ -60,6 +60,7 @@ export type Database = {
         Row: {
           availability: string | null
           certifications: string | null
+          contact_preference: string | null
           created_at: string
           cv_url: string | null
           email: string
@@ -68,6 +69,8 @@ export type Database = {
           message: string | null
           name: string
           phone: string
+          privacy_consent: boolean
+          profile: string | null
           region: string | null
           status: string
           vacancy_id: string | null
@@ -75,6 +78,7 @@ export type Database = {
         Insert: {
           availability?: string | null
           certifications?: string | null
+          contact_preference?: string | null
           created_at?: string
           cv_url?: string | null
           email: string
@@ -83,6 +87,8 @@ export type Database = {
           message?: string | null
           name: string
           phone: string
+          privacy_consent?: boolean
+          profile?: string | null
           region?: string | null
           status?: string
           vacancy_id?: string | null
@@ -90,6 +96,7 @@ export type Database = {
         Update: {
           availability?: string | null
           certifications?: string | null
+          contact_preference?: string | null
           created_at?: string
           cv_url?: string | null
           email?: string
@@ -98,6 +105,8 @@ export type Database = {
           message?: string | null
           name?: string
           phone?: string
+          privacy_consent?: boolean
+          profile?: string | null
           region?: string | null
           status?: string
           vacancy_id?: string | null
