@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { render, screen, act, fireEvent, createEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MetaTooltip } from "./MetaTooltip";
@@ -11,6 +11,31 @@ function tap(element: Element) {
   const evt = createEvent.pointerDown(element, { bubbles: true });
   Object.defineProperty(evt, "pointerType", { value: "touch" });
   fireEvent(element, evt);
+}
+
+/**
+ * Globale fake timers maken het auto-hide-schedule (2.5s) en eventuele
+ * andere debounce/timing-paden volledig deterministisch. Zonder dit kan
+ * de auto-hide mid-test vuren en tests flaky maken bij retries op trage CI.
+ *
+ * `userEvent` wordt opgezet met `advanceTimers: vi.advanceTimersByTime`
+ * zodat zijn interne kleine delays meelopen met de fake clock.
+ */
+beforeEach(() => {
+  vi.useFakeTimers();
+  document.body.innerHTML = "";
+});
+
+afterEach(() => {
+  // Voer hangende timers uit zonder dat ze in een volgend test lekken,
+  // schakel daarna terug naar echte timers.
+  vi.runOnlyPendingTimers();
+  vi.useRealTimers();
+});
+
+/** userEvent v14 + fake timers: laat user-event de fake clock gebruiken. */
+function setupUser() {
+  return userEvent.setup({ advanceTimers: vi.advanceTimersByTime.bind(vi) });
 }
 
 describe("MetaTooltip — mobiele interacties", () => {
