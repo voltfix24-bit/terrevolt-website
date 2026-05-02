@@ -589,11 +589,62 @@ const VacatureDetail = () => {
           </div>
         </section>
 
+        {/* VRAGEN OVER DEZE FUNCTIE? — contactblok */}
+        <section id="vragen" className="py-16 md:py-20 bg-white scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-5 tracking-wider uppercase">
+                  <HelpCircle className="w-4 h-4" />
+                  Vragen?
+                </div>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl text-[#0d3b2e] mb-4">
+                  Vragen over deze functie?
+                </h2>
+                <p className="text-[#6c757d] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+                  Je hoeft niet direct alles compleet te hebben. Bel, WhatsApp of mail ons gerust. We bespreken je ervaring, certificaten en beschikbaarheid en kijken samen of deze functie of projectinzet past.
+                </p>
+                <p className="text-sm text-[#6c757d] mt-3">— Team TerreVolt</p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                <a
+                  href={telHref}
+                  className="group flex items-center justify-center gap-3 bg-[#0d3b2e] text-white rounded-xl px-5 py-4 min-h-[56px] hover:bg-[#1a4a36] transition-colors"
+                >
+                  <PhoneIcon className="w-5 h-5 text-[#9ed42e]" strokeWidth={2.2} />
+                  <span>Bel direct</span>
+                </a>
+                <a
+                  href={waLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-center gap-3 bg-[#9ed42e] text-[#0d3b2e] rounded-xl px-5 py-4 min-h-[56px] hover:bg-[#8bc41f] transition-colors"
+                >
+                  <MessageCircle className="w-5 h-5" strokeWidth={2.2} />
+                  <span>WhatsApp</span>
+                </a>
+                <a
+                  href={mailHref}
+                  className="group flex items-center justify-center gap-3 bg-white border-2 border-[#0d3b2e] text-[#0d3b2e] rounded-xl px-5 py-4 min-h-[56px] hover:bg-[#0d3b2e] hover:text-white transition-colors"
+                >
+                  <MailIcon className="w-5 h-5" strokeWidth={2.2} />
+                  <span>Mail ons</span>
+                </a>
+              </div>
+
+              <div className="mt-5 text-center text-xs text-[#6c757d] break-words">
+                {company.phone.display} · {company.email}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* PROCES */}
         <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Zo verloopt het proces</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Zo verloopt je aanmelding</h2>
               <p className="text-xl text-[#6c757d] max-w-2xl mx-auto">
                 Van aanmelding tot start op het project — duidelijk en kort.
               </p>
