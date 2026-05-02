@@ -69,7 +69,7 @@ export function Services() {
                   <p className="text-[15px] sm:text-base text-[#6c757d] leading-relaxed mb-5 sm:mb-6">{service.description}</p>
                   <span className="mt-auto inline-flex items-center gap-1.5 text-sm text-[#0d3b2e] group-hover:text-[#1a4a36] transition-all">
                     Bekijk dienst
-                    <ArrowRight className="w-4 h-4 text-[#9ed42e] arrow-x" strokeWidth={2.5} />
+                    <ArrowRight className="w-4 h-4 text-[#9ed42e] transition-transform duration-300 group-hover:translate-x-1" strokeWidth={2.5} />
                   </span>
                 </Link>
               </Reveal>
