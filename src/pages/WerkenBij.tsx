@@ -4,16 +4,55 @@ import {
   ArrowRight, Zap, Cable, PlugZap, Power, ClipboardCheck, Users,
   Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert,
   Award, Loader2, Upload, CalendarCheck, Phone as PhoneIcon, HardHat,
-  CheckCircle2, FileCheck2, X,
+  CheckCircle2, FileCheck2, X, ClipboardList, UserCheck, Layers3, Rocket,
+  Mail as MailIcon, HelpCircle,
 } from "lucide-react";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { CopyableContactLink } from "@/components/terrevolt/CopyableContactLink";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { vacatures as fallbackVacatures } from "@/data/vacatures";
+import { company, telHref, mailHref } from "@/config/company";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+const waLink = `https://wa.me/${company.phone.e164.replace("+", "")}?text=${encodeURIComponent(
+  "Hallo TerreVolt, ik heb interesse om met jullie te werken.",
+)}`;
+
+const funnelNav: { label: string; href: string }[] = [
+  { label: "Profielen", href: "#profielen" },
+  { label: "ZZP & ploegen", href: "#zzp" },
+  { label: "Hoe het werkt", href: "#hoe-het-werkt" },
+  { label: "Veelgestelde vragen", href: "#faq" },
+  { label: "Aanmelden", href: "#aanmelden" },
+];
+
+const stappen = [
+  { icon: ClipboardList, title: "Aanmelden", text: "Je laat je gegevens, ervaring en beschikbaarheid achter. Een CV mag, maar is niet verplicht." },
+  { icon: UserCheck, title: "Kennismaken & check", text: "We bellen je op en bespreken je ervaring, certificaten, bevoegdheden en voorkeuren." },
+  { icon: Layers3, title: "Projectmatch", text: "We kijken welke LS/MS-projecten, stationswerkzaamheden, schakelwerk of aardingswerk bij jou passen." },
+  { icon: Rocket, title: "Start op project", text: "Je krijgt duidelijke projectinformatie, planning en afspraken voordat je start." },
+];
+
+const faqs: { q: string; a: string }[] = [
+  { q: "Kan ik ook als ZZP'er reageren?", a: "Ja. TerreVolt werkt ook samen met zelfstandige monteurs en complete ploegen voor projectmatige inzet binnen LS/MS, stationswerk, kabelmontage, schakelwerk en aarding." },
+  { q: "Moet ik BEI BLS of BEI BHS hebben?", a: "Dat hangt af van de rol en het project. Relevante aanwijzingen zijn vaak een pré of vereiste. We bespreken dit tijdens de kennismaking." },
+  { q: "Is VCA verplicht?", a: "Voor veel projecten is VCA belangrijk of vereist. Heb je dit nog niet, dan kijken we samen wat mogelijk is." },
+  { q: "Kan ik reageren zonder CV?", a: "Ja. Geen CV bij de hand? Laat gewoon je gegevens achter. Certificaten of documenten kunnen later worden aangevuld." },
+  { q: "In welke regio's werken jullie?", a: "TerreVolt werkt projectmatig in Nederland. Per project stemmen we locatie, reistijd en beschikbaarheid af." },
+  { q: "Hoe snel nemen jullie contact op?", a: "Na je aanmelding proberen we snel contact op te nemen om je ervaring, beschikbaarheid en mogelijke projectmatch te bespreken." },
+  { q: "Werken jullie met losse monteurs of complete ploegen?", a: "Beide zijn mogelijk. We kijken per project of een losse specialist, vaste ploeg of ZZP-team passend is." },
+  { q: "Welke documenten hebben jullie nodig?", a: "Dat verschilt per project, maar denk aan VCA, relevante BEI-aanwijzingen, certificaten, KvK-gegevens bij ZZP en eventueel verzekering of ID-check volgens projectvereisten." },
+];
 
 const slugIconMap: Record<string, typeof Zap> = {
   laagspanningsmonteur: Zap,
@@ -310,6 +349,26 @@ const WerkenBij = () => {
           </div>
         </section>
 
+        {/* FUNNEL SUBNAV */}
+        <nav
+          aria-label="Werken bij — secties"
+          className="sticky top-16 sm:top-20 z-30 bg-white/95 backdrop-blur border-b border-gray-200"
+        >
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="flex gap-2 sm:gap-3 overflow-x-auto py-3 -mx-1 px-1 scrollbar-hide">
+              {funnelNav.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="flex-shrink-0 px-4 py-2 rounded-full border border-gray-200 bg-white text-[#0d3b2e] text-sm hover:border-[#9ed42e] hover:bg-[#f0f7e6] transition-all min-h-[40px] flex items-center"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </nav>
+
         {/* QUICK NAV CHIPS */}
         <section className="py-8 md:py-10 bg-white border-b border-gray-100">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
@@ -421,6 +480,42 @@ const WerkenBij = () => {
           </div>
         </section>
 
+        {/* HOE HET WERKT */}
+        <section id="hoe-het-werkt" className="py-16 md:py-24 bg-white scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="text-center mb-10 md:mb-14 max-w-3xl mx-auto">
+              <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+                Hoe het werkt
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Hoe werken via TerreVolt eruitziet</h2>
+              <p className="text-base sm:text-lg text-[#6c757d]">
+                Wij houden het graag duidelijk. Je weet vooraf waar je aan toe bent: welke werkzaamheden, welke locatie, welke planning en welke veiligheidsafspraken gelden.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto">
+              {stappen.map((s, i) => {
+                const Icon = s.icon;
+                return (
+                  <div
+                    key={s.title}
+                    className="relative bg-[#f8f9fa] rounded-xl p-6 border border-gray-200 hover:border-[#9ed42e] hover:shadow-lg transition-all duration-300"
+                  >
+                    <div className="absolute -top-3 -left-3 w-9 h-9 rounded-full bg-[#9ed42e] text-[#0d3b2e] flex items-center justify-center text-sm font-medium shadow-sm">
+                      {i + 1}
+                    </div>
+                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-4">
+                      <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                    </div>
+                    <h3 className="text-lg text-[#0d3b2e] mb-2 leading-snug">{s.title}</h3>
+                    <p className="text-[#6c757d] text-sm leading-relaxed">{s.text}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* WAAROM */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
@@ -475,22 +570,138 @@ const WerkenBij = () => {
           </div>
         </section>
 
+        {/* AANSPREEKPUNT */}
+        <section id="aanspreekpunt" className="py-16 md:py-24 bg-white scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-10 md:mb-12 max-w-3xl mx-auto">
+                <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+                  Direct contact
+                </div>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Je vaste aanspreekpunt bij TerreVolt</h2>
+                <p className="text-base sm:text-lg text-[#6c757d]">
+                  Heb je interesse om met TerreVolt te werken? Dan houden we het simpel. Je laat je gegevens achter, wij nemen contact met je op en kijken samen welke rol of projectinzet past bij jouw ervaring.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                {/* Bellen */}
+                <div className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-5 sm:p-6 text-center hover:border-[#9ed42e] transition-colors">
+                  <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-3 mx-auto">
+                    <PhoneIcon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                  </div>
+                  <div className="text-xs uppercase tracking-wider text-[#6c757d] mb-1">Bellen</div>
+                  <CopyableContactLink
+                    type="tel"
+                    value={company.phone.e164}
+                    href={telHref}
+                    className="text-[#0d3b2e] hover:text-[#9ed42e] transition-colors text-base sm:text-lg break-all"
+                    wrapperClassName="inline-flex items-center gap-1 justify-center"
+                  >
+                    {company.phone.display}
+                  </CopyableContactLink>
+                </div>
+
+                {/* WhatsApp */}
+                <div className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-5 sm:p-6 text-center hover:border-[#9ed42e] transition-colors">
+                  <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-3 mx-auto">
+                    <MessageSquare className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                  </div>
+                  <div className="text-xs uppercase tracking-wider text-[#6c757d] mb-1">WhatsApp</div>
+                  <a
+                    href={waLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#0d3b2e] hover:text-[#9ed42e] transition-colors text-base sm:text-lg break-all"
+                  >
+                    Stuur een bericht
+                  </a>
+                </div>
+
+                {/* E-mail */}
+                <div className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-5 sm:p-6 text-center hover:border-[#9ed42e] transition-colors">
+                  <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-3 mx-auto">
+                    <MailIcon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                  </div>
+                  <div className="text-xs uppercase tracking-wider text-[#6c757d] mb-1">E-mail</div>
+                  <CopyableContactLink
+                    type="mail"
+                    value={company.email}
+                    href={mailHref}
+                    className="text-[#0d3b2e] hover:text-[#9ed42e] transition-colors text-base sm:text-lg break-all"
+                    wrapperClassName="inline-flex items-center gap-1 justify-center"
+                  >
+                    {company.email}
+                  </CopyableContactLink>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <a
+                  href="#aanmelden"
+                  className="w-full sm:w-auto bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px]"
+                >
+                  Direct aanmelden
+                  <ArrowRight className="w-5 h-5" />
+                </a>
+                <a
+                  href="/contact"
+                  className="w-full sm:w-auto border-2 border-[#0d3b2e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-all duration-300 text-center min-h-[48px] flex items-center justify-center"
+                >
+                  Eerst een vraag stellen
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="faq" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-10 md:mb-12">
+                <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+                  <HelpCircle className="w-4 h-4" /> FAQ
+                </div>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Veelgestelde vragen</h2>
+                <p className="text-base sm:text-lg text-[#6c757d]">
+                  Antwoorden op de vragen die we het vaakst krijgen van monteurs, werkverantwoordelijken en ZZP-ploegen.
+                </p>
+              </div>
+
+              <Accordion type="single" collapsible className="bg-white border border-gray-200 rounded-2xl divide-y divide-gray-200 overflow-hidden">
+                {faqs.map((f, i) => (
+                  <AccordionItem key={i} value={`faq-${i}`} className="border-b-0">
+                    <AccordionTrigger className="px-5 sm:px-6 py-4 text-left text-[#0d3b2e] hover:no-underline hover:bg-[#f0f7e6]/40 min-h-[56px]">
+                      {f.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="px-5 sm:px-6 pb-5 text-[#6c757d] leading-relaxed">
+                      {f.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </div>
+        </section>
+
         {/* AANMELDFORMULIER */}
-        <section id="aanmelden" className="py-16 md:py-24 bg-white">
+        <section id="aanmelden" className="py-16 md:py-24 bg-white scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10 md:mb-12">
                 <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
-                  Aanmelden
+                  Open aanmelding
                 </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Meld je aan</h2>
-                <p className="text-base sm:text-xl text-[#6c757d]">
-                  Laat je gegevens achter. We nemen snel contact met je op om te kijken welke projecten of rollen bij jouw ervaring passen.
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Open aanmelding</h2>
+                <p className="text-base sm:text-lg text-[#6c757d]">
+                  Geen passende functie gezien, maar wel ervaring met elektrotechniek, infra, LS/MS, kabelwerk, aarding of aansluitingen? Meld je toch aan. We kijken graag of er een passende rol of projectinzet is.
                 </p>
                 <p className="text-sm text-[#6c757d] mt-3">
                   Geen CV bij de hand? Geen probleem. Laat je gegevens achter, dan nemen we contact met je op.
                 </p>
               </div>
+
 
               {success ? (
                 <div role="status" aria-live="polite" className="bg-[#f0f7e6] border border-[#9ed42e] rounded-2xl p-6 sm:p-10 shadow-sm text-center">
