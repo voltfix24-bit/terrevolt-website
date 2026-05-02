@@ -484,7 +484,7 @@ const WerkenBij = () => {
                     href="#aanmelden"
                     className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors text-center min-h-[44px] flex items-center justify-center"
                   >
-                    ZZP'er aanmelden
+                    ZZP'er of ploeg aanmelden
                   </a>
                   <a
                     href="/contact"
