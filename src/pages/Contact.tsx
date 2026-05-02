@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { company, addressOneLine, telHref, mailHref } from "@/config/company";
-import { CopyButton, CopyableContactLink } from "@/components/terrevolt/CopyableContactLink";
+import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
 
 const contactCards = [
   { icon: Phone, title: "Telefoon", value: company.phone.display, href: telHref },
