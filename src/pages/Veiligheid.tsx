@@ -287,7 +287,7 @@ const Veiligheid = () => {
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 hyphens-nl">Bevoegdheden, rollen en normen</h2>
               <p className="text-base sm:text-lg text-gray-300 leading-relaxed hyphens-nl text-pretty">
-                Veilig werken binnen de netbeheerwereld vraagt om duidelijkheid in rollen, aanwijzingen en procedures. TerreVolt sluit aan op de veiligheidsstructuur en bedrijfsspecifieke eisen van opdrachtgever of netbeheerder, afgestemd op de opdracht, locatie en geldende projectafspraken.
+                {softHyphenate("Veilig werken binnen de netbeheerwereld vraagt om duidelijkheid in rollen, aanwijzingen en procedures. TerreVolt sluit aan op de veiligheidsstructuur en bedrijfsspecifieke eisen van opdrachtgever of netbeheerder, afgestemd op de opdracht, locatie en geldende projectafspraken.")}
               </p>
             </div>
 
@@ -318,7 +318,7 @@ const Veiligheid = () => {
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl">Projectafspraken en locatie-eisen</h2>
               <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
-                Naast branche-regels kunnen per opdrachtgever of netbeheerder aanvullende afspraken gelden. Denk aan bedrijfsspecifieke procedures, poortinstructies, toegangseisen, sleutelprocedures, werkvergunningen en locatie-instructies.
+                {softHyphenate("Naast branche-regels kunnen per opdrachtgever of netbeheerder aanvullende afspraken gelden. Denk aan bedrijfsspecifieke procedures, poortinstructies, toegangseisen, sleutelprocedures, werkvergunningen en locatie-instructies.")}
               </p>
             </div>
 
