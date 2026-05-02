@@ -8,7 +8,7 @@ export function Header() {
     { href: "/diensten", label: "Diensten" },
     { href: "/projecten", label: "Projecten" },
     { href: "/veiligheid", label: "Veiligheid" },
-    { href: "/#over-ons", label: "Over ons" },
+    { href: "/over", label: "Over ons" },
   ];
 
   // Sluit het menu automatisch zodra we (door rotatie of resize) op desktop komen,
