@@ -21,6 +21,13 @@ import {
   Layers,
   PlayCircle,
   X,
+  Sparkles,
+  Phone as PhoneIcon,
+  MessageCircle,
+  Mail as MailIcon,
+  Share2,
+  LinkIcon,
+  HelpCircle,
 } from "lucide-react";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
@@ -29,6 +36,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { findVacature } from "@/data/vacatures";
+import { company, telHref, mailHref } from "@/config/company";
 
 const contactVoorkeurOpties = ["Bellen", "WhatsApp", "E-mail", "Maakt niet uit"];
 
@@ -47,12 +55,31 @@ const formSchema = z.object({
 type FieldErrors = Partial<Record<keyof z.infer<typeof formSchema>, string>>;
 
 const proces = [
-  { icon: UserPlus, title: "Aanmelden", text: "Je stuurt het formulier in met je gegevens en certificaten." },
-  { icon: Coffee, title: "Kennismaken", text: "Korte (telefonische) kennismaking over werk en wensen." },
-  { icon: FileCheck2, title: "Documenten / check", text: "Controle van bevoegdheden, VCA en eventueel VOG." },
-  { icon: Layers, title: "Projectmatch", text: "We koppelen jou aan een passend project en planning." },
-  { icon: PlayCircle, title: "Start", text: "Inwerken op locatie, daarna zelfstandig aan de slag." },
+  { icon: UserPlus, title: "Je meldt je aan", text: "Je stuurt je gegevens in. Een CV of certificaat mag, maar is niet verplicht om te starten." },
+  { icon: Coffee, title: "Kennismaking", text: "We nemen telefonisch of via WhatsApp contact op en bespreken je ervaring, wensen en beschikbaarheid." },
+  { icon: FileCheck2, title: "Documenten/check", text: "We kijken naar VCA, BEI-aanwijzingen, certificaten en projectvereisten. Voor ZZP kijken we ook naar KvK en verzekering." },
+  { icon: Layers, title: "Projectmatch", text: "We zoeken passende inzet binnen LS/MS, stationswerk, schakelwerk, kabelmontage of aarding." },
+  { icon: PlayCircle, title: "Start op project", text: "Je krijgt duidelijke projectinformatie, planning en afspraken voordat je start." },
 ];
+
+/** Fallback match-bullets per slug. ZZP krijgt eigen tekst. */
+const matchByDefault = [
+  "Je hebt ervaring met elektrotechniek, infra of LS/MS-werk",
+  "Je werkt veilig en zelfstandig",
+  "Je vindt duidelijke afspraken en projectmatig werk belangrijk",
+  "Je bent beschikbaar voor projecten binnen de netbeheerwereld",
+];
+const matchZzp = [
+  "Je bent als zelfstandige monteur of complete ploeg inzetbaar",
+  "Je vindt duidelijke scope, planning en afspraken belangrijk",
+  "Je hebt ervaring met LS/MS, kabelwerk, stationswerk of aarding",
+];
+function matchBulletsFor(slug?: string) {
+  if (!slug) return matchByDefault;
+  if (slug.includes("zzp")) return matchZzp;
+  return matchByDefault;
+}
+
 
 type VacatureView = {
   id?: string;
@@ -73,7 +100,7 @@ type VacatureView = {
   process_steps: string[];
 };
 
-const standaardProces = ["Aanmelden", "Kennismaken", "Documenten/check", "Projectmatch", "Start"];
+const standaardProces = ["Je meldt je aan", "Kennismaking", "Documenten/check", "Projectmatch", "Start op project"];
 
 const VacatureDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -243,6 +270,34 @@ const VacatureDetail = () => {
     { icon: ShieldCheck, label: "Bevoegdheden", value: vacature.meta.bevoegdheden },
   ];
 
+  const waText = `Hallo TerreVolt, ik heb een vraag over de functie "${vacature.title}".`;
+  const waLink = `https://wa.me/${company.phone.e164.replace("+", "")}?text=${encodeURIComponent(waText)}`;
+  const shareText = `Vacature bij TerreVolt: ${vacature.title}`;
+  const shareUrl = typeof window !== "undefined" ? window.location.href : "";
+  const waShareLink = `https://wa.me/?text=${encodeURIComponent(`${shareText} — ${shareUrl}`)}`;
+
+  const copyShareLink = async () => {
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = shareUrl;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      toast.success("Link gekopieerd");
+    } catch {
+      toast.error("Kopiëren lukte niet. Selecteer de URL handmatig.");
+    }
+  };
+
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -382,7 +437,7 @@ const VacatureDetail = () => {
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="/contact"
+                  href="#vragen"
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
                   Eerst vraag stellen
@@ -436,14 +491,38 @@ const VacatureDetail = () => {
           </div>
         </section>
 
-        {/* WAT GA JE DOEN + DIT BRENG JE MEE */}
+        {/* MATCH-CARD: Deze functie past bij jou als… */}
+        <section className="py-10 sm:py-14 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#f0f7e6] to-white border border-[#9ed42e]/40 rounded-2xl p-6 sm:p-8">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-11 h-11 bg-[#9ed42e] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-5 h-5 text-[#0d3b2e]" strokeWidth={2.5} />
+                </div>
+                <h2 className="text-xl sm:text-2xl text-[#0d3b2e] leading-tight">
+                  Deze functie past bij jou als…
+                </h2>
+              </div>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                {matchBulletsFor(slug).map((m) => (
+                  <li key={m} className="flex items-start gap-3 text-[#0d3b2e]">
+                    <CheckCircle2 className="w-5 h-5 text-[#0d3b2e] flex-shrink-0 mt-0.5" />
+                    <span className="text-[#0d3b2e]/90 text-[15px] leading-relaxed">{m}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* WAT DOE JE + WAT BRENG JE MEE */}
         <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
               <div className="bg-white rounded-2xl p-8 border border-gray-200">
                 <div className="flex items-center gap-3 mb-6">
                   <ListChecks className="w-7 h-7 text-[#9ed42e]" strokeWidth={2.5} />
-                  <h2 className="text-2xl text-[#0d3b2e]">Wat ga je doen?</h2>
+                  <h2 className="text-2xl text-[#0d3b2e]">Wat doe je?</h2>
                 </div>
                 <ul className="space-y-3">
                   {vacature.taken.map((t) => (
@@ -458,7 +537,7 @@ const VacatureDetail = () => {
               <div className="bg-white rounded-2xl p-8 border border-gray-200">
                 <div className="flex items-center gap-3 mb-6">
                   <Award className="w-7 h-7 text-[#9ed42e]" strokeWidth={2.5} />
-                  <h2 className="text-2xl text-[#0d3b2e]">Dit breng je mee</h2>
+                  <h2 className="text-2xl text-[#0d3b2e]">Wat breng je mee?</h2>
                 </div>
                 <ul className="space-y-3">
                   {vacature.meebrengen.map((t) => (
@@ -479,9 +558,9 @@ const VacatureDetail = () => {
             <div className="max-w-4xl mx-auto text-center mb-12">
               <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 <Gift className="w-4 h-4" />
-                Wat bieden wij?
+                Wat krijg je van ons?
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Heldere voordelen</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Heldere voorwaarden</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
               {vacature.bieden.map((b) => (
@@ -510,11 +589,62 @@ const VacatureDetail = () => {
           </div>
         </section>
 
+        {/* VRAGEN OVER DEZE FUNCTIE? — contactblok */}
+        <section id="vragen" className="py-16 md:py-20 bg-white scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-5 tracking-wider uppercase">
+                  <HelpCircle className="w-4 h-4" />
+                  Vragen?
+                </div>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl text-[#0d3b2e] mb-4">
+                  Vragen over deze functie?
+                </h2>
+                <p className="text-[#6c757d] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+                  Je hoeft niet direct alles compleet te hebben. Bel, WhatsApp of mail ons gerust. We bespreken je ervaring, certificaten en beschikbaarheid en kijken samen of deze functie of projectinzet past.
+                </p>
+                <p className="text-sm text-[#6c757d] mt-3">— Team TerreVolt</p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                <a
+                  href={telHref}
+                  className="group flex items-center justify-center gap-3 bg-[#0d3b2e] text-white rounded-xl px-5 py-4 min-h-[56px] hover:bg-[#1a4a36] transition-colors"
+                >
+                  <PhoneIcon className="w-5 h-5 text-[#9ed42e]" strokeWidth={2.2} />
+                  <span>Bel direct</span>
+                </a>
+                <a
+                  href={waLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-center gap-3 bg-[#9ed42e] text-[#0d3b2e] rounded-xl px-5 py-4 min-h-[56px] hover:bg-[#8bc41f] transition-colors"
+                >
+                  <MessageCircle className="w-5 h-5" strokeWidth={2.2} />
+                  <span>WhatsApp</span>
+                </a>
+                <a
+                  href={mailHref}
+                  className="group flex items-center justify-center gap-3 bg-white border-2 border-[#0d3b2e] text-[#0d3b2e] rounded-xl px-5 py-4 min-h-[56px] hover:bg-[#0d3b2e] hover:text-white transition-colors"
+                >
+                  <MailIcon className="w-5 h-5" strokeWidth={2.2} />
+                  <span>Mail ons</span>
+                </a>
+              </div>
+
+              <div className="mt-5 text-center text-xs text-[#6c757d] break-words">
+                {company.phone.display} · {company.email}
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* PROCES */}
         <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Zo verloopt het proces</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Zo verloopt je aanmelding</h2>
               <p className="text-xl text-[#6c757d] max-w-2xl mx-auto">
                 Van aanmelding tot start op het project — duidelijk en kort.
               </p>
@@ -581,7 +711,7 @@ const VacatureDetail = () => {
                   </div>
                   <h3 className="text-2xl text-[#0d3b2e] mb-2">Aanmelding ontvangen</h3>
                   <p className="text-[#0d3b2e]/80 mb-6 max-w-md mx-auto">
-                    Bedankt! We hebben je gegevens ontvangen. We nemen binnenkort telefonisch of per e-mail contact met je op.
+                    Bedankt! We hebben je gegevens ontvangen. We nemen binnenkort contact met je op.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <Link to="/werken-bij" className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors min-h-[48px] flex items-center justify-center">
@@ -731,23 +861,38 @@ const VacatureDetail = () => {
           </div>
         </section>
 
-        {/* CTA naar contact */}
+        {/* DEELBLOK — Ken je iemand voor deze functie? */}
         <section className="py-14 md:py-20 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl text-[#0d3b2e] mb-4">
-                Liever eerst een <span className="text-[#9ed42e]">vraag stellen</span>?
+            <div className="max-w-3xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 text-center">
+              <div className="w-12 h-12 bg-[#f0f7e6] rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Share2 className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.2} />
+              </div>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl text-[#0d3b2e] mb-3">
+                Ken je iemand voor deze functie?
               </h2>
-              <p className="text-lg text-[#6c757d] mb-8">
-                Neem contact op met TerreVolt voor inhoudelijke vragen over deze vacature, projecten of samenwerking.
+              <p className="text-[#6c757d] mb-6 leading-relaxed">
+                Stuur deze functie eenvoudig door naar een collega-monteur of iemand uit je netwerk.
               </p>
-              <a
-                href="/contact"
-                className="inline-flex items-center gap-2 bg-[#0d3b2e] text-white px-8 py-4 rounded-lg hover:bg-[#1a4a36] transition-all duration-300"
-              >
-                Naar contact
-                <ArrowRight className="w-5 h-5" />
-              </a>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <a
+                  href={waShareLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors"
+                >
+                  <MessageCircle className="w-5 h-5" strokeWidth={2.2} />
+                  Deel via WhatsApp
+                </a>
+                <button
+                  type="button"
+                  onClick={copyShareLink}
+                  className="inline-flex items-center justify-center gap-2 border-2 border-[#0d3b2e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors"
+                >
+                  <LinkIcon className="w-5 h-5" strokeWidth={2.2} />
+                  Kopieer link
+                </button>
+              </div>
             </div>
           </div>
         </section>
