@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { ArrowRight, Phone, Mail, MapPin, Upload, Loader2, Network, HardHat, Factory } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight, Phone, Mail, MapPin, Upload, Loader2, Network, HardHat, Factory, Briefcase, Users } from "lucide-react";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
