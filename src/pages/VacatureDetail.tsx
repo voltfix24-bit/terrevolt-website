@@ -282,7 +282,7 @@ const VacatureDetail = () => {
         {/* META */}
         <section className="py-16 bg-white border-b border-gray-100">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 sm:gap-6 max-w-6xl mx-auto">
               {meta.map((m) => {
                 const Icon = m.icon;
                 return (
