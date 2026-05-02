@@ -4,7 +4,12 @@ import { useLocation } from "react-router-dom";
 /**
  * Scrollt naar het element waarvan id matcht met de URL-hash.
  * Werkt bij directe page loads en bij in-app navigatie naar /pad#anchor.
- * Respecteert prefers-reduced-motion via globale CSS scroll-behavior.
+ *
+ * Houdt rekening met:
+ *  - async geladen content (Supabase fetches) door een korte tijd te blijven
+ *    her-positioneren tot het element stabiel is.
+ *  - sticky header/subnav via CSS scroll-margin-top (scroll-mt-*).
+ *  - prefers-reduced-motion via globale CSS scroll-behavior.
  */
 export function HashScroll() {
   const { pathname, hash } = useLocation();
@@ -14,21 +19,37 @@ export function HashScroll() {
     const id = decodeURIComponent(hash.replace(/^#/, ""));
     if (!id) return;
 
-    // Wacht tot de pagina-content (sectie) gerenderd is
+    let cancelled = false;
+    let lastTop = -1;
+    let stableCount = 0;
     let attempts = 0;
-    const maxAttempts = 20; // ~1s
-    const tryScroll = () => {
+    const MAX_ATTEMPTS = 60; // ~3s totaal
+
+    const tick = () => {
+      if (cancelled) return;
       const el = document.getElementById(id);
       if (el) {
+        // Geen smooth bij eerste positionering — voorkomt halve scroll bij
+        // langzaam ladende content.
         el.scrollIntoView({ block: "start" });
-        return;
+        const top = el.getBoundingClientRect().top;
+        if (Math.abs(top - lastTop) < 1) {
+          stableCount++;
+          if (stableCount >= 3) return; // doelpositie is stabiel
+        } else {
+          stableCount = 0;
+          lastTop = top;
+        }
       }
-      if (++attempts < maxAttempts) {
-        window.setTimeout(tryScroll, 50);
+      if (++attempts < MAX_ATTEMPTS) {
+        window.setTimeout(tick, 50);
       }
     };
-    // RAF zorgt dat layout klaar is na route-wissel
-    requestAnimationFrame(tryScroll);
+
+    requestAnimationFrame(tick);
+    return () => {
+      cancelled = true;
+    };
   }, [pathname, hash]);
 
   return null;
