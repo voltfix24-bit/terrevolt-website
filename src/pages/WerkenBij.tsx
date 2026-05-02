@@ -153,6 +153,7 @@ const WerkenBij = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [uploadingFile, setUploadingFile] = useState(false);
   const [profielen, setProfielen] = useState<ProfielCard[]>([]);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [success, setSuccess] = useState(false);
