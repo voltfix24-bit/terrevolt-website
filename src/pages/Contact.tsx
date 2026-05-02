@@ -356,13 +356,25 @@ const Contact = () => {
               <p className="text-xl text-gray-300 mb-12 leading-relaxed">
                 Bel of mail TerreVolt voor een snelle projectafstemming.
               </p>
-              <a
-                href={telHref}
-                className="inline-flex items-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-10 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-lg"
-              >
-                <Phone className="w-5 h-5" />
-                Bel TerreVolt
-              </a>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a
+                  href={telHref}
+                  aria-label={`Bel TerreVolt op ${company.phone.display}. Werkt de bel-app niet? Gebruik de kopieerknop hiernaast.`}
+                  className="inline-flex items-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-10 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-lg"
+                >
+                  <Phone className="w-5 h-5" />
+                  Bel TerreVolt
+                </a>
+                <CopyButton
+                  type="tel"
+                  value={company.phone.e164}
+                  ariaLabel={`Telefoonnummer kopiëren: ${company.phone.display}`}
+                  className="inline-flex items-center gap-2 px-5 py-3 min-h-[48px] rounded-lg border-2 border-[#9ed42e] text-[#9ed42e] hover:bg-[#9ed42e] hover:text-[#0d3b2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] transition-colors"
+                />
+              </div>
+              <p className="text-sm text-gray-400 mt-4">
+                Geen bel-app op dit apparaat? Kopieer het nummer met de knop hiernaast.
+              </p>
             </div>
           </div>
         </section>
