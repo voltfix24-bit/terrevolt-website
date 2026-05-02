@@ -16,7 +16,7 @@ type Props = {
 export function WhenToCall({ items, title = "Wanneer schakelt u TerreVolt in?", variant = "white" }: Props) {
   const bg = variant === "muted" ? "bg-[#f8f9fa]" : "bg-white";
   return (
-    <section className={`py-16 md:py-20 ${bg}`}>
+    <section id="wanneer-inschakelen" className={`py-16 md:py-20 ${bg} scroll-mt-24`}>
       <div className="container mx-auto px-5 sm:px-6 lg:px-12">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-8 md:mb-10">
