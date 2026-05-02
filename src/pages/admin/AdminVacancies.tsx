@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Plus, Pencil, Trash2, Eye, EyeOff, Loader2, ExternalLink } from "lucide-react";
+import { Plus, Pencil, Trash2, Eye, EyeOff, Loader2, ExternalLink, Search, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
@@ -28,6 +32,12 @@ type Vacancy = {
 export default function AdminVacancies() {
   const [rows, setRows] = useState<Vacancy[]>([]);
   const [loading, setLoading] = useState(true);
+
+  // Filters
+  const [query, setQuery] = useState("");
+  const [regionFilter, setRegionFilter] = useState<string>("all");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [featuredFilter, setFeaturedFilter] = useState<string>("all");
 
   async function load() {
     setLoading(true);
@@ -58,6 +68,38 @@ export default function AdminVacancies() {
     load();
   }
 
+  // Unieke regio's voor filter-dropdown
+  const regions = useMemo(() => {
+    const set = new Set<string>();
+    rows.forEach((r) => { if (r.region) set.add(r.region); });
+    return Array.from(set).sort((a, b) => a.localeCompare(b, "nl"));
+  }, [rows]);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return rows.filter((v) => {
+      if (q) {
+        const hay = `${v.title} ${v.slug} ${v.category ?? ""}`.toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      if (regionFilter !== "all" && (v.region ?? "") !== regionFilter) return false;
+      if (statusFilter !== "all" && v.status !== statusFilter) return false;
+      if (featuredFilter === "yes" && !v.is_featured) return false;
+      if (featuredFilter === "no" && v.is_featured) return false;
+      return true;
+    });
+  }, [rows, query, regionFilter, statusFilter, featuredFilter]);
+
+  const hasActiveFilters =
+    query !== "" || regionFilter !== "all" || statusFilter !== "all" || featuredFilter !== "all";
+
+  function resetFilters() {
+    setQuery("");
+    setRegionFilter("all");
+    setStatusFilter("all");
+    setFeaturedFilter("all");
+  }
+
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -70,11 +112,68 @@ export default function AdminVacancies() {
         </Button>
       </div>
 
+      {/* Zoek- en filterbalk */}
+      <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+          <div className="md:col-span-5 relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6c757d]" />
+            <Input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Zoek op titel, slug of categorie…"
+              className="pl-9 min-h-[44px]"
+              aria-label="Zoek vacatures"
+            />
+          </div>
+          <div className="md:col-span-3">
+            <Select value={regionFilter} onValueChange={setRegionFilter}>
+              <SelectTrigger className="min-h-[44px]" aria-label="Filter op regio"><SelectValue placeholder="Regio" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alle regio's</SelectItem>
+                {regions.map((r) => (
+                  <SelectItem key={r} value={r}>{r}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="md:col-span-2">
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="min-h-[44px]" aria-label="Filter op status"><SelectValue placeholder="Status" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alle statussen</SelectItem>
+                <SelectItem value="published">Gepubliceerd</SelectItem>
+                <SelectItem value="draft">Concept</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="md:col-span-2">
+            <Select value={featuredFilter} onValueChange={setFeaturedFilter}>
+              <SelectTrigger className="min-h-[44px]" aria-label="Filter op uitgelicht"><SelectValue placeholder="Uitgelicht" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alle</SelectItem>
+                <SelectItem value="yes">Alleen uitgelicht</SelectItem>
+                <SelectItem value="no">Niet uitgelicht</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <div className="flex items-center justify-between text-sm text-[#6c757d]">
+          <span>{filtered.length} van {rows.length} vacatures</span>
+          {hasActiveFilters && (
+            <Button variant="ghost" size="sm" onClick={resetFilters} className="h-8">
+              <X className="w-3.5 h-3.5 mr-1" /> Filters wissen
+            </Button>
+          )}
+        </div>
+      </div>
+
       <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
         {loading ? (
           <div className="p-12 flex justify-center"><Loader2 className="w-6 h-6 animate-spin text-[#0d3b2e]" /></div>
-        ) : rows.length === 0 ? (
-          <div className="p-12 text-center text-[#6c757d]">Nog geen vacatures.</div>
+        ) : filtered.length === 0 ? (
+          <div className="p-12 text-center text-[#6c757d]">
+            {rows.length === 0 ? "Nog geen vacatures." : "Geen vacatures gevonden met deze filters."}
+          </div>
         ) : (
           <div className="overflow-x-auto">
             <Table>
@@ -91,7 +190,7 @@ export default function AdminVacancies() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {rows.map((v) => (
+                {filtered.map((v) => (
                   <TableRow key={v.id}>
                     <TableCell className="font-medium text-[#0d3b2e]">
                       <div className="flex items-center gap-2">
