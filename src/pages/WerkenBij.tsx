@@ -89,7 +89,25 @@ const quickNav: { label: string; slugs: string[] }[] = [
   { label: "ZZP", slugs: ["zzp-ploegen"] },
 ];
 
-type ProfielCard = { slug: string; label: string };
+type ProfielCard = {
+  slug: string;
+  label: string;
+  intro?: string;
+  region?: string;
+  hours?: string;
+  employmentType?: string;
+  level?: string;
+  workArea?: string;
+};
+
+type FilterKey = "region" | "hours" | "employmentType" | "level" | "workArea";
+const FILTER_LABELS: Record<FilterKey, string> = {
+  region: "Regio",
+  hours: "Uren / beschikbaarheid",
+  employmentType: "Dienstverband",
+  level: "Niveau / ervaring",
+  workArea: "Werkgebied",
+};
 
 const trust = [
   { icon: CalendarCheck, label: "Duidelijke planning" },
