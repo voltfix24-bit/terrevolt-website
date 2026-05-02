@@ -640,7 +640,7 @@ const VacatureDetail = () => {
                   Vragen?
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl text-[#0d3b2e] mb-4">
-                  Vragen over deze functie?
+                  Liever eerst een vraag stellen?
                 </h2>
                 <p className="text-[#6c757d] text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
                   Je hoeft niet direct alles compleet te hebben. Bel, WhatsApp of mail ons gerust. We bespreken je ervaring, certificaten en beschikbaarheid en kijken samen of deze functie of projectinzet past.
