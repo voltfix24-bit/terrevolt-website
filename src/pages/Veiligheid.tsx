@@ -3,6 +3,7 @@ import { ArrowRight, CheckCircle2, ShieldCheck, BadgeCheck, Award, BookOpen, Fil
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
+import { softHyphenate } from "@/lib/softHyphen";
 import {
   Accordion,
   AccordionContent,
@@ -376,7 +377,7 @@ const Veiligheid = () => {
                       {f.q}
                     </AccordionTrigger>
                     <AccordionContent className="text-[#6c757d] leading-relaxed text-sm sm:text-base pb-5 hyphens-nl text-pretty">
-                      {f.a}
+                      {softHyphenate(f.a)}
                     </AccordionContent>
                   </AccordionItem>
                 ))}
