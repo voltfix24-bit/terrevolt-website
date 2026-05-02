@@ -17,7 +17,7 @@ const focus = [
 ];
 
 const Over = () => {
-  usePageMeta("Over TerreVolt | TerreVolt BV", "TerreVolt BV is een elektrotechnisch infrabedrijf met focus op LS/MS-infrastructuur, stationsrenovatie, schakelwerk en aardingsoplossingen.");
+  usePageMeta("Over TerreVolt | TerreVolt BV", "TerreVolt BV is een elektrotechnisch infrabedrijf met focus op LS/MS-infrastructuur, stationsrenovatie, schakelwerk en aardingsoplossingen.", "/over");
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">

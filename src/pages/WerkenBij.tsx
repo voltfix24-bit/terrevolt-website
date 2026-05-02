@@ -150,6 +150,7 @@ const WerkenBij = () => {
   usePageMeta(
     "Werken bij TerreVolt | Vacatures monteurs LS/MS, schakelwerk & aarding",
     "TerreVolt zoekt monteurs, werkverantwoordelijken en ZZP-ploegen voor LS/MS-projecten binnen de netbeheerwereld. Duidelijke planning, korte lijnen, veiligheid voorop.",
+    "/werken-bij",
   );
 
   const [submitting, setSubmitting] = useState(false);

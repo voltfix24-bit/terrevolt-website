@@ -26,7 +26,7 @@ const stappen = [
 ];
 
 const Veiligheid = () => {
-  usePageMeta("Veiligheid & certificeringen | TerreVolt BV", "Veiligheid, bevoegdheden en normen bij TerreVolt: BEI BLS/BHS, AVP/VP/VOP/WV, VCA en NEN 1010 / NEN 3140.");
+  usePageMeta("Veiligheid & certificeringen | TerreVolt BV", "Veiligheid, bevoegdheden en normen bij TerreVolt: BEI BLS/BHS, AVP/VP/VOP/WV, VCA en NEN 1010 / NEN 3140.", "/veiligheid");
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
