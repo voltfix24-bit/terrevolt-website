@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import {
   ArrowRight,
@@ -711,7 +711,7 @@ const VacatureDetail = () => {
                   </div>
                   <h3 className="text-2xl text-[#0d3b2e] mb-2">Aanmelding ontvangen</h3>
                   <p className="text-[#0d3b2e]/80 mb-6 max-w-md mx-auto">
-                    Bedankt! We hebben je gegevens ontvangen. We nemen binnenkort telefonisch of per e-mail contact met je op.
+                    Bedankt! We hebben je gegevens ontvangen. We nemen binnenkort contact met je op.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <Link to="/werken-bij" className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors min-h-[48px] flex items-center justify-center">
