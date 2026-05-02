@@ -129,15 +129,15 @@ All colors MUST be HSL.
   }
 
   h1, h2, h3, h4 {
-    overflow-wrap: anywhere;
-    word-break: break-word;
+    overflow-wrap: break-word;
+    word-break: normal;
     hyphens: auto;
   }
 
   /* Lange technische termen (Aardverspreidingsweerstand, middenspanningsstation, ...) mogen
      in tekstblokken netjes wrappen zonder de layout te breken. */
   p, li, span, a, label {
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
   }
 
   /* Voorkom dat heel kleine bodytekst op iOS gaat zoomen / niet leesbaar is. */
