@@ -50,8 +50,9 @@ describe("MetaTooltip — mobiele interacties", () => {
     // De globale pointerdown-listener wordt op `document` met capture geregistreerd
     // en sluit de tooltip wanneer de tap buiten de wrapper plaatsvindt.
     act(() => {
-      const evt = new PointerEvent("pointerdown", { bubbles: true });
-      screen.getByTestId("outside").dispatchEvent(evt);
+      const outside = screen.getByTestId("outside");
+      const evt = createEvent.pointerDown(outside, { bubbles: true });
+      fireEvent(outside, evt);
     });
 
     expect(tip).toHaveAttribute("aria-hidden", "true");
