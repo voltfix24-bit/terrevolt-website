@@ -570,22 +570,138 @@ const WerkenBij = () => {
           </div>
         </section>
 
+        {/* AANSPREEKPUNT */}
+        <section id="aanspreekpunt" className="py-16 md:py-24 bg-white scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-10 md:mb-12 max-w-3xl mx-auto">
+                <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+                  Direct contact
+                </div>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Je vaste aanspreekpunt bij TerreVolt</h2>
+                <p className="text-base sm:text-lg text-[#6c757d]">
+                  Heb je interesse om met TerreVolt te werken? Dan houden we het simpel. Je laat je gegevens achter, wij nemen contact met je op en kijken samen welke rol of projectinzet past bij jouw ervaring.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                {/* Bellen */}
+                <div className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-5 sm:p-6 text-center hover:border-[#9ed42e] transition-colors">
+                  <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-3 mx-auto">
+                    <PhoneIcon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                  </div>
+                  <div className="text-xs uppercase tracking-wider text-[#6c757d] mb-1">Bellen</div>
+                  <CopyableContactLink
+                    type="tel"
+                    value={company.phone.e164}
+                    href={telHref}
+                    className="text-[#0d3b2e] hover:text-[#9ed42e] transition-colors text-base sm:text-lg break-all"
+                    wrapperClassName="inline-flex items-center gap-1 justify-center"
+                  >
+                    {company.phone.display}
+                  </CopyableContactLink>
+                </div>
+
+                {/* WhatsApp */}
+                <div className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-5 sm:p-6 text-center hover:border-[#9ed42e] transition-colors">
+                  <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-3 mx-auto">
+                    <MessageSquare className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                  </div>
+                  <div className="text-xs uppercase tracking-wider text-[#6c757d] mb-1">WhatsApp</div>
+                  <a
+                    href={waLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#0d3b2e] hover:text-[#9ed42e] transition-colors text-base sm:text-lg break-all"
+                  >
+                    Stuur een bericht
+                  </a>
+                </div>
+
+                {/* E-mail */}
+                <div className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-5 sm:p-6 text-center hover:border-[#9ed42e] transition-colors">
+                  <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-3 mx-auto">
+                    <MailIcon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                  </div>
+                  <div className="text-xs uppercase tracking-wider text-[#6c757d] mb-1">E-mail</div>
+                  <CopyableContactLink
+                    type="mail"
+                    value={company.email}
+                    href={mailHref}
+                    className="text-[#0d3b2e] hover:text-[#9ed42e] transition-colors text-base sm:text-lg break-all"
+                    wrapperClassName="inline-flex items-center gap-1 justify-center"
+                  >
+                    {company.email}
+                  </CopyableContactLink>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <a
+                  href="#aanmelden"
+                  className="w-full sm:w-auto bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px]"
+                >
+                  Direct aanmelden
+                  <ArrowRight className="w-5 h-5" />
+                </a>
+                <a
+                  href="/contact"
+                  className="w-full sm:w-auto border-2 border-[#0d3b2e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-all duration-300 text-center min-h-[48px] flex items-center justify-center"
+                >
+                  Eerst een vraag stellen
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section id="faq" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="max-w-3xl mx-auto">
+              <div className="text-center mb-10 md:mb-12">
+                <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+                  <HelpCircle className="w-4 h-4" /> FAQ
+                </div>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Veelgestelde vragen</h2>
+                <p className="text-base sm:text-lg text-[#6c757d]">
+                  Antwoorden op de vragen die we het vaakst krijgen van monteurs, werkverantwoordelijken en ZZP-ploegen.
+                </p>
+              </div>
+
+              <Accordion type="single" collapsible className="bg-white border border-gray-200 rounded-2xl divide-y divide-gray-200 overflow-hidden">
+                {faqs.map((f, i) => (
+                  <AccordionItem key={i} value={`faq-${i}`} className="border-b-0">
+                    <AccordionTrigger className="px-5 sm:px-6 py-4 text-left text-[#0d3b2e] hover:no-underline hover:bg-[#f0f7e6]/40 min-h-[56px]">
+                      {f.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="px-5 sm:px-6 pb-5 text-[#6c757d] leading-relaxed">
+                      {f.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </div>
+        </section>
+
         {/* AANMELDFORMULIER */}
-        <section id="aanmelden" className="py-16 md:py-24 bg-white">
+        <section id="aanmelden" className="py-16 md:py-24 bg-white scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10 md:mb-12">
                 <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
-                  Aanmelden
+                  Open aanmelding
                 </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Meld je aan</h2>
-                <p className="text-base sm:text-xl text-[#6c757d]">
-                  Laat je gegevens achter. We nemen snel contact met je op om te kijken welke projecten of rollen bij jouw ervaring passen.
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Open aanmelding</h2>
+                <p className="text-base sm:text-lg text-[#6c757d]">
+                  Geen passende functie gezien, maar wel ervaring met elektrotechniek, infra, LS/MS, kabelwerk, aarding of aansluitingen? Meld je toch aan. We kijken graag of er een passende rol of projectinzet is.
                 </p>
                 <p className="text-sm text-[#6c757d] mt-3">
                   Geen CV bij de hand? Geen probleem. Laat je gegevens achter, dan nemen we contact met je op.
                 </p>
               </div>
+
 
               {success ? (
                 <div role="status" aria-live="polite" className="bg-[#f0f7e6] border border-[#9ed42e] rounded-2xl p-6 sm:p-10 shadow-sm text-center">
