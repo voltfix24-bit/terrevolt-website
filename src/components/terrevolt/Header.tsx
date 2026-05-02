@@ -6,7 +6,7 @@ export function Header() {
 
   const links = [
     { href: "/diensten", label: "Diensten" },
-    { href: "/#projecten", label: "Projecten" },
+    { href: "/projecten", label: "Projecten" },
     { href: "/#veiligheid", label: "Veiligheid" },
     { href: "/#over-ons", label: "Over ons" },
   ];
