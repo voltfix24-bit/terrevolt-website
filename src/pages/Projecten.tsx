@@ -1,4 +1,4 @@
-import { ArrowRight, Cable, Building2, Anchor, ShieldCheck, GitMerge, Gauge, HardHat, Users, ShieldAlert, ClipboardCheck, Check } from "lucide-react";
+import { ArrowRight, Cable, Building2, Anchor, ShieldCheck, FileBarChart, HardHat, Users, ShieldAlert, ClipboardCheck, Check } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
@@ -33,14 +33,14 @@ const projecten = [
     bullets: ["In- en uitbedrijf nemen", "Veilig werkgebied", "Afstemming met uitvoering"],
   },
   {
-    icon: GitMerge,
+    icon: Cable,
     label: "Netmontage",
     title: "Kabelmontage LS/MS",
     description: "Kabelinvoer, afmontage, moffen en eindsluitingen binnen technische ruimten en netstructuren.",
     bullets: ["Kabelmontage", "Eindsluitingen", "Oplevercontrole"],
   },
   {
-    icon: Gauge,
+    icon: FileBarChart,
     label: "Metingen",
     title: "Oplevermetingen en rapportage",
     description: "Controlemetingen en duidelijke rapportage voor oplevering van aardings- en kabelwerk.",
