@@ -4,16 +4,55 @@ import {
   ArrowRight, Zap, Cable, PlugZap, Power, ClipboardCheck, Users,
   Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert,
   Award, Loader2, Upload, CalendarCheck, Phone as PhoneIcon, HardHat,
-  CheckCircle2, FileCheck2, X,
+  CheckCircle2, FileCheck2, X, ClipboardList, UserCheck, Layers3, Rocket,
+  Mail as MailIcon, HelpCircle,
 } from "lucide-react";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { CopyableContactLink } from "@/components/terrevolt/CopyableContactLink";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { vacatures as fallbackVacatures } from "@/data/vacatures";
+import { company, telHref, mailHref } from "@/config/company";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
+const waLink = `https://wa.me/${company.phone.e164.replace("+", "")}?text=${encodeURIComponent(
+  "Hallo TerreVolt, ik heb interesse om met jullie te werken.",
+)}`;
+
+const funnelNav: { label: string; href: string }[] = [
+  { label: "Profielen", href: "#profielen" },
+  { label: "ZZP & ploegen", href: "#zzp" },
+  { label: "Hoe het werkt", href: "#hoe-het-werkt" },
+  { label: "Veelgestelde vragen", href: "#faq" },
+  { label: "Aanmelden", href: "#aanmelden" },
+];
+
+const stappen = [
+  { icon: ClipboardList, title: "Aanmelden", text: "Je laat je gegevens, ervaring en beschikbaarheid achter. Een CV mag, maar is niet verplicht." },
+  { icon: UserCheck, title: "Kennismaken & check", text: "We bellen je op en bespreken je ervaring, certificaten, bevoegdheden en voorkeuren." },
+  { icon: Layers3, title: "Projectmatch", text: "We kijken welke LS/MS-projecten, stationswerkzaamheden, schakelwerk of aardingswerk bij jou passen." },
+  { icon: Rocket, title: "Start op project", text: "Je krijgt duidelijke projectinformatie, planning en afspraken voordat je start." },
+];
+
+const faqs: { q: string; a: string }[] = [
+  { q: "Kan ik ook als ZZP'er reageren?", a: "Ja. TerreVolt werkt ook samen met zelfstandige monteurs en complete ploegen voor projectmatige inzet binnen LS/MS, stationswerk, kabelmontage, schakelwerk en aarding." },
+  { q: "Moet ik BEI BLS of BEI BHS hebben?", a: "Dat hangt af van de rol en het project. Relevante aanwijzingen zijn vaak een pré of vereiste. We bespreken dit tijdens de kennismaking." },
+  { q: "Is VCA verplicht?", a: "Voor veel projecten is VCA belangrijk of vereist. Heb je dit nog niet, dan kijken we samen wat mogelijk is." },
+  { q: "Kan ik reageren zonder CV?", a: "Ja. Geen CV bij de hand? Laat gewoon je gegevens achter. Certificaten of documenten kunnen later worden aangevuld." },
+  { q: "In welke regio's werken jullie?", a: "TerreVolt werkt projectmatig in Nederland. Per project stemmen we locatie, reistijd en beschikbaarheid af." },
+  { q: "Hoe snel nemen jullie contact op?", a: "Na je aanmelding proberen we snel contact op te nemen om je ervaring, beschikbaarheid en mogelijke projectmatch te bespreken." },
+  { q: "Werken jullie met losse monteurs of complete ploegen?", a: "Beide zijn mogelijk. We kijken per project of een losse specialist, vaste ploeg of ZZP-team passend is." },
+  { q: "Welke documenten hebben jullie nodig?", a: "Dat verschilt per project, maar denk aan VCA, relevante BEI-aanwijzingen, certificaten, KvK-gegevens bij ZZP en eventueel verzekering of ID-check volgens projectvereisten." },
+];
 
 const slugIconMap: Record<string, typeof Zap> = {
   laagspanningsmonteur: Zap,
