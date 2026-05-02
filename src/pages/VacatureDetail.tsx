@@ -28,6 +28,7 @@ import {
   Share2,
   LinkIcon,
   HelpCircle,
+  AlertCircle,
 } from "lucide-react";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
