@@ -13,7 +13,7 @@ export function SafetyStatement() {
             <div className="min-w-0">
               <h3 className="text-xl text-[#0d3b2e] mb-2">Veiligheid en kwaliteit als standaard</h3>
               <p className="text-[#6c757d] leading-relaxed">
-                TerreVolt werkt bij deze dienst met aandacht voor passende aanwijzingen, bevoegdheden en procedures. Oplevering gebeurt met controle en documentatie volgens geldende projectafspraken en NEN-normen waar van toepassing.
+                TerreVolt werkt bij deze dienst met aandacht voor passende aanwijzingen, bevoegdheden en procedures. Maar de basis blijft altijd hetzelfde: iedereen veilig thuis. Als het niet veilig kan, doen we het niet.
               </p>
               <div className="flex flex-wrap gap-2 mt-4">
                 {tags.map((t) => (
