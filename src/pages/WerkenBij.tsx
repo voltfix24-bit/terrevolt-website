@@ -5,7 +5,7 @@ import {
   Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert,
   Award, Loader2, Upload, CalendarCheck, Phone as PhoneIcon, HardHat,
   CheckCircle2, FileCheck2, X, ClipboardList, UserCheck, Layers3, Rocket,
-  Mail as MailIcon, HelpCircle,
+  Mail as MailIcon, HelpCircle, AlertCircle,
 } from "lucide-react";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
 import { z } from "zod";
@@ -156,8 +156,19 @@ const WerkenBij = () => {
   const [uploadingFile, setUploadingFile] = useState(false);
   const [profielen, setProfielen] = useState<ProfielCard[]>([]);
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const errorBannerRef = useRef<HTMLDivElement>(null);
+
+  const clearFieldError = (field: keyof FieldErrors) => {
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  };
 
   useEffect(() => {
     let active = true;
@@ -202,6 +213,7 @@ const WerkenBij = () => {
       privacy: fd.get("privacy") ? "on" : "",
     };
 
+    setSubmitError(null);
     const parsed = formSchema.safeParse(raw);
     if (!parsed.success) {
       const fe: FieldErrors = {};
@@ -210,13 +222,20 @@ const WerkenBij = () => {
         if (k && !fe[k]) fe[k] = err.message;
       });
       setErrors(fe);
-      toast.error(parsed.error.errors[0]?.message || "Controleer het formulier");
-      focusFirstError(fe);
+      const count = Object.keys(fe).length;
+      toast.error(count === 1 ? parsed.error.errors[0]?.message ?? "Controleer het formulier" : `Controleer ${count} velden`);
+      // Scroll banner in beeld + focus eerste foute veld
+      requestAnimationFrame(() => {
+        errorBannerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        focusFirstError(fe);
+      });
       return;
     }
     setErrors({});
     if (file && file.size > 10 * 1024 * 1024) {
-      toast.error("Bestand mag maximaal 10MB zijn");
+      const msg = "Bestand mag maximaal 10MB zijn";
+      setSubmitError(msg);
+      toast.error(msg);
       return;
     }
 
@@ -263,7 +282,12 @@ const WerkenBij = () => {
       setSuccess(true);
     } catch (err) {
       console.error(err);
-      toast.error("Er ging iets mis. Probeer het later opnieuw.");
+      const msg = "Versturen lukte niet. Controleer je verbinding en probeer opnieuw, of bel ons direct.";
+      setSubmitError(msg);
+      toast.error(msg);
+      requestAnimationFrame(() => {
+        errorBannerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
     } finally {
       setSubmitting(false);
     }
@@ -755,9 +779,39 @@ const WerkenBij = () => {
               <form
                 ref={formRef}
                 onSubmit={handleSubmit}
+                onChange={(e) => {
+                  if (submitError) setSubmitError(null);
+                  const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+                  const name = target?.name as keyof FieldErrors | undefined;
+                  if (name && errors[name]) clearFieldError(name);
+                }}
                 noValidate
+                aria-describedby={submitError || Object.keys(errors).length > 0 ? "form-error-banner" : undefined}
                 className="bg-[#f8f9fa] rounded-2xl p-5 sm:p-10 border border-gray-200 shadow-sm space-y-6"
               >
+                {(submitError || Object.keys(errors).length > 0) && (
+                  <div
+                    ref={errorBannerRef}
+                    id="form-error-banner"
+                    role="alert"
+                    aria-live="assertive"
+                    className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-lg p-4"
+                  >
+                    <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm text-red-800 font-medium">
+                        {submitError
+                          ? "Versturen mislukt"
+                          : Object.keys(errors).length === 1
+                            ? "Controleer 1 veld hieronder"
+                            : `Controleer ${Object.keys(errors).length} velden hieronder`}
+                      </p>
+                      <p className="text-xs text-red-700 mt-1 leading-relaxed">
+                        {submitError ?? "De gemarkeerde velden zijn niet correct ingevuld. Pas ze aan en probeer opnieuw."}
+                      </p>
+                    </div>
+                  </div>
+                )}
                 {/* Blok 1 — Contactgegevens */}
                 <div>
                   <h3 className="text-xs uppercase tracking-wider text-[#6c757d] mb-3 pb-2 border-b border-gray-200">Contactgegevens</h3>
