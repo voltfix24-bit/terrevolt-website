@@ -128,7 +128,7 @@ const VacatureDetail = () => {
   useEffect(() => {
     if (!vacature || vacature === "missing") return;
     if (typeof IntersectionObserver === "undefined") return;
-    const formEl = document.getElementById("solliciteer");
+    const formEl = document.getElementById("solliciteren");
     const footerEl = document.querySelector<HTMLElement>("footer");
     const targets: Element[] = [formEl, footerEl].filter((n): n is HTMLElement => !!n);
     if (targets.length === 0) return;
@@ -426,7 +426,7 @@ const VacatureDetail = () => {
     setFile(null);
     formRef.current?.reset();
     setTimeout(() => {
-      document.getElementById("solliciteer")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById("solliciteren")?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 50);
   };
 
@@ -471,7 +471,7 @@ const VacatureDetail = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#solliciteer"
+                  href="#solliciteren"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Direct aanmelden</span>
@@ -718,7 +718,7 @@ const VacatureDetail = () => {
         </section>
 
         {/* FORMULIER */}
-        <section id="solliciteer" className="py-16 md:py-16 md:py-24 bg-white">
+        <section id="solliciteren" className="py-16 md:py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10 md:mb-12">
@@ -997,7 +997,7 @@ const VacatureDetail = () => {
       >
         <div className="px-4 py-3">
           <a
-            href="#solliciteer"
+            href="#solliciteren"
             tabIndex={formInView ? -1 : 0}
             className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2"
           >
