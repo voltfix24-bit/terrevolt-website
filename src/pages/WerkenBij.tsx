@@ -347,18 +347,24 @@ const WerkenBij = () => {
               {profielCards.map((p) => {
                 const Icon = slugIconMap[p.slug] || Briefcase;
                 const desc = slugDescriptionMap[p.slug] || "Bekijk de volledige profielomschrijving.";
+                const isZzp = p.slug === "zzp-ploegen";
+                const labelTag = isZzp ? "Projectbasis" : "Loondienst / ZZP mogelijk";
                 return (
                   <Link
                     key={p.slug}
                     id={`profiel-${p.slug}`}
                     to={`/vacatures/${p.slug}`}
-                    className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center scroll-mt-24"
+                    aria-label={`Bekijk profiel: ${p.label}`}
+                    className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center scroll-mt-24 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 active:scale-[0.99]"
                   >
                     <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform flex-shrink-0">
                       <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
                     </div>
                     <div className="text-[#0d3b2e] text-base sm:text-lg mb-2 break-words max-w-full">{p.label}</div>
-                    <p className="text-sm text-[#6c757d] leading-snug mb-4 break-words">{desc}</p>
+                    <p className="text-sm text-[#6c757d] leading-snug mb-3 break-words">{desc}</p>
+                    <span className="inline-block text-[11px] tracking-wider uppercase text-[#0d3b2e] bg-[#f0f7e6] border border-[#9ed42e]/40 rounded-full px-2.5 py-1 mb-4">
+                      {labelTag}
+                    </span>
                     <div className="text-xs text-[#9ed42e] inline-flex items-center gap-1 group-hover:gap-2 transition-all mt-auto">
                       Bekijk profiel <ArrowRight className="w-3 h-3" />
                     </div>
@@ -370,9 +376,9 @@ const WerkenBij = () => {
         </section>
 
         {/* ZZP-BLOK */}
-        <section className="py-14 md:py-20 bg-[#f0f7e6]">
+        <section id="zzp" className="py-14 md:py-20 bg-[#f0f7e6] scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="max-w-5xl mx-auto bg-white rounded-2xl border border-[#9ed42e]/40 shadow-sm p-6 sm:p-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="max-w-5xl mx-auto bg-white rounded-2xl border-2 border-[#9ed42e] shadow-[0_8px_30px_-8px_rgba(13,59,46,0.15)] p-6 sm:p-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div>
                 <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-3 py-1.5 rounded-full text-xs mb-4 tracking-wider uppercase">
                   <Users className="w-3.5 h-3.5" /> ZZP & ploegen
@@ -480,6 +486,9 @@ const WerkenBij = () => {
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Meld je aan</h2>
                 <p className="text-base sm:text-xl text-[#6c757d]">
                   Laat je gegevens achter. We nemen snel contact met je op om te kijken welke projecten of rollen bij jouw ervaring passen.
+                </p>
+                <p className="text-sm text-[#6c757d] mt-3">
+                  Geen CV bij de hand? Geen probleem. Laat je gegevens achter, dan nemen we contact met je op.
                 </p>
               </div>
 
