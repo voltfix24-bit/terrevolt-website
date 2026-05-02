@@ -309,7 +309,7 @@ const Contact = () => {
         </section>
 
         {/* HOOFDSECTIE — links trust-kolom, rechts formulier */}
-        <section id="aanvraag" className="relative py-12 sm:py-16 md:py-20 bg-[#f8f9fa] overflow-hidden">
+        <section id="aanvraag" className="relative pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 md:pb-20 bg-[#f8f9fa] overflow-hidden">
           <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
             <div
               className="absolute inset-0"
