@@ -6,6 +6,7 @@ import {
   Award, Loader2, CalendarCheck, Phone as PhoneIcon, HardHat,
   CheckCircle2, ClipboardList, UserCheck, Layers3, Rocket,
   Mail as MailIcon, HelpCircle, AlertCircle,
+  Search, X, SlidersHorizontal,
 } from "lucide-react";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
 import { z } from "zod";
