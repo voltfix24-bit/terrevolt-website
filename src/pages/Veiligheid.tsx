@@ -222,7 +222,7 @@ const Veiligheid = () => {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto">
+            <div id="rollen" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto scroll-mt-32">
               {certs.map((c) => {
                 const Icon = c.icon;
                 return (
