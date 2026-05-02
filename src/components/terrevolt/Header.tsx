@@ -70,7 +70,7 @@ export function Header() {
           </nav>
 
           <button
-            className="lg:hidden text-[#0d3b2e] p-2 -mr-2 flex-shrink-0"
+            className="lg:hidden text-[#0d3b2e] inline-flex items-center justify-center w-11 h-11 -mr-2 flex-shrink-0 rounded-md hover:bg-[#f0f7e6] transition-colors"
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? "Menu sluiten" : "Menu openen"}
             aria-expanded={open}
