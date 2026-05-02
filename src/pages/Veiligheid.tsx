@@ -199,7 +199,7 @@ const Veiligheid = () => {
         </nav>
 
         {/* SECTIE: Veiligheidsaanpak (5 stappen) */}
-        <section id="veiligheidsaanpak" className="py-16 md:py-24 bg-white scroll-mt-32">
+        <section id="veiligheidsaanpak" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-14 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Onze veiligheidsaanpak</h2>
@@ -266,7 +266,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Bevoegdheden, rollen en normen (donker) */}
-        <section id="bei-vwi" className="relative py-16 md:py-24 bg-[#0d3b2e] overflow-hidden scroll-mt-32">
+        <section id="bei-vwi" className="relative py-16 md:py-24 bg-[#0d3b2e] overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="absolute inset-0 opacity-[0.05]">
             <div
               className="absolute inset-0"
@@ -290,7 +290,7 @@ const Veiligheid = () => {
               </p>
             </div>
 
-            <div id="rollen" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto scroll-mt-32">
+            <div id="rollen" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
               {certs.map((c) => {
                 const Icon = c.icon;
                 return (
@@ -312,7 +312,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Projectafspraken en locatie-eisen */}
-        <section id="locatie-eisen" className="py-16 md:py-24 bg-white scroll-mt-32">
+        <section id="locatie-eisen" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl">Projectafspraken en locatie-eisen</h2>
@@ -362,7 +362,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: FAQ */}
-        <section id="faq" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-32">
+        <section id="faq" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10 sm:mb-12">
@@ -386,7 +386,7 @@ const Veiligheid = () => {
         </section>
 
         {/* CTA */}
-        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-32">
+        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"
