@@ -1,11 +1,11 @@
-import { ArrowRight, ClipboardCheck, Users, HardHat, CheckCircle2, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, MessageSquare, Lock, Wrench, ClipboardList } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, MessageSquare, Lock, Wrench, ClipboardList, HardHat } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 const veiligwerken = [
-  { icon: ClipboardCheck, title: "LMRA", description: "Last Minute Risk Analysis vóór elke werkstart op locatie." },
-  { icon: Users, title: "Toolboxen", description: "Periodieke toolboxen voor kennisdeling en veiligheidsbewustzijn." },
+  { icon: FileSearch, title: "LMRA", description: "Last Minute Risk Analysis vóór elke werkstart op locatie." },
+  { icon: Wrench, title: "Toolboxen", description: "Periodieke toolboxen voor kennisdeling en veiligheidsbewustzijn." },
   { icon: HardHat, title: "Werkplekinrichting", description: "Veilige inrichting van werkplek, afzetting en signalering." },
   { icon: CheckCircle2, title: "Oplevercontrole", description: "Gestructureerde controle vóór terugschakelen en oplevering." },
 ];

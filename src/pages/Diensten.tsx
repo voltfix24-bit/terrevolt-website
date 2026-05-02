@@ -1,11 +1,11 @@
-import { ArrowRight, CheckCircle2, ClipboardList, FileSearch, ShieldCheck, PackageCheck, Network, Building2, Cog, Gauge, Activity, Home } from "lucide-react";
+import { ArrowRight, CheckCircle2, ClipboardList, FileSearch, ShieldCheck, PackageCheck, Cable, Building2, Power, Anchor, Gauge, PlugZap } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 const services = [
   {
-    icon: Network,
+    icon: Cable,
     slug: "ls-ms-netmontage",
     title: "LS/MS Netmontage",
     description: "Kabelmontage, moffen, eindsluitingen en aansluitwerk binnen laag- en middenspanningsnetten.",
@@ -19,28 +19,28 @@ const services = [
     bullets: ["LS-rekken", "RMU's en schakelinstallaties", "Transformatorruimten"],
   },
   {
-    icon: Cog,
+    icon: Power,
     slug: "schakelwerk",
     title: "Schakelwerk & veiligstellen",
     description: "Veilig in- en uitbedrijf nemen, vrijschakelen en veiligstellen van LS/MS-installaties.",
     bullets: ["Vrijschakelen", "Veiligstellen", "Terugschakelen"],
   },
   {
-    icon: Gauge,
+    icon: Anchor,
     slug: "aardingsoplossingen",
     title: "Aardingsoplossingen",
     description: "Aanleg, verbetering, meting en rapportage van aardingssystemen.",
     bullets: ["Aardelektroden", "Stationsaarding", "Meetrapportage"],
   },
   {
-    icon: Activity,
+    icon: Gauge,
     slug: "meten-en-beproeven",
     title: "Meten & beproeven",
     description: "Controlemetingen, kabelmetingen, aardingsmetingen en duidelijke opleverrapportages.",
     bullets: ["Aardingsmetingen", "Controlemetingen", "Opleverdocumentatie"],
   },
   {
-    icon: Home,
+    icon: PlugZap,
     slug: "huisaansluitingen",
     title: "Huisaansluitingen",
     description: "Aanleg, wijziging en sanering van aansluitingen op het laagspanningsnet.",

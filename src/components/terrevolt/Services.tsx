@@ -1,8 +1,8 @@
-import { Network, Building2, Cog, Gauge, Activity, Home } from "lucide-react";
+import { Cable, Building2, Power, Anchor, Gauge, PlugZap } from "lucide-react";
 
 const services = [
   {
-    icon: Network,
+    icon: Cable,
     title: "LS/MS Netmontage",
     description: "Kabelmontage, moffen, eindsluitingen en aansluitwerk binnen laag- en middenspanningsnetten."
   },
@@ -12,22 +12,22 @@ const services = [
     description: "Renovatie en inrichting van MS/LS-stations, technische ruimten en transformatorstations."
   },
   {
-    icon: Cog,
+    icon: Power,
     title: "Schakelwerk",
     description: "Veilig in- en uitbedrijf nemen, vrijschakelen en veiligstellen van LS/MS-installaties."
   },
   {
-    icon: Gauge,
+    icon: Anchor,
     title: "Aardingsoplossingen",
     description: "Aanleg, verbetering, meting en rapportage van aardingssystemen voor stations en technische ruimten."
   },
   {
-    icon: Activity,
+    icon: Gauge,
     title: "Meten & beproeven",
     description: "Controlemetingen, kabelmetingen, aardingsmetingen en duidelijke opleverrapportages."
   },
   {
-    icon: Home,
+    icon: PlugZap,
     title: "Huisaansluitingen",
     description: "Aanleg, wijziging en sanering van aansluitingen op het laagspanningsnet."
   }

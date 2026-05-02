@@ -1,4 +1,4 @@
-import { ShieldCheck, FileCheck, Award, BookOpen } from "lucide-react";
+import { ShieldCheck, BadgeCheck, Award, BookOpen } from "lucide-react";
 
 const certifications = [
   {
@@ -7,7 +7,7 @@ const certifications = [
     description: "Aanwijzingen en veiligheidsstructuur voor werkzaamheden binnen laag- en middenspanning."
   },
   {
-    icon: FileCheck,
+    icon: BadgeCheck,
     title: "AVP / VP / VOP / WV",
     description: "Passende rollen en bevoegdheden afhankelijk van project, opdrachtgever en werkgebied."
   },
