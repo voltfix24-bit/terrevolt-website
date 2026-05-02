@@ -40,12 +40,12 @@ const voorWie = [
 const schema = z.object({
   name: z.string().trim().min(2, "Naam is verplicht").max(100),
   company: z.string().trim().max(150).optional(),
-  phone: z.string().trim().max(30).optional(),
+  phone: z.string().trim().min(6, "Telefoonnummer is verplicht").max(30),
   email: z.string().trim().email("Ongeldig e-mailadres").max(255),
-  request_type: z.string().trim().max(100).optional(),
+  request_type: z.string().trim().min(1, "Kies een type aanvraag").max(100),
   location: z.string().trim().max(150).optional(),
   start_date: z.string().trim().max(50).optional(),
-  description: z.string().trim().max(3000).optional(),
+  description: z.string().trim().min(5, "Geef een korte omschrijving").max(3000),
 });
 
 const Contact = () => {
