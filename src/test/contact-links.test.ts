@@ -113,9 +113,11 @@ describe("Contact-links (mobiele tap-doelen)", () => {
   });
 
   it("er is minstens één tel:- en één mailto:-link in de UI", () => {
-    const tel = collectStatic(TEL_STATIC);
-    const mail = collectStatic(MAIL_STATIC);
-    expect(tel.length, "Geen tel:-links gevonden in src/").toBeGreaterThan(0);
-    expect(mail.length, "Geen mailto:-links gevonden in src/").toBeGreaterThan(0);
+    const telCount =
+      collectStatic(TEL_STATIC).length + findLinks(/\btelHref\b/).length;
+    const mailCount =
+      collectStatic(MAIL_STATIC).length + findLinks(/\bmailHref\b/).length;
+    expect(telCount, "Geen tel:-links of telHref-gebruik gevonden in src/").toBeGreaterThan(0);
+    expect(mailCount, "Geen mailto:-links of mailHref-gebruik gevonden in src/").toBeGreaterThan(0);
   });
 });
