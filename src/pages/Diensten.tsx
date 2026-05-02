@@ -141,9 +141,11 @@ const Diensten = () => {
               {services.map((service) => {
                 const Icon = service.icon;
                 return (
-                  <article
+                  <Link
                     key={service.slug}
-                    className="group flex flex-col bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300"
+                    to={`/diensten/${service.slug}`}
+                    aria-label={`Bekijk dienst: ${service.title}`}
+                    className="group flex flex-col bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 active:scale-[0.99]"
                   >
                     <div className="w-14 h-14 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#9ed42e] transition-colors duration-300">
                       <Icon className="w-7 h-7 text-[#0d3b2e] group-hover:text-white transition-colors duration-300" strokeWidth={2} />
@@ -160,14 +162,11 @@ const Diensten = () => {
                       ))}
                     </ul>
 
-                    <a
-                      href={`/diensten/${service.slug}`}
-                      className="mt-auto inline-flex items-center justify-center gap-2 bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors"
-                    >
-                      <span>Bekijk dienst</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-                  </article>
+                    <span className="mt-auto inline-flex items-center gap-1.5 text-[#0d3b2e] text-sm group-hover:gap-2.5 transition-all">
+                      Bekijk dienst
+                      <ArrowRight className="w-4 h-4 text-[#9ed42e]" strokeWidth={2.5} />
+                    </span>
+                  </Link>
                 );
               })}
             </div>
