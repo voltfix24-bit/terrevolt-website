@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import {
   ArrowRight,
@@ -21,6 +21,13 @@ import {
   Layers,
   PlayCircle,
   X,
+  Sparkles,
+  Phone as PhoneIcon,
+  MessageCircle,
+  Mail as MailIcon,
+  Share2,
+  LinkIcon,
+  HelpCircle,
 } from "lucide-react";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
@@ -29,6 +36,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { findVacature } from "@/data/vacatures";
+import { company, telHref, mailHref } from "@/config/company";
 
 const contactVoorkeurOpties = ["Bellen", "WhatsApp", "E-mail", "Maakt niet uit"];
 
@@ -47,12 +55,31 @@ const formSchema = z.object({
 type FieldErrors = Partial<Record<keyof z.infer<typeof formSchema>, string>>;
 
 const proces = [
-  { icon: UserPlus, title: "Aanmelden", text: "Je stuurt het formulier in met je gegevens en certificaten." },
-  { icon: Coffee, title: "Kennismaken", text: "Korte (telefonische) kennismaking over werk en wensen." },
-  { icon: FileCheck2, title: "Documenten / check", text: "Controle van bevoegdheden, VCA en eventueel VOG." },
-  { icon: Layers, title: "Projectmatch", text: "We koppelen jou aan een passend project en planning." },
-  { icon: PlayCircle, title: "Start", text: "Inwerken op locatie, daarna zelfstandig aan de slag." },
+  { icon: UserPlus, title: "Je meldt je aan", text: "Je stuurt je gegevens in. Een CV of certificaat mag, maar is niet verplicht om te starten." },
+  { icon: Coffee, title: "Kennismaking", text: "We nemen telefonisch of via WhatsApp contact op en bespreken je ervaring, wensen en beschikbaarheid." },
+  { icon: FileCheck2, title: "Documenten/check", text: "We kijken naar VCA, BEI-aanwijzingen, certificaten en projectvereisten. Voor ZZP kijken we ook naar KvK en verzekering." },
+  { icon: Layers, title: "Projectmatch", text: "We zoeken passende inzet binnen LS/MS, stationswerk, schakelwerk, kabelmontage of aarding." },
+  { icon: PlayCircle, title: "Start op project", text: "Je krijgt duidelijke projectinformatie, planning en afspraken voordat je start." },
 ];
+
+/** Fallback match-bullets per slug. ZZP krijgt eigen tekst. */
+const matchByDefault = [
+  "Je hebt ervaring met elektrotechniek, infra of LS/MS-werk",
+  "Je werkt veilig en zelfstandig",
+  "Je vindt duidelijke afspraken en projectmatig werk belangrijk",
+  "Je bent beschikbaar voor projecten binnen de netbeheerwereld",
+];
+const matchZzp = [
+  "Je bent als zelfstandige monteur of complete ploeg inzetbaar",
+  "Je vindt duidelijke scope, planning en afspraken belangrijk",
+  "Je hebt ervaring met LS/MS, kabelwerk, stationswerk of aarding",
+];
+function matchBulletsFor(slug?: string) {
+  if (!slug) return matchByDefault;
+  if (slug.includes("zzp")) return matchZzp;
+  return matchByDefault;
+}
+
 
 type VacatureView = {
   id?: string;
