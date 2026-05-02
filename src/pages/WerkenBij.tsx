@@ -115,6 +115,9 @@ const WerkenBij = () => {
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [profielen, setProfielen] = useState<ProfielCard[]>([]);
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [success, setSuccess] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     let active = true;
@@ -135,6 +138,13 @@ const WerkenBij = () => {
     return () => { active = false; };
   }, []);
 
+  const focusFirstError = (errs: FieldErrors) => {
+    const first = Object.keys(errs)[0];
+    if (!first || !formRef.current) return;
+    const el = formRef.current.querySelector<HTMLElement>(`[name="${first}"]`);
+    el?.focus();
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
@@ -144,17 +154,27 @@ const WerkenBij = () => {
       email: String(fd.get("email") || ""),
       profile: String(fd.get("profile") || ""),
       region: String(fd.get("region") || ""),
+      contact_pref: String(fd.get("contact_pref") || ""),
       experience: String(fd.get("experience") || ""),
       certifications: String(fd.get("certifications") || ""),
       availability: String(fd.get("availability") || ""),
       message: String(fd.get("message") || ""),
+      privacy: fd.get("privacy") ? "on" : "",
     };
 
     const parsed = formSchema.safeParse(raw);
     if (!parsed.success) {
+      const fe: FieldErrors = {};
+      parsed.error.errors.forEach((err) => {
+        const k = err.path[0] as keyof FieldErrors;
+        if (k && !fe[k]) fe[k] = err.message;
+      });
+      setErrors(fe);
       toast.error(parsed.error.errors[0]?.message || "Controleer het formulier");
+      focusFirstError(fe);
       return;
     }
+    setErrors({});
     if (file && file.size > 10 * 1024 * 1024) {
       toast.error("Bestand mag maximaal 10MB zijn");
       return;
@@ -173,7 +193,11 @@ const WerkenBij = () => {
         cv_url = path;
       }
 
-      const fullMessage = `Profiel: ${parsed.data.profile}${parsed.data.message ? `\n\n${parsed.data.message}` : ""}`;
+      const extras = [
+        `Profiel: ${parsed.data.profile}`,
+        parsed.data.contact_pref ? `Contactvoorkeur: ${parsed.data.contact_pref}` : null,
+      ].filter(Boolean).join(" | ");
+      const fullMessage = parsed.data.message ? `${extras}\n\n${parsed.data.message}` : extras;
 
       const { error: insErr } = await supabase.from("job_applications").insert([{
         name: parsed.data.name,
@@ -189,14 +213,25 @@ const WerkenBij = () => {
       if (insErr) throw insErr;
 
       toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");
-      (e.target as HTMLFormElement).reset();
+      formRef.current?.reset();
       setFile(null);
+      setSuccess(true);
     } catch (err) {
       console.error(err);
       toast.error("Er ging iets mis. Probeer het later opnieuw.");
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const resetForm = () => {
+    setSuccess(false);
+    setErrors({});
+    setFile(null);
+    formRef.current?.reset();
+    setTimeout(() => {
+      document.getElementById("aanmelden")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
   };
 
   const scrollToSlug = (slugs: string[]) => {
