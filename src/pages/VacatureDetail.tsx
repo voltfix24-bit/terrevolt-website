@@ -282,16 +282,18 @@ const VacatureDetail = () => {
         {/* META */}
         <section className="py-16 bg-white border-b border-gray-100">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 sm:gap-6 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 max-w-6xl mx-auto">
               {meta.map((m) => {
                 const Icon = m.icon;
                 return (
-                  <div key={m.label} className="flex flex-col items-center text-center gap-2">
-                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                  <div key={m.label} className="flex sm:flex-col items-center sm:text-center gap-3 sm:gap-2 bg-[#f8f9fa] sm:bg-transparent rounded-xl sm:rounded-none p-4 sm:p-0 border border-gray-100 sm:border-0">
+                    <div className="w-11 h-11 sm:w-12 sm:h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#0d3b2e]" strokeWidth={2} />
                     </div>
-                    <div className="text-xs uppercase tracking-wider text-[#6c757d]">{m.label}</div>
-                    <div className="text-[#0d3b2e] text-sm">{m.value}</div>
+                    <div className="min-w-0 flex-1 sm:flex-none">
+                      <div className="text-[11px] sm:text-xs uppercase tracking-wider text-[#6c757d]">{m.label}</div>
+                      <div className="text-[#0d3b2e] text-sm break-words">{m.value}</div>
+                    </div>
                   </div>
                 );
               })}
