@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { ArrowRight, Zap, Cable, Anchor, PlugZap, ShieldCheck, Home, ClipboardCheck, Users, Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert, Award, Loader2, Upload } from "lucide-react";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
@@ -6,17 +7,18 @@ import { Footer } from "@/components/terrevolt/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
+import { vacatures } from "@/data/vacatures";
 
-const profielen = [
-  { icon: Zap, label: "Laagspanningsmonteurs" },
-  { icon: Cable, label: "Middenspanningsmonteurs" },
-  { icon: ShieldCheck, label: "Schakelmonteurs" },
-  { icon: PlugZap, label: "Kabelmonteurs" },
-  { icon: Anchor, label: "Aardingsmonteurs" },
-  { icon: Home, label: "Monteurs huisaansluitingen" },
-  { icon: ClipboardCheck, label: "Werkverantwoordelijken" },
-  { icon: Users, label: "ZZP-ploegen" },
-];
+const profielIcons: Record<string, typeof Zap> = {
+  ls: Zap,
+  ms: Cable,
+  schakel: ShieldCheck,
+  kabel: PlugZap,
+  aarding: Anchor,
+  huisaansluiting: Home,
+  wv: ClipboardCheck,
+  zzp: Users,
+};
 
 const waarom = [
   { icon: Network, title: "Werk binnen de netbeheerwereld", description: "Projecten voor netbeheerders en hoofdaannemers binnen de Nederlandse energie-infrastructuur." },
@@ -173,18 +175,22 @@ const WerkenBij = () => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {profielen.map((p) => {
-                const Icon = p.icon;
+              {vacatures.map((v) => {
+                const Icon = profielIcons[v.iconKey] || Zap;
                 return (
-                  <div
-                    key={p.label}
+                  <Link
+                    key={v.slug}
+                    to={`/vacatures/${v.slug}`}
                     className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center"
                   >
-                    <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mb-4">
+                    <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
                       <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
                     </div>
-                    <div className="text-[#0d3b2e]">{p.label}</div>
-                  </div>
+                    <div className="text-[#0d3b2e] mb-2">{v.shortLabel}</div>
+                    <div className="text-xs text-[#9ed42e] inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                      Bekijk vacature <ArrowRight className="w-3 h-3" />
+                    </div>
+                  </Link>
                 );
               })}
             </div>
