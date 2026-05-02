@@ -9,6 +9,7 @@ import LSMSNetmontage from "./pages/diensten/LSMSNetmontage.tsx";
 import Stationsrenovatie from "./pages/diensten/Stationsrenovatie.tsx";
 import Schakelwerk from "./pages/diensten/Schakelwerk.tsx";
 import Aardingsoplossingen from "./pages/diensten/Aardingsoplossingen.tsx";
+import MetenEnBeproeven from "./pages/diensten/MetenEnBeproeven.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
