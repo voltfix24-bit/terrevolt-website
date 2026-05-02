@@ -338,7 +338,7 @@ const Contact = () => {
                     id="attachment"
                     name="attachment"
                     type="file"
-                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.dwg,.zip"
+                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.dwg"
                     onChange={(e) => setFile(e.target.files?.[0] || null)}
                     className="hidden"
                   />
