@@ -1,13 +1,15 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { render, screen, act, fireEvent } from "@testing-library/react";
+import { render, screen, act, fireEvent, createEvent } from "@testing-library/react";
 import { MetaTooltip } from "./MetaTooltip";
 
 /**
- * Helper: simuleer een touch-tap. Onze component reageert op pointerdown
- * met pointerType === "touch".
+ * Helper: simuleer een touch-tap. jsdom kent geen native PointerEvent,
+ * dus we maken handmatig een event aan dat `pointerType: "touch"` doorgeeft.
  */
 function tap(element: Element) {
-  fireEvent.pointerDown(element, { pointerType: "touch" });
+  const evt = createEvent.pointerDown(element, { bubbles: true });
+  Object.defineProperty(evt, "pointerType", { value: "touch" });
+  fireEvent(element, evt);
 }
 
 describe("MetaTooltip — mobiele interacties", () => {
