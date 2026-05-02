@@ -128,7 +128,7 @@ export default function AdminVacancyForm() {
         if (error) throw error;
         toast.success("Vacature bijgewerkt");
       } else {
-        const { error } = await supabase.from("vacancies").insert([payload]);
+        const { error } = await supabase.from("vacancies").insert([payload as any]);
         if (error) throw error;
         toast.success("Vacature aangemaakt");
       }
