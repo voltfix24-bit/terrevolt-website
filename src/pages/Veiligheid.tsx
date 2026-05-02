@@ -244,7 +244,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Projectafspraken en locatie-eisen */}
-        <section className="py-16 md:py-24 bg-white">
+        <section id="locatie-eisen" className="py-16 md:py-24 bg-white scroll-mt-32">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl">Projectafspraken en locatie-eisen</h2>
@@ -294,7 +294,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: FAQ */}
-        <section className="py-16 md:py-24 bg-[#f8f9fa]">
+        <section id="faq" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-32">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10 sm:mb-12">
@@ -318,7 +318,7 @@ const Veiligheid = () => {
         </section>
 
         {/* CTA */}
-        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-32">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"
