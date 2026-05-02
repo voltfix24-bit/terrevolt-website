@@ -337,6 +337,7 @@ const VacatureDetail = () => {
       message: String(formData.get("message") || ""),
     };
 
+    setSubmitError(null);
     const parsed = formSchema.safeParse(raw);
     if (!parsed.success) {
       const fe: FieldErrors = {};
@@ -345,17 +346,23 @@ const VacatureDetail = () => {
         if (k && !fe[k]) fe[k] = err.message;
       });
       setErrors(fe);
-      toast.error(parsed.error.errors[0]?.message || "Controleer het formulier");
-      const first = Object.keys(fe)[0];
-      if (first && formRef.current) {
-        formRef.current.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
-      }
+      const count = Object.keys(fe).length;
+      toast.error(count === 1 ? parsed.error.errors[0]?.message ?? "Controleer het formulier" : `Controleer ${count} velden`);
+      requestAnimationFrame(() => {
+        errorBannerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        const first = Object.keys(fe)[0];
+        if (first && formRef.current) {
+          formRef.current.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
+        }
+      });
       return;
     }
     setErrors({});
 
     if (file && file.size > 10 * 1024 * 1024) {
-      toast.error("Bestand mag maximaal 10MB zijn");
+      const msg = "Bestand mag maximaal 10MB zijn";
+      setSubmitError(msg);
+      toast.error(msg);
       return;
     }
 
