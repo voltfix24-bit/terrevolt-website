@@ -480,6 +480,42 @@ const WerkenBij = () => {
           </div>
         </section>
 
+        {/* HOE HET WERKT */}
+        <section id="hoe-het-werkt" className="py-16 md:py-24 bg-white scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="text-center mb-10 md:mb-14 max-w-3xl mx-auto">
+              <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+                Hoe het werkt
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Hoe werken via TerreVolt eruitziet</h2>
+              <p className="text-base sm:text-lg text-[#6c757d]">
+                Wij houden het graag duidelijk. Je weet vooraf waar je aan toe bent: welke werkzaamheden, welke locatie, welke planning en welke veiligheidsafspraken gelden.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto">
+              {stappen.map((s, i) => {
+                const Icon = s.icon;
+                return (
+                  <div
+                    key={s.title}
+                    className="relative bg-[#f8f9fa] rounded-xl p-6 border border-gray-200 hover:border-[#9ed42e] hover:shadow-lg transition-all duration-300"
+                  >
+                    <div className="absolute -top-3 -left-3 w-9 h-9 rounded-full bg-[#9ed42e] text-[#0d3b2e] flex items-center justify-center text-sm font-medium shadow-sm">
+                      {i + 1}
+                    </div>
+                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-4">
+                      <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                    </div>
+                    <h3 className="text-lg text-[#0d3b2e] mb-2 leading-snug">{s.title}</h3>
+                    <p className="text-[#6c757d] text-sm leading-relaxed">{s.text}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* WAAROM */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
