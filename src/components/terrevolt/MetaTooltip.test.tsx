@@ -584,3 +584,145 @@ describe("MetaTooltip — toetsenbordnavigatie", () => {
     expect(tip).toHaveAttribute("aria-hidden", "true");
   });
 });
+
+/**
+ * Schakelen tussen meerdere MetaTooltip-instances op mobiel.
+ * Een tap op een andere badge moet de vorige tooltip sluiten via de globale
+ * pointerdown-listener en de nieuwe openen — er mag nooit meer dan één
+ * tooltip tegelijk zichtbaar zijn.
+ */
+describe("MetaTooltip — schakelen tussen meerdere badges (mobiel)", () => {
+  beforeEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  function renderTrio() {
+    return render(
+      <div>
+        <MetaTooltip label="Eerste — beschikbaarheid">
+          <span data-testid="badge-1">Badge 1</span>
+        </MetaTooltip>
+        <MetaTooltip label="Tweede — regio">
+          <span data-testid="badge-2">Badge 2</span>
+        </MetaTooltip>
+        <MetaTooltip label="Derde — uren">
+          <span data-testid="badge-3">Badge 3</span>
+        </MetaTooltip>
+      </div>,
+    );
+  }
+
+  /** Verwacht dat er op enig moment maximaal één tooltip aria-hidden=false heeft. */
+  function getOpenTooltips() {
+    return screen
+      .getAllByRole("tooltip", { hidden: true })
+      .filter((el) => el.getAttribute("aria-hidden") === "false");
+  }
+
+  it("sluit de vorige tooltip bij een tap op een andere badge", () => {
+    renderTrio();
+
+    const badge1 = screen.getByTestId("badge-1");
+    const badge2 = screen.getByTestId("badge-2");
+
+    tap(badge1);
+    let open = getOpenTooltips();
+    expect(open).toHaveLength(1);
+    expect(open[0]).toHaveTextContent("Eerste — beschikbaarheid");
+
+    // Tap op een andere badge: de eerste tooltip sluit via de globale
+    // pointerdown-listener (target zit niet in wrapper 1), de tweede opent.
+    tap(badge2);
+
+    open = getOpenTooltips();
+    expect(open).toHaveLength(1);
+    expect(open[0]).toHaveTextContent("Tweede — regio");
+  });
+
+  it("toont nooit meer dan één tooltip tegelijk bij snel achter elkaar tappen", () => {
+    renderTrio();
+
+    const badges = [
+      screen.getByTestId("badge-1"),
+      screen.getByTestId("badge-2"),
+      screen.getByTestId("badge-3"),
+    ];
+
+    // Simuleer snel doorklikken tussen alle drie de badges.
+    badges.forEach((b) => tap(b));
+
+    const open = getOpenTooltips();
+    expect(open).toHaveLength(1);
+    expect(open[0]).toHaveTextContent("Derde — uren");
+  });
+
+  it("annuleert de auto-hide-timer van badge 1 wanneer naar badge 2 wordt geschakeld", () => {
+    renderTrio();
+
+    const badge1 = screen.getByTestId("badge-1");
+    const badge2 = screen.getByTestId("badge-2");
+
+    tap(badge1);
+    expect(getOpenTooltips()).toHaveLength(1);
+
+    // Halverwege de auto-hide-window van badge 1 schakelen we naar badge 2.
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
+    tap(badge2);
+
+    let open = getOpenTooltips();
+    expect(open).toHaveLength(1);
+    expect(open[0]).toHaveTextContent("Tweede — regio");
+
+    // Voorbij de oorspronkelijke deadline van badge 1: die timer mag niet
+    // alsnog vuren en mag badge 2 niet beïnvloeden.
+    act(() => {
+      vi.advanceTimersByTime(1600);
+    });
+    open = getOpenTooltips();
+    expect(open).toHaveLength(1);
+    expect(open[0]).toHaveTextContent("Tweede — regio");
+
+    // Voorbij de auto-hide van badge 2: die sluit netjes als enige.
+    act(() => {
+      vi.advanceTimersByTime(2500);
+    });
+    expect(getOpenTooltips()).toHaveLength(0);
+  });
+
+  it("een tweede tap op dezelfde badge sluit; opnieuw schakelen naar een andere opent alleen die", () => {
+    renderTrio();
+
+    const badge1 = screen.getByTestId("badge-1");
+    const badge3 = screen.getByTestId("badge-3");
+
+    tap(badge1);
+    expect(getOpenTooltips()).toHaveLength(1);
+
+    tap(badge1);
+    expect(getOpenTooltips()).toHaveLength(0);
+
+    tap(badge3);
+    const open = getOpenTooltips();
+    expect(open).toHaveLength(1);
+    expect(open[0]).toHaveTextContent("Derde — uren");
+  });
+
+  it("Escape sluit de huidige tooltip; daarna kan een andere badge opnieuw geopend worden", () => {
+    renderTrio();
+
+    tap(screen.getByTestId("badge-2"));
+    expect(getOpenTooltips()).toHaveLength(1);
+
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
+    });
+    expect(getOpenTooltips()).toHaveLength(0);
+
+    tap(screen.getByTestId("badge-1"));
+    const open = getOpenTooltips();
+    expect(open).toHaveLength(1);
+    expect(open[0]).toHaveTextContent("Eerste — beschikbaarheid");
+  });
+});
