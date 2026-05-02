@@ -85,31 +85,14 @@ const MetaTooltipImpl = ({ label, enabled = true, children, className }: Props) 
     return <span className={className}>{children}</span>;
   }
 
-  const handlePointerDown = (e: React.PointerEvent) => {
-    if (e.pointerType === "touch") {
-      // Tap toggelt en plant auto-hide.
-      setOpen((prev) => {
-        if (prev) {
-          clearHide();
-          return false;
-        }
-        scheduleHide(2500);
-        return true;
-      });
-    }
-  };
-
   return (
     <span
       ref={wrapRef}
       className={`relative inline-flex max-w-full ${className ?? ""}`}
-      onMouseEnter={() => {
-        clearHide();
-        setOpen(true);
-      }}
-      onMouseLeave={() => setOpen(false)}
-      onFocus={() => setOpen(true)}
-      onBlur={() => setOpen(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       onPointerDown={handlePointerDown}
     >
       <span aria-describedby={open ? id : undefined} className="inline-flex max-w-full min-w-0">
@@ -132,3 +115,6 @@ const MetaTooltipImpl = ({ label, enabled = true, children, className }: Props) 
     </span>
   );
 };
+
+export const MetaTooltip = memo(MetaTooltipImpl);
+
