@@ -376,13 +376,14 @@ const WerkenBij = () => {
               <div className="text-xs uppercase tracking-wider text-[#6c757d] mb-3 text-center sm:text-left">
                 Snel naar profiel
               </div>
-              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center sm:justify-start">
+              <div role="group" aria-label="Snel naar profiel" className="flex flex-wrap gap-2 sm:gap-3 justify-center sm:justify-start">
                 {quickNav.map((q) => (
                   <button
                     key={q.label}
                     type="button"
                     onClick={() => scrollToSlug(q.slugs)}
-                    className="px-4 py-2.5 rounded-full border border-gray-200 bg-[#f8f9fa] text-[#0d3b2e] text-sm hover:border-[#9ed42e] hover:bg-[#f0f7e6] active:scale-[0.98] transition-all min-h-[44px] inline-flex items-center"
+                    aria-label={`Scroll naar profiel: ${q.label}`}
+                    className="px-4 py-2.5 rounded-full border border-gray-200 bg-[#f8f9fa] text-[#0d3b2e] text-sm hover:border-[#9ed42e] hover:bg-[#f0f7e6] active:scale-[0.98] transition-all min-h-[44px] inline-flex items-center focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:border-[#9ed42e]"
                   >
                     {q.label}
                   </button>
