@@ -25,17 +25,17 @@ const veiligwerken = [
 ];
 
 const certs = [
-  { icon: ShieldCheck, title: "BEI", subtitle: "BLS / BHS", description: "Branche-regels voor veilige bedrijfsvoering in laagspannings-, middenspannings- en hoogspanningssystemen van netbeheerders." },
-  { icon: BadgeCheck, title: "Rollen", subtitle: "WV / AVP / VP / VOP", description: "Passende rollen en aanwijzingen afhankelijk van project, opdrachtgever, werkgebied en werkzaamheden." },
-  { icon: Award, title: "VWI's & LMRA", subtitle: "Werkinstructies", description: "Veiligheidswerkinstructies en laatste-minuut-risicoanalyse helpen om werkzaamheden bewust en beheerst uit te voeren." },
+  { icon: ShieldCheck, title: "BEI", subtitle: "BLS / BHS", description: "Branche-regels voor veilige bedrijfsvoering in laagspannings-, middenspannings- en hoogspanningssystemen van netbeheerders, toegepast waar van toepassing." },
+  { icon: BadgeCheck, title: "Rollen", subtitle: "WV / AVP / VP / VOP", description: "Passende rollen en aanwijzingen, afhankelijk van project, opdrachtgever, werkgebied en werkzaamheden." },
+  { icon: Award, title: "VWI's & LMRA", subtitle: "Werkinstructies", description: "Veiligheidswerkinstructies en laatste-minuut-risicoanalyse helpen om werkzaamheden, met aandacht voor de situatie, bewust en beheerst uit te voeren." },
   { icon: BookOpen, title: "NEN", subtitle: "1010 / 3140 / 3840", description: "NEN-normen geven, waar van toepassing, richting aan veilig werken, bedrijfsvoering, aanleg, controle en oplevering." },
 ];
 
 const locatie = [
-  { icon: DoorOpen, title: "Poortinstructies", description: "Voor toegang tot stations, bouwplaatsen of technische locaties kunnen instructies en toetsing verplicht zijn." },
-  { icon: Building2, title: "Bedrijfsspecifieke procedures", description: "Netbeheerders en opdrachtgevers kunnen aanvullende procedures of supplementen hanteren." },
-  { icon: KeyRound, title: "Toegang & sleutelbeheer", description: "Toegang tot technische ruimten, stations en terreinen vraagt om duidelijke afspraken en bevoegdheden." },
-  { icon: FileText, title: "Werkvergunningen & overdracht", description: "Een veilige start vraagt om juiste vrijgave, instructie, overdracht en afstemming met betrokken partijen." },
+  { icon: DoorOpen, title: "Poortinstructies", description: "Voor toegang tot stations, bouwplaatsen of technische locaties kunnen, afhankelijk van de locatie, instructies en toetsing verplicht zijn." },
+  { icon: Building2, title: "Bedrijfsspecifieke procedures", description: "Netbeheerders en opdrachtgevers kunnen aanvullende procedures of supplementen hanteren; we sluiten daarop aan waar van toepassing." },
+  { icon: KeyRound, title: "Toegang & sleutelbeheer", description: "Toegang tot technische ruimten, stations en terreinen vraagt, afhankelijk van de locatie, om duidelijke afspraken en bevoegdheden." },
+  { icon: FileText, title: "Werkvergunningen & overdracht", description: "Een veilige start vraagt, waar van toepassing, om juiste vrijgave, instructie, overdracht en afstemming met betrokken partijen." },
 ];
 
 const faqs = [
