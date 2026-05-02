@@ -7,13 +7,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 
-const PHONE = "+31 (0)20 123 4567";
+const PHONE = "+31 6 34 48 74 67";
 const EMAIL = "info@terrevolt.nl";
+const ADDRESS = "Overvliet 97, 3545 NH Utrecht";
 
 const contactCards = [
   { icon: Phone, title: "Telefoon", value: PHONE, href: `tel:${PHONE.replace(/\s|\(|\)/g, "")}` },
   { icon: Mail, title: "E-mail", value: EMAIL, href: `mailto:${EMAIL}` },
-  { icon: MapPin, title: "Werkgebied", value: "Nederland", href: null },
+  { icon: MapPin, title: "Adres", value: ADDRESS, href: null },
 ];
 
 const requestTypes = [
