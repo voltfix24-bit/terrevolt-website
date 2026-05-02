@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { ArrowRight, CheckCircle2, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, MessageSquare, Lock, Wrench, ClipboardList, HardHat, KeyRound, DoorOpen, FileText, Building2 } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
@@ -49,6 +50,72 @@ const faqs = [
 
 const Veiligheid = () => {
   usePageMeta("Veiligheid & certificeringen | TerreVolt BV", "Veiligheid, bevoegdheden en normen bij TerreVolt: BEI BLS/BHS, WV/AVP/VP/VOP, VWI's, LMRA, VCA en NEN 1010 / 3140 / 3840.", "/veiligheid");
+
+  const subnavRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    // Bereken dynamische offset: header (sticky boven subnav) + subnav zelf + kleine ademruimte.
+    const getOffset = () => {
+      const header = document.querySelector("header");
+      const headerH = header ? header.getBoundingClientRect().height : 0;
+      const subnavH = subnavRef.current ? subnavRef.current.getBoundingClientRect().height : 0;
+      return Math.round(headerH + subnavH + 12);
+    };
+
+    const scrollToHash = (hash: string, behavior: ScrollBehavior = "smooth") => {
+      if (!hash || hash === "#") return false;
+      const id = decodeURIComponent(hash.slice(1));
+      const el = document.getElementById(id);
+      if (!el) return false;
+      const rect = el.getBoundingClientRect();
+      const top = rect.top + window.scrollY - getOffset();
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top, behavior: prefersReduced ? "auto" : behavior });
+      // Focus op target voor toegankelijkheid (zonder extra scroll).
+      const prevTabIndex = el.getAttribute("tabindex");
+      if (prevTabIndex === null) el.setAttribute("tabindex", "-1");
+      (el as HTMLElement).focus({ preventScroll: true });
+      if (prevTabIndex === null) {
+        // Maak het weer "transparant" voor toetsenbord-tabs nadat focus gezet is.
+        setTimeout(() => el.removeAttribute("tabindex"), 0);
+      }
+      return true;
+    };
+
+    const onClick = (e: MouseEvent) => {
+      // Negeer als modifier-toetsen of niet-linkermuisknop.
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      const target = (e.target as HTMLElement | null)?.closest('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!target) return;
+      const href = target.getAttribute("href") || "";
+      if (href.length < 2) return; // alleen "#" zelf negeren
+      if (target.target && target.target !== "" && target.target !== "_self") return;
+      if (scrollToHash(href, "smooth")) {
+        e.preventDefault();
+        if (window.location.hash !== href) {
+          history.pushState(null, "", href);
+        }
+      }
+    };
+
+    document.addEventListener("click", onClick);
+
+    // Deeplink bij paginaload of bij hash-wijziging via browser-navigatie.
+    const onHashChange = () => scrollToHash(window.location.hash, "smooth");
+
+    if (window.location.hash) {
+      // Wacht een frame zodat layout (incl. subnav-hoogte) klaar is.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => scrollToHash(window.location.hash, "auto"));
+      });
+    }
+    window.addEventListener("hashchange", onHashChange);
+
+    return () => {
+      document.removeEventListener("click", onClick);
+      window.removeEventListener("hashchange", onHashChange);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
