@@ -1,5 +1,6 @@
 import { Cable, Building2, Power, Anchor, Gauge, PlugZap, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Reveal } from "@/components/terrevolt/Reveal";
 
 const services = [
   {
