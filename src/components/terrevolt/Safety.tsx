@@ -1,4 +1,5 @@
 import { ShieldCheck, BadgeCheck, Award, BookOpen } from "lucide-react";
+import { Reveal } from "@/components/terrevolt/Reveal";
 
 const certifications = [
   {
