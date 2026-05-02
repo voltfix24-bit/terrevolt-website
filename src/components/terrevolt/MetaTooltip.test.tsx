@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { render, screen, act, fireEvent, createEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { MetaTooltip } from "./MetaTooltip";
 
 /**
@@ -253,5 +254,179 @@ describe("MetaTooltip — iOS Safari gedrag", () => {
 
     tap(screen.getByTestId("badge"));
     expect(() => unmount()).not.toThrow();
+  });
+});
+
+/**
+ * Toetsenbordnavigatie:
+ *  - Tab opent de tooltip zodra een focusable child binnen de wrapper focus krijgt.
+ *  - Tab tussen badge en 'Lees meer'-knop binnen dezelfde wrapper houdt de tooltip open.
+ *  - Tab uit de wrapper sluit de tooltip.
+ *  - Shift+Tab terug in de wrapper opent de tooltip opnieuw.
+ *  - Escape sluit de tooltip ook wanneer de uitgebreide metadata (Lees meer) open staat.
+ */
+describe("MetaTooltip — toetsenbordnavigatie", () => {
+  beforeEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  it("opent op Tab-focus en sluit wanneer Tab focus uit de wrapper haalt", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <div>
+        <button data-testid="before">Voor</button>
+        <MetaTooltip label="Volledige metadatawaarde">
+          <button data-testid="badge">Badge</button>
+        </MetaTooltip>
+        <button data-testid="after">Na</button>
+      </div>,
+    );
+
+    const before = screen.getByTestId("before");
+    const badge = screen.getByTestId("badge");
+    const after = screen.getByTestId("after");
+    const tip = screen.getByRole("tooltip", { hidden: true });
+
+    before.focus();
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+
+    // Tab → focus naar badge → tooltip opent.
+    await user.tab();
+    expect(document.activeElement).toBe(badge);
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+
+    // Tab → focus uit wrapper → tooltip sluit.
+    await user.tab();
+    expect(document.activeElement).toBe(after);
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("blijft open wanneer Tab focus binnen de wrapper verschuift (badge → Lees meer)", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <div>
+        <button data-testid="before">Voor</button>
+        <MetaTooltip label="Uitgebreide metadata met lange waarde">
+          <>
+            <button data-testid="badge">Badge</button>
+            <button data-testid="readmore">Lees meer</button>
+          </>
+        </MetaTooltip>
+        <button data-testid="after">Na</button>
+      </div>,
+    );
+
+    const badge = screen.getByTestId("badge");
+    const readmore = screen.getByTestId("readmore");
+    const tip = screen.getByRole("tooltip", { hidden: true });
+
+    screen.getByTestId("before").focus();
+
+    // Tab → badge focus → open
+    await user.tab();
+    expect(document.activeElement).toBe(badge);
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+
+    // Tab → 'Lees meer' krijgt focus binnen dezelfde wrapper → blijft open
+    await user.tab();
+    expect(document.activeElement).toBe(readmore);
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+
+    // Tab → focus naar element buiten wrapper → sluit
+    await user.tab();
+    expect(document.activeElement).toBe(screen.getByTestId("after"));
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("opent opnieuw bij Shift+Tab terug in de wrapper", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <div>
+        <button data-testid="before">Voor</button>
+        <MetaTooltip label="Shift+Tab terug">
+          <button data-testid="badge">Badge</button>
+        </MetaTooltip>
+        <button data-testid="after">Na</button>
+      </div>,
+    );
+
+    const badge = screen.getByTestId("badge");
+    const after = screen.getByTestId("after");
+    const tip = screen.getByRole("tooltip", { hidden: true });
+
+    after.focus();
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+
+    // Shift+Tab → focus terug naar badge → tooltip opent.
+    await user.tab({ shift: true });
+    expect(document.activeElement).toBe(badge);
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+
+    // Shift+Tab → focus uit wrapper → tooltip sluit.
+    await user.tab({ shift: true });
+    expect(document.activeElement).toBe(screen.getByTestId("before"));
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("sluit met Escape terwijl uitgebreide metadata (Lees meer) open staat en focus binnen wrapper is", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <MetaTooltip label="Lange metadatawaarde die uitklapbaar is">
+        <>
+          <button data-testid="badge">Badge</button>
+          <button data-testid="readmore">Lees meer</button>
+          <span data-testid="expanded">Volledige uitgebreide tekst</span>
+        </>
+      </MetaTooltip>,
+    );
+
+    const badge = screen.getByTestId("badge");
+    const readmore = screen.getByTestId("readmore");
+    const tip = screen.getByRole("tooltip", { hidden: true });
+
+    act(() => {
+      fireEvent.focus(badge);
+    });
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+
+    // Verschuif focus naar de 'Lees meer'-knop binnen de wrapper.
+    act(() => {
+      fireEvent.blur(badge, { relatedTarget: readmore });
+      fireEvent.focus(readmore);
+    });
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+
+    // Escape sluit de tooltip ook wanneer focus op een child-knop staat.
+    await user.keyboard("{Escape}");
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("Escape sluit de tooltip ongeacht waar focus zich op de pagina bevindt", () => {
+    render(
+      <div>
+        <MetaTooltip label="Globale Escape">
+          <button data-testid="badge">Badge</button>
+        </MetaTooltip>
+        <button data-testid="elsewhere">Elders</button>
+      </div>,
+    );
+
+    const tip = screen.getByRole("tooltip", { hidden: true });
+    act(() => {
+      fireEvent.focus(screen.getByTestId("badge"));
+    });
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+
+    // Focus verplaatst naar element binnen wrapper niet mogelijk hier; we vuren
+    // de Escape direct op document — dat is precies hoe de globale listener werkt.
+    act(() => {
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
+    });
+
+    expect(tip).toHaveAttribute("aria-hidden", "true");
   });
 });
