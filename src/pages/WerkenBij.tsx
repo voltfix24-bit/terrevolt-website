@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight, Zap, Cable, PlugZap, Power, ClipboardCheck, Users,
   Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert,
   Award, Loader2, Upload, CalendarCheck, Phone as PhoneIcon, HardHat,
-  CheckCircle2,
+  CheckCircle2, FileCheck2, X,
 } from "lucide-react";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
 import { z } from "zod";
