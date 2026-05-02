@@ -131,7 +131,11 @@ All colors MUST be HSL.
   h1, h2, h3, h4 {
     overflow-wrap: break-word;
     word-break: normal;
+    -webkit-hyphens: auto;
     hyphens: auto;
+    -webkit-hyphenate-limit-before: 3;
+    -webkit-hyphenate-limit-after: 3;
+    hyphenate-limit-chars: 8 4 4; /* min woordlengte / min vóór / min ná koppelteken */
   }
 
   /* Lange technische termen (Aardverspreidingsweerstand, middenspanningsstation, ...) mogen
@@ -139,6 +143,22 @@ All colors MUST be HSL.
   p, li, span, a, label {
     overflow-wrap: break-word;
   }
+}
+
+@layer utilities {
+  /* Nette Nederlandse afbreking voor lange samengestelde woorden
+     (bv. "Middenspanningsmonteur", "Aardverspreidingsweerstand").
+     Werkt automatisch met <html lang="nl">. */
+  .hyphens-nl {
+    overflow-wrap: break-word;
+    word-break: normal;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    -webkit-hyphenate-limit-before: 3;
+    -webkit-hyphenate-limit-after: 3;
+    hyphenate-limit-chars: 8 4 4;
+  }
+@layer base {
 
   /* Voorkom dat heel kleine bodytekst op iOS gaat zoomen / niet leesbaar is. */
   input, textarea, select {
