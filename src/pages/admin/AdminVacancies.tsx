@@ -190,7 +190,7 @@ export default function AdminVacancies() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {rows.map((v) => (
+                {filtered.map((v) => (
                   <TableRow key={v.id}>
                     <TableCell className="font-medium text-[#0d3b2e]">
                       <div className="flex items-center gap-2">
