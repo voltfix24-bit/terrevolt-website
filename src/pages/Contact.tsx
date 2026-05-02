@@ -11,9 +11,9 @@ import { company, addressOneLine, telHref, mailHref } from "@/config/company";
 import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
 
 const contactCards = [
-  { icon: Phone, title: "Telefoon", value: company.phone.display, href: telHref },
-  { icon: Mail, title: "E-mail", value: company.email, href: mailHref },
-  { icon: MapPin, title: "Adres", value: addressOneLine, href: null },
+  { icon: Phone, title: "Bel ons", value: company.phone.display, href: telHref },
+  { icon: Mail, title: "Mail ons", value: company.email, href: mailHref },
+  { icon: MapPin, title: "Werkgebied", value: addressOneLine, href: null },
 ];
 
 const requestTypes = [
@@ -578,10 +578,19 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Contactgegevens — compact, onder het formulier */}
-        <section className="py-12 md:py-16 bg-white">
+        {/* DIRECT CONTACT — 3 cards: Bel ons, Mail ons, Werkgebied */}
+        <section className="py-14 md:py-20 bg-white border-t border-gray-100">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+            <div className="max-w-3xl mb-10 sm:mb-12">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl text-[#0d3b2e] mb-3 leading-tight">
+                Liever <span className="text-[#9ed42e]">direct contact</span>?
+              </h2>
+              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed">
+                Onze specialisten staan klaar om uw technische vraagstuk direct te bespreken.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl">
               {contactCards.map((c) => {
                 const Icon = c.icon;
                 const copyType: "tel" | "mail" | null =
@@ -615,12 +624,12 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* SECTIE 3: Voor wie */}
-        <section className="py-16 md:py-24 bg-white">
+        {/* SECTIE: Voor wie werken wij */}
+        <section className="py-16 md:py-24 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="text-center mb-16">
+            <div className="text-center mb-12 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voor wie werken wij?</h2>
-              <p className="text-xl text-[#6c757d] max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-[#6c757d] max-w-2xl mx-auto">
                 TerreVolt werkt voor partijen binnen de netbeheerwereld.
               </p>
             </div>
@@ -631,62 +640,16 @@ const Contact = () => {
                 return (
                   <div
                     key={v.title}
-                    className="group bg-[#f8f9fa] rounded-xl p-8 border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 text-center"
+                    className="group bg-white rounded-xl p-8 border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 text-center"
                   >
                     <div className="w-16 h-16 bg-[#f0f7e6] rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-[#9ed42e] transition-colors duration-300">
-                      <Icon className="w-8 h-8 text-[#0d3b2e] group-hover:text-white transition-colors duration-300" strokeWidth={2} />
+                      <Icon className="w-8 h-8 text-[#0d3b2e]" strokeWidth={2} />
                     </div>
                     <h3 className="text-xl text-[#0d3b2e] mb-3">{v.title}</h3>
                     <p className="text-[#6c757d] leading-relaxed">{v.description}</p>
                   </div>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10">
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `
-                  linear-gradient(rgba(158, 212, 46, 0.3) 2px, transparent 2px),
-                  linear-gradient(90deg, rgba(158, 212, 46, 0.3) 2px, transparent 2px)
-                `,
-                backgroundSize: "100px 100px",
-              }}
-            />
-          </div>
-
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
-                Liever <span className="text-[#9ed42e]">direct contact</span>?
-              </h2>
-              <p className="text-xl text-gray-300 mb-12 leading-relaxed">
-                Bel of mail TerreVolt voor een snelle projectafstemming.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a
-                  href={telHref}
-                  aria-label={`Bel TerreVolt op ${company.phone.display}. Werkt de bel-app niet? Gebruik de kopieerknop hiernaast.`}
-                  className="inline-flex items-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-10 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-lg"
-                >
-                  <Phone className="w-5 h-5" />
-                  Bel TerreVolt
-                </a>
-                <CopyButton
-                  type="tel"
-                  value={company.phone.e164}
-                  ariaLabel={`Telefoonnummer kopiëren: ${company.phone.display}`}
-                  className="inline-flex items-center gap-2 px-5 py-3 min-h-[48px] rounded-lg border-2 border-[#9ed42e] text-[#9ed42e] hover:bg-[#9ed42e] hover:text-[#0d3b2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] transition-colors"
-                />
-              </div>
-              <p className="text-sm text-gray-400 mt-4">
-                Geen bel-app op dit apparaat? Kopieer het nummer met de knop hiernaast.
-              </p>
             </div>
           </div>
         </section>
