@@ -115,6 +115,13 @@ const VacatureDetail = () => {
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [expandedMeta, setExpandedMeta] = useState<Set<string>>(new Set());
+  const toggleMeta = (label: string) =>
+    setExpandedMeta((prev) => {
+      const next = new Set(prev);
+      next.has(label) ? next.delete(label) : next.add(label);
+      return next;
+    });
   const formRef = useRef<HTMLFormElement>(null);
   const errorBannerRef = useRef<HTMLDivElement>(null);
 
