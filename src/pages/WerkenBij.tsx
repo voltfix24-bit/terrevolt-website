@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Zap, Cable, Anchor, PlugZap, ShieldCheck, Home, ClipboardCheck, Users, Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert, Award, Loader2, Upload } from "lucide-react";
 import { z } from "zod";
@@ -7,18 +7,20 @@ import { Footer } from "@/components/terrevolt/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
-import { vacatures } from "@/data/vacatures";
+import { vacatures as fallbackVacatures } from "@/data/vacatures";
 
-const profielIcons: Record<string, typeof Zap> = {
-  ls: Zap,
-  ms: Cable,
-  schakel: ShieldCheck,
-  kabel: PlugZap,
-  aarding: Anchor,
-  huisaansluiting: Home,
-  wv: ClipboardCheck,
-  zzp: Users,
+const slugIconMap: Record<string, typeof Zap> = {
+  laagspanningsmonteur: Zap,
+  middenspanningsmonteur: Cable,
+  schakelmonteur: ShieldCheck,
+  kabelmonteur: PlugZap,
+  aardingsmonteur: Anchor,
+  "monteur-huisaansluitingen": Home,
+  werkverantwoordelijke: ClipboardCheck,
+  "zzp-ploegen": Users,
 };
+
+type ProfielCard = { slug: string; label: string };
 
 const waarom = [
   { icon: Network, title: "Werk binnen de netbeheerwereld", description: "Projecten voor netbeheerders en hoofdaannemers binnen de Nederlandse energie-infrastructuur." },
@@ -47,6 +49,26 @@ const WerkenBij = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [profielen, setProfielen] = useState<ProfielCard[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const { data } = await supabase
+        .from("vacancies")
+        .select("slug,title")
+        .eq("status", "published")
+        .order("sort_order", { ascending: true })
+        .order("created_at", { ascending: false });
+      if (!active) return;
+      if (data && data.length > 0) {
+        setProfielen(data.map((v: any) => ({ slug: v.slug, label: v.title })));
+      } else {
+        setProfielen(fallbackVacatures.map((v) => ({ slug: v.slug, label: v.shortLabel })));
+      }
+    })();
+    return () => { active = false; };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -175,18 +197,18 @@ const WerkenBij = () => {
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {vacatures.map((v) => {
-                const Icon = profielIcons[v.iconKey] || Zap;
+              {profielen.map((p) => {
+                const Icon = slugIconMap[p.slug] || Briefcase;
                 return (
                   <Link
-                    key={v.slug}
-                    to={`/vacatures/${v.slug}`}
+                    key={p.slug}
+                    to={`/vacatures/${p.slug}`}
                     className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center"
                   >
                     <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
                       <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
                     </div>
-                    <div className="text-[#0d3b2e] mb-2">{v.shortLabel}</div>
+                    <div className="text-[#0d3b2e] mb-2">{p.label}</div>
                     <div className="text-xs text-[#9ed42e] inline-flex items-center gap-1 group-hover:gap-2 transition-all">
                       Bekijk vacature <ArrowRight className="w-3 h-3" />
                     </div>

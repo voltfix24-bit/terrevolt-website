@@ -18,6 +18,12 @@ import WerkenBij from "./pages/WerkenBij.tsx";
 import VacatureDetail from "./pages/VacatureDetail.tsx";
 import Contact from "./pages/Contact.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import AdminLayout from "./pages/admin/AdminLayout.tsx";
+import AdminLogin from "./pages/admin/AdminLogin.tsx";
+import AdminDashboard from "./pages/admin/AdminDashboard.tsx";
+import AdminVacancies from "./pages/admin/AdminVacancies.tsx";
+import AdminVacancyForm from "./pages/admin/AdminVacancyForm.tsx";
+import AdminApplications from "./pages/admin/AdminApplications.tsx";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +54,18 @@ const App = () => (
           <Route path="/diensten/meten-en-beproeven" element={<MetenEnBeproeven />} />
           <Route path="/diensten/meten-beproeven-rapportage" element={<MetenEnBeproeven />} />
           <Route path="/diensten/huisaansluitingen" element={<Huisaansluitingen />} />
+          <Route path="/diensten/huisaansluitingen" element={<Huisaansluitingen />} />
+
+          {/* Admin */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="vacatures" element={<AdminVacancies />} />
+            <Route path="vacatures/nieuw" element={<AdminVacancyForm />} />
+            <Route path="vacatures/:id/bewerken" element={<AdminVacancyForm />} />
+            <Route path="sollicitaties" element={<AdminApplications />} />
+          </Route>
+
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

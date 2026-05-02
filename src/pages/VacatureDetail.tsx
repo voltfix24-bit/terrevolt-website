@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import {
   ArrowRight,
@@ -48,19 +48,102 @@ const proces = [
   { icon: PlayCircle, title: "Start", text: "Inwerken op locatie, daarna zelfstandig aan de slag." },
 ];
 
+type VacatureView = {
+  id?: string;
+  title: string;
+  intro: string;
+  meta: {
+    regio: string;
+    uren: string;
+    dienstverband: string;
+    niveau: string;
+    werkgebied: string;
+    bevoegdheden: string;
+  };
+  taken: string[];
+  meebrengen: string[];
+  bieden: string[];
+  veiligheid: string;
+  process_steps: string[];
+};
+
+const standaardProces = ["Aanmelden", "Kennismaken", "Documenten/check", "Projectmatch", "Start"];
+
 const VacatureDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const vacature = findVacature(slug);
-
-  if (!vacature) return <Navigate to="/werken-bij" replace />;
-
-  usePageMeta(
-    `${vacature.title} | Vacature TerreVolt BV`,
-    `${vacature.title} bij TerreVolt: ${vacature.intro.slice(0, 140)}`
-  );
-
+  const [vacature, setVacature] = useState<VacatureView | null | "missing">(null);
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const { data } = await supabase
+        .from("vacancies")
+        .select("*")
+        .eq("slug", slug || "")
+        .eq("status", "published")
+        .maybeSingle();
+      if (!active) return;
+      if (data) {
+        setVacature({
+          id: data.id,
+          title: data.title,
+          intro: data.intro || "",
+          meta: {
+            regio: data.region || "—",
+            uren: data.hours || "—",
+            dienstverband: data.employment_type || "—",
+            niveau: data.level || "—",
+            werkgebied: data.work_area || "—",
+            bevoegdheden: "VCA, relevante aanwijzingen",
+          },
+          taken: Array.isArray(data.what_you_do) ? (data.what_you_do as string[]) : [],
+          meebrengen: Array.isArray(data.requirements) ? (data.requirements as string[]) : [],
+          bieden: Array.isArray(data.offer) ? (data.offer as string[]) : [],
+          veiligheid: data.safety_text || "",
+          process_steps: Array.isArray(data.process_steps) && data.process_steps.length > 0
+            ? (data.process_steps as string[])
+            : standaardProces,
+        });
+        return;
+      }
+      const fb = findVacature(slug);
+      if (fb) {
+        setVacature({
+          title: fb.title,
+          intro: fb.intro,
+          meta: fb.meta,
+          taken: fb.taken,
+          meebrengen: fb.meebrengen,
+          bieden: fb.bieden,
+          veiligheid: fb.veiligheid,
+          process_steps: standaardProces,
+        });
+      } else {
+        setVacature("missing");
+      }
+    })();
+    return () => { active = false; };
+  }, [slug]);
+
+  usePageMeta(
+    vacature && vacature !== "missing"
+      ? `${vacature.title} | Vacature TerreVolt BV`
+      : "Vacature | TerreVolt BV",
+    vacature && vacature !== "missing"
+      ? `${vacature.title} bij TerreVolt: ${vacature.intro.slice(0, 140)}`
+      : undefined
+  );
+
+  if (vacature === "missing") return <Navigate to="/werken-bij" replace />;
+  if (!vacature) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#f8f9fa]">
+        <Loader2 className="w-8 h-8 animate-spin text-[#0d3b2e]" />
+      </div>
+    );
+  }
 
   const meta = [
     { icon: MapPin, label: "Regio", value: vacature.meta.regio },
@@ -124,7 +207,8 @@ const VacatureDetail = () => {
         availability: parsed.data.availability || null,
         message: fullMessage,
         cv_url,
-      }]);
+        vacancy_id: vacature.id || null,
+      } as any]);
       if (insErr) throw insErr;
 
       toast.success("Sollicitatie verstuurd. We nemen zo snel mogelijk contact op.");
@@ -300,11 +384,14 @@ const VacatureDetail = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
-              {proces.map((p, i) => {
-                const Icon = p.icon;
+              {(vacature.process_steps.length > 0 ? vacature.process_steps : proces.map((p) => p.title)).map((step, i) => {
+                const fallback = proces[i] || proces[proces.length - 1];
+                const Icon = fallback.icon;
+                const title = typeof step === "string" ? step : fallback.title;
+                const text = (proces[i]?.text) || "";
                 return (
                   <div
-                    key={p.title}
+                    key={`${title}-${i}`}
                     className="relative bg-white rounded-xl p-6 border border-gray-200 hover:border-[#9ed42e] hover:shadow-lg transition-all"
                   >
                     <div className="absolute -top-3 -left-3 w-8 h-8 bg-[#9ed42e] text-[#0d3b2e] rounded-full flex items-center justify-center text-sm">
@@ -313,8 +400,8 @@ const VacatureDetail = () => {
                     <div className="w-12 h-12 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-lg flex items-center justify-center mb-4">
                       <Icon className="w-6 h-6 text-[#9ed42e]" strokeWidth={2} />
                     </div>
-                    <h3 className="text-lg text-[#0d3b2e] mb-2">{p.title}</h3>
-                    <p className="text-sm text-[#6c757d] leading-relaxed">{p.text}</p>
+                    <h3 className="text-lg text-[#0d3b2e] mb-2">{title}</h3>
+                    {text && <p className="text-sm text-[#6c757d] leading-relaxed">{text}</p>}
                   </div>
                 );
               })}
