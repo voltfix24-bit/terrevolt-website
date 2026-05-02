@@ -90,8 +90,8 @@ export const MetaTooltip = ({ label, enabled = true, children, className }: Prop
       <span
         role="tooltip"
         id={id}
-        className={`pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-40 max-w-[min(18rem,calc(100vw-2rem))] whitespace-normal break-words rounded-lg bg-[#0d3b2e] text-white text-xs leading-snug px-3 py-2 shadow-lg transition-opacity duration-150 ${
-          open ? "opacity-100" : "opacity-0"
+        className={`pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-40 max-w-[min(18rem,calc(100vw-2rem))] whitespace-normal break-words rounded-lg bg-[#0d3b2e] text-white text-xs leading-snug px-3 py-2 shadow-lg transition-[opacity,transform] duration-200 ease-out motion-reduce:transition-none motion-reduce:transform-none ${
+          open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
         }`}
         aria-hidden={!open}
       >
