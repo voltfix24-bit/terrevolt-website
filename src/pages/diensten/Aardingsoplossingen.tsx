@@ -187,7 +187,7 @@ const Aardingsoplossingen = () => {
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Aantoonbaar
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4">Veilig geaard. Meetbaar opgeleverd.</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4">Aantoonbaar uitgevoerd. Meetbaar opgeleverd.</h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
                 TerreVolt zorgt voor controleerbare uitvoering en duidelijke vastlegging. Waar nodig leveren wij meetgegevens en rapportages op voor opdrachtgever, beheerder of opleverdossier.
               </p>

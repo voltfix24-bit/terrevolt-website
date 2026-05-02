@@ -11,9 +11,9 @@ import { company, addressOneLine, telHref, mailHref } from "@/config/company";
 import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
 
 const contactCards = [
-  { icon: Phone, title: "Telefoon", value: company.phone.display, href: telHref },
-  { icon: Mail, title: "E-mail", value: company.email, href: mailHref },
-  { icon: MapPin, title: "Adres", value: addressOneLine, href: null },
+  { icon: Phone, title: "Bel ons", value: company.phone.display, href: telHref },
+  { icon: Mail, title: "Mail ons", value: company.email, href: mailHref },
+  { icon: MapPin, title: "Werkgebied", value: addressOneLine, href: null },
 ];
 
 const requestTypes = [
@@ -219,8 +219,8 @@ const Contact = () => {
       <Header />
 
       <main id="main-content" className="pt-16 sm:pt-20">
-        {/* HERO — compact, technisch */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-12 sm:py-16">
+        {/* HERO — donker, technisch, met overlappende keuzecards */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-16 sm:py-24 md:py-32 pb-24 sm:pb-32 md:pb-40">
           <div className="absolute inset-0 opacity-[0.08]">
             <div
               className="absolute inset-0"
@@ -243,71 +243,73 @@ const Contact = () => {
                 Stuur een <span className="text-[#9ed42e]">aanvraag</span>
               </h1>
               <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl leading-relaxed">
-                Vul het formulier in voor een projectaanvraag, technische vraag of capaciteitsaanvraag. We nemen zo snel mogelijk contact op.
+                Vul het formulier in voor een projectaanvraag, technische vraag of capaciteitsaanvraag binnen LS/MS, stationswerk, schakelwerk, aarding of metingen. We nemen zo snel mogelijk contact op.
               </p>
             </div>
           </div>
         </section>
 
-        {/* KEUZEHULP — 3 grote intent-cards */}
-        <section aria-labelledby="keuzehulp-heading" className="bg-white border-b border-gray-200">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12 py-10 sm:py-12">
-            <div id="keuzehulp-heading" className="text-xs sm:text-sm tracking-wider uppercase text-[#6c757d] mb-5">
-              Waar wilt u het over hebben?
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-              {intents.map((it) => {
-                const Icon = it.icon;
-                const active = intent === it.id;
-                return (
-                  <button
-                    key={it.id}
-                    type="button"
-                    onClick={() => handleIntentChange(it.id)}
-                    aria-pressed={active}
-                    className={`group text-left rounded-xl border p-5 sm:p-6 min-h-[120px] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 ${
-                      active
-                        ? "bg-[#f0f7e6] border-gray-200 border-b-4 border-b-[#9ed42e] shadow-sm"
-                        : "bg-white border-gray-200 hover:border-[#9ed42e] hover:shadow-sm"
-                    }`}
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
-                        active ? "bg-[#9ed42e]" : "bg-[#f0f7e6] group-hover:bg-[#9ed42e]"
-                      }`}>
-                        <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-base sm:text-lg text-[#0d3b2e] mb-1">{it.label}</div>
-                        <p className="text-sm text-[#6c757d] leading-relaxed">{it.helper}</p>
-                      </div>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            {intent === "sollicitatie" && (
-              <div className="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-[#f0f7e6] border border-[#9ed42e] rounded-xl p-4 sm:p-5">
-                <div className="flex items-start gap-3 min-w-0">
-                  <BadgeCheck className="w-5 h-5 text-[#0d3b2e] flex-shrink-0 mt-0.5" strokeWidth={2.2} />
-                  <p className="text-sm text-[#0d3b2e] min-w-0">
-                    Voor sollicitaties en ZZP-aanmeldingen heeft TerreVolt een speciaal aanmeldformulier met alle profielen en certificaatvelden. Je kunt hieronder ook gewoon dit formulier invullen als je dat liever hebt.
-                  </p>
-                </div>
-                <Link
-                  to="/werken-bij"
-                  className="inline-flex items-center justify-center gap-1.5 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2.5 min-h-[44px] rounded-lg text-sm hover:bg-[#1a4a36] transition-colors flex-shrink-0"
-                >
-                  Ga naar Werken bij TerreVolt <ArrowRight className="w-4 h-4" />
-                </Link>
+        {/* KEUZEHULP — 3 grote intent-cards die over de hero heen vallen */}
+        <section aria-labelledby="keuzehulp-heading" className="bg-transparent">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="relative -mt-16 sm:-mt-20 md:-mt-24 z-20">
+              <div id="keuzehulp-heading" className="sr-only">
+                Waar wilt u het over hebben?
               </div>
-            )}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
+                {intents.map((it) => {
+                  const Icon = it.icon;
+                  const active = intent === it.id;
+                  return (
+                    <button
+                      key={it.id}
+                      type="button"
+                      onClick={() => handleIntentChange(it.id)}
+                      aria-pressed={active}
+                      className={`group text-left rounded-xl border p-6 sm:p-7 md:p-8 min-h-[140px] transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 ${
+                        active
+                          ? "bg-white border-gray-200 border-b-4 border-b-[#9ed42e] shadow-xl"
+                          : "bg-white border-gray-200 hover:border-[#9ed42e] hover:shadow-xl shadow-sm"
+                      }`}
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0 transition-colors ${
+                          active ? "bg-[#9ed42e]" : "bg-[#f0f7e6] group-hover:bg-[#9ed42e]"
+                        }`}>
+                          <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="text-base sm:text-lg text-[#0d3b2e] mb-1">{it.label}</div>
+                          <p className="text-sm text-[#6c757d] leading-relaxed">{it.helper}</p>
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {intent === "sollicitatie" && (
+                <div className="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-[#f0f7e6] border border-[#9ed42e] rounded-xl p-4 sm:p-5">
+                  <div className="flex items-start gap-3 min-w-0">
+                    <BadgeCheck className="w-5 h-5 text-[#0d3b2e] flex-shrink-0 mt-0.5" strokeWidth={2.2} />
+                    <p className="text-sm text-[#0d3b2e] min-w-0">
+                      Voor sollicitaties en ZZP-aanmeldingen heeft TerreVolt een speciaal aanmeldformulier met alle profielen en certificaatvelden. Je kunt hieronder ook gewoon dit formulier invullen als je dat liever hebt.
+                    </p>
+                  </div>
+                  <Link
+                    to="/werken-bij"
+                    className="inline-flex items-center justify-center gap-1.5 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2.5 min-h-[44px] rounded-lg text-sm hover:bg-[#1a4a36] transition-colors flex-shrink-0"
+                  >
+                    Ga naar Werken bij TerreVolt <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
         </section>
 
         {/* HOOFDSECTIE — links trust-kolom, rechts formulier */}
-        <section id="aanvraag" className="relative py-12 sm:py-16 md:py-20 bg-[#f8f9fa] overflow-hidden">
+        <section id="aanvraag" className="relative pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 md:pb-20 bg-[#f8f9fa] overflow-hidden">
           <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
             <div
               className="absolute inset-0"
@@ -326,7 +328,7 @@ const Contact = () => {
               {/* LINKS — trust-kolom */}
               <aside className="lg:col-span-4 space-y-4">
                 {[
-                  { icon: ShieldCheck, title: "Veiligheid geborgd", text: "We doen het veilig, of we doen het niet. Veilig werken staat altijd voorop." },
+                  { icon: ShieldCheck, title: "Veiligheid voorop", text: "We doen het veilig, of we doen het niet." },
                   { icon: ClipboardCheck, title: "Duidelijke oplevering", text: "Controle, rapportage en documentatie waar nodig als onderdeel van de uitvoering." },
                   { icon: MessageSquare, title: "Korte lijnen", text: "Direct contact met uitvoering en planning. Praktisch, duidelijk en zonder onnodige schakels." },
                 ].map((t) => {
@@ -576,10 +578,19 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Contactgegevens — compact, onder het formulier */}
-        <section className="py-12 md:py-16 bg-white">
+        {/* DIRECT CONTACT — 3 cards: Bel ons, Mail ons, Werkgebied */}
+        <section className="py-14 md:py-20 bg-white border-t border-gray-100">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+            <div className="max-w-3xl mb-10 sm:mb-12">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl text-[#0d3b2e] mb-3 leading-tight">
+                Liever <span className="text-[#9ed42e]">direct contact</span>?
+              </h2>
+              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed">
+                Onze specialisten staan klaar om uw technische vraagstuk direct te bespreken.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl">
               {contactCards.map((c) => {
                 const Icon = c.icon;
                 const copyType: "tel" | "mail" | null =
@@ -613,12 +624,12 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* SECTIE 3: Voor wie */}
-        <section className="py-16 md:py-24 bg-white">
+        {/* SECTIE: Voor wie werken wij */}
+        <section className="py-16 md:py-24 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="text-center mb-16">
+            <div className="text-center mb-12 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voor wie werken wij?</h2>
-              <p className="text-xl text-[#6c757d] max-w-2xl mx-auto">
+              <p className="text-lg sm:text-xl text-[#6c757d] max-w-2xl mx-auto">
                 TerreVolt werkt voor partijen binnen de netbeheerwereld.
               </p>
             </div>
@@ -629,62 +640,16 @@ const Contact = () => {
                 return (
                   <div
                     key={v.title}
-                    className="group bg-[#f8f9fa] rounded-xl p-8 border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 text-center"
+                    className="group bg-white rounded-xl p-8 border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 text-center"
                   >
                     <div className="w-16 h-16 bg-[#f0f7e6] rounded-xl flex items-center justify-center mx-auto mb-6 group-hover:bg-[#9ed42e] transition-colors duration-300">
-                      <Icon className="w-8 h-8 text-[#0d3b2e] group-hover:text-white transition-colors duration-300" strokeWidth={2} />
+                      <Icon className="w-8 h-8 text-[#0d3b2e]" strokeWidth={2} />
                     </div>
                     <h3 className="text-xl text-[#0d3b2e] mb-3">{v.title}</h3>
                     <p className="text-[#6c757d] leading-relaxed">{v.description}</p>
                   </div>
                 );
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
-          <div className="absolute inset-0 opacity-10">
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `
-                  linear-gradient(rgba(158, 212, 46, 0.3) 2px, transparent 2px),
-                  linear-gradient(90deg, rgba(158, 212, 46, 0.3) 2px, transparent 2px)
-                `,
-                backgroundSize: "100px 100px",
-              }}
-            />
-          </div>
-
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
-                Liever <span className="text-[#9ed42e]">direct contact</span>?
-              </h2>
-              <p className="text-xl text-gray-300 mb-12 leading-relaxed">
-                Bel of mail TerreVolt voor een snelle projectafstemming.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <a
-                  href={telHref}
-                  aria-label={`Bel TerreVolt op ${company.phone.display}. Werkt de bel-app niet? Gebruik de kopieerknop hiernaast.`}
-                  className="inline-flex items-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-10 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-lg"
-                >
-                  <Phone className="w-5 h-5" />
-                  Bel TerreVolt
-                </a>
-                <CopyButton
-                  type="tel"
-                  value={company.phone.e164}
-                  ariaLabel={`Telefoonnummer kopiëren: ${company.phone.display}`}
-                  className="inline-flex items-center gap-2 px-5 py-3 min-h-[48px] rounded-lg border-2 border-[#9ed42e] text-[#9ed42e] hover:bg-[#9ed42e] hover:text-[#0d3b2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] transition-colors"
-                />
-              </div>
-              <p className="text-sm text-gray-400 mt-4">
-                Geen bel-app op dit apparaat? Kopieer het nummer met de knop hiernaast.
-              </p>
             </div>
           </div>
         </section>
