@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container mx-auto px-5 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <a href="/" className="flex items-center gap-2 mb-4">
+            <a href="/" className="inline-flex items-center gap-2 mb-4 min-h-[44px] py-2">
               <div className="w-8 h-8 bg-[#0d3b2e] rounded-lg flex items-center justify-center">
                 <Zap className="w-5 h-5 text-[#9ed42e]" strokeWidth={2.5} />
               </div>
@@ -81,7 +81,7 @@ export function Footer() {
                   {company.address.country}
                 </address>
               </li>
-              <li className="pt-2"><a href="/contact" className="text-[#9ed42e] hover:text-white transition-colors">Stuur een aanvraag →</a></li>
+              <li className="pt-2"><a href="/contact" className="inline-flex items-center min-h-[44px] py-2 text-[#9ed42e] hover:text-white transition-colors">Stuur een aanvraag →</a></li>
             </ul>
           </div>
         </div>
@@ -89,7 +89,7 @@ export function Footer() {
         <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
           <div>© {new Date().getFullYear()} TerreVolt BV. Alle rechten voorbehouden.</div>
           <div className="flex gap-6">
-            <a href="/contact" className="hover:text-[#9ed42e] transition-colors">Contact</a>
+            <a href="/contact" className="inline-flex items-center min-h-[44px] py-2 hover:text-[#9ed42e] transition-colors">Contact</a>
           </div>
         </div>
       </div>
