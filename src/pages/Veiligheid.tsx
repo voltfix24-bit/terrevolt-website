@@ -304,7 +304,7 @@ const Veiligheid = () => {
               <Accordion type="single" collapsible className="bg-white rounded-xl border border-gray-200 divide-y divide-gray-200">
                 {faqs.map((f, i) => (
                   <AccordionItem key={i} value={`faq-${i}`} className="border-b-0 px-5 sm:px-6">
-                    <AccordionTrigger className="text-left text-[#0d3b2e] hover:no-underline py-5 text-base sm:text-lg">
+                    <AccordionTrigger className="text-left text-[#0d3b2e] hover:no-underline py-5 text-base sm:text-lg rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-white">
                       {f.q}
                     </AccordionTrigger>
                     <AccordionContent className="text-[#6c757d] leading-relaxed text-sm sm:text-base pb-5">
