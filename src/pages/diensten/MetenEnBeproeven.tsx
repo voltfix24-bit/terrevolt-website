@@ -1,6 +1,7 @@
 import { ArrowRight, Gauge, Cable, Zap, Shield, Eye, FileText, Building2, GitMerge, Anchor, AlertTriangle, PlayCircle, PackageCheck, Activity, ClipboardCheck, FileBarChart } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 const metingen = [
   { icon: Gauge, title: "Aardingsmetingen", description: "Meten en vastleggen van aardingsvoorzieningen en aardverspreidingsweerstand." },
@@ -27,6 +28,8 @@ const proces = [
 ];
 
 const MetenEnBeproeven = () => {
+  usePageMeta("Meten & beproeven | TerreVolt BV", "Aardingsmetingen, kabelmetingen, isolatiemetingen en opleverrapportages voor LS/MS-installaties.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />

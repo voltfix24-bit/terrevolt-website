@@ -1,6 +1,7 @@
 import { ArrowRight, Server, Cpu, Zap, Cable, Gauge, ClipboardCheck, Building2, Layers, Boxes, ShieldCheck, CalendarClock, MessageCircle, PackageCheck } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 const werkzaamheden = [
   { icon: Server, title: "LS-rekken vervangen", description: "Ondersteuning bij demontage, montage, kabelafwerking en oplevering van laagspanningsverdelingen." },
@@ -25,6 +26,8 @@ const trustItems = [
 ];
 
 const Stationsrenovatie = () => {
+  usePageMeta("Stationsrenovatie | TerreVolt BV", "Renovatie en inrichting van MS/LS-stations, technische ruimten en transformatorstations.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />

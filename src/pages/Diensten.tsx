@@ -1,6 +1,7 @@
 import { ArrowRight, CheckCircle2, ClipboardList, FileSearch, ShieldCheck, PackageCheck, Network, Building2, Cog, Gauge, Activity, Home } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const services = [
   {
@@ -71,6 +72,8 @@ const steps = [
 ];
 
 const Diensten = () => {
+  usePageMeta("Diensten | TerreVolt BV", "Overzicht van TerreVolt's diensten: LS/MS netmontage, stationsrenovatie, schakelwerk, aardingsoplossingen, meten & beproeven en huisaansluitingen.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />

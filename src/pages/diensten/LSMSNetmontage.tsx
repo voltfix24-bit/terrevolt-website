@@ -1,6 +1,7 @@
 import { ArrowRight, Cable, Zap, GitMerge, Plug, Workflow, ClipboardCheck, Wrench, Building2, AlertTriangle, Building, HardHat, Factory } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 const uitvoering = [
   { icon: Cable, title: "LS-kabelmontage", description: "Montage en aansluiting van laagspanningskabels binnen netten, stations en verdeelinrichtingen." },
@@ -24,6 +25,8 @@ const voorWie = [
 ];
 
 const LSMSNetmontage = () => {
+  usePageMeta("LS/MS Netmontage | TerreVolt BV", "Kabelmontage, moffen, eindsluitingen en aansluitwerk binnen laag- en middenspanningsnetten.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />

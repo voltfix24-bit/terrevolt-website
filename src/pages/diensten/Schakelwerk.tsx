@@ -1,6 +1,7 @@
 import { ArrowRight, Power, Lock, PlayCircle, PauseCircle, Anchor, ListChecks, Building2, Zap, Cable, Wrench, ShieldCheck } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 const taken = [
   { icon: Power, title: "Vrijschakelen", description: "Installaties of netdelen spanningsloos maken volgens projectafspraken en veiligheidsprocedures." },
@@ -21,6 +22,8 @@ const inzet = [
 const badges = ["BEI BLS/BHS", "AVP / VP / VOP / WV", "LMRA", "VCA", "NEN 3140"];
 
 const Schakelwerk = () => {
+  usePageMeta("Schakelwerk & veiligstellen | TerreVolt BV", "Vrijschakelen, veiligstellen, in- en uitbedrijf nemen binnen LS/MS-installaties.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />

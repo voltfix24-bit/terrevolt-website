@@ -1,6 +1,7 @@
 import { ArrowRight, ClipboardCheck, Users, HardHat, CheckCircle2, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, MessageSquare, Lock, Wrench, ClipboardList } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const veiligwerken = [
   { icon: ClipboardCheck, title: "LMRA", description: "Last Minute Risk Analysis vóór elke werkstart op locatie." },
@@ -25,6 +26,8 @@ const stappen = [
 ];
 
 const Veiligheid = () => {
+  usePageMeta("Veiligheid & certificeringen | TerreVolt BV", "Veiligheid, bevoegdheden en normen bij TerreVolt: BEI BLS/BHS, AVP/VP/VOP/WV, VCA en NEN 1010 / NEN 3140.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />

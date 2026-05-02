@@ -1,6 +1,7 @@
 import { ArrowRight, Cable, Layers, ShieldCheck, GitBranch, FileBarChart, Building2, Server, Zap, Factory, Construction, Plug, Activity, ClipboardList, FileCheck } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 const fundament = [
   { icon: Cable, title: "Aardelektroden", description: "Plaatsen van aardelektroden en aardingsvoorzieningen voor technische installaties." },
@@ -26,6 +27,8 @@ const meetbaar = [
 ];
 
 const Aardingsoplossingen = () => {
+  usePageMeta("Aardingsoplossingen | TerreVolt BV", "Aanleg, verbetering, meting en rapportage van aardingsvoorzieningen voor LS/MS-infrastructuur.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
