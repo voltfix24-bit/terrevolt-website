@@ -1,8 +1,9 @@
-import { ArrowRight, ShieldCheck, Wrench, Handshake, Gauge, Cable, Anchor, HardHat, Phone, Zap } from "lucide-react";
+import { ArrowRight, ShieldCheck, Wrench, Handshake, Gauge, Cable, HardHat, Phone, Zap } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { telHref } from "@/config/company";
+import { EarthSymbol } from "@/components/icons/EarthSymbol";
 
 const waarden = [
   { icon: ShieldCheck, title: "Veiligheid", description: "Werken met aandacht voor mens, installatie en omgeving." },
@@ -13,7 +14,7 @@ const waarden = [
 
 const focus = [
   { icon: Cable, title: "LS/MS-infrastructuur", description: "Netmontage, stationsrenovatie en kabelwerk binnen laag- en middenspanning." },
-  { icon: Anchor, title: "Aardingsoplossingen", description: "Aanleg, verbetering, meting en rapportage van aardingsvoorzieningen." },
+  { icon: EarthSymbol, title: "Aardingsoplossingen", description: "Aanleg, verbetering, meting en rapportage van aardingsvoorzieningen." },
   { icon: HardHat, title: "Veilige uitvoering", description: "Schakelwerk, veiligstellen en projectmatige uitvoering volgens geldende normen." },
 ];
 

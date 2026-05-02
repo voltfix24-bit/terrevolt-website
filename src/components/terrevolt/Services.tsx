@@ -1,6 +1,7 @@
-import { Cable, Building2, Power, Anchor, Gauge, PlugZap, ArrowRight } from "lucide-react";
+import { Cable, Building2, Power, Gauge, PlugZap, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Reveal } from "@/components/terrevolt/Reveal";
+import { EarthSymbol } from "@/components/icons/EarthSymbol";
 
 const services = [
   {
@@ -22,7 +23,7 @@ const services = [
     description: "Veilig in- en uitbedrijf nemen, vrijschakelen en veiligstellen van LS/MS-installaties."
   },
   {
-    icon: Anchor,
+    icon: EarthSymbol,
     slug: "aardingsoplossingen",
     title: "Aardingsoplossingen",
     description: "Aanleg, verbetering, meting en rapportage van aardingssystemen voor stations en technische ruimten."
