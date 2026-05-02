@@ -674,6 +674,16 @@ const VacatureDetail = () => {
                 </a>
               </div>
 
+              <div className="mt-6 flex justify-center">
+                <Link
+                  to="/contact"
+                  className="group inline-flex items-center justify-center gap-2 bg-[#0d3b2e] text-white px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#1a4a36] transition-colors"
+                >
+                  <span>Neem contact op</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+
               <div className="mt-5 text-center text-xs text-[#6c757d] break-words">
                 {company.phone.display} · {company.email}
               </div>
