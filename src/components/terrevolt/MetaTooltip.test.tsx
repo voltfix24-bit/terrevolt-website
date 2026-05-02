@@ -416,7 +416,9 @@ describe("MetaTooltip — toetsenbordnavigatie", () => {
     );
 
     const tip = screen.getByRole("tooltip", { hidden: true });
-    screen.getByTestId("badge").focus();
+    act(() => {
+      fireEvent.focus(screen.getByTestId("badge"));
+    });
     expect(tip).toHaveAttribute("aria-hidden", "false");
 
     // Focus verplaatst naar element binnen wrapper niet mogelijk hier; we vuren
