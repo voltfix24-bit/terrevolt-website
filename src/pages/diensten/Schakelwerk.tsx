@@ -1,6 +1,7 @@
 import { ArrowRight, Power, Lock, PlayCircle, PauseCircle, Anchor, ListChecks, Building2, Zap, Cable, Wrench, ShieldCheck } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 const taken = [
   { icon: Power, title: "Vrijschakelen", description: "Installaties of netdelen spanningsloos maken volgens projectafspraken en veiligheidsprocedures." },
@@ -21,6 +22,8 @@ const inzet = [
 const badges = ["BEI BLS/BHS", "AVP / VP / VOP / WV", "LMRA", "VCA", "NEN 3140"];
 
 const Schakelwerk = () => {
+  usePageMeta("Schakelwerk & veiligstellen | TerreVolt BV", "Vrijschakelen, veiligstellen, in- en uitbedrijf nemen binnen LS/MS-installaties.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
@@ -56,14 +59,14 @@ const Schakelwerk = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Schakelwerk bespreken</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
                   Contact opnemen

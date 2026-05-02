@@ -7,8 +7,11 @@ import { Projects } from "@/components/terrevolt/Projects";
 import { Safety } from "@/components/terrevolt/Safety";
 import { CTA } from "@/components/terrevolt/CTA";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const Index = () => {
+  usePageMeta("TerreVolt BV | LS/MS-infrastructuur en aardingsoplossingen", "TerreVolt BV ondersteunt netbeheerders, hoofdaannemers en industrie bij LS/MS-netmontage, stationsrenovaties, schakelwerk en aardingsoplossingen.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />

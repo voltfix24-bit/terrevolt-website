@@ -1,6 +1,7 @@
 import { ArrowRight, ClipboardCheck, Users, HardHat, CheckCircle2, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, MessageSquare, Lock, Wrench, ClipboardList } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const veiligwerken = [
   { icon: ClipboardCheck, title: "LMRA", description: "Last Minute Risk Analysis vóór elke werkstart op locatie." },
@@ -25,6 +26,8 @@ const stappen = [
 ];
 
 const Veiligheid = () => {
+  usePageMeta("Veiligheid & certificeringen | TerreVolt BV", "Veiligheid, bevoegdheden en normen bij TerreVolt: BEI BLS/BHS, AVP/VP/VOP/WV, VCA en NEN 1010 / NEN 3140.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
@@ -60,14 +63,14 @@ const Veiligheid = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Veiligheidsaanpak bespreken</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
                   Contact opnemen

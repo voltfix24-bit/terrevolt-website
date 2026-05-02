@@ -1,6 +1,7 @@
 import { ArrowRight, Cable, Building2, Anchor, ShieldCheck, GitMerge, Gauge, HardHat, Users, ShieldAlert, ClipboardCheck, Check } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const projecten = [
   {
@@ -55,6 +56,8 @@ const rollen = [
 ];
 
 const Projecten = () => {
+  usePageMeta("Projecten | TerreVolt BV", "Projecttypes en praktijkvoorbeelden van TerreVolt binnen LS/MS-infrastructuur, stationsrenovatie, schakelwerk en aarding.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
@@ -90,7 +93,7 @@ const Projecten = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Project bespreken</span>

@@ -1,6 +1,7 @@
 import { ArrowRight, Cable, Layers, ShieldCheck, GitBranch, FileBarChart, Building2, Server, Zap, Factory, Construction, Plug, Activity, ClipboardList, FileCheck } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 const fundament = [
   { icon: Cable, title: "Aardelektroden", description: "Plaatsen van aardelektroden en aardingsvoorzieningen voor technische installaties." },
@@ -26,6 +27,8 @@ const meetbaar = [
 ];
 
 const Aardingsoplossingen = () => {
+  usePageMeta("Aardingsoplossingen | TerreVolt BV", "Aanleg, verbetering, meting en rapportage van aardingsvoorzieningen voor LS/MS-infrastructuur.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
@@ -82,14 +85,14 @@ const Aardingsoplossingen = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Aarding bespreken</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
                   Meetrapportage aanvragen

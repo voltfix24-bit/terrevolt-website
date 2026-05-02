@@ -1,6 +1,7 @@
 import { ArrowRight, Server, Cpu, Zap, Cable, Gauge, ClipboardCheck, Building2, Layers, Boxes, ShieldCheck, CalendarClock, MessageCircle, PackageCheck } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 const werkzaamheden = [
   { icon: Server, title: "LS-rekken vervangen", description: "Ondersteuning bij demontage, montage, kabelafwerking en oplevering van laagspanningsverdelingen." },
@@ -25,6 +26,8 @@ const trustItems = [
 ];
 
 const Stationsrenovatie = () => {
+  usePageMeta("Stationsrenovatie | TerreVolt BV", "Renovatie en inrichting van MS/LS-stations, technische ruimten en transformatorstations.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
@@ -60,14 +63,14 @@ const Stationsrenovatie = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Stationsproject bespreken</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
                   Neem contact op

@@ -5,6 +5,7 @@ import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const PHONE = "+31 (0)20 123 4567";
 const EMAIL = "info@terrevolt.nl";
@@ -44,6 +45,8 @@ const schema = z.object({
 });
 
 const Contact = () => {
+  usePageMeta("Contact | TerreVolt BV", "Neem contact op met TerreVolt voor LS/MS-projecten, stationsrenovatie, schakelwerk, aardingsoplossingen en metingen.");
+
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
 

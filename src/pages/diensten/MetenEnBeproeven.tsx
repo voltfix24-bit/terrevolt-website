@@ -1,6 +1,7 @@
 import { ArrowRight, Gauge, Cable, Zap, Shield, Eye, FileText, Building2, GitMerge, Anchor, AlertTriangle, PlayCircle, PackageCheck, Activity, ClipboardCheck, FileBarChart } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 const metingen = [
   { icon: Gauge, title: "Aardingsmetingen", description: "Meten en vastleggen van aardingsvoorzieningen en aardverspreidingsweerstand." },
@@ -27,6 +28,8 @@ const proces = [
 ];
 
 const MetenEnBeproeven = () => {
+  usePageMeta("Meten & beproeven | TerreVolt BV", "Aardingsmetingen, kabelmetingen, isolatiemetingen en opleverrapportages voor LS/MS-installaties.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
@@ -62,14 +65,14 @@ const MetenEnBeproeven = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Meting aanvragen</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
                   Contact opnemen

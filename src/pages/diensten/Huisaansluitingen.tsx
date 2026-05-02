@@ -1,6 +1,7 @@
 import { ArrowRight, PlugZap, Settings, Trash2, Building, Gauge, Wrench, Network, HardHat, Home, ShieldCheck, ClipboardList, MessageSquare } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 const werkzaamheden = [
   { icon: PlugZap, title: "Nieuwe aansluitingen", description: "Ondersteuning bij aanleg van nieuwe laagspanningsaansluitingen." },
@@ -24,6 +25,8 @@ const trust = [
 ];
 
 const Huisaansluitingen = () => {
+  usePageMeta("Huisaansluitingen | TerreVolt BV", "Aanleg, wijziging, sanering en herstel van laagspanningsaansluitingen voor woningen, complexen en bedrijfspanden.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
@@ -59,14 +62,14 @@ const Huisaansluitingen = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Aansluitwerk bespreken</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
                   Contact opnemen

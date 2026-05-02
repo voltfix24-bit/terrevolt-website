@@ -1,6 +1,7 @@
 import { ArrowRight, ShieldCheck, Wrench, Handshake, Gauge, Cable, Anchor, HardHat } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const waarden = [
   { icon: ShieldCheck, title: "Veiligheid", description: "Werken met aandacht voor mens, installatie en omgeving." },
@@ -16,6 +17,8 @@ const focus = [
 ];
 
 const Over = () => {
+  usePageMeta("Over TerreVolt | TerreVolt BV", "TerreVolt BV is een elektrotechnisch infrabedrijf met focus op LS/MS-infrastructuur, stationsrenovatie, schakelwerk en aardingsoplossingen.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
@@ -51,7 +54,7 @@ const Over = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Contact opnemen</span>

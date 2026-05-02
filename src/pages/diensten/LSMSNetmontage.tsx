@@ -1,6 +1,7 @@
 import { ArrowRight, Cable, Zap, GitMerge, Plug, Workflow, ClipboardCheck, Wrench, Building2, AlertTriangle, Building, HardHat, Factory } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../../hooks/usePageMeta";
 
 const uitvoering = [
   { icon: Cable, title: "LS-kabelmontage", description: "Montage en aansluiting van laagspanningskabels binnen netten, stations en verdeelinrichtingen." },
@@ -24,6 +25,8 @@ const voorWie = [
 ];
 
 const LSMSNetmontage = () => {
+  usePageMeta("LS/MS Netmontage | TerreVolt BV", "Kabelmontage, moffen, eindsluitingen en aansluitwerk binnen laag- en middenspanningsnetten.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
@@ -58,14 +61,14 @@ const LSMSNetmontage = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Netmontage bespreken</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
                   Contact opnemen

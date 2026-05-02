@@ -5,6 +5,7 @@ import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const profielen = [
   { icon: Zap, label: "Laagspanningsmonteurs" },
@@ -40,6 +41,8 @@ const formSchema = z.object({
 });
 
 const WerkenBij = () => {
+  usePageMeta("Werken bij TerreVolt | TerreVolt BV", "Werk mee aan de energie-infrastructuur van Nederland. Vacatures en ZZP-mogelijkheden voor LS/MS-, schakel- en aardingsmonteurs.");
+
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
 

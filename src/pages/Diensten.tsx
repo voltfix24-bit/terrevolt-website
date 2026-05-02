@@ -1,6 +1,7 @@
 import { ArrowRight, CheckCircle2, ClipboardList, FileSearch, ShieldCheck, PackageCheck, Network, Building2, Cog, Gauge, Activity, Home } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { usePageMeta } from "../hooks/usePageMeta";
 
 const services = [
   {
@@ -71,6 +72,8 @@ const steps = [
 ];
 
 const Diensten = () => {
+  usePageMeta("Diensten | TerreVolt BV", "Overzicht van TerreVolt's diensten: LS/MS netmontage, stationsrenovatie, schakelwerk, aardingsoplossingen, meten & beproeven en huisaansluitingen.");
+
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
@@ -106,14 +109,14 @@ const Diensten = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Project bespreken</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
                   Contact opnemen
