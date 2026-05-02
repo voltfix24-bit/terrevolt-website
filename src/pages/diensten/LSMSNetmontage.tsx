@@ -1,6 +1,7 @@
 import { ArrowRight, Cable, Zap, GitMerge, Plug, Workflow, ClipboardCheck, Wrench, Building2, AlertTriangle, Building, HardHat, Factory } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { WhenToCall } from "@/components/terrevolt/WhenToCall";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
 const uitvoering = [
@@ -167,6 +168,18 @@ const LSMSNetmontage = () => {
             </div>
           </div>
         </section>
+
+        {/* SECTIE 3.5: Wanneer schakelt u TerreVolt in? */}
+        <WhenToCall
+          variant="muted"
+          items={[
+            "Bij kabelmontage binnen LS/MS-projecten",
+            "Bij moffen, eindsluitingen en kabelafwerking",
+            "Bij stationswerk of technische ruimten",
+            "Bij uitbreiding, vervanging of sanering",
+            "Bij behoefte aan vakbekwame monteurs of ploegen",
+          ]}
+        />
 
         {/* SECTIE 4: CTA */}
         <section id="contact" className="py-16 md:py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
