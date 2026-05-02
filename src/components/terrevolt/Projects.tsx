@@ -35,7 +35,7 @@ const projects = [
 
 export function Projects() {
   return (
-    <section className="py-24 bg-white">
+    <section id="projecten" className="py-24 bg-white">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Projecttypes en praktijkvoorbeelden</h2>
