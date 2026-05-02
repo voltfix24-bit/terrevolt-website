@@ -250,7 +250,7 @@ const Contact = () => {
         </section>
 
         {/* KEUZEHULP — 3 grote intent-cards die over de hero heen vallen */}
-        <section aria-labelledby="keuzehulp-heading" className="bg-transparent">
+        <section id="keuzehulp" aria-labelledby="keuzehulp-heading" className="bg-transparent scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="relative -mt-16 sm:-mt-20 md:-mt-24 z-20">
               <div id="keuzehulp-heading" className="sr-only">
@@ -309,7 +309,7 @@ const Contact = () => {
         </section>
 
         {/* HOOFDSECTIE — links trust-kolom, rechts formulier */}
-        <section id="aanvraag" className="relative pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 md:pb-20 bg-[#f8f9fa] overflow-hidden">
+        <section id="formulier" className="relative pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 md:pb-20 bg-[#f8f9fa] overflow-hidden scroll-mt-24">
           <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
             <div
               className="absolute inset-0"
@@ -579,7 +579,7 @@ const Contact = () => {
         </section>
 
         {/* DIRECT CONTACT — 3 cards: Bel ons, Mail ons, Werkgebied */}
-        <section className="py-14 md:py-20 bg-white border-t border-gray-100">
+        <section id="direct-contact" className="py-14 md:py-20 bg-white border-t border-gray-100 scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mb-10 sm:mb-12">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl text-[#0d3b2e] mb-3 leading-tight">
@@ -625,7 +625,7 @@ const Contact = () => {
         </section>
 
         {/* SECTIE: Voor wie werken wij */}
-        <section className="py-16 md:py-24 bg-[#f8f9fa]">
+        <section id="doelgroepen" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-12 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voor wie werken wij?</h2>
