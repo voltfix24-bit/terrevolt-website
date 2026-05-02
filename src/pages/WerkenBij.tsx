@@ -510,25 +510,7 @@ const WerkenBij = () => {
           </div>
         </section>
 
-        {/* FUNNEL SUBNAV */}
-        <nav
-          aria-label="Werken bij — secties"
-          className="sticky top-16 sm:top-20 z-30 bg-white/95 backdrop-blur border-b border-gray-200"
-        >
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="flex gap-2 sm:gap-3 overflow-x-auto py-3 -mx-1 px-1 scrollbar-hide">
-              {funnelNav.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="flex-shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-[#0d3b2e] text-sm hover:border-[#9ed42e] hover:bg-[#f0f7e6] transition-all min-h-[44px] flex items-center"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </nav>
+        {/* (Dubbele FUNNEL SUBNAV verwijderd — sticky subnav staat verderop, zie 'Paginanavigatie Werken bij'.) */}
 
         {/* QUICK NAV CHIPS */}
         <section className="py-8 md:py-10 bg-white border-b border-gray-100">
