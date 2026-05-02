@@ -54,11 +54,11 @@ const Veiligheid = () => {
                 Veiligheid
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight hyphens-nl">
-                Veiligheid, certificeringen<br />
-                <span className="text-[#9ed42e]">& normen</span>
+                We doen het veilig,<br />
+                <span className="text-[#9ed42e]">of we doen het niet.</span>
               </h1>
               <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
-                Werken aan elektrotechnische infrastructuur vraagt om vakbekwaamheid, veiligheidsbewustzijn en duidelijke procedures. TerreVolt werkt met aandacht voor geldende normen, aanwijzingen en projectafspraken.
+                Werken aan LS/MS-infrastructuur vraagt om meer dan vakmanschap. Het vraagt om de discipline om stil te staan, risico's te herkennen en pas te starten als het veilig kan. Voor TerreVolt is veiligheid geen formaliteit, maar de afspraak dat iedereen aan het einde van de dag veilig naar huis gaat.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -165,10 +165,13 @@ const Veiligheid = () => {
                 Wat dit betekent voor uw project
               </div>
               <h2 className="text-3xl sm:text-4xl text-white mb-6 leading-tight">
-                Veiligheid is geen bijzaak — het is de basis van elke opdracht
+                Iedereen veilig thuis. Altijd.
               </h2>
               <p className="text-lg text-gray-300 leading-relaxed">
-                Elk project start met een heldere veiligheidsstructuur: passende aanwijzingen, duidelijke bevoegdheden en afgesproken procedures. Dat is geen papieren exercitie — het is hoe TerreVolt werkt.
+                BEI, VCA, LMRA, NEN en projectafspraken zijn geen papieren verplichtingen, maar middelen om veilig te werken. Voor de monteur, de ploeg, de uitvoerende partij en iedereen op locatie.
+              </p>
+              <p className="mt-4 text-base sm:text-lg text-[#9ed42e] leading-relaxed">
+                Geen planning of deadline is belangrijker dan veiligheid.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-12 text-left">

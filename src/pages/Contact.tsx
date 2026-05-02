@@ -280,7 +280,7 @@ const Contact = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                 {[
-                  { icon: ShieldCheck, title: "Veiligheid geborgd", text: "We werken met aandacht voor BEI, VCA, NEN 3140 en passende bevoegdheden voor het project." },
+                  { icon: ShieldCheck, title: "Veiligheid geborgd", text: "Veiligheid begint bij mensen. Wij werken met aandacht voor BEI, VCA, LMRA, NEN 3140 en passende bevoegdheden, zodat iedereen veilig thuis komt." },
                   { icon: ClipboardCheck, title: "Duidelijke oplevering", text: "Meetrapportages, oplevercontroles en documentatie waar nodig als onderdeel van de uitvoering." },
                   { icon: MessageSquare, title: "Korte lijnen", text: "Directe communicatie met uitvoering en planning. Praktisch, duidelijk en zonder onnodige schakels." },
                 ].map((t) => {

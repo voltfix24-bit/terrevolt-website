@@ -97,6 +97,8 @@ export function Footer() {
             <span>NEN 1010 / NEN 3140</span>
             <span className="w-1 h-1 rounded-full bg-gray-600" />
             <span>AVP / VP / VOP / WV</span>
+            <span className="w-1 h-1 rounded-full bg-gray-600" />
+            <span className="italic text-gray-500">We doen het veilig, of we doen het niet.</span>
           </div>
           <div className="flex gap-6">
             <Link to="/privacy" className="inline-flex items-center min-h-[44px] py-2 hover:text-[#9ed42e] transition-colors">Privacy</Link>

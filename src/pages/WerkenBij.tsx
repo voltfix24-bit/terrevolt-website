@@ -55,6 +55,7 @@ const faqs: { q: string; a: string }[] = [
   { q: "Hoe snel nemen jullie contact op?", a: "Na je aanmelding proberen we snel contact op te nemen om je ervaring, beschikbaarheid en mogelijke projectmatch te bespreken." },
   { q: "Werken jullie met losse monteurs of complete ploegen?", a: "Beide zijn mogelijk. We kijken per project of een losse specialist, vaste ploeg of ZZP-team passend is." },
   { q: "Welke documenten hebben jullie nodig?", a: "Dat verschilt per project, maar denk aan VCA, relevante BEI-aanwijzingen, certificaten, KvK-gegevens bij ZZP en eventueel verzekering of ID-check volgens projectvereisten." },
+  { q: "Wat als een situatie op locatie niet veilig voelt?", a: "Dan wordt er niet zomaar doorgewerkt. Veiligheid gaat voor. Bespreek het met je aanspreekpunt, uitvoerder of werkverantwoordelijke. We doen het veilig, of we doen het niet." },
 ];
 
 const slugIconMap: Record<string, typeof Zap> = {
@@ -494,6 +495,13 @@ const WerkenBij = () => {
                   );
                 })}
               </ul>
+
+              <div className="mt-6 max-w-3xl bg-white/5 border border-[#9ed42e]/30 rounded-lg p-4 sm:p-5">
+                <div className="text-[#9ed42e] text-sm uppercase tracking-wider mb-1">Veiligheid boven tempo</div>
+                <p className="text-white/90 text-sm sm:text-base leading-relaxed">
+                  Je krijgt liever ruimte om het werk goed en veilig te doen dan druk om onverantwoord door te gaan. We doen het veilig, of we doen het niet.
+                </p>
+              </div>
 
               <p className="text-gray-400 text-sm mt-4 max-w-xl">
                 Tarieven en salaris bespreken we tijdens de kennismaking — afgestemd op jouw ervaring, bevoegdheden en de manier van samenwerken.

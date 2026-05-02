@@ -1,10 +1,10 @@
-import { ShieldCheck, Award, ClipboardCheck, MapPin } from "lucide-react";
+import { ShieldCheck, Award, ClipboardCheck } from "lucide-react";
 
 const items = [
   { icon: ShieldCheck, label: "Veiligheidsstructuur", value: "BEI BLS/BHS" },
   { icon: Award, label: "Veilig werken", value: "VCA" },
   { icon: ClipboardCheck, label: "Normen", value: "NEN 3140 / NEN 1010" },
-  { icon: MapPin, label: "Werkgebied", value: "Nederland / projectlocaties" },
+  { icon: ShieldCheck, label: "Veiligheidsfilosofie", value: "We doen het veilig" },
 ];
 
 export function TrustStrip() {
@@ -30,6 +30,9 @@ export function TrustStrip() {
             );
           })}
         </div>
+        <p className="mt-4 text-center text-xs sm:text-sm text-[#6c757d] italic">
+          We doen het veilig, of we doen het niet.
+        </p>
       </div>
     </section>
   );
