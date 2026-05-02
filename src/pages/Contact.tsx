@@ -202,7 +202,7 @@ const Contact = () => {
         <section id="aanvraag" className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-10">
                 <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                   Projectaanvraag
                 </div>
@@ -212,10 +212,58 @@ const Contact = () => {
                 </p>
               </div>
 
+              {/* Intentie-keuze */}
+              <fieldset className="mb-6">
+                <legend className="block text-sm text-[#0d3b2e] mb-3">Waar wil je het over hebben?</legend>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  {intents.map((it) => {
+                    const Icon = it.icon;
+                    const active = intent === it.id;
+                    return (
+                      <button
+                        key={it.id}
+                        type="button"
+                        onClick={() => setIntent(it.id)}
+                        aria-pressed={active}
+                        className={`flex items-start gap-2.5 text-left rounded-xl border px-3.5 py-3 min-h-[60px] transition-colors ${
+                          active
+                            ? "bg-[#f0f7e6] border-[#9ed42e] ring-1 ring-[#9ed42e]"
+                            : "bg-white border-gray-200 hover:border-[#9ed42e]"
+                        }`}
+                      >
+                        <Icon className={`w-5 h-5 mt-0.5 flex-shrink-0 ${active ? "text-[#0d3b2e]" : "text-[#6c757d]"}`} strokeWidth={2} />
+                        <span className="min-w-0">
+                          <span className="block text-sm text-[#0d3b2e]">{it.label}</span>
+                          <span className="block text-[11px] text-[#6c757d] leading-snug mt-0.5">{it.helper}</span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </fieldset>
+
+              {intent === "sollicitatie" && (
+                <div className="mb-6 flex items-start gap-3 bg-[#f0f7e6] border border-[#9ed42e] rounded-xl p-4">
+                  <HardHat className="w-5 h-5 text-[#0d3b2e] flex-shrink-0 mt-0.5" strokeWidth={2.2} />
+                  <div className="min-w-0 flex-1">
+                    <div className="text-sm text-[#0d3b2e]">
+                      Wil je je aanmelden als monteur of ZZP'er? Ga naar Werken bij TerreVolt voor het juiste aanmeldformulier en alle profielen.
+                    </div>
+                    <Link
+                      to="/werken-bij"
+                      className="inline-flex items-center gap-1.5 mt-2 text-sm text-[#0d3b2e] underline underline-offset-4 hover:text-[#1a4a36]"
+                    >
+                      Naar Werken bij TerreVolt <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              )}
+
               <form
                 onSubmit={handleSubmit}
                 className="bg-white rounded-2xl p-8 sm:p-10 border border-gray-200 shadow-sm space-y-6"
               >
+                <input type="hidden" name="intent" value={intent} readOnly />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm text-[#0d3b2e] mb-2">Naam *</label>
