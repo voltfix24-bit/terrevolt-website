@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { memo, useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react";
 
 type Props = {
   /** Volledige tekst die in de tooltip getoond wordt. */
@@ -17,23 +17,26 @@ type Props = {
  * - Touch:   tap toont tooltip (auto-hide na 2.5s); tap buiten of nieuwe tap sluit.
  * - Escape sluit altijd.
  */
-export const MetaTooltip = ({ label, enabled = true, children, className }: Props) => {
+const MetaTooltipImpl = ({ label, enabled = true, children, className }: Props) => {
   const [open, setOpen] = useState(false);
   const id = useId();
   const wrapRef = useRef<HTMLSpanElement>(null);
   const hideTimer = useRef<number | null>(null);
 
-  const clearHide = () => {
+  const clearHide = useCallback(() => {
     if (hideTimer.current !== null) {
       window.clearTimeout(hideTimer.current);
       hideTimer.current = null;
     }
-  };
+  }, []);
 
-  const scheduleHide = (ms: number) => {
-    clearHide();
-    hideTimer.current = window.setTimeout(() => setOpen(false), ms);
-  };
+  const scheduleHide = useCallback(
+    (ms: number) => {
+      clearHide();
+      hideTimer.current = window.setTimeout(() => setOpen(false), ms);
+    },
+    [clearHide],
+  );
 
   useEffect(() => {
     if (!open) return;
@@ -51,7 +54,32 @@ export const MetaTooltip = ({ label, enabled = true, children, className }: Prop
     };
   }, [open]);
 
-  useEffect(() => () => clearHide(), []);
+  useEffect(() => () => clearHide(), [clearHide]);
+
+  const handlePointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      if (e.pointerType === "touch") {
+        setOpen((prev) => {
+          if (prev) {
+            clearHide();
+            return false;
+          }
+          scheduleHide(2500);
+          return true;
+        });
+      }
+    },
+    [clearHide, scheduleHide],
+  );
+
+  const handleMouseEnter = useCallback(() => {
+    clearHide();
+    setOpen(true);
+  }, [clearHide]);
+
+  const handleMouseLeave = useCallback(() => setOpen(false), []);
+  const handleFocus = useCallback(() => setOpen(true), []);
+  const handleBlur = useCallback(() => setOpen(false), []);
 
   if (!enabled) {
     return <span className={className}>{children}</span>;
