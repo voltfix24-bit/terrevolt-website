@@ -44,8 +44,24 @@ export function Footer() {
           <div>
             <h4 className="text-white mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href={telHref} className="hover:text-[#9ed42e] transition-colors">{company.phone.display}</a></li>
-              <li><a href={mailHref} className="hover:text-[#9ed42e] transition-colors">{company.email}</a></li>
+              <li>
+                <a
+                  href={telHref}
+                  aria-label={`Bel TerreVolt op ${company.phone.display}`}
+                  className="inline-flex items-center min-h-[44px] -my-1 py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 active:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] rounded-md transition-colors"
+                >
+                  {company.phone.display}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={mailHref}
+                  aria-label={`Mail TerreVolt op ${company.email}`}
+                  className="inline-flex items-center min-h-[44px] -my-1 py-2 break-all hover:text-[#9ed42e] hover:underline underline-offset-4 active:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] rounded-md transition-colors"
+                >
+                  {company.email}
+                </a>
+              </li>
               <li className="not-italic">
                 <address className="not-italic leading-relaxed">
                   {company.address.street}<br />

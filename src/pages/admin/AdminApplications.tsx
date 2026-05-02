@@ -101,8 +101,8 @@ export default function AdminApplications() {
                     </TableCell>
                     <TableCell className="text-[#0d3b2e]">{a.name}</TableCell>
                     <TableCell>{a.vacancies?.title || "—"}</TableCell>
-                    <TableCell><a href={`tel:${a.phone}`} className="hover:text-[#9ed42e]">{a.phone}</a></TableCell>
-                    <TableCell><a href={`mailto:${a.email}`} className="hover:text-[#9ed42e]">{a.email}</a></TableCell>
+                    <TableCell><a href={`tel:${a.phone}`} aria-label={`Bel ${a.phone}`} className="inline-flex items-center min-h-[40px] py-1 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors">{a.phone}</a></TableCell>
+                    <TableCell><a href={`mailto:${a.email}`} aria-label={`Mail ${a.email}`} className="inline-flex items-center min-h-[40px] py-1 break-all hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors">{a.email}</a></TableCell>
                     <TableCell>{a.region || "—"}</TableCell>
                     <TableCell>
                       <Badge variant="secondary">{STATUSES.find((s) => s.value === a.status)?.label || a.status}</Badge>
@@ -118,8 +118,8 @@ export default function AdminApplications() {
                           </DialogHeader>
                           <div className="space-y-4 text-sm">
                             <div className="flex flex-wrap gap-4 text-[#0d3b2e]">
-                              <a href={`mailto:${a.email}`} className="flex items-center gap-1.5 hover:text-[#9ed42e]"><Mail className="w-4 h-4" /> {a.email}</a>
-                              <a href={`tel:${a.phone}`} className="flex items-center gap-1.5 hover:text-[#9ed42e]"><Phone className="w-4 h-4" /> {a.phone}</a>
+                              <a href={`mailto:${a.email}`} aria-label={`Mail ${a.email}`} className="flex items-center gap-1.5 min-h-[44px] py-2 break-all hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors"><Mail className="w-4 h-4 shrink-0" /> {a.email}</a>
+                              <a href={`tel:${a.phone}`} aria-label={`Bel ${a.phone}`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors"><Phone className="w-4 h-4 shrink-0" /> {a.phone}</a>
                               {a.region && <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> {a.region}</span>}
                             </div>
 
