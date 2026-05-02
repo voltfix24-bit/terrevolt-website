@@ -779,7 +779,12 @@ const WerkenBij = () => {
               <form
                 ref={formRef}
                 onSubmit={handleSubmit}
-                onChange={() => { if (submitError) setSubmitError(null); }}
+                onChange={(e) => {
+                  if (submitError) setSubmitError(null);
+                  const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+                  const name = target?.name as keyof FieldErrors | undefined;
+                  if (name && errors[name]) clearFieldError(name);
+                }}
                 noValidate
                 aria-describedby={submitError || Object.keys(errors).length > 0 ? "form-error-banner" : undefined}
                 className="bg-[#f8f9fa] rounded-2xl p-5 sm:p-10 border border-gray-200 shadow-sm space-y-6"
