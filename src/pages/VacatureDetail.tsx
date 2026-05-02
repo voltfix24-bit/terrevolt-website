@@ -340,13 +340,18 @@ const VacatureDetail = () => {
     try {
       let cv_url: string | null = null;
       if (file) {
-        const ext = file.name.split(".").pop() || "bin";
-        const path = `${crypto.randomUUID()}.${ext}`;
-        const { error: upErr } = await supabase.storage
-          .from("job-applications")
-          .upload(path, file, { contentType: file.type || undefined });
-        if (upErr) throw upErr;
-        cv_url = path;
+        setUploadingFile(true);
+        try {
+          const ext = file.name.split(".").pop() || "bin";
+          const path = `${crypto.randomUUID()}.${ext}`;
+          const { error: upErr } = await supabase.storage
+            .from("job-applications")
+            .upload(path, file, { contentType: file.type || undefined });
+          if (upErr) throw upErr;
+          cv_url = path;
+        } finally {
+          setUploadingFile(false);
+        }
       }
 
       const messagePrefix = `Vacature: ${vacature.title}${parsed.data.contact_pref ? ` | Contactvoorkeur: ${parsed.data.contact_pref}` : ""}`;
