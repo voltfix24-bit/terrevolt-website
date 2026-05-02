@@ -55,6 +55,7 @@ const faqs: { q: string; a: string }[] = [
   { q: "Hoe snel nemen jullie contact op?", a: "Na je aanmelding proberen we snel contact op te nemen om je ervaring, beschikbaarheid en mogelijke projectmatch te bespreken." },
   { q: "Werken jullie met losse monteurs of complete ploegen?", a: "Beide zijn mogelijk. We kijken per project of een losse specialist, vaste ploeg of ZZP-team passend is." },
   { q: "Welke documenten hebben jullie nodig?", a: "Dat verschilt per project, maar denk aan VCA, relevante BEI-aanwijzingen, certificaten, KvK-gegevens bij ZZP en eventueel verzekering of ID-check volgens projectvereisten." },
+  { q: "Wat als een situatie op locatie niet veilig voelt?", a: "Dan wordt er niet zomaar doorgewerkt. Veiligheid gaat voor. Bespreek het met je aanspreekpunt, uitvoerder of werkverantwoordelijke. We doen het veilig, of we doen het niet." },
 ];
 
 const slugIconMap: Record<string, typeof Zap> = {
