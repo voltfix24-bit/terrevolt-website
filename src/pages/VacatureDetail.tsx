@@ -421,6 +421,7 @@ const VacatureDetail = () => {
       formRef.current?.reset();
       setFile(null);
       setFileError(null);
+      setNoCv(false);
       setSuccess(true);
     } catch (err) {
       console.error(err);
