@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import {
   ArrowRight,
@@ -20,6 +20,7 @@ import {
   FileCheck2,
   Layers,
   PlayCircle,
+  X,
 } from "lucide-react";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
@@ -29,16 +30,21 @@ import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { findVacature } from "@/data/vacatures";
 
+const contactVoorkeurOpties = ["Bellen", "WhatsApp", "E-mail", "Maakt niet uit"];
+
 const formSchema = z.object({
   name: z.string().trim().min(2, "Naam is verplicht").max(100),
   phone: z.string().trim().min(6, "Telefoonnummer is verplicht").max(30),
   email: z.string().trim().email("Ongeldig e-mailadres").max(255),
-  profile: z.string().trim().max(150).optional(),
   region: z.string().trim().max(100).optional(),
+  contact_pref: z.string().trim().max(50).optional(),
   availability: z.string().trim().max(200).optional(),
   certifications: z.string().trim().max(1000).optional(),
   message: z.string().trim().max(2000).optional(),
+  privacy: z.literal("on", { errorMap: () => ({ message: "Akkoord met privacyverklaring is verplicht" }) }),
 });
+
+type FieldErrors = Partial<Record<keyof z.infer<typeof formSchema>, string>>;
 
 const proces = [
   { icon: UserPlus, title: "Aanmelden", text: "Je stuurt het formulier in met je gegevens en certificaten." },
