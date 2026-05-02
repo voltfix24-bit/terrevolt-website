@@ -213,6 +213,7 @@ const WerkenBij = () => {
       privacy: fd.get("privacy") ? "on" : "",
     };
 
+    setSubmitError(null);
     const parsed = formSchema.safeParse(raw);
     if (!parsed.success) {
       const fe: FieldErrors = {};
@@ -221,13 +222,20 @@ const WerkenBij = () => {
         if (k && !fe[k]) fe[k] = err.message;
       });
       setErrors(fe);
-      toast.error(parsed.error.errors[0]?.message || "Controleer het formulier");
-      focusFirstError(fe);
+      const count = Object.keys(fe).length;
+      toast.error(count === 1 ? parsed.error.errors[0]?.message ?? "Controleer het formulier" : `Controleer ${count} velden`);
+      // Scroll banner in beeld + focus eerste foute veld
+      requestAnimationFrame(() => {
+        errorBannerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        focusFirstError(fe);
+      });
       return;
     }
     setErrors({});
     if (file && file.size > 10 * 1024 * 1024) {
-      toast.error("Bestand mag maximaal 10MB zijn");
+      const msg = "Bestand mag maximaal 10MB zijn";
+      setSubmitError(msg);
+      toast.error(msg);
       return;
     }
 
