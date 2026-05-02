@@ -1,4 +1,5 @@
 import { Building, HardHat, Factory } from "lucide-react";
+import { Reveal } from "@/components/terrevolt/Reveal";
 
 const targets = [
   {
