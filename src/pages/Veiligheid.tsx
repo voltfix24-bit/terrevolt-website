@@ -80,7 +80,7 @@ const Veiligheid = () => {
                 <span className="text-[#9ed42e]">of we doen het niet.</span>
               </h1>
               <p className="text-base sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed hyphens-nl text-pretty">
-                Werken aan LS/MS-infrastructuur vraagt om vakmanschap, discipline en het lef om te stoppen wanneer iets niet veilig voelt. Voor TerreVolt is veiligheid geen formaliteit, maar&nbsp;— waar van toepassing&nbsp;— een uitgangspunt van elke opdracht: voor de monteur, de ploeg, de uitvoerende partij en iedereen op locatie.
+                Werken aan LS/MS-infrastructuur vraagt om vakmanschap, discipline en het lef om te stoppen wanneer iets niet veilig voelt. Voor TerreVolt is veiligheid geen formaliteit, maar een uitgangspunt van elke opdracht — voor de monteur, de ploeg, de uitvoerende partij en iedereen op locatie.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -136,7 +136,7 @@ const Veiligheid = () => {
             <div className="text-center mb-14 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Onze veiligheidsaanpak</h2>
               <p className="text-base sm:text-xl text-[#6c757d] max-w-2xl mx-auto leading-relaxed hyphens-nl text-pretty">
-                Een veilige uitvoering begint vóór de eerste handeling. TerreVolt werkt, waar van toepassing, met een gestructureerde aanpak van voorbereiding tot oplevering, afgestemd op de projectafspraken.
+                Een veilige uitvoering begint vóór de eerste handeling. TerreVolt werkt met een gestructureerde aanpak van voorbereiding tot oplevering, afgestemd op de opdracht, locatie en geldende projectafspraken.
               </p>
             </div>
 
@@ -218,7 +218,7 @@ const Veiligheid = () => {
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 hyphens-nl">Bevoegdheden, rollen en normen</h2>
               <p className="text-base sm:text-lg text-gray-300 leading-relaxed hyphens-nl text-pretty">
-                Veilig werken binnen de netbeheerwereld vraagt om duidelijkheid in rollen, aanwijzingen en procedures. TerreVolt sluit aan op de veiligheidsstructuur, projectafspraken en bedrijfsspecifieke eisen van opdrachtgever of netbeheerder, waar van toepassing.
+                Veilig werken binnen de netbeheerwereld vraagt om duidelijkheid in rollen, aanwijzingen en procedures. TerreVolt sluit aan op de veiligheidsstructuur en bedrijfsspecifieke eisen van opdrachtgever of netbeheerder, afgestemd op de opdracht, locatie en geldende projectafspraken.
               </p>
             </div>
 
@@ -338,7 +338,7 @@ const Veiligheid = () => {
                 Een LS/MS-project <span className="text-[#9ed42e]">veilig voorbereiden</span>?
               </h2>
               <p className="text-base sm:text-xl text-gray-300 mb-10 leading-relaxed hyphens-nl text-pretty">
-                Neem contact op met TerreVolt voor projectmatige ondersteuning waarbij veiligheid, vakmanschap en duidelijke afspraken&nbsp;— waar van toepassing&nbsp;— centraal staan.
+                Neem contact op met TerreVolt voor projectmatige ondersteuning waarbij veiligheid, vakmanschap en duidelijke afspraken centraal staan — afgestemd op de opdracht, locatie en geldende projectafspraken.
               </p>
               <a
                 href="/contact"
