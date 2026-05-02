@@ -21,24 +21,24 @@ export function Footer() {
 
           <div>
             <h4 className="text-white mb-4">Diensten</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="/diensten/ls-ms-netmontage" className="hover:text-[#9ed42e] transition-colors">LS/MS Netmontage</a></li>
-              <li><a href="/diensten/stationsrenovatie" className="hover:text-[#9ed42e] transition-colors">Stationsrenovatie</a></li>
-              <li><a href="/diensten/schakelwerk" className="hover:text-[#9ed42e] transition-colors">Schakelwerk</a></li>
-              <li><a href="/diensten/aardingsoplossingen" className="hover:text-[#9ed42e] transition-colors">Aardingsoplossingen</a></li>
-              <li><a href="/diensten/meten-en-beproeven" className="hover:text-[#9ed42e] transition-colors">Meten & beproeven</a></li>
-              <li><a href="/diensten/huisaansluitingen" className="hover:text-[#9ed42e] transition-colors">Huisaansluitingen</a></li>
+            <ul className="space-y-1 text-sm">
+              <li><a href="/diensten/ls-ms-netmontage" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">LS/MS Netmontage</a></li>
+              <li><a href="/diensten/stationsrenovatie" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Stationsrenovatie</a></li>
+              <li><a href="/diensten/schakelwerk" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Schakelwerk</a></li>
+              <li><a href="/diensten/aardingsoplossingen" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Aardingsoplossingen</a></li>
+              <li><a href="/diensten/meten-en-beproeven" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Meten &amp; beproeven</a></li>
+              <li><a href="/diensten/huisaansluitingen" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Huisaansluitingen</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-white mb-4">Bedrijf</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="/over" className="hover:text-[#9ed42e] transition-colors">Over TerreVolt</a></li>
-              <li><a href="/projecten" className="hover:text-[#9ed42e] transition-colors">Projecten</a></li>
-              <li><a href="/veiligheid" className="hover:text-[#9ed42e] transition-colors">Veiligheid</a></li>
-              <li><a href="/werken-bij" className="hover:text-[#9ed42e] transition-colors">Werken bij ons</a></li>
-              <li><a href="/werken-bij#zzp" className="hover:text-[#9ed42e] transition-colors">ZZP'ers & monteurs</a></li>
+            <ul className="space-y-1 text-sm">
+              <li><a href="/over" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Over TerreVolt</a></li>
+              <li><a href="/projecten" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Projecten</a></li>
+              <li><a href="/veiligheid" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Veiligheid</a></li>
+              <li><a href="/werken-bij" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Werken bij ons</a></li>
+              <li><a href="/werken-bij#zzp" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">ZZP'ers &amp; monteurs</a></li>
             </ul>
           </div>
 

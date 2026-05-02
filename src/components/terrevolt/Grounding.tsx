@@ -30,7 +30,7 @@ const groundingServices = [
 
 export function Grounding() {
   return (
-    <section id="aarding" className="py-16 md:py-16 md:py-24 bg-[#0d3b2e] relative overflow-hidden">
+    <section id="aarding" className="py-16 md:py-24 bg-[#0d3b2e] relative overflow-hidden">
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
           backgroundImage: `
@@ -42,17 +42,17 @@ export function Grounding() {
       </div>
 
       <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+        <div className="text-center mb-10 sm:mb-14 md:mb-16">
+          <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-5 sm:mb-6 tracking-wider uppercase">
             Specialisme
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4">Aardingsoplossingen</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-3 sm:mb-4">Aardingsoplossingen</h2>
+          <p className="text-base sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Een betrouwbare aarding is de basis van veilige elektrotechnische infrastructuur. TerreVolt realiseert, verbetert, meet en rapporteert aardingssystemen voor LS/MS-stations, technische ruimten en industriële installaties.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6">
           {groundingServices.map((service, index) => {
             const Icon = service.icon;
             return (
@@ -63,8 +63,8 @@ export function Grounding() {
                 <div className="w-12 h-12 bg-[#9ed42e] rounded-lg flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.5} />
                 </div>
-                <h3 className="text-lg text-white mb-2">{service.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{service.description}</p>
+                <h3 className="text-lg text-white mb-2 hyphens-nl">{service.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed hyphens-nl">{service.description}</p>
               </div>
             );
           })}

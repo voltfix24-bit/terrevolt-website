@@ -43,7 +43,7 @@ export function Header() {
             </div>
             <div className="min-w-0">
               <div className="text-base sm:text-xl text-[#0d3b2e] truncate leading-tight">TerreVolt BV</div>
-              <div className="text-[11px] sm:text-xs text-[#6c757d] truncate leading-tight">LS/MS-infrastructuur</div>
+              <div className="hidden xs:block text-[11px] sm:text-xs text-[#6c757d] truncate leading-tight">LS/MS-infrastructuur</div>
             </div>
           </a>
 
@@ -70,7 +70,7 @@ export function Header() {
           </nav>
 
           <button
-            className="lg:hidden text-[#0d3b2e] p-2 -mr-2 flex-shrink-0"
+            className="lg:hidden text-[#0d3b2e] inline-flex items-center justify-center w-11 h-11 -mr-2 flex-shrink-0 rounded-md hover:bg-[#f0f7e6] transition-colors"
             onClick={() => setOpen((o) => !o)}
             aria-label={open ? "Menu sluiten" : "Menu openen"}
             aria-expanded={open}
@@ -104,7 +104,7 @@ export function Header() {
                     Bekijk profielen voor monteurs, werkverantwoordelijken en ZZP-ploegen.
                   </div>
                   <div className="inline-flex items-center gap-1.5 text-[#9ed42e] text-sm mt-2">
-                    Bekijk Werken bij <ArrowRight className="w-3.5 h-3.5" />
+                    Werken bij bekijken <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
               </div>
@@ -120,14 +120,6 @@ export function Header() {
                 {l.label}
               </a>
             ))}
-
-            <a
-              href="/werken-bij"
-              onClick={() => setOpen(false)}
-              className="text-[#0d3b2e] bg-[#f0f7e6] border border-[#9ed42e] py-3 px-3 rounded-lg flex items-center gap-2 min-h-[44px] mt-1"
-            >
-              <HardHat className="w-4 h-4" /> Werken bij
-            </a>
             <a
               href="/contact"
               onClick={() => setOpen(false)}
