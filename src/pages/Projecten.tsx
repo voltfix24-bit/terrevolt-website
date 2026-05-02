@@ -8,55 +8,73 @@ const projecten = [
   {
     icon: Cable,
     label: "LS-Infrastructuur",
-    title: "Laagspanningsrek vervangen",
-    description: "Ondersteuning bij demontage, montage, kabelafwerking en oplevering van laagspanningsverdelingen.",
+    tag: "Uitvoering & oplevering",
+    title: "Vervanging laagspanningsrek bij verdeelstation",
+    situation: "Een verouderd LS-rek moet worden vervangen binnen een gepland onderhoudsvenster met minimale hinder voor de omgeving.",
+    approach: "TerreVolt ondersteunt bij demontage, montage en kabelafwerking van het nieuwe LS-rek inclusief afgaande velden, in afstemming met de werkverantwoordelijke van de opdrachtgever.",
+    result: "Een gecontroleerde oplevering met duidelijke terugkoppeling, controle en waar nodig opleverdocumentatie.",
     bullets: ["LS-rek en afgaande velden", "Kabels opnieuw aansluiten", "Controle en oplevering"],
-    rol: ["Uitvoering", "Controle", "Oplevering"],
+    rol: ["Uitvoering", "Oplevering"],
     serviceHref: "/diensten/ls-ms-netmontage",
   },
   {
     icon: Building2,
     label: "Stationsrenovatie",
-    title: "MS/LS-stationsrenovatie",
-    description: "Uitvoering en ondersteuning bij renovatie van technische ruimten, schakelinstallaties, transformatoren en aarding.",
-    bullets: ["MS-installatie en transformator", "LS-verdeling en kabelwerk", "Stationsaarding"],
-    rol: ["Uitvoering", "Ondersteuning", "Oplevering"],
+    tag: "Renovatie & aarding",
+    title: "Renovatie MS/LS-station of transformatorruimte",
+    situation: "Een technische ruimte of station moet worden aangepast, vernieuwd of voorbereid op nieuwe installaties.",
+    approach: "TerreVolt ondersteunt bij MS-installatie, LS-verdeling, kabelmontage en stationsaarding. Schakelwerk en veiligstelling vinden plaats volgens geldende projectafspraken.",
+    result: "Een veilige, overzichtelijke en oplevergerichte renovatie met aandacht voor aarding, kabelwerk en documentatie.",
+    bullets: ["MS-installatie en schakelwerk", "Stationsaarding", "Opleverdossier"],
+    rol: ["Uitvoering", "Aarding", "Rapportage"],
     serviceHref: "/diensten/stationsrenovatie",
   },
   {
     icon: Anchor,
     label: "Aarding",
+    tag: "Meting & rapportage",
     title: "Aardingsverbetering technische ruimte",
-    description: "Inspectie, verbetering en meting van aardingsvoorzieningen voor veilige en betrouwbare installaties.",
-    bullets: ["Aardelektroden plaatsen", "Aardverspreidingsweerstand meten", "Meetrapportage opleveren"],
+    situation: "Een bestaande aardingsvoorziening moet worden gecontroleerd, verbeterd of meetbaar worden opgeleverd.",
+    approach: "TerreVolt inspecteert het bestaande aardingssysteem, plaatst waar nodig aanvullende aardelektroden en voert metingen en potentiaalvereffening uit.",
+    result: "Een aantoonbaar verbeterde aardingsvoorziening met duidelijke meetrapportage en opleverdocumentatie.",
+    bullets: ["Inspectie en verbetering aarding", "Meting aardverspreidingsweerstand", "Opleverdocumentatie"],
     rol: ["Uitvoering", "Meting", "Rapportage"],
     serviceHref: "/diensten/aardingsoplossingen",
   },
   {
     icon: ShieldCheck,
     label: "Schakelwerk",
-    title: "Veiligstellen bij stationswerk",
-    description: "Ondersteuning bij vrijschakelen, veiligstellen en terugschakelen tijdens LS/MS-werkzaamheden.",
-    bullets: ["In- en uitbedrijf nemen", "Veilig werkgebied", "Afstemming met uitvoering"],
-    rol: ["Ondersteuning", "Controle"],
+    tag: "Veiligstellen",
+    title: "Vrijschakelen en veiligstellen bij stationswerk",
+    situation: "Bij stationswerk of kabelwerk moet een installatie veilig worden vrijgeschakeld voordat werkzaamheden kunnen starten.",
+    approach: "TerreVolt ondersteunt bij vrijschakelen, vergrendelen, veiligstellen en terugschakelen in afstemming met de werkverantwoordelijke en uitvoerende partijen.",
+    result: "Een veilig werkgebied en duidelijke overdracht voor uitvoering en oplevering.",
+    bullets: ["Vrijschakelen", "Veilig werkgebied", "Terugschakelen en oplevering"],
+    rol: ["Schakelwerk", "Veiligstellen"],
     serviceHref: "/diensten/schakelwerk",
   },
   {
     icon: Cable,
     label: "Netmontage",
-    title: "Kabelmontage LS/MS",
-    description: "Kabelinvoer, afmontage, moffen en eindsluitingen binnen technische ruimten en netstructuren.",
-    bullets: ["Kabelmontage", "Eindsluitingen", "Oplevercontrole"],
+    tag: "Kabelmontage",
+    title: "MS-kabelmontage bij transformatorstation",
+    situation: "Bij nieuwbouw, renovatie of uitbreiding van een station moeten kabels worden ingevoerd, afgemonteerd en gecontroleerd.",
+    approach: "TerreVolt ondersteunt bij kabelinvoer, moffen en eindsluitingen in technische ruimten, afgestemd op projecttekeningen en uitvoeringsafspraken.",
+    result: "Correct afgemonteerde kabels, gereed voor controle, beproeving of inbedrijfstelling.",
+    bullets: ["Kabelinvoer en afmontage", "Moffen en eindsluitingen", "Oplevercontrole"],
     rol: ["Uitvoering", "Oplevering"],
     serviceHref: "/diensten/ls-ms-netmontage",
   },
   {
     icon: FileBarChart,
     label: "Metingen",
-    title: "Oplevermetingen en rapportage",
-    description: "Controlemetingen en duidelijke rapportage voor oplevering van aardings- en kabelwerk.",
-    bullets: ["Controlemetingen", "Meetrapportage", "Opleverdossier"],
-    rol: ["Meting", "Rapportage", "Oplevering"],
+    tag: "Aardingsmetingen",
+    title: "Oplevermetingen na stationswerkzaamheden",
+    situation: "Na werkzaamheden aan stations, kabels of aarding moeten metingen worden uitgevoerd en vastgelegd voor het opleverdossier.",
+    approach: "TerreVolt voert controlemetingen uit, waaronder aardingsmetingen en vastlegging van meetresultaten in een duidelijke rapportage.",
+    result: "Meetgegevens en rapportage die bruikbaar zijn voor opdrachtgever, beheerder of projectdossier.",
+    bullets: ["Controlemetingen", "Aardverspreidingsweerstand", "Opleverdossier"],
+    rol: ["Meting", "Rapportage"],
     serviceHref: "/diensten/meten-en-beproeven",
   },
 ];
@@ -151,9 +169,22 @@ const Projecten = () => {
                         {p.label}
                       </span>
                     </div>
-                    <h3 className="text-xl text-[#0d3b2e] mb-3">{p.title}</h3>
-                    <p className="text-[#6c757d] leading-relaxed mb-6">{p.description}</p>
-                    <ul className="space-y-2 pt-4 border-t border-gray-100">
+                    <h3 className="text-xl text-[#0d3b2e] mb-4">{p.title}</h3>
+
+                    <div>
+                      <div className="text-[#6c757d] text-xs uppercase tracking-wider mb-1">Situatie</div>
+                      <p className="text-[#2d3436] text-sm leading-relaxed">{p.situation}</p>
+                    </div>
+                    <div className="border-t border-gray-100 pt-3 mt-3">
+                      <div className="text-[#6c757d] text-xs uppercase tracking-wider mb-1">Aanpak</div>
+                      <p className="text-[#2d3436] text-sm leading-relaxed">{p.approach}</p>
+                    </div>
+                    <div className="border-t border-gray-100 pt-3 mt-3">
+                      <div className="text-[#9ed42e] text-xs uppercase tracking-wider mb-1">Resultaat</div>
+                      <p className="text-[#0d3b2e] text-sm leading-relaxed">{p.result}</p>
+                    </div>
+
+                    <ul className="space-y-2 pt-4 mt-4 border-t border-gray-100">
                       {p.bullets.map((b) => (
                         <li key={b} className="flex items-start gap-2 text-sm text-[#0d3b2e]">
                           <Check className="w-4 h-4 text-[#9ed42e] mt-0.5 flex-shrink-0" strokeWidth={3} />

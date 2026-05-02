@@ -1,7 +1,8 @@
-import { ArrowRight, ShieldCheck, Wrench, Handshake, Gauge, Cable, Anchor, HardHat } from "lucide-react";
+import { ArrowRight, ShieldCheck, Wrench, Handshake, Gauge, Cable, Anchor, HardHat, Phone, Zap } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
+import { telHref } from "@/config/company";
 
 const waarden = [
   { icon: ShieldCheck, title: "Veiligheid", description: "Werken met aandacht voor mens, installatie en omgeving." },
@@ -144,6 +145,51 @@ const Over = () => {
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* SECTIE 4: Direct contact */}
+        <section className="py-16 md:py-24 bg-[#f8f9fa]">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="max-w-2xl mx-auto text-center">
+              <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+                Direct contact
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Neem direct contact op</h2>
+              <p className="text-lg text-[#6c757d] leading-relaxed">
+                TerreVolt werkt voor professionele opdrachtgevers die veiligheid, vakmanschap en heldere communicatie verwachten. Bel of mail ons voor een eerste projectbespreking.
+              </p>
+
+              <div className="bg-white border-2 border-[#9ed42e] rounded-2xl p-8 shadow-sm mt-8">
+                <div className="w-16 h-16 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Zap className="w-8 h-8 text-[#9ed42e]" strokeWidth={2} />
+                </div>
+                <div className="text-xl text-[#0d3b2e]">Team TerreVolt</div>
+                <div className="text-sm text-[#6c757d] mt-1">LS/MS-infrastructuur &amp; aardingsoplossingen</div>
+                <div className="inline-flex items-center gap-2 mt-3 text-sm text-[#6c757d]">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#9ed42e] opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#9ed42e]" />
+                  </span>
+                  Reageert binnen 2 werkdagen
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6">
+                  <a
+                    href={telHref}
+                    className="group inline-flex items-center justify-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300"
+                  >
+                    <Phone className="w-5 h-5" />
+                    <span>Bel direct</span>
+                  </a>
+                  <a
+                    href="/contact"
+                    className="inline-flex items-center justify-center border-2 border-[#0d3b2e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-all duration-300"
+                  >
+                    Stuur een aanvraag
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
         </section>

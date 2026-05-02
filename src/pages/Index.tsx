@@ -1,8 +1,10 @@
 import { Header } from "@/components/terrevolt/Header";
 import { Hero } from "@/components/terrevolt/Hero";
+import { TrustStrip } from "@/components/terrevolt/TrustStrip";
 import { Services } from "@/components/terrevolt/Services";
 import { Grounding } from "@/components/terrevolt/Grounding";
 import { Target } from "@/components/terrevolt/Target";
+import { Testimonials } from "@/components/terrevolt/Testimonials";
 import { Projects } from "@/components/terrevolt/Projects";
 import { Safety } from "@/components/terrevolt/Safety";
 import { CTA } from "@/components/terrevolt/CTA";
@@ -17,9 +19,11 @@ const Index = () => {
       <Header />
       <main id="main-content" className="pt-16 sm:pt-20">
         <Hero />
+        <TrustStrip />
         <Services />
         <Grounding />
         <Target />
+        <Testimonials />
         <Projects />
         <Safety />
         <CTA />

@@ -89,6 +89,15 @@ export function Footer() {
 
         <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
           <div>© {new Date().getFullYear()} TerreVolt BV. Alle rechten voorbehouden.</div>
+          <div className="hidden md:flex items-center gap-4 text-xs text-gray-600">
+            <span>BEI BLS/BHS</span>
+            <span className="w-1 h-1 rounded-full bg-gray-600" />
+            <span>VCA</span>
+            <span className="w-1 h-1 rounded-full bg-gray-600" />
+            <span>NEN 1010 / NEN 3140</span>
+            <span className="w-1 h-1 rounded-full bg-gray-600" />
+            <span>AVP / VP / VOP / WV</span>
+          </div>
           <div className="flex gap-6">
             <Link to="/privacy" className="inline-flex items-center min-h-[44px] py-2 hover:text-[#9ed42e] transition-colors">Privacy</Link>
             <Link to="/contact" className="inline-flex items-center min-h-[44px] py-2 hover:text-[#9ed42e] transition-colors">Contact</Link>
