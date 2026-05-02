@@ -282,7 +282,12 @@ const WerkenBij = () => {
       setSuccess(true);
     } catch (err) {
       console.error(err);
-      toast.error("Er ging iets mis. Probeer het later opnieuw.");
+      const msg = "Versturen lukte niet. Controleer je verbinding en probeer opnieuw, of bel ons direct.";
+      setSubmitError(msg);
+      toast.error(msg);
+      requestAnimationFrame(() => {
+        errorBannerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
     } finally {
       setSubmitting(false);
     }
