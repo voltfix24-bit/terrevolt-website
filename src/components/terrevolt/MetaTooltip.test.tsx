@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { render, screen, act, fireEvent, createEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MetaTooltip } from "./MetaTooltip";
@@ -11,6 +11,31 @@ function tap(element: Element) {
   const evt = createEvent.pointerDown(element, { bubbles: true });
   Object.defineProperty(evt, "pointerType", { value: "touch" });
   fireEvent(element, evt);
+}
+
+/**
+ * Globale fake timers maken het auto-hide-schedule (2.5s) en eventuele
+ * andere debounce/timing-paden volledig deterministisch. Zonder dit kan
+ * de auto-hide mid-test vuren en tests flaky maken bij retries op trage CI.
+ *
+ * `userEvent` wordt opgezet met `advanceTimers: vi.advanceTimersByTime`
+ * zodat zijn interne kleine delays meelopen met de fake clock.
+ */
+beforeEach(() => {
+  vi.useFakeTimers();
+  document.body.innerHTML = "";
+});
+
+afterEach(() => {
+  // Voer hangende timers uit zonder dat ze in een volgend test lekken,
+  // schakel daarna terug naar echte timers.
+  vi.runOnlyPendingTimers();
+  vi.useRealTimers();
+});
+
+/** userEvent v14 + fake timers: laat user-event de fake clock gebruiken. */
+function setupUser() {
+  return userEvent.setup({ advanceTimers: vi.advanceTimersByTime.bind(vi) });
 }
 
 describe("MetaTooltip — mobiele interacties", () => {
@@ -91,6 +116,135 @@ describe("MetaTooltip — mobiele interacties", () => {
     expect(tip).toHaveAttribute("aria-hidden", "false");
 
     tap(badge);
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+  });
+});
+
+/**
+ * Deterministische timing van de auto-hide / debounce-logica.
+ * De component plant na een touch-tap een `setTimeout` van 2500 ms in om de
+ * tooltip automatisch te sluiten. Met fake timers kunnen we exact rond die
+ * grens testen zonder dat retries op trage CI flaky worden.
+ */
+describe("MetaTooltip — auto-hide timing (fake timers)", () => {
+  const HIDE_DELAY_MS = 2500;
+
+  it("sluit pas exact ná de schedule-grens van 2500 ms na een tap", () => {
+    render(
+      <MetaTooltip label="Auto-hide na 2.5s">
+        <span data-testid="badge">Badge</span>
+      </MetaTooltip>,
+    );
+
+    tap(screen.getByTestId("badge"));
+    const tip = screen.getByRole("tooltip", { hidden: true });
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+
+    // 1 ms vóór de grens is de tooltip nog steeds open.
+    act(() => {
+      vi.advanceTimersByTime(HIDE_DELAY_MS - 1);
+    });
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+
+    // Op de grens vuurt de timer en sluit de tooltip.
+    act(() => {
+      vi.advanceTimersByTime(1);
+    });
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("herstart de auto-hide niet bij een tweede tap (toggle sluit direct)", () => {
+    render(
+      <MetaTooltip label="Tweede tap = sluit">
+        <span data-testid="badge">Badge</span>
+      </MetaTooltip>,
+    );
+
+    const badge = screen.getByTestId("badge");
+    const tip = screen.getByRole("tooltip", { hidden: true });
+
+    tap(badge);
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+
+    // Tweede tap sluit direct, zonder op de timer te wachten.
+    tap(badge);
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+
+    // De oorspronkelijke timer mag niet alsnog vuren of side-effects hebben.
+    act(() => {
+      vi.advanceTimersByTime(HIDE_DELAY_MS * 2);
+    });
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("annuleert de auto-hide wanneer focus de tooltip openhoudt", () => {
+    render(
+      <MetaTooltip label="Focus annuleert auto-hide">
+        <button data-testid="badge">Badge</button>
+      </MetaTooltip>,
+    );
+
+    const badge = screen.getByTestId("badge");
+    const tip = screen.getByRole("tooltip", { hidden: true });
+
+    // Tap plant auto-hide.
+    tap(badge);
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+
+    // Halverwege komt focus binnen → clearHide moet de timer annuleren.
+    act(() => {
+      vi.advanceTimersByTime(HIDE_DELAY_MS / 2);
+      fireEvent.focus(badge);
+    });
+
+    // Voorbij de oorspronkelijke deadline blijft de tooltip open.
+    act(() => {
+      vi.advanceTimersByTime(HIDE_DELAY_MS);
+    });
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+  });
+
+  it("laat geen timer vuren ná unmount (cleanup van pending setTimeout)", () => {
+    const { unmount } = render(
+      <MetaTooltip label="Cleanup-check">
+        <span data-testid="badge">Badge</span>
+      </MetaTooltip>,
+    );
+
+    tap(screen.getByTestId("badge"));
+
+    // Unmount terwijl de auto-hide nog gepland staat.
+    unmount();
+
+    // Het uitvoeren van álle timers mag geen 'set state on unmounted'-fout
+    // of andere side-effect veroorzaken.
+    expect(() =>
+      act(() => {
+        vi.runAllTimers();
+      }),
+    ).not.toThrow();
+  });
+
+  it("blijft Escape ook respecteren wanneer de auto-hide-timer al loopt", () => {
+    render(
+      <MetaTooltip label="Escape vóór timer">
+        <span data-testid="badge">Badge</span>
+      </MetaTooltip>,
+    );
+
+    tap(screen.getByTestId("badge"));
+    const tip = screen.getByRole("tooltip", { hidden: true });
+
+    act(() => {
+      vi.advanceTimersByTime(500);
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" }));
+    });
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+
+    // De gateste timer mag niet alsnog re-openen of crashen.
+    act(() => {
+      vi.advanceTimersByTime(HIDE_DELAY_MS);
+    });
     expect(tip).toHaveAttribute("aria-hidden", "true");
   });
 });
@@ -271,7 +425,7 @@ describe("MetaTooltip — toetsenbordnavigatie", () => {
   });
 
   it("opent op Tab-focus en sluit wanneer Tab focus uit de wrapper haalt", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
 
     render(
       <div>
@@ -303,7 +457,7 @@ describe("MetaTooltip — toetsenbordnavigatie", () => {
   });
 
   it("blijft open wanneer Tab focus binnen de wrapper verschuift (badge → Lees meer)", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
 
     render(
       <div>
@@ -341,7 +495,7 @@ describe("MetaTooltip — toetsenbordnavigatie", () => {
   });
 
   it("opent opnieuw bij Shift+Tab terug in de wrapper", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
 
     render(
       <div>
@@ -372,7 +526,7 @@ describe("MetaTooltip — toetsenbordnavigatie", () => {
   });
 
   it("sluit met Escape terwijl uitgebreide metadata (Lees meer) open staat en focus binnen wrapper is", async () => {
-    const user = userEvent.setup();
+    const user = setupUser();
 
     render(
       <MetaTooltip label="Lange metadatawaarde die uitklapbaar is">
