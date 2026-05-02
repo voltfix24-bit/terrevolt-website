@@ -88,17 +88,35 @@ const profielOpties = [
   "Anders",
 ];
 
+const profielOpties = [
+  "Laagspanningsmonteur",
+  "Middenspanningsmonteur",
+  "Schakelmonteur",
+  "Kabelmonteur",
+  "Aardingsmonteur",
+  "Monteur huisaansluitingen",
+  "Werkverantwoordelijke",
+  "ZZP-ploeg",
+  "Anders",
+];
+
+const contactVoorkeurOpties = ["Bellen", "WhatsApp", "E-mail", "Maakt niet uit"];
+
 const formSchema = z.object({
   name: z.string().trim().min(2, "Naam is verplicht").max(100),
   phone: z.string().trim().min(6, "Telefoonnummer is verplicht").max(30),
   email: z.string().trim().email("Ongeldig e-mailadres").max(255),
   profile: z.string().trim().min(1, "Kies een profiel").max(100),
   region: z.string().trim().max(100).optional(),
+  contact_pref: z.string().trim().max(50).optional(),
   experience: z.string().trim().max(2000).optional(),
   certifications: z.string().trim().max(1000).optional(),
   availability: z.string().trim().max(200).optional(),
   message: z.string().trim().max(2000).optional(),
+  privacy: z.literal("on", { errorMap: () => ({ message: "Akkoord met privacyverklaring is verplicht" }) }),
 });
+
+type FieldErrors = Partial<Record<keyof z.infer<typeof formSchema>, string>>;
 
 const WerkenBij = () => {
   usePageMeta(
