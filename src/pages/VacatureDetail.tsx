@@ -462,112 +462,163 @@ const VacatureDetail = () => {
         <section id="solliciteer" className="py-16 md:py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-12">
+              <div className="text-center mb-10 md:mb-12">
                 <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                   Solliciteren
                 </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Meld je aan voor: {vacature.title}</h2>
-                <p className="text-xl text-[#6c757d]">Vul het formulier in. Wij reageren snel.</p>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Meld je aan voor deze functie</h2>
+                <p className="text-base sm:text-xl text-[#6c757d]">
+                  Vul je gegevens in. We nemen contact op om je ervaring, beschikbaarheid en mogelijke projectmatch te bespreken.
+                </p>
               </div>
 
+              {/* Vacature-badge */}
+              <div className="mb-5 flex items-start gap-3 bg-[#f0f7e6] border border-[#9ed42e] rounded-xl px-4 py-3">
+                <CheckCircle2 className="w-5 h-5 text-[#0d3b2e] flex-shrink-0 mt-0.5" />
+                <div className="min-w-0">
+                  <div className="text-xs uppercase tracking-wider text-[#0d3b2e]/70">Je meldt je aan voor</div>
+                  <div className="text-[#0d3b2e] break-words">{vacature.title}</div>
+                </div>
+              </div>
+
+              {success ? (
+                <div role="status" aria-live="polite" className="bg-[#f0f7e6] border border-[#9ed42e] rounded-2xl p-6 sm:p-10 shadow-sm text-center">
+                  <div className="w-14 h-14 bg-[#9ed42e] rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle2 className="w-8 h-8 text-[#0d3b2e]" strokeWidth={2.5} />
+                  </div>
+                  <h3 className="text-2xl text-[#0d3b2e] mb-2">Aanmelding ontvangen</h3>
+                  <p className="text-[#0d3b2e]/80 mb-6 max-w-md mx-auto">
+                    Bedankt! We hebben je gegevens ontvangen. We nemen binnenkort telefonisch of per e-mail contact met je op.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <Link to="/werken-bij" className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors min-h-[48px] flex items-center justify-center">
+                      Terug naar profielen
+                    </Link>
+                    <button type="button" onClick={resetForm} className="border-2 border-[#0d3b2e] text-[#0d3b2e] px-6 py-3 rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors min-h-[48px] flex items-center justify-center">
+                      Nog iemand aanmelden
+                    </button>
+                  </div>
+                </div>
+              ) : (
               <form
+                ref={formRef}
                 onSubmit={handleSubmit}
-                className="bg-[#f8f9fa] rounded-2xl p-8 sm:p-10 border border-gray-200 shadow-sm space-y-6"
+                noValidate
+                className="bg-[#f8f9fa] rounded-2xl p-5 sm:p-10 border border-gray-200 shadow-sm space-y-6"
               >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm text-[#0d3b2e] mb-2">Naam *</label>
-                    <input id="name" name="name" required maxLength={100}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
-                  </div>
-                  <div>
-                    <label htmlFor="phone" className="block text-sm text-[#0d3b2e] mb-2">Telefoon *</label>
-                    <input id="phone" name="phone" type="tel" required maxLength={30}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm text-[#0d3b2e] mb-2">E-mail *</label>
-                    <input id="email" name="email" type="email" required maxLength={255}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
-                  </div>
-                  <div>
-                    <label htmlFor="profile" className="block text-sm text-[#0d3b2e] mb-2">Profiel</label>
-                    <select
-                      id="profile"
-                      name="profile"
-                      defaultValue={vacature.title}
-                      className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition"
-                    >
-                      <option value={vacature.title}>{vacature.title}</option>
-                      {[
-                        "Laagspanningsmonteur",
-                        "Middenspanningsmonteur",
-                        "Schakelmonteur",
-                        "Kabelmonteur",
-                        "Aardingsmonteur",
-                        "Monteur huisaansluitingen",
-                        "Werkverantwoordelijke",
-                        "ZZP-ploeg",
-                        "Anders",
-                      ]
-                        .filter((o) => o !== vacature.title)
-                        .map((o) => (
+                {/* Hidden vacature-tag */}
+                <input type="hidden" name="vacancy_title" value={vacature.title} readOnly />
+
+                {/* Blok 1 — Contactgegevens */}
+                <div>
+                  <h3 className="text-xs uppercase tracking-wider text-[#6c757d] mb-3 pb-2 border-b border-gray-200">Contactgegevens</h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                    <div>
+                      <label htmlFor="name" className="block text-sm text-[#0d3b2e] mb-2">Naam *</label>
+                      <input id="name" name="name" required maxLength={100} aria-invalid={!!errors.name}
+                        className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.name ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`} />
+                      {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name}</p>}
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-sm text-[#0d3b2e] mb-2">Telefoon *</label>
+                      <input id="phone" name="phone" type="tel" required maxLength={30} inputMode="tel" aria-invalid={!!errors.phone}
+                        className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`} />
+                      {errors.phone && <p className="mt-1 text-xs text-red-600">{errors.phone}</p>}
+                    </div>
+                    <div className="sm:col-span-2">
+                      <label htmlFor="email" className="block text-sm text-[#0d3b2e] mb-2">E-mail *</label>
+                      <input id="email" name="email" type="email" required maxLength={255} inputMode="email" autoComplete="email" aria-invalid={!!errors.email}
+                        className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.email ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`} />
+                      {errors.email && <p className="mt-1 text-xs text-red-600">{errors.email}</p>}
+                    </div>
+                    <div>
+                      <label htmlFor="contact_pref" className="block text-sm text-[#0d3b2e] mb-2">Hoe wil je het liefst benaderd worden?</label>
+                      <select id="contact_pref" name="contact_pref" defaultValue=""
+                        className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition">
+                        <option value="">Maakt niet uit</option>
+                        {contactVoorkeurOpties.map((o) => (
                           <option key={o} value={o}>{o}</option>
                         ))}
-                    </select>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="region" className="block text-sm text-[#0d3b2e] mb-2">Woonplaats / regio</label>
+                      <input id="region" name="region" maxLength={100}
+                        className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                    </div>
                   </div>
+                </div>
+
+                {/* Blok 2 — Profiel & ervaring */}
+                <div>
+                  <h3 className="text-xs uppercase tracking-wider text-[#6c757d] mb-3 pb-2 border-b border-gray-200">Profiel &amp; ervaring</h3>
                   <div>
-                    <label htmlFor="region" className="block text-sm text-[#0d3b2e] mb-2">Regio</label>
-                    <input id="region" name="region" maxLength={100}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
-                  </div>
-                  <div>
-                    <label htmlFor="availability" className="block text-sm text-[#0d3b2e] mb-2">Beschikbaarheid</label>
-                    <input id="availability" name="availability" maxLength={200}
-                      placeholder="Bijv. fulltime per direct"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                    <label htmlFor="certifications" className="block text-sm text-[#0d3b2e] mb-2">Bevoegdheden / certificaten</label>
+                    <input id="certifications" name="certifications" maxLength={1000}
+                      placeholder="Bijv. VCA, BEI BLS/BHS, NEN 3140 VOP"
+                      className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
                   </div>
                 </div>
 
+                {/* Blok 3 — Beschikbaarheid & documenten */}
                 <div>
-                  <label htmlFor="certifications" className="block text-sm text-[#0d3b2e] mb-2">Certificaten</label>
-                  <input id="certifications" name="certifications" maxLength={1000}
-                    placeholder="Bijv. VCA, BEI BLS/BHS, NEN 3140 VOP"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                  <h3 className="text-xs uppercase tracking-wider text-[#6c757d] mb-3 pb-2 border-b border-gray-200">Beschikbaarheid &amp; documenten</h3>
+                  <div className="space-y-4 sm:space-y-5">
+                    <div>
+                      <label htmlFor="availability" className="block text-sm text-[#0d3b2e] mb-2">Beschikbaarheid</label>
+                      <input id="availability" name="availability" maxLength={200}
+                        placeholder="Bijv. fulltime per direct"
+                        className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                    </div>
+                    <div>
+                      <label htmlFor="message" className="block text-sm text-[#0d3b2e] mb-2">Bericht</label>
+                      <textarea id="message" name="message" rows={4} maxLength={2000}
+                        className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition resize-y max-h-72" />
+                    </div>
+                    <div>
+                      <label htmlFor="cv" className="block text-sm text-[#0d3b2e] mb-2">CV / certificaten uploaden</label>
+                      {file ? (
+                        <div className="flex items-center gap-3 w-full px-4 py-3 rounded-lg border border-[#9ed42e] bg-[#f0f7e6]">
+                          <FileCheck2 className="w-5 h-5 text-[#0d3b2e] flex-shrink-0" />
+                          <div className="min-w-0 flex-1">
+                            <div className="text-xs uppercase tracking-wider text-[#6c757d]">Bestand geselecteerd</div>
+                            <div className="text-sm text-[#0d3b2e] break-all">{file.name}</div>
+                          </div>
+                          <label htmlFor="cv" className="text-xs text-[#0d3b2e] underline cursor-pointer min-h-[44px] flex items-center px-2">Wijzig</label>
+                          <button type="button" onClick={() => setFile(null)} aria-label="Verwijder bestand" className="text-[#6c757d] hover:text-[#0d3b2e] min-h-[44px] min-w-[44px] flex items-center justify-center">
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ) : (
+                        <label htmlFor="cv" className="flex items-center justify-center gap-3 w-full px-4 py-5 rounded-lg border-2 border-dashed border-gray-300 hover:border-[#9ed42e] hover:bg-[#f0f7e6]/40 cursor-pointer transition bg-white min-h-[88px]">
+                          <Upload className="w-5 h-5 text-[#0d3b2e]" />
+                          <span className="text-[#6c757d] text-sm">Klik om bestand te kiezen</span>
+                        </label>
+                      )}
+                      <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                        onChange={(e) => setFile(e.target.files?.[0] || null)} className="hidden" />
+                      <p className="mt-2 text-xs text-[#6c757d] leading-relaxed">
+                        PDF, DOC, JPG of PNG — maximaal 10MB. Geen CV bij de hand? Geen probleem, je kunt ook zonder bestand aanmelden.
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
+                {/* Privacy */}
                 <div>
-                  <label htmlFor="message" className="block text-sm text-[#0d3b2e] mb-2">Bericht</label>
-                  <textarea id="message" name="message" rows={4} maxLength={2000}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition resize-y" />
-                </div>
-
-                <div>
-                  <label htmlFor="cv" className="block text-sm text-[#0d3b2e] mb-2">Certificaten / CV uploaden (PDF, DOC, max 10MB)</label>
-                  <label
-                    htmlFor="cv"
-                    className="flex items-center justify-center gap-3 w-full px-4 py-6 rounded-lg border-2 border-dashed border-gray-300 hover:border-[#9ed42e] hover:bg-[#f0f7e6]/40 cursor-pointer transition bg-white"
-                  >
-                    <Upload className="w-5 h-5 text-[#0d3b2e]" />
-                    <span className="text-[#6c757d] text-sm">
-                      {file ? file.name : "Klik om bestand te kiezen"}
+                  <label className="flex items-start gap-3 cursor-pointer text-sm text-[#0d3b2e] leading-relaxed">
+                    <input type="checkbox" name="privacy" required aria-invalid={!!errors.privacy}
+                      className="mt-1 w-5 h-5 rounded border-gray-300 text-[#9ed42e] focus:ring-[#9ed42e] flex-shrink-0" />
+                    <span>
+                      Ik ga akkoord dat TerreVolt mijn gegevens gebruikt om contact met mij op te nemen over werk, projecten of samenwerking.{" "}
+                      <Link to="/privacy" className="underline hover:text-[#0d3b2e]/80">Privacyverklaring</Link>
                     </span>
                   </label>
-                  <input
-                    id="cv"
-                    name="cv"
-                    type="file"
-                    accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                    onChange={(e) => setFile(e.target.files?.[0] || null)}
-                    className="hidden"
-                  />
+                  {errors.privacy && <p className="mt-1 text-xs text-red-600">{errors.privacy}</p>}
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
-                >
+                <button type="submit" disabled={submitting}
+                  className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
                   {submitting ? (
                     <>
                       <Loader2 className="w-5 h-5 animate-spin" />
@@ -581,6 +632,8 @@ const VacatureDetail = () => {
                   )}
                 </button>
               </form>
+              )}
+
             </div>
           </div>
         </section>
