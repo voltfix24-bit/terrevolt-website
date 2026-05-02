@@ -38,7 +38,7 @@ export function Footer() {
               <li><a href="/projecten" className="hover:text-[#9ed42e] transition-colors">Projecten</a></li>
               <li><a href="/veiligheid" className="hover:text-[#9ed42e] transition-colors">Veiligheid</a></li>
               <li><a href="/werken-bij" className="hover:text-[#9ed42e] transition-colors">Werken bij ons</a></li>
-              <li><a href="/werken-bij" className="hover:text-[#9ed42e] transition-colors">ZZP'ers & monteurs</a></li>
+              <li><a href="/werken-bij#zzp" className="hover:text-[#9ed42e] transition-colors">ZZP'ers & monteurs</a></li>
             </ul>
           </div>
 

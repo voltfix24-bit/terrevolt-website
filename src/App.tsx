@@ -56,7 +56,6 @@ const App = () => (
           <Route path="/diensten/meten-en-beproeven" element={<MetenEnBeproeven />} />
           <Route path="/diensten/meten-beproeven-rapportage" element={<MetenEnBeproeven />} />
           <Route path="/diensten/huisaansluitingen" element={<Huisaansluitingen />} />
-          <Route path="/diensten/huisaansluitingen" element={<Huisaansluitingen />} />
 
           {/* Admin */}
           <Route path="/admin/login" element={<AdminLogin />} />
