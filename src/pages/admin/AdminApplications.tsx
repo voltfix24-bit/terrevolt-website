@@ -129,8 +129,14 @@ export default function AdminApplications() {
                           </DialogHeader>
                           <div className="space-y-4 text-sm">
                             <div className="flex flex-wrap gap-4 text-[#0d3b2e]">
-                              <a href={`mailto:${a.email}`} aria-label={`Mail ${a.email}`} className="flex items-center gap-1.5 min-h-[44px] py-2 break-all hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors"><Mail className="w-4 h-4 shrink-0" /> {a.email}</a>
-                              <a href={`tel:${a.phone}`} aria-label={`Bel ${a.phone}`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors"><Phone className="w-4 h-4 shrink-0" /> {a.phone}</a>
+                              <span className="flex items-center gap-1">
+                                <a href={`mailto:${a.email}`} aria-label={`Mail ${a.email}. Werkt de mail-app niet? Gebruik de kopieerknop hiernaast.`} className="flex items-center gap-1.5 min-h-[44px] py-2 break-all hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors"><Mail className="w-4 h-4 shrink-0" /> {a.email}</a>
+                                <CopyButton type="mail" value={a.email} />
+                              </span>
+                              <span className="flex items-center gap-1">
+                                <a href={`tel:${a.phone}`} aria-label={`Bel ${a.phone}. Werkt de bel-app niet? Gebruik de kopieerknop hiernaast.`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors"><Phone className="w-4 h-4 shrink-0" /> {a.phone}</a>
+                                <CopyButton type="tel" value={a.phone} />
+                              </span>
                               {a.region && <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" /> {a.region}</span>}
                             </div>
 
