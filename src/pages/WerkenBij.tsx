@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Zap, Cable, Anchor, PlugZap, ShieldCheck, Home, ClipboardCheck, Users, Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert, Award, Loader2, Upload } from "lucide-react";
+import { ArrowRight, Zap, Cable, Anchor, PlugZap, Power, ClipboardCheck, Users, Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert, Award, Loader2, Upload } from "lucide-react";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
@@ -12,10 +12,10 @@ import { vacatures as fallbackVacatures } from "@/data/vacatures";
 const slugIconMap: Record<string, typeof Zap> = {
   laagspanningsmonteur: Zap,
   middenspanningsmonteur: Cable,
-  schakelmonteur: ShieldCheck,
-  kabelmonteur: PlugZap,
+  schakelmonteur: Power,
+  kabelmonteur: Cable,
   aardingsmonteur: Anchor,
-  "monteur-huisaansluitingen": Home,
+  "monteur-huisaansluitingen": PlugZap,
   werkverantwoordelijke: ClipboardCheck,
   "zzp-ploegen": Users,
 };
