@@ -726,3 +726,116 @@ describe("MetaTooltip — schakelen tussen meerdere badges (mobiel)", () => {
     expect(open[0]).toHaveTextContent("Eerste — beschikbaarheid");
   });
 });
+
+/**
+ * Regressietest: na een buiten-tap moet de tooltip opnieuw geopend kunnen
+ * worden via een nieuwe tap op de badge. Een eerdere bug liet de interne
+ * state of de auto-hide-timer hangen, waardoor de tweede tap niets deed.
+ */
+describe("MetaTooltip — heropenen na buiten-tap", () => {
+  beforeEach(() => {
+    document.body.innerHTML = "";
+  });
+
+  /** Vuur een touch-pointerdown op een element (zoals iOS Safari doet). */
+  function touchPointerDown(element: Element) {
+    const evt = createEvent.pointerDown(element, { bubbles: true });
+    Object.defineProperty(evt, "pointerType", { value: "touch" });
+    fireEvent(element, evt);
+  }
+
+  it("opent opnieuw na een buiten-tap zonder te blijven hangen", () => {
+    render(
+      <div>
+        <MetaTooltip label="Heropenen na outside-tap">
+          <span data-testid="badge">Badge</span>
+        </MetaTooltip>
+        <button data-testid="outside">Buiten</button>
+      </div>,
+    );
+
+    const badge = screen.getByTestId("badge");
+    const outside = screen.getByTestId("outside");
+    const tip = screen.getByRole("tooltip", { hidden: true });
+
+    // 1) Open via tap.
+    tap(badge);
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+
+    // 2) Buiten-tap sluit de tooltip via de globale pointerdown-listener.
+    act(() => {
+      touchPointerDown(outside);
+    });
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+
+    // 3) Nieuwe tap op de badge moet de tooltip weer openen — niet blijven
+    //    hangen op een oude state of een oude (geannuleerde) timer.
+    tap(badge);
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+    expect(tip).toHaveTextContent("Heropenen na outside-tap");
+  });
+
+  it("kan herhaaldelijk open/dicht via tap → outside-tap → tap", () => {
+    render(
+      <div>
+        <MetaTooltip label="Herhaalde cyclus">
+          <span data-testid="badge">Badge</span>
+        </MetaTooltip>
+        <button data-testid="outside">Buiten</button>
+      </div>,
+    );
+
+    const badge = screen.getByTestId("badge");
+    const outside = screen.getByTestId("outside");
+    const tip = screen.getByRole("tooltip", { hidden: true });
+
+    for (let i = 0; i < 3; i += 1) {
+      tap(badge);
+      expect(tip).toHaveAttribute("aria-hidden", "false");
+
+      act(() => {
+        touchPointerDown(outside);
+      });
+      expect(tip).toHaveAttribute("aria-hidden", "true");
+    }
+
+    // Eindcheck: nog één keer openen werkt nog steeds.
+    tap(badge);
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+  });
+
+  it("blijft heropenbaar wanneer de buiten-tap exact rond de auto-hide-grens valt", () => {
+    render(
+      <div>
+        <MetaTooltip label="Outside tap rond auto-hide">
+          <span data-testid="badge">Badge</span>
+        </MetaTooltip>
+        <button data-testid="outside">Buiten</button>
+      </div>,
+    );
+
+    const badge = screen.getByTestId("badge");
+    const outside = screen.getByTestId("outside");
+    const tip = screen.getByRole("tooltip", { hidden: true });
+
+    tap(badge);
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+
+    // Net vóór de auto-hide grens vuurt een outside-tap.
+    act(() => {
+      vi.advanceTimersByTime(2499);
+      touchPointerDown(outside);
+    });
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+
+    // Voorbij de oorspronkelijke deadline mag de oude timer niets meer doen.
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+    expect(tip).toHaveAttribute("aria-hidden", "true");
+
+    // Heropenen werkt direct.
+    tap(badge);
+    expect(tip).toHaveAttribute("aria-hidden", "false");
+  });
+});
