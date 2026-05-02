@@ -198,7 +198,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Bevoegdheden, rollen en normen (donker) */}
-        <section className="relative py-16 md:py-24 bg-[#0d3b2e] overflow-hidden">
+        <section id="bei-vwi" className="relative py-16 md:py-24 bg-[#0d3b2e] overflow-hidden scroll-mt-32">
           <div className="absolute inset-0 opacity-[0.05]">
             <div
               className="absolute inset-0"
