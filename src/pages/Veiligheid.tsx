@@ -225,7 +225,7 @@ const Veiligheid = () => {
                       <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
                     </div>
                     <h3 className="text-base text-[#0d3b2e] mb-2">{step.title}</h3>
-                    <p className="text-[#6c757d] text-sm leading-relaxed hyphens-nl text-pretty">{step.description}</p>
+                    <p className="text-[#6c757d] text-sm leading-relaxed hyphens-nl text-pretty">{softHyphenate(step.description)}</p>
                   </div>
                 );
               })}
@@ -255,7 +255,7 @@ const Veiligheid = () => {
                       <Icon className="w-7 h-7 text-[#0d3b2e] group-hover:text-white transition-colors duration-300" strokeWidth={2} />
                     </div>
                     <h3 className="text-xl text-[#0d3b2e] mb-3">{item.title}</h3>
-                    <p className="text-[#6c757d] leading-relaxed flex-1 hyphens-nl text-pretty">{item.description}</p>
+                    <p className="text-[#6c757d] leading-relaxed flex-1 hyphens-nl text-pretty">{softHyphenate(item.description)}</p>
                     <span className="mt-5 inline-block self-start text-[10px] uppercase tracking-wider text-[#0d3b2e] bg-[#f0f7e6] border border-[#9ed42e]/40 rounded-full px-3 py-1">
                       {item.label}
                     </span>
@@ -304,7 +304,7 @@ const Veiligheid = () => {
                     </div>
                     <h3 className="text-lg text-white mb-1">{c.title}</h3>
                     <div className="text-xs uppercase tracking-wider text-[#9ed42e] mb-3">{c.subtitle}</div>
-                    <p className="text-sm text-gray-300 leading-relaxed hyphens-nl text-pretty">{c.description}</p>
+                    <p className="text-sm text-gray-300 leading-relaxed hyphens-nl text-pretty">{softHyphenate(c.description)}</p>
                   </div>
                 );
               })}
@@ -334,7 +334,7 @@ const Veiligheid = () => {
                       <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
                     </div>
                     <h3 className="text-base sm:text-lg text-[#0d3b2e] mb-2">{c.title}</h3>
-                    <p className="text-sm text-[#6c757d] leading-relaxed hyphens-nl text-pretty">{c.description}</p>
+                    <p className="text-sm text-[#6c757d] leading-relaxed hyphens-nl text-pretty">{softHyphenate(c.description)}</p>
                   </div>
                 );
               })}
