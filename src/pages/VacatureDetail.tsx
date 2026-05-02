@@ -118,7 +118,7 @@ const VacatureDetail = () => {
     if (typeof IntersectionObserver === "undefined") return;
     const formEl = document.getElementById("solliciteer");
     const footerEl = document.querySelector<HTMLElement>("footer");
-    const targets: Element[] = [formEl, footerEl].filter((n): n is Element => !!n);
+    const targets: Element[] = [formEl, footerEl].filter((n): n is HTMLElement => !!n);
     if (targets.length === 0) return;
 
     const visible = new Set<Element>();
