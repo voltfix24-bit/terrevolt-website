@@ -15,6 +15,7 @@ import Projecten from "./pages/Projecten.tsx";
 import Veiligheid from "./pages/Veiligheid.tsx";
 import Over from "./pages/Over.tsx";
 import WerkenBij from "./pages/WerkenBij.tsx";
+import VacatureDetail from "./pages/VacatureDetail.tsx";
 import Contact from "./pages/Contact.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/veiligheid" element={<Veiligheid />} />
           <Route path="/over" element={<Over />} />
           <Route path="/werken-bij" element={<WerkenBij />} />
+          <Route path="/vacatures/:slug" element={<VacatureDetail />} />
           <Route path="/contact" element={<Contact />} />
           {/* Aliassen voor leesbare URL's */}
           <Route path="/veiligheid-certificeringen" element={<Veiligheid />} />
