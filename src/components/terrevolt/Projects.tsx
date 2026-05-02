@@ -35,32 +35,32 @@ const projects = [
 
 export function Projects() {
   return (
-    <section id="projecten" className="py-16 md:py-16 md:py-24 bg-white">
+    <section id="projecten" className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Projecttypes en praktijkvoorbeelden</h2>
-          <p className="text-xl text-[#6c757d] max-w-3xl mx-auto">
+        <div className="text-center mb-10 sm:mb-14 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-3 sm:mb-4 hyphens-nl">Projecttypes en praktijkvoorbeelden</h2>
+          <p className="text-base sm:text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
             Voorbeelden van werkzaamheden waarbij TerreVolt opdrachtgevers kan ondersteunen.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-gradient-to-br from-[#f8f9fa] to-white border border-gray-200 rounded-xl p-8 hover:shadow-xl transition-all duration-300 group"
+              className="bg-gradient-to-br from-[#f8f9fa] to-white border border-gray-200 rounded-xl p-6 md:p-8 hover:shadow-xl transition-all duration-300 group"
             >
-              <div className="mb-6">
-                <div className="text-xs text-[#9ed42e] mb-3 tracking-widest uppercase">{project.label}</div>
-                <h3 className="text-2xl text-[#0d3b2e] mb-4">{project.title}</h3>
-                <p className="text-[#6c757d] leading-relaxed mb-6">{project.description}</p>
+              <div className="mb-5 sm:mb-6">
+                <div className="text-[11px] sm:text-xs text-[#9ed42e] mb-2 sm:mb-3 tracking-widest uppercase break-words">{project.label}</div>
+                <h3 className="text-xl sm:text-2xl text-[#0d3b2e] mb-3 sm:mb-4 hyphens-nl">{project.title}</h3>
+                <p className="text-[15px] sm:text-base text-[#6c757d] leading-relaxed mb-5 sm:mb-6">{project.description}</p>
               </div>
 
               <div className="space-y-2 pt-4 border-t border-gray-200">
                 {project.highlights.map((highlight, idx) => (
-                  <div key={idx} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-[#9ed42e] flex-shrink-0" strokeWidth={2.5} />
-                    <span className="text-[#2d3436] text-sm">{highlight}</span>
+                  <div key={idx} className="flex items-start gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-[#9ed42e] flex-shrink-0 mt-0.5" strokeWidth={2.5} />
+                    <span className="text-[#2d3436] text-sm break-words">{highlight}</span>
                   </div>
                 ))}
               </div>
