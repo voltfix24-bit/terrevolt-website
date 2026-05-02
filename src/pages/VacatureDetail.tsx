@@ -898,13 +898,43 @@ const VacatureDetail = () => {
                       <textarea id="message" name="message" rows={4} maxLength={2000}
                         className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition resize-y max-h-72" />
                     </div>
-                    <CvUploadField
-                      file={file}
-                      setFile={setFile}
-                      uploading={uploadingFile}
-                      fileError={fileError}
-                      setFileError={setFileError}
-                    />
+                    <div>
+                      <div className="flex items-center justify-between gap-3 mb-2 flex-wrap">
+                        <span className="block text-sm text-[#0d3b2e]">CV (optioneel)</span>
+                        <label className="inline-flex items-center gap-2 text-xs text-[#0d3b2e] cursor-pointer select-none">
+                          <input
+                            type="checkbox"
+                            checked={noCv}
+                            onChange={(e) => {
+                              const checked = e.target.checked;
+                              setNoCv(checked);
+                              if (checked) {
+                                setFile(null);
+                                setFileError(null);
+                              }
+                            }}
+                            className="h-4 w-4 rounded border-gray-300 text-[#9ed42e] focus:ring-[#9ed42e]"
+                          />
+                          <span>Ik heb (nog) geen CV</span>
+                        </label>
+                      </div>
+                      {noCv ? (
+                        <div className="rounded-lg border border-dashed border-[#9ed42e] bg-[#f0f7e6] px-4 py-3 text-sm text-[#0d3b2e] flex items-start gap-2">
+                          <CheckCircle2 className="w-4 h-4 mt-0.5 text-[#0d3b2e] flex-shrink-0" />
+                          <span>
+                            Geen probleem — je kunt zonder CV solliciteren. We nemen contact op en bespreken je ervaring telefonisch of via WhatsApp.
+                          </span>
+                        </div>
+                      ) : (
+                        <CvUploadField
+                          file={file}
+                          setFile={setFile}
+                          uploading={uploadingFile}
+                          fileError={fileError}
+                          setFileError={setFileError}
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
 
