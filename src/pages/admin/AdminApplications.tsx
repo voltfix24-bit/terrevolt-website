@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Loader2, Mail, Phone, MapPin, FileDown } from "lucide-react";
+import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -101,8 +102,18 @@ export default function AdminApplications() {
                     </TableCell>
                     <TableCell className="text-[#0d3b2e]">{a.name}</TableCell>
                     <TableCell>{a.vacancies?.title || "—"}</TableCell>
-                    <TableCell><a href={`tel:${a.phone}`} aria-label={`Bel ${a.phone}`} className="inline-flex items-center min-h-[40px] py-1 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors">{a.phone}</a></TableCell>
-                    <TableCell><a href={`mailto:${a.email}`} aria-label={`Mail ${a.email}`} className="inline-flex items-center min-h-[40px] py-1 break-all hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors">{a.email}</a></TableCell>
+                    <TableCell>
+                      <span className="inline-flex items-center gap-1">
+                        <a href={`tel:${a.phone}`} aria-label={`Bel ${a.phone}. Werkt de bel-app niet? Gebruik de kopieerknop hiernaast.`} className="inline-flex items-center min-h-[40px] py-1 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors">{a.phone}</a>
+                        <CopyButton type="tel" value={a.phone} />
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <span className="inline-flex items-center gap-1">
+                        <a href={`mailto:${a.email}`} aria-label={`Mail ${a.email}. Werkt de mail-app niet? Gebruik de kopieerknop hiernaast.`} className="inline-flex items-center min-h-[40px] py-1 break-all hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors">{a.email}</a>
+                        <CopyButton type="mail" value={a.email} />
+                      </span>
+                    </TableCell>
                     <TableCell>{a.region || "—"}</TableCell>
                     <TableCell>
                       <Badge variant="secondary">{STATUSES.find((s) => s.value === a.status)?.label || a.status}</Badge>
