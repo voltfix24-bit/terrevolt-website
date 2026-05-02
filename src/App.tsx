@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import Diensten from "./pages/Diensten.tsx";
 import LSMSNetmontage from "./pages/diensten/LSMSNetmontage.tsx";
+import Stationsrenovatie from "./pages/diensten/Stationsrenovatie.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
