@@ -83,10 +83,17 @@ const WerkenBij = () => {
         cv_url = path;
       }
 
-      const { error: insErr } = await supabase.from("job_applications").insert({
-        ...parsed.data,
+      const { error: insErr } = await supabase.from("job_applications").insert([{
+        name: parsed.data.name,
+        phone: parsed.data.phone,
+        email: parsed.data.email,
+        region: parsed.data.region || null,
+        experience: parsed.data.experience || null,
+        certifications: parsed.data.certifications || null,
+        availability: parsed.data.availability || null,
+        message: parsed.data.message || null,
         cv_url,
-      });
+      }]);
       if (insErr) throw insErr;
 
       toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");
