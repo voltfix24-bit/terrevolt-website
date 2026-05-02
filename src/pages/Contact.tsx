@@ -19,13 +19,17 @@ const contactCards = [
 const requestTypes = [
   "LS/MS Netmontage",
   "Stationsrenovatie",
-  "Schakelwerk",
+  "Schakelwerk & veiligstellen",
   "Aardingsoplossingen",
   "Meten & beproeven",
   "Huisaansluitingen",
-  "Monteurs/ploeg nodig",
+  "Monteur / ploeg nodig",
+  "Sollicitatie / ZZP",
   "Anders",
 ];
+
+const ALLOWED_EXT = ["pdf", "jpg", "jpeg", "png", "dwg"] as const;
+const MAX_UPLOAD_BYTES = 25 * 1024 * 1024;
 
 const voorWie = [
   { icon: Network, title: "Netbeheerders", description: "Ondersteuning bij LS/MS-netmontage, stationswerk en aarding." },
