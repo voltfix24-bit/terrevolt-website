@@ -122,6 +122,8 @@ export function validateRoutesAndLinks({ throwOnError = true } = {}) {
     const links = extractLinks(src);
     for (const raw of links) {
       if (isIgnoredLink(raw)) continue;
+      // Skip dynamische template-literal paden (we kunnen ze niet statisch valideren).
+      if (raw.includes("${")) continue;
       const pathname = normalize(raw);
       if (pathname === "" || pathname === "/") continue;
       scannedLinks++;
