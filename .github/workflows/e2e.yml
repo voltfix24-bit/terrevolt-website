@@ -57,6 +57,14 @@ jobs:
           path: test-results/veiligheid-overflow
           retention-days: 30
 
+      - name: Upload anchor-offset report (md + json)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: veiligheid-anchor-offset-report
+          path: test-results/veiligheid-anchor-offset
+          retention-days: 30
+
       - name: Upload raw test-results (traces, videos)
         if: failure()
         uses: actions/upload-artifact@v4
