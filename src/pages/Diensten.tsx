@@ -128,7 +128,7 @@ const Diensten = () => {
         </section>
 
         {/* DIENSTEN GRID */}
-        <section id="diensten" className="py-16 md:py-16 md:py-24 bg-white">
+        <section id="diensten" className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Onze diensten</h2>
@@ -174,16 +174,21 @@ const Diensten = () => {
         </section>
 
         {/* KEUZEHULP — Niet zeker welke ondersteuning u nodig heeft? */}
-        <section className="py-16 md:py-20 bg-[#f8f9fa]">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+        <section className="py-16 md:py-20 bg-[#0d3b2e] relative overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.04] pointer-events-none" aria-hidden="true" style={{
+            backgroundImage:
+              "linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)",
+            backgroundSize: "48px 48px",
+          }} />
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative">
             <div className="text-center mb-10 md:mb-12">
-              <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-5 tracking-wider uppercase">
+              <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-5 tracking-wider uppercase">
                 Keuzehulp
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-tight hyphens-nl" lang="nl">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 leading-tight hyphens-nl" lang="nl">
                 Niet zeker welke ondersteuning u nodig heeft?
               </h2>
-              <p className="text-lg text-[#6c757d] max-w-2xl mx-auto">
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
                 Kies het scenario dat het beste past — wij denken mee over uitvoering, planning en oplevering.
               </p>
             </div>
@@ -217,14 +222,14 @@ const Diensten = () => {
                   <Link
                     key={c.title}
                     to={c.href}
-                    className="group flex flex-col bg-white border border-gray-200 rounded-xl p-6 sm:p-7 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 active:scale-[0.99]"
+                    className="group flex flex-col bg-white/5 border border-white/10 rounded-xl p-6 sm:p-7 hover:border-[#9ed42e] hover:bg-white/[0.07] transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] active:scale-[0.99]"
                   >
-                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-5 group-hover:bg-[#9ed42e] transition-colors">
-                      <Icon className="w-6 h-6 text-[#0d3b2e] group-hover:text-white transition-colors" strokeWidth={2} />
+                    <div className="w-12 h-12 bg-[#9ed42e] rounded-lg flex items-center justify-center mb-5">
+                      <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
                     </div>
-                    <h3 className="text-lg sm:text-xl text-[#0d3b2e] mb-2 hyphens-nl" lang="nl">{c.title}</h3>
-                    <p className="text-[#6c757d] text-sm sm:text-[15px] leading-relaxed mb-5">{c.text}</p>
-                    <span className="mt-auto inline-flex items-center gap-1.5 text-[#0d3b2e] text-sm group-hover:gap-2.5 transition-all">
+                    <h3 className="text-lg sm:text-xl text-white mb-2 hyphens-nl" lang="nl">{c.title}</h3>
+                    <p className="text-gray-300 text-sm sm:text-[15px] leading-relaxed mb-5">{c.text}</p>
+                    <span className="mt-auto inline-flex items-center gap-1.5 text-[#9ed42e] text-sm group-hover:gap-2.5 transition-all">
                       {c.cta}
                       <ArrowRight className="w-4 h-4 text-[#9ed42e]" strokeWidth={2.5} />
                     </span>
@@ -236,7 +241,7 @@ const Diensten = () => {
         </section>
 
         {/* WERKWIJZE */}
-        <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+        <section className="py-16 md:py-24 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
@@ -272,7 +277,7 @@ const Diensten = () => {
         </section>
 
         {/* CTA */}
-        <section id="contact" className="py-16 md:py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"

@@ -1,4 +1,5 @@
-import { Navigate, Outlet, Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Navigate, Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { Loader2, LogOut, Briefcase, Inbox, LayoutDashboard } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -7,6 +8,23 @@ import { Button } from "@/components/ui/button";
 export default function AdminLayout() {
   const { user, isAdmin, loading } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+
+  // Aanvullende sessie-check: redirect direct als de Supabase-sessie ontbreekt.
+  // Voorkomt dat een admin-shell kort wordt getoond na uitloggen of bij verlopen tokens.
+  useEffect(() => {
+    let cancelled = false;
+    if (loading) return;
+    supabase.auth.getSession().then(({ data }) => {
+      if (cancelled) return;
+      if (!data.session) {
+        navigate("/admin/login", { replace: true, state: { from: location } });
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [loading, location, navigate]);
 
   if (loading) {
     return (

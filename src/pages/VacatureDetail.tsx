@@ -562,7 +562,7 @@ const VacatureDetail = () => {
         </section>
 
         {/* WAT DOE JE + WAT BRENG JE MEE */}
-        <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+        <section className="py-16 md:py-24 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
               <div className="bg-white rounded-2xl p-8 border border-gray-200">
@@ -599,7 +599,7 @@ const VacatureDetail = () => {
         </section>
 
         {/* WAT BIEDEN WIJ */}
-        <section className="py-16 md:py-16 md:py-24 bg-white">
+        <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-4xl mx-auto text-center mb-12">
               <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
@@ -697,7 +697,7 @@ const VacatureDetail = () => {
         </section>
 
         {/* PROCES */}
-        <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+        <section className="py-16 md:py-24 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Zo verloopt je aanmelding</h2>
@@ -733,7 +733,7 @@ const VacatureDetail = () => {
         </section>
 
         {/* FORMULIER */}
-        <section id="solliciteren" className="py-16 md:py-16 md:py-24 bg-white">
+        <section id="solliciteren" className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10 md:mb-12">
