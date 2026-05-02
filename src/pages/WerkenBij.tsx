@@ -306,7 +306,7 @@ const WerkenBij = () => {
               <div className="inline-flex items-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 <HardHat className="w-4 h-4" /> Werken bij TerreVolt
               </div>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight break-words">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight hyphens-nl">
                 Werk mee aan{" "}
                 <span className="text-[#9ed42e]">LS/MS-projecten</span> binnen de netbeheerwereld
               </h1>
