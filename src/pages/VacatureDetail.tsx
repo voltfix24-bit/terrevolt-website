@@ -387,7 +387,13 @@ const VacatureDetail = () => {
         }
       }
 
-      const messagePrefix = `Vacature: ${vacature.title}${parsed.data.contact_pref ? ` | Contactvoorkeur: ${parsed.data.contact_pref}` : ""}`;
+      const prefixParts = [
+        `Profiel: ${vacature.title}`,
+        `Vacature: ${vacature.title}`,
+        parsed.data.contact_pref ? `Contactvoorkeur: ${parsed.data.contact_pref}` : null,
+        `Privacy akkoord: ja`,
+      ].filter(Boolean);
+      const messagePrefix = prefixParts.join(" | ");
       const fullMessage = parsed.data.message
         ? `${messagePrefix}\n\n${parsed.data.message}`
         : messagePrefix;
@@ -403,6 +409,9 @@ const VacatureDetail = () => {
         message: fullMessage,
         cv_url,
         vacancy_id: vacature.id || null,
+        profile: vacature.title,
+        contact_preference: parsed.data.contact_pref || null,
+        privacy_consent: true,
       } as any]);
       if (insErr) throw insErr;
 
