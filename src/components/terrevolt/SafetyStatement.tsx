@@ -3,7 +3,7 @@ import { ShieldCheck } from "lucide-react";
 export function SafetyStatement() {
   const tags = ["BEI BLS/BHS", "VCA", "NEN 3140 / NEN 1010"];
   return (
-    <section className="py-12 md:py-16 bg-[#f8f9fa]">
+    <section id="veiligheid" className="py-12 md:py-16 bg-[#f8f9fa] scroll-mt-24">
       <div className="container mx-auto px-5 sm:px-6 lg:px-12">
         <div className="max-w-4xl mx-auto">
           <div className="bg-white border border-gray-200 rounded-xl p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start">
