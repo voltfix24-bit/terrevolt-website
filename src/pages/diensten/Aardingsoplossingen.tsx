@@ -106,7 +106,7 @@ const Aardingsoplossingen = () => {
         </section>
 
         {/* SECTIE 1: Aarding als fundament */}
-        <section className="py-16 md:py-24 bg-white">
+        <section id="werkzaamheden" className="py-16 md:py-24 bg-white scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Aarding als basis van veilige infrastructuur</h2>
@@ -228,7 +228,7 @@ const Aardingsoplossingen = () => {
         <SafetyStatement />
 
         {/* CTA */}
-        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-24">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"
