@@ -175,78 +175,137 @@ export default function AdminVacancies() {
             {rows.length === 0 ? "Nog geen vacatures." : "Geen vacatures gevonden met deze filters."}
           </div>
         ) : (
-          <div className="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Titel</TableHead>
-                  <TableHead>Categorie</TableHead>
-                  <TableHead>Regio</TableHead>
-                  <TableHead>Dienstverband</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Uitgelicht</TableHead>
-                  <TableHead>Laatst bijgewerkt</TableHead>
-                  <TableHead className="text-right">Acties</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filtered.map((v) => (
-                  <TableRow key={v.id}>
-                    <TableCell className="font-medium text-[#0d3b2e]">
-                      <div className="flex items-center gap-2">
-                        {v.title}
-                        <a href={`/vacatures/${v.slug}`} target="_blank" rel="noreferrer" className="text-[#9ed42e]">
+          <>
+            {/* Mobile card view */}
+            <ul className="md:hidden divide-y divide-gray-200">
+              {filtered.map((v) => (
+                <li key={v.id} className="p-4 space-y-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-medium text-[#0d3b2e] break-words">{v.title}</span>
+                        <a href={`/vacatures/${v.slug}`} target="_blank" rel="noreferrer" className="text-[#9ed42e] inline-flex items-center min-h-[32px]" aria-label="Open vacature in nieuw tabblad">
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
                       </div>
-                    </TableCell>
-                    <TableCell>{v.category || "—"}</TableCell>
-                    <TableCell>{v.region || "—"}</TableCell>
-                    <TableCell>{v.employment_type || "—"}</TableCell>
-                    <TableCell>
-                      <Badge variant={v.status === "published" ? "default" : "secondary"}
-                        className={v.status === "published" ? "bg-[#9ed42e] text-[#0d3b2e] hover:bg-[#9ed42e]" : ""}>
-                        {v.status === "published" ? "Gepubliceerd" : "Concept"}
-                      </Badge>
-                    </TableCell>
-                    <TableCell>{v.is_featured ? "Ja" : "—"}</TableCell>
-                    <TableCell className="text-sm text-[#6c757d]">
-                      {new Date(v.updated_at).toLocaleDateString("nl-NL")}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <div className="flex items-center justify-end gap-1">
-                        <Button size="icon" variant="ghost" title={v.status === "published" ? "Depubliceren" : "Publiceren"} onClick={() => toggleStatus(v)}>
-                          {v.status === "published" ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                        </Button>
-                        <Button size="icon" variant="ghost" asChild title="Bewerken">
-                          <Link to={`/admin/vacatures/${v.id}/bewerken`}><Pencil className="w-4 h-4" /></Link>
-                        </Button>
-                        <AlertDialog>
-                          <AlertDialogTrigger asChild>
-                            <Button size="icon" variant="ghost" title="Verwijderen"><Trash2 className="w-4 h-4 text-red-600" /></Button>
-                          </AlertDialogTrigger>
-                          <AlertDialogContent>
-                            <AlertDialogHeader>
-                              <AlertDialogTitle>Vacature verwijderen?</AlertDialogTitle>
-                              <AlertDialogDescription>
-                                "{v.title}" wordt definitief verwijderd. Dit kan niet ongedaan worden gemaakt.
-                              </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter>
-                              <AlertDialogCancel>Annuleren</AlertDialogCancel>
-                              <AlertDialogAction onClick={() => remove(v)} className="bg-red-600 hover:bg-red-700">
-                                Verwijderen
-                              </AlertDialogAction>
-                            </AlertDialogFooter>
-                          </AlertDialogContent>
-                        </AlertDialog>
+                      <div className="text-xs text-[#6c757d] mt-1 break-words">
+                        {[v.category, v.region, v.employment_type].filter(Boolean).join(" · ") || "—"}
                       </div>
-                    </TableCell>
+                    </div>
+                    <Badge variant={v.status === "published" ? "default" : "secondary"}
+                      className={`shrink-0 ${v.status === "published" ? "bg-[#9ed42e] text-[#0d3b2e] hover:bg-[#9ed42e]" : ""}`}>
+                      {v.status === "published" ? "Gepubliceerd" : "Concept"}
+                    </Badge>
+                  </div>
+                  <div className="flex items-center justify-between text-xs text-[#6c757d]">
+                    <span>{v.is_featured ? "★ Uitgelicht" : ""}</span>
+                    <span>Bijgewerkt: {new Date(v.updated_at).toLocaleDateString("nl-NL")}</span>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+                    <Button variant="outline" className="w-full min-h-[44px]" onClick={() => toggleStatus(v)}>
+                      {v.status === "published" ? <><EyeOff className="w-4 h-4 mr-1.5" /> Depubliceren</> : <><Eye className="w-4 h-4 mr-1.5" /> Publiceren</>}
+                    </Button>
+                    <Button variant="outline" className="w-full min-h-[44px]" asChild>
+                      <Link to={`/admin/vacatures/${v.id}/bewerken`}><Pencil className="w-4 h-4 mr-1.5" /> Bewerken</Link>
+                    </Button>
+                    <AlertDialog>
+                      <AlertDialogTrigger asChild>
+                        <Button variant="outline" className="w-full min-h-[44px] text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200">
+                          <Trash2 className="w-4 h-4 mr-1.5" /> Verwijderen
+                        </Button>
+                      </AlertDialogTrigger>
+                      <AlertDialogContent>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>Vacature verwijderen?</AlertDialogTitle>
+                          <AlertDialogDescription>
+                            "{v.title}" wordt definitief verwijderd. Dit kan niet ongedaan worden gemaakt.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel>Annuleren</AlertDialogCancel>
+                          <AlertDialogAction onClick={() => remove(v)} className="bg-red-600 hover:bg-red-700">Verwijderen</AlertDialogAction>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+            {/* Desktop table view */}
+            <div className="hidden md:block overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Titel</TableHead>
+                    <TableHead>Categorie</TableHead>
+                    <TableHead>Regio</TableHead>
+                    <TableHead>Dienstverband</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Uitgelicht</TableHead>
+                    <TableHead>Laatst bijgewerkt</TableHead>
+                    <TableHead className="text-right">Acties</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
+                </TableHeader>
+                <TableBody>
+                  {filtered.map((v) => (
+                    <TableRow key={v.id}>
+                      <TableCell className="font-medium text-[#0d3b2e]">
+                        <div className="flex items-center gap-2">
+                          {v.title}
+                          <a href={`/vacatures/${v.slug}`} target="_blank" rel="noreferrer" className="text-[#9ed42e]">
+                            <ExternalLink className="w-3.5 h-3.5" />
+                          </a>
+                        </div>
+                      </TableCell>
+                      <TableCell>{v.category || "—"}</TableCell>
+                      <TableCell>{v.region || "—"}</TableCell>
+                      <TableCell>{v.employment_type || "—"}</TableCell>
+                      <TableCell>
+                        <Badge variant={v.status === "published" ? "default" : "secondary"}
+                          className={v.status === "published" ? "bg-[#9ed42e] text-[#0d3b2e] hover:bg-[#9ed42e]" : ""}>
+                          {v.status === "published" ? "Gepubliceerd" : "Concept"}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>{v.is_featured ? "Ja" : "—"}</TableCell>
+                      <TableCell className="text-sm text-[#6c757d]">
+                        {new Date(v.updated_at).toLocaleDateString("nl-NL")}
+                      </TableCell>
+                      <TableCell className="text-right">
+                        <div className="flex items-center justify-end gap-1">
+                          <Button size="icon" variant="ghost" title={v.status === "published" ? "Depubliceren" : "Publiceren"} onClick={() => toggleStatus(v)}>
+                            {v.status === "published" ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                          </Button>
+                          <Button size="icon" variant="ghost" asChild title="Bewerken">
+                            <Link to={`/admin/vacatures/${v.id}/bewerken`}><Pencil className="w-4 h-4" /></Link>
+                          </Button>
+                          <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                              <Button size="icon" variant="ghost" title="Verwijderen"><Trash2 className="w-4 h-4 text-red-600" /></Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                              <AlertDialogHeader>
+                                <AlertDialogTitle>Vacature verwijderen?</AlertDialogTitle>
+                                <AlertDialogDescription>
+                                  "{v.title}" wordt definitief verwijderd. Dit kan niet ongedaan worden gemaakt.
+                                </AlertDialogDescription>
+                              </AlertDialogHeader>
+                              <AlertDialogFooter>
+                                <AlertDialogCancel>Annuleren</AlertDialogCancel>
+                                <AlertDialogAction onClick={() => remove(v)} className="bg-red-600 hover:bg-red-700">
+                                  Verwijderen
+                                </AlertDialogAction>
+                              </AlertDialogFooter>
+                            </AlertDialogContent>
+                          </AlertDialog>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </div>
+          </>
         )}
       </div>
     </div>
