@@ -207,7 +207,8 @@ const VacatureDetail = () => {
         availability: parsed.data.availability || null,
         message: fullMessage,
         cv_url,
-      }]);
+        vacancy_id: vacature.id || null,
+      } as any]);
       if (insErr) throw insErr;
 
       toast.success("Sollicitatie verstuurd. We nemen zo snel mogelijk contact op.");
@@ -383,8 +384,11 @@ const VacatureDetail = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
-              {proces.map((p, i) => {
-                const Icon = p.icon;
+              {(vacature.process_steps.length > 0 ? vacature.process_steps : proces.map((p) => p.title)).map((step, i) => {
+                const fallback = proces[i] || proces[proces.length - 1];
+                const Icon = fallback.icon;
+                const title = typeof step === "string" ? step : fallback.title;
+                const text = (proces[i]?.text) || "";
                 return (
                   <div
                     key={p.title}
