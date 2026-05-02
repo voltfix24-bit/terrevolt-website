@@ -43,7 +43,7 @@ export function Header() {
             </div>
             <div className="min-w-0">
               <div className="text-base sm:text-xl text-[#0d3b2e] truncate leading-tight">TerreVolt BV</div>
-              <div className="text-[11px] sm:text-xs text-[#6c757d] truncate leading-tight">LS/MS-infrastructuur</div>
+              <div className="hidden xs:block text-[11px] sm:text-xs text-[#6c757d] truncate leading-tight">LS/MS-infrastructuur</div>
             </div>
           </a>
 
