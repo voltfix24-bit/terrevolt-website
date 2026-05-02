@@ -6,15 +6,12 @@ import { Footer } from "@/components/terrevolt/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
-
-const PHONE = "+31 6 34 48 74 67";
-const EMAIL = "info@terrevolt.nl";
-const ADDRESS = "Overvliet 97, 3545 NH Utrecht";
+import { company, addressOneLine, telHref, mailHref } from "@/config/company";
 
 const contactCards = [
-  { icon: Phone, title: "Telefoon", value: PHONE, href: `tel:${PHONE.replace(/\s|\(|\)/g, "")}` },
-  { icon: Mail, title: "E-mail", value: EMAIL, href: `mailto:${EMAIL}` },
-  { icon: MapPin, title: "Adres", value: ADDRESS, href: null },
+  { icon: Phone, title: "Telefoon", value: company.phone.display, href: telHref },
+  { icon: Mail, title: "E-mail", value: company.email, href: mailHref },
+  { icon: MapPin, title: "Adres", value: addressOneLine, href: null },
 ];
 
 const requestTypes = [
@@ -349,7 +346,7 @@ const Contact = () => {
                 Bel of mail TerreVolt voor een snelle projectafstemming.
               </p>
               <a
-                href={`tel:${PHONE.replace(/\s|\(|\)/g, "")}`}
+                href={telHref}
                 className="inline-flex items-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-10 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-lg"
               >
                 <Phone className="w-5 h-5" />

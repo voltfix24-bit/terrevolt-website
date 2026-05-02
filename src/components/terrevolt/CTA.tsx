@@ -1,4 +1,5 @@
 import { Mail, Phone, MapPin } from "lucide-react";
+import { company, telHref, mailHref } from "@/config/company";
 
 export function CTA() {
   return (
@@ -28,19 +29,19 @@ export function CTA() {
               <div className="w-12 h-12 bg-[#9ed42e] rounded-full flex items-center justify-center">
                 <Phone className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.5} />
               </div>
-              <a href="tel:+31634487467" className="text-lg hover:text-[#9ed42e] transition-colors">+31 6 34 48 74 67</a>
+              <a href={telHref} className="text-lg hover:text-[#9ed42e] transition-colors">{company.phone.display}</a>
             </div>
             <div className="flex flex-col items-center gap-3 text-white">
               <div className="w-12 h-12 bg-[#9ed42e] rounded-full flex items-center justify-center">
                 <Mail className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.5} />
               </div>
-              <a href="mailto:info@terrevolt.nl" className="text-lg hover:text-[#9ed42e] transition-colors">info@terrevolt.nl</a>
+              <a href={mailHref} className="text-lg hover:text-[#9ed42e] transition-colors">{company.email}</a>
             </div>
             <div className="flex flex-col items-center gap-3 text-white">
               <div className="w-12 h-12 bg-[#9ed42e] rounded-full flex items-center justify-center">
                 <MapPin className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.5} />
               </div>
-              <div className="text-lg text-center leading-snug">Overvliet 97<br />3545 NH Utrecht</div>
+              <div className="text-lg text-center leading-snug">{company.address.street}<br />{company.address.postalCode} {company.address.city}</div>
             </div>
           </div>
 
