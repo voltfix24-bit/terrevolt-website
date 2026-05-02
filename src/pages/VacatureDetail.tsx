@@ -296,6 +296,9 @@ const VacatureDetail = () => {
     { icon: ShieldCheck, label: "Bevoegdheden", value: vacature.meta.bevoegdheden },
   ];
 
+  const META_LONG_THRESHOLD = 40;
+  const isLongMeta = (value: string) => (value?.length ?? 0) > META_LONG_THRESHOLD;
+
   const waText = `Hallo TerreVolt, ik heb een vraag over de functie "${vacature.title}".`;
   const waLink = `https://wa.me/${company.phone.e164.replace("+", "")}?text=${encodeURIComponent(waText)}`;
   const shareText = `Vacature bij TerreVolt: ${vacature.title}`;
