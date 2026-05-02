@@ -13,6 +13,7 @@ import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { CopyableContactLink } from "@/components/terrevolt/CopyableContactLink";
 import { supabase } from "@/integrations/supabase/client";
+import { CvUploadField, validateCvFile } from "@/components/CvUploadField";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { vacatures as fallbackVacatures } from "@/data/vacatures";
