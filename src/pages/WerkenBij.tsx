@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Zap, Cable, Anchor, PlugZap, ShieldCheck, Home, ClipboardCheck, Users, Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert, Award, Loader2, Upload } from "lucide-react";
 import { z } from "zod";
@@ -7,18 +7,20 @@ import { Footer } from "@/components/terrevolt/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
-import { vacatures } from "@/data/vacatures";
+import { vacatures as fallbackVacatures } from "@/data/vacatures";
 
-const profielIcons: Record<string, typeof Zap> = {
-  ls: Zap,
-  ms: Cable,
-  schakel: ShieldCheck,
-  kabel: PlugZap,
-  aarding: Anchor,
-  huisaansluiting: Home,
-  wv: ClipboardCheck,
-  zzp: Users,
+const slugIconMap: Record<string, typeof Zap> = {
+  laagspanningsmonteur: Zap,
+  middenspanningsmonteur: Cable,
+  schakelmonteur: ShieldCheck,
+  kabelmonteur: PlugZap,
+  aardingsmonteur: Anchor,
+  "monteur-huisaansluitingen": Home,
+  werkverantwoordelijke: ClipboardCheck,
+  "zzp-ploegen": Users,
 };
+
+type ProfielCard = { slug: string; label: string };
 
 const waarom = [
   { icon: Network, title: "Werk binnen de netbeheerwereld", description: "Projecten voor netbeheerders en hoofdaannemers binnen de Nederlandse energie-infrastructuur." },
