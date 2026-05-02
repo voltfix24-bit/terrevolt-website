@@ -1,4 +1,5 @@
 import { Zap } from "lucide-react";
+import { company, telHref, mailHref } from "@/config/company";
 
 export function Footer() {
   return (
@@ -43,13 +44,13 @@ export function Footer() {
           <div>
             <h4 className="text-white mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="tel:+31634487467" className="hover:text-[#9ed42e] transition-colors">+31 6 34 48 74 67</a></li>
-              <li><a href="mailto:info@terrevolt.nl" className="hover:text-[#9ed42e] transition-colors">info@terrevolt.nl</a></li>
+              <li><a href={telHref} className="hover:text-[#9ed42e] transition-colors">{company.phone.display}</a></li>
+              <li><a href={mailHref} className="hover:text-[#9ed42e] transition-colors">{company.email}</a></li>
               <li className="not-italic">
                 <address className="not-italic leading-relaxed">
-                  Overvliet 97<br />
-                  3545 NH Utrecht<br />
-                  Nederland
+                  {company.address.street}<br />
+                  {company.address.postalCode} {company.address.city}<br />
+                  {company.address.country}
                 </address>
               </li>
               <li className="pt-2"><a href="/contact" className="text-[#9ed42e] hover:text-white transition-colors">Stuur een aanvraag →</a></li>
