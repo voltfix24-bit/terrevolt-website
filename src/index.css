@@ -99,7 +99,38 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    /* Compenseert de sticky header (4rem mobiel, 5rem vanaf sm) zodat
+       sectie-anchors niet onder de header verdwijnen. */
+    scroll-padding-top: 4rem;
+  }
+
+  @media (min-width: 640px) {
+    html {
+      scroll-padding-top: 5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Extra veiligheid: per sectie ook scroll-margin-top instellen voor browsers/contexten
+     waar scroll-padding-top op <html> niet werkt (bv. genest scrollende ouders). */
+  section[id] {
+    scroll-margin-top: 4rem;
+  }
+
+  @media (min-width: 640px) {
+    section[id] {
+      scroll-margin-top: 5rem;
+    }
   }
 }
