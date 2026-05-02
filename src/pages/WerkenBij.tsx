@@ -554,8 +554,29 @@ const WerkenBij = () => {
           </div>
         </section>
 
+        {/* STICKY SUBNAV — scroll-navigatie binnen pagina */}
+        <nav
+          aria-label="Paginanavigatie Werken bij"
+          className="sticky top-16 sm:top-20 z-30 bg-white/90 backdrop-blur-sm border-b border-gray-200"
+        >
+          <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+            <ul className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide -mx-1 px-1 py-2">
+              {funnelNav.map((item) => (
+                <li key={item.href} className="flex-shrink-0">
+                  <a
+                    href={item.href}
+                    className="inline-flex items-center min-h-[40px] px-3 sm:px-4 rounded-full text-sm text-[#0d3b2e] hover:bg-[#f0f7e6] hover:text-[#0d3b2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border border-transparent hover:border-[#9ed42e] transition-colors whitespace-nowrap"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+
         {/* PROFIELEN */}
-        <section id="profielen" className="py-16 md:py-24 bg-white">
+        <section id="profielen" className="py-16 md:py-24 bg-white scroll-mt-32">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-10 md:mb-14">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Gezochte profielen</h2>
