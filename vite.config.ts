@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+// @ts-expect-error - .mjs runtime module zonder TS-declaraties (gedeeld met Vitest).
 import contactLinksPlugin from "./scripts/vite-plugin-contact-links.mjs";
 
 // https://vitejs.dev/config/
