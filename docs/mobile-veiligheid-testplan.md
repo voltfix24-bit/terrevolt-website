@@ -306,3 +306,55 @@ offset te groot (ruimte verspild).
 - ❌ **Zak**: één deeplink landt achter de header, één woord/chip valt
   buiten viewport in system-font fallback, of letter-spacing zorgt voor
   visueel kleeftekst in een knop of titel.
+
+---
+
+## 10. CI — automatische runs op elke push
+
+`.github/workflows/e2e.yml` draait Playwright automatisch op elke push
+en pull request. Eén Ubuntu-job installeert **Chromium + WebKit** en
+voert vier projecten uit:
+
+| Project | Engine | Device |
+|---|---|---|
+| `chromium-mobile` | Chromium | Pixel 5 |
+| `mobile-safari-iphone-se` | **WebKit (= iOS Safari)** | iPhone SE |
+| `mobile-safari-iphone-12` | **WebKit (= iOS Safari)** | iPhone 12 |
+| `mobile-safari-iphone-14-pro-max` | **WebKit (= iOS Safari)** | iPhone 14 Pro Max |
+
+> WebKit op Linux is exact dezelfde rendering-engine als iOS Safari —
+> letter-spacing, font-fallback en layout-quirks gedragen zich identiek.
+> Dat dekt sectie 9 uit dit testplan af zonder dat er een Mac/iPhone
+> nodig is in CI.
+
+### Artefacten per run
+
+Elke workflow-run upload drie artifacts (zichtbaar onderaan de
+GitHub Actions run-pagina, 14–30 dagen retentie):
+
+- **`playwright-report`** — interactieve HTML-rapport (`npx playwright show-report` lokaal).
+- **`veiligheid-overflow-report`** — per project een eigen submap met
+  `report.md`, `report.json` en de drie full-page screenshots
+  (375 / 414 / 640 px).
+- **`playwright-test-results`** *(alleen bij failure)* — traces, video's
+  en screenshots voor debugging.
+
+### Lokaal hetzelfde commando draaien
+
+```bash
+# Eénmalig: browsers installeren
+npx playwright install --with-deps chromium webkit
+
+# Alle projecten (zoals CI)
+CI=true npx playwright test
+
+# Alleen iOS Safari op iPhone SE
+npx playwright test --project=mobile-safari-iphone-se
+```
+
+### Faalcriterium
+
+Een run faalt zodra **één** project op **één** breakpoint horizontale
+overflow vindt of een element rechts buiten de viewport laat vallen.
+De PR-check is daarmee een harde poort tegen mobiele regressies — ook
+op iOS Safari, niet alleen Chromium.

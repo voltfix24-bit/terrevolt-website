@@ -20,7 +20,11 @@ const BREAKPOINTS = [
 ] as const;
 
 const ROUTE = "/veiligheid";
-const REPORT_DIR = "test-results/veiligheid-overflow";
+const REPORT_ROOT = "test-results/veiligheid-overflow";
+// Per Playwright-project een eigen subdirectory zodat WebKit (iOS Safari)
+// en Chromium-runs elkaars rapporten/screenshots niet overschrijven in CI.
+const projectSlug = (name: string) =>
+  name.replace(/[^a-z0-9-_]/gi, "-").toLowerCase() || "default";
 
 type Offender = {
   tag: string;
@@ -46,7 +50,8 @@ const results: RunResult[] = [];
 for (const bp of BREAKPOINTS) {
   test(`/veiligheid heeft geen horizontale overflow @ ${bp.width}px`, async ({
     browser,
-  }) => {
+  }, testInfo) => {
+    const reportDir = join(REPORT_ROOT, projectSlug(testInfo.project.name));
     const context = await browser.newContext({
       viewport: { width: bp.width, height: bp.height },
       deviceScaleFactor: 2,
@@ -113,9 +118,9 @@ for (const bp of BREAKPOINTS) {
     });
 
     // Screenshot voor visueel bewijs.
-    mkdirSync(REPORT_DIR, { recursive: true });
+    mkdirSync(reportDir, { recursive: true });
     await page.screenshot({
-      path: join(REPORT_DIR, `veiligheid-${bp.width}.png`),
+      path: join(reportDir, `veiligheid-${bp.width}.png`),
       fullPage: true,
     });
 
@@ -143,18 +148,20 @@ for (const bp of BREAKPOINTS) {
   });
 }
 
-test.afterAll(async () => {
-  mkdirSync(REPORT_DIR, { recursive: true });
+test.afterAll(async ({}, testInfo) => {
+  const reportDir = join(REPORT_ROOT, projectSlug(testInfo.project.name));
+  mkdirSync(reportDir, { recursive: true });
   const stamp = new Date().toISOString();
 
   writeFileSync(
-    join(REPORT_DIR, "report.json"),
-    JSON.stringify({ route: ROUTE, runAt: stamp, results }, null, 2),
+    join(reportDir, "report.json"),
+    JSON.stringify({ route: ROUTE, project: testInfo.project.name, runAt: stamp, results }, null, 2),
   );
 
   const md: string[] = [];
   md.push(`# Overflow-rapport — ${ROUTE}`);
   md.push("");
+  md.push(`Project: \`${testInfo.project.name}\``);
   md.push(`Gegenereerd: \`${stamp}\``);
   md.push("");
   md.push("| Breakpoint | Label | Horiz. scroll? | scrollWidth | Overtreders |");
@@ -187,7 +194,7 @@ test.afterAll(async () => {
     }
     md.push("");
   }
-  writeFileSync(join(REPORT_DIR, "report.md"), md.join("\n"));
+  writeFileSync(join(reportDir, "report.md"), md.join("\n"));
   // eslint-disable-next-line no-console
-  console.log(`\n📄 Rapport geschreven naar ${REPORT_DIR}/report.md\n`);
+  console.log(`\n📄 Rapport (${testInfo.project.name}) geschreven naar ${reportDir}/report.md\n`);
 });

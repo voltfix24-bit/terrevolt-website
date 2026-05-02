@@ -1,0 +1,66 @@
+name: E2E – Veiligheid overflow & iOS Safari checks
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+  workflow_dispatch:
+
+# Avoid stacking redundant runs on the same ref.
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  playwright:
+    name: Playwright (Chromium + WebKit/iOS Safari)
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Install only the browsers we actually use (Chromium + WebKit).
+      # WebKit op Linux is exact dezelfde engine die iOS Safari gebruikt.
+      - name: Install Playwright browsers (chromium, webkit)
+        run: npx playwright install --with-deps chromium webkit
+
+      - name: Run Playwright tests
+        env:
+          CI: "true"
+        run: npx playwright test
+
+      - name: Upload Playwright HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 14
+
+      - name: Upload overflow report (md + json + screenshots)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: veiligheid-overflow-report
+          path: test-results/veiligheid-overflow
+          retention-days: 30
+
+      - name: Upload raw test-results (traces, videos)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-test-results
+          path: test-results
+          retention-days: 7
