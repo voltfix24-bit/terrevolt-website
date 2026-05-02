@@ -171,6 +171,7 @@ const Veiligheid = () => {
 
         {/* STICKY SUBNAV */}
         <nav
+          ref={subnavRef}
           aria-label="Paginanavigatie Veiligheid"
           className="sticky top-16 sm:top-20 z-30 bg-white/90 backdrop-blur-sm border-b border-gray-200"
         >
