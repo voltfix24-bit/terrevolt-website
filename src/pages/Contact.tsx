@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { ArrowRight, Phone, Mail, MapPin, Upload, Loader2, Network, HardHat, Factory, Briefcase, Users } from "lucide-react";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
