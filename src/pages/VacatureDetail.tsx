@@ -552,7 +552,7 @@ const VacatureDetail = () => {
 
                 return (
                   <li key={m.label} className={open ? "w-full" : "max-w-full min-w-0"}>
-                    <MetaTooltip label={tooltipText} enabled={!open} className={open ? "w-full" : ""}>
+                    <MetaTooltip label={tooltipText} className={open ? "w-full" : ""}>
                       <button
                         type="button"
                         onClick={() => toggleMeta(m.label)}
@@ -585,7 +585,7 @@ const VacatureDetail = () => {
                 const open = expandedMeta.has(m.label);
                 const tooltipText = `${m.label}: ${m.value}`;
                 return (
-                  <MetaTooltip key={m.label} label={tooltipText} enabled={long && !open} className="w-full">
+                  <MetaTooltip key={m.label} label={tooltipText} className="w-full">
                     <div
                       tabIndex={0}
                       aria-label={tooltipText}
