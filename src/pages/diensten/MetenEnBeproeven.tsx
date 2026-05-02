@@ -1,9 +1,10 @@
-import { ArrowRight, Gauge, Cable, Zap, Shield, Eye, FileText, Building2, GitMerge, Anchor, AlertTriangle, PlayCircle, PackageCheck, Activity, ClipboardCheck, FileBarChart } from "lucide-react";
+import { ArrowRight, Gauge, Cable, Zap, Shield, Eye, FileText, Building2, GitMerge, AlertTriangle, PlayCircle, PackageCheck, Activity, ClipboardCheck, FileBarChart } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { WhenToCall } from "@/components/terrevolt/WhenToCall";
 import { SafetyStatement } from "@/components/terrevolt/SafetyStatement";
 import { usePageMeta } from "../../hooks/usePageMeta";
+import { EarthSymbol } from "@/components/icons/EarthSymbol";
 
 const metingen = [
   { icon: Gauge, title: "Aardingsmetingen", description: "Meten en vastleggen van aardingsvoorzieningen en aardverspreidingsweerstand." },
@@ -17,7 +18,7 @@ const metingen = [
 const wanneer = [
   { icon: Building2, label: "Na stationsrenovatie" },
   { icon: GitMerge, label: "Na kabelmontage" },
-  { icon: Anchor, label: "Na aanleg van aarding" },
+  { icon: EarthSymbol, label: "Na aanleg van aarding" },
   { icon: AlertTriangle, label: "Bij storingsonderzoek" },
   { icon: PlayCircle, label: "Voor ingebruikname" },
   { icon: PackageCheck, label: "Voor oplevering" },

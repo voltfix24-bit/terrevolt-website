@@ -1,8 +1,9 @@
-import { ArrowRight, CheckCircle2, ClipboardList, FileSearch, ShieldCheck, PackageCheck, Cable, Building2, Power, Anchor, Gauge, PlugZap, Users, Briefcase, Zap as ZapIcon } from "lucide-react";
+import { ArrowRight, CheckCircle2, ClipboardList, FileSearch, ShieldCheck, PackageCheck, Cable, Building2, Power, Gauge, PlugZap, Users, Briefcase, Zap as ZapIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
+import { EarthSymbol } from "@/components/icons/EarthSymbol";
 
 const services = [
   {
@@ -27,7 +28,7 @@ const services = [
     bullets: ["Vrijschakelen", "Veiligstellen", "Terugschakelen"],
   },
   {
-    icon: Anchor,
+    icon: EarthSymbol,
     slug: "aardingsoplossingen",
     title: "Aardingsoplossingen",
     description: "Aanleg, verbetering, meting en rapportage van aardingssystemen.",

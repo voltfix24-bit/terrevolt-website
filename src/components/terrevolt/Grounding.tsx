@@ -1,9 +1,10 @@
-import { Anchor, Gauge, ShieldCheck, GitBranch, FileBarChart } from "lucide-react";
+import { Gauge, ShieldCheck, GitBranch, FileBarChart } from "lucide-react";
 import { Reveal } from "@/components/terrevolt/Reveal";
+import { EarthSymbol } from "@/components/icons/EarthSymbol";
 
 const groundingServices = [
   {
-    icon: Anchor,
+    icon: EarthSymbol,
     title: "Aardelektroden",
     description: "Plaatsen van aardelektroden en aardingsvoorzieningen voor technische installaties."
   },

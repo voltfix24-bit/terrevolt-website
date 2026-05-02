@@ -1,16 +1,17 @@
-import { ArrowRight, Power, Lock, PlayCircle, PauseCircle, Anchor, ListChecks, Building2, Zap, Cable, Wrench, ShieldCheck } from "lucide-react";
+import { ArrowRight, Power, Lock, PlayCircle, PauseCircle, ListChecks, Building2, Zap, Cable, Wrench, ShieldCheck } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { WhenToCall } from "@/components/terrevolt/WhenToCall";
 import { SafetyStatement } from "@/components/terrevolt/SafetyStatement";
 import { usePageMeta } from "../../hooks/usePageMeta";
+import { EarthSymbol } from "@/components/icons/EarthSymbol";
 
 const taken = [
   { icon: Power, title: "Vrijschakelen", description: "Installaties of netdelen spanningsloos maken volgens projectafspraken en veiligheidsprocedures." },
   { icon: Lock, title: "Veiligstellen", description: "Werkgebieden veiligstellen zodat monteurs verantwoord kunnen uitvoeren." },
   { icon: PlayCircle, title: "In bedrijf nemen", description: "Installaties gecontroleerd terug in bedrijf nemen na uitvoering, controle of renovatie." },
   { icon: PauseCircle, title: "Uit bedrijf nemen", description: "Netdelen of installaties voorbereiden voor werkzaamheden, vervanging of onderhoud." },
-  { icon: Anchor, title: "Aarden en kortsluiten", description: "Ondersteuning bij veiligheidsmaatregelen rondom werkplekken en installaties." },
+  { icon: EarthSymbol, title: "Aarden en kortsluiten", description: "Ondersteuning bij veiligheidsmaatregelen rondom werkplekken en installaties." },
   { icon: ListChecks, title: "Schakelplannen", description: "Uitvoering en afstemming rondom bedienings- en schakelplannen." },
 ];
 
