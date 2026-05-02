@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Zap, Cable, Anchor, PlugZap, Power, ClipboardCheck, Users, Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert, Award, Loader2, Upload } from "lucide-react";
+import { ArrowRight, Zap, Cable, PlugZap, Power, ClipboardCheck, Users, Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert, Award, Loader2, Upload } from "lucide-react";
+import { EarthSymbol } from "@/components/icons/EarthSymbol";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
@@ -14,7 +15,7 @@ const slugIconMap: Record<string, typeof Zap> = {
   middenspanningsmonteur: Cable,
   schakelmonteur: Power,
   kabelmonteur: Cable,
-  aardingsmonteur: Anchor,
+  aardingsmonteur: EarthSymbol,
   "monteur-huisaansluitingen": PlugZap,
   werkverantwoordelijke: ClipboardCheck,
   "zzp-ploegen": Users,
