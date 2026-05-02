@@ -582,38 +582,40 @@ const VacatureDetail = () => {
                 const Icon = m.icon;
                 const long = isLongMeta(m.value);
                 const open = expandedMeta.has(m.label);
+                const tooltipText = `${m.label}: ${m.value}`;
                 return (
-                  <div
-                    key={m.label}
-                    tabIndex={long ? -1 : 0}
-                    aria-label={long ? undefined : `${m.label}: ${m.value}`}
-                    className="group flex flex-col items-center text-center gap-2 rounded-xl p-3 -m-3 border border-transparent transition-all duration-200 cursor-default hover:border-[#9ed42e] hover:bg-[#f8fbf0] hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2 focus-visible:border-[#9ed42e] focus-visible:bg-[#f8fbf0] active:scale-[0.98]"
-                  >
-                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-200 group-hover:bg-[#9ed42e] group-focus-visible:bg-[#9ed42e]">
-                      <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} aria-hidden="true" />
-                    </div>
-                    <div className="min-w-0 w-full">
-                      <div className="text-xs uppercase tracking-wider text-[#0d3b2e]/80">{m.label}</div>
-                      <div
-                        className={`text-[#0d3b2e] text-sm break-words ${long && !open ? "line-clamp-2" : ""}`}
-                        title={long && !open ? m.value : undefined}
-                      >
-                        {m.value}
+                  <MetaTooltip key={m.label} label={tooltipText} enabled={long && !open} className="w-full">
+                    <div
+                      tabIndex={0}
+                      aria-label={tooltipText}
+                      className="group flex flex-col items-center text-center gap-2 rounded-xl p-3 -m-3 border border-transparent transition-all duration-200 cursor-default hover:border-[#9ed42e] hover:bg-[#f8fbf0] hover:shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2 focus-visible:border-[#9ed42e] focus-visible:bg-[#f8fbf0] active:scale-[0.98] w-full"
+                    >
+                      <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center flex-shrink-0 transition-colors duration-200 group-hover:bg-[#9ed42e] group-focus-visible:bg-[#9ed42e]">
+                        <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} aria-hidden="true" />
                       </div>
-                      {long && (
-                        <button
-                          type="button"
-                          onClick={() => toggleMeta(m.label)}
-                          aria-expanded={open}
-                          aria-label={`${m.label}: ${open ? "minder tonen" : "lees meer"}`}
-                          className="mt-1 inline-flex items-center gap-1 text-xs text-[#0d3b2e] underline decoration-[#9ed42e] decoration-2 underline-offset-2 hover:text-[#0d3b2e] hover:decoration-[#0d3b2e] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2 rounded"
-                        >
-                          {open ? "Minder" : "Lees meer"}
-                          <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`} strokeWidth={2.5} aria-hidden="true" />
-                        </button>
-                      )}
+                      <div className="min-w-0 w-full">
+                        <div className="text-xs uppercase tracking-wider text-[#0d3b2e]/80">{m.label}</div>
+                        <div className={`text-[#0d3b2e] text-sm break-words ${long && !open ? "line-clamp-2" : ""}`}>
+                          {m.value}
+                        </div>
+                        {long && (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleMeta(m.label);
+                            }}
+                            aria-expanded={open}
+                            aria-label={`${m.label}: ${open ? "minder tonen" : "lees meer"}`}
+                            className="mt-1 inline-flex items-center gap-1 text-xs text-[#0d3b2e] underline decoration-[#9ed42e] decoration-2 underline-offset-2 hover:text-[#0d3b2e] hover:decoration-[#0d3b2e] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2 rounded"
+                          >
+                            {open ? "Minder" : "Lees meer"}
+                            <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`} strokeWidth={2.5} aria-hidden="true" />
+                          </button>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  </MetaTooltip>
                 );
               })}
             </div>
