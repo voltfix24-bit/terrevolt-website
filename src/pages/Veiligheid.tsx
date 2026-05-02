@@ -225,7 +225,7 @@ const Veiligheid = () => {
                       <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
                     </div>
                     <h3 className="text-base text-[#0d3b2e] mb-2">{step.title}</h3>
-                    <p className="text-[#6c757d] text-sm leading-relaxed hyphens-nl text-pretty">{softHyphenate(step.description)}</p>
+                    <p className="text-[#6c757d] text-[15px] leading-[1.7] sm:text-sm sm:leading-relaxed hyphens-nl text-pretty">{softHyphenate(step.description)}</p>
                   </div>
                 );
               })}
@@ -255,7 +255,7 @@ const Veiligheid = () => {
                       <Icon className="w-7 h-7 text-[#0d3b2e] group-hover:text-white transition-colors duration-300" strokeWidth={2} />
                     </div>
                     <h3 className="text-xl text-[#0d3b2e] mb-3">{item.title}</h3>
-                    <p className="text-[#6c757d] leading-relaxed flex-1 hyphens-nl text-pretty">{softHyphenate(item.description)}</p>
+                    <p className="text-[#6c757d] text-[15px] leading-[1.7] sm:text-base sm:leading-relaxed flex-1 hyphens-nl text-pretty">{softHyphenate(item.description)}</p>
                     <span className="mt-5 inline-block self-start text-[10px] uppercase tracking-wider text-[#0d3b2e] bg-[#f0f7e6] border border-[#9ed42e]/40 rounded-full px-3 py-1">
                       {item.label}
                     </span>
@@ -373,10 +373,10 @@ const Veiligheid = () => {
               <Accordion type="single" collapsible className="bg-white rounded-xl border border-gray-200 divide-y divide-gray-200">
                 {faqs.map((f, i) => (
                   <AccordionItem key={i} value={`faq-${i}`} className="border-b-0 px-5 sm:px-6">
-                    <AccordionTrigger className="text-left text-[#0d3b2e] hover:no-underline py-5 text-base sm:text-lg rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-white">
+                    <AccordionTrigger className="text-left text-[#0d3b2e] hover:no-underline py-4 sm:py-5 text-[15px] sm:text-lg leading-snug rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-white">
                       {f.q}
                     </AccordionTrigger>
-                    <AccordionContent className="text-[#6c757d] leading-relaxed text-sm sm:text-base pb-5 hyphens-nl text-pretty">
+                    <AccordionContent className="text-[#6c757d] text-[15px] sm:text-base leading-[1.75] sm:leading-relaxed pb-5 hyphens-nl text-pretty max-w-prose">
                       {softHyphenate(f.a)}
                     </AccordionContent>
                   </AccordionItem>
