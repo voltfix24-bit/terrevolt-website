@@ -360,7 +360,7 @@ const WerkenBij = () => {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="flex-shrink-0 px-4 py-2 rounded-full border border-gray-200 bg-white text-[#0d3b2e] text-sm hover:border-[#9ed42e] hover:bg-[#f0f7e6] transition-all min-h-[40px] flex items-center"
+                  className="flex-shrink-0 px-4 py-2.5 rounded-full border border-gray-200 bg-white text-[#0d3b2e] text-sm hover:border-[#9ed42e] hover:bg-[#f0f7e6] transition-all min-h-[44px] flex items-center"
                 >
                   {item.label}
                 </a>
@@ -382,7 +382,7 @@ const WerkenBij = () => {
                     key={q.label}
                     type="button"
                     onClick={() => scrollToSlug(q.slugs)}
-                    className="px-4 py-2 rounded-full border border-gray-200 bg-[#f8f9fa] text-[#0d3b2e] text-sm hover:border-[#9ed42e] hover:bg-[#f0f7e6] active:scale-[0.98] transition-all min-h-[40px]"
+                    className="px-4 py-2.5 rounded-full border border-gray-200 bg-[#f8f9fa] text-[#0d3b2e] text-sm hover:border-[#9ed42e] hover:bg-[#f0f7e6] active:scale-[0.98] transition-all min-h-[44px] inline-flex items-center"
                   >
                     {q.label}
                   </button>

@@ -184,3 +184,35 @@ All colors MUST be HSL.
     }
   }
 }
+
+@layer base {
+  /* Mobile tap-target safety net (WCAG 2.5.5 / Apple HIG: min 44x44).
+     Strategie: snellere taps via touch-action, en een opt-in utility
+     `.tap-target` voor losse iconen/links waar layout het niet zelf doet.
+     We forceren NIET globaal min-height op alle <a>/<button> om inline
+     tekstlinks binnen lopende tekst niet te breken. */
+  @media (max-width: 767px) {
+    a[href],
+    button,
+    [role="button"],
+    label[for],
+    summary,
+    input[type="checkbox"],
+    input[type="radio"],
+    input[type="submit"],
+    input[type="button"] {
+      touch-action: manipulation;
+    }
+  }
+
+  /* Opt-in: gebruik `tap-target` op losse interactieve elementen
+     (icoon-knoppen, kleine pills, etc.) om 44x44 te garanderen. */
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+

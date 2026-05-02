@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container mx-auto px-5 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <a href="/" className="flex items-center gap-2 mb-4">
+            <a href="/" className="inline-flex items-center gap-2 mb-4 min-h-[44px] py-2">
               <div className="w-8 h-8 bg-[#0d3b2e] rounded-lg flex items-center justify-center">
                 <Zap className="w-5 h-5 text-[#9ed42e]" strokeWidth={2.5} />
               </div>
@@ -22,23 +22,23 @@ export function Footer() {
           <div>
             <h4 className="text-white mb-4">Diensten</h4>
             <ul className="space-y-1 text-sm">
-              <li><a href="/diensten/ls-ms-netmontage" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">LS/MS Netmontage</a></li>
-              <li><a href="/diensten/stationsrenovatie" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Stationsrenovatie</a></li>
-              <li><a href="/diensten/schakelwerk" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Schakelwerk</a></li>
-              <li><a href="/diensten/aardingsoplossingen" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Aardingsoplossingen</a></li>
-              <li><a href="/diensten/meten-en-beproeven" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Meten &amp; beproeven</a></li>
-              <li><a href="/diensten/huisaansluitingen" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Huisaansluitingen</a></li>
+              <li><a href="/diensten/ls-ms-netmontage" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">LS/MS Netmontage</a></li>
+              <li><a href="/diensten/stationsrenovatie" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Stationsrenovatie</a></li>
+              <li><a href="/diensten/schakelwerk" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Schakelwerk</a></li>
+              <li><a href="/diensten/aardingsoplossingen" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Aardingsoplossingen</a></li>
+              <li><a href="/diensten/meten-en-beproeven" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Meten &amp; beproeven</a></li>
+              <li><a href="/diensten/huisaansluitingen" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Huisaansluitingen</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-white mb-4">Bedrijf</h4>
             <ul className="space-y-1 text-sm">
-              <li><a href="/over" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Over TerreVolt</a></li>
-              <li><a href="/projecten" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Projecten</a></li>
-              <li><a href="/veiligheid" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Veiligheid</a></li>
-              <li><a href="/werken-bij" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">Werken bij ons</a></li>
-              <li><a href="/werken-bij#zzp" className="block min-h-[40px] py-2 hover:text-[#9ed42e] transition-colors">ZZP'ers &amp; monteurs</a></li>
+              <li><a href="/over" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Over TerreVolt</a></li>
+              <li><a href="/projecten" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Projecten</a></li>
+              <li><a href="/veiligheid" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Veiligheid</a></li>
+              <li><a href="/werken-bij" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Werken bij ons</a></li>
+              <li><a href="/werken-bij#zzp" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">ZZP'ers &amp; monteurs</a></li>
             </ul>
           </div>
 
@@ -57,7 +57,7 @@ export function Footer() {
                   type="tel"
                   value={company.phone.e164}
                   ariaLabel={`Telefoonnummer kopiëren: ${company.phone.display}`}
-                  className="inline-flex items-center justify-center min-h-[40px] min-w-[40px] p-2 rounded-md text-current/70 hover:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] transition-colors"
+                  className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2.5 rounded-md text-current/70 hover:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] transition-colors"
                 />
               </li>
               <li className="flex items-center gap-1">
@@ -71,7 +71,7 @@ export function Footer() {
                 <CopyButton
                   type="mail"
                   value={company.email}
-                  className="inline-flex items-center justify-center min-h-[40px] min-w-[40px] p-2 rounded-md text-current/70 hover:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] transition-colors"
+                  className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2.5 rounded-md text-current/70 hover:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] transition-colors"
                 />
               </li>
               <li className="not-italic">
@@ -81,7 +81,7 @@ export function Footer() {
                   {company.address.country}
                 </address>
               </li>
-              <li className="pt-2"><a href="/contact" className="text-[#9ed42e] hover:text-white transition-colors">Stuur een aanvraag →</a></li>
+              <li className="pt-2"><a href="/contact" className="inline-flex items-center min-h-[44px] py-2 text-[#9ed42e] hover:text-white transition-colors">Stuur een aanvraag →</a></li>
             </ul>
           </div>
         </div>
@@ -89,7 +89,7 @@ export function Footer() {
         <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
           <div>© {new Date().getFullYear()} TerreVolt BV. Alle rechten voorbehouden.</div>
           <div className="flex gap-6">
-            <a href="/contact" className="hover:text-[#9ed42e] transition-colors">Contact</a>
+            <a href="/contact" className="inline-flex items-center min-h-[44px] py-2 hover:text-[#9ed42e] transition-colors">Contact</a>
           </div>
         </div>
       </div>
