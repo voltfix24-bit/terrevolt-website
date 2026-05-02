@@ -1,11 +1,11 @@
-import { ArrowRight, Cable, Layers, ShieldCheck, GitBranch, FileBarChart, Building2, Server, Zap, Factory, Construction, Plug, Activity, ClipboardList, FileCheck } from "lucide-react";
+import { ArrowRight, Anchor, Gauge, ShieldCheck, GitBranch, FileBarChart, Building2, Server, Zap, Factory, Construction, Plug, Activity, ClipboardList, FileCheck } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
 const fundament = [
-  { icon: Cable, title: "Aardelektroden", description: "Plaatsen van aardelektroden en aardingsvoorzieningen voor technische installaties." },
-  { icon: Layers, title: "Aardverspreidingsweerstand", description: "Meten, beoordelen en optimaliseren van aardverspreidingsweerstand." },
+  { icon: Anchor, title: "Aardelektroden", description: "Plaatsen van aardelektroden en aardingsvoorzieningen voor technische installaties." },
+  { icon: Gauge, title: "Aardverspreidingsweerstand", description: "Meten, beoordelen en optimaliseren van aardverspreidingsweerstand." },
   { icon: ShieldCheck, title: "Stationsaarding", description: "Aardingssystemen voor MS/LS-stations en transformatorruimten." },
   { icon: GitBranch, title: "Potentiaalvereffening", description: "Hoofd- en aanvullende potentiaalvereffening voor veilige installaties." },
   { icon: FileBarChart, title: "Meetrapportage", description: "Duidelijke meetrapportages en opleverdocumentatie." },
