@@ -427,7 +427,7 @@ const WerkenBij = () => {
     else document.getElementById("profielen")?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const profielCards = useMemo(() => profielen, [profielen]);
+  const profielCards = filteredProfielen;
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
