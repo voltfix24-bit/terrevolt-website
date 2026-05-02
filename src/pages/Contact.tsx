@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowRight, Phone, Mail, MapPin, Upload, Loader2, Network, HardHat, Factory, Briefcase, Users } from "lucide-react";
+import { ArrowRight, Phone, Mail, MapPin, Upload, Loader2, Network, HardHat, Factory, Briefcase, Users, ShieldCheck, ClipboardCheck, MessageSquare } from "lucide-react";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
@@ -277,6 +277,27 @@ const Contact = () => {
                   </div>
                 </div>
               )}
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                {[
+                  { icon: ShieldCheck, title: "Veiligheid geborgd", text: "We werken met aandacht voor BEI, VCA, NEN 3140 en passende bevoegdheden voor het project." },
+                  { icon: ClipboardCheck, title: "Duidelijke oplevering", text: "Meetrapportages, oplevercontroles en documentatie waar nodig als onderdeel van de uitvoering." },
+                  { icon: MessageSquare, title: "Korte lijnen", text: "Directe communicatie met uitvoering en planning. Praktisch, duidelijk en zonder onnodige schakels." },
+                ].map((t) => {
+                  const Icon = t.icon;
+                  return (
+                    <div key={t.title} className="flex items-start gap-3 bg-[#f8f9fa] border border-gray-200 rounded-xl p-4">
+                      <div className="w-9 h-9 bg-[#f0f7e6] rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <Icon className="w-5 h-5 text-[#0d3b2e]" strokeWidth={2} />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-sm text-[#0d3b2e] mb-0.5">{t.title}</div>
+                        <p className="text-xs text-[#6c757d] leading-relaxed">{t.text}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
 
               <form
                 onSubmit={handleSubmit}
