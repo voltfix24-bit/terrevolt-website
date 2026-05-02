@@ -8,6 +8,7 @@ export function Header() {
     { href: "/diensten", label: "Diensten" },
     { href: "/projecten", label: "Projecten" },
     { href: "/veiligheid", label: "Veiligheid" },
+    { href: "/werken-bij", label: "Werken bij" },
     { href: "/over", label: "Over ons" },
   ];
 
