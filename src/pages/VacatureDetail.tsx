@@ -378,14 +378,14 @@ const VacatureDetail = () => {
                   href="#solliciteer"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  <span>Solliciteer / Meld je aan</span>
+                  <span>Direct aanmelden</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
                   href="/contact"
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
-                  Vraag stellen
+                  Eerst vraag stellen
                 </a>
               </div>
             </div>
@@ -530,11 +530,16 @@ const VacatureDetail = () => {
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10 md:mb-12">
                 <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
-                  Solliciteren
+                  Aanmelden
                 </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Meld je aan voor deze functie</h2>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl text-[#0d3b2e] mb-4 break-words">
+                  Meld je aan voor: <span className="text-[#1a4a36]">{vacature.title}</span>
+                </h2>
                 <p className="text-base sm:text-xl text-[#6c757d]">
                   Vul je gegevens in. We nemen contact op om je ervaring, beschikbaarheid en mogelijke projectmatch te bespreken.
+                </p>
+                <p className="text-sm text-[#6c757d] mt-3">
+                  Geen CV bij de hand? Geen probleem. Laat je gegevens achter, dan nemen we contact met je op.
                 </p>
               </div>
 
@@ -692,7 +697,7 @@ const VacatureDetail = () => {
                     </>
                   ) : (
                     <>
-                      <span>Verstuur sollicitatie</span>
+                      <span>Verstuur aanmelding</span>
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
