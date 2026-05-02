@@ -5,7 +5,6 @@
  */
 import { describe, it, expect } from "vitest";
 import { join } from "node:path";
-// @ts-expect-error — .mjs zonder type-declaraties; runtime-only.
 import { lintContactLinks } from "../../scripts/lint-contact-links.mjs";
 
 const ROOT = join(__dirname, "..", "..");
