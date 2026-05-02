@@ -947,7 +947,7 @@ const WerkenBij = () => {
                 <div>
                   <label className="flex items-start gap-3 cursor-pointer text-sm text-[#0d3b2e] leading-relaxed">
                     <input type="checkbox" name="privacy" required aria-invalid={!!errors.privacy}
-                      className="mt-1 w-5 h-5 rounded border-gray-300 text-[#9ed42e] focus:ring-[#9ed42e] flex-shrink-0" />
+                      className="mt-0.5 h-6 w-6 rounded border-gray-300 text-[#9ed42e] focus:ring-[#9ed42e] flex-shrink-0" />
                     <span>
                       Ik ga akkoord dat TerreVolt mijn gegevens gebruikt om contact met mij op te nemen over werk, projecten of samenwerking.{" "}
                       <Link to="/privacy" className="underline hover:text-[#0d3b2e]/80">Privacyverklaring</Link>
