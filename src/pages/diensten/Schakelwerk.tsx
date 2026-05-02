@@ -1,6 +1,7 @@
 import { ArrowRight, Power, Lock, PlayCircle, PauseCircle, Anchor, ListChecks, Building2, Zap, Cable, Wrench, ShieldCheck } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { WhenToCall } from "@/components/terrevolt/WhenToCall";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
 const taken = [
@@ -159,6 +160,18 @@ const Schakelwerk = () => {
             </div>
           </div>
         </section>
+        {/* Wanneer schakelt u TerreVolt in? */}
+        <WhenToCall
+          variant="muted"
+          items={[
+            "Bij vrijschakelen en veiligstellen",
+            "Bij in- en uitbedrijf nemen",
+            "Bij stationsrenovaties",
+            "Bij kabelwerk en transformatorwissels",
+            "Bij afstemming met WV, uitvoerder en ploeg",
+          ]}
+        />
+
 
         {/* CTA */}
         <section id="contact" className="py-16 md:py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">

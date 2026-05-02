@@ -1,6 +1,7 @@
 import { ArrowRight, Server, Cpu, Zap, Cable, Gauge, ClipboardCheck, Building2, Layers, Boxes, ShieldCheck, CalendarClock, MessageCircle, PackageCheck } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { WhenToCall } from "@/components/terrevolt/WhenToCall";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
 const werkzaamheden = [
@@ -169,6 +170,18 @@ const Stationsrenovatie = () => {
             </div>
           </div>
         </section>
+        {/* Wanneer schakelt u TerreVolt in? */}
+        <WhenToCall
+          variant="muted"
+          items={[
+            "Bij renovatie van MS/LS-stations",
+            "Bij vervangen van LS-rekken",
+            "Bij transformatorwissels",
+            "Bij aanpassen van technische ruimten",
+            "Bij stationsaarding en oplevering",
+          ]}
+        />
+
 
         {/* CTA */}
         <section id="contact" className="py-16 md:py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
@@ -198,7 +211,7 @@ const Stationsrenovatie = () => {
                 href="/contact"
                 className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-10 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-lg"
               >
-                Project bespreken
+                Stationsproject bespreken
               </a>
             </div>
           </div>

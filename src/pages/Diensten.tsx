@@ -1,4 +1,5 @@
-import { ArrowRight, CheckCircle2, ClipboardList, FileSearch, ShieldCheck, PackageCheck, Cable, Building2, Power, Anchor, Gauge, PlugZap } from "lucide-react";
+import { ArrowRight, CheckCircle2, ClipboardList, FileSearch, ShieldCheck, PackageCheck, Cable, Building2, Power, Anchor, Gauge, PlugZap, Users, Briefcase, Zap as ZapIcon } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
@@ -140,9 +141,11 @@ const Diensten = () => {
               {services.map((service) => {
                 const Icon = service.icon;
                 return (
-                  <article
+                  <Link
                     key={service.slug}
-                    className="group flex flex-col bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300"
+                    to={`/diensten/${service.slug}`}
+                    aria-label={`Bekijk dienst: ${service.title}`}
+                    className="group flex flex-col bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 active:scale-[0.99]"
                   >
                     <div className="w-14 h-14 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#9ed42e] transition-colors duration-300">
                       <Icon className="w-7 h-7 text-[#0d3b2e] group-hover:text-white transition-colors duration-300" strokeWidth={2} />
@@ -159,14 +162,73 @@ const Diensten = () => {
                       ))}
                     </ul>
 
-                    <a
-                      href={`/diensten/${service.slug}`}
-                      className="mt-auto inline-flex items-center justify-center gap-2 bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors"
-                    >
-                      <span>Bekijk dienst</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
-                  </article>
+                    <span className="mt-auto inline-flex items-center gap-1.5 text-[#0d3b2e] text-sm group-hover:gap-2.5 transition-all">
+                      Bekijk dienst
+                      <ArrowRight className="w-4 h-4 text-[#9ed42e]" strokeWidth={2.5} />
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* KEUZEHULP — Niet zeker welke ondersteuning u nodig heeft? */}
+        <section className="py-16 md:py-20 bg-[#f8f9fa]">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="text-center mb-10 md:mb-12">
+              <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-5 tracking-wider uppercase">
+                Keuzehulp
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-tight hyphens-nl" lang="nl">
+                Niet zeker welke ondersteuning u nodig heeft?
+              </h2>
+              <p className="text-lg text-[#6c757d] max-w-2xl mx-auto">
+                Kies het scenario dat het beste past — wij denken mee over uitvoering, planning en oplevering.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
+              {[
+                {
+                  icon: Users,
+                  title: "Ik zoek monteurs of ploegen",
+                  text: "Voor projectmatige inzet binnen LS/MS, stationswerk, schakelwerk of aarding.",
+                  cta: "Inzet bespreken",
+                  href: "/contact?intent=monteur",
+                },
+                {
+                  icon: Briefcase,
+                  title: "Ik heb een LS/MS-project",
+                  text: "Voor netmontage, stationsrenovatie, kabelwerk, schakelwerk of oplevering.",
+                  cta: "Project bespreken",
+                  href: "/contact?intent=project&type=LS%2FMS+Netmontage",
+                },
+                {
+                  icon: ZapIcon,
+                  title: "Ik heb een aardings- of meetvraagstuk",
+                  text: "Voor aardingsoplossingen, metingen, rapportage en opleverdocumentatie.",
+                  cta: "Aarding of meting bespreken",
+                  href: "/contact?intent=project&type=Aardingsoplossingen",
+                },
+              ].map((c) => {
+                const Icon = c.icon;
+                return (
+                  <Link
+                    key={c.title}
+                    to={c.href}
+                    className="group flex flex-col bg-white border border-gray-200 rounded-xl p-6 sm:p-7 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 active:scale-[0.99]"
+                  >
+                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-5 group-hover:bg-[#9ed42e] transition-colors">
+                      <Icon className="w-6 h-6 text-[#0d3b2e] group-hover:text-white transition-colors" strokeWidth={2} />
+                    </div>
+                    <h3 className="text-lg sm:text-xl text-[#0d3b2e] mb-2 hyphens-nl" lang="nl">{c.title}</h3>
+                    <p className="text-[#6c757d] text-sm sm:text-[15px] leading-relaxed mb-5">{c.text}</p>
+                    <span className="mt-auto inline-flex items-center gap-1.5 text-[#0d3b2e] text-sm group-hover:gap-2.5 transition-all">
+                      {c.cta}
+                      <ArrowRight className="w-4 h-4 text-[#9ed42e]" strokeWidth={2.5} />
+                    </span>
+                  </Link>
                 );
               })}
             </div>
