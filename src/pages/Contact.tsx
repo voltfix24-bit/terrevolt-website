@@ -48,40 +48,110 @@ const schema = z.object({
   description: z.string().trim().min(5, "Geef een korte omschrijving").max(3000),
 });
 
+const intentToRequestType: Record<"project" | "monteur" | "sollicitatie", string> = {
+  project: "LS/MS Netmontage",
+  monteur: "Monteur / ploeg nodig",
+  sollicitatie: "Sollicitatie / ZZP",
+};
+
 const Contact = () => {
-  usePageMeta("Contact | TerreVolt BV", "Neem contact op met TerreVolt voor LS/MS-projecten, stationsrenovatie, schakelwerk, aardingsoplossingen en metingen.");
+  usePageMeta("Contact | TerreVolt BV", "Stuur een aanvraag bij TerreVolt: LS/MS-projecten, stationsrenovatie, schakelwerk, aardingsoplossingen, metingen of inzet van monteurs.");
 
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
+  const [dragOver, setDragOver] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [requestType, setRequestType] = useState<string>("");
   const [searchParams] = useSearchParams();
+  const formRef = useRef<HTMLFormElement>(null);
+
   const initialIntent = (() => {
     const v = searchParams.get("intent");
     return v === "monteur" || v === "sollicitatie" || v === "project" ? v : "project";
   })();
   const initialType = searchParams.get("type") || "";
   const [intent, setIntent] = useState<"project" | "monteur" | "sollicitatie">(initialIntent);
+
+  // Sync request_type met de gekozen intent (alleen als gebruiker nog niets handmatig koos).
   useEffect(() => {
     if (initialType) {
-      const sel = document.getElementById("request_type") as HTMLSelectElement | null;
-      if (sel) sel.value = initialType;
+      setRequestType(initialType);
+      return;
     }
-  }, [initialType]);
+    setRequestType((curr) => (curr ? curr : intentToRequestType[intent]));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const intents: { id: "project" | "monteur" | "sollicitatie"; label: string; icon: typeof Briefcase; helper: string }[] = [
-    { id: "project", label: "Project bespreken", icon: Briefcase, helper: "Voor netbeheerders, hoofdaannemers en industrie." },
-    { id: "monteur", label: "Monteur / ploeg nodig", icon: Users, helper: "Inhuur van vakbekwame uitvoering binnen jouw project." },
-    { id: "sollicitatie", label: "Sollicitatie / ZZP", icon: HardHat, helper: "Aanmelden als monteur of ZZP'er." },
+  const handleIntentChange = (id: "project" | "monteur" | "sollicitatie") => {
+    setIntent(id);
+    setRequestType(intentToRequestType[id]);
+  };
+
+  const intents: {
+    id: "project" | "monteur" | "sollicitatie";
+    label: string;
+    icon: typeof Briefcase;
+    helper: string;
+  }[] = [
+    { id: "project", label: "Project bespreken", icon: Cable, helper: "Voor LS/MS-netmontage, stationsrenovatie, schakelwerk, aarding of metingen." },
+    { id: "monteur", label: "Monteur / ploeg nodig", icon: Users, helper: "Voor projectmatige inzet van vakbekwame monteurs of complete ploegen." },
+    { id: "sollicitatie", label: "Sollicitatie / ZZP", icon: BadgeCheck, helper: "Voor monteurs, werkverantwoordelijken en ZZP-ploegen die met TerreVolt willen werken." },
   ];
+
+  const validateFile = (f: File): string | null => {
+    const ext = (f.name.split(".").pop() || "").toLowerCase();
+    if (!ALLOWED_EXT.includes(ext as typeof ALLOWED_EXT[number])) {
+      return "Bestandstype niet toegestaan. Gebruik PDF, JPG, PNG of DWG.";
+    }
+    if (f.size > MAX_UPLOAD_BYTES) {
+      return "Bestand mag maximaal 25MB zijn.";
+    }
+    return null;
+  };
+
+  const handleFileChange = (next: File | null) => {
+    if (!next) {
+      setFile(null);
+      setFileError(null);
+      return;
+    }
+    const err = validateFile(next);
+    if (err) {
+      setFile(null);
+      setFileError(err);
+      return;
+    }
+    setFile(next);
+    setFileError(null);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLLabelElement>) => {
+    e.preventDefault();
+    setDragOver(false);
+    const f = e.dataTransfer.files?.[0];
+    if (f) handleFileChange(f);
+  };
+
+  const resetForm = () => {
+    formRef.current?.reset();
+    setFile(null);
+    setFileError(null);
+    setRequestType(intentToRequestType[intent]);
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSubmitError(null);
+
     const fd = new FormData(e.currentTarget);
     const raw = {
       name: String(fd.get("name") || ""),
       company: String(fd.get("company") || ""),
       phone: String(fd.get("phone") || ""),
       email: String(fd.get("email") || ""),
-      request_type: String(fd.get("request_type") || ""),
+      request_type: String(fd.get("request_type") || requestType || ""),
       location: String(fd.get("location") || ""),
       start_date: String(fd.get("start_date") || ""),
       description: String(fd.get("description") || ""),
@@ -93,16 +163,20 @@ const Contact = () => {
       return;
     }
 
-    if (file && file.size > 10 * 1024 * 1024) {
-      toast.error("Bestand mag maximaal 10MB zijn");
-      return;
+    if (file) {
+      const fileErr = validateFile(file);
+      if (fileErr) {
+        setFileError(fileErr);
+        toast.error(fileErr);
+        return;
+      }
     }
 
     setSubmitting(true);
     try {
       let attachment_url: string | null = null;
       if (file) {
-        const ext = file.name.split(".").pop() || "bin";
+        const ext = (file.name.split(".").pop() || "bin").toLowerCase();
         const path = `${crypto.randomUUID()}.${ext}`;
         const { error: upErr } = await supabase.storage
           .from("contact-attachments")
@@ -114,7 +188,6 @@ const Contact = () => {
       const intentLabel =
         intent === "project" ? "Project bespreken" :
         intent === "monteur" ? "Monteur/ploeg nodig" : "Sollicitatie/ZZP";
-      const description = parsed.data.description || null;
 
       const { error: insErr } = await supabase.from("contact_requests").insert([{
         name: parsed.data.name,
@@ -124,19 +197,18 @@ const Contact = () => {
         request_type: parsed.data.request_type || null,
         location: parsed.data.location || null,
         start_date: parsed.data.start_date || null,
-        description,
+        description: parsed.data.description,
         attachment_url,
         intent,
         intent_label: intentLabel,
       } as any]);
       if (insErr) throw insErr;
 
-      toast.success("Aanvraag verstuurd. We nemen zo snel mogelijk contact op.");
-      (e.target as HTMLFormElement).reset();
-      setFile(null);
+      setSubmitSuccess(true);
+      resetForm();
     } catch (err) {
       console.error(err);
-      toast.error(`Er ging iets mis. Probeer het later opnieuw of mail ons op ${company.email}`);
+      setSubmitError(`Er ging iets mis. Probeer het later opnieuw of mail ons op ${company.email}.`);
     } finally {
       setSubmitting(false);
     }
