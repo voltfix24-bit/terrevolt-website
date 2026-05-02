@@ -150,14 +150,80 @@ const VacatureDetail = () => {
     return () => { active = false; };
   }, [slug]);
 
-  usePageMeta(
+  const seoTitle =
     vacature && vacature !== "missing"
-      ? `${vacature.title} | Vacature TerreVolt BV`
-      : "Vacature | TerreVolt BV",
+      ? `${vacature.title}${vacature.meta.regio && vacature.meta.regio !== "—" ? ` – ${vacature.meta.regio}` : ""} | Vacature TerreVolt`
+      : "Vacature | TerreVolt BV";
+
+  const seoDescription =
     vacature && vacature !== "missing"
-      ? `${vacature.title} bij TerreVolt: ${vacature.intro.slice(0, 140)}`
-      : undefined
-  );
+      ? (() => {
+          const clean = (vacature.intro || "").replace(/\s+/g, " ").trim();
+          const base = clean || `${vacature.title} bij TerreVolt. Solliciteer direct.`;
+          return base.length > 155 ? `${base.slice(0, 152).trimEnd()}…` : base;
+        })()
+      : undefined;
+
+  usePageMeta(seoTitle, seoDescription);
+
+  // JobPosting JSON-LD voor zoekmachines (Google for Jobs)
+  useEffect(() => {
+    if (!vacature || vacature === "missing") return;
+    const SCRIPT_ID = "ld-json-jobposting";
+    document.getElementById(SCRIPT_ID)?.remove();
+
+    const url = `${window.location.origin}/vacatures/${slug}`;
+    const description = [
+      vacature.intro,
+      vacature.taken.length ? `Taken: ${vacature.taken.join("; ")}.` : "",
+      vacature.meebrengen.length ? `Wat je meebrengt: ${vacature.meebrengen.join("; ")}.` : "",
+      vacature.bieden.length ? `Wij bieden: ${vacature.bieden.join("; ")}.` : "",
+    ].filter(Boolean).join(" ");
+
+    const employmentTypeMap: Record<string, string> = {
+      "Vast": "FULL_TIME",
+      "Vast dienstverband": "FULL_TIME",
+      "Fulltime": "FULL_TIME",
+      "Parttime": "PART_TIME",
+      "ZZP": "CONTRACTOR",
+      "Detachering": "CONTRACTOR",
+    };
+    const employmentType =
+      employmentTypeMap[vacature.meta.dienstverband] || "FULL_TIME";
+
+    const data = {
+      "@context": "https://schema.org",
+      "@type": "JobPosting",
+      title: vacature.title,
+      description: `<p>${description.replace(/</g, "&lt;")}</p>`,
+      datePosted: new Date().toISOString().slice(0, 10),
+      employmentType,
+      hiringOrganization: {
+        "@type": "Organization",
+        name: "TerreVolt B.V.",
+        sameAs: window.location.origin,
+      },
+      jobLocation: {
+        "@type": "Place",
+        address: {
+          "@type": "PostalAddress",
+          addressRegion: vacature.meta.regio !== "—" ? vacature.meta.regio : "NL",
+          addressCountry: "NL",
+        },
+      },
+      url,
+      directApply: true,
+    };
+
+    const script = document.createElement("script");
+    script.id = SCRIPT_ID;
+    script.type = "application/ld+json";
+    script.text = JSON.stringify(data);
+    document.head.appendChild(script);
+
+    return () => { document.getElementById(SCRIPT_ID)?.remove(); };
+  }, [vacature, slug]);
+
 
   if (vacature === "missing") return <Navigate to="/werken-bij" replace />;
   if (!vacature) {
