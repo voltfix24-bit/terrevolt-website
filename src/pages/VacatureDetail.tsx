@@ -441,6 +441,7 @@ const VacatureDetail = () => {
     setErrors({});
     setFile(null);
     setFileError(null);
+    setNoCv(false);
     formRef.current?.reset();
     setTimeout(() => {
       document.getElementById("solliciteren")?.scrollIntoView({ behavior: "smooth", block: "start" });
