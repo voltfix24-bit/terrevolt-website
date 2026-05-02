@@ -45,6 +45,7 @@ const App = () => (
           <Route path="/werken-bij" element={<WerkenBij />} />
           <Route path="/vacatures/:slug" element={<VacatureDetail />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<Privacy />} />
           {/* Aliassen voor leesbare URL's */}
           <Route path="/veiligheid-certificeringen" element={<Veiligheid />} />
           <Route path="/over-terrevolt" element={<Over />} />
