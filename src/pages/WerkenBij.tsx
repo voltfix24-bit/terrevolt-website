@@ -878,7 +878,7 @@ const WerkenBij = () => {
                             <span>Bestand uploaden…</span>
                           </div>
                           <div className="h-1.5 w-full overflow-hidden rounded-full bg-gray-200">
-                            <div className="h-full w-1/3 bg-[#9ed42e] rounded-full animate-[progress_1.2s_ease-in-out_infinite]" />
+                            <div className="h-full w-1/3 bg-[#9ed42e] rounded-full animate-progress" />
                           </div>
                         </div>
                       )}
