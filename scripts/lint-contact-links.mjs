@@ -161,6 +161,51 @@ export function lintContactLinks(projectRoot) {
           }
         }
       }
+
+      // Rule 5: JSON-LD / OG telephone — moet exact E.164 zijn en gelijk aan company.phone.e164
+      // Vangt: "telephone": "...", telephone: "...", content="+316..." in og:phone_number
+      const jsonTelRe = /(?:["']?telephone["']?\s*:\s*|og:phone_number["'][^>]*content\s*=\s*)["']([^"']+)["']/g;
+      for (const m of lineText.matchAll(jsonTelRe)) {
+        const val = m[1];
+        if (!E164_RE.test(val)) {
+          issues.push({
+            file: rel, line: lineNo, col: (m.index ?? 0) + 1,
+            rule: "tel-format",
+            message: `JSON-LD/OG telephone "${val}" is geen E.164.`,
+            snippet: lineText.trim(),
+          });
+        } else if (val !== company.e164) {
+          issues.push({
+            file: rel, line: lineNo, col: (m.index ?? 0) + 1,
+            rule: "tel-mismatch",
+            message: `JSON-LD/OG telephone "${val}" wijkt af van company.phone.e164 ("${company.e164}").`,
+            snippet: lineText.trim(),
+          });
+        }
+      }
+
+      // Rule 6: JSON-LD / OG email — moet exact gelijk zijn aan company.email
+      const jsonMailRe = /(?:["']?email["']?\s*:\s*|og:email["'][^>]*content\s*=\s*)["']([^"']+)["']/g;
+      for (const m of lineText.matchAll(jsonMailRe)) {
+        const val = m[1];
+        // skip form-field defaults zoals email: String(fd.get("email")...) — die hebben geen quoted literal hier
+        if (!EMAIL_RE.test(val)) {
+          issues.push({
+            file: rel, line: lineNo, col: (m.index ?? 0) + 1,
+            rule: "mail-format",
+            message: `JSON-LD/OG email "${val}" is geen geldig e-mailadres.`,
+            snippet: lineText.trim(),
+          });
+        } else if (val !== company.email) {
+          issues.push({
+            file: rel, line: lineNo, col: (m.index ?? 0) + 1,
+            rule: "mail-mismatch",
+            message: `JSON-LD/OG email "${val}" wijkt af van company.email ("${company.email}").`,
+            snippet: lineText.trim(),
+          });
+        }
+      }
+
     });
   }
 
