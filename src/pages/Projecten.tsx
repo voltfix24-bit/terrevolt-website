@@ -12,6 +12,7 @@ const projecten = [
     description: "Ondersteuning bij demontage, montage, kabelafwerking en oplevering van laagspanningsverdelingen.",
     bullets: ["LS-rek en afgaande velden", "Kabels opnieuw aansluiten", "Controle en oplevering"],
     rol: ["Uitvoering", "Controle", "Oplevering"],
+    serviceHref: "/diensten/ls-ms-netmontage",
   },
   {
     icon: Building2,
@@ -20,6 +21,7 @@ const projecten = [
     description: "Uitvoering en ondersteuning bij renovatie van technische ruimten, schakelinstallaties, transformatoren en aarding.",
     bullets: ["MS-installatie en transformator", "LS-verdeling en kabelwerk", "Stationsaarding"],
     rol: ["Uitvoering", "Ondersteuning", "Oplevering"],
+    serviceHref: "/diensten/stationsrenovatie",
   },
   {
     icon: Anchor,
@@ -28,6 +30,7 @@ const projecten = [
     description: "Inspectie, verbetering en meting van aardingsvoorzieningen voor veilige en betrouwbare installaties.",
     bullets: ["Aardelektroden plaatsen", "Aardverspreidingsweerstand meten", "Meetrapportage opleveren"],
     rol: ["Uitvoering", "Meting", "Rapportage"],
+    serviceHref: "/diensten/aardingsoplossingen",
   },
   {
     icon: ShieldCheck,
@@ -36,6 +39,7 @@ const projecten = [
     description: "Ondersteuning bij vrijschakelen, veiligstellen en terugschakelen tijdens LS/MS-werkzaamheden.",
     bullets: ["In- en uitbedrijf nemen", "Veilig werkgebied", "Afstemming met uitvoering"],
     rol: ["Ondersteuning", "Controle"],
+    serviceHref: "/diensten/schakelwerk",
   },
   {
     icon: Cable,
@@ -44,6 +48,7 @@ const projecten = [
     description: "Kabelinvoer, afmontage, moffen en eindsluitingen binnen technische ruimten en netstructuren.",
     bullets: ["Kabelmontage", "Eindsluitingen", "Oplevercontrole"],
     rol: ["Uitvoering", "Oplevering"],
+    serviceHref: "/diensten/ls-ms-netmontage",
   },
   {
     icon: FileBarChart,
@@ -52,6 +57,7 @@ const projecten = [
     description: "Controlemetingen en duidelijke rapportage voor oplevering van aardings- en kabelwerk.",
     bullets: ["Controlemetingen", "Meetrapportage", "Opleverdossier"],
     rol: ["Meting", "Rapportage", "Oplevering"],
+    serviceHref: "/diensten/meten-en-beproeven",
   },
 ];
 
