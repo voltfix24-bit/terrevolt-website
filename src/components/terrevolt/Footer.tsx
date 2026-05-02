@@ -43,9 +43,15 @@ export function Footer() {
           <div>
             <h4 className="text-white mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="tel:+31201234567" className="hover:text-[#9ed42e] transition-colors">+31 (0)20 123 4567</a></li>
+              <li><a href="tel:+31634487467" className="hover:text-[#9ed42e] transition-colors">+31 6 34 48 74 67</a></li>
               <li><a href="mailto:info@terrevolt.nl" className="hover:text-[#9ed42e] transition-colors">info@terrevolt.nl</a></li>
-              <li>Nederland</li>
+              <li className="not-italic">
+                <address className="not-italic leading-relaxed">
+                  Overvliet 97<br />
+                  3545 NH Utrecht<br />
+                  Nederland
+                </address>
+              </li>
               <li className="pt-2"><a href="/contact" className="text-[#9ed42e] hover:text-white transition-colors">Stuur een aanvraag →</a></li>
             </ul>
           </div>

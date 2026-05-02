@@ -28,19 +28,19 @@ export function CTA() {
               <div className="w-12 h-12 bg-[#9ed42e] rounded-full flex items-center justify-center">
                 <Phone className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.5} />
               </div>
-              <div className="text-lg">+31 (0)20 123 4567</div>
+              <a href="tel:+31634487467" className="text-lg hover:text-[#9ed42e] transition-colors">+31 6 34 48 74 67</a>
             </div>
             <div className="flex flex-col items-center gap-3 text-white">
               <div className="w-12 h-12 bg-[#9ed42e] rounded-full flex items-center justify-center">
                 <Mail className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.5} />
               </div>
-              <div className="text-lg">info@terrevolt.nl</div>
+              <a href="mailto:info@terrevolt.nl" className="text-lg hover:text-[#9ed42e] transition-colors">info@terrevolt.nl</a>
             </div>
             <div className="flex flex-col items-center gap-3 text-white">
               <div className="w-12 h-12 bg-[#9ed42e] rounded-full flex items-center justify-center">
                 <MapPin className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.5} />
               </div>
-              <div className="text-lg">Werkgebied: Nederland</div>
+              <div className="text-lg text-center leading-snug">Overvliet 97<br />3545 NH Utrecht</div>
             </div>
           </div>
 
