@@ -527,6 +527,40 @@ const WerkenBij = () => {
           </div>
         </section>
 
+        {/* WAT VAKMENSEN BELANGRIJK VINDEN */}
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="text-center mb-10 md:mb-14 max-w-3xl mx-auto">
+              <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+                Wat vakmensen belangrijk vinden
+              </div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Werken via TerreVolt</h2>
+              <p className="text-base sm:text-lg text-[#6c757d]">
+                Wat monteurs en ZZP'ers belangrijk vinden bij projectmatig werk binnen LS/MS, stationswerk, schakelwerk en aarding.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {[
+                { title: "Duidelijke afspraken", text: "Je weet vooraf waar je aan toe bent: werkzaamheden, locatie, planning, scope en veiligheidsafspraken." },
+                { title: "Kennis van het vak", text: "Binnen LS/MS-projecten maakt het verschil als planning en uitvoering begrijpen wat stationswerk, kabelwerk en schakelwerk inhoudt." },
+                { title: "Korte lijnen", text: "Bij vragen op locatie wil je snel iemand spreken die weet waar het over gaat en direct kan meedenken." },
+              ].map((c) => (
+                <div
+                  key={c.title}
+                  className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <span aria-hidden="true" className="w-2.5 h-2.5 rounded-full bg-[#9ed42e] flex-shrink-0" />
+                    <h3 className="text-lg text-[#0d3b2e] leading-snug">{c.title}</h3>
+                  </div>
+                  <p className="text-[#6c757d] text-sm leading-relaxed">{c.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* HOE HET WERKT */}
         <section id="hoe-het-werkt" className="py-16 md:py-24 bg-white scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
