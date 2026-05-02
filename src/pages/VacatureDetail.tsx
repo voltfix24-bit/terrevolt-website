@@ -453,7 +453,7 @@ const VacatureDetail = () => {
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
 
-      <main className="pt-16 sm:pt-20 pb-20 lg:pb-0">
+      <main id="main-content" className="pt-16 sm:pt-20 pb-20 lg:pb-0">
         {/* HERO */}
         <section className="relative overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-20">
           <div className="absolute inset-0 opacity-[0.08]">
