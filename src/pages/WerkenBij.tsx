@@ -187,29 +187,29 @@ const WerkenBij = () => {
         </section>
 
         {/* SECTIE 1: Profielen */}
-        <section className="py-24 bg-white">
-          <div className="container mx-auto px-6 lg:px-12">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Gezochte profielen</h2>
-              <p className="text-xl text-[#6c757d] max-w-2xl mx-auto">
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="text-center mb-12 md:mb-16">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Gezochte profielen</h2>
+              <p className="text-base sm:text-xl text-[#6c757d] max-w-2xl mx-auto">
                 Vakmensen voor uitvoering binnen LS/MS-infrastructuur en aarding.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
               {profielen.map((p) => {
                 const Icon = slugIconMap[p.slug] || Briefcase;
                 return (
                   <Link
                     key={p.slug}
                     to={`/vacatures/${p.slug}`}
-                    className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center"
+                    className="group bg-white border border-gray-200 rounded-xl p-6 min-h-[44px] hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center"
                   >
-                    <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
+                    <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform flex-shrink-0">
                       <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
                     </div>
-                    <div className="text-[#0d3b2e] mb-2">{p.label}</div>
-                    <div className="text-xs text-[#9ed42e] inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                    <div className="text-[#0d3b2e] text-base sm:text-lg mb-2 break-words max-w-full">{p.label}</div>
+                    <div className="text-xs text-[#9ed42e] inline-flex items-center gap-1 group-hover:gap-2 transition-all mt-auto">
                       Bekijk vacature <ArrowRight className="w-3 h-3" />
                     </div>
                   </Link>
