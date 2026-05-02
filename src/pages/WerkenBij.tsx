@@ -197,19 +197,106 @@ const WerkenBij = () => {
     (async () => {
       const { data } = await supabase
         .from("vacancies")
-        .select("slug,title")
+        .select("slug,title,intro,region,hours,employment_type,level,work_area")
         .eq("status", "published")
         .order("sort_order", { ascending: true })
         .order("created_at", { ascending: false });
       if (!active) return;
       if (data && data.length > 0) {
-        setProfielen(data.map((v: any) => ({ slug: v.slug, label: v.title })));
+        setProfielen(
+          data.map((v: any) => ({
+            slug: v.slug,
+            label: v.title,
+            intro: v.intro ?? undefined,
+            region: v.region ?? undefined,
+            hours: v.hours ?? undefined,
+            employmentType: v.employment_type ?? undefined,
+            level: v.level ?? undefined,
+            workArea: v.work_area ?? undefined,
+          })),
+        );
       } else {
-        setProfielen(fallbackVacatures.map((v) => ({ slug: v.slug, label: v.shortLabel })));
+        setProfielen(
+          fallbackVacatures.map((v) => ({
+            slug: v.slug,
+            label: v.shortLabel,
+            intro: v.intro,
+            region: v.meta?.regio,
+            hours: v.meta?.uren,
+            employmentType: v.meta?.dienstverband,
+            level: v.meta?.niveau,
+            workArea: v.meta?.werkgebied,
+          })),
+        );
       }
     })();
     return () => { active = false; };
   }, []);
+
+  // Zoek + filters
+  const [search, setSearch] = useState("");
+  const [filters, setFilters] = useState<Record<FilterKey, string>>({
+    region: "",
+    hours: "",
+    employmentType: "",
+    level: "",
+    workArea: "",
+  });
+
+  const filterOptions = useMemo(() => {
+    const collect = (key: FilterKey) => {
+      const set = new Set<string>();
+      profielen.forEach((p) => {
+        const v = p[key];
+        if (v && v.trim()) set.add(v.trim());
+      });
+      return Array.from(set).sort((a, b) => a.localeCompare(b, "nl"));
+    };
+    return {
+      region: collect("region"),
+      hours: collect("hours"),
+      employmentType: collect("employmentType"),
+      level: collect("level"),
+      workArea: collect("workArea"),
+    } as Record<FilterKey, string[]>;
+  }, [profielen]);
+
+  const filteredProfielen = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return profielen.filter((p) => {
+      if (q) {
+        const haystack = [
+          p.label,
+          p.intro,
+          slugDescriptionMap[p.slug],
+          p.region,
+          p.hours,
+          p.employmentType,
+          p.level,
+          p.workArea,
+        ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        if (!haystack.includes(q)) return false;
+      }
+      for (const key of Object.keys(filters) as FilterKey[]) {
+        const sel = filters[key];
+        if (sel && p[key] !== sel) return false;
+      }
+      return true;
+    });
+  }, [profielen, search, filters]);
+
+  const activeFilterCount = useMemo(
+    () => (search.trim() ? 1 : 0) + Object.values(filters).filter(Boolean).length,
+    [search, filters],
+  );
+
+  const resetFilters = () => {
+    setSearch("");
+    setFilters({ region: "", hours: "", employmentType: "", level: "", workArea: "" });
+  };
 
   const focusFirstError = (errs: FieldErrors) => {
     const first = Object.keys(errs)[0];
