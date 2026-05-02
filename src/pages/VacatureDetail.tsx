@@ -81,7 +81,9 @@ const VacatureDetail = () => {
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [formInView, setFormInView] = useState(false);
-
+  const [errors, setErrors] = useState<FieldErrors>({});
+  const [success, setSuccess] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
   // Verberg de sticky bottom-CTA zodra het sollicitatieformulier in beeld is.
   useEffect(() => {
     if (!vacature || vacature === "missing") return;
