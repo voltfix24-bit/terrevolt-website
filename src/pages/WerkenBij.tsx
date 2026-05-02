@@ -495,6 +495,13 @@ const WerkenBij = () => {
                 })}
               </ul>
 
+              <div className="mt-6 max-w-3xl bg-white/5 border border-[#9ed42e]/30 rounded-lg p-4 sm:p-5">
+                <div className="text-[#9ed42e] text-sm uppercase tracking-wider mb-1">Veiligheid boven tempo</div>
+                <p className="text-white/90 text-sm sm:text-base leading-relaxed">
+                  Je krijgt liever ruimte om het werk goed en veilig te doen dan druk om onverantwoord door te gaan. We doen het veilig, of we doen het niet.
+                </p>
+              </div>
+
               <p className="text-gray-400 text-sm mt-4 max-w-xl">
                 Tarieven en salaris bespreken we tijdens de kennismaking — afgestemd op jouw ervaring, bevoegdheden en de manier van samenwerken.
               </p>
