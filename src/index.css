@@ -158,6 +158,8 @@ All colors MUST be HSL.
     -webkit-hyphenate-limit-after: 3;
     hyphenate-limit-chars: 8 4 4;
   }
+}
+
 @layer base {
 
   /* Voorkom dat heel kleine bodytekst op iOS gaat zoomen / niet leesbaar is. */
