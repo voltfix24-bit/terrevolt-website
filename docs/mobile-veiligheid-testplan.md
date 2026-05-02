@@ -358,3 +358,50 @@ Een run faalt zodra **één** project op **één** breakpoint horizontale
 overflow vindt of een element rechts buiten de viewport laat vallen.
 De PR-check is daarmee een harde poort tegen mobiele regressies — ook
 op iOS Safari, niet alleen Chromium.
+
+---
+
+## 11. Geautomatiseerde anker-offset test
+
+Naast de overflow-suite draait `e2e/veiligheid-anchor-offset.spec.ts` op
+elk push/PR. Deze controleert per anker (`#veiligheidsaanpak`,
+`#bei-vwi`, `#rollen`, `#locatie-eisen`, `#faq`, `#contact`) dat het
+doel-element na deep-link én na hash-navigatie **net onder** de sticky
+header + subnav landt — ook wanneer de iOS Safari URL-bar inklapt en de
+viewport ~80px hoger wordt, en op iPhones met `safe-area-inset-top`
+(notch).
+
+Acceptatiecriteria per anker × fase:
+
+- `target.top >= stickyOffset − 4px` (niet verborgen onder header/subnav)
+- `target.top <= stickyOffset + 24px` (niet onnodig ver eronder)
+
+De test draait twee fases per anker:
+
+1. **initial** — directe deep-link `/veiligheid#anker` met de start-viewport.
+2. **url-bar-collapsed** — viewport-hoogte +80px (gesimuleerde inklap van
+   de iOS-URL-bar) en opnieuw via `window.location.hash` getriggerd, zoals
+   wanneer de gebruiker een subnav-chip aantikt na scrollen.
+
+Per project (Pixel 5, iPhone SE, iPhone 12, iPhone 14 Pro Max) wordt een
+rapport (`report.json` + `report.md`) en bij falen een screenshot
+weggeschreven naar:
+
+```
+test-results/veiligheid-anchor-offset/<project>/
+```
+
+Lokaal draaien:
+
+```bash
+npx playwright test e2e/veiligheid-anchor-offset.spec.ts \
+  --project=mobile-safari-iphone-14-pro-max
+```
+
+Faalt een anker, kijk dan eerst of:
+
+- de sticky header- of subnav-hoogte recent veranderd is → pas
+  `scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]` of de `getOffset()`-marge in
+  `src/pages/Veiligheid.tsx` aan.
+- de safe-area CSS-variabele (`--safe-area-inset-top`) door een nieuwe
+  layout-wrapper niet meer doorkomt op iPhones met notch.
