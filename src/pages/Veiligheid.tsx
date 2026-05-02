@@ -10,18 +10,18 @@ import {
 } from "@/components/ui/accordion";
 
 const stappen = [
-  { icon: FileSearch, title: "Voorbereiden", description: "Scope, locatie, werkmethode, risico's, bevoegdheden en projectafspraken worden vooraf helder gemaakt." },
-  { icon: MessageSquare, title: "Afstemmen", description: "We stemmen af met opdrachtgever, uitvoerder, werkverantwoordelijke en betrokken partijen over toegang, schakelingen, instructies en planning." },
-  { icon: Lock, title: "Veiligstellen", description: "Werkgebied, installatie en werkzaamheden worden volgens de juiste procedures veiliggesteld. Bij twijfel wordt niet gestart." },
-  { icon: Wrench, title: "Uitvoeren", description: "Monteurs werken volgens instructie, LMRA, VCA, BEI/VWI en projectafspraken waar van toepassing." },
-  { icon: ClipboardList, title: "Controleren", description: "Werkzaamheden worden gecontroleerd, teruggekoppeld en waar nodig aantoonbaar vastgelegd." },
+  { icon: FileSearch, title: "Voorbereiden", description: "Scope, locatie, werkmethode, risico's, bevoegdheden en projectafspraken worden vooraf, met aandacht voor de specifieke situatie, helder gemaakt." },
+  { icon: MessageSquare, title: "Afstemmen", description: "We stemmen, waar van toepassing, af met opdrachtgever, uitvoerder, werkverantwoordelijke en betrokken partijen over toegang, schakelingen, instructies en planning." },
+  { icon: Lock, title: "Veiligstellen", description: "Werkgebied, installatie en werkzaamheden worden volgens de geldende procedures en projectafspraken veiliggesteld. Bij twijfel wordt niet gestart." },
+  { icon: Wrench, title: "Uitvoeren", description: "Monteurs werken met aandacht voor instructie, LMRA, VCA, BEI/VWI en projectafspraken, waar van toepassing." },
+  { icon: ClipboardList, title: "Controleren", description: "Werkzaamheden worden gecontroleerd, teruggekoppeld en, waar nodig of vereist, aantoonbaar vastgelegd volgens projectafspraken." },
 ];
 
 const veiligwerken = [
-  { icon: FileSearch, title: "LMRA", description: "Voor start van werkzaamheden wordt de situatie gecontroleerd. Zijn omstandigheden gewijzigd, ontbreekt informatie of voelt iets niet veilig? Dan wordt er afgestemd voordat er wordt doorgewerkt.", label: "Laatste minuut risicoanalyse" },
-  { icon: MessageSquare, title: "Toolboxen & kennisdeling", description: "Veiligheid vraagt om herhaling en bewustzijn. Toolboxen en kennisdeling helpen om risico's, projectafspraken en werkinstructies actief onder de aandacht te houden.", label: "Veiligheid als gedrag" },
-  { icon: HardHat, title: "Werkplekinrichting", description: "Een veilige werkplek vraagt om duidelijke afzetting, orde, verlichting, passend materieel en afspraken met andere partijen op locatie.", label: "Veilige werkplek" },
-  { icon: CheckCircle2, title: "Oplevercontrole", description: "Na uitvoering volgt controle, terugkoppeling en waar nodig meetrapportage of opleverdocumentatie. Veilig werken stopt niet bij de laatste handeling.", label: "Controle en vastlegging" },
+  { icon: FileSearch, title: "LMRA", description: "Voor start van werkzaamheden wordt de situatie, met aandacht voor gewijzigde omstandigheden, gecontroleerd. Ontbreekt informatie of voelt iets niet veilig? Dan wordt er afgestemd voordat er wordt doorgewerkt.", label: "Laatste minuut risicoanalyse" },
+  { icon: MessageSquare, title: "Toolboxen & kennisdeling", description: "Veiligheid vraagt om herhaling en bewustzijn. Toolboxen en kennisdeling helpen om risico's, projectafspraken en werkinstructies, waar van toepassing, actief onder de aandacht te houden.", label: "Veiligheid als gedrag" },
+  { icon: HardHat, title: "Werkplekinrichting", description: "Een veilige werkplek vraagt, afhankelijk van de situatie, om duidelijke afzetting, orde, verlichting, passend materieel en afspraken met andere partijen op locatie.", label: "Veilige werkplek" },
+  { icon: CheckCircle2, title: "Oplevercontrole", description: "Na uitvoering volgt controle, terugkoppeling en, waar nodig of vereist, meetrapportage of opleverdocumentatie volgens projectafspraken. Veilig werken stopt niet bij de laatste handeling.", label: "Controle en vastlegging" },
 ];
 
 const certs = [
