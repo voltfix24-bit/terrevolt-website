@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import Diensten from "./pages/Diensten.tsx";
 import LSMSNetmontage from "./pages/diensten/LSMSNetmontage.tsx";
 import Stationsrenovatie from "./pages/diensten/Stationsrenovatie.tsx";
+import Schakelwerk from "./pages/diensten/Schakelwerk.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/diensten" element={<Diensten />} />
           <Route path="/diensten/ls-ms-netmontage" element={<LSMSNetmontage />} />
           <Route path="/diensten/stationsrenovatie" element={<Stationsrenovatie />} />
+          <Route path="/diensten/schakelwerk" element={<Schakelwerk />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
