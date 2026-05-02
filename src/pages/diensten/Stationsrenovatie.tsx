@@ -2,6 +2,7 @@ import { ArrowRight, Server, Cpu, Zap, Cable, Gauge, ClipboardCheck, Building2, 
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { WhenToCall } from "@/components/terrevolt/WhenToCall";
+import { SafetyStatement } from "@/components/terrevolt/SafetyStatement";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
 const werkzaamheden = [
@@ -182,6 +183,8 @@ const Stationsrenovatie = () => {
           ]}
         />
 
+
+        <SafetyStatement />
 
         {/* CTA */}
         <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
