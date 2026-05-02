@@ -241,7 +241,7 @@ const VacatureDetail = () => {
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
 
-      <main className="pt-16 sm:pt-20">
+      <main className="pt-16 sm:pt-20 pb-20 lg:pb-0">
         {/* HERO */}
         <section className="relative overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-20">
           <div className="absolute inset-0 opacity-[0.08]">
@@ -460,9 +460,29 @@ const VacatureDetail = () => {
                   </div>
                   <div>
                     <label htmlFor="profile" className="block text-sm text-[#0d3b2e] mb-2">Profiel</label>
-                    <input id="profile" name="profile" maxLength={150}
-                      placeholder="Bijv. LS-monteur, MS-schakelmonteur"
-                      className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
+                    <select
+                      id="profile"
+                      name="profile"
+                      defaultValue={vacature.title}
+                      className="w-full px-4 py-3 min-h-[44px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition"
+                    >
+                      <option value={vacature.title}>{vacature.title}</option>
+                      {[
+                        "Laagspanningsmonteur",
+                        "Middenspanningsmonteur",
+                        "Schakelmonteur",
+                        "Kabelmonteur",
+                        "Aardingsmonteur",
+                        "Monteur huisaansluitingen",
+                        "Werkverantwoordelijke",
+                        "ZZP-ploeg",
+                        "Anders",
+                      ]
+                        .filter((o) => o !== vacature.title)
+                        .map((o) => (
+                          <option key={o} value={o}>{o}</option>
+                        ))}
+                    </select>
                   </div>
                   <div>
                     <label htmlFor="region" className="block text-sm text-[#0d3b2e] mb-2">Regio</label>
