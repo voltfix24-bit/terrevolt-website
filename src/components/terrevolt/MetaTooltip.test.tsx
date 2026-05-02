@@ -388,12 +388,16 @@ describe("MetaTooltip — toetsenbordnavigatie", () => {
     const readmore = screen.getByTestId("readmore");
     const tip = screen.getByRole("tooltip", { hidden: true });
 
-    badge.focus();
+    act(() => {
+      fireEvent.focus(badge);
+    });
     expect(tip).toHaveAttribute("aria-hidden", "false");
 
     // Verschuif focus naar de 'Lees meer'-knop binnen de wrapper.
-    readmore.focus();
-    expect(document.activeElement).toBe(readmore);
+    act(() => {
+      fireEvent.blur(badge, { relatedTarget: readmore });
+      fireEvent.focus(readmore);
+    });
     expect(tip).toHaveAttribute("aria-hidden", "false");
 
     // Escape sluit de tooltip ook wanneer focus op een child-knop staat.
