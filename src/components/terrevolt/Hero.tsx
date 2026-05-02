@@ -32,9 +32,9 @@ export function Hero() {
             <span className="text-[#9ed42e] tracking-widest uppercase text-sm">TERREVOLT BV</span>
           </div>
 
-          <h1 className="text-[42px] sm:text-5xl lg:text-7xl text-white mb-5 sm:mb-6 leading-[1.08] sm:leading-tight hyphens-nl">
+          <h1 className="text-[34px] sm:text-5xl lg:text-7xl text-white mb-5 sm:mb-6 leading-[1.1] sm:leading-tight hyphens-nl">
             <span>Specialist in LS/MS-infrastructuur</span>{" "}
-            <span className="text-[#9ed42e]">en&nbsp;aardingsoplossingen</span>
+            <span className="text-[#9ed42e]">en aardingsoplossingen</span>
           </h1>
 
           <p className="text-[17px] sm:text-xl lg:text-2xl text-gray-300 mb-3 sm:mb-4 max-w-3xl leading-relaxed">
@@ -42,7 +42,7 @@ export function Hero() {
           </p>
 
           <p className="text-[15px] sm:text-lg text-gray-400 mb-8 sm:mb-10 max-w-2xl italic leading-relaxed">
-            Van huisaansluiting tot middenspanningsstation. Veilig geaard. Zeker verbonden.
+            Van huisaansluiting tot middenspanningsstation. Specialist in LS/MS, schakelwerk en aardingsoplossingen.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
