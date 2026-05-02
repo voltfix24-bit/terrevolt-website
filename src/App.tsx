@@ -24,6 +24,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard.tsx";
 import AdminVacancies from "./pages/admin/AdminVacancies.tsx";
 import AdminVacancyForm from "./pages/admin/AdminVacancyForm.tsx";
 import AdminApplications from "./pages/admin/AdminApplications.tsx";
+import { OrganizationJsonLd } from "./components/seo/OrganizationJsonLd.tsx";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <OrganizationJsonLd />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
