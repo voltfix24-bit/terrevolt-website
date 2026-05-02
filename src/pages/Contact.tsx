@@ -120,7 +120,7 @@ const Contact = () => {
       setFile(null);
     } catch (err) {
       console.error(err);
-      toast.error("Er ging iets mis. Probeer het later opnieuw.");
+      toast.error(`Er ging iets mis. Probeer het later opnieuw of mail ons op ${company.email}`);
     } finally {
       setSubmitting(false);
     }
