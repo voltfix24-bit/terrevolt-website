@@ -33,6 +33,7 @@ import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { MetaTooltip } from "@/components/terrevolt/MetaTooltip";
+import { Reveal } from "@/components/terrevolt/Reveal";
 import { supabase } from "@/integrations/supabase/client";
 import { CvUploadField, validateCvFile } from "@/components/CvUploadField";
 import { toast } from "sonner";
