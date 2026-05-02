@@ -19,8 +19,11 @@ type Props = {
  */
 const MetaTooltipImpl = ({ label, enabled = true, children, className }: Props) => {
   const [open, setOpen] = useState(false);
+  const [shift, setShift] = useState(0);
+  const [arrowOffset, setArrowOffset] = useState(0);
   const id = useId();
   const wrapRef = useRef<HTMLSpanElement>(null);
+  const tipRef = useRef<HTMLSpanElement>(null);
   const hideTimer = useRef<number | null>(null);
 
   const clearHide = useCallback(() => {
@@ -53,6 +56,35 @@ const MetaTooltipImpl = ({ label, enabled = true, children, className }: Props) 
       document.removeEventListener("keydown", onKey);
     };
   }, [open]);
+
+  // Klem de tooltip binnen de viewport zodra hij opent of het scherm wijzigt.
+  useEffect(() => {
+    if (!open) return;
+    const reposition = () => {
+      const wrap = wrapRef.current;
+      const tip = tipRef.current;
+      if (!wrap || !tip) return;
+      const gutter = 12;
+      const wrapRect = wrap.getBoundingClientRect();
+      const wrapCenter = wrapRect.left + wrapRect.width / 2;
+      const tipWidth = tip.offsetWidth;
+      const desiredLeft = wrapCenter - tipWidth / 2;
+      const maxLeft = window.innerWidth - gutter - tipWidth;
+      const minLeft = gutter;
+      const clampedLeft = Math.max(minLeft, Math.min(desiredLeft, maxLeft));
+      const nextShift = clampedLeft - desiredLeft;
+      setShift(nextShift);
+      // Pijl blijft op het midden van de wrapper wijzen.
+      setArrowOffset(-nextShift);
+    };
+    reposition();
+    window.addEventListener("resize", reposition);
+    window.addEventListener("scroll", reposition, true);
+    return () => {
+      window.removeEventListener("resize", reposition);
+      window.removeEventListener("scroll", reposition, true);
+    };
+  }, [open, label]);
 
   useEffect(() => () => clearHide(), [clearHide]);
 
@@ -99,17 +131,20 @@ const MetaTooltipImpl = ({ label, enabled = true, children, className }: Props) 
         {children}
       </span>
       <span
+        ref={tipRef}
         role="tooltip"
         id={id}
-        className={`pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-2 z-40 max-w-[min(18rem,calc(100vw-2rem))] whitespace-normal break-words rounded-lg bg-[#0d3b2e] text-white text-xs leading-snug px-3 py-2 shadow-lg transition-[opacity,transform] duration-200 ease-out motion-reduce:transition-none motion-reduce:transform-none ${
-          open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
+        style={{ transform: `translate(calc(-50% + ${shift}px), ${open ? "0" : "4px"})` }}
+        className={`pointer-events-none absolute left-1/2 bottom-full mb-2 z-40 w-max max-w-[min(18rem,calc(100vw-1.5rem))] whitespace-normal break-words [overflow-wrap:anywhere] [hyphens:auto] rounded-lg bg-[#0d3b2e] text-white text-xs leading-snug px-3 py-2 shadow-lg transition-[opacity,transform] duration-200 ease-out motion-reduce:transition-none ${
+          open ? "opacity-100" : "opacity-0"
         }`}
         aria-hidden={!open}
       >
         {label}
         <span
           aria-hidden="true"
-          className="absolute left-1/2 -translate-x-1/2 top-full -mt-px h-2 w-2 rotate-45 bg-[#0d3b2e]"
+          style={{ transform: `translateX(calc(-50% + ${arrowOffset}px)) rotate(45deg)` }}
+          className="absolute left-1/2 top-full -mt-px h-2 w-2 bg-[#0d3b2e]"
         />
       </span>
     </span>
