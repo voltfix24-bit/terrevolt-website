@@ -3,6 +3,7 @@ import { ArrowRight, CheckCircle2, ShieldCheck, BadgeCheck, Award, BookOpen, Fil
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
+import { softHyphenate } from "@/lib/softHyphen";
 import {
   Accordion,
   AccordionContent,
@@ -224,7 +225,7 @@ const Veiligheid = () => {
                       <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
                     </div>
                     <h3 className="text-base text-[#0d3b2e] mb-2">{step.title}</h3>
-                    <p className="text-[#6c757d] text-sm leading-relaxed hyphens-nl text-pretty">{step.description}</p>
+                    <p className="text-[#6c757d] text-sm leading-relaxed hyphens-nl text-pretty">{softHyphenate(step.description)}</p>
                   </div>
                 );
               })}
@@ -254,7 +255,7 @@ const Veiligheid = () => {
                       <Icon className="w-7 h-7 text-[#0d3b2e] group-hover:text-white transition-colors duration-300" strokeWidth={2} />
                     </div>
                     <h3 className="text-xl text-[#0d3b2e] mb-3">{item.title}</h3>
-                    <p className="text-[#6c757d] leading-relaxed flex-1 hyphens-nl text-pretty">{item.description}</p>
+                    <p className="text-[#6c757d] leading-relaxed flex-1 hyphens-nl text-pretty">{softHyphenate(item.description)}</p>
                     <span className="mt-5 inline-block self-start text-[10px] uppercase tracking-wider text-[#0d3b2e] bg-[#f0f7e6] border border-[#9ed42e]/40 rounded-full px-3 py-1">
                       {item.label}
                     </span>
@@ -286,7 +287,7 @@ const Veiligheid = () => {
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 hyphens-nl">Bevoegdheden, rollen en normen</h2>
               <p className="text-base sm:text-lg text-gray-300 leading-relaxed hyphens-nl text-pretty">
-                Veilig werken binnen de netbeheerwereld vraagt om duidelijkheid in rollen, aanwijzingen en procedures. TerreVolt sluit aan op de veiligheidsstructuur en bedrijfsspecifieke eisen van opdrachtgever of netbeheerder, afgestemd op de opdracht, locatie en geldende projectafspraken.
+                {softHyphenate("Veilig werken binnen de netbeheerwereld vraagt om duidelijkheid in rollen, aanwijzingen en procedures. TerreVolt sluit aan op de veiligheidsstructuur en bedrijfsspecifieke eisen van opdrachtgever of netbeheerder, afgestemd op de opdracht, locatie en geldende projectafspraken.")}
               </p>
             </div>
 
@@ -303,7 +304,7 @@ const Veiligheid = () => {
                     </div>
                     <h3 className="text-lg text-white mb-1">{c.title}</h3>
                     <div className="text-xs uppercase tracking-wider text-[#9ed42e] mb-3">{c.subtitle}</div>
-                    <p className="text-sm text-gray-300 leading-relaxed hyphens-nl text-pretty">{c.description}</p>
+                    <p className="text-sm text-gray-300 leading-relaxed hyphens-nl text-pretty">{softHyphenate(c.description)}</p>
                   </div>
                 );
               })}
@@ -317,7 +318,7 @@ const Veiligheid = () => {
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl">Projectafspraken en locatie-eisen</h2>
               <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
-                Naast branche-regels kunnen per opdrachtgever of netbeheerder aanvullende afspraken gelden. Denk aan bedrijfsspecifieke procedures, poortinstructies, toegangseisen, sleutelprocedures, werkvergunningen en locatie-instructies.
+                {softHyphenate("Naast branche-regels kunnen per opdrachtgever of netbeheerder aanvullende afspraken gelden. Denk aan bedrijfsspecifieke procedures, poortinstructies, toegangseisen, sleutelprocedures, werkvergunningen en locatie-instructies.")}
               </p>
             </div>
 
@@ -333,7 +334,7 @@ const Veiligheid = () => {
                       <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
                     </div>
                     <h3 className="text-base sm:text-lg text-[#0d3b2e] mb-2">{c.title}</h3>
-                    <p className="text-sm text-[#6c757d] leading-relaxed hyphens-nl text-pretty">{c.description}</p>
+                    <p className="text-sm text-[#6c757d] leading-relaxed hyphens-nl text-pretty">{softHyphenate(c.description)}</p>
                   </div>
                 );
               })}
@@ -376,7 +377,7 @@ const Veiligheid = () => {
                       {f.q}
                     </AccordionTrigger>
                     <AccordionContent className="text-[#6c757d] leading-relaxed text-sm sm:text-base pb-5 hyphens-nl text-pretty">
-                      {f.a}
+                      {softHyphenate(f.a)}
                     </AccordionContent>
                   </AccordionItem>
                 ))}
