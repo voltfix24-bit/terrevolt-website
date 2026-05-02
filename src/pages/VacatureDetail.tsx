@@ -463,14 +463,38 @@ const VacatureDetail = () => {
           </div>
         </section>
 
-        {/* WAT GA JE DOEN + DIT BRENG JE MEE */}
+        {/* MATCH-CARD: Deze functie past bij jou als… */}
+        <section className="py-10 sm:py-14 bg-white">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#f0f7e6] to-white border border-[#9ed42e]/40 rounded-2xl p-6 sm:p-8">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-11 h-11 bg-[#9ed42e] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-5 h-5 text-[#0d3b2e]" strokeWidth={2.5} />
+                </div>
+                <h2 className="text-xl sm:text-2xl text-[#0d3b2e] leading-tight">
+                  Deze functie past bij jou als…
+                </h2>
+              </div>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                {matchBulletsFor(slug).map((m) => (
+                  <li key={m} className="flex items-start gap-3 text-[#0d3b2e]">
+                    <CheckCircle2 className="w-5 h-5 text-[#0d3b2e] flex-shrink-0 mt-0.5" />
+                    <span className="text-[#0d3b2e]/90 text-[15px] leading-relaxed">{m}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* WAT DOE JE + WAT BRENG JE MEE */}
         <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
               <div className="bg-white rounded-2xl p-8 border border-gray-200">
                 <div className="flex items-center gap-3 mb-6">
                   <ListChecks className="w-7 h-7 text-[#9ed42e]" strokeWidth={2.5} />
-                  <h2 className="text-2xl text-[#0d3b2e]">Wat ga je doen?</h2>
+                  <h2 className="text-2xl text-[#0d3b2e]">Wat doe je?</h2>
                 </div>
                 <ul className="space-y-3">
                   {vacature.taken.map((t) => (
