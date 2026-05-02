@@ -137,9 +137,11 @@ const Projecten = () => {
               {projecten.map((p) => {
                 const Icon = p.icon;
                 return (
-                  <article
+                  <Link
                     key={p.title}
-                    className="group bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 flex flex-col"
+                    to={p.serviceHref}
+                    aria-label={`Bekijk dienst voor ${p.title}`}
+                    className="group bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 flex flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 active:scale-[0.99]"
                   >
                     <div className="flex items-center gap-3 mb-6">
                       <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center group-hover:bg-[#9ed42e] transition-colors duration-300">
@@ -169,7 +171,10 @@ const Projecten = () => {
                         ))}
                       </div>
                     </div>
-                  </article>
+                    <div className="mt-4 text-xs text-[#9ed42e] inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                      Bekijk dienst <ArrowRight className="w-3 h-3" />
+                    </div>
+                  </Link>
                 );
               })}
             </div>
