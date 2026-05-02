@@ -74,6 +74,21 @@ const VacatureDetail = () => {
   const [vacature, setVacature] = useState<VacatureView | null | "missing">(null);
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [formInView, setFormInView] = useState(false);
+
+  // Verberg de sticky bottom-CTA zodra het sollicitatieformulier in beeld is.
+  useEffect(() => {
+    if (!vacature || vacature === "missing") return;
+    const el = document.getElementById("solliciteer");
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach((e) => setFormInView(e.isIntersecting)),
+      { threshold: 0.05 },
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [vacature]);
+
 
   useEffect(() => {
     let active = true;
