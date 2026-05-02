@@ -109,6 +109,7 @@ const VacatureDetail = () => {
   const [file, setFile] = useState<File | null>(null);
   const [fileError, setFileError] = useState<string | null>(null);
   const [uploadingFile, setUploadingFile] = useState(false);
+  const [noCv, setNoCv] = useState(false);
   const [formInView, setFormInView] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
