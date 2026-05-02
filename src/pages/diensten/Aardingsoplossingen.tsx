@@ -104,7 +104,7 @@ const Aardingsoplossingen = () => {
         </section>
 
         {/* SECTIE 1: Aarding als fundament */}
-        <section className="py-16 md:py-16 md:py-24 bg-white">
+        <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Aarding als basis van veilige infrastructuur</h2>
@@ -134,7 +134,7 @@ const Aardingsoplossingen = () => {
         </section>
 
         {/* SECTIE 2: Toepassingen */}
-        <section className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+        <section className="py-16 md:py-24 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
@@ -166,7 +166,7 @@ const Aardingsoplossingen = () => {
         </section>
 
         {/* SECTIE 3: Meetbaar en aantoonbaar */}
-        <section className="py-16 md:py-16 md:py-24 bg-[#0d3b2e] relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-[#0d3b2e] relative overflow-hidden">
           <div className="absolute inset-0 opacity-5">
             <div
               className="absolute inset-0"
@@ -224,7 +224,7 @@ const Aardingsoplossingen = () => {
 
 
         {/* CTA */}
-        <section id="contact" className="py-16 md:py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"

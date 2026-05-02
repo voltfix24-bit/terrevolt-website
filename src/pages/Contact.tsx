@@ -171,7 +171,7 @@ const Contact = () => {
         </section>
 
         {/* SECTIE 1: Contactgegevens */}
-        <section className="py-16 md:py-16 md:py-24 bg-white">
+        <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
               {contactCards.map((c) => {
@@ -206,7 +206,7 @@ const Contact = () => {
         </section>
 
         {/* SECTIE 2: Aanvraagformulier */}
-        <section id="aanvraag" className="py-16 md:py-16 md:py-24 bg-[#f8f9fa]">
+        <section id="aanvraag" className="py-16 md:py-24 bg-[#f8f9fa]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10">
@@ -367,7 +367,7 @@ const Contact = () => {
         </section>
 
         {/* SECTIE 3: Voor wie */}
-        <section className="py-16 md:py-16 md:py-24 bg-white">
+        <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voor wie werken wij?</h2>
@@ -397,7 +397,7 @@ const Contact = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-16 md:py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+        <section className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"
