@@ -107,6 +107,7 @@ const VacatureDetail = () => {
   const [vacature, setVacature] = useState<VacatureView | null | "missing">(null);
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [uploadingFile, setUploadingFile] = useState(false);
   const [formInView, setFormInView] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [success, setSuccess] = useState(false);
@@ -339,13 +340,18 @@ const VacatureDetail = () => {
     try {
       let cv_url: string | null = null;
       if (file) {
-        const ext = file.name.split(".").pop() || "bin";
-        const path = `${crypto.randomUUID()}.${ext}`;
-        const { error: upErr } = await supabase.storage
-          .from("job-applications")
-          .upload(path, file, { contentType: file.type || undefined });
-        if (upErr) throw upErr;
-        cv_url = path;
+        setUploadingFile(true);
+        try {
+          const ext = file.name.split(".").pop() || "bin";
+          const path = `${crypto.randomUUID()}.${ext}`;
+          const { error: upErr } = await supabase.storage
+            .from("job-applications")
+            .upload(path, file, { contentType: file.type || undefined });
+          if (upErr) throw upErr;
+          cv_url = path;
+        } finally {
+          setUploadingFile(false);
+        }
       }
 
       const messagePrefix = `Vacature: ${vacature.title}${parsed.data.contact_pref ? ` | Contactvoorkeur: ${parsed.data.contact_pref}` : ""}`;
@@ -808,7 +814,7 @@ const VacatureDetail = () => {
                             <div className="text-sm text-[#0d3b2e] break-all">{file.name}</div>
                           </div>
                           <label htmlFor="cv" className="text-xs text-[#0d3b2e] underline cursor-pointer min-h-[44px] flex items-center px-2">Wijzig</label>
-                          <button type="button" onClick={() => setFile(null)} aria-label="Verwijder bestand" className="text-[#6c757d] hover:text-[#0d3b2e] min-h-[44px] min-w-[44px] flex items-center justify-center">
+                          <button type="button" onClick={() => setFile(null)} disabled={uploadingFile} aria-label="Verwijder bestand" className="text-[#6c757d] hover:text-[#0d3b2e] min-h-[44px] min-w-[44px] flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed">
                             <X className="w-4 h-4" />
                           </button>
                         </div>
@@ -819,9 +825,22 @@ const VacatureDetail = () => {
                         </label>
                       )}
                       <input id="cv" name="cv" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
-                        onChange={(e) => setFile(e.target.files?.[0] || null)} className="hidden" />
-                      <p className="mt-2 text-xs text-[#6c757d] leading-relaxed">
-                        PDF, DOC, JPG of PNG — maximaal 10MB. Geen CV bij de hand? Geen probleem, je kunt ook zonder bestand aanmelden.
+                        onChange={(e) => setFile(e.target.files?.[0] || null)}
+                        aria-describedby="cv-help"
+                        className="hidden" />
+                      {uploadingFile && (
+                        <div className="mt-3" role="status" aria-live="polite">
+                          <div className="flex items-center gap-2 text-xs text-[#0d3b2e] mb-1.5">
+                            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                            <span>Bestand uploaden…</span>
+                          </div>
+                          <div className="h-1.5 w-full overflow-hidden rounded-full bg-gray-200">
+                            <div className="h-full w-1/3 bg-[#9ed42e] rounded-full animate-progress" />
+                          </div>
+                        </div>
+                      )}
+                      <p id="cv-help" className="mt-2 text-xs text-[#6c757d] leading-relaxed">
+                        Toegestane bestanden: <span className="text-[#0d3b2e]">PDF, DOC, DOCX, JPG, PNG</span> — maximaal 10MB. Geen CV bij de hand? Geen probleem, je kunt ook zonder bestand aanmelden.
                       </p>
                     </div>
                   </div>
