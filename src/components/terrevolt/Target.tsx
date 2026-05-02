@@ -20,7 +20,7 @@ const targets = [
 
 export function Target() {
   return (
-    <section className="py-24 bg-[#f8f9fa]">
+    <section id="over-ons" className="py-24 bg-[#f8f9fa]">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Voor wie werken wij?</h2>
