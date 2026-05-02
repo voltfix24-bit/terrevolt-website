@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      contact_requests: {
+        Row: {
+          attachment_url: string | null
+          company: string | null
+          created_at: string
+          description: string | null
+          email: string
+          id: string
+          location: string | null
+          name: string
+          phone: string | null
+          request_type: string | null
+          start_date: string | null
+        }
+        Insert: {
+          attachment_url?: string | null
+          company?: string | null
+          created_at?: string
+          description?: string | null
+          email: string
+          id?: string
+          location?: string | null
+          name: string
+          phone?: string | null
+          request_type?: string | null
+          start_date?: string | null
+        }
+        Update: {
+          attachment_url?: string | null
+          company?: string | null
+          created_at?: string
+          description?: string | null
+          email?: string
+          id?: string
+          location?: string | null
+          name?: string
+          phone?: string | null
+          request_type?: string | null
+          start_date?: string | null
+        }
+        Relationships: []
+      }
       job_applications: {
         Row: {
           availability: string | null
