@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, MessageSquare, Lock, Wrench, ClipboardList, HardHat } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, MessageSquare, Lock, Wrench, ClipboardList, HardHat, FileCheck } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
@@ -141,6 +141,54 @@ const Veiligheid = () => {
                   </div>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        {/* SECTIE 2.5: Normenverklaring */}
+        <section className="relative py-16 md:py-24 bg-[#0d3b2e] overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.05]">
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `
+                  linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)
+                `,
+                backgroundSize: "60px 60px",
+              }}
+            />
+          </div>
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
+                Wat dit betekent voor uw project
+              </div>
+              <h2 className="text-3xl sm:text-4xl text-white mb-6 leading-tight">
+                Veiligheid is geen bijzaak — het is de basis van elke opdracht
+              </h2>
+              <p className="text-lg text-gray-300 leading-relaxed">
+                Elk project start met een heldere veiligheidsstructuur: passende aanwijzingen, duidelijke bevoegdheden en afgesproken procedures. Dat is geen papieren exercitie — het is hoe TerreVolt werkt.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-12 text-left">
+                {[
+                  { icon: ShieldCheck, title: "Voor de opdrachtgever", text: "U werkt met een partner die de BEI-structuur kent, werkt met passende aanwijzingen en veilig uitvoert. Geen verrassingen op locatie." },
+                  { icon: FileCheck, title: "Voor het project", text: "Vrijschakelen, veiligstellen en terugschakelen volgens afgesproken procedures. Meetrapportages en opleverdossiers waar nodig als onderdeel van de uitvoering." },
+                  { icon: ClipboardList, title: "Voor het dossier", text: "Werkzaamheden worden aantoonbaar vastgelegd. Meetrapporten, oplevercontroles en documentatie sluiten aan op NEN 1010 en NEN 3140 waar van toepassing." },
+                ].map((c) => {
+                  const Icon = c.icon;
+                  return (
+                    <div key={c.title} className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 hover:border-[#9ed42e] transition-all duration-300">
+                      <div className="w-12 h-12 bg-[#9ed42e] rounded-xl flex items-center justify-center mb-4">
+                        <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                      </div>
+                      <h3 className="text-lg text-white mb-2">{c.title}</h3>
+                      <p className="text-sm text-gray-300 leading-relaxed">{c.text}</p>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
