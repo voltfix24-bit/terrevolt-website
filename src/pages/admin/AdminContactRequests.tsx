@@ -34,17 +34,32 @@ type Req = {
   status: string;
   admin_notes: string | null;
   last_contacted_at: string | null;
+  next_follow_up_at: string | null;
+  safety_scope_flags: Record<string, boolean> | null;
 };
 
 const STATUSES = [
   { value: "new", label: "Nieuw" },
-  { value: "in_review", label: "In behandeling" },
+  { value: "in_review", label: "Scope beoordelen" },
   { value: "contacted", label: "Contact gehad" },
   { value: "quote_needed", label: "Offerte nodig" },
   { value: "planned", label: "Ingepland" },
   { value: "waiting_for_client", label: "Wacht op klant" },
+  { value: "completed", label: "Afgerond" },
   { value: "rejected", label: "Afgewezen" },
   { value: "archived", label: "Gearchiveerd" },
+];
+
+const SAFETY_FLAGS: { key: string; label: string }[] = [
+  { key: "schakelwerk", label: "Schakelwerk" },
+  { key: "ms_ls_station", label: "MS/LS-station" },
+  { key: "netmontage", label: "Netmontage" },
+  { key: "aarding_meting", label: "Aarding/meting" },
+  { key: "werken_langs_weg", label: "Werken langs weg" },
+  { key: "afzetting_zichtbaarheid", label: "Afzetting/zichtbaarheid relevant" },
+  { key: "scope_onvoldoende", label: "Onvoldoende scope" },
+  { key: "bijlage_ontbreekt", label: "Bijlage/tekening ontbreekt" },
+  { key: "wv_onduidelijk", label: "WV/opdrachtgever onduidelijk" },
 ];
 const STATUS_LABEL = (v: string) => STATUSES.find((s) => s.value === v)?.label || v;
 
