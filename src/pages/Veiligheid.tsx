@@ -246,12 +246,13 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Veiligheid en kwaliteit in één aanpak */}
-        <section id="veiligheidsaanpak" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="aanpak" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-14 sm:mb-16 max-w-3xl mx-auto">
+              <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">5 pijlers</div>
               <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty" lang="nl">Veiligheid en kwaliteit in één aanpak</h2>
               <p className="text-base sm:text-xl text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
-                {softHyphenate("Veilig werken en goed opleveren horen bij elkaar. TerreVolt kijkt niet alleen naar de elektrische installatie, maar ook naar voorbereiding, werkplek, bevoegdheden, uitvoering, controle en overdracht.")}
+                {softHyphenate("Veilig werken en goed opleveren horen bij elkaar. TerreVolt kijkt naar voorbereiding, werkplek, bevoegdheden, uitvoering, controle en overdracht.")}
               </p>
             </div>
 
