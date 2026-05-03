@@ -13,6 +13,7 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger,
 } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { whatsappLink } from "@/lib/whatsapp";
 import { waTemplates, inDateRange, type DateRange } from "@/lib/adminUtils";
@@ -34,17 +35,32 @@ type Req = {
   status: string;
   admin_notes: string | null;
   last_contacted_at: string | null;
+  next_follow_up_at: string | null;
+  safety_scope_flags: Record<string, boolean> | null;
 };
 
 const STATUSES = [
   { value: "new", label: "Nieuw" },
-  { value: "in_review", label: "In behandeling" },
+  { value: "in_review", label: "Scope beoordelen" },
   { value: "contacted", label: "Contact gehad" },
   { value: "quote_needed", label: "Offerte nodig" },
   { value: "planned", label: "Ingepland" },
   { value: "waiting_for_client", label: "Wacht op klant" },
+  { value: "completed", label: "Afgerond" },
   { value: "rejected", label: "Afgewezen" },
   { value: "archived", label: "Gearchiveerd" },
+];
+
+const SAFETY_FLAGS: { key: string; label: string }[] = [
+  { key: "schakelwerk", label: "Schakelwerk" },
+  { key: "ms_ls_station", label: "MS/LS-station" },
+  { key: "netmontage", label: "Netmontage" },
+  { key: "aarding_meting", label: "Aarding/meting" },
+  { key: "werken_langs_weg", label: "Werken langs weg" },
+  { key: "afzetting_zichtbaarheid", label: "Afzetting/zichtbaarheid relevant" },
+  { key: "scope_onvoldoende", label: "Onvoldoende scope" },
+  { key: "bijlage_ontbreekt", label: "Bijlage/tekening ontbreekt" },
+  { key: "wv_onduidelijk", label: "WV/opdrachtgever onduidelijk" },
 ];
 const STATUS_LABEL = (v: string) => STATUSES.find((s) => s.value === v)?.label || v;
 
@@ -89,6 +105,18 @@ export default function AdminContactRequests() {
   }
   async function archive(id: string) {
     await setStatus(id, "archived");
+  }
+  async function saveScopeFlags(id: string, flags: Record<string, boolean>) {
+    const { error } = await supabase.from("contact_requests").update({ safety_scope_flags: flags }).eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success("Veiligheid & scope opgeslagen");
+    load();
+  }
+  async function setFollowUp(id: string, iso: string | null) {
+    const { error } = await supabase.from("contact_requests").update({ next_follow_up_at: iso }).eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success(iso ? "Opvolgdatum opgeslagen" : "Opvolgdatum verwijderd");
+    load();
   }
   async function downloadAttachment(path: string) {
     const { data, error } = await supabase.storage.from("contact-attachments").createSignedUrl(path, 60);
@@ -220,7 +248,7 @@ export default function AdminContactRequests() {
                       <Button variant="outline" className="w-full min-h-[44px]">Bekijken</Button>
                     </DialogTrigger>
                     <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full max-h-[90vh] overflow-y-auto">
-                      <Detail r={r} setStatus={setStatus} saveNote={saveNote} logContact={logContact} archive={archive} downloadAttachment={downloadAttachment} />
+                      <Detail r={r} setStatus={setStatus} saveNote={saveNote} logContact={logContact} archive={archive} downloadAttachment={downloadAttachment} saveScopeFlags={saveScopeFlags} setFollowUp={setFollowUp} />
                     </DialogContent>
                   </Dialog>
                 </li>
@@ -254,7 +282,7 @@ export default function AdminContactRequests() {
                         <Dialog>
                           <DialogTrigger asChild><Button size="sm" variant="outline">Bekijken</Button></DialogTrigger>
                           <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full max-h-[90vh] overflow-y-auto">
-                            <Detail r={r} setStatus={setStatus} saveNote={saveNote} logContact={logContact} archive={archive} downloadAttachment={downloadAttachment} />
+                            <Detail r={r} setStatus={setStatus} saveNote={saveNote} logContact={logContact} archive={archive} downloadAttachment={downloadAttachment} saveScopeFlags={saveScopeFlags} setFollowUp={setFollowUp} />
                           </DialogContent>
                         </Dialog>
                       </TableCell>
@@ -271,7 +299,7 @@ export default function AdminContactRequests() {
 }
 
 function Detail({
-  r, setStatus, saveNote, logContact, archive, downloadAttachment,
+  r, setStatus, saveNote, logContact, archive, downloadAttachment, saveScopeFlags, setFollowUp,
 }: {
   r: Req;
   setStatus: (id: string, status: string) => void;
@@ -279,8 +307,16 @@ function Detail({
   logContact: (id: string) => void;
   archive: (id: string) => void;
   downloadAttachment: (path: string) => void;
+  saveScopeFlags: (id: string, flags: Record<string, boolean>) => void;
+  setFollowUp: (id: string, iso: string | null) => void;
 }) {
   const [notes, setNotes] = useState(r.admin_notes || "");
+  const [flags, setFlags] = useState<Record<string, boolean>>(
+    (r.safety_scope_flags as Record<string, boolean>) || {},
+  );
+  const [followUp, setFollowUpState] = useState<string>(
+    r.next_follow_up_at ? r.next_follow_up_at.slice(0, 10) : "",
+  );
   const wa = whatsappLink(r.phone);
   const waTemplate = whatsappLink(r.phone, waTemplates.contact(r.name));
   return (
@@ -359,6 +395,53 @@ function Detail({
           </div>
           {r.last_contacted_at && (
             <p className="text-xs text-[#6c757d]">Laatste contact: {new Date(r.last_contacted_at).toLocaleString("nl-NL")}</p>
+          )}
+        </div>
+
+        {/* Veiligheid & scope (alleen admin) */}
+        <div className="pt-4 border-t space-y-2">
+          <div className="text-sm font-medium text-[#0d3b2e]">Veiligheid & scope</div>
+          <p className="text-xs text-[#6c757d]">Snelle interne beoordeling. Niet zichtbaar op de website.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {SAFETY_FLAGS.map((f) => (
+              <label key={f.key} className="flex items-center gap-2 text-sm cursor-pointer min-h-[36px]">
+                <Checkbox
+                  checked={!!flags[f.key]}
+                  onCheckedChange={(v) => setFlags((prev) => ({ ...prev, [f.key]: !!v }))}
+                />
+                <span>{f.label}</span>
+              </label>
+            ))}
+          </div>
+          <Button size="sm" variant="outline" className="min-h-[44px]" onClick={() => saveScopeFlags(r.id, flags)}>
+            <Save className="w-4 h-4 mr-1.5" /> Veiligheid & scope opslaan
+          </Button>
+        </div>
+
+        {/* Volgende opvolging */}
+        <div className="pt-4 border-t space-y-2">
+          <label className="text-sm font-medium text-[#0d3b2e]" htmlFor={`follow-${r.id}`}>Volgende opvolging</label>
+          <div className="flex flex-wrap gap-2 items-center">
+            <Input
+              id={`follow-${r.id}`}
+              type="date"
+              value={followUp}
+              onChange={(e) => setFollowUpState(e.target.value)}
+              className="min-h-[44px] w-full sm:w-[200px]"
+            />
+            <Button size="sm" variant="outline" className="min-h-[44px]"
+              onClick={() => setFollowUp(r.id, followUp ? new Date(followUp).toISOString() : null)}>
+              <Save className="w-4 h-4 mr-1.5" /> Datum opslaan
+            </Button>
+            {r.next_follow_up_at && (
+              <Button size="sm" variant="ghost" className="min-h-[44px]"
+                onClick={() => { setFollowUpState(""); setFollowUp(r.id, null); }}>
+                <X className="w-4 h-4 mr-1.5" /> Wissen
+              </Button>
+            )}
+          </div>
+          {r.next_follow_up_at && (
+            <p className="text-xs text-[#6c757d]">Gepland: {new Date(r.next_follow_up_at).toLocaleDateString("nl-NL")}</p>
           )}
         </div>
 

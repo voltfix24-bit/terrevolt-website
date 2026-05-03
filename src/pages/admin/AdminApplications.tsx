@@ -35,6 +35,7 @@ type App = {
   profile: string | null;
   admin_notes: string | null;
   last_contacted_at: string | null;
+  next_follow_up_at: string | null;
   vacancies?: { title: string; slug: string } | null;
 };
 
@@ -94,6 +95,12 @@ export default function AdminApplications() {
       .eq("id", id);
     if (error) return toast.error(error.message);
     toast.success("Contactmoment vastgelegd");
+    load();
+  }
+  async function setFollowUp(id: string, iso: string | null) {
+    const { error } = await supabase.from("job_applications").update({ next_follow_up_at: iso }).eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success(iso ? "Opvolgdatum opgeslagen" : "Opvolgdatum verwijderd");
     load();
   }
 
@@ -270,7 +277,7 @@ export default function AdminApplications() {
                       <Button variant="outline" className="w-full min-h-[44px]">Bekijken</Button>
                     </DialogTrigger>
                     <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full max-h-[90vh] overflow-y-auto">
-                      <Detail a={a} setStatus={setStatus} downloadCv={downloadCv} saveNote={saveNote} logContact={logContact} />
+                      <Detail a={a} setStatus={setStatus} downloadCv={downloadCv} saveNote={saveNote} logContact={logContact} setFollowUp={setFollowUp} />
                     </DialogContent>
                   </Dialog>
                 </li>
@@ -318,7 +325,7 @@ export default function AdminApplications() {
                             <Button size="sm" variant="outline">Bekijken</Button>
                           </DialogTrigger>
                           <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full max-h-[90vh] overflow-y-auto">
-                            <Detail a={a} setStatus={setStatus} downloadCv={downloadCv} saveNote={saveNote} logContact={logContact} />
+                            <Detail a={a} setStatus={setStatus} downloadCv={downloadCv} saveNote={saveNote} logContact={logContact} setFollowUp={setFollowUp} />
                           </DialogContent>
                         </Dialog>
                       </TableCell>
@@ -335,15 +342,19 @@ export default function AdminApplications() {
 }
 
 function Detail({
-  a, setStatus, downloadCv, saveNote, logContact,
+  a, setStatus, downloadCv, saveNote, logContact, setFollowUp,
 }: {
   a: App;
   setStatus: (id: string, status: string) => void;
   downloadCv: (path: string) => void;
   saveNote: (id: string, notes: string) => void;
   logContact: (id: string) => void;
+  setFollowUp: (id: string, iso: string | null) => void;
 }) {
   const [notes, setNotes] = useState(a.admin_notes || "");
+  const [followUp, setFollowUpState] = useState<string>(
+    a.next_follow_up_at ? a.next_follow_up_at.slice(0, 10) : "",
+  );
   const wa = whatsappLink(a.phone);
   return (
     <>
@@ -434,6 +445,34 @@ function Detail({
           )}
         </div>
 
+        {/* Volgende opvolging */}
+        <div className="pt-4 border-t space-y-2">
+          <label className="text-sm font-medium text-[#0d3b2e]" htmlFor={`follow-${a.id}`}>Volgende opvolging</label>
+          <div className="flex flex-wrap gap-2 items-center">
+            <Input
+              id={`follow-${a.id}`}
+              type="date"
+              value={followUp}
+              onChange={(e) => setFollowUpState(e.target.value)}
+              className="min-h-[44px] w-full sm:w-[200px]"
+            />
+            <Button size="sm" variant="outline" className="min-h-[44px]"
+              onClick={() => setFollowUp(a.id, followUp ? new Date(followUp).toISOString() : null)}>
+              <Save className="w-4 h-4 mr-1.5" /> Datum opslaan
+            </Button>
+            {a.next_follow_up_at && (
+              <Button size="sm" variant="ghost" className="min-h-[44px]"
+                onClick={() => { setFollowUpState(""); setFollowUp(a.id, null); }}>
+                <X className="w-4 h-4 mr-1.5" /> Wissen
+              </Button>
+            )}
+          </div>
+          {a.next_follow_up_at && (
+            <p className="text-xs text-[#6c757d]">Gepland: {new Date(a.next_follow_up_at).toLocaleDateString("nl-NL")}</p>
+          )}
+        </div>
+
+        {/* TODO: gestructureerde certificatenmodule (VCA, BEI BLS/BHS, VOP, VP, AVP, WV, Rijbewijs) — nu alleen vrije tekst hierboven. */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pt-4 border-t">
           <span className="text-sm">Status:</span>
           <Select value={a.status} onValueChange={(v) => setStatus(a.id, v)}>
