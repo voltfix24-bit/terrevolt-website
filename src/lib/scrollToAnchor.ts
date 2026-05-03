@@ -38,6 +38,12 @@ export const scrollToAnchor = (hashOrId: string, behavior: ScrollBehavior = "smo
   const element = document.getElementById(id);
   if (!element) return false;
 
+  return scrollToElement(element, behavior, id);
+};
+
+export const scrollToElement = (element: HTMLElement, behavior: ScrollBehavior = "smooth", targetId = element.id) => {
+  if (!element) return false;
+
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const finalBehavior: ScrollBehavior = prefersReducedMotion ? "auto" : behavior;
   const html = document.documentElement;
