@@ -18,6 +18,7 @@ import { toast } from "sonner";
 import { whatsappLink } from "@/lib/whatsapp";
 import { waTemplates, inDateRange, type DateRange } from "@/lib/adminUtils";
 import { downloadCsv } from "@/lib/csvExport";
+import { isFollowUpOverdue, isUncontactedStale } from "@/lib/adminBadges";
 
 type Req = {
   id: string;
