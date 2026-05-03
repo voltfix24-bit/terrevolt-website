@@ -37,13 +37,6 @@ const werkplek = [
   { icon: ClipboardList, title: "Orde en overzicht", description: "Een opgeruimde werkplek, duidelijke overdracht en heldere afstemming met andere partijen op locatie." },
 ];
 
-const locatie = [
-  { icon: DoorOpen, title: "Poortinstructies", description: "Voor toegang tot stations, bouwplaatsen of technische locaties kunnen, afhankelijk van de locatie, instructies en toetsing gelden." },
-  { icon: Building2, title: "Bedrijfsspecifieke procedures", description: "Netbeheerders en opdrachtgevers kunnen aanvullende procedures of supplementen hanteren; we sluiten daarop aan volgens de projectafspraken." },
-  { icon: KeyRound, title: "Toegang & sleutelbeheer", description: "Toegang tot technische ruimten, stations en terreinen vraagt om duidelijke afspraken en bevoegdheden." },
-  { icon: FileText, title: "Werkvergunningen & overdracht", description: "Een veilige start vraagt om juiste vrijgave, instructie, overdracht en afstemming met betrokken partijen." },
-];
-
 const rollen = [
   { code: "WV", title: "Werkverantwoordelijke", description: "Verantwoordelijk voor de veilige uitvoering van werkzaamheden, afhankelijk van project en opdrachtgever." },
   { code: "AVP", title: "Allround Vakbekwaam Persoon", description: "Bereidt werkzaamheden voor en geeft opdracht binnen passende aanwijzingen, volgens projectafspraken." },
