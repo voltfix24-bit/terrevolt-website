@@ -309,7 +309,13 @@ export default function AdminContactRequests() {
                       <TableCell>{r.company || "—"}</TableCell>
                       <TableCell>{r.request_type || "—"}</TableCell>
                       <TableCell>{r.location || "—"}</TableCell>
-                      <TableCell><Badge variant="secondary">{STATUS_LABEL(r.status)}</Badge></TableCell>
+                      <TableCell>
+                        <div className="flex flex-col gap-1">
+                          <Badge variant="secondary" className="w-fit">{STATUS_LABEL(r.status)}</Badge>
+                          <ReqFollowUpBadges row={r} />
+                          <FlagMiniBadges flags={r.safety_scope_flags} />
+                        </div>
+                      </TableCell>
                       <TableCell className="text-right">
                         <Dialog>
                           <DialogTrigger asChild><Button size="sm" variant="outline">Bekijken</Button></DialogTrigger>
