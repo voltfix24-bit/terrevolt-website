@@ -352,9 +352,9 @@ const Veiligheid = () => {
         <section id="werkplekveiligheid" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty">Veiligheid stopt niet bij de installatie</h2>
-              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
-                {softHyphenate("Bij LS/MS-werkzaamheden gaat veiligheid ook over de werkplek zelf: toegang, afzetting, looproutes, verlichting, PBM's, gereedschap, materieel, werkplekinrichting en omgevingsrisico's zoals aanrijdgevaar of werken langs de weg.")}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Veilig werken op elke projectlocatie</h2>
+              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
+                {softHyphenate("Bij werkzaamheden langs wegen, op bouwplaatsen, in stations of technische ruimten draait veiligheid ook om de omgeving. Zichtbaarheid, afzettingen, verkeerssituatie, looproutes, toegang, verlichting en samenwerking met andere partijen op locatie worden meegenomen in de voorbereiding.")}
               </p>
             </div>
 
