@@ -382,33 +382,6 @@ const Veiligheid = () => {
           </div>
         </section>
 
-        {/* SECTIE: Locatie-eisen */}
-        <section id="locatie-eisen" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty">Projectafspraken en locatie-eisen</h2>
-              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
-                {softHyphenate("Naast branche-regels kunnen per opdrachtgever of netbeheerder aanvullende afspraken gelden. Denk aan bedrijfsspecifieke procedures, poortinstructies, toegangseisen, sleutelprocedures, werkvergunningen en locatie-instructies.")}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto">
-              {locatie.map((c) => {
-                const Icon = c.icon;
-                return (
-                  <div key={c.title} className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-md transition-all duration-300">
-                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
-                    </div>
-                    <h3 className="text-base sm:text-lg text-[#0d3b2e] mb-2">{c.title}</h3>
-                    <p className="text-sm text-[#6c757d] leading-relaxed hyphens-nl text-pretty">{softHyphenate(c.description)}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
         {/* SECTIE: Rollen (donker) */}
         <section id="rollen" className="relative py-16 md:py-24 bg-[#0d3b2e] overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="absolute inset-0 opacity-[0.05]">
