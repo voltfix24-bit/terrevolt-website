@@ -192,6 +192,7 @@ const Veiligheid = () => {
             <ul className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide -mx-1 px-1 py-2">
               {[
                 { label: "Aanpak", href: "#veiligheidsaanpak" },
+                { label: "Veilige 5", href: "#veilige-5" },
                 { label: "BEI & VWI", href: "#bei-vwi" },
                 { label: "Werkplek", href: "#werkplekveiligheid" },
                 { label: "Locatie-eisen", href: "#locatie-eisen" },
