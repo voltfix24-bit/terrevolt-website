@@ -185,6 +185,65 @@ const WerkenBij = () => {
   const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const errorBannerRef = useRef<HTMLDivElement>(null);
+  const subnavRef = useRef<HTMLElement | null>(null);
+  const isProgrammaticScrollRef = useRef(false);
+  const programmaticScrollTimerRef = useRef<number | null>(null);
+  const [activeId, setActiveId] = useState<string>("");
+
+  useEffect(() => {
+    const sectionIds = ["profielen", "zzp", "hoe-het-werkt", "faq", "aanmelden"];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+
+    const computeActive = () => {
+      if (isProgrammaticScrollRef.current) return;
+      const header = document.querySelector("header");
+      const headerH = header ? header.getBoundingClientRect().height : 0;
+      const subnavH = subnavRef.current ? subnavRef.current.getBoundingClientRect().height : 0;
+      const threshold = headerH + subnavH + 24;
+
+      let current = "";
+      for (const el of sections) {
+        if (el.getBoundingClientRect().top - threshold <= 0) current = el.id;
+      }
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        current = sections[sections.length - 1]?.id ?? current;
+      }
+      setActiveId((previous) => (previous === current ? previous : current));
+    };
+
+    const onProgrammaticScroll = (event: Event) => {
+      const { active, targetId } = (event as CustomEvent<ProgrammaticScrollDetail>).detail || {};
+      isProgrammaticScrollRef.current = Boolean(active);
+      if (targetId && sectionIds.includes(targetId)) {
+        setActiveId((previous) => (previous === targetId ? previous : targetId));
+      }
+      if (programmaticScrollTimerRef.current) {
+        window.clearTimeout(programmaticScrollTimerRef.current);
+      }
+      if (active) {
+        programmaticScrollTimerRef.current = window.setTimeout(() => {
+          isProgrammaticScrollRef.current = false;
+          computeActive();
+        }, 800);
+      }
+    };
+
+    computeActive();
+    window.addEventListener("scroll", computeActive, { passive: true });
+    window.addEventListener("resize", computeActive);
+    window.addEventListener(PROGRAMMATIC_SCROLL_EVENT, onProgrammaticScroll);
+    return () => {
+      window.removeEventListener("scroll", computeActive);
+      window.removeEventListener("resize", computeActive);
+      window.removeEventListener(PROGRAMMATIC_SCROLL_EVENT, onProgrammaticScroll);
+      if (programmaticScrollTimerRef.current) {
+        window.clearTimeout(programmaticScrollTimerRef.current);
+      }
+    };
+  }, []);
+
 
   const clearFieldError = (field: keyof FieldErrors) => {
     setErrors((prev) => {
