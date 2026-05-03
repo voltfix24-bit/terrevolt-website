@@ -97,6 +97,12 @@ export default function AdminApplications() {
     toast.success("Contactmoment vastgelegd");
     load();
   }
+  async function setFollowUp(id: string, iso: string | null) {
+    const { error } = await supabase.from("job_applications").update({ next_follow_up_at: iso }).eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success(iso ? "Opvolgdatum opgeslagen" : "Opvolgdatum verwijderd");
+    load();
+  }
 
   async function downloadCv(path: string) {
     const { data, error } = await supabase.storage.from("job-applications").createSignedUrl(path, 60);
