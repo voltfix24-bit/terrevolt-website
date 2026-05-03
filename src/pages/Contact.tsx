@@ -87,6 +87,9 @@ const Contact = () => {
   const handleIntentChange = (id: "project" | "monteur" | "sollicitatie") => {
     setIntent(id);
     setRequestType(intentToRequestType[id]);
+    const label =
+      id === "project" ? "Project bespreken" : id === "monteur" ? "Monteur / ploeg nodig" : "Sollicitatie / ZZP";
+    import("@/lib/analytics").then((m) => m.trackCTA(label, { intent: id }));
   };
 
   const intents: {
@@ -204,6 +207,9 @@ const Contact = () => {
       } as any]);
       if (insErr) throw insErr;
 
+      import("@/lib/analytics").then((m) =>
+        m.trackFormSubmit("contact_form", { aanvraag_type: intent })
+      );
       setSubmitSuccess(true);
       resetForm();
     } catch (err) {
@@ -415,6 +421,14 @@ const Contact = () => {
                   <form
                     ref={formRef}
                     onSubmit={handleSubmit}
+                    onFocus={(e) => {
+                      const t = e.target as HTMLElement;
+                      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT")) {
+                        import("@/lib/analytics").then((m) =>
+                          m.trackFormStart("contact_form", { aanvraag_type: intent })
+                        );
+                      }
+                    }}
                     className="bg-white rounded-2xl p-6 sm:p-8 md:p-10 border border-gray-200 shadow-sm space-y-8"
                   >
                     <input type="hidden" name="intent" value={intent} readOnly />

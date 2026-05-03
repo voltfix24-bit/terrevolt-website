@@ -394,6 +394,7 @@ const WerkenBij = () => {
       } as any]);
       if (insErr) throw insErr;
 
+      import("@/lib/analytics").then((m) => m.trackFormSubmit("werken_bij_form"));
       toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");
       formRef.current?.reset();
       setFile(null);
@@ -938,6 +939,7 @@ const WerkenBij = () => {
               <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
                 <a
                   href="#aanmelden"
+                  data-cta="Direct aanmelden (werken bij)"
                   className="w-full sm:w-auto bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px]"
                 >
                   Direct aanmelden
@@ -1041,6 +1043,12 @@ const WerkenBij = () => {
               <form
                 ref={formRef}
                 onSubmit={handleSubmit}
+                onFocus={(e) => {
+                  const t = e.target as HTMLElement;
+                  if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT")) {
+                    import("@/lib/analytics").then((m) => m.trackFormStart("werken_bij_form"));
+                  }
+                }}
                 onChange={(e) => {
                   if (submitError) setSubmitError(null);
                   const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;

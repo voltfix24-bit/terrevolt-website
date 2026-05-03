@@ -430,6 +430,9 @@ const VacatureDetail = () => {
       } as any]);
       if (insErr) throw insErr;
 
+      import("@/lib/analytics").then((m) =>
+        m.trackFormSubmit("vacature_form", { vacature_slug: slug, vacature_id: vacature?.id })
+      );
       toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");
       formRef.current?.reset();
       setFile(null);
@@ -503,6 +506,9 @@ const VacatureDetail = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href="#solliciteren"
+                  data-cta="Direct aanmelden"
+                  data-entity-type="vacancy"
+                  data-entity-id={slug}
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Direct aanmelden</span>
@@ -510,6 +516,9 @@ const VacatureDetail = () => {
                 </a>
                 <a
                   href="#vragen"
+                  data-cta="Eerst vraag stellen"
+                  data-entity-type="vacancy"
+                  data-entity-id={slug}
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
                   Eerst vraag stellen
@@ -872,6 +881,14 @@ const VacatureDetail = () => {
               <form
                 ref={formRef}
                 onSubmit={handleSubmit}
+                onFocus={(e) => {
+                  const t = e.target as HTMLElement;
+                  if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT")) {
+                    import("@/lib/analytics").then((m) =>
+                      m.trackFormStart("vacature_form", { vacature_slug: slug })
+                    );
+                  }
+                }}
                 onChange={(e) => {
                   if (submitError) setSubmitError(null);
                   const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
@@ -1075,6 +1092,9 @@ const VacatureDetail = () => {
                 <button
                   type="button"
                   onClick={copyShareLink}
+                  data-cta="Kopieer link"
+                  data-entity-type="vacancy"
+                  data-entity-id={slug}
                   className="inline-flex items-center justify-center gap-2 border-2 border-[#0d3b2e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors"
                 >
                   <LinkIcon className="w-5 h-5" strokeWidth={2.2} />
@@ -1102,6 +1122,9 @@ const VacatureDetail = () => {
           <a
             href="#solliciteren"
             tabIndex={formInView ? -1 : 0}
+            data-cta="Aanmelden voor deze functie"
+            data-entity-type="vacancy"
+            data-entity-id={slug}
             className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2"
           >
             <span>Aanmelden voor deze functie</span>

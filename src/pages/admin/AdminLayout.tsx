@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Navigate, Outlet, Link, useLocation, useNavigate } from "react-router-dom";
-import { Loader2, LogOut, Briefcase, Inbox, LayoutDashboard, MessageSquare } from "lucide-react";
+import { Loader2, LogOut, Briefcase, Inbox, LayoutDashboard, MessageSquare, BarChart3 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -50,6 +50,7 @@ export default function AdminLayout() {
     { to: "/admin/vacatures", label: "Vacatures", icon: Briefcase },
     { to: "/admin/sollicitaties", label: "Sollicitaties", icon: Inbox },
     { to: "/admin/contactaanvragen", label: "Contactaanvragen", icon: MessageSquare },
+    { to: "/admin/analytics", label: "Analytics", icon: BarChart3 },
   ];
 
   return (

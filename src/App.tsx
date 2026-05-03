@@ -28,6 +28,8 @@ import AdminApplications from "./pages/admin/AdminApplications.tsx";
 import AdminContactRequests from "./pages/admin/AdminContactRequests.tsx";
 import { OrganizationJsonLd } from "./components/seo/OrganizationJsonLd.tsx";
 import { HashScroll } from "./components/HashScroll.tsx";
+import { RouteTracker } from "./components/analytics/RouteTracker.tsx";
+import AdminAnalytics from "./pages/admin/AdminAnalytics.tsx";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +41,7 @@ const App = () => (
       <OrganizationJsonLd />
       <BrowserRouter>
         <HashScroll />
+        <RouteTracker />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/diensten" element={<Diensten />} />
@@ -71,6 +74,7 @@ const App = () => (
             <Route path="vacatures/:id/bewerken" element={<AdminVacancyForm />} />
             <Route path="sollicitaties" element={<AdminApplications />} />
             <Route path="contactaanvragen" element={<AdminContactRequests />} />
+            <Route path="analytics" element={<AdminAnalytics />} />
           </Route>
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
