@@ -146,14 +146,20 @@ export function Header() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
           <div className="flex items-center justify-between h-16 sm:h-20 gap-3">
-            <Link to="/" className="flex items-center gap-2 sm:gap-3 min-w-0">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 bg-[#0d3b2e] rounded-lg flex items-center justify-center flex-shrink-0">
-                <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-[#9ed42e]" strokeWidth={2.5} />
-              </div>
-              <div className="min-w-0">
-                <div className="text-base sm:text-xl text-[#0d3b2e] truncate leading-tight">TerreVolt BV</div>
-                <div className="hidden xs:block text-[11px] sm:text-xs text-[#6c757d] leading-tight whitespace-nowrap">LS/MS-infrastructuur</div>
-              </div>
+            <Link
+              to="/"
+              aria-label="TerreVolt — naar de homepagina"
+              className="flex items-center gap-2 sm:gap-3 min-w-0 [--tv-bolt:#9ed42e] [--tv-earth:#f0b41a] dark:[--tv-bolt:#9ed42e] dark:[--tv-earth:#f0b41a]"
+            >
+              <span className="w-9 h-9 sm:w-10 sm:h-10 bg-[#0d3b2e] dark:bg-[#0f172a] rounded-lg flex items-center justify-center flex-shrink-0">
+                <LogoMark stacked className="w-7 h-7 sm:w-8 sm:h-8" />
+              </span>
+              <span className="min-w-0">
+                <span className="block text-base sm:text-xl text-[#0d3b2e] dark:text-white truncate leading-tight font-extrabold tracking-tight" style={{ letterSpacing: "-0.03em" }}>
+                  TerreVolt <span className="text-[#6c757d] dark:text-white/60 font-bold">BV</span>
+                </span>
+                <span className="hidden xs:block text-[11px] sm:text-xs text-[#6c757d] dark:text-white/60 leading-tight whitespace-nowrap">LS/MS-infrastructuur</span>
+              </span>
             </Link>
 
             <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
