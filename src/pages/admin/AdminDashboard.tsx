@@ -77,23 +77,27 @@ export default function AdminDashboard() {
         applications: a.count || 0, appNew7: an7.count || 0, appNewStatus: ans.count || 0,
         requests: r.count || 0, reqNew7: rn7.count || 0, reqOpen: ro.count || 0, reqNewStatus: rns.count || 0,
       });
-      setRecentApps((lastA.data as any) || []);
-      setRecentReqs((lastR.data as any) || []);
+      setRecentApps(((lastA.data as RecentApp[] | null) ?? []));
+      setRecentReqs(((lastR.data as RecentReq[] | null) ?? []));
+
+      type AppActRow = { id: string; name: string; profile: string | null; vacancies?: { title: string } | null };
+      type ReqActRow = { id: string; name: string; company: string | null };
+      type DraftRow = { id: string; title: string };
 
       const acc: ActionItem[] = [];
-      ((appNewAct.data as any[]) || []).forEach((x) =>
+      ((appNewAct.data as AppActRow[] | null) ?? []).forEach((x) =>
         acc.push({ id: `an-${x.id}`, kind: "application", title: `${x.name} — ${x.vacancies?.title || x.profile || "Open sollicitatie"}`, reason: "Nieuwe sollicitatie", to: "/admin/sollicitaties" }));
-      ((reqNewAct.data as any[]) || []).forEach((x) =>
+      ((reqNewAct.data as ReqActRow[] | null) ?? []).forEach((x) =>
         acc.push({ id: `rn-${x.id}`, kind: "request", title: `${x.name}${x.company ? ` · ${x.company}` : ""}`, reason: "Nieuwe contactaanvraag", to: "/admin/contactaanvragen" }));
-      ((appStaleAct.data as any[]) || []).forEach((x) =>
+      ((appStaleAct.data as AppActRow[] | null) ?? []).forEach((x) =>
         acc.push({ id: `as-${x.id}`, kind: "application", title: `${x.name} — ${x.vacancies?.title || x.profile || ""}`, reason: ">2 dagen zonder contact", to: "/admin/sollicitaties" }));
-      ((reqStaleAct.data as any[]) || []).forEach((x) =>
+      ((reqStaleAct.data as ReqActRow[] | null) ?? []).forEach((x) =>
         acc.push({ id: `rs-${x.id}`, kind: "request", title: `${x.name}${x.company ? ` · ${x.company}` : ""}`, reason: ">2 dagen zonder contact", to: "/admin/contactaanvragen" }));
-      ((appDocsAct.data as any[]) || []).forEach((x) =>
+      ((appDocsAct.data as AppActRow[] | null) ?? []).forEach((x) =>
         acc.push({ id: `ad-${x.id}`, kind: "application", title: `${x.name} — ${x.vacancies?.title || x.profile || ""}`, reason: "Documenten nodig", to: "/admin/sollicitaties" }));
-      ((reqWaitAct.data as any[]) || []).forEach((x) =>
+      ((reqWaitAct.data as ReqActRow[] | null) ?? []).forEach((x) =>
         acc.push({ id: `rw-${x.id}`, kind: "request", title: `${x.name}${x.company ? ` · ${x.company}` : ""}`, reason: "Wacht op klant", to: "/admin/contactaanvragen" }));
-      ((draftsAct.data as any[]) || []).forEach((x) =>
+      ((draftsAct.data as DraftRow[] | null) ?? []).forEach((x) =>
         acc.push({ id: `dv-${x.id}`, kind: "vacancy", title: x.title, reason: "Conceptvacature", to: "/admin/vacatures" }));
       // Dedup by id
       const seen = new Set<string>();
