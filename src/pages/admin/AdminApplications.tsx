@@ -342,15 +342,19 @@ export default function AdminApplications() {
 }
 
 function Detail({
-  a, setStatus, downloadCv, saveNote, logContact,
+  a, setStatus, downloadCv, saveNote, logContact, setFollowUp,
 }: {
   a: App;
   setStatus: (id: string, status: string) => void;
   downloadCv: (path: string) => void;
   saveNote: (id: string, notes: string) => void;
   logContact: (id: string) => void;
+  setFollowUp: (id: string, iso: string | null) => void;
 }) {
   const [notes, setNotes] = useState(a.admin_notes || "");
+  const [followUp, setFollowUpState] = useState<string>(
+    a.next_follow_up_at ? a.next_follow_up_at.slice(0, 10) : "",
+  );
   const wa = whatsappLink(a.phone);
   return (
     <>
