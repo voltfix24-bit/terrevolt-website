@@ -157,8 +157,8 @@ const Veiligheid = () => {
               <h1 className="text-[clamp(1.75rem,7vw,3.75rem)] text-white mb-4 leading-tight hyphens-nl text-pretty" lang="nl">
                 Iedereen veilig <span className="text-[#9ed42e]">thuis.</span>
               </h1>
-              <p className="text-lg sm:text-2xl text-[#9ed42e] mb-6">We doen het veilig, of we doen het niet.</p>
-              <p className="text-base sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed hyphens-nl text-pretty" lang="nl">
+              <p className="text-lg sm:text-2xl font-semibold text-[#9ed42e] mb-6">We doen het veilig, of we doen het niet.</p>
+              <p className="text-base sm:text-xl lg:text-2xl font-medium text-white/90 mb-10 max-w-xl leading-[1.65] hyphens-nl text-pretty" lang="nl">
                 Werken aan LS/MS-infrastructuur vraagt om vakmanschap, discipline en duidelijke afspraken. Voor TerreVolt is veiligheid geen formaliteit, maar de basis van elke opdracht: voor de monteur, de ploeg, de uitvoerende partij, de opdrachtgever en iedereen op locatie.
               </p>
 
