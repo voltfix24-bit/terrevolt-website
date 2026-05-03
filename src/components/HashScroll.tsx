@@ -85,7 +85,10 @@ export function HashScroll() {
   );
 
   useEffect(() => {
-    if (!hash) return;
+    if (!hash) {
+      lastAutoScrolledKey = "";
+      return;
+    }
     const scrollKey = `${pathname}${search}${hash}`;
     if (lastAutoScrolledKey === scrollKey) return;
 
