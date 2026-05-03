@@ -277,11 +277,11 @@ export default function AdminVacancyForm() {
           </div>
         </div>
 
-        <div className="flex justify-end gap-3 pt-4 border-t">
-          <Button type="button" variant="outline" asChild>
+        <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-4 border-t">
+          <Button type="button" variant="outline" asChild className="w-full sm:w-auto min-h-[44px]">
             <Link to="/admin/vacatures">Annuleren</Link>
           </Button>
-          <Button type="submit" disabled={saving} className="bg-[#9ed42e] text-[#0d3b2e] hover:bg-[#8bc41f]">
+          <Button type="submit" disabled={saving} className="w-full sm:w-auto min-h-[44px] bg-[#9ed42e] text-[#0d3b2e] hover:bg-[#8bc41f]">
             {saving ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Save className="w-4 h-4 mr-2" />}
             Opslaan
           </Button>
