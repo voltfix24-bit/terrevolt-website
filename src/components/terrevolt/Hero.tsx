@@ -32,9 +32,9 @@ export function Hero() {
             <span className="text-[#9ed42e] tracking-widest uppercase text-sm">TERREVOLT BV</span>
           </div>
 
-          <h1 className="text-[clamp(2rem,9vw,2.625rem)] sm:text-5xl lg:text-7xl text-white mb-5 sm:mb-6 leading-[1.08] sm:leading-tight tracking-tight hyphens-none break-normal [text-wrap:balance]">
+          <h1 className="text-[clamp(1.75rem,7.5vw,2.5rem)] sm:text-5xl lg:text-7xl text-white mb-5 sm:mb-6 leading-[1.08] sm:leading-tight tracking-tight [hyphens:manual] break-normal [text-wrap:balance]">
             <span className="block sm:inline whitespace-normal">Specialist in&nbsp;LS/MS-infrastructuur</span>{" "}
-            <span className="block sm:inline text-[#9ed42e] whitespace-normal">en&nbsp;aardingsoplossingen</span>
+            <span className="block sm:inline text-[#9ed42e] whitespace-normal">en&nbsp;aardings&shy;oplossingen</span>
           </h1>
 
           <p className="text-[17px] sm:text-xl lg:text-2xl text-gray-300 mb-3 sm:mb-4 max-w-3xl leading-relaxed">
