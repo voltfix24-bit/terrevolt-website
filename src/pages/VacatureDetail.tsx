@@ -431,7 +431,7 @@ const VacatureDetail = () => {
       if (insErr) throw insErr;
 
       import("@/lib/analytics").then((m) =>
-        m.trackFormSubmit("vacature_form", { vacature_slug: vacature?.slug, vacature_id: vacature?.id })
+        m.trackFormSubmit("vacature_form", { vacature_slug: slug, vacature_id: vacature?.id })
       );
       toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");
       formRef.current?.reset();
@@ -879,7 +879,7 @@ const VacatureDetail = () => {
                   const t = e.target as HTMLElement;
                   if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT")) {
                     import("@/lib/analytics").then((m) =>
-                      m.trackFormStart("vacature_form", { vacature_slug: vacature?.slug })
+                      m.trackFormStart("vacature_form", { vacature_slug: slug })
                     );
                   }
                 }}
