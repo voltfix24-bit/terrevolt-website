@@ -324,9 +324,9 @@ const Veiligheid = () => {
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Normen & bevoegdheden</div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Normen, systemen en bevoegdheden</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Normen, kwaliteitssystemen en bevoegdheden</h2>
               <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
-                {softHyphenate("BEI BLS/BHS, VWI's, VCA, LMRA, NEN-normen en ISO 9001:2015 vormen samen het kader waarbinnen TerreVolt veilig en beheerst werkt. Aanwijzingen en certificaten worden ingezet volgens project, opdrachtgever en werkgebied.")}
+                {softHyphenate("Normen, certificaten en kwaliteitssystemen zijn geen doel op zichzelf. Ze helpen om veilig, beheerst en aantoonbaar te werken.")}
               </p>
             </div>
 
