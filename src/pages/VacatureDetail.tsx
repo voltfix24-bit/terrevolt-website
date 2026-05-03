@@ -39,7 +39,7 @@ import { CvUploadField, validateCvFile } from "@/components/CvUploadField";
 import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { findVacature } from "@/data/vacatures";
-import { company, telHref, mailHref } from "@/config/company";
+import { company, telHref, mailHref, SITE_URL } from "@/config/company";
 
 const contactVoorkeurOpties = ["Bellen", "WhatsApp", "E-mail", "Maakt niet uit"];
 
@@ -234,7 +234,7 @@ const VacatureDetail = () => {
     const SCRIPT_ID = "ld-json-jobposting";
     document.getElementById(SCRIPT_ID)?.remove();
 
-    const url = `${window.location.origin}/vacatures/${slug}`;
+    const url = `${SITE_URL}/vacatures/${slug}`;
     const description = [
       vacature.intro,
       vacature.taken.length ? `Taken: ${vacature.taken.join("; ")}.` : "",
@@ -253,17 +253,23 @@ const VacatureDetail = () => {
     const employmentType =
       employmentTypeMap[vacature.meta.dienstverband] || "FULL_TIME";
 
+    // validThrough = vandaag + 90 dagen — voorkomt Google for Jobs waarschuwing
+    const validThrough = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000)
+      .toISOString();
+
     const data = {
       "@context": "https://schema.org",
       "@type": "JobPosting",
       title: vacature.title,
       description: `<p>${description.replace(/</g, "&lt;")}</p>`,
       datePosted: new Date().toISOString().slice(0, 10),
+      validThrough,
       employmentType,
       hiringOrganization: {
         "@type": "Organization",
         name: "TerreVolt B.V.",
-        sameAs: window.location.origin,
+        sameAs: SITE_URL,
+        logo: `${SITE_URL}/og-image.jpg`,
       },
       jobLocation: {
         "@type": "Place",
