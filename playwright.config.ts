@@ -33,23 +33,47 @@ export default defineConfig({
     screenshot: "only-on-failure",
     video: "retain-on-failure",
   },
+  // Visuele regressie: tolereer minieme rendering-verschillen, maar flag layout-shift.
+  expect: {
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.02,
+      animations: "disabled",
+      caret: "hide",
+    },
+  },
   projects: [
     {
       name: "chromium-mobile",
       use: { ...devices["Pixel 5"] },
+      testIgnore: /visual-regression\.spec\.ts/,
     },
     // iOS Safari engine via WebKit, op de drie kritieke iPhone-formaten.
     {
       name: "mobile-safari-iphone-se",
       use: { ...devices["iPhone SE"] },
+      testIgnore: /visual-regression\.spec\.ts/,
     },
     {
       name: "mobile-safari-iphone-12",
       use: { ...devices["iPhone 12"] },
+      testIgnore: /visual-regression\.spec\.ts/,
     },
     {
       name: "mobile-safari-iphone-14-pro-max",
       use: { ...devices["iPhone 14 Pro Max"] },
+      testIgnore: /visual-regression\.spec\.ts/,
+    },
+    // Visuele regressie: één mobile- en één desktop-project,
+    // gebruikt door e2e/visual-regression.spec.ts om pariteit te bewaken.
+    {
+      name: "visual-mobile",
+      use: { ...devices["Pixel 5"], viewport: { width: 390, height: 844 } },
+      testMatch: /visual-regression\.spec\.ts/,
+    },
+    {
+      name: "visual-desktop",
+      use: { ...devices["Desktop Chrome"], viewport: { width: 1366, height: 768 } },
+      testMatch: /visual-regression\.spec\.ts/,
     },
   ],
   webServer: {
