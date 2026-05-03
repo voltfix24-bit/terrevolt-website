@@ -247,7 +247,7 @@ export default function AdminContactRequests() {
                     <DialogTrigger asChild>
                       <Button variant="outline" className="w-full min-h-[44px]">Bekijken</Button>
                     </DialogTrigger>
-                    <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full max-h-[90vh] overflow-y-auto">
+                    <DialogContent className="max-w-2xl w-[calc(100vw-1rem)] sm:w-full max-h-[90vh] overflow-y-auto p-4 sm:p-6">
                       <Detail r={r} setStatus={setStatus} saveNote={saveNote} logContact={logContact} archive={archive} downloadAttachment={downloadAttachment} saveScopeFlags={saveScopeFlags} setFollowUp={setFollowUp} />
                     </DialogContent>
                   </Dialog>
