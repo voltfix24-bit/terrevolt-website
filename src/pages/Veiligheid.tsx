@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { ArrowRight, CheckCircle2, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, MessageSquare, Lock, Wrench, ClipboardList, HardHat, KeyRound, DoorOpen, FileText, Building2, Users, UserCheck, Briefcase, TrafficCone, AlertTriangle } from "lucide-react";
+import { ArrowRight, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, Wrench, ClipboardList, HardHat, DoorOpen, FileText, Users, Briefcase, TrafficCone, AlertTriangle } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
@@ -23,9 +23,9 @@ const beiCards = [
   { icon: ShieldCheck, title: "BEI BLS/BHS", description: "Veilige bedrijfsvoering binnen LS/MS/HS-netbeheeromgevingen, inclusief bijbehorende VWI's en projectafspraken." },
   { icon: BookOpen, title: "VWI's", description: "Veiligheidswerkinstructies voor specifieke werkzaamheden, situaties en risico's." },
   { icon: BadgeCheck, title: "VCA", description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving en risico's." },
-  { icon: Award, title: "ISO 9001:2015", description: "Met aandacht voor de principes van ISO 9001:2015: kwaliteitsmanagement, procesbeheersing, klantgericht werken, risicodenken en continue verbetering." },
+  { icon: FileSearch, title: "LMRA", description: "Laatste-minuut-risicoanalyse voor start of hervatting van werkzaamheden, bij twijfel altijd opnieuw." },
   { icon: FileText, title: "NEN 1010 / 3140 / 3840", description: "Normen die, waar van toepassing, richting geven aan aanleg, bedrijfsvoering, controle en veilig werken." },
-  { icon: UserCheck, title: "Certificaten & aanwijzingen", description: "Monteurs worden ingezet met certificaten, aanwijzingen en bevoegdheden die passen bij het werk, de opdrachtgever en de projectlocatie." },
+  { icon: Award, title: "ISO 9001:2015", description: "Met aandacht voor de principes van ISO 9001:2015: procesbeheersing, klantgerichtheid, risicodenken en continue verbetering." },
 ];
 
 const werkplek = [
@@ -33,13 +33,8 @@ const werkplek = [
   { icon: TrafficCone, title: "Afzettingen", description: "Werkgebied duidelijk afzetten en risico's voor monteurs, omgeving en verkeer beperken." },
   { icon: DoorOpen, title: "Looproutes & toegang", description: "Veilige toegang, looproutes en werkzones vooraf duidelijk maken." },
   { icon: AlertTriangle, title: "Verkeer & aanrijdgevaar", description: "Risico's van rijdend verkeer, bouwplaatsmaterieel en logistieke bewegingen meenemen in de LMRA." },
-];
-
-const locatie = [
-  { icon: DoorOpen, title: "Poortinstructies", description: "Voor toegang tot stations, bouwplaatsen of technische locaties kunnen, afhankelijk van de locatie, instructies en toetsing gelden." },
-  { icon: Building2, title: "Bedrijfsspecifieke procedures", description: "Netbeheerders en opdrachtgevers kunnen aanvullende procedures of supplementen hanteren; we sluiten daarop aan volgens de projectafspraken." },
-  { icon: KeyRound, title: "Toegang & sleutelbeheer", description: "Toegang tot technische ruimten, stations en terreinen vraagt om duidelijke afspraken en bevoegdheden." },
-  { icon: FileText, title: "Werkvergunningen & overdracht", description: "Een veilige start vraagt om juiste vrijgave, instructie, overdracht en afstemming met betrokken partijen." },
+  { icon: ShieldCheck, title: "PBM's & materieel", description: "Passende persoonlijke beschermingsmiddelen, goedgekeurd gereedschap en geschikt materieel." },
+  { icon: ClipboardList, title: "Orde en overzicht", description: "Een opgeruimde werkplek, duidelijke overdracht en heldere afstemming met andere partijen op locatie." },
 ];
 
 const rollen = [
@@ -166,7 +161,7 @@ const Veiligheid = () => {
 
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
-                  href="#veiligheidsaanpak"
+                  href="#aanpak"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 min-h-[54px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Onze aanpak</span>
@@ -192,14 +187,15 @@ const Veiligheid = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-12">
             <ul className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide -mx-1 px-1 py-2">
               {[
-                { label: "Aanpak", href: "#veiligheidsaanpak" },
+                { label: "Filosofie", href: "#filosofie" },
+                { label: "Aanpak", href: "#aanpak" },
                 { label: "Veilige 5", href: "#veilige-5" },
                 { label: "BEI & VWI", href: "#bei-vwi" },
-                { label: "Werkplek", href: "#werkplekveiligheid" },
-                { label: "Locatie-eisen", href: "#locatie-eisen" },
+                { label: "Werkplek", href: "#werkplek" },
                 { label: "Rollen", href: "#rollen" },
+                { label: "Stoppen", href: "#stoppen" },
                 { label: "FAQ", href: "#faq" },
-                { label: "Contact", href: "/contact#formulier" },
+                { label: "Contact", href: "#contact" },
               ].map((item) => (
                 <li key={item.href} className="flex-shrink-0">
                   <a
@@ -215,12 +211,13 @@ const Veiligheid = () => {
         </nav>
 
         {/* SECTIE: Veiligheid vóór planning */}
-        <section className="py-16 md:py-24 bg-white">
+        <section id="filosofie" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-14">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6 hyphens-nl text-pretty">Veiligheid vóór planning</h2>
-              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
-                Geen onderhoudsvenster, deadline of projectdruk is belangrijker dan veilig werken. Als de werkplek, installatie, instructie of bevoegdheid niet klopt, wordt er niet zomaar doorgewerkt. Dan stoppen we, stemmen we af en starten we pas wanneer het verantwoord kan.
+              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Onze houding</div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6 hyphens-nl text-pretty" lang="nl">Veiligheid vóór planning</h2>
+              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
+                Geen onderhoudsvenster, deadline of projectdruk is belangrijker dan veilig werken. Als de werkplek, installatie, instructie of bevoegdheid niet klopt, wordt er niet zomaar doorgewerkt.
               </p>
             </div>
 
@@ -242,12 +239,13 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Veiligheid en kwaliteit in één aanpak */}
-        <section id="veiligheidsaanpak" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="aanpak" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-14 sm:mb-16 max-w-3xl mx-auto">
+              <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">5 pijlers</div>
               <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty" lang="nl">Veiligheid en kwaliteit in één aanpak</h2>
               <p className="text-base sm:text-xl text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
-                {softHyphenate("Veilig werken en goed opleveren horen bij elkaar. TerreVolt kijkt niet alleen naar de elektrische installatie, maar ook naar voorbereiding, werkplek, bevoegdheden, uitvoering, controle en overdracht.")}
+                {softHyphenate("Veilig werken en goed opleveren horen bij elkaar. TerreVolt kijkt naar voorbereiding, werkplek, bevoegdheden, uitvoering, controle en overdracht.")}
               </p>
             </div>
 
@@ -277,7 +275,8 @@ const Veiligheid = () => {
         <section id="veilige-5" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
-              <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty" lang="nl">Schakelwerk volgens de Veilige 5</h2>
+              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Schakelwerk</div>
+              <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty" lang="nl">De Veilige 5 bij schakelwerk</h2>
               <p className="text-base sm:text-xl text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
                 {softHyphenate("Schakelwerk vraagt om rust, discipline en duidelijke opdrachtverstrekking. Een netdeel wordt niet 'even' uitgeschakeld; het wordt voorbereid, geschakeld, veiliggesteld en pas vrijgegeven wanneer de situatie klopt.")}
               </p>
@@ -324,9 +323,10 @@ const Veiligheid = () => {
         <section id="bei-vwi" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Normen, systemen en bevoegdheden</h2>
+              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Netbeheerstructuur</div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Veilig werken binnen BEI, VWI en projectafspraken</h2>
               <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
-                {softHyphenate("Normen en certificaten zijn geen doel op zichzelf. Ze helpen om veilig, beheerst en aantoonbaar te werken.")}
+                {softHyphenate("BEI, VWI's, VCA, LMRA en NEN-normen zijn geen losse labels. Ze ondersteunen de manier waarop veilig en beheerst gewerkt wordt binnen de netbeheerwereld.")}
               </p>
             </div>
 
@@ -348,47 +348,21 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Werkplekveiligheid */}
-        <section id="werkplekveiligheid" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="werkplek" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
+              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Uitvoering</div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Veilig werken op elke projectlocatie</h2>
               <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
-                {softHyphenate("Bij werkzaamheden langs wegen, op bouwplaatsen, in stations of technische ruimten draait veiligheid ook om de omgeving. Zichtbaarheid, afzettingen, verkeerssituatie, looproutes, toegang, verlichting en samenwerking met andere partijen op locatie worden meegenomen in de voorbereiding.")}
+                {softHyphenate("Veiligheid stopt niet bij de installatie. Ook zichtbaarheid, afzettingen, looproutes, verlichting, PBM's, materieel, verkeer en andere partijen op locatie tellen mee.")}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
               {werkplek.map((c) => {
                 const Icon = c.icon;
                 return (
                   <div key={c.title} className="bg-white border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-md transition-all duration-300">
-                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
-                    </div>
-                    <h3 className="text-base sm:text-lg text-[#0d3b2e] mb-2">{c.title}</h3>
-                    <p className="text-sm text-[#6c757d] leading-relaxed hyphens-nl text-pretty">{softHyphenate(c.description)}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* SECTIE: Locatie-eisen */}
-        <section id="locatie-eisen" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty">Projectafspraken en locatie-eisen</h2>
-              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
-                {softHyphenate("Naast branche-regels kunnen per opdrachtgever of netbeheerder aanvullende afspraken gelden. Denk aan bedrijfsspecifieke procedures, poortinstructies, toegangseisen, sleutelprocedures, werkvergunningen en locatie-instructies.")}
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto">
-              {locatie.map((c) => {
-                const Icon = c.icon;
-                return (
-                  <div key={c.title} className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-md transition-all duration-300">
                     <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-4">
                       <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
                     </div>
@@ -444,7 +418,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Statement */}
-        <section className="relative py-20 md:py-28 bg-[#f8f9fa] overflow-hidden">
+        <section id="stoppen" className="relative py-20 md:py-28 bg-[#f8f9fa] overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center select-none">
             <span className="text-[18vw] sm:text-[14vw] lg:text-[12rem] font-bold tracking-tight text-[#0d3b2e]/[0.04] uppercase whitespace-nowrap">
               Veilig werken
@@ -488,7 +462,7 @@ const Veiligheid = () => {
         </section>
 
         {/* CTA */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden">
+        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"
