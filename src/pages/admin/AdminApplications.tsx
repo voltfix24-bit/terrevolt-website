@@ -35,6 +35,7 @@ type App = {
   profile: string | null;
   admin_notes: string | null;
   last_contacted_at: string | null;
+  next_follow_up_at: string | null;
   vacancies?: { title: string; slug: string } | null;
 };
 
