@@ -62,7 +62,7 @@ const MetenEnBeproeven = () => {
                 Meten, beproeven<br />
                 <span className="text-[#9ed42e]">& rapportage</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-10 max-w-3xl leading-relaxed">
                 TerreVolt ondersteunt bij metingen, controles, beproevingen en opleverrapportages voor laagspannings-, middenspannings- en aardingsinstallaties.
               </p>
 
@@ -217,7 +217,7 @@ const MetenEnBeproeven = () => {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
                 Metingen of <span className="text-[#9ed42e]">opleverrapportage</span> nodig?
               </h2>
-              <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+              <p className="text-xl text-white/85 mb-12 leading-relaxed">
                 TerreVolt levert vakbekwame uitvoering en heldere documentatie.
               </p>
               <a

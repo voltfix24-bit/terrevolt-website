@@ -59,7 +59,7 @@ const Stationsrenovatie = () => {
                 Stationsrenovatie<br />
                 <span className="text-[#9ed42e]">& technische ruimten</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-10 max-w-3xl leading-relaxed">
                 TerreVolt ondersteunt bij renovatie, vervanging en inrichting van MS/LS-stations en technische ruimten. Van kabelmontage en LS-verdelers tot transformatoren, schakelinstallaties en aardingsvoorzieningen.
               </p>
 
@@ -207,7 +207,7 @@ const Stationsrenovatie = () => {
                 Een stationsrenovatie<br />
                 <span className="text-[#9ed42e]">voorbereiden of uitvoeren?</span>
               </h2>
-              <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+              <p className="text-xl text-white/85 mb-12 leading-relaxed">
                 TerreVolt denkt graag mee over voorbereiding, planning en uitvoering.
               </p>
               <a

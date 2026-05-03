@@ -462,7 +462,7 @@ const WerkenBij = () => {
                 Werk mee aan{" "}
                 <span className="text-[#9ed42e]">LS/MS-projecten</span> binnen de netbeheerwereld
               </h1>
-              <p className="text-base sm:text-xl lg:text-2xl text-gray-300 mb-8 max-w-3xl leading-relaxed">
+              <p className="text-base sm:text-xl lg:text-2xl text-white/85 mb-8 max-w-3xl leading-relaxed">
                 Ben jij monteur, werkverantwoordelijke of ZZP'er met ervaring in laagspanning, middenspanning, kabelwerk, schakelwerk of aarding? TerreVolt zoekt vakmensen voor professionele projecten met duidelijke afspraken, korte lijnen en veiligheid voorop.
               </p>
 
@@ -505,7 +505,7 @@ const WerkenBij = () => {
                 </p>
               </div>
 
-              <p className="text-gray-400 text-sm mt-4 max-w-xl">
+              <p className="text-white/65 text-sm mt-4 max-w-xl">
                 Tarieven en salaris bespreken we tijdens de kennismaking — afgestemd op jouw ervaring, bevoegdheden en de manier van samenwerken.
               </p>
             </div>

@@ -105,7 +105,7 @@ const Diensten = () => {
                 Elektrotechnische infrastructuur<br />
                 <span className="text-[#9ed42e]">voor de netbeheerwereld</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-10 max-w-3xl leading-relaxed">
                 TerreVolt ondersteunt netbeheerders, hoofdaannemers en industrie bij aanleg, renovatie, veiligstelling, meting en oplevering van laagspannings- en middenspanningsinfrastructuur.
               </p>
 
@@ -189,7 +189,7 @@ const Diensten = () => {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 leading-tight hyphens-nl" lang="nl">
                 Niet zeker welke ondersteuning u nodig heeft?
               </h2>
-              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+              <p className="text-lg text-white/85 max-w-2xl mx-auto">
                 Kies het scenario dat het beste past — wij denken mee over uitvoering, planning en oplevering.
               </p>
             </div>
@@ -229,7 +229,7 @@ const Diensten = () => {
                       <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
                     </div>
                     <h3 className="text-lg sm:text-xl text-white mb-2 hyphens-nl" lang="nl">{c.title}</h3>
-                    <p className="text-gray-300 text-sm sm:text-[15px] leading-relaxed mb-5">{c.text}</p>
+                    <p className="text-white/85 text-sm sm:text-[15px] leading-relaxed mb-5">{c.text}</p>
                     <span className="mt-auto inline-flex items-center gap-1.5 text-[#9ed42e] text-sm group-hover:gap-2.5 transition-all">
                       {c.cta}
                       <ArrowRight className="w-4 h-4 text-[#9ed42e]" strokeWidth={2.5} />
@@ -298,7 +298,7 @@ const Diensten = () => {
                 Een LS/MS-project of<br />
                 <span className="text-[#9ed42e]">aardingsvraagstuk bespreken?</span>
               </h2>
-              <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+              <p className="text-xl text-white/85 mb-12 leading-relaxed">
                 Neem contact op met TerreVolt voor vakbekwame ondersteuning binnen de netbeheerwereld.
               </p>
               <a

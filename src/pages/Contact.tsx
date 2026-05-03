@@ -248,7 +248,7 @@ const Contact = () => {
               <h1 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 leading-tight hyphens-nl">
                 Stuur een <span className="text-[#9ed42e]">aanvraag</span>
               </h1>
-              <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-2xl leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl text-white/85 max-w-2xl leading-relaxed">
                 Vul het formulier in voor een projectaanvraag, technische vraag of capaciteitsaanvraag binnen LS/MS, stationswerk, schakelwerk, aarding of metingen. We nemen zo snel mogelijk contact op.
               </p>
             </div>

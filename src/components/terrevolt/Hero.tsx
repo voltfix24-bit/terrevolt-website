@@ -37,11 +37,11 @@ export function Hero() {
             <span className="block sm:inline text-[#9ed42e] whitespace-normal">en&nbsp;aardings&shy;oplossingen</span>
           </h1>
 
-          <p className="text-[17px] sm:text-xl lg:text-2xl text-gray-300 mb-3 sm:mb-4 max-w-3xl leading-relaxed">
+          <p className="text-[17px] sm:text-xl lg:text-2xl text-white/85 mb-3 sm:mb-4 max-w-3xl leading-relaxed">
             TerreVolt ondersteunt netbeheerders, hoofdaannemers en industrie bij LS/MS-netmontage, stationsrenovaties, schakelwerk en meetbare aardingsoplossingen.
           </p>
 
-          <p className="text-[15px] sm:text-lg text-gray-400 mb-6 sm:mb-10 max-w-2xl italic leading-relaxed">
+          <p className="text-[15px] sm:text-lg text-white/70 mb-6 sm:mb-10 max-w-2xl italic leading-relaxed">
             Van huisaansluiting tot middenspanningsstation, met veiligheid als basis.
           </p>
 

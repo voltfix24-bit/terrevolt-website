@@ -119,7 +119,7 @@ const Projecten = () => {
                 Projecttypes waarin<br />
                 <span className="text-[#9ed42e]">TerreVolt ondersteunt</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-10 max-w-3xl leading-relaxed">
                 Een overzicht van werkzaamheden waarbij TerreVolt inzetbaar is voor professionele opdrachtgevers binnen LS/MS-infrastructuur, stationswerk, schakelwerk, aarding en metingen.
               </p>
 
@@ -266,7 +266,7 @@ const Projecten = () => {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
                 Een project bespreken <span className="text-[#9ed42e]">met TerreVolt</span>?
               </h2>
-              <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+              <p className="text-xl text-white/85 mb-12 leading-relaxed">
                 We denken graag mee over uitvoering, planning en oplevering.
               </p>
               <a

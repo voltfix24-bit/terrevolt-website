@@ -522,7 +522,7 @@ const VacatureDetail = () => {
               <h1 className="text-[clamp(1.875rem,7vw,2.5rem)] sm:text-5xl lg:text-6xl text-white mb-6 leading-[1.1] sm:leading-tight hyphens-nl text-pretty" lang="nl">
                 {vacature.title}
               </h1>
-              <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-lg sm:text-xl text-white/85 mb-10 max-w-3xl leading-relaxed">
                 {vacature.intro}
               </p>
 
@@ -752,7 +752,7 @@ const VacatureDetail = () => {
                 <ShieldAlert className="w-8 h-8 text-[#0d3b2e]" strokeWidth={2.5} />
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl text-white mb-6">Veiligheid voorop</h2>
-              <p className="text-lg text-gray-300 leading-relaxed">{vacature.veiligheid}</p>
+              <p className="text-lg text-white/85 leading-relaxed">{vacature.veiligheid}</p>
             </div>
           </div>
         </section>

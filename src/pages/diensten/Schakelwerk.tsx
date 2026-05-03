@@ -56,7 +56,7 @@ const Schakelwerk = () => {
                 Schakelwerk<br />
                 <span className="text-[#9ed42e]">& veiligstellen</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-10 max-w-3xl leading-relaxed">
                 TerreVolt ondersteunt bij geplande en projectmatige schakelwerkzaamheden binnen laagspannings- en middenspanningsinstallaties. Wij helpen bij veilig in- en uitbedrijf nemen, vrijschakelen, veiligstellen en terugschakelen.
               </p>
 
@@ -197,7 +197,7 @@ const Schakelwerk = () => {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
                 Schakelwerk of <span className="text-[#9ed42e]">veiligstelling nodig?</span>
               </h2>
-              <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+              <p className="text-xl text-white/85 mb-12 leading-relaxed">
                 TerreVolt ondersteunt bij veilige uitvoering binnen LS/MS-infrastructuur.
               </p>
               <a

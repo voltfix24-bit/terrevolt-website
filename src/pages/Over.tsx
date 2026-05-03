@@ -50,7 +50,7 @@ const Over = () => {
                 Specialist in elektrotechnische<br />
                 <span className="text-[#9ed42e]">infrastructuur</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-10 max-w-3xl leading-relaxed">
                 TerreVolt BV ondersteunt netbeheerders, hoofdaannemers en industrie bij veilige, betrouwbare en meetbare LS/MS-infrastructuur.
               </p>
 
@@ -215,7 +215,7 @@ const Over = () => {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
                 Kennismaken met <span className="text-[#9ed42e]">TerreVolt</span>?
               </h2>
-              <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+              <p className="text-xl text-white/85 mb-12 leading-relaxed">
                 Neem contact op voor een projectbespreking of samenwerking binnen de netbeheerwereld.
               </p>
               <a
