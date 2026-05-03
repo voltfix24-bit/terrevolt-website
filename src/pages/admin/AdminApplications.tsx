@@ -17,6 +17,19 @@ import { toast } from "sonner";
 import { whatsappLink } from "@/lib/whatsapp";
 import { waTemplates, inDateRange, type DateRange } from "@/lib/adminUtils";
 import { downloadCsv } from "@/lib/csvExport";
+import { isFollowUpOverdue, isUncontactedStale } from "@/lib/adminBadges";
+
+function FollowUpBadges({ row }: { row: { created_at: string; last_contacted_at: string | null; next_follow_up_at: string | null } }) {
+  const overdue = isFollowUpOverdue(row.next_follow_up_at);
+  const stale = isUncontactedStale(row.created_at, row.last_contacted_at);
+  if (!overdue && !stale) return null;
+  return (
+    <div className="flex flex-wrap gap-1">
+      {overdue && <Badge variant="destructive" className="text-[10px]">Opvolging verlopen</Badge>}
+      {stale && <Badge variant="outline" className="text-[10px] border-amber-400 text-amber-700">Nog niet opgevolgd</Badge>}
+    </div>
+  );
+}
 
 type App = {
   id: string;
@@ -260,7 +273,10 @@ export default function AdminApplications() {
                         {a.region ? ` · ${a.region}` : ""}
                       </div>
                     </div>
-                    <Badge variant="secondary" className="shrink-0">{STATUS_LABEL(a.status)}</Badge>
+                    <div className="flex flex-col items-end gap-1 shrink-0">
+                      <Badge variant="secondary">{STATUS_LABEL(a.status)}</Badge>
+                      <FollowUpBadges row={a} />
+                    </div>
                   </div>
                   <div className="space-y-1.5 text-sm">
                     <div className="flex items-center gap-1 min-w-0">
@@ -318,7 +334,12 @@ export default function AdminApplications() {
                         </span>
                       </TableCell>
                       <TableCell>{a.region || "—"}</TableCell>
-                      <TableCell><Badge variant="secondary">{STATUS_LABEL(a.status)}</Badge></TableCell>
+                      <TableCell>
+                        <div className="flex flex-col gap-1">
+                          <Badge variant="secondary" className="w-fit">{STATUS_LABEL(a.status)}</Badge>
+                          <FollowUpBadges row={a} />
+                        </div>
+                      </TableCell>
                       <TableCell className="text-right">
                         <Dialog>
                           <DialogTrigger asChild>

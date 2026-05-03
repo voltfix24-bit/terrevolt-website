@@ -18,6 +18,7 @@ import { toast } from "sonner";
 import { whatsappLink } from "@/lib/whatsapp";
 import { waTemplates, inDateRange, type DateRange } from "@/lib/adminUtils";
 import { downloadCsv } from "@/lib/csvExport";
+import { isFollowUpOverdue, isUncontactedStale } from "@/lib/adminBadges";
 
 type Req = {
   id: string;
@@ -63,6 +64,33 @@ const SAFETY_FLAGS: { key: string; label: string }[] = [
   { key: "wv_onduidelijk", label: "WV/opdrachtgever onduidelijk" },
 ];
 const STATUS_LABEL = (v: string) => STATUSES.find((s) => s.value === v)?.label || v;
+const FLAG_LABEL = (k: string) => SAFETY_FLAGS.find((f) => f.key === k)?.label || k;
+const activeFlagKeys = (flags: Record<string, boolean> | null | undefined) =>
+  Object.entries(flags || {}).filter(([, v]) => !!v).map(([k]) => k);
+
+function ReqFollowUpBadges({ row }: { row: { created_at: string; last_contacted_at: string | null; next_follow_up_at: string | null } }) {
+  const overdue = isFollowUpOverdue(row.next_follow_up_at);
+  const stale = isUncontactedStale(row.created_at, row.last_contacted_at);
+  if (!overdue && !stale) return null;
+  return (
+    <div className="flex flex-wrap gap-1">
+      {overdue && <Badge variant="destructive" className="text-[10px]">Opvolging verlopen</Badge>}
+      {stale && <Badge variant="outline" className="text-[10px] border-amber-400 text-amber-700">Nog niet opgevolgd</Badge>}
+    </div>
+  );
+}
+
+function FlagMiniBadges({ flags }: { flags: Record<string, boolean> | null | undefined }) {
+  const keys = activeFlagKeys(flags).slice(0, 3);
+  if (keys.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-1 mt-1">
+      {keys.map((k) => (
+        <Badge key={k} variant="outline" className="text-[10px]">{FLAG_LABEL(k)}</Badge>
+      ))}
+    </div>
+  );
+}
 
 export default function AdminContactRequests() {
   const [rows, setRows] = useState<Req[]>([]);
@@ -240,8 +268,12 @@ export default function AdminContactRequests() {
                         {r.request_type ? ` · ${r.request_type}` : ""}
                         {r.location ? ` · ${r.location}` : ""}
                       </div>
+                      <FlagMiniBadges flags={r.safety_scope_flags} />
                     </div>
-                    <Badge variant="secondary" className="shrink-0">{STATUS_LABEL(r.status)}</Badge>
+                    <div className="flex flex-col items-end gap-1 shrink-0">
+                      <Badge variant="secondary">{STATUS_LABEL(r.status)}</Badge>
+                      <ReqFollowUpBadges row={r} />
+                    </div>
                   </div>
                   <Dialog>
                     <DialogTrigger asChild>
@@ -277,7 +309,13 @@ export default function AdminContactRequests() {
                       <TableCell>{r.company || "—"}</TableCell>
                       <TableCell>{r.request_type || "—"}</TableCell>
                       <TableCell>{r.location || "—"}</TableCell>
-                      <TableCell><Badge variant="secondary">{STATUS_LABEL(r.status)}</Badge></TableCell>
+                      <TableCell>
+                        <div className="flex flex-col gap-1">
+                          <Badge variant="secondary" className="w-fit">{STATUS_LABEL(r.status)}</Badge>
+                          <ReqFollowUpBadges row={r} />
+                          <FlagMiniBadges flags={r.safety_scope_flags} />
+                        </div>
+                      </TableCell>
                       <TableCell className="text-right">
                         <Dialog>
                           <DialogTrigger asChild><Button size="sm" variant="outline">Bekijken</Button></DialogTrigger>
@@ -402,6 +440,11 @@ function Detail({
         <div className="pt-4 border-t space-y-2">
           <div className="text-sm font-medium text-[#0d3b2e]">Veiligheid & scope</div>
           <p className="text-xs text-[#6c757d]">Snelle interne beoordeling. Niet zichtbaar op de website.</p>
+          {(flags.scope_onvoldoende || flags.bijlage_ontbreekt) && (
+            <div className="rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-xs text-amber-800">
+              Let op: aanvraag heeft nog aanvullende informatie nodig.
+            </div>
+          )}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
             {SAFETY_FLAGS.map((f) => (
               <label key={f.key} className="flex items-center gap-3 text-sm cursor-pointer min-h-[44px] py-2 px-2 -mx-2 rounded-md hover:bg-gray-50 active:bg-gray-100">
