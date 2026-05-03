@@ -32,9 +32,9 @@ export function Safety() {
           <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-5 sm:mb-6 tracking-wider uppercase">
             Veiligheid voorop
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-3 sm:mb-4 hyphens-nl">Veiligheid, certificeringen &amp; normen</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-3 sm:mb-4 hyphens-nl">Veiligheid &amp; kwaliteit</h2>
           <p className="text-base sm:text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
-            Werken aan elektrotechnische infrastructuur vraagt om vakbekwaamheid, veiligheidsbewustzijn en duidelijke procedures. TerreVolt werkt met aandacht voor geldende normen, aanwijzingen en projectafspraken.
+            Iedereen veilig thuis. We doen het veilig, of we doen het niet. TerreVolt werkt met aandacht voor LMRA, BEI BLS/BHS, VWI's, VCA, NEN-normen en aantoonbare oplevering.
           </p>
         </Reveal>
 
