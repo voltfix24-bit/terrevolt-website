@@ -156,13 +156,12 @@ const Veiligheid = () => {
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Kwaliteit &amp; veiligheid
               </div>
-              <h1 className="text-[clamp(1.75rem,7vw,3.75rem)] text-white mb-4 leading-tight hyphens-nl text-pretty">
-                We doen het veilig,<br />
-                <span className="text-[#9ed42e]">of we doen het niet.</span>
+              <h1 className="text-[clamp(1.75rem,7vw,3.75rem)] text-white mb-4 leading-tight hyphens-nl text-pretty" lang="nl">
+                Iedereen veilig <span className="text-[#9ed42e]">thuis.</span>
               </h1>
-              <p className="text-lg sm:text-2xl text-[#9ed42e] mb-6">Iedereen veilig thuis.</p>
-              <p className="text-base sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed hyphens-nl text-pretty">
-                Werken aan LS/MS-infrastructuur vraagt om vakmanschap, discipline en het lef om te stoppen wanneer iets niet veilig voelt. Voor TerreVolt is veiligheid geen formaliteit, maar de basis van elke opdracht: voor de monteur, de ploeg, de uitvoerende partij, de opdrachtgever en iedereen op locatie.
+              <p className="text-lg sm:text-2xl text-[#9ed42e] mb-6">We doen het veilig, of we doen het niet.</p>
+              <p className="text-base sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed hyphens-nl text-pretty" lang="nl">
+                Werken aan LS/MS-infrastructuur vraagt om vakmanschap, discipline en duidelijke afspraken. Voor TerreVolt is veiligheid geen formaliteit, maar de basis van elke opdracht: voor de monteur, de ploeg, de uitvoerende partij, de opdrachtgever en iedereen op locatie.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
