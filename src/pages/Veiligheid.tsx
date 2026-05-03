@@ -346,7 +346,7 @@ const Veiligheid = () => {
         <section className="relative py-20 md:py-28 bg-[#f8f9fa] overflow-hidden">
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center select-none">
             <span className="text-[18vw] sm:text-[14vw] lg:text-[12rem] font-bold tracking-tight text-[#0d3b2e]/[0.04] uppercase whitespace-nowrap">
-              Safety first
+              Veilig werken
             </span>
           </div>
           <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
