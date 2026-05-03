@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Sitebrede smooth scroll voor anchor-links */
+/* Programmatische hash-scroll wordt centraal afgehandeld in HashScroll. */
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -120,7 +120,7 @@ All colors MUST be HSL.
   }
 
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     /* Compenseert de sticky header (4rem mobiel, 5rem vanaf sm) zodat
        sectie-anchors niet onder de header verdwijnen. */
     scroll-padding-top: 4rem;
