@@ -34,6 +34,9 @@ function pct(num: number, denom: number) {
 }
 
 export default function AdminAnalytics() {
+  useEffect(() => {
+    document.title = "Analytics — TerreVolt admin";
+  }, []);
   const [loading, setLoading] = useState(true);
   const [events, setEvents] = useState<EventRow[]>([]);
   const [contacts, setContacts] = useState<ContactRow[]>([]);
