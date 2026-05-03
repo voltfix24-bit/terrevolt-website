@@ -29,6 +29,8 @@ const EXEMPT = new Set([
   "src/pages/NotFound.tsx",
   "src/pages/admin/AdminLayout.tsx",
   "src/pages/admin/AdminLogin.tsx",
+  // Compositie-pagina's: CTA's zitten in onderliggende sectie-componenten.
+  "src/pages/Index.tsx",
 ]);
 
 // Woorden die we als CTA-tekst herkennen (NL).
