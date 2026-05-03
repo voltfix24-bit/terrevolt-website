@@ -1,8 +1,8 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { ArrowRight, Home, Mail } from "lucide-react";
-import Header from "@/components/terrevolt/Header";
-import Footer from "@/components/terrevolt/Footer";
+import { Header } from "@/components/terrevolt/Header";
+import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 const NotFound = () => {
