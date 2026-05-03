@@ -4,6 +4,7 @@ import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { softHyphenate } from "@/lib/softHyphen";
+import { PROGRAMMATIC_SCROLL_EVENT, type ProgrammaticScrollDetail } from "@/lib/scrollToAnchor";
 import {
   Accordion,
   AccordionContent,
@@ -101,7 +102,7 @@ const Veiligheid = () => {
     };
 
     const onProgrammaticScroll = (event: Event) => {
-      const { active, targetId } = (event as CustomEvent<{ active: boolean; targetId?: string }>).detail || {};
+      const { active, targetId } = (event as CustomEvent<ProgrammaticScrollDetail>).detail || {};
       isProgrammaticScrollRef.current = Boolean(active);
       if (targetId) {
         setActiveId((previous) => (previous === targetId ? previous : targetId));
@@ -120,11 +121,11 @@ const Veiligheid = () => {
     computeActive();
     window.addEventListener("scroll", computeActive, { passive: true });
     window.addEventListener("resize", computeActive);
-    window.addEventListener("terrevolt:programmatic-scroll", onProgrammaticScroll);
+    window.addEventListener(PROGRAMMATIC_SCROLL_EVENT, onProgrammaticScroll);
     return () => {
       window.removeEventListener("scroll", computeActive);
       window.removeEventListener("resize", computeActive);
-      window.removeEventListener("terrevolt:programmatic-scroll", onProgrammaticScroll);
+      window.removeEventListener(PROGRAMMATIC_SCROLL_EVENT, onProgrammaticScroll);
       if (programmaticScrollTimerRef.current) {
         window.clearTimeout(programmaticScrollTimerRef.current);
       }

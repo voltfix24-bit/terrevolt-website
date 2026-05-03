@@ -40,6 +40,7 @@ import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { findVacature } from "@/data/vacatures";
 import { company, telHref, mailHref, SITE_URL } from "@/config/company";
+import { scrollToAnchor, scrollToElement } from "@/lib/scrollToAnchor";
 
 const contactVoorkeurOpties = ["Bellen", "WhatsApp", "E-mail", "Maakt niet uit"];
 
@@ -126,6 +127,7 @@ const VacatureDetail = () => {
     });
   const formRef = useRef<HTMLFormElement>(null);
   const errorBannerRef = useRef<HTMLDivElement>(null);
+  const loadedHashScrollRef = useRef("");
 
   const clearFieldError = (field: keyof FieldErrors) => {
     setErrors((prev) => {
@@ -135,6 +137,21 @@ const VacatureDetail = () => {
       return next;
     });
   };
+
+  useEffect(() => {
+    if (!vacature || vacature === "missing" || !window.location.hash) return;
+    const key = `${slug || ""}${window.location.hash}`;
+    if (loadedHashScrollRef.current === key) return;
+
+    const timer = window.setTimeout(() => {
+      if (scrollToAnchor(window.location.hash)) {
+        loadedHashScrollRef.current = key;
+      }
+    }, 100);
+
+    return () => window.clearTimeout(timer);
+  }, [slug, vacature]);
+
   // Verberg de sticky bottom-CTA zodra het sollicitatieformulier OF de footer in beeld is.
   useEffect(() => {
     if (!vacature || vacature === "missing") return;
@@ -369,7 +386,7 @@ const VacatureDetail = () => {
       const count = Object.keys(fe).length;
       toast.error(count === 1 ? parsed.error.errors[0]?.message ?? "Controleer het formulier" : `Controleer ${count} velden`);
       requestAnimationFrame(() => {
-        errorBannerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (errorBannerRef.current) scrollToElement(errorBannerRef.current);
         const first = Object.keys(fe)[0];
         if (first && formRef.current) {
           formRef.current.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
@@ -451,7 +468,7 @@ const VacatureDetail = () => {
       setSubmitError(msg);
       toast.error(msg);
       requestAnimationFrame(() => {
-        errorBannerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (errorBannerRef.current) scrollToElement(errorBannerRef.current);
       });
     } finally {
       setSubmitting(false);
@@ -466,7 +483,7 @@ const VacatureDetail = () => {
     setNoCv(false);
     formRef.current?.reset();
     setTimeout(() => {
-      document.getElementById("solliciteren")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollToAnchor("solliciteren");
     }, 50);
   };
 
@@ -838,7 +855,7 @@ const VacatureDetail = () => {
         </section>
 
         {/* FORMULIER */}
-        <section id="solliciteren" className="py-16 md:py-24 bg-white">
+        <section id="solliciteren" className="py-16 md:py-24 bg-white scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10 md:mb-12">

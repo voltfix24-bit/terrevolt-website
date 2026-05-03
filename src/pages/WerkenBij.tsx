@@ -20,6 +20,7 @@ import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { vacatures as fallbackVacatures } from "@/data/vacatures";
 import { company, telHref, mailHref } from "@/config/company";
+import { scrollToAnchor, scrollToElement } from "@/lib/scrollToAnchor";
 import {
   Accordion,
   AccordionContent,
@@ -337,7 +338,7 @@ const WerkenBij = () => {
       toast.error(count === 1 ? parsed.error.errors[0]?.message ?? "Controleer het formulier" : `Controleer ${count} velden`);
       // Scroll banner in beeld + focus eerste foute veld
       requestAnimationFrame(() => {
-        errorBannerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (errorBannerRef.current) scrollToElement(errorBannerRef.current);
         focusFirstError(fe);
       });
       return;
@@ -406,7 +407,7 @@ const WerkenBij = () => {
       setSubmitError(msg);
       toast.error(msg);
       requestAnimationFrame(() => {
-        errorBannerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (errorBannerRef.current) scrollToElement(errorBannerRef.current);
       });
     } finally {
       setSubmitting(false);
@@ -420,14 +421,14 @@ const WerkenBij = () => {
     setFileError(null);
     formRef.current?.reset();
     setTimeout(() => {
-      document.getElementById("aanmelden")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollToAnchor("aanmelden");
     }, 50);
   };
 
   const scrollToSlug = (slugs: string[]) => {
     const target = slugs.map((s) => document.getElementById(`profiel-${s}`)).find(Boolean);
-    if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
-    else document.getElementById("profielen")?.scrollIntoView({ behavior: "smooth" });
+    if (target) scrollToElement(target as HTMLElement);
+    else scrollToAnchor("profielen");
   };
 
   const profielCards = filteredProfielen;
@@ -539,6 +540,7 @@ const WerkenBij = () => {
 
         {/* STICKY SUBNAV — scroll-navigatie binnen pagina */}
         <nav
+          data-hash-scroll-offset
           aria-label="Paginanavigatie Werken bij"
           className="sticky top-16 sm:top-20 z-30 bg-white/90 backdrop-blur-sm border-b border-gray-200"
         >
@@ -548,7 +550,7 @@ const WerkenBij = () => {
                 <li key={item.href} className="flex-shrink-0">
                   <a
                     href={item.href}
-                    className="inline-flex items-center min-h-[40px] px-3 sm:px-4 rounded-full text-sm text-[#0d3b2e] hover:bg-[#f0f7e6] hover:text-[#0d3b2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border border-transparent hover:border-[#9ed42e] transition-colors whitespace-nowrap"
+                    className="inline-flex items-center min-h-[44px] px-3 sm:px-4 rounded-full text-sm text-[#0d3b2e] hover:bg-[#f0f7e6] hover:text-[#0d3b2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border border-transparent hover:border-[#9ed42e] transition-colors whitespace-nowrap"
                   >
                     {item.label}
                   </a>

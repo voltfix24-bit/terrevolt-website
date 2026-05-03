@@ -26,7 +26,7 @@ const certifications = [
 
 export function Safety() {
   return (
-    <section id="veiligheid" className="py-16 md:py-24 bg-[#f8f9fa]">
+    <section id="veiligheid" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
       <div className="container mx-auto px-5 sm:px-6 lg:px-12">
         <Reveal className="text-center mb-10 sm:mb-14 md:mb-16">
           <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-5 sm:mb-6 tracking-wider uppercase">

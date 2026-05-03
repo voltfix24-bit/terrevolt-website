@@ -5,6 +5,7 @@
 /* Programmatische hash-scroll wordt centraal afgehandeld in HashScroll. */
 html {
   scroll-behavior: auto;
+  scroll-padding-top: var(--scroll-offset, 5rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -28,6 +29,10 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    --header-height: 4rem;
+    --subnav-height: 0rem;
+    --scroll-offset: calc(var(--header-height) + var(--subnav-height) + 1rem);
+
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
@@ -121,14 +126,17 @@ All colors MUST be HSL.
 
   html {
     scroll-behavior: auto;
-    /* Compenseert de sticky header (4rem mobiel, 5rem vanaf sm) zodat
-       sectie-anchors niet onder de header verdwijnen. */
-    scroll-padding-top: 4rem;
+    /* Fallback voor native anchor-scroll; HashScroll gebruikt JS-offset. */
+    scroll-padding-top: var(--scroll-offset, 5rem);
   }
 
   @media (min-width: 640px) {
+    :root {
+      --header-height: 5rem;
+    }
+
     html {
-      scroll-padding-top: 5rem;
+      scroll-padding-top: var(--scroll-offset, 6rem);
     }
   }
 
