@@ -221,7 +221,7 @@ const VacatureDetail = () => {
     vacature && vacature !== "missing"
       ? (() => {
           const clean = (vacature.intro || "").replace(/\s+/g, " ").trim();
-          const base = clean || `${vacature.title} bij TerreVolt. Solliciteer direct.`;
+          const base = clean || `${vacature.title} bij TerreVolt. Meld je aan voor projectinzet.`;
           return base.length > 155 ? `${base.slice(0, 152).trimEnd()}…` : base;
         })()
       : undefined;
