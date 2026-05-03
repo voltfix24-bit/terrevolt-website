@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { addressOneLine, company } from "@/config/company";
+import { addressOneLine, company, SITE_LOGO, SITE_URL } from "@/config/company";
 
 /**
  * Injecteert één Organization JSON-LD blok + og:email / og:phone_number meta tags
@@ -21,7 +21,10 @@ export function OrganizationJsonLd() {
       "@context": "https://schema.org",
       "@type": "Organization",
       name: company.legalName,
-      url: window.location.origin,
+      alternateName: company.shortName,
+      url: SITE_URL,
+      logo: SITE_LOGO,
+      image: SITE_LOGO,
       email: company.email,
       telephone: company.phone.e164,
       address: {

@@ -3,6 +3,13 @@
  * Wijzig hier — alle pagina's, footer, CTA's en metadata gebruiken deze waarden.
  */
 
+/** Canoniek productiedomein. Altijd zonder trailing slash. */
+export const SITE_URL = "https://terrevolt.nl";
+/** Absoluut pad naar de social-share afbeelding (1216×640). */
+export const SITE_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
+/** Absoluut pad naar het logo (gebruikt in Organization JSON-LD). */
+export const SITE_LOGO = `${SITE_URL}/og-image.jpg`;
+
 export const company = {
   legalName: "TerreVolt B.V.",
   shortName: "TerreVolt BV",
