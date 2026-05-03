@@ -187,6 +187,7 @@ const Veiligheid = () => {
         {/* STICKY SUBNAV */}
         <nav
           ref={subnavRef}
+          data-hash-scroll-offset
           aria-label="Paginanavigatie Veiligheid"
           className="sticky top-16 sm:top-20 z-30 bg-white/90 backdrop-blur-sm border-b border-gray-200"
         >
@@ -213,7 +214,7 @@ const Veiligheid = () => {
                       aria-current={isActive ? "true" : undefined}
                       className={`inline-flex items-center min-h-[44px] px-3 sm:px-4 rounded-full text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border transition-colors whitespace-nowrap ${
                         isActive
-                          ? "bg-[#0d3b2e] text-[#9ed42e] border-[#0d3b2e] font-semibold"
+                          ? "bg-[#0d3b2e] text-[#9ed42e] border-[#0d3b2e]"
                           : "text-[#0d3b2e] border-transparent hover:bg-[#f0f7e6] hover:border-[#9ed42e]"
                       }`}
                     >
