@@ -46,11 +46,11 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-            <a href="/contact" className="group bg-[#9ed42e] text-[#0d3b2e] px-5 sm:px-8 py-3 sm:py-4 min-h-[54px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto">
+            <a href="/contact" data-cta="Project bespreken (hero)" className="group bg-[#9ed42e] text-[#0d3b2e] px-5 sm:px-8 py-3 sm:py-4 min-h-[54px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 w-full sm:w-auto">
               <span>Project bespreken</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="/diensten" className="border-2 border-[#9ed42e] text-[#9ed42e] px-5 sm:px-8 py-3 sm:py-4 min-h-[54px] rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 flex items-center justify-center w-full sm:w-auto">
+            <a href="/diensten" data-cta="Onze diensten (hero)" className="border-2 border-[#9ed42e] text-[#9ed42e] px-5 sm:px-8 py-3 sm:py-4 min-h-[54px] rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 flex items-center justify-center w-full sm:w-auto">
               Onze diensten
             </a>
           </div>
