@@ -58,6 +58,8 @@ export default function AdminApplications() {
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [vacancyFilter, setVacancyFilter] = useState<string>("all");
+  const [profileFilter, setProfileFilter] = useState<string>("all");
+  const [dateRange, setDateRange] = useState<DateRange>("all");
 
   async function load() {
     setLoading(true);
@@ -111,6 +113,12 @@ export default function AdminApplications() {
     return Array.from(map.entries()).sort((a, b) => a[1].localeCompare(b[1], "nl"));
   }, [rows]);
 
+  const profiles = useMemo(() => {
+    const set = new Set<string>();
+    rows.forEach((r) => { if (r.profile) set.add(r.profile); });
+    return Array.from(set).sort((a, b) => a.localeCompare(b, "nl"));
+  }, [rows]);
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return rows.filter((r) => {
@@ -120,15 +128,33 @@ export default function AdminApplications() {
       }
       if (statusFilter !== "all" && r.status !== statusFilter) return false;
       if (vacancyFilter !== "all" && r.vacancy_id !== vacancyFilter) return false;
+      if (profileFilter !== "all" && (r.profile ?? "") !== profileFilter) return false;
+      if (!inDateRange(r.created_at, dateRange)) return false;
       return true;
     });
-  }, [rows, query, statusFilter, vacancyFilter]);
+  }, [rows, query, statusFilter, vacancyFilter, profileFilter, dateRange]);
 
-  const hasActiveFilters = query !== "" || statusFilter !== "all" || vacancyFilter !== "all";
+  const hasActiveFilters = query !== "" || statusFilter !== "all" || vacancyFilter !== "all" || profileFilter !== "all" || dateRange !== "all";
   function resetFilters() {
     setQuery("");
     setStatusFilter("all");
     setVacancyFilter("all");
+    setProfileFilter("all");
+    setDateRange("all");
+  }
+
+  function exportCsv() {
+    downloadCsv(
+      `sollicitaties-${new Date().toISOString().slice(0, 10)}.csv`,
+      ["datum", "naam", "telefoon", "email", "profiel/vacature", "regio", "beschikbaarheid", "status", "notitie"],
+      filtered.map((r) => [
+        new Date(r.created_at).toLocaleDateString("nl-NL"),
+        r.name, r.phone, r.email,
+        r.vacancies?.title || r.profile || "",
+        r.region ?? "", r.availability ?? "",
+        STATUS_LABEL(r.status), r.admin_notes ?? "",
+      ]),
+    );
   }
 
   return (
