@@ -68,7 +68,7 @@ export function Header() {
       return () => cancelAnimationFrame(raf);
     }
 
-    previouslyFocusedRef.current = (document.activeElement as HTMLElement | null) ?? null;
+    
 
     const getFocusable = (): HTMLElement[] => {
       const root = menuRef.current;
