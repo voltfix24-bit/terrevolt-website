@@ -334,7 +334,12 @@ export default function AdminApplications() {
                         </span>
                       </TableCell>
                       <TableCell>{a.region || "—"}</TableCell>
-                      <TableCell><Badge variant="secondary">{STATUS_LABEL(a.status)}</Badge></TableCell>
+                      <TableCell>
+                        <div className="flex flex-col gap-1">
+                          <Badge variant="secondary" className="w-fit">{STATUS_LABEL(a.status)}</Badge>
+                          <FollowUpBadges row={a} />
+                        </div>
+                      </TableCell>
                       <TableCell className="text-right">
                         <Dialog>
                           <DialogTrigger asChild>
