@@ -190,12 +190,12 @@ const Veiligheid = () => {
                 { label: "Filosofie", href: "#filosofie" },
                 { label: "Aanpak", href: "#aanpak" },
                 { label: "Veilige 5", href: "#veilige-5" },
-                { label: "Normen", href: "#bei-vwi" },
+                { label: "Normen & kwaliteit", href: "#bei-vwi" },
                 { label: "Werkplek", href: "#werkplek" },
+                { label: "Locatie-eisen", href: "#locatie-eisen" },
                 { label: "Rollen", href: "#rollen" },
-                { label: "Stoppen", href: "#stoppen" },
                 { label: "FAQ", href: "#faq" },
-                { label: "Contact", href: "#contact" },
+                { label: "Contact", href: "/contact#formulier" },
               ].map((item) => (
                 <li key={item.href} className="flex-shrink-0">
                   <a
