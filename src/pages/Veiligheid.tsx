@@ -23,9 +23,9 @@ const beiCards = [
   { icon: ShieldCheck, title: "BEI BLS/BHS", description: "Veilige bedrijfsvoering binnen LS/MS/HS-netbeheeromgevingen, inclusief bijbehorende VWI's en projectafspraken." },
   { icon: BookOpen, title: "VWI's", description: "Veiligheidswerkinstructies voor specifieke werkzaamheden, situaties en risico's." },
   { icon: BadgeCheck, title: "VCA", description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving en risico's." },
-  { icon: Award, title: "ISO 9001:2015", description: "Met aandacht voor de principes van ISO 9001:2015: kwaliteitsmanagement, procesbeheersing, klantgericht werken, risicodenken en continue verbetering." },
+  { icon: FileSearch, title: "LMRA", description: "Laatste-minuut-risicoanalyse voor start of hervatting van werkzaamheden, bij twijfel altijd opnieuw." },
   { icon: FileText, title: "NEN 1010 / 3140 / 3840", description: "Normen die, waar van toepassing, richting geven aan aanleg, bedrijfsvoering, controle en veilig werken." },
-  { icon: UserCheck, title: "Certificaten & aanwijzingen", description: "Monteurs worden ingezet met certificaten, aanwijzingen en bevoegdheden die passen bij het werk, de opdrachtgever en de projectlocatie." },
+  { icon: Award, title: "ISO 9001:2015", description: "Met aandacht voor de principes van ISO 9001:2015: procesbeheersing, klantgerichtheid, risicodenken en continue verbetering." },
 ];
 
 const werkplek = [
@@ -33,6 +33,8 @@ const werkplek = [
   { icon: TrafficCone, title: "Afzettingen", description: "Werkgebied duidelijk afzetten en risico's voor monteurs, omgeving en verkeer beperken." },
   { icon: DoorOpen, title: "Looproutes & toegang", description: "Veilige toegang, looproutes en werkzones vooraf duidelijk maken." },
   { icon: AlertTriangle, title: "Verkeer & aanrijdgevaar", description: "Risico's van rijdend verkeer, bouwplaatsmaterieel en logistieke bewegingen meenemen in de LMRA." },
+  { icon: ShieldCheck, title: "PBM's & materieel", description: "Passende persoonlijke beschermingsmiddelen, goedgekeurd gereedschap en geschikt materieel." },
+  { icon: ClipboardList, title: "Orde en overzicht", description: "Een opgeruimde werkplek, duidelijke overdracht en heldere afstemming met andere partijen op locatie." },
 ];
 
 const locatie = [
