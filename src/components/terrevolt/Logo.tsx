@@ -23,8 +23,9 @@ function LogoSvg({ dark, title }: { dark: boolean; title: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 920 240"
+      viewBox="0 15 920 200"
       role="img"
+      preserveAspectRatio="xMinYMid meet"
       aria-label={title}
       className="h-full w-auto block"
     >
