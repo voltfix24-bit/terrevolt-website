@@ -47,6 +47,36 @@ function safeUA() {
   return navigator.userAgent?.slice(0, 500);
 }
 
+// PII-scrubber. Verwijdert e-mail, telefoon en bekende persoonsvelden uit metadata.
+const PII_KEY_RE = /(email|mail|phone|tel|telefoon|name|naam|firstname|lastname|address|adres|postcode|zipcode|cv|attachment|bericht|message|content|description|notes|certificat|ip)/i;
+const EMAIL_RE = /[\w.+-]+@[\w-]+\.[\w.-]+/g;
+const PHONE_RE = /(\+?\d[\d\s().-]{6,}\d)/g;
+
+function scrubString(s: string): string {
+  return s.replace(EMAIL_RE, "[redacted-email]").replace(PHONE_RE, "[redacted-phone]");
+}
+
+export function safeMetadata(input: Record<string, unknown> | undefined): Record<string, unknown> {
+  if (!input) return {};
+  const out: Record<string, unknown> = {};
+  for (const [k, v] of Object.entries(input)) {
+    if (PII_KEY_RE.test(k)) continue;
+    if (typeof v === "string") {
+      const trimmed = v.length > 200 ? v.slice(0, 200) : v;
+      out[k] = scrubString(trimmed);
+    } else if (typeof v === "number" || typeof v === "boolean" || v === null) {
+      out[k] = v;
+    } else if (typeof v === "object") {
+      try {
+        out[k] = safeMetadata(v as Record<string, unknown>);
+      } catch {
+        /* skip */
+      }
+    }
+  }
+  return out;
+}
+
 export function trackEvent(eventName: string, payload: AnalyticsPayload = {}) {
   // Fire and forget. Never throw.
   try {
@@ -59,7 +89,7 @@ export function trackEvent(eventName: string, payload: AnalyticsPayload = {}) {
       element_id: payload.element_id?.slice(0, 200),
       entity_type: payload.entity_type?.slice(0, 100),
       entity_id: payload.entity_id?.slice(0, 200),
-      metadata: (payload.metadata ?? {}) as Record<string, unknown>,
+      metadata: safeMetadata(payload.metadata),
       session_id: getSessionId(),
       user_agent: safeUA(),
     };

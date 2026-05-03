@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { trackPageView, trackCTA } from "@/lib/analytics";
 
@@ -9,11 +9,15 @@ import { trackPageView, trackCTA } from "@/lib/analytics";
  */
 export function RouteTracker() {
   const location = useLocation();
+  const lastTrackedRef = useRef<string>("");
 
   useEffect(() => {
+    const key = location.pathname + location.search;
+    if (lastTrackedRef.current === key) return;
     const t = window.setTimeout(() => {
+      lastTrackedRef.current = key;
       trackPageView(
-        location.pathname + location.search,
+        key,
         typeof document !== "undefined" ? document.title : undefined
       );
     }, 80);
