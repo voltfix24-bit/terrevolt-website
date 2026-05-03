@@ -195,7 +195,7 @@ const Veiligheid = () => {
                 { label: "Aanpak", href: "#aanpak" },
                 { label: "Praktijk", href: "#praktijk" },
                 { label: "Veilige 5", href: "#veilige-5" },
-                { label: "Normen & kwaliteit", href: "#bei-vwi" },
+                { label: "BEI & VWI", href: "#bei-vwi" },
                 { label: "Werkplek", href: "#werkplek" },
                 { label: "Locatie-eisen", href: "#locatie-eisen" },
                 { label: "Rollen", href: "#rollen" },
@@ -217,7 +217,7 @@ const Veiligheid = () => {
         </nav>
 
         {/* SECTIE: Veiligheid vóór planning */}
-        <section id="filosofie" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="filosofie" className="py-14 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-14">
               <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Onze houding</div>
@@ -245,7 +245,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Veiligheid en kwaliteit in één aanpak */}
-        <section id="aanpak" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="aanpak" className="py-14 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-14 sm:mb-16 max-w-3xl mx-auto">
               <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">5 pijlers</div>
@@ -278,7 +278,7 @@ const Veiligheid = () => {
           </div>
         </section>
         {/* SECTIE: Wat veiligheid en kwaliteit in de praktijk betekenen */}
-        <section id="praktijk" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="praktijk" className="py-14 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-14">
               <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">In de praktijk</div>
@@ -350,7 +350,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: De Veilige 5 bij schakelwerk */}
-        <section id="veilige-5" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="veilige-5" className="py-14 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Schakelwerk</div>
@@ -398,7 +398,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: BEI & VWI */}
-        <section id="bei-vwi" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="bei-vwi" className="py-14 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Normen & bevoegdheden</div>
@@ -426,7 +426,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Werkplekveiligheid */}
-        <section id="werkplek" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="werkplek" className="py-14 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Uitvoering</div>
@@ -455,7 +455,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Rollen (donker) */}
-        <section id="rollen" className="relative py-16 md:py-24 bg-[#0d3b2e] overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="rollen" className="relative py-14 md:py-24 bg-[#0d3b2e] overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="absolute inset-0 opacity-[0.05]">
             <div
               className="absolute inset-0"
@@ -474,7 +474,7 @@ const Veiligheid = () => {
                 Rollen &amp; bevoegdheden
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 hyphens-nl text-pretty">Duidelijkheid in rollen en bevoegdheden</h2>
-              <p className="text-base sm:text-lg text-gray-300 leading-relaxed hyphens-nl text-pretty">
+              <p className="text-base sm:text-lg text-white/85 leading-relaxed hyphens-nl text-pretty">
                 {softHyphenate("Veilig werken begint met weten wie waarvoor verantwoordelijk is. TerreVolt werkt met passende rollen, aanwijzingen en bevoegdheden afhankelijk van project, opdrachtgever en werkgebied.")}
               </p>
             </div>
@@ -486,11 +486,11 @@ const Veiligheid = () => {
                     {r.code}
                   </div>
                   <h3 className="text-lg text-white mb-2">{r.title}</h3>
-                  <p className="text-sm text-gray-300 leading-relaxed hyphens-nl text-pretty">{softHyphenate(r.description)}</p>
+                  <p className="text-sm text-white/80 leading-relaxed hyphens-nl text-pretty">{softHyphenate(r.description)}</p>
                 </div>
               ))}
             </div>
-            <p className="text-center text-xs sm:text-sm text-gray-400 mt-10 max-w-2xl mx-auto">
+            <p className="text-center text-xs sm:text-sm text-white/70 mt-10 max-w-2xl mx-auto">
               Rollen, aanwijzingen en bevoegdheden worden ingezet volgens projectafspraken en kunnen per opdrachtgever verschillen.
             </p>
           </div>
@@ -591,12 +591,13 @@ const Veiligheid = () => {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6 hyphens-nl text-pretty">
                 Een LS/MS-project <span className="text-[#9ed42e]">veilig voorbereiden</span>?
               </h2>
-              <p className="text-base sm:text-xl text-gray-300 mb-10 leading-relaxed hyphens-nl text-pretty">
+              <p className="text-base sm:text-xl text-white/85 mb-10 leading-relaxed hyphens-nl text-pretty">
                 Neem contact op met TerreVolt voor projectmatige ondersteuning waarbij veiligheid, vakmanschap en duidelijke afspraken centraal staan.
               </p>
               <a
                 href="/contact#formulier"
-                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-[#9ed42e] text-[#0d3b2e] px-10 py-4 min-h-[54px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-lg"
+                className="inline-flex items-center justify-center gap-2 w-full sm:w-auto bg-[#9ed42e] text-[#0d3b2e] px-8 sm:px-10 py-4 min-h-[56px] rounded-xl sm:rounded-lg font-semibold hover:bg-[#8bc41f] transition-all duration-300 text-base sm:text-lg"
+                style={{ marginBottom: "env(safe-area-inset-bottom)" }}
               >
                 Project bespreken
                 <ArrowRight className="w-5 h-5" />
