@@ -219,12 +219,15 @@ export default function AdminVacancies() {
                     <span>{v.is_featured ? "★ Uitgelicht" : ""}</span>
                     <span>Bijgewerkt: {new Date(v.updated_at).toLocaleDateString("nl-NL")}</span>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                     <Button variant="outline" className="w-full min-h-[44px]" onClick={() => toggleStatus(v)}>
                       {v.status === "published" ? <><EyeOff className="w-4 h-4 mr-1.5" /> Depubliceren</> : <><Eye className="w-4 h-4 mr-1.5" /> Publiceren</>}
                     </Button>
                     <Button variant="outline" className="w-full min-h-[44px]" asChild>
                       <Link to={`/admin/vacatures/${v.id}/bewerken`}><Pencil className="w-4 h-4 mr-1.5" /> Bewerken</Link>
+                    </Button>
+                    <Button variant="outline" className="w-full min-h-[44px]" onClick={() => duplicate(v)}>
+                      <Copy className="w-4 h-4 mr-1.5" /> Dupliceren
                     </Button>
                     <AlertDialog>
                       <AlertDialogTrigger asChild>
@@ -296,6 +299,9 @@ export default function AdminVacancies() {
                           </Button>
                           <Button size="icon" variant="ghost" asChild title="Bewerken">
                             <Link to={`/admin/vacatures/${v.id}/bewerken`}><Pencil className="w-4 h-4" /></Link>
+                          </Button>
+                          <Button size="icon" variant="ghost" title="Dupliceren" onClick={() => duplicate(v)}>
+                            <Copy className="w-4 h-4" />
                           </Button>
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
