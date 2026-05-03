@@ -76,7 +76,7 @@ const Veiligheid = () => {
       const header = document.querySelector("header");
       const headerH = header ? header.getBoundingClientRect().height : 0;
       const subnavH = subnavRef.current ? subnavRef.current.getBoundingClientRect().height : 0;
-      return Math.round(headerH + subnavH + 12);
+      return Math.round(headerH + subnavH + 20);
     };
 
     const scrollToHash = (hash: string, behavior: ScrollBehavior = "smooth") => {
