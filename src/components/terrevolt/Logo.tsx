@@ -1,13 +1,8 @@
 /**
- * TerreVolt-logo — exact de aangeleverde SVG, inline gerenderd zodat
- * stroke en font ook op kleine afmetingen betrouwbaar tonen.
- *
+ * TerreVolt-logo — inline SVG render van de aangeleverde merkversie.
  * - Bliksem (Lucide Zap, outline) in groen
  * - IEC-aardingssymbool in geel
  * - Wordmark "TerreVolt BV" in Manrope 800
- *
- * Light/dark wordt automatisch geregeld via Tailwind dark-class
- * (witte tekst + felgroene bolt op donker).
  */
 export interface LogoProps {
   className?: string;
@@ -24,39 +19,40 @@ function LogoSvg({ dark, title }: { dark: boolean; title: string }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 480 120"
+      viewBox="0 0 920 240"
       role="img"
       preserveAspectRatio="xMinYMid meet"
       aria-label={title}
       className="h-full w-auto block"
     >
-      {/* Bliksemschicht */}
-      <g transform="translate(24 18)">
+      {/* Bliksemschicht (Lucide Zap) */}
+      <g transform="translate(70 25) scale(7.2)">
         <path
-          d="M 52 4 L 14 56 L 40 56 L 30 92 L 70 42 L 44 42 Z"
+          d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
           fill="none"
           stroke={boltColor}
-          strokeWidth={7}
           strokeLinejoin="round"
           strokeLinecap="round"
+          vectorEffect="non-scaling-stroke"
+          style={{ strokeWidth: 14 }}
         />
       </g>
       {/* Aardingssymbool */}
-      <g stroke={earthColor} strokeWidth={3.5} strokeLinecap="round" fill="none">
-        <line x1="112" y1="78" x2="112" y2="86" />
-        <line x1="100" y1="86" x2="124" y2="86" />
-        <line x1="104" y1="94" x2="120" y2="94" />
-        <line x1="108" y1="102" x2="116" y2="102" />
+      <g stroke={earthColor} strokeWidth={6.5} strokeLinecap="round" fill="none">
+        <line x1="225" y1="160" x2="225" y2="178" />
+        <line x1="202" y1="178" x2="248" y2="178" />
+        <line x1="209" y1="192" x2="241" y2="192" />
+        <line x1="216" y1="206" x2="234" y2="206" />
       </g>
       {/* Wordmark */}
       <text
-        x="142"
-        y="80"
+        x="285"
+        y="155"
         fill={textColor}
         fontFamily="'Manrope','Inter','Plus Jakarta Sans','Helvetica Neue',sans-serif"
         fontWeight={800}
-        fontSize={56}
-        letterSpacing="-1.6"
+        fontSize={100}
+        letterSpacing="-3"
       >
         TerreVolt BV
       </text>
