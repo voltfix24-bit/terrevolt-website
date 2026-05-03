@@ -149,11 +149,16 @@ export function Header() {
             <Link
               to="/"
               aria-label="TerreVolt — naar de homepagina"
-              className="flex items-center min-w-0"
+              className="flex items-center min-w-0 flex-shrink"
             >
               <Logo
                 className="w-auto"
-                style={{ height: "clamp(44px, 11vw, 56px)" }}
+                style={{
+                  // Fluid hoogte: 36px op smalle telefoons → 56px op desktop.
+                  height: "clamp(36px, 9.5vw, 56px)",
+                  // Voorkom dat 't logo de hamburger uit de viewport drukt.
+                  maxWidth: "min(70vw, 320px)",
+                }}
               />
             </Link>
 
