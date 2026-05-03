@@ -76,8 +76,10 @@ export type Database = {
           last_contacted_at: string | null
           location: string | null
           name: string
+          next_follow_up_at: string | null
           phone: string | null
           request_type: string | null
+          safety_scope_flags: Json
           start_date: string | null
           status: string
         }
@@ -94,8 +96,10 @@ export type Database = {
           last_contacted_at?: string | null
           location?: string | null
           name: string
+          next_follow_up_at?: string | null
           phone?: string | null
           request_type?: string | null
+          safety_scope_flags?: Json
           start_date?: string | null
           status?: string
         }
@@ -112,8 +116,10 @@ export type Database = {
           last_contacted_at?: string | null
           location?: string | null
           name?: string
+          next_follow_up_at?: string | null
           phone?: string | null
           request_type?: string | null
+          safety_scope_flags?: Json
           start_date?: string | null
           status?: string
         }
@@ -133,6 +139,7 @@ export type Database = {
           last_contacted_at: string | null
           message: string | null
           name: string
+          next_follow_up_at: string | null
           phone: string
           privacy_consent: boolean
           profile: string | null
@@ -153,6 +160,7 @@ export type Database = {
           last_contacted_at?: string | null
           message?: string | null
           name: string
+          next_follow_up_at?: string | null
           phone: string
           privacy_consent?: boolean
           profile?: string | null
@@ -173,6 +181,7 @@ export type Database = {
           last_contacted_at?: string | null
           message?: string | null
           name?: string
+          next_follow_up_at?: string | null
           phone?: string
           privacy_consent?: boolean
           profile?: string | null
