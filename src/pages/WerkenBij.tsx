@@ -394,6 +394,7 @@ const WerkenBij = () => {
       } as any]);
       if (insErr) throw insErr;
 
+      import("@/lib/analytics").then((m) => m.trackFormSubmit("werken_bij_form"));
       toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");
       formRef.current?.reset();
       setFile(null);
