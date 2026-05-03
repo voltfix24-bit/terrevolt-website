@@ -17,28 +17,28 @@ const voorPlanning = [
   { icon: Briefcase, title: "Voor de opdrachtgever", description: "Een veilige uitvoering vraagt om duidelijke voorbereiding, passende bevoegdheden en heldere communicatie." },
 ];
 
-const stappen = [
-  { icon: FileSearch, title: "Voorbereiden", description: "Scope, locatie, werkmethode, risico's, bevoegdheden en projectafspraken worden vooraf helder gemaakt." },
-  { icon: MessageSquare, title: "Afstemmen", description: "We stemmen af met opdrachtgever, uitvoerder, werkverantwoordelijke en betrokken partijen over toegang, schakelingen, instructies en planning." },
-  { icon: Lock, title: "Veiligstellen", description: "Werkgebied, installatie en werkzaamheden worden volgens de juiste procedures veiliggesteld. Bij twijfel wordt niet gestart." },
-  { icon: Wrench, title: "Uitvoeren", description: "Monteurs werken volgens instructie, LMRA, VCA, BEI/VWI en projectafspraken waar van toepassing." },
-  { icon: ClipboardList, title: "Controleren", description: "Werkzaamheden worden gecontroleerd, teruggekoppeld en waar nodig aantoonbaar vastgelegd." },
+const pijlers = [
+  { icon: FileSearch, title: "LMRA bij elk werk", description: "Voor start of hervatting van werkzaamheden wordt de situatie gecontroleerd. Is de situatie gewijzigd, ontbreekt informatie of voelt iets niet veilig? Dan stoppen we, stemmen we af en starten pas wanneer het verantwoord kan." },
+  { icon: ShieldCheck, title: "De Veilige 5 bij schakelwerk", description: "Bij schakelwerk werken we met aandacht voor de Veilige 5: scheiden, beveiligen tegen wederinschakelen, controleren op afwezigheid van spanning, aarden en kortsluiten, en afschermen of afbakenen." },
+  { icon: Wrench, title: "Netmontage volgens instructie", description: "Bij LS/MS-netmontage werken monteurs volgens opdracht, werkmethode, VWI's en projectafspraken waar van toepassing. Werkgrenzen, materialen en bevoegdheden moeten vooraf duidelijk zijn." },
+  { icon: TrafficCone, title: "Werkplekveiligheid & zichtbaarheid", description: "Veiligheid stopt niet bij de installatie. Afzettingen, zichtbaarheid, looproutes, verlichting, PBM's, materieel, verkeer en andere partijen op locatie worden meegenomen in voorbereiding en LMRA." },
+  { icon: ClipboardList, title: "Kwaliteit & aantoonbare oplevering", description: "Werkzaamheden worden gecontroleerd, teruggekoppeld en waar nodig vastgelegd. TerreVolt werkt met aandacht voor ISO 9001:2015-principes, duidelijke werkinstructies, rapportage en continue verbetering." },
 ];
 
 const beiCards = [
-  { icon: ShieldCheck, title: "BEI BLS/BHS", description: "Veiligheidsstructuur voor laagspanning, middenspanning en hoogspanning binnen netbeheeromgevingen." },
+  { icon: ShieldCheck, title: "BEI BLS/BHS", description: "Veilige bedrijfsvoering binnen LS/MS/HS-netbeheeromgevingen, inclusief bijbehorende VWI's en projectafspraken." },
   { icon: BookOpen, title: "VWI's", description: "Veiligheidswerkinstructies voor specifieke werkzaamheden, situaties en risico's." },
-  { icon: FileSearch, title: "LMRA", description: "Laatste-minuut-risicoanalyse voordat werkzaamheden starten of worden hervat." },
-  { icon: BadgeCheck, title: "VCA", description: "Veiligheidsbewust werken met aandacht voor mens, installatie en omgeving." },
-  { icon: Award, title: "NEN 1010 / 3140 / 3840", description: "Normen die, waar van toepassing, richting geven aan aanleg, bedrijfsvoering, controle en veilig werken." },
-  { icon: MessageSquare, title: "Projectafspraken", description: "Afstemming met opdrachtgever, werkverantwoordelijke, uitvoerder en betrokken partijen." },
+  { icon: BadgeCheck, title: "VCA", description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving en risico's." },
+  { icon: Award, title: "ISO 9001:2015", description: "Met aandacht voor de principes van ISO 9001:2015: kwaliteitsmanagement, procesbeheersing, klantgericht werken, risicodenken en continue verbetering." },
+  { icon: FileText, title: "NEN 1010 / 3140 / 3840", description: "Normen die, waar van toepassing, richting geven aan aanleg, bedrijfsvoering, controle en veilig werken." },
+  { icon: UserCheck, title: "Certificaten & aanwijzingen", description: "Monteurs worden ingezet met certificaten, aanwijzingen en bevoegdheden die passen bij het werk, de opdrachtgever en de projectlocatie." },
 ];
 
 const werkplek = [
-  { icon: HardHat, title: "Werkplekinrichting", description: "Een veilige werkplek vraagt om orde, duidelijke afzetting, passende verlichting en veilige looproutes." },
-  { icon: ShieldCheck, title: "PBM's & materieel", description: "Monteurs werken met passende persoonlijke beschermingsmiddelen, goedgekeurd gereedschap en geschikt materieel." },
-  { icon: TrafficCone, title: "Aanrijdgevaar & omgeving", description: "Bij werkzaamheden langs wegen, op terreinen of bij bouwplaatsen wordt rekening gehouden met verkeer, materieel en andere partijen." },
-  { icon: KeyRound, title: "Toegang & overdracht", description: "Toegang, sleutelbeheer, werkvergunning, poortinstructie en overdracht moeten duidelijk zijn voordat werkzaamheden starten." },
+  { icon: HardHat, title: "Zichtbaarheid", description: "Goed zichtbaar werken met passende kleding, verlichting en markering." },
+  { icon: TrafficCone, title: "Afzettingen", description: "Werkgebied duidelijk afzetten en risico's voor monteurs, omgeving en verkeer beperken." },
+  { icon: DoorOpen, title: "Looproutes & toegang", description: "Veilige toegang, looproutes en werkzones vooraf duidelijk maken." },
+  { icon: AlertTriangle, title: "Verkeer & aanrijdgevaar", description: "Risico's van rijdend verkeer, bouwplaatsmaterieel en logistieke bewegingen meenemen in de LMRA." },
 ];
 
 const locatie = [
@@ -57,13 +57,21 @@ const rollen = [
   { code: "OG", title: "Uitvoerder / opdrachtgever", description: "Zorgt voor heldere scope, toegang, vrijgave en randvoorwaarden, afhankelijk van project en locatie." },
 ];
 
+const voorPlanning = [
+  { icon: HardHat, title: "Voor de monteur", description: "Iedere monteur moet zijn werk veilig kunnen uitvoeren en aan het einde van de dag veilig naar huis." },
+  { icon: Users, title: "Voor de ploeg", description: "Veilig werken betekent elkaar aanspreken, risico's melden en niet wegkijken bij twijfel." },
+  { icon: Briefcase, title: "Voor de opdrachtgever", description: "Een veilige uitvoering vraagt om duidelijke voorbereiding, passende bevoegdheden en heldere communicatie." },
+];
+
 const faqs = [
+  { q: "Geldt LMRA voor al het werk?", a: "Ja. Voor start of hervatting van werkzaamheden wordt gecontroleerd of de situatie nog klopt. Bij twijfel wordt afgestemd voordat er wordt doorgewerkt." },
+  { q: "Wat is de Veilige 5 bij schakelwerk?", a: "De Veilige 5 beschrijft de basisstappen om veilig te kunnen werken: scheiden, beveiligen tegen wederinschakelen, controleren op afwezigheid van spanning, aarden en kortsluiten, en afschermen of afbakenen." },
   { q: "Wat betekent BEI BLS/BHS?", a: "BEI-BLS gaat over laagspanning; BEI-BHS over hoog- en middenspanning binnen de elektriciteitsvoorzieningssystemen van netbeheerders. Voor TerreVolt betekent dit dat werkzaamheden worden voorbereid en uitgevoerd met aandacht voor de juiste rollen, aanwijzingen en instructies." },
   { q: "Wat zijn VWI's?", a: "VWI's zijn veiligheidswerkinstructies voor specifieke werkzaamheden. Ze geven richting aan hoe werkzaamheden veilig uitgevoerd moeten worden binnen de BEI-structuur." },
-  { q: "Wat is een LMRA?", a: "LMRA staat voor Laatste Minuut Risico Analyse. Voor start of hervatting van werkzaamheden wordt gecontroleerd of de situatie nog veilig is." },
+  { q: "Hoe kijkt TerreVolt naar werkplekveiligheid langs wegen?", a: "Bij werkzaamheden langs wegen of op projectlocaties kijken we naar zichtbaarheid, afzettingen, verkeersbewegingen, looproutes, toegang en andere partijen op locatie." },
+  { q: "Hoe borgt TerreVolt kwaliteit?", a: "Door duidelijke voorbereiding, passende werkinstructies, controle, terugkoppeling, rapportage waar nodig en aandacht voor ISO 9001:2015-principes zoals procesbeheersing en continue verbetering." },
   { q: "Werkt TerreVolt volgens netbeheerderseisen?", a: "TerreVolt sluit aan op projectafspraken, opdrachtgeverseisen en bedrijfsspecifieke procedures waar die van toepassing zijn." },
   { q: "Wat als een situatie niet veilig voelt?", a: "Dan wordt er niet zomaar doorgewerkt. Veiligheid gaat voor. De situatie wordt gemeld, afgestemd en pas opgepakt als het verantwoord kan. We doen het veilig, of we doen het niet." },
-  { q: "Wie is verantwoordelijk voor veilig werken?", a: "Iedereen heeft een rol: opdrachtgever, werkverantwoordelijke, uitvoerder, monteur en ploeg. TerreVolt verwacht dat iedereen onveilige situaties meldt, elkaar aanspreekt en niet wegkijkt." },
 ];
 
 const Veiligheid = () => {
