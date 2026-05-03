@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, Wrench, ClipboardList, HardHat, DoorOpen, FileText, Users, Briefcase, TrafficCone, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
@@ -70,6 +70,41 @@ const Veiligheid = () => {
   usePageMeta("Kwaliteit & veiligheid | TerreVolt BV", "Veiligheid bij TerreVolt: BEI BLS/BHS, VWI's, LMRA, VCA, NEN 1010/3140/3840, projectafspraken en rollen — iedereen veilig thuis.", "/veiligheid");
 
   const subnavRef = useRef<HTMLElement | null>(null);
+  const [activeId, setActiveId] = useState<string>("");
+
+  useEffect(() => {
+    const sectionIds = ["filosofie", "aanpak", "praktijk", "veilige-5", "bei-vwi", "werkplek", "locatie-eisen", "rollen", "stoppen", "faq"];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+
+    const computeActive = () => {
+      const header = document.querySelector("header");
+      const headerH = header ? header.getBoundingClientRect().height : 0;
+      const subnavH = subnavRef.current ? subnavRef.current.getBoundingClientRect().height : 0;
+      const threshold = headerH + subnavH + 24;
+
+      let current = "";
+      for (const el of sections) {
+        if (el.getBoundingClientRect().top - threshold <= 0) {
+          current = el.id;
+        }
+      }
+      // Bottom-of-page fallback: highlight last section
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        current = sections[sections.length - 1]?.id ?? current;
+      }
+      setActiveId(current);
+    };
+
+    computeActive();
+    window.addEventListener("scroll", computeActive, { passive: true });
+    window.addEventListener("resize", computeActive);
+    return () => {
+      window.removeEventListener("scroll", computeActive);
+      window.removeEventListener("resize", computeActive);
+    };
+  }, []);
 
   useEffect(() => {
     const getOffset = () => {
@@ -202,17 +237,25 @@ const Veiligheid = () => {
                 { label: "Bij twijfel", href: "#stoppen" },
                 { label: "FAQ", href: "#faq" },
                 { label: "Contact", href: "/contact#formulier" },
-              ].map((item) => (
-                <li key={item.href} className="flex-shrink-0">
-                  <a
-                    href={item.href}
-                    className="inline-flex items-center min-h-[44px] px-3 sm:px-4 rounded-full text-sm text-[#0d3b2e] hover:bg-[#f0f7e6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border border-transparent hover:border-[#9ed42e] transition-colors whitespace-nowrap"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+              ].map((item) => {
+                const isActive = item.href.startsWith("#") && item.href.slice(1) === activeId;
+                return (
+                  <li key={item.href} className="flex-shrink-0">
+                    <a
+                      href={item.href}
+                      aria-current={isActive ? "true" : undefined}
+                      className={`inline-flex items-center min-h-[44px] px-3 sm:px-4 rounded-full text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border transition-colors whitespace-nowrap ${
+                        isActive
+                          ? "bg-[#0d3b2e] text-[#9ed42e] border-[#0d3b2e] font-semibold"
+                          : "text-[#0d3b2e] border-transparent hover:bg-[#f0f7e6] hover:border-[#9ed42e]"
+                      }`}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                );
+              })}
+              </ul>
           </div>
         </nav>
 
