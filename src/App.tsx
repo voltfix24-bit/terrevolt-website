@@ -28,6 +28,8 @@ import AdminApplications from "./pages/admin/AdminApplications.tsx";
 import AdminContactRequests from "./pages/admin/AdminContactRequests.tsx";
 import { OrganizationJsonLd } from "./components/seo/OrganizationJsonLd.tsx";
 import { HashScroll } from "./components/HashScroll.tsx";
+import { RouteTracker } from "./components/analytics/RouteTracker.tsx";
+import AdminAnalytics from "./pages/admin/AdminAnalytics.tsx";
 
 const queryClient = new QueryClient();
 
