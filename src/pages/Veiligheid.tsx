@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { ArrowRight, CheckCircle2, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, MessageSquare, Lock, Wrench, ClipboardList, HardHat, KeyRound, DoorOpen, FileText, Building2, Users, UserCheck, Briefcase, TrafficCone, AlertTriangle } from "lucide-react";
+import { ArrowRight, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, Wrench, ClipboardList, HardHat, DoorOpen, FileText, Users, Briefcase, TrafficCone, AlertTriangle } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
