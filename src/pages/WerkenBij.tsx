@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { vacatures as fallbackVacatures } from "@/data/vacatures";
 import { company, telHref, mailHref } from "@/config/company";
-import { scrollToAnchor, scrollToElement } from "@/lib/scrollToAnchor";
+import { PROGRAMMATIC_SCROLL_EVENT, type ProgrammaticScrollDetail, scrollToAnchor, scrollToElement } from "@/lib/scrollToAnchor";
 import {
   Accordion,
   AccordionContent,
