@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { scrollToAnchor, setProgrammaticScroll } from "@/lib/scrollToAnchor";
+import { scrollToAnchor } from "@/lib/scrollToAnchor";
 
 let lastAutoScrolledKey = "";
 
@@ -13,7 +13,6 @@ export function HashScroll() {
   const { pathname, search, hash } = useLocation();
   const locationRef = useRef({ pathname, search, hash });
   const lastScrolledKeyRef = useRef(lastAutoScrolledKey);
-  const programmaticEndTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     locationRef.current = { pathname, search, hash };
@@ -34,10 +33,6 @@ export function HashScroll() {
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const finalBehavior: ScrollBehavior = prefersReducedMotion ? "auto" : behavior;
 
-      if (programmaticEndTimerRef.current) {
-        window.clearTimeout(programmaticEndTimerRef.current);
-      }
-
       if (!scrollToAnchor(id, finalBehavior)) return false;
 
       const el = document.getElementById(id);
@@ -48,11 +43,6 @@ export function HashScroll() {
       if (prevTabIndex === null) {
         window.setTimeout(() => el.removeAttribute("tabindex"), 0);
       }
-
-      programmaticEndTimerRef.current = window.setTimeout(
-        () => setProgrammaticScroll(false, id),
-        finalBehavior === "smooth" ? 700 : 100,
-      );
 
       return true;
     },
@@ -124,9 +114,6 @@ export function HashScroll() {
     document.addEventListener("click", onClick, true);
     return () => {
       document.removeEventListener("click", onClick, true);
-      if (programmaticEndTimerRef.current) {
-        window.clearTimeout(programmaticEndTimerRef.current);
-      }
     };
   }, [navigate, scrollToHash]);
 
