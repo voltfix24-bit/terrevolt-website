@@ -61,11 +61,10 @@ export function Header() {
   // Focus trap + Escape, zonder focus glitches.
   useEffect(() => {
     if (!open) {
-      // Bij sluiten: focus terug naar de toggle (of de eerder gefocuste element).
-      const target = previouslyFocusedRef.current ?? toggleButtonRef.current;
+      // Bij sluiten: focus expliciet terug naar de hamburger-toggle.
       // requestAnimationFrame voorkomt dat focus race't met React's commit/unmount.
       const raf = requestAnimationFrame(() => {
-        target?.focus({ preventScroll: true });
+        toggleButtonRef.current?.focus({ preventScroll: true });
       });
       return () => cancelAnimationFrame(raf);
     }
@@ -273,7 +272,7 @@ export function Header() {
                 <a
                   href={telHref}
                   onClick={() => setOpen(false)}
-                  className="inline-flex items-center gap-2 text-sm text-[#0d3b2e] hover:underline min-h-[36px]"
+                  className="inline-flex items-center gap-2 text-sm text-[#0d3b2e] hover:underline min-h-[36px] px-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1"
                 >
                   <Phone className="w-4 h-4" />
                   <span>{company.phone.display}</span>
@@ -281,7 +280,7 @@ export function Header() {
                 <a
                   href={mailHref}
                   onClick={() => setOpen(false)}
-                  className="inline-flex items-center gap-2 text-sm text-[#0d3b2e] hover:underline min-h-[36px] break-all"
+                  className="inline-flex items-center gap-2 text-sm text-[#0d3b2e] hover:underline min-h-[36px] break-all px-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1"
                 >
                   <Mail className="w-4 h-4" />
                   <span>{company.email}</span>
