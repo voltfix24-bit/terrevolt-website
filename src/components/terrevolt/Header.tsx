@@ -24,14 +24,38 @@ export function Header() {
     return () => mql.removeEventListener("change", handle);
   }, []);
 
-  // Voorkom body-scroll achter open mobiel menu.
+  // Voorkom body-scroll achter open mobiel menu (iOS-safe).
   useEffect(() => {
     if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
+    const scrollY = window.scrollY;
+    const body = document.body;
+    const prev = {
+      overflow: body.style.overflow,
+      position: body.style.position,
+      top: body.style.top,
+      width: body.style.width,
     };
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.width = "100%";
+    return () => {
+      body.style.overflow = prev.overflow;
+      body.style.position = prev.position;
+      body.style.top = prev.top;
+      body.style.width = prev.width;
+      window.scrollTo(0, scrollY);
+    };
+  }, [open]);
+
+  // Esc sluit menu.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
   return (
@@ -90,57 +114,59 @@ export function Header() {
           </div>
         </div>
 
-        {/* Mobiel menu */}
-        {open && (
-          <nav
-            id="mobile-nav"
-            className="lg:hidden bg-white/95 backdrop-blur-sm border-t border-gray-200 max-h-[calc(100dvh-4rem)] sm:max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain"
-          >
-            <div className="container mx-auto px-4 sm:px-6 py-3 flex flex-col gap-1.5 pb-[max(env(safe-area-inset-bottom),1rem)]">
-              {/* Recruitment-card bovenaan */}
-              <Link
-                to="/werken-bij"
-                onClick={() => setOpen(false)}
-                className="block bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] text-white rounded-xl p-4 mb-1.5 border border-[#9ed42e]/40 hover:from-[#1a4a36] hover:to-[#0d3b2e] transition-colors"
-              >
-                <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-[#9ed42e] rounded-lg flex items-center justify-center flex-shrink-0">
-                    <HardHat className="w-5 h-5 text-[#0d3b2e]" strokeWidth={2.5} />
+      </header>
+
+      {/* Mobiel menu — full-viewport overlay onder de header, boven alle sticky subnavs/CTA's */}
+      {open && (
+        <nav
+          id="mobile-nav"
+          aria-label="Mobiele navigatie"
+          className="lg:hidden fixed left-0 right-0 top-16 sm:top-20 bottom-0 z-[9999] bg-white border-t border-gray-200 overflow-y-auto overscroll-contain"
+          style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}
+        >
+          <div className="container mx-auto px-4 sm:px-6 py-3 flex flex-col gap-1.5 pb-[calc(2rem+env(safe-area-inset-bottom))]">
+            {/* Recruitment-card bovenaan */}
+            <Link
+              to="/werken-bij"
+              onClick={() => setOpen(false)}
+              className="block bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] text-white rounded-xl p-4 mb-1.5 border border-[#9ed42e]/40 hover:from-[#1a4a36] hover:to-[#0d3b2e] transition-colors"
+            >
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 bg-[#9ed42e] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <HardHat className="w-5 h-5 text-[#0d3b2e]" strokeWidth={2.5} />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <div className="text-white text-base leading-snug">Werk mee aan LS/MS-infrastructuur</div>
+                  <div className="text-gray-300 text-xs mt-1 leading-snug">
+                    Bekijk profielen voor monteurs, werkverantwoordelijken en ZZP-ploegen.
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-white text-base leading-snug">Werk mee aan LS/MS-infrastructuur</div>
-                    <div className="text-gray-300 text-xs mt-1 leading-snug">
-                      Bekijk profielen voor monteurs, werkverantwoordelijken en ZZP-ploegen.
-                    </div>
-                    <div className="inline-flex items-center gap-1.5 text-[#9ed42e] text-sm mt-2">
-                      Werken bij bekijken <ArrowRight className="w-3.5 h-3.5" />
-                    </div>
+                  <div className="inline-flex items-center gap-1.5 text-[#9ed42e] text-sm mt-2">
+                    Werken bij bekijken <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
-              </Link>
+              </div>
+            </Link>
 
-              {links.map((l) => (
-                <Link
-                  key={l.href}
-                  to={l.href}
-                  onClick={() => setOpen(false)}
-                  className="text-[#2d3436] hover:text-[#0d3b2e] transition-colors py-2.5 px-2 rounded-md hover:bg-[#f0f7e6] min-h-[44px] flex items-center"
-                >
-                  {l.label}
-                </Link>
-              ))}
+            {links.map((l) => (
               <Link
-                to="/contact"
+                key={l.href}
+                to={l.href}
                 onClick={() => setOpen(false)}
-                className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors text-center mt-2 min-h-[48px] flex items-center justify-center"
+                className="text-[#2d3436] hover:text-[#0d3b2e] transition-colors py-2.5 px-2 rounded-md hover:bg-[#f0f7e6] min-h-[44px] flex items-center"
               >
-                Contact
+                {l.label}
               </Link>
-            </div>
-          </nav>
-        )}
-      </header>
+            ))}
+            <Link
+              to="/contact"
+              onClick={() => setOpen(false)}
+              className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors text-center mt-2 min-h-[48px] flex items-center justify-center"
+            >
+              Contact
+            </Link>
+          </div>
+        </nav>
+      )}
     </>
   );
 }
-
