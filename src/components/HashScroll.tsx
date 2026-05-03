@@ -61,6 +61,7 @@ export function HashScroll() {
 
   useEffect(() => {
     if (!hash) {
+      lastScrolledKeyRef.current = "";
       lastAutoScrolledKey = "";
       return;
     }
