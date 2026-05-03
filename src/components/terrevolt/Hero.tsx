@@ -2,7 +2,7 @@ import { ArrowRight, Zap } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[68vh] sm:min-h-[78vh] lg:min-h-[85vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-12 sm:py-20 lg:py-24">
+    <section className="relative min-h-[64vh] sm:min-h-[78vh] lg:min-h-[85vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-10 sm:py-20 lg:py-24">
       <div className="absolute inset-0 opacity-[0.08] grid-breathe">
         <div className="absolute inset-0" style={{
           backgroundImage: `
@@ -32,16 +32,16 @@ export function Hero() {
             <span className="text-[#9ed42e] tracking-widest uppercase text-sm">TERREVOLT BV</span>
           </div>
 
-          <h1 className="text-[clamp(1.75rem,8vw,2.25rem)] sm:text-5xl lg:text-7xl text-white mb-5 sm:mb-6 leading-[1.1] sm:leading-tight hyphens-nl">
-            <span>Specialist in LS/MS-infrastructuur</span>{" "}
-            <span className="text-[#9ed42e]">en aardingsoplossingen</span>
+          <h1 className="text-[clamp(2rem,9vw,2.625rem)] sm:text-5xl lg:text-7xl text-white mb-5 sm:mb-6 leading-[1.08] sm:leading-tight tracking-tight hyphens-none break-normal [text-wrap:balance]">
+            <span className="block sm:inline whitespace-normal">Specialist in&nbsp;LS/MS-infrastructuur</span>{" "}
+            <span className="block sm:inline text-[#9ed42e] whitespace-normal">en&nbsp;aardingsoplossingen</span>
           </h1>
 
           <p className="text-[17px] sm:text-xl lg:text-2xl text-gray-300 mb-3 sm:mb-4 max-w-3xl leading-relaxed">
             TerreVolt ondersteunt netbeheerders, hoofdaannemers en industrie bij LS/MS-netmontage, stationsrenovaties, schakelwerk en meetbare aardingsoplossingen.
           </p>
 
-          <p className="text-[15px] sm:text-lg text-gray-400 mb-8 sm:mb-10 max-w-2xl italic leading-relaxed">
+          <p className="text-[15px] sm:text-lg text-gray-400 mb-6 sm:mb-10 max-w-2xl italic leading-relaxed">
             Van huisaansluiting tot middenspanningsstation, met veiligheid als basis.
           </p>
 
@@ -57,7 +57,7 @@ export function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-16 sm:h-32 bg-gradient-to-t from-[#f8f9fa] to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-10 sm:h-32 bg-gradient-to-t from-[#f8f9fa] to-transparent pointer-events-none" />
     </section>
   );
 }
