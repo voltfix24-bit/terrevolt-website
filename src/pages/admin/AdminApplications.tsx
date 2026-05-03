@@ -445,6 +445,34 @@ function Detail({
           )}
         </div>
 
+        {/* Volgende opvolging */}
+        <div className="pt-4 border-t space-y-2">
+          <label className="text-sm font-medium text-[#0d3b2e]" htmlFor={`follow-${a.id}`}>Volgende opvolging</label>
+          <div className="flex flex-wrap gap-2 items-center">
+            <Input
+              id={`follow-${a.id}`}
+              type="date"
+              value={followUp}
+              onChange={(e) => setFollowUpState(e.target.value)}
+              className="min-h-[44px] w-full sm:w-[200px]"
+            />
+            <Button size="sm" variant="outline" className="min-h-[44px]"
+              onClick={() => setFollowUp(a.id, followUp ? new Date(followUp).toISOString() : null)}>
+              <Save className="w-4 h-4 mr-1.5" /> Datum opslaan
+            </Button>
+            {a.next_follow_up_at && (
+              <Button size="sm" variant="ghost" className="min-h-[44px]"
+                onClick={() => { setFollowUpState(""); setFollowUp(a.id, null); }}>
+                <X className="w-4 h-4 mr-1.5" /> Wissen
+              </Button>
+            )}
+          </div>
+          {a.next_follow_up_at && (
+            <p className="text-xs text-[#6c757d]">Gepland: {new Date(a.next_follow_up_at).toLocaleDateString("nl-NL")}</p>
+          )}
+        </div>
+
+        {/* TODO: gestructureerde certificatenmodule (VCA, BEI BLS/BHS, VOP, VP, AVP, WV, Rijbewijs) — nu alleen vrije tekst hierboven. */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pt-4 border-t">
           <span className="text-sm">Status:</span>
           <Select value={a.status} onValueChange={(v) => setStatus(a.id, v)}>
