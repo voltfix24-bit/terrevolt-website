@@ -84,7 +84,7 @@ export default function AdminLayout() {
               <Link
                 key={n.to}
                 to={n.to}
-                className={`flex items-center gap-2 lg:gap-3 px-3 lg:px-4 py-2.5 rounded-lg text-sm transition whitespace-nowrap flex-shrink-0 ${
+                className={`flex items-center gap-2 lg:gap-3 px-3 lg:px-4 py-2.5 min-h-[44px] rounded-lg text-sm transition whitespace-nowrap flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#f8f9fa] ${
                   active
                     ? "bg-[#0d3b2e] text-white"
                     : "text-[#0d3b2e] hover:bg-white"
