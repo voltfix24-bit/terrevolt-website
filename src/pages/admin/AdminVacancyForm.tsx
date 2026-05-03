@@ -53,7 +53,7 @@ export default function AdminVacancyForm() {
     level: "MBO / praktijkervaring",
     work_area: "",
     intro: "",
-    safety_text: "Bij TerreVolt staat veilig werken voorop. We werken volgens BEI, NEN 3140 en VCA, met duidelijke aanwijzingen, LMRA en passende PBM's voor iedere taak.",
+    safety_text: "Bij TerreVolt staat veilig werken voorop. We doen het veilig, of we doen het niet. Afhankelijk van project, opdrachtgever en werkgebied werken we met passende aanwijzingen, LMRA, VCA, BEI/VWI en projectafspraken.",
     status: "draft" as "draft" | "published",
     sort_order: 100,
     is_featured: false,
@@ -99,12 +99,30 @@ export default function AdminVacancyForm() {
     setForm((f) => ({ ...f, [k]: v }));
   }
 
+  function validateForPublish(): string | null {
+    if (!form.title.trim()) return "Titel ontbreekt.";
+    if (!form.slug.trim()) return "Slug ontbreekt.";
+    if (!form.intro.trim()) return "Intro ontbreekt.";
+    if (linesToArray(whatYouDo).length < 3) return "Minimaal 3 taken vereist.";
+    if (linesToArray(requirements).length < 3) return "Minimaal 3 eisen vereist.";
+    if (linesToArray(offer).length < 3) return "Minimaal 3 voordelen vereist.";
+    if (!form.safety_text.trim()) return "Veiligheidstekst ontbreekt.";
+    return null;
+  }
+
   async function save(e: React.FormEvent) {
     e.preventDefault();
     const parsed = schema.safeParse(form);
     if (!parsed.success) {
       toast.error(parsed.error.errors[0].message);
       return;
+    }
+    if (form.status === "published") {
+      const err = validateForPublish();
+      if (err) {
+        toast.error(`Deze vacature mist nog informatie om te publiceren. ${err}`);
+        return;
+      }
     }
     setSaving(true);
     const payload = {
