@@ -939,6 +939,7 @@ const WerkenBij = () => {
               <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
                 <a
                   href="#aanmelden"
+                  data-cta="Direct aanmelden (werken bij)"
                   className="w-full sm:w-auto bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px]"
                 >
                   Direct aanmelden
