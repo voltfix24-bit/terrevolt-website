@@ -40,6 +40,7 @@ import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { findVacature } from "@/data/vacatures";
 import { company, telHref, mailHref, SITE_URL } from "@/config/company";
+import { scrollToAnchor, scrollToElement } from "@/lib/scrollToAnchor";
 
 const contactVoorkeurOpties = ["Bellen", "WhatsApp", "E-mail", "Maakt niet uit"];
 
@@ -369,7 +370,7 @@ const VacatureDetail = () => {
       const count = Object.keys(fe).length;
       toast.error(count === 1 ? parsed.error.errors[0]?.message ?? "Controleer het formulier" : `Controleer ${count} velden`);
       requestAnimationFrame(() => {
-        errorBannerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (errorBannerRef.current) scrollToElement(errorBannerRef.current);
         const first = Object.keys(fe)[0];
         if (first && formRef.current) {
           formRef.current.querySelector<HTMLElement>(`[name="${first}"]`)?.focus();
@@ -451,7 +452,7 @@ const VacatureDetail = () => {
       setSubmitError(msg);
       toast.error(msg);
       requestAnimationFrame(() => {
-        errorBannerRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (errorBannerRef.current) scrollToElement(errorBannerRef.current);
       });
     } finally {
       setSubmitting(false);
@@ -466,7 +467,7 @@ const VacatureDetail = () => {
     setNoCv(false);
     formRef.current?.reset();
     setTimeout(() => {
-      document.getElementById("solliciteren")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollToAnchor("solliciteren");
     }, 50);
   };
 
