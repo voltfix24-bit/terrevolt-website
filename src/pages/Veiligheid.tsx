@@ -418,7 +418,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Statement */}
-        <section className="relative py-20 md:py-28 bg-[#f8f9fa] overflow-hidden">
+        <section id="stoppen" className="relative py-20 md:py-28 bg-[#f8f9fa] overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center select-none">
             <span className="text-[18vw] sm:text-[14vw] lg:text-[12rem] font-bold tracking-tight text-[#0d3b2e]/[0.04] uppercase whitespace-nowrap">
               Veilig werken
