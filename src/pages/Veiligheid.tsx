@@ -169,7 +169,7 @@ const Veiligheid = () => {
                   href="#veiligheidsaanpak"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 min-h-[54px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  <span>Onze veiligheidsaanpak</span>
+                  <span>Onze aanpak</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
