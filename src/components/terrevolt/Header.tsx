@@ -180,7 +180,8 @@ export function Header() {
             </nav>
 
             <button
-              className="lg:hidden text-[#0d3b2e] inline-flex items-center justify-center w-11 h-11 -mr-2 flex-shrink-0 rounded-md hover:bg-[#f0f7e6] transition-colors"
+              ref={toggleButtonRef}
+              className="lg:hidden text-[#0d3b2e] inline-flex items-center justify-center w-11 h-11 -mr-2 flex-shrink-0 rounded-md hover:bg-[#f0f7e6] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e]"
               onClick={() => setOpen((o) => !o)}
               aria-label={open ? "Menu sluiten" : "Menu openen"}
               aria-expanded={open}
@@ -196,8 +197,11 @@ export function Header() {
       {/* Mobiel menu — full-viewport overlay onder de header, boven alle sticky subnavs/CTA's */}
       {open && (
         <nav
+          ref={menuRef}
           id="mobile-nav"
           aria-label="Mobiele navigatie"
+          aria-modal="true"
+          role="dialog"
           className="lg:hidden fixed left-0 right-0 top-16 sm:top-20 bottom-0 z-[9999] bg-white border-t border-gray-200 overflow-y-auto overscroll-contain animate-fade-in motion-reduce:animate-none"
           style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}
         >
