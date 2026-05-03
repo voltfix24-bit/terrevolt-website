@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Plus, Pencil, Trash2, Eye, EyeOff, Loader2, ExternalLink, Search, X } from "lucide-react";
+import { Plus, Pencil, Trash2, Eye, EyeOff, Loader2, ExternalLink, Search, X, Copy } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -65,6 +65,24 @@ export default function AdminVacancies() {
     const { error } = await supabase.from("vacancies").delete().eq("id", v.id);
     if (error) return toast.error(error.message);
     toast.success("Verwijderd");
+    load();
+  }
+
+  async function duplicate(v: Vacancy) {
+    // Haal volledige rij op (zonder id/timestamps)
+    const { data, error } = await supabase.from("vacancies").select("*").eq("id", v.id).maybeSingle();
+    if (error || !data) return toast.error("Kon vacature niet kopiëren");
+    const { id: _id, created_at: _c, updated_at: _u, ...rest } = data as any;
+    const payload = {
+      ...rest,
+      title: `${data.title} kopie`,
+      slug: `${data.slug}-kopie`,
+      status: "draft",
+      is_featured: false,
+    };
+    const { error: insErr } = await supabase.from("vacancies").insert([payload]);
+    if (insErr) return toast.error(insErr.message);
+    toast.success("Vacature gekopieerd als concept.");
     load();
   }
 
