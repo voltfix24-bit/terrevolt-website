@@ -2,7 +2,7 @@ import { Menu, X, HardHat, ArrowRight, Phone, Mail } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { company, telHref, mailHref } from "@/config/company";
-import { LogoMark } from "@/components/terrevolt/Logo";
+import { Logo } from "@/components/terrevolt/Logo";
 
 export function Header() {
   const [open, setOpen] = useState(false);
