@@ -398,6 +398,53 @@ function Detail({
           )}
         </div>
 
+        {/* Veiligheid & scope (alleen admin) */}
+        <div className="pt-4 border-t space-y-2">
+          <div className="text-sm font-medium text-[#0d3b2e]">Veiligheid & scope</div>
+          <p className="text-xs text-[#6c757d]">Snelle interne beoordeling. Niet zichtbaar op de website.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {SAFETY_FLAGS.map((f) => (
+              <label key={f.key} className="flex items-center gap-2 text-sm cursor-pointer min-h-[36px]">
+                <Checkbox
+                  checked={!!flags[f.key]}
+                  onCheckedChange={(v) => setFlags((prev) => ({ ...prev, [f.key]: !!v }))}
+                />
+                <span>{f.label}</span>
+              </label>
+            ))}
+          </div>
+          <Button size="sm" variant="outline" className="min-h-[44px]" onClick={() => saveScopeFlags(r.id, flags)}>
+            <Save className="w-4 h-4 mr-1.5" /> Veiligheid & scope opslaan
+          </Button>
+        </div>
+
+        {/* Volgende opvolging */}
+        <div className="pt-4 border-t space-y-2">
+          <label className="text-sm font-medium text-[#0d3b2e]" htmlFor={`follow-${r.id}`}>Volgende opvolging</label>
+          <div className="flex flex-wrap gap-2 items-center">
+            <Input
+              id={`follow-${r.id}`}
+              type="date"
+              value={followUp}
+              onChange={(e) => setFollowUpState(e.target.value)}
+              className="min-h-[44px] w-full sm:w-[200px]"
+            />
+            <Button size="sm" variant="outline" className="min-h-[44px]"
+              onClick={() => setFollowUp(r.id, followUp ? new Date(followUp).toISOString() : null)}>
+              <Save className="w-4 h-4 mr-1.5" /> Datum opslaan
+            </Button>
+            {r.next_follow_up_at && (
+              <Button size="sm" variant="ghost" className="min-h-[44px]"
+                onClick={() => { setFollowUpState(""); setFollowUp(r.id, null); }}>
+                <X className="w-4 h-4 mr-1.5" /> Wissen
+              </Button>
+            )}
+          </div>
+          {r.next_follow_up_at && (
+            <p className="text-xs text-[#6c757d]">Gepland: {new Date(r.next_follow_up_at).toLocaleDateString("nl-NL")}</p>
+          )}
+        </div>
+
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pt-4 border-t">
           <span className="text-sm">Status:</span>
           <Select value={r.status} onValueChange={(v) => setStatus(r.id, v)}>
