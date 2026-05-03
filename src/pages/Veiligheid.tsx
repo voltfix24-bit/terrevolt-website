@@ -190,7 +190,7 @@ const Veiligheid = () => {
                 { label: "Filosofie", href: "#filosofie" },
                 { label: "Aanpak", href: "#aanpak" },
                 { label: "Veilige 5", href: "#veilige-5" },
-                { label: "BEI & VWI", href: "#bei-vwi" },
+                { label: "Normen", href: "#bei-vwi" },
                 { label: "Werkplek", href: "#werkplek" },
                 { label: "Rollen", href: "#rollen" },
                 { label: "Stoppen", href: "#stoppen" },
