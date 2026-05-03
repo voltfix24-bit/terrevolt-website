@@ -82,7 +82,7 @@ export default function AdminApplications() {
       .select("*, vacancies(title, slug)")
       .order("created_at", { ascending: false });
     if (error) toast.error(error.message);
-    setRows((data as any) || []);
+    setRows(((data as App[] | null) ?? []));
     setLoading(false);
   }
   useEffect(() => { load(); }, []);
