@@ -140,26 +140,47 @@ export default function AdminDashboard() {
       </div>
 
       <Card>
-        <CardHeader>
+        <CardHeader className="flex flex-row items-center justify-between gap-2">
           <CardTitle className="text-lg text-[#0d3b2e]">Vandaag opvolgen</CardTitle>
+          {actions.length > 0 && (
+            <span className="text-xs text-[#6c757d]">{actions.length} item{actions.length === 1 ? "" : "s"}</span>
+          )}
         </CardHeader>
         <CardContent>
           {actions.length === 0 ? (
             <p className="text-[#6c757d] text-sm">Niets staat open. Alles afgehandeld.</p>
           ) : (
-            <ul className="divide-y divide-gray-200">
-              {actions.slice(0, 12).map((it) => (
-                <li key={it.id} className="py-3 flex items-start justify-between gap-3 flex-wrap">
-                  <div className="min-w-0">
-                    <div className="text-[#0d3b2e] font-medium break-words">{it.title}</div>
-                    <div className="text-xs text-[#6c757d] mt-0.5">{it.reason}</div>
-                  </div>
-                  <Button asChild size="sm" variant="outline" className="min-h-[40px]">
-                    <Link to={it.to}>Openen</Link>
-                  </Button>
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul className="divide-y divide-gray-200">
+                {actions.slice(0, 12).map((it) => {
+                  const kindLabel =
+                    it.kind === "application" ? "Sollicitatie"
+                    : it.kind === "request" ? "Aanvraag"
+                    : "Vacature";
+                  return (
+                    <li key={it.id} className="py-3 flex items-start justify-between gap-3 flex-wrap">
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <Badge variant="outline" className="shrink-0 text-[10px] uppercase tracking-wide">{kindLabel}</Badge>
+                          <span className="text-[#0d3b2e] font-medium break-words">{it.title}</span>
+                        </div>
+                        <div className="text-xs text-[#6c757d] mt-1">{it.reason}</div>
+                      </div>
+                      <Button asChild size="sm" variant="outline" className="min-h-[40px]">
+                        <Link to={it.to}>Openen</Link>
+                      </Button>
+                    </li>
+                  );
+                })}
+              </ul>
+              {actions.length > 12 && (
+                <div className="pt-3 flex flex-wrap gap-2 text-sm">
+                  <Button asChild variant="ghost" size="sm"><Link to="/admin/sollicitaties">Alle sollicitaties</Link></Button>
+                  <Button asChild variant="ghost" size="sm"><Link to="/admin/contactaanvragen">Alle aanvragen</Link></Button>
+                  <Button asChild variant="ghost" size="sm"><Link to="/admin/vacatures">Alle vacatures</Link></Button>
+                </div>
+              )}
+            </>
           )}
         </CardContent>
       </Card>
