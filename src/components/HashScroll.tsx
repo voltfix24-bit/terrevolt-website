@@ -50,6 +50,17 @@ export function HashScroll() {
   );
 
   useEffect(() => {
+    // Voorkom dat de browser zelf de scrollpositie herstelt op (re)load — wij beheren scrollen.
+    if ("scrollRestoration" in window.history) {
+      try {
+        window.history.scrollRestoration = "manual";
+      } catch {
+        // ignore
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     if (!hash) {
       lastScrolledKeyRef.current = "";
       lastAutoScrolledKey = "";
@@ -60,30 +71,36 @@ export function HashScroll() {
 
     let cancelled = false;
     let rafId = 0;
-    let firstTimer = 0;
-    let retryTimer = 0;
+    const timers: number[] = [];
 
-    const run = (isRetry = false) => {
-      if (cancelled) return;
+    // Probeer meerdere keren: async-data / lazy components mounten soms pas na 200–800ms.
+    // Eerste poging direct na paint, daarna oplopend tot ~1.2s.
+    const attemptDelays = [0, 80, 200, 400, 800, 1200];
+
+    const tryScroll = () => {
+      if (cancelled) return false;
       if (scrollToHash(hash, "smooth")) {
         lastScrolledKeyRef.current = scrollKey;
         lastAutoScrolledKey = scrollKey;
-        return;
+        return true;
       }
-      if (!isRetry) {
-        retryTimer = window.setTimeout(() => run(true), 100);
-      }
+      return false;
     };
 
     rafId = requestAnimationFrame(() => {
-      firstTimer = window.setTimeout(() => run(false), 75);
+      for (const delay of attemptDelays) {
+        const t = window.setTimeout(() => {
+          if (lastScrolledKeyRef.current === scrollKey) return;
+          tryScroll();
+        }, delay);
+        timers.push(t);
+      }
     });
 
     return () => {
       cancelled = true;
       cancelAnimationFrame(rafId);
-      window.clearTimeout(firstTimer);
-      window.clearTimeout(retryTimer);
+      timers.forEach((t) => window.clearTimeout(t));
     };
   }, [pathname, hash, scrollToHash]);
 
