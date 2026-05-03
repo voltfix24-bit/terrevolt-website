@@ -50,7 +50,7 @@ export const scrollToElement = (element: HTMLElement, behavior: ScrollBehavior =
   const previousInlineScrollBehavior = html.style.scrollBehavior;
   const top = Math.max(0, element.getBoundingClientRect().top + window.scrollY - getAnchorScrollOffset());
 
-  setProgrammaticScroll(true, id);
+  setProgrammaticScroll(true, targetId);
   html.style.scrollBehavior = "auto";
   window.scrollTo({ top, behavior: finalBehavior });
   window.requestAnimationFrame(() => {
