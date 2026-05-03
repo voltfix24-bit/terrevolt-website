@@ -299,7 +299,7 @@ export default function AdminContactRequests() {
 }
 
 function Detail({
-  r, setStatus, saveNote, logContact, archive, downloadAttachment,
+  r, setStatus, saveNote, logContact, archive, downloadAttachment, saveScopeFlags, setFollowUp,
 }: {
   r: Req;
   setStatus: (id: string, status: string) => void;
@@ -307,8 +307,16 @@ function Detail({
   logContact: (id: string) => void;
   archive: (id: string) => void;
   downloadAttachment: (path: string) => void;
+  saveScopeFlags: (id: string, flags: Record<string, boolean>) => void;
+  setFollowUp: (id: string, iso: string | null) => void;
 }) {
   const [notes, setNotes] = useState(r.admin_notes || "");
+  const [flags, setFlags] = useState<Record<string, boolean>>(
+    (r.safety_scope_flags as Record<string, boolean>) || {},
+  );
+  const [followUp, setFollowUpState] = useState<string>(
+    r.next_follow_up_at ? r.next_follow_up_at.slice(0, 10) : "",
+  );
   const wa = whatsappLink(r.phone);
   const waTemplate = whatsappLink(r.phone, waTemplates.contact(r.name));
   return (
