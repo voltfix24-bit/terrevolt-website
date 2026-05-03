@@ -218,12 +218,13 @@ const Veiligheid = () => {
         </nav>
 
         {/* SECTIE: Veiligheid vóór planning */}
-        <section className="py-16 md:py-24 bg-white">
+        <section id="filosofie" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-14">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6 hyphens-nl text-pretty">Veiligheid vóór planning</h2>
-              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
-                Geen onderhoudsvenster, deadline of projectdruk is belangrijker dan veilig werken. Als de werkplek, installatie, instructie of bevoegdheid niet klopt, wordt er niet zomaar doorgewerkt. Dan stoppen we, stemmen we af en starten we pas wanneer het verantwoord kan.
+              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Onze houding</div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6 hyphens-nl text-pretty" lang="nl">Veiligheid vóór planning</h2>
+              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
+                Geen onderhoudsvenster, deadline of projectdruk is belangrijker dan veilig werken. Als de werkplek, installatie, instructie of bevoegdheid niet klopt, wordt er niet zomaar doorgewerkt.
               </p>
             </div>
 
