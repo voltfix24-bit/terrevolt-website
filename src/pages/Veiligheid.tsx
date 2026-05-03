@@ -11,34 +11,28 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const voorPlanning = [
-  { icon: HardHat, title: "Voor de monteur", description: "Iedere monteur moet zijn werk veilig kunnen uitvoeren en aan het einde van de dag veilig naar huis." },
-  { icon: Users, title: "Voor de ploeg", description: "Veilig werken betekent elkaar aanspreken, risico's melden en niet wegkijken bij twijfel." },
-  { icon: Briefcase, title: "Voor de opdrachtgever", description: "Een veilige uitvoering vraagt om duidelijke voorbereiding, passende bevoegdheden en heldere communicatie." },
-];
-
-const stappen = [
-  { icon: FileSearch, title: "Voorbereiden", description: "Scope, locatie, werkmethode, risico's, bevoegdheden en projectafspraken worden vooraf helder gemaakt." },
-  { icon: MessageSquare, title: "Afstemmen", description: "We stemmen af met opdrachtgever, uitvoerder, werkverantwoordelijke en betrokken partijen over toegang, schakelingen, instructies en planning." },
-  { icon: Lock, title: "Veiligstellen", description: "Werkgebied, installatie en werkzaamheden worden volgens de juiste procedures veiliggesteld. Bij twijfel wordt niet gestart." },
-  { icon: Wrench, title: "Uitvoeren", description: "Monteurs werken volgens instructie, LMRA, VCA, BEI/VWI en projectafspraken waar van toepassing." },
-  { icon: ClipboardList, title: "Controleren", description: "Werkzaamheden worden gecontroleerd, teruggekoppeld en waar nodig aantoonbaar vastgelegd." },
+const pijlers = [
+  { icon: FileSearch, title: "LMRA bij elk werk", description: "Voor start of hervatting van werkzaamheden wordt de situatie gecontroleerd. Is de situatie gewijzigd, ontbreekt informatie of voelt iets niet veilig? Dan stoppen we, stemmen we af en starten pas wanneer het verantwoord kan." },
+  { icon: ShieldCheck, title: "De Veilige 5 bij schakelwerk", description: "Bij schakelwerk werken we met aandacht voor de Veilige 5: scheiden, beveiligen tegen wederinschakelen, controleren op afwezigheid van spanning, aarden en kortsluiten, en afschermen of afbakenen." },
+  { icon: Wrench, title: "Netmontage volgens instructie", description: "Bij LS/MS-netmontage werken monteurs volgens opdracht, werkmethode, VWI's en projectafspraken waar van toepassing. Werkgrenzen, materialen en bevoegdheden moeten vooraf duidelijk zijn." },
+  { icon: TrafficCone, title: "Werkplekveiligheid & zichtbaarheid", description: "Veiligheid stopt niet bij de installatie. Afzettingen, zichtbaarheid, looproutes, verlichting, PBM's, materieel, verkeer en andere partijen op locatie worden meegenomen in voorbereiding en LMRA." },
+  { icon: ClipboardList, title: "Kwaliteit & aantoonbare oplevering", description: "Werkzaamheden worden gecontroleerd, teruggekoppeld en waar nodig vastgelegd. TerreVolt werkt met aandacht voor ISO 9001:2015-principes, duidelijke werkinstructies, rapportage en continue verbetering." },
 ];
 
 const beiCards = [
-  { icon: ShieldCheck, title: "BEI BLS/BHS", description: "Veiligheidsstructuur voor laagspanning, middenspanning en hoogspanning binnen netbeheeromgevingen." },
+  { icon: ShieldCheck, title: "BEI BLS/BHS", description: "Veilige bedrijfsvoering binnen LS/MS/HS-netbeheeromgevingen, inclusief bijbehorende VWI's en projectafspraken." },
   { icon: BookOpen, title: "VWI's", description: "Veiligheidswerkinstructies voor specifieke werkzaamheden, situaties en risico's." },
-  { icon: FileSearch, title: "LMRA", description: "Laatste-minuut-risicoanalyse voordat werkzaamheden starten of worden hervat." },
-  { icon: BadgeCheck, title: "VCA", description: "Veiligheidsbewust werken met aandacht voor mens, installatie en omgeving." },
-  { icon: Award, title: "NEN 1010 / 3140 / 3840", description: "Normen die, waar van toepassing, richting geven aan aanleg, bedrijfsvoering, controle en veilig werken." },
-  { icon: MessageSquare, title: "Projectafspraken", description: "Afstemming met opdrachtgever, werkverantwoordelijke, uitvoerder en betrokken partijen." },
+  { icon: BadgeCheck, title: "VCA", description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving en risico's." },
+  { icon: Award, title: "ISO 9001:2015", description: "Met aandacht voor de principes van ISO 9001:2015: kwaliteitsmanagement, procesbeheersing, klantgericht werken, risicodenken en continue verbetering." },
+  { icon: FileText, title: "NEN 1010 / 3140 / 3840", description: "Normen die, waar van toepassing, richting geven aan aanleg, bedrijfsvoering, controle en veilig werken." },
+  { icon: UserCheck, title: "Certificaten & aanwijzingen", description: "Monteurs worden ingezet met certificaten, aanwijzingen en bevoegdheden die passen bij het werk, de opdrachtgever en de projectlocatie." },
 ];
 
 const werkplek = [
-  { icon: HardHat, title: "Werkplekinrichting", description: "Een veilige werkplek vraagt om orde, duidelijke afzetting, passende verlichting en veilige looproutes." },
-  { icon: ShieldCheck, title: "PBM's & materieel", description: "Monteurs werken met passende persoonlijke beschermingsmiddelen, goedgekeurd gereedschap en geschikt materieel." },
-  { icon: TrafficCone, title: "Aanrijdgevaar & omgeving", description: "Bij werkzaamheden langs wegen, op terreinen of bij bouwplaatsen wordt rekening gehouden met verkeer, materieel en andere partijen." },
-  { icon: KeyRound, title: "Toegang & overdracht", description: "Toegang, sleutelbeheer, werkvergunning, poortinstructie en overdracht moeten duidelijk zijn voordat werkzaamheden starten." },
+  { icon: HardHat, title: "Zichtbaarheid", description: "Goed zichtbaar werken met passende kleding, verlichting en markering." },
+  { icon: TrafficCone, title: "Afzettingen", description: "Werkgebied duidelijk afzetten en risico's voor monteurs, omgeving en verkeer beperken." },
+  { icon: DoorOpen, title: "Looproutes & toegang", description: "Veilige toegang, looproutes en werkzones vooraf duidelijk maken." },
+  { icon: AlertTriangle, title: "Verkeer & aanrijdgevaar", description: "Risico's van rijdend verkeer, bouwplaatsmaterieel en logistieke bewegingen meenemen in de LMRA." },
 ];
 
 const locatie = [
@@ -57,13 +51,21 @@ const rollen = [
   { code: "OG", title: "Uitvoerder / opdrachtgever", description: "Zorgt voor heldere scope, toegang, vrijgave en randvoorwaarden, afhankelijk van project en locatie." },
 ];
 
+const voorPlanning = [
+  { icon: HardHat, title: "Voor de monteur", description: "Iedere monteur moet zijn werk veilig kunnen uitvoeren en aan het einde van de dag veilig naar huis." },
+  { icon: Users, title: "Voor de ploeg", description: "Veilig werken betekent elkaar aanspreken, risico's melden en niet wegkijken bij twijfel." },
+  { icon: Briefcase, title: "Voor de opdrachtgever", description: "Een veilige uitvoering vraagt om duidelijke voorbereiding, passende bevoegdheden en heldere communicatie." },
+];
+
 const faqs = [
+  { q: "Geldt LMRA voor al het werk?", a: "Ja. Voor start of hervatting van werkzaamheden wordt gecontroleerd of de situatie nog klopt. Bij twijfel wordt afgestemd voordat er wordt doorgewerkt." },
+  { q: "Wat is de Veilige 5 bij schakelwerk?", a: "De Veilige 5 beschrijft de basisstappen om veilig te kunnen werken: scheiden, beveiligen tegen wederinschakelen, controleren op afwezigheid van spanning, aarden en kortsluiten, en afschermen of afbakenen." },
   { q: "Wat betekent BEI BLS/BHS?", a: "BEI-BLS gaat over laagspanning; BEI-BHS over hoog- en middenspanning binnen de elektriciteitsvoorzieningssystemen van netbeheerders. Voor TerreVolt betekent dit dat werkzaamheden worden voorbereid en uitgevoerd met aandacht voor de juiste rollen, aanwijzingen en instructies." },
   { q: "Wat zijn VWI's?", a: "VWI's zijn veiligheidswerkinstructies voor specifieke werkzaamheden. Ze geven richting aan hoe werkzaamheden veilig uitgevoerd moeten worden binnen de BEI-structuur." },
-  { q: "Wat is een LMRA?", a: "LMRA staat voor Laatste Minuut Risico Analyse. Voor start of hervatting van werkzaamheden wordt gecontroleerd of de situatie nog veilig is." },
+  { q: "Hoe kijkt TerreVolt naar werkplekveiligheid langs wegen?", a: "Bij werkzaamheden langs wegen of op projectlocaties kijken we naar zichtbaarheid, afzettingen, verkeersbewegingen, looproutes, toegang en andere partijen op locatie." },
+  { q: "Hoe borgt TerreVolt kwaliteit?", a: "Door duidelijke voorbereiding, passende werkinstructies, controle, terugkoppeling, rapportage waar nodig en aandacht voor ISO 9001:2015-principes zoals procesbeheersing en continue verbetering." },
   { q: "Werkt TerreVolt volgens netbeheerderseisen?", a: "TerreVolt sluit aan op projectafspraken, opdrachtgeverseisen en bedrijfsspecifieke procedures waar die van toepassing zijn." },
   { q: "Wat als een situatie niet veilig voelt?", a: "Dan wordt er niet zomaar doorgewerkt. Veiligheid gaat voor. De situatie wordt gemeld, afgestemd en pas opgepakt als het verantwoord kan. We doen het veilig, of we doen het niet." },
-  { q: "Wie is verantwoordelijk voor veilig werken?", a: "Iedereen heeft een rol: opdrachtgever, werkverantwoordelijke, uitvoerder, monteur en ploeg. TerreVolt verwacht dat iedereen onveilige situaties meldt, elkaar aanspreekt en niet wegkijkt." },
 ];
 
 const Veiligheid = () => {
@@ -154,13 +156,12 @@ const Veiligheid = () => {
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Kwaliteit &amp; veiligheid
               </div>
-              <h1 className="text-[clamp(1.75rem,7vw,3.75rem)] text-white mb-4 leading-tight hyphens-nl text-pretty">
-                We doen het veilig,<br />
-                <span className="text-[#9ed42e]">of we doen het niet.</span>
+              <h1 className="text-[clamp(1.75rem,7vw,3.75rem)] text-white mb-4 leading-tight hyphens-nl text-pretty" lang="nl">
+                Iedereen veilig <span className="text-[#9ed42e]">thuis.</span>
               </h1>
-              <p className="text-lg sm:text-2xl text-[#9ed42e] mb-6">Iedereen veilig thuis.</p>
-              <p className="text-base sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed hyphens-nl text-pretty">
-                Werken aan LS/MS-infrastructuur vraagt om vakmanschap, discipline en het lef om te stoppen wanneer iets niet veilig voelt. Voor TerreVolt is veiligheid geen formaliteit, maar de basis van elke opdracht: voor de monteur, de ploeg, de uitvoerende partij, de opdrachtgever en iedereen op locatie.
+              <p className="text-lg sm:text-2xl text-[#9ed42e] mb-6">We doen het veilig, of we doen het niet.</p>
+              <p className="text-base sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed hyphens-nl text-pretty" lang="nl">
+                Werken aan LS/MS-infrastructuur vraagt om vakmanschap, discipline en duidelijke afspraken. Voor TerreVolt is veiligheid geen formaliteit, maar de basis van elke opdracht: voor de monteur, de ploeg, de uitvoerende partij, de opdrachtgever en iedereen op locatie.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -168,7 +169,7 @@ const Veiligheid = () => {
                   href="#veiligheidsaanpak"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 min-h-[54px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  <span>Onze veiligheidsaanpak</span>
+                  <span>Onze aanpak</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
@@ -240,54 +241,52 @@ const Veiligheid = () => {
           </div>
         </section>
 
-        {/* SECTIE: Veiligheidsaanpak */}
+        {/* SECTIE: Veiligheid en kwaliteit in één aanpak */}
         <section id="veiligheidsaanpak" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="text-center mb-14 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Onze veiligheidsaanpak</h2>
-              <p className="text-base sm:text-xl text-[#6c757d] max-w-2xl mx-auto leading-relaxed hyphens-nl text-pretty">
-                Een veilige uitvoering begint vóór de eerste handeling. TerreVolt werkt met een gestructureerde aanpak van voorbereiding tot oplevering.
+            <div className="text-center mb-14 sm:mb-16 max-w-3xl mx-auto">
+              <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty" lang="nl">Veiligheid en kwaliteit in één aanpak</h2>
+              <p className="text-base sm:text-xl text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
+                {softHyphenate("Veilig werken en goed opleveren horen bij elkaar. TerreVolt kijkt niet alleen naar de elektrische installatie, maar ook naar voorbereiding, werkplek, bevoegdheden, uitvoering, controle en overdracht.")}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto relative">
-              <div className="hidden lg:block absolute top-12 left-[10%] right-[10%] h-px bg-gradient-to-r from-[#9ed42e]/0 via-[#9ed42e] to-[#9ed42e]/0" aria-hidden="true" />
-              {stappen.map((step, index) => {
-                const Icon = step.icon;
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+              {pijlers.map((p, index) => {
+                const Icon = p.icon;
                 return (
                   <div
-                    key={step.title}
-                    className="relative bg-white rounded-xl p-6 border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 text-center mt-6 sm:mt-0"
+                    key={p.title}
+                    className="relative bg-white rounded-xl p-6 border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 mt-6 sm:mt-0"
                   >
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-[#0d3b2e] text-[#9ed42e] rounded-full flex items-center justify-center text-sm border-4 border-white">
+                    <div className="absolute -top-4 left-6 w-10 h-10 bg-[#0d3b2e] text-[#9ed42e] rounded-full flex items-center justify-center text-sm border-4 border-white">
                       {index + 1}
                     </div>
-                    <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mx-auto mb-4 mt-2">
-                      <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
+                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-4 mt-2">
+                      <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
                     </div>
-                    <h3 className="text-base text-[#0d3b2e] mb-2">{step.title}</h3>
-                    <p className="text-[#6c757d] text-[15px] leading-[1.7] sm:text-sm sm:leading-relaxed hyphens-nl text-pretty">{softHyphenate(step.description)}</p>
+                    <h3 className="text-base text-[#0d3b2e] mb-2 hyphens-nl text-pretty" lang="nl">{p.title}</h3>
+                    <p className="text-[#6c757d] text-[15px] leading-[1.7] sm:text-sm sm:leading-relaxed hyphens-nl text-pretty" lang="nl">{softHyphenate(p.description)}</p>
                   </div>
                 );
               })}
             </div>
           </div>
         </section>
-
         {/* SECTIE: De Veilige 5 bij schakelwerk */}
         <section id="veilige-5" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
-              <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty">De Veilige 5 bij schakelwerk</h2>
+              <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty" lang="nl">Schakelwerk volgens de Veilige 5</h2>
               <p className="text-base sm:text-xl text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
-                {softHyphenate("Schakelwerk vraagt om rust, discipline en duidelijke opdrachtverstrekking. Een netdeel wordt niet 'even' uitgeschakeld; het wordt volgens een gecontroleerde volgorde voorbereid, geschakeld, veiliggesteld en pas vrijgegeven wanneer de situatie klopt.")}
+                {softHyphenate("Schakelwerk vraagt om rust, discipline en duidelijke opdrachtverstrekking. Een netdeel wordt niet 'even' uitgeschakeld; het wordt voorbereid, geschakeld, veiliggesteld en pas vrijgegeven wanneer de situatie klopt.")}
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
               {[
-                { title: "Scheiden", description: "Het netdeel wordt gescheiden van alle relevante voedingsbronnen volgens opdracht, bedienplan en projectafspraken." },
-                { title: "Beveiligen tegen wederinschakelen", description: "Er worden maatregelen genomen om te voorkomen dat de installatie ongewenst opnieuw kan worden ingeschakeld." },
+                { title: "Scheiden", description: "Het netdeel wordt gescheiden van relevante voedingsbronnen volgens opdracht, bedienplan en projectafspraken." },
+                { title: "Beveiligen tegen wederinschakelen", description: "Er worden maatregelen genomen om ongewenst opnieuw inschakelen te voorkomen." },
                 { title: "Controleren op afwezigheid van spanning", description: "Voordat werkzaamheden starten, wordt gecontroleerd of de installatie of het werkgebied spanningsloos is volgens de geldende instructie." },
                 { title: "Aarden en kortsluiten", description: "Waar van toepassing wordt geaard en kortgesloten om het werkgebied veilig te houden bij onverwachte spanning, inductie of terugvoeding." },
                 { title: "Afschermen en afbakenen", description: "Nabijgelegen onder spanning staande delen worden afgeschermd en het veilige werkgebied wordt duidelijk afgebakend." },
@@ -313,7 +312,7 @@ const Veiligheid = () => {
                 <div>
                   <h3 className="text-xl sm:text-2xl mb-2 text-white">Niet zeker? Niet starten.</h3>
                   <p className="text-[15px] sm:text-base text-white/85 leading-relaxed hyphens-nl text-pretty" lang="nl">
-                    {softHyphenate("Bij onduidelijke opdracht, ontbrekende aanwijzing, twijfel over de spanningstoestand of onveilige werkgrens wordt er niet doorgewerkt. Dan wordt er afgestemd met de juiste verantwoordelijke. We doen het veilig, of we doen het niet.")}
+                    {softHyphenate("Bij onduidelijke opdracht, ontbrekende aanwijzing, twijfel over de spanningstoestand of onveilige werkgrens wordt er niet doorgewerkt. Dan wordt afgestemd met de juiste verantwoordelijke.")}
                   </p>
                 </div>
               </div>
@@ -325,9 +324,9 @@ const Veiligheid = () => {
         <section id="bei-vwi" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty">Veilig werken binnen BEI, VWI en projectafspraken</h2>
-              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
-                {softHyphenate("TerreVolt werkt binnen de netbeheerwereld en sluit aan op de veiligheidsstructuur, projectafspraken en procedures van opdrachtgever en netbeheerder. BEI BLS/BHS, VWI's, LMRA, VCA en NEN-normen zijn daarbij middelen om het belangrijkste doel te bereiken: iedereen veilig thuis.")}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Normen, systemen en bevoegdheden</h2>
+              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
+                {softHyphenate("Normen en certificaten zijn geen doel op zichzelf. Ze helpen om veilig, beheerst en aantoonbaar te werken.")}
               </p>
             </div>
 
@@ -352,9 +351,9 @@ const Veiligheid = () => {
         <section id="werkplekveiligheid" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty">Veiligheid stopt niet bij de installatie</h2>
-              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
-                {softHyphenate("Bij LS/MS-werkzaamheden gaat veiligheid ook over de werkplek zelf: toegang, afzetting, looproutes, verlichting, PBM's, gereedschap, materieel, werkplekinrichting en omgevingsrisico's zoals aanrijdgevaar of werken langs de weg.")}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Veilig werken op elke projectlocatie</h2>
+              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
+                {softHyphenate("Bij werkzaamheden langs wegen, op bouwplaatsen, in stations of technische ruimten draait veiligheid ook om de omgeving. Zichtbaarheid, afzettingen, verkeerssituatie, looproutes, toegang, verlichting en samenwerking met andere partijen op locatie worden meegenomen in de voorbereiding.")}
               </p>
             </div>
 
@@ -453,9 +452,9 @@ const Veiligheid = () => {
           </div>
           <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-[clamp(1.875rem,7vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6 hyphens-nl text-pretty leading-tight">Iedereen veilig thuis. Altijd.</h2>
-              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
-                Geen planning, onderhoudsvenster of commercieel belang is belangrijker dan de veiligheid van mensen. Veiligheid zit in voorbereiding, in gedrag, in elkaar aanspreken en in de beslissing om te stoppen wanneer iets niet klopt.
+              <h2 className="text-[clamp(1.875rem,7vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6 hyphens-nl text-pretty leading-tight" lang="nl">Als het niet klopt, stoppen we.</h2>
+              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
+                {softHyphenate("Een onduidelijke opdracht, ontbrekende aanwijzing, onveilige afzetting, twijfel over de spanningstoestand, onduidelijke overdracht of ongeschikte werkplek is reden om te stoppen en af te stemmen. Veiligheid is geen vertraging van het werk; veiligheid is de voorwaarde om te mogen werken.")}
               </p>
               <p className="mt-8 text-xl sm:text-2xl text-[#0d3b2e] italic">
                 &ldquo;We doen het veilig, of we doen het niet.&rdquo;
