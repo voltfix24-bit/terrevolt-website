@@ -70,6 +70,8 @@ const Veiligheid = () => {
   usePageMeta("Kwaliteit & veiligheid | TerreVolt BV", "Veiligheid bij TerreVolt: BEI BLS/BHS, VWI's, LMRA, VCA, NEN 1010/3140/3840, projectafspraken en rollen — iedereen veilig thuis.", "/veiligheid");
 
   const subnavRef = useRef<HTMLElement | null>(null);
+  const isProgrammaticScrollRef = useRef(false);
+  const programmaticScrollTimerRef = useRef<number | null>(null);
   const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
@@ -79,6 +81,7 @@ const Veiligheid = () => {
       .filter((el): el is HTMLElement => !!el);
 
     const computeActive = () => {
+      if (isProgrammaticScrollRef.current) return;
       const header = document.querySelector("header");
       const headerH = header ? header.getBoundingClientRect().height : 0;
       const subnavH = subnavRef.current ? subnavRef.current.getBoundingClientRect().height : 0;
@@ -94,73 +97,37 @@ const Veiligheid = () => {
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
         current = sections[sections.length - 1]?.id ?? current;
       }
-      setActiveId(current);
+      setActiveId((previous) => (previous === current ? previous : current));
+    };
+
+    const onProgrammaticScroll = (event: Event) => {
+      const { active, targetId } = (event as CustomEvent<{ active: boolean; targetId?: string }>).detail || {};
+      isProgrammaticScrollRef.current = Boolean(active);
+      if (targetId) {
+        setActiveId((previous) => (previous === targetId ? previous : targetId));
+      }
+      if (programmaticScrollTimerRef.current) {
+        window.clearTimeout(programmaticScrollTimerRef.current);
+      }
+      if (active) {
+        programmaticScrollTimerRef.current = window.setTimeout(() => {
+          isProgrammaticScrollRef.current = false;
+          computeActive();
+        }, 800);
+      }
     };
 
     computeActive();
     window.addEventListener("scroll", computeActive, { passive: true });
     window.addEventListener("resize", computeActive);
+    window.addEventListener("terrevolt:programmatic-scroll", onProgrammaticScroll);
     return () => {
       window.removeEventListener("scroll", computeActive);
       window.removeEventListener("resize", computeActive);
-    };
-  }, []);
-
-  useEffect(() => {
-    const getOffset = () => {
-      const header = document.querySelector("header");
-      const headerH = header ? header.getBoundingClientRect().height : 0;
-      const subnavH = subnavRef.current ? subnavRef.current.getBoundingClientRect().height : 0;
-      return Math.round(headerH + subnavH + 20);
-    };
-
-    const scrollToHash = (hash: string, behavior: ScrollBehavior = "smooth") => {
-      if (!hash || hash === "#") return false;
-      const id = decodeURIComponent(hash.slice(1));
-      const el = document.getElementById(id);
-      if (!el) return false;
-      const rect = el.getBoundingClientRect();
-      const top = rect.top + window.scrollY - getOffset();
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      window.scrollTo({ top, behavior: prefersReduced ? "auto" : behavior });
-      const prevTabIndex = el.getAttribute("tabindex");
-      if (prevTabIndex === null) el.setAttribute("tabindex", "-1");
-      (el as HTMLElement).focus({ preventScroll: true });
-      if (prevTabIndex === null) {
-        setTimeout(() => el.removeAttribute("tabindex"), 0);
+      window.removeEventListener("terrevolt:programmatic-scroll", onProgrammaticScroll);
+      if (programmaticScrollTimerRef.current) {
+        window.clearTimeout(programmaticScrollTimerRef.current);
       }
-      return true;
-    };
-
-    const onClick = (e: MouseEvent) => {
-      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      const target = (e.target as HTMLElement | null)?.closest('a[href^="#"]') as HTMLAnchorElement | null;
-      if (!target) return;
-      const href = target.getAttribute("href") || "";
-      if (href.length < 2) return;
-      if (target.target && target.target !== "" && target.target !== "_self") return;
-      if (scrollToHash(href, "smooth")) {
-        e.preventDefault();
-        if (window.location.hash !== href) {
-          history.pushState(null, "", href);
-        }
-      }
-    };
-
-    document.addEventListener("click", onClick);
-
-    const onHashChange = () => scrollToHash(window.location.hash, "smooth");
-
-    if (window.location.hash) {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => scrollToHash(window.location.hash, "auto"));
-      });
-    }
-    window.addEventListener("hashchange", onHashChange);
-
-    return () => {
-      document.removeEventListener("click", onClick);
-      window.removeEventListener("hashchange", onHashChange);
     };
   }, []);
 
@@ -220,6 +187,7 @@ const Veiligheid = () => {
         {/* STICKY SUBNAV */}
         <nav
           ref={subnavRef}
+          data-hash-scroll-offset
           aria-label="Paginanavigatie Veiligheid"
           className="sticky top-16 sm:top-20 z-30 bg-white/90 backdrop-blur-sm border-b border-gray-200"
         >
@@ -246,7 +214,7 @@ const Veiligheid = () => {
                       aria-current={isActive ? "true" : undefined}
                       className={`inline-flex items-center min-h-[44px] px-3 sm:px-4 rounded-full text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border transition-colors whitespace-nowrap ${
                         isActive
-                          ? "bg-[#0d3b2e] text-[#9ed42e] border-[#0d3b2e] font-semibold"
+                          ? "bg-[#0d3b2e] text-[#9ed42e] border-[#0d3b2e]"
                           : "text-[#0d3b2e] border-transparent hover:bg-[#f0f7e6] hover:border-[#9ed42e]"
                       }`}
                     >
