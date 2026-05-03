@@ -62,6 +62,7 @@ export default function AdminVacancyForm() {
   const [requirements, setRequirements] = useState("");
   const [offer, setOffer] = useState("");
   const [processSteps, setProcessSteps] = useState(defaultProcess.join("\n"));
+  const [originalSlug, setOriginalSlug] = useState<string>("");
 
   useEffect(() => {
     if (!isEdit) return;
@@ -91,6 +92,7 @@ export default function AdminVacancyForm() {
       setRequirements(arrayToLines(data.requirements));
       setOffer(arrayToLines(data.offer));
       setProcessSteps(arrayToLines(data.process_steps) || defaultProcess.join("\n"));
+      setOriginalSlug(data.slug);
       setLoading(false);
     })();
   }, [id, isEdit, navigate]);
@@ -174,6 +176,11 @@ export default function AdminVacancyForm() {
       </div>
 
       <form onSubmit={save} className="space-y-6 bg-white p-6 sm:p-8 rounded-xl border border-gray-200">
+        {form.slug && (
+          <div className="rounded-md border border-[#9ed42e]/40 bg-[#9ed42e]/5 px-3 py-2 text-sm text-[#0d3b2e] break-all">
+            <span className="text-[#6c757d]">Live URL:</span> /vacatures/{form.slug}
+          </div>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="title">Titel *</Label>
@@ -188,6 +195,9 @@ export default function AdminVacancyForm() {
           <div>
             <Label htmlFor="slug">Slug (URL) *</Label>
             <Input id="slug" value={form.slug} onChange={(e) => set("slug", e.target.value)} required maxLength={150} />
+            {isEdit && originalSlug && form.slug !== originalSlug && (
+              <p className="text-xs text-amber-700 mt-1">Let op: wijzigen van de slug verandert de URL.</p>
+            )}
           </div>
           <div>
             <Label htmlFor="category">Categorie</Label>
