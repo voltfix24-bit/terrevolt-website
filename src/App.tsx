@@ -25,6 +25,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard.tsx";
 import AdminVacancies from "./pages/admin/AdminVacancies.tsx";
 import AdminVacancyForm from "./pages/admin/AdminVacancyForm.tsx";
 import AdminApplications from "./pages/admin/AdminApplications.tsx";
+import AdminContactRequests from "./pages/admin/AdminContactRequests.tsx";
 import { OrganizationJsonLd } from "./components/seo/OrganizationJsonLd.tsx";
 import { HashScroll } from "./components/HashScroll.tsx";
 
@@ -69,6 +70,7 @@ const App = () => (
             <Route path="vacatures/nieuw" element={<AdminVacancyForm />} />
             <Route path="vacatures/:id/bewerken" element={<AdminVacancyForm />} />
             <Route path="sollicitaties" element={<AdminApplications />} />
+            <Route path="contactaanvragen" element={<AdminContactRequests />} />
           </Route>
 
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
