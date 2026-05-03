@@ -355,16 +355,17 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Werkplekveiligheid */}
-        <section id="werkplekveiligheid" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="werkplek" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
+              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Uitvoering</div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Veilig werken op elke projectlocatie</h2>
               <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
-                {softHyphenate("Bij werkzaamheden langs wegen, op bouwplaatsen, in stations of technische ruimten draait veiligheid ook om de omgeving. Zichtbaarheid, afzettingen, verkeerssituatie, looproutes, toegang, verlichting en samenwerking met andere partijen op locatie worden meegenomen in de voorbereiding.")}
+                {softHyphenate("Veiligheid stopt niet bij de installatie. Ook zichtbaarheid, afzettingen, looproutes, verlichting, PBM's, materieel, verkeer en andere partijen op locatie tellen mee.")}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
               {werkplek.map((c) => {
                 const Icon = c.icon;
                 return (
