@@ -324,7 +324,7 @@ export default function AdminApplications() {
                           <DialogTrigger asChild>
                             <Button size="sm" variant="outline">Bekijken</Button>
                           </DialogTrigger>
-                          <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full max-h-[90vh] overflow-y-auto">
+                          <DialogContent className="max-w-2xl w-[calc(100vw-1rem)] sm:w-full max-h-[90vh] overflow-y-auto p-4 sm:p-6">
                             <Detail a={a} setStatus={setStatus} downloadCv={downloadCv} saveNote={saveNote} logContact={logContact} setFollowUp={setFollowUp} />
                           </DialogContent>
                         </Dialog>
