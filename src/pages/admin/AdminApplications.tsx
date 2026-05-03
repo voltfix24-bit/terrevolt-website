@@ -159,15 +159,20 @@ export default function AdminApplications() {
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl sm:text-3xl text-[#0d3b2e]">Sollicitaties</h1>
-        <p className="text-[#6c757d]">Alle binnengekomen aanmeldingen.</p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h1 className="text-2xl sm:text-3xl text-[#0d3b2e]">Sollicitaties</h1>
+          <p className="text-[#6c757d]">Alle binnengekomen aanmeldingen.</p>
+        </div>
+        <Button variant="outline" onClick={exportCsv} className="min-h-[44px] w-full sm:w-auto" disabled={filtered.length === 0}>
+          <Download className="w-4 h-4 mr-1.5" /> Export CSV
+        </Button>
       </div>
 
       {/* Zoek- en filterbalk */}
       <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-3">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
-          <div className="md:col-span-6 relative">
+          <div className="md:col-span-12 lg:col-span-4 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6c757d]" />
             <Input
               value={query}
@@ -177,25 +182,41 @@ export default function AdminApplications() {
               aria-label="Zoek sollicitaties"
             />
           </div>
-          <div className="md:col-span-3">
+          <div className="md:col-span-6 lg:col-span-2">
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="min-h-[44px]" aria-label="Filter op status"><SelectValue placeholder="Status" /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Alle statussen</SelectItem>
-                {STATUSES.map((s) => (
-                  <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
-                ))}
+                {STATUSES.map((s) => (<SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>))}
               </SelectContent>
             </Select>
           </div>
-          <div className="md:col-span-3">
+          <div className="md:col-span-6 lg:col-span-2">
             <Select value={vacancyFilter} onValueChange={setVacancyFilter}>
               <SelectTrigger className="min-h-[44px]" aria-label="Filter op vacature"><SelectValue placeholder="Vacature" /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Alle vacatures</SelectItem>
-                {vacancies.map(([id, title]) => (
-                  <SelectItem key={id} value={id}>{title}</SelectItem>
-                ))}
+                {vacancies.map(([id, title]) => (<SelectItem key={id} value={id}>{title}</SelectItem>))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="md:col-span-6 lg:col-span-2">
+            <Select value={profileFilter} onValueChange={setProfileFilter}>
+              <SelectTrigger className="min-h-[44px]" aria-label="Filter op profiel"><SelectValue placeholder="Profiel" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alle profielen</SelectItem>
+                {profiles.map((p) => (<SelectItem key={p} value={p}>{p}</SelectItem>))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="md:col-span-6 lg:col-span-2">
+            <Select value={dateRange} onValueChange={(v) => setDateRange(v as DateRange)}>
+              <SelectTrigger className="min-h-[44px]" aria-label="Filter op datum"><SelectValue placeholder="Datum" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alles</SelectItem>
+                <SelectItem value="today">Vandaag</SelectItem>
+                <SelectItem value="7d">Laatste 7 dagen</SelectItem>
+                <SelectItem value="30d">Laatste 30 dagen</SelectItem>
               </SelectContent>
             </Select>
           </div>
