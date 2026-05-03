@@ -31,6 +31,9 @@ export default defineConfig(({ mode }) => ({
     // Build-time: voegt /vacatures/:slug entries toe aan dist/sitemap.xml
     // op basis van gepubliceerde vacatures in Supabase.
     sitemapPlugin(),
+    // Build-time lint: faalt de build bij verboden "binnen N werkdagen"
+    // varianten buiten recruitment-context.
+    responseTimePlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {
