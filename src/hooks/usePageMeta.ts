@@ -13,7 +13,9 @@ export interface PageMetaInput {
   noindex?: boolean;
 }
 
-const DEFAULT_OG_IMAGE = "https://terrevolt.nl/og-image.jpg";
+import { SITE_OG_IMAGE, SITE_URL } from "@/config/company";
+
+const DEFAULT_OG_IMAGE = SITE_OG_IMAGE;
 
 function upsertMeta(attr: "name" | "property", key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
@@ -64,23 +66,29 @@ export function usePageMeta(
       : metaOrTitle;
   useEffect(() => {
     if (typeof document === "undefined") return;
-    const origin = typeof window !== "undefined" ? window.location.origin : "";
+    // Canonicals/og:url moeten ALTIJD het productiedomein gebruiken,
+    // ongeacht of we draaien op preview-, lovable.app- of custom domain.
+    const origin = SITE_URL;
 
     document.title = meta.title;
     if (meta.description) upsertMeta("name", "description", meta.description);
 
+    const path = typeof window !== "undefined" ? window.location.pathname : "/";
     const canonicalHref = meta.canonical
       ? meta.canonical.startsWith("http")
         ? meta.canonical
         : origin + meta.canonical
-      : origin + window.location.pathname;
+      : origin + path;
     upsertLink("canonical", canonicalHref);
 
+    upsertMeta("property", "og:site_name", "TerreVolt");
+    upsertMeta("property", "og:locale", "nl_NL");
     upsertMeta("property", "og:title", meta.title);
     if (meta.description) upsertMeta("property", "og:description", meta.description);
     upsertMeta("property", "og:type", meta.ogType ?? "website");
     upsertMeta("property", "og:url", canonicalHref);
     upsertMeta("property", "og:image", meta.ogImage ?? DEFAULT_OG_IMAGE);
+    upsertMeta("property", "og:image:alt", meta.title);
 
     upsertMeta("name", "twitter:card", "summary_large_image");
     upsertMeta("name", "twitter:title", meta.title);
