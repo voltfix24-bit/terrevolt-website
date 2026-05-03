@@ -111,8 +111,9 @@ export function HashScroll() {
 
       event.preventDefault();
       const current = locationRef.current;
+      const nextSearch = targetUrl.search || (targetUrl.pathname === current.pathname ? current.search : "");
       if (targetUrl.pathname !== current.pathname || targetUrl.search !== current.search || current.hash !== targetUrl.hash) {
-        navigate({ pathname: targetUrl.pathname, search: targetUrl.search || current.search, hash: targetUrl.hash });
+        navigate({ pathname: targetUrl.pathname, search: nextSearch, hash: targetUrl.hash });
         return;
       }
 
