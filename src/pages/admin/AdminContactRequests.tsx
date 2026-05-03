@@ -64,6 +64,33 @@ const SAFETY_FLAGS: { key: string; label: string }[] = [
   { key: "wv_onduidelijk", label: "WV/opdrachtgever onduidelijk" },
 ];
 const STATUS_LABEL = (v: string) => STATUSES.find((s) => s.value === v)?.label || v;
+const FLAG_LABEL = (k: string) => SAFETY_FLAGS.find((f) => f.key === k)?.label || k;
+const activeFlagKeys = (flags: Record<string, boolean> | null | undefined) =>
+  Object.entries(flags || {}).filter(([, v]) => !!v).map(([k]) => k);
+
+function ReqFollowUpBadges({ row }: { row: { created_at: string; last_contacted_at: string | null; next_follow_up_at: string | null } }) {
+  const overdue = isFollowUpOverdue(row.next_follow_up_at);
+  const stale = isUncontactedStale(row.created_at, row.last_contacted_at);
+  if (!overdue && !stale) return null;
+  return (
+    <div className="flex flex-wrap gap-1">
+      {overdue && <Badge variant="destructive" className="text-[10px]">Opvolging verlopen</Badge>}
+      {stale && <Badge variant="outline" className="text-[10px] border-amber-400 text-amber-700">Nog niet opgevolgd</Badge>}
+    </div>
+  );
+}
+
+function FlagMiniBadges({ flags }: { flags: Record<string, boolean> | null | undefined }) {
+  const keys = activeFlagKeys(flags).slice(0, 3);
+  if (keys.length === 0) return null;
+  return (
+    <div className="flex flex-wrap gap-1 mt-1">
+      {keys.map((k) => (
+        <Badge key={k} variant="outline" className="text-[10px]">{FLAG_LABEL(k)}</Badge>
+      ))}
+    </div>
+  );
+}
 
 export default function AdminContactRequests() {
   const [rows, setRows] = useState<Req[]>([]);
