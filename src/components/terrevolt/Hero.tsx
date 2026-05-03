@@ -41,7 +41,7 @@ export function Hero() {
             TerreVolt ondersteunt netbeheerders, hoofdaannemers en industrie bij LS/MS-netmontage, stationsrenovaties, schakelwerk en meetbare aardingsoplossingen.
           </p>
 
-          <p className="text-[15px] sm:text-lg text-gray-400 mb-6 sm:mb-10 max-w-2xl italic leading-relaxed">
+          <p className="text-[15px] sm:text-lg text-white/70 mb-6 sm:mb-10 max-w-2xl italic leading-relaxed">
             Van huisaansluiting tot middenspanningsstation, met veiligheid als basis.
           </p>
 
