@@ -45,23 +45,23 @@ export default defineConfig({
     {
       name: "chromium-mobile",
       use: { ...devices["Pixel 5"] },
-      testIgnore: /visual-regression\.spec\.ts/,
+      testIgnore: /(visual-regression|logo-visual)\.spec\.ts/,
     },
     // iOS Safari engine via WebKit, op de drie kritieke iPhone-formaten.
     {
       name: "mobile-safari-iphone-se",
       use: { ...devices["iPhone SE"] },
-      testIgnore: /visual-regression\.spec\.ts/,
+      testIgnore: /(visual-regression|logo-visual)\.spec\.ts/,
     },
     {
       name: "mobile-safari-iphone-12",
       use: { ...devices["iPhone 12"] },
-      testIgnore: /visual-regression\.spec\.ts/,
+      testIgnore: /(visual-regression|logo-visual)\.spec\.ts/,
     },
     {
       name: "mobile-safari-iphone-14-pro-max",
       use: { ...devices["iPhone 14 Pro Max"] },
-      testIgnore: /visual-regression\.spec\.ts/,
+      testIgnore: /(visual-regression|logo-visual)\.spec\.ts/,
     },
     // Visuele regressie: één mobile- en één desktop-project,
     // gebruikt door e2e/visual-regression.spec.ts om pariteit te bewaken.
@@ -74,6 +74,13 @@ export default defineConfig({
       name: "visual-desktop",
       use: { ...devices["Desktop Chrome"], viewport: { width: 1366, height: 768 } },
       testMatch: /visual-regression\.spec\.ts/,
+    },
+    // Logo-schaling — eigen project zodat we 'm los kunnen draaien:
+    //   npx playwright test --project=logo-visual
+    {
+      name: "logo-visual",
+      use: { ...devices["Desktop Chrome"] },
+      testMatch: /logo-visual\.spec\.ts/,
     },
   ],
   webServer: {
