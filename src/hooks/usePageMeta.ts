@@ -13,8 +13,7 @@ export interface PageMetaInput {
   noindex?: boolean;
 }
 
-const DEFAULT_OG_IMAGE =
-  "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/934c096b-5da3-4d3e-8664-9c3b2851ad34/id-preview-be52df31--114e0361-3feb-41c9-9cc2-4ee83a6c5558.lovable.app-1777724052662.png";
+const DEFAULT_OG_IMAGE = "https://terrevolt.nl/og-image.jpg";
 
 function upsertMeta(attr: "name" | "property", key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
