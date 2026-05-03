@@ -17,6 +17,19 @@ import { toast } from "sonner";
 import { whatsappLink } from "@/lib/whatsapp";
 import { waTemplates, inDateRange, type DateRange } from "@/lib/adminUtils";
 import { downloadCsv } from "@/lib/csvExport";
+import { isFollowUpOverdue, isUncontactedStale } from "@/lib/adminBadges";
+
+function FollowUpBadges({ row }: { row: { created_at: string; last_contacted_at: string | null; next_follow_up_at: string | null } }) {
+  const overdue = isFollowUpOverdue(row.next_follow_up_at);
+  const stale = isUncontactedStale(row.created_at, row.last_contacted_at);
+  if (!overdue && !stale) return null;
+  return (
+    <div className="flex flex-wrap gap-1">
+      {overdue && <Badge variant="destructive" className="text-[10px]">Opvolging verlopen</Badge>}
+      {stale && <Badge variant="outline" className="text-[10px] border-amber-400 text-amber-700">Nog niet opgevolgd</Badge>}
+    </div>
+  );
+}
 
 type App = {
   id: string;
