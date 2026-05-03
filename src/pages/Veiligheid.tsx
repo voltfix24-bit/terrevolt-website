@@ -274,6 +274,53 @@ const Veiligheid = () => {
           </div>
         </section>
 
+        {/* SECTIE: De Veilige 5 bij schakelwerk */}
+        <section id="veilige-5" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
+              <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty">De Veilige 5 bij schakelwerk</h2>
+              <p className="text-base sm:text-xl text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
+                {softHyphenate("Schakelwerk vraagt om rust, discipline en duidelijke opdrachtverstrekking. Een netdeel wordt niet 'even' uitgeschakeld; het wordt volgens een gecontroleerde volgorde voorbereid, geschakeld, veiliggesteld en pas vrijgegeven wanneer de situatie klopt.")}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+              {[
+                { title: "Scheiden", description: "Het netdeel wordt gescheiden van alle relevante voedingsbronnen volgens opdracht, bedienplan en projectafspraken." },
+                { title: "Beveiligen tegen wederinschakelen", description: "Er worden maatregelen genomen om te voorkomen dat de installatie ongewenst opnieuw kan worden ingeschakeld." },
+                { title: "Controleren op afwezigheid van spanning", description: "Voordat werkzaamheden starten, wordt gecontroleerd of de installatie of het werkgebied spanningsloos is volgens de geldende instructie." },
+                { title: "Aarden en kortsluiten", description: "Waar van toepassing wordt geaard en kortgesloten om het werkgebied veilig te houden bij onverwachte spanning, inductie of terugvoeding." },
+                { title: "Afschermen en afbakenen", description: "Nabijgelegen onder spanning staande delen worden afgeschermd en het veilige werkgebied wordt duidelijk afgebakend." },
+              ].map((step, index) => (
+                <div
+                  key={step.title}
+                  className="relative bg-[#f8f9fa] rounded-xl p-6 border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 mt-6 sm:mt-0"
+                >
+                  <div className="absolute -top-4 left-6 w-10 h-10 bg-[#0d3b2e] text-[#9ed42e] rounded-full flex items-center justify-center text-sm border-4 border-white">
+                    {index + 1}
+                  </div>
+                  <h3 className="text-base text-[#0d3b2e] mb-2 mt-2 hyphens-nl text-pretty" lang="nl">{step.title}</h3>
+                  <p className="text-[#6c757d] text-[15px] leading-[1.7] sm:text-sm sm:leading-relaxed hyphens-nl text-pretty" lang="nl">
+                    {softHyphenate(step.description)}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="max-w-3xl mx-auto mt-12 sm:mt-14 bg-[#0d3b2e] text-white rounded-2xl p-6 sm:p-8 border-l-4 border-[#9ed42e]">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <AlertTriangle className="w-6 h-6 text-[#9ed42e] flex-shrink-0 mt-1" strokeWidth={2} />
+                <div>
+                  <h3 className="text-xl sm:text-2xl mb-2 text-white">Niet zeker? Niet starten.</h3>
+                  <p className="text-[15px] sm:text-base text-white/85 leading-relaxed hyphens-nl text-pretty" lang="nl">
+                    {softHyphenate("Bij onduidelijke opdracht, ontbrekende aanwijzing, twijfel over de spanningstoestand of onveilige werkgrens wordt er niet doorgewerkt. Dan wordt er afgestemd met de juiste verantwoordelijke. We doen het veilig, of we doen het niet.")}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* SECTIE: BEI & VWI */}
         <section id="bei-vwi" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
