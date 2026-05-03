@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { ArrowRight, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, Wrench, ClipboardList, HardHat, DoorOpen, FileText, Users, Briefcase, TrafficCone, AlertTriangle } from "lucide-react";
+import { ArrowRight, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, Wrench, ClipboardList, HardHat, DoorOpen, FileText, Users, Briefcase, TrafficCone, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
@@ -55,9 +55,12 @@ const voorPlanning = [
 const faqs = [
   { q: "Geldt LMRA voor al het werk?", a: "Ja. Voor start of hervatting van werkzaamheden wordt gecontroleerd of de situatie nog klopt. Bij twijfel wordt afgestemd voordat er wordt doorgewerkt." },
   { q: "Wat is de Veilige 5 bij schakelwerk?", a: "De Veilige 5 beschrijft de basisstappen om veilig te kunnen werken: scheiden, beveiligen tegen wederinschakelen, controleren op afwezigheid van spanning, aarden en kortsluiten, en afschermen of afbakenen." },
+  { q: "Wordt er doorgewerkt als de planning onder druk staat?", a: "Nee. Planning, onderhoudsvensters en deadlines zijn belangrijk, maar niet belangrijker dan veilig werken. Als de situatie niet veilig is, wordt er gestopt en afgestemd." },
+  { q: "Wat als een monteur een situatie onveilig vindt?", a: "Dan wordt er niet zomaar doorgewerkt. De situatie wordt gemeld, besproken en pas opgepakt als het verantwoord kan. We doen het veilig, of we doen het niet." },
   { q: "Wat betekent BEI BLS/BHS?", a: "BEI-BLS gaat over laagspanning; BEI-BHS over hoog- en middenspanning binnen de elektriciteitsvoorzieningssystemen van netbeheerders. Voor TerreVolt betekent dit dat werkzaamheden worden voorbereid en uitgevoerd met aandacht voor de juiste rollen, aanwijzingen en instructies." },
   { q: "Wat zijn VWI's?", a: "VWI's zijn veiligheidswerkinstructies voor specifieke werkzaamheden. Ze geven richting aan hoe werkzaamheden veilig uitgevoerd moeten worden binnen de BEI-structuur." },
   { q: "Hoe kijkt TerreVolt naar werkplekveiligheid langs wegen?", a: "Bij werkzaamheden langs wegen of op projectlocaties kijken we naar zichtbaarheid, afzettingen, verkeersbewegingen, looproutes, toegang en andere partijen op locatie." },
+  { q: "Wat krijgt een opdrachtgever terug na uitvoering?", a: "Afhankelijk van het werk leveren we controle, terugkoppeling, meetrapportage, fotoregistratie of opleverdocumentatie aan. Zo blijft het werk aantoonbaar en overdraagbaar." },
   { q: "Hoe borgt TerreVolt kwaliteit?", a: "Door duidelijke voorbereiding, passende werkinstructies, controle, terugkoppeling, rapportage waar nodig en aandacht voor ISO 9001:2015-principes zoals procesbeheersing en continue verbetering." },
   { q: "Werkt TerreVolt volgens netbeheerderseisen?", a: "TerreVolt sluit aan op projectafspraken, opdrachtgeverseisen en bedrijfsspecifieke procedures waar die van toepassing zijn." },
   { q: "Wat als een situatie niet veilig voelt?", a: "Dan wordt er niet zomaar doorgewerkt. Veiligheid gaat voor. De situatie wordt gemeld, afgestemd en pas opgepakt als het verantwoord kan. We doen het veilig, of we doen het niet." },
@@ -271,6 +274,78 @@ const Veiligheid = () => {
             </div>
           </div>
         </section>
+        {/* SECTIE: Wat veiligheid en kwaliteit in de praktijk betekenen */}
+        <section id="praktijk" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-14">
+              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">In de praktijk</div>
+              <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty" lang="nl">Wat veiligheid en kwaliteit in de praktijk betekenen</h2>
+              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
+                {softHyphenate("Veiligheid en kwaliteit moeten zichtbaar zijn in het werk, niet alleen in woorden. Daarom maken we duidelijk wat monteurs en opdrachtgevers van TerreVolt mogen verwachten.")}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+              {[
+                {
+                  title: "Voor monteurs en ploegen",
+                  icon: HardHat,
+                  items: [
+                    "Je mag en moet stoppen bij twijfel.",
+                    "Voor start of hervatting doen we een LMRA.",
+                    "Werkgrenzen, opdracht en bevoegdheden moeten duidelijk zijn.",
+                    "Geen veilige werkplek betekent: niet starten.",
+                    "Veiligheid gaat vóór planning, tempo of productiedruk.",
+                  ],
+                },
+                {
+                  title: "Voor opdrachtgevers",
+                  icon: Briefcase,
+                  items: [
+                    "Vooraf afstemming over scope, toegang, werkmethode en bevoegdheden.",
+                    "Uitvoering met aandacht voor BEI BLS/BHS, VWI's, VCA en projectafspraken.",
+                    "Werkplekveiligheid inclusief afzetting, zichtbaarheid en omgevingsrisico's.",
+                    "Controle, terugkoppeling en documentatie waar nodig.",
+                    "Afwijkingen worden gemeld en afgestemd.",
+                  ],
+                },
+              ].map((card) => {
+                const Icon = card.icon;
+                return (
+                  <div key={card.title} className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-6 sm:p-8 hover:border-[#9ed42e] hover:shadow-md transition-all duration-300">
+                    <div className="flex items-center gap-3 mb-5">
+                      <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center flex-shrink-0">
+                        <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                      </div>
+                      <h3 className="text-lg sm:text-xl text-[#0d3b2e] hyphens-nl text-pretty" lang="nl">{card.title}</h3>
+                    </div>
+                    <ul className="space-y-3">
+                      {card.items.map((item) => (
+                        <li key={item} className="flex items-start gap-3 text-[#6c757d] text-[15px] leading-[1.6] hyphens-nl text-pretty" lang="nl">
+                          <CheckCircle2 className="w-5 h-5 text-[#9ed42e] flex-shrink-0 mt-0.5" strokeWidth={2} />
+                          <span>{softHyphenate(item)}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="max-w-3xl mx-auto mt-12 sm:mt-14 bg-[#0d3b2e] text-white rounded-2xl p-6 sm:p-8 border-l-4 border-[#9ed42e]">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <AlertTriangle className="w-6 h-6 text-[#9ed42e] flex-shrink-0 mt-1" strokeWidth={2} />
+                <div>
+                  <h3 className="text-xl sm:text-2xl mb-2 text-white">Niet zeker? Niet starten.</h3>
+                  <p className="text-[15px] sm:text-base text-white/85 leading-relaxed hyphens-nl text-pretty" lang="nl">
+                    {softHyphenate("Een monteur die stopt bij twijfel doet precies wat wij verwachten. Veiligheid is geen vertraging van het werk; veiligheid is de voorwaarde om te mogen werken.")}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* SECTIE: De Veilige 5 bij schakelwerk */}
         <section id="veilige-5" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
