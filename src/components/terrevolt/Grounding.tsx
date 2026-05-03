@@ -49,7 +49,7 @@ export function Grounding() {
             Specialisme
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-3 sm:mb-4">Aardingsoplossingen</h2>
-          <p className="text-base sm:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-xl text-white/85 max-w-3xl mx-auto leading-relaxed">
             Een betrouwbare aarding is de basis van veilige elektrotechnische infrastructuur. TerreVolt realiseert, verbetert, meet en rapporteert aardingssystemen voor LS/MS-stations, technische ruimten en industriële installaties.
           </p>
         </Reveal>
@@ -64,7 +64,7 @@ export function Grounding() {
                     <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.5} />
                   </div>
                   <h3 className="text-lg text-white mb-2 hyphens-nl">{service.title}</h3>
-                  <p className="text-gray-400 text-sm leading-relaxed hyphens-nl">{service.description}</p>
+                  <p className="text-white/65 text-sm leading-relaxed hyphens-nl">{service.description}</p>
                 </div>
               </Reveal>
             );

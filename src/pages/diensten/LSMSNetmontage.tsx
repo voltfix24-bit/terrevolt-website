@@ -57,7 +57,7 @@ const LSMSNetmontage = () => {
               <h1 className="text-[clamp(1.875rem,7vw,2.625rem)] sm:text-5xl lg:text-6xl text-white mb-6 leading-[1.1] sm:leading-tight hyphens-nl text-pretty">
                 LS/MS <span className="text-[#9ed42e]">Netmontage</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-10 max-w-3xl leading-relaxed">
                 TerreVolt voert netmontage uit aan laagspannings- en middenspanningsnetten. Wij ondersteunen bij kabelmontage, moffen, eindsluitingen, aansluitwerk en oplevering binnen de netbeheeromgeving.
               </p>
 
@@ -204,7 +204,7 @@ const LSMSNetmontage = () => {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
                 LS/MS-monteurs of <span className="text-[#9ed42e]">netmontageploeg nodig?</span>
               </h2>
-              <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+              <p className="text-xl text-white/85 mb-12 leading-relaxed">
                 TerreVolt denkt mee over veilige, praktische en betrouwbare uitvoering.
               </p>
               <a

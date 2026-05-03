@@ -58,7 +58,7 @@ const Huisaansluitingen = () => {
                 Huisaansluitingen<br />
                 <span className="text-[#9ed42e]">& LS-aansluitwerk</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-10 max-w-3xl leading-relaxed">
                 TerreVolt ondersteunt bij aanleg, wijziging, sanering en herstel van laagspanningsaansluitingen voor woningen, appartementencomplexen, bedrijfspanden en openbare voorzieningen.
               </p>
 
@@ -212,7 +212,7 @@ const Huisaansluitingen = () => {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
                 Ondersteuning nodig bij <span className="text-[#9ed42e]">LS-aansluitwerk</span>?
               </h2>
-              <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+              <p className="text-xl text-white/85 mb-12 leading-relaxed">
                 TerreVolt denkt mee over veilige, praktische en betrouwbare uitvoering.
               </p>
               <a

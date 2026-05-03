@@ -146,7 +146,7 @@ export function Header() {
                   <div className="text-white text-base font-medium leading-snug line-clamp-2">
                     Werk mee aan LS/MS-infrastructuur
                   </div>
-                  <div className="text-gray-300 text-xs mt-1 leading-snug line-clamp-2">
+                  <div className="text-white/85 text-xs mt-1 leading-snug line-clamp-2">
                     Profielen voor monteurs, werkverantwoordelijken en ZZP-ploegen.
                   </div>
                   <div className="inline-flex items-center gap-1.5 text-[#9ed42e] text-sm mt-2 font-medium">

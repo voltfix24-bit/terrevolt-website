@@ -21,7 +21,7 @@ export function CTA() {
             Een LS/MS-project of{" "}
             <span className="text-[#9ed42e]">aardingsvraagstuk&nbsp;bespreken?</span>
           </h2>
-          <p className="text-base sm:text-xl text-gray-300 mb-10 sm:mb-12 leading-relaxed">
+          <p className="text-base sm:text-xl text-white/85 mb-10 sm:mb-12 leading-relaxed">
             Of het nu gaat om netmontage, stationsrenovatie, schakelwerk of aarding: TerreVolt denkt graag mee over de juiste aanpak.
           </p>
 

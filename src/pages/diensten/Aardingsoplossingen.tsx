@@ -82,7 +82,7 @@ const Aardingsoplossingen = () => {
                 Aardingsoplossingen<br />
                 <span className="text-[#9ed42e]">voor LS/MS-infrastructuur</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-10 max-w-3xl leading-relaxed">
                 TerreVolt realiseert, verbetert, meet en rapporteert aardingsvoorzieningen voor laagspannings- en middenspanningsinstallaties, stations, technische ruimten en industriële installaties.
               </p>
 
@@ -188,7 +188,7 @@ const Aardingsoplossingen = () => {
                 Aantoonbaar
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4">Aantoonbaar uitgevoerd. Meetbaar opgeleverd.</h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-white/85 max-w-3xl mx-auto leading-relaxed">
                 TerreVolt zorgt voor controleerbare uitvoering en duidelijke vastlegging. Waar nodig leveren wij meetgegevens en rapportages op voor opdrachtgever, beheerder of opleverdossier.
               </p>
             </div>
@@ -205,7 +205,7 @@ const Aardingsoplossingen = () => {
                       <Icon className="w-7 h-7 text-[#0d3b2e]" strokeWidth={2.5} />
                     </div>
                     <h3 className="text-xl text-white mb-3">{item.title}</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">{item.description}</p>
+                    <p className="text-white/65 text-sm leading-relaxed">{item.description}</p>
                   </div>
                 );
               })}
@@ -247,7 +247,7 @@ const Aardingsoplossingen = () => {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6">
                 Een <span className="text-[#9ed42e]">aardingsvraagstuk</span> bespreken?
               </h2>
-              <p className="text-xl text-gray-300 mb-12 leading-relaxed">
+              <p className="text-xl text-white/85 mb-12 leading-relaxed">
                 TerreVolt denkt graag mee over aanpak, meting en oplevering.
               </p>
               <a
