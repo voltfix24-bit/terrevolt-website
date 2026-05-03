@@ -63,7 +63,7 @@ const faqs = [
   { q: "Wat krijgt een opdrachtgever terug na uitvoering?", a: "Afhankelijk van het werk leveren we controle, terugkoppeling, meetrapportage, fotoregistratie of opleverdocumentatie aan. Zo blijft het werk aantoonbaar en overdraagbaar." },
   { q: "Hoe borgt TerreVolt kwaliteit?", a: "Door duidelijke voorbereiding, passende werkinstructies, controle, terugkoppeling, rapportage waar nodig en aandacht voor ISO 9001:2015-principes zoals procesbeheersing en continue verbetering." },
   { q: "Werkt TerreVolt volgens netbeheerderseisen?", a: "TerreVolt sluit aan op projectafspraken, opdrachtgeverseisen en bedrijfsspecifieke procedures waar die van toepassing zijn." },
-  { q: "Wat als een situatie niet veilig voelt?", a: "Dan wordt er niet zomaar doorgewerkt. Veiligheid gaat voor. De situatie wordt gemeld, afgestemd en pas opgepakt als het verantwoord kan. We doen het veilig, of we doen het niet." },
+  
 ];
 
 const Veiligheid = () => {
