@@ -1,56 +1,150 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useCallback, useEffect, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+let lastAutoScrolledKey = "";
+
+const PROGRAMMATIC_SCROLL_EVENT = "terrevolt:programmatic-scroll";
 
 /**
- * Scrollt naar het element waarvan id matcht met de URL-hash.
- * Werkt bij directe page loads en bij in-app navigatie naar /pad#anchor.
- *
- * Houdt rekening met:
- *  - async geladen content (Supabase fetches) door een korte tijd te blijven
- *    her-positioneren tot het element stabiel is.
- *  - sticky header/subnav via CSS scroll-margin-top (scroll-mt-*).
- *  - prefers-reduced-motion via globale CSS scroll-behavior.
+ * Eén centrale hash-scroller voor directe page loads, in-app navigatie
+ * en same-page anchor clicks. Voorkomt dubbele native/CSS/JS-scrolls.
  */
 export function HashScroll() {
-  const { pathname, hash } = useLocation();
+  const navigate = useNavigate();
+  const { pathname, search, hash } = useLocation();
+  const locationRef = useRef({ pathname, search, hash });
+  const programmaticEndTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    locationRef.current = { pathname, search, hash };
+  }, [pathname, search, hash]);
+
+  const getOffset = useCallback(() => {
+    const header = document.querySelector("header");
+    const headerH = header ? header.getBoundingClientRect().height : 0;
+    const stickyOffsetElements = Array.from(document.querySelectorAll<HTMLElement>("[data-hash-scroll-offset]"));
+    const stickyOffsetH = stickyOffsetElements.reduce((total, el) => total + el.getBoundingClientRect().height, 0);
+    return Math.round(headerH + stickyOffsetH + 16);
+  }, []);
+
+  const setProgrammaticScroll = useCallback((active: boolean, targetId?: string) => {
+    window.dispatchEvent(
+      new CustomEvent(PROGRAMMATIC_SCROLL_EVENT, {
+        detail: { active, targetId },
+      }),
+    );
+  }, []);
+
+  const scrollToHash = useCallback(
+    (targetHash: string, behavior: ScrollBehavior = "smooth") => {
+      if (!targetHash || targetHash === "#") return false;
+
+      let id = "";
+      try {
+        id = decodeURIComponent(targetHash.replace(/^#/, ""));
+      } catch {
+        id = targetHash.replace(/^#/, "");
+      }
+      if (!id) return false;
+
+      const el = document.getElementById(id);
+      if (!el) return false;
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const finalBehavior: ScrollBehavior = prefersReducedMotion ? "auto" : behavior;
+      const y = Math.max(0, el.getBoundingClientRect().top + window.scrollY - getOffset());
+      const html = document.documentElement;
+      const previousInlineScrollBehavior = html.style.scrollBehavior;
+
+      if (programmaticEndTimerRef.current) {
+        window.clearTimeout(programmaticEndTimerRef.current);
+      }
+
+      setProgrammaticScroll(true, id);
+      html.style.scrollBehavior = "auto";
+      window.scrollTo({ top: y, behavior: finalBehavior });
+      window.requestAnimationFrame(() => {
+        html.style.scrollBehavior = previousInlineScrollBehavior;
+      });
+
+      const prevTabIndex = el.getAttribute("tabindex");
+      if (prevTabIndex === null) el.setAttribute("tabindex", "-1");
+      el.focus({ preventScroll: true });
+      if (prevTabIndex === null) {
+        window.setTimeout(() => el.removeAttribute("tabindex"), 0);
+      }
+
+      programmaticEndTimerRef.current = window.setTimeout(
+        () => setProgrammaticScroll(false, id),
+        finalBehavior === "smooth" ? 700 : 100,
+      );
+
+      return true;
+    },
+    [getOffset, setProgrammaticScroll],
+  );
 
   useEffect(() => {
     if (!hash) return;
-    const id = decodeURIComponent(hash.replace(/^#/, ""));
-    if (!id) return;
+    const scrollKey = `${pathname}${search}${hash}`;
+    if (lastAutoScrolledKey === scrollKey) return;
 
     let cancelled = false;
-    let lastTop = -1;
-    let stableCount = 0;
-    let attempts = 0;
-    const MAX_ATTEMPTS = 60; // ~3s totaal
+    let rafId = 0;
+    let firstTimer = 0;
+    let retryTimer = 0;
 
-    const tick = () => {
+    const run = (isRetry = false) => {
       if (cancelled) return;
-      const el = document.getElementById(id);
-      if (el) {
-        // Geen smooth bij eerste positionering — voorkomt halve scroll bij
-        // langzaam ladende content.
-        el.scrollIntoView({ block: "start" });
-        const top = el.getBoundingClientRect().top;
-        if (Math.abs(top - lastTop) < 1) {
-          stableCount++;
-          if (stableCount >= 3) return; // doelpositie is stabiel
-        } else {
-          stableCount = 0;
-          lastTop = top;
-        }
+      if (scrollToHash(hash, "smooth")) {
+        lastAutoScrolledKey = scrollKey;
+        return;
       }
-      if (++attempts < MAX_ATTEMPTS) {
-        window.setTimeout(tick, 50);
+      if (!isRetry) {
+        retryTimer = window.setTimeout(() => run(true), 100);
       }
     };
 
-    requestAnimationFrame(tick);
+    rafId = requestAnimationFrame(() => {
+      firstTimer = window.setTimeout(() => run(false), 75);
+    });
+
     return () => {
       cancelled = true;
+      cancelAnimationFrame(rafId);
+      window.clearTimeout(firstTimer);
+      window.clearTimeout(retryTimer);
     };
-  }, [pathname, hash]);
+  }, [pathname, search, hash, scrollToHash]);
+
+  useEffect(() => {
+    const onClick = (event: MouseEvent) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const target = (event.target as HTMLElement | null)?.closest('a[href^="#"]') as HTMLAnchorElement | null;
+      if (!target) return;
+      if (target.target && target.target !== "" && target.target !== "_self") return;
+
+      const targetHash = target.getAttribute("href") || "";
+      if (targetHash.length < 2) return;
+
+      event.preventDefault();
+      const current = locationRef.current;
+      if (current.hash !== targetHash) {
+        navigate({ pathname: current.pathname, search: current.search, hash: targetHash });
+        return;
+      }
+
+      scrollToHash(targetHash, "smooth");
+    };
+
+    document.addEventListener("click", onClick);
+    return () => {
+      document.removeEventListener("click", onClick);
+      if (programmaticEndTimerRef.current) {
+        window.clearTimeout(programmaticEndTimerRef.current);
+      }
+    };
+  }, [navigate, scrollToHash]);
 
   return null;
 }
