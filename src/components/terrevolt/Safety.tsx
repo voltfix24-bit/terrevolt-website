@@ -1,26 +1,26 @@
-import { ShieldCheck, BadgeCheck, Award, BookOpen } from "lucide-react";
+import { FileSearch, ShieldCheck, BadgeCheck, ClipboardList } from "lucide-react";
 import { Reveal } from "@/components/terrevolt/Reveal";
 
 const certifications = [
   {
+    icon: FileSearch,
+    title: "LMRA & werkhouding",
+    description: "Voor start of hervatting wordt gekeken of de situatie nog klopt. Bij twijfel wordt afgestemd."
+  },
+  {
     icon: ShieldCheck,
-    title: "BEI BLS/BHS",
-    description: "Aanwijzingen en veiligheidsstructuur voor werkzaamheden binnen laag- en middenspanning."
+    title: "BEI BLS/BHS & VWI's",
+    description: "Veilig werken binnen LS/MS-netbeheeromgevingen met passende instructies en projectafspraken."
   },
   {
     icon: BadgeCheck,
-    title: "AVP / VP / VOP / WV",
-    description: "Passende rollen en bevoegdheden afhankelijk van project, opdrachtgever en werkgebied."
+    title: "VCA & werkplekveiligheid",
+    description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving, afzetting en zichtbaarheid."
   },
   {
-    icon: Award,
-    title: "VCA",
-    description: "Veiligheidsbewust werken met aandacht voor mens, installatie en omgeving."
-  },
-  {
-    icon: BookOpen,
-    title: "NEN 1010 / NEN 3140",
-    description: "Werken met aandacht voor geldende installatie- en veiligheidsnormen."
+    icon: ClipboardList,
+    title: "Kwaliteit & oplevering",
+    description: "Controle, rapportage en aantoonbare oplevering met aandacht voor NEN en ISO 9001:2015-principes."
   }
 ];
 
