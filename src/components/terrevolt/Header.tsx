@@ -128,49 +128,92 @@ export function Header() {
         <nav
           id="mobile-nav"
           aria-label="Mobiele navigatie"
-          className="lg:hidden fixed left-0 right-0 top-16 sm:top-20 bottom-0 z-[9999] bg-white border-t border-gray-200 overflow-y-auto overscroll-contain"
+          className="lg:hidden fixed left-0 right-0 top-16 sm:top-20 bottom-0 z-[9999] bg-white border-t border-gray-200 overflow-y-auto overscroll-contain animate-fade-in motion-reduce:animate-none"
           style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}
         >
-          <div className="container mx-auto px-4 sm:px-6 py-3 flex flex-col gap-1.5 pb-[calc(2rem+env(safe-area-inset-bottom))]">
+          <div className="container mx-auto px-4 sm:px-6 pt-4 pb-[calc(2rem+env(safe-area-inset-bottom))] flex flex-col">
             {/* Recruitment-card bovenaan */}
             <Link
               to="/werken-bij"
               onClick={() => setOpen(false)}
-              className="block bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] text-white rounded-xl p-4 mb-1.5 border border-[#9ed42e]/40 hover:from-[#1a4a36] hover:to-[#0d3b2e] transition-colors"
+              className="block bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] text-white rounded-xl p-4 mb-4 border border-[#9ed42e]/40 transition-transform active:scale-[0.99] hover:from-[#1a4a36] hover:to-[#0d3b2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2"
             >
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 bg-[#9ed42e] rounded-lg flex items-center justify-center flex-shrink-0">
-                  <HardHat className="w-5 h-5 text-[#0d3b2e]" strokeWidth={2.5} />
+                <div className="w-12 h-12 bg-[#9ed42e] rounded-lg flex items-center justify-center flex-shrink-0">
+                  <HardHat className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.5} />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <div className="text-white text-base leading-snug">Werk mee aan LS/MS-infrastructuur</div>
-                  <div className="text-gray-300 text-xs mt-1 leading-snug">
-                    Bekijk profielen voor monteurs, werkverantwoordelijken en ZZP-ploegen.
+                  <div className="text-white text-base font-medium leading-snug line-clamp-2">
+                    Werk mee aan LS/MS-infrastructuur
                   </div>
-                  <div className="inline-flex items-center gap-1.5 text-[#9ed42e] text-sm mt-2">
+                  <div className="text-gray-300 text-xs mt-1 leading-snug line-clamp-2">
+                    Profielen voor monteurs, werkverantwoordelijken en ZZP-ploegen.
+                  </div>
+                  <div className="inline-flex items-center gap-1.5 text-[#9ed42e] text-sm mt-2 font-medium">
                     Werken bij bekijken <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
               </div>
             </Link>
 
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                to={l.href}
-                onClick={() => setOpen(false)}
-                className="text-[#2d3436] hover:text-[#0d3b2e] transition-colors py-2.5 px-2 rounded-md hover:bg-[#f0f7e6] min-h-[44px] flex items-center"
-              >
-                {l.label}
-              </Link>
-            ))}
+            {/* Navigatielijst */}
+            <ul className="flex flex-col divide-y divide-gray-100 border-y border-gray-100">
+              {links.map((l) => {
+                const isActive = pathname === l.href || pathname.startsWith(`${l.href}/`);
+                return (
+                  <li key={l.href}>
+                    <Link
+                      to={l.href}
+                      onClick={() => setOpen(false)}
+                      aria-current={isActive ? "page" : undefined}
+                      className={`flex items-center gap-3 min-h-[56px] px-2 py-4 text-lg font-medium transition-colors active:bg-[#f8f9fa] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md ${
+                        isActive ? "text-[#0d3b2e]" : "text-[#2d3436] hover:text-[#0d3b2e]"
+                      }`}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className={`block w-1 h-6 rounded-full transition-colors ${
+                          isActive ? "bg-[#9ed42e]" : "bg-transparent"
+                        }`}
+                      />
+                      <span className="flex-1">{l.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+
+            {/* Contact CTA */}
             <Link
               to="/contact"
               onClick={() => setOpen(false)}
-              className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors text-center mt-2 min-h-[48px] flex items-center justify-center"
+              className="bg-[#0d3b2e] text-white px-6 rounded-xl text-center mt-5 min-h-[56px] flex items-center justify-center font-medium transition-all active:scale-[0.98] hover:bg-[#1a4a36] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2"
             >
               Contact
             </Link>
+
+            {/* Snelle contactregel */}
+            <div className="mt-5 pt-4 border-t border-gray-100 text-center">
+              <p className="text-xs text-[#6c757d] mb-2">Direct schakelen?</p>
+              <div className="flex flex-col gap-1.5 items-center">
+                <a
+                  href={telHref}
+                  onClick={() => setOpen(false)}
+                  className="inline-flex items-center gap-2 text-sm text-[#0d3b2e] hover:underline min-h-[36px]"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>{company.phone.display}</span>
+                </a>
+                <a
+                  href={mailHref}
+                  onClick={() => setOpen(false)}
+                  className="inline-flex items-center gap-2 text-sm text-[#0d3b2e] hover:underline min-h-[36px] break-all"
+                >
+                  <Mail className="w-4 h-4" />
+                  <span>{company.email}</span>
+                </a>
+              </div>
+            </div>
           </div>
         </nav>
       )}
