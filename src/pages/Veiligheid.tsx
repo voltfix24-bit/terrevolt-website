@@ -330,9 +330,10 @@ const Veiligheid = () => {
         <section id="bei-vwi" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Normen, systemen en bevoegdheden</h2>
+              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Netbeheerstructuur</div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Veilig werken binnen BEI, VWI en projectafspraken</h2>
               <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
-                {softHyphenate("Normen en certificaten zijn geen doel op zichzelf. Ze helpen om veilig, beheerst en aantoonbaar te werken.")}
+                {softHyphenate("BEI, VWI's, VCA, LMRA en NEN-normen zijn geen losse labels. Ze ondersteunen de manier waarop veilig en beheerst gewerkt wordt binnen de netbeheerwereld.")}
               </p>
             </div>
 
