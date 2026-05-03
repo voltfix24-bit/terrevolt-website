@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
-import { Loader2, Mail, Phone, MapPin, FileDown } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Loader2, Mail, Phone, MapPin, FileDown, Search, X, MessageCircle, Save, CalendarCheck } from "lucide-react";
 import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
@@ -12,6 +14,7 @@ import {
 } from "@/components/ui/dialog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import { whatsappLink } from "@/lib/whatsapp";
 
 type App = {
   id: string;
@@ -27,6 +30,9 @@ type App = {
   cv_url: string | null;
   status: string;
   vacancy_id: string | null;
+  profile: string | null;
+  admin_notes: string | null;
+  last_contacted_at: string | null;
   vacancies?: { title: string; slug: string } | null;
 };
 
@@ -34,13 +40,22 @@ const STATUSES = [
   { value: "new", label: "Nieuw" },
   { value: "in_review", label: "In behandeling" },
   { value: "contacted", label: "Contact gehad" },
+  { value: "not_reached", label: "Niet bereikbaar" },
+  { value: "documents_needed", label: "Documenten nodig" },
+  { value: "matched", label: "Gematcht" },
   { value: "rejected", label: "Afgewezen" },
   { value: "hired", label: "Aangenomen" },
+  { value: "archived", label: "Gearchiveerd" },
 ];
+const STATUS_LABEL = (v: string) => STATUSES.find((s) => s.value === v)?.label || v;
 
 export default function AdminApplications() {
   const [rows, setRows] = useState<App[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const [query, setQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [vacancyFilter, setVacancyFilter] = useState<string>("all");
 
   async function load() {
     setLoading(true);
@@ -61,10 +76,57 @@ export default function AdminApplications() {
     load();
   }
 
+  async function saveNote(id: string, admin_notes: string) {
+    const { error } = await supabase.from("job_applications").update({ admin_notes }).eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success("Notitie opgeslagen");
+    load();
+  }
+
+  async function logContact(id: string) {
+    const { error } = await supabase
+      .from("job_applications")
+      .update({ last_contacted_at: new Date().toISOString() })
+      .eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success("Contactmoment vastgelegd");
+    load();
+  }
+
   async function downloadCv(path: string) {
     const { data, error } = await supabase.storage.from("job-applications").createSignedUrl(path, 60);
-    if (error || !data) return toast.error("Kon CV niet ophalen");
+    if (error || !data) {
+      return toast.error("Bestand kon niet worden geopend. Controleer of het bestand nog bestaat.");
+    }
     window.open(data.signedUrl, "_blank");
+  }
+
+  const vacancies = useMemo(() => {
+    const map = new Map<string, string>();
+    rows.forEach((r) => {
+      if (r.vacancies?.title && r.vacancy_id) map.set(r.vacancy_id, r.vacancies.title);
+    });
+    return Array.from(map.entries()).sort((a, b) => a[1].localeCompare(b[1], "nl"));
+  }, [rows]);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return rows.filter((r) => {
+      if (q) {
+        const hay = `${r.name} ${r.email} ${r.phone} ${r.region ?? ""} ${r.vacancies?.title ?? ""} ${r.profile ?? ""}`.toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      if (statusFilter !== "all" && r.status !== statusFilter) return false;
+      if (vacancyFilter !== "all" && r.vacancy_id !== vacancyFilter) return false;
+      return true;
+    });
+  }, [rows, query, statusFilter, vacancyFilter]);
+
+  const hasActiveFilters = query !== "" || statusFilter !== "all" || vacancyFilter !== "all";
+  function resetFilters() {
+    setQuery("");
+    setStatusFilter("all");
+    setVacancyFilter("all");
   }
 
   return (
@@ -74,37 +136,83 @@ export default function AdminApplications() {
         <p className="text-[#6c757d]">Alle binnengekomen aanmeldingen.</p>
       </div>
 
+      {/* Zoek- en filterbalk */}
+      <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
+          <div className="md:col-span-6 relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6c757d]" />
+            <Input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Zoek naam, e-mail, telefoon, regio of vacature…"
+              className="pl-9 min-h-[44px]"
+              aria-label="Zoek sollicitaties"
+            />
+          </div>
+          <div className="md:col-span-3">
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="min-h-[44px]" aria-label="Filter op status"><SelectValue placeholder="Status" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alle statussen</SelectItem>
+                {STATUSES.map((s) => (
+                  <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="md:col-span-3">
+            <Select value={vacancyFilter} onValueChange={setVacancyFilter}>
+              <SelectTrigger className="min-h-[44px]" aria-label="Filter op vacature"><SelectValue placeholder="Vacature" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alle vacatures</SelectItem>
+                {vacancies.map(([id, title]) => (
+                  <SelectItem key={id} value={id}>{title}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <div className="flex items-center justify-between text-sm text-[#6c757d]">
+          <span>{filtered.length} van {rows.length} sollicitaties</span>
+          {hasActiveFilters && (
+            <Button variant="ghost" size="sm" onClick={resetFilters} className="h-8">
+              <X className="w-3.5 h-3.5 mr-1" /> Filters wissen
+            </Button>
+          )}
+        </div>
+      </div>
+
       <div className="bg-white border border-gray-200 rounded-xl overflow-hidden">
         {loading ? (
           <div className="p-12 flex justify-center"><Loader2 className="w-6 h-6 animate-spin text-[#0d3b2e]" /></div>
-        ) : rows.length === 0 ? (
-          <div className="p-12 text-center text-[#6c757d]">Nog geen sollicitaties.</div>
+        ) : filtered.length === 0 ? (
+          <div className="p-12 text-center text-[#6c757d]">
+            {rows.length === 0 ? "Nog geen sollicitaties." : "Geen sollicitaties gevonden met deze filters."}
+          </div>
         ) : (
           <>
             {/* Mobile card view */}
             <ul className="md:hidden divide-y divide-gray-200">
-              {rows.map((a) => (
+              {filtered.map((a) => (
                 <li key={a.id} className="p-4 space-y-3">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0 flex-1">
                       <div className="text-[#0d3b2e] font-medium break-words">{a.name}</div>
                       <div className="text-xs text-[#6c757d] mt-0.5">
                         {new Date(a.created_at).toLocaleDateString("nl-NL")}
-                        {a.vacancies?.title ? ` · ${a.vacancies.title}` : ""}
+                        {a.vacancies?.title ? ` · ${a.vacancies.title}` : a.profile ? ` · ${a.profile}` : ""}
                         {a.region ? ` · ${a.region}` : ""}
                       </div>
                     </div>
-                    <Badge variant="secondary" className="shrink-0">
-                      {STATUSES.find((s) => s.value === a.status)?.label || a.status}
-                    </Badge>
+                    <Badge variant="secondary" className="shrink-0">{STATUS_LABEL(a.status)}</Badge>
                   </div>
                   <div className="space-y-1.5 text-sm">
                     <div className="flex items-center gap-1 min-w-0">
-                      <a href={`tel:${a.phone}`} aria-label={`Bel ${a.phone}. Werkt de bel-app niet? Gebruik de kopieerknop hiernaast.`} className="inline-flex items-center gap-1.5 min-h-[40px] py-1 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors min-w-0"><Phone className="w-4 h-4 shrink-0" /> <span className="break-all">{a.phone}</span></a>
+                      <a href={`tel:${a.phone}`} aria-label={`Bel ${a.phone}.`} className="inline-flex items-center gap-1.5 min-h-[40px] py-1 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors min-w-0"><Phone className="w-4 h-4 shrink-0" /> <span className="break-all">{a.phone}</span></a>
                       <CopyButton type="tel" value={a.phone} />
                     </div>
                     <div className="flex items-center gap-1 min-w-0">
-                      <a href={`mailto:${a.email}`} aria-label={`Mail ${a.email}. Werkt de mail-app niet? Gebruik de kopieerknop hiernaast.`} className="inline-flex items-center gap-1.5 min-h-[40px] py-1 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors min-w-0"><Mail className="w-4 h-4 shrink-0" /> <span className="break-all">{a.email}</span></a>
+                      <a href={`mailto:${a.email}`} aria-label={`Mail ${a.email}.`} className="inline-flex items-center gap-1.5 min-h-[40px] py-1 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors min-w-0"><Mail className="w-4 h-4 shrink-0" /> <span className="break-all">{a.email}</span></a>
                       <CopyButton type="mail" value={a.email} />
                     </div>
                   </div>
@@ -113,7 +221,7 @@ export default function AdminApplications() {
                       <Button variant="outline" className="w-full min-h-[44px]">Bekijken</Button>
                     </DialogTrigger>
                     <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full max-h-[90vh] overflow-y-auto">
-                      {renderDetail(a, setStatus, downloadCv)}
+                      <Detail a={a} setStatus={setStatus} downloadCv={downloadCv} saveNote={saveNote} logContact={logContact} />
                     </DialogContent>
                   </Dialog>
                 </li>
@@ -136,36 +244,32 @@ export default function AdminApplications() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {rows.map((a) => (
+                  {filtered.map((a) => (
                     <TableRow key={a.id}>
-                      <TableCell className="text-sm text-[#6c757d]">
-                        {new Date(a.created_at).toLocaleDateString("nl-NL")}
-                      </TableCell>
+                      <TableCell className="text-sm text-[#6c757d]">{new Date(a.created_at).toLocaleDateString("nl-NL")}</TableCell>
                       <TableCell className="text-[#0d3b2e]">{a.name}</TableCell>
-                      <TableCell>{a.vacancies?.title || "—"}</TableCell>
+                      <TableCell>{a.vacancies?.title || a.profile || "—"}</TableCell>
                       <TableCell>
                         <span className="inline-flex items-center gap-1">
-                          <a href={`tel:${a.phone}`} aria-label={`Bel ${a.phone}. Werkt de bel-app niet? Gebruik de kopieerknop hiernaast.`} className="inline-flex items-center min-h-[40px] py-1 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors">{a.phone}</a>
+                          <a href={`tel:${a.phone}`} className="inline-flex items-center min-h-[40px] py-1 hover:text-[#9ed42e] hover:underline underline-offset-4 rounded-md transition-colors">{a.phone}</a>
                           <CopyButton type="tel" value={a.phone} />
                         </span>
                       </TableCell>
                       <TableCell>
                         <span className="inline-flex items-center gap-1">
-                          <a href={`mailto:${a.email}`} aria-label={`Mail ${a.email}. Werkt de mail-app niet? Gebruik de kopieerknop hiernaast.`} className="inline-flex items-center min-h-[40px] py-1 break-all hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors">{a.email}</a>
+                          <a href={`mailto:${a.email}`} className="inline-flex items-center min-h-[40px] py-1 break-all hover:text-[#9ed42e] hover:underline underline-offset-4 rounded-md transition-colors">{a.email}</a>
                           <CopyButton type="mail" value={a.email} />
                         </span>
                       </TableCell>
                       <TableCell>{a.region || "—"}</TableCell>
-                      <TableCell>
-                        <Badge variant="secondary">{STATUSES.find((s) => s.value === a.status)?.label || a.status}</Badge>
-                      </TableCell>
+                      <TableCell><Badge variant="secondary">{STATUS_LABEL(a.status)}</Badge></TableCell>
                       <TableCell className="text-right">
                         <Dialog>
                           <DialogTrigger asChild>
                             <Button size="sm" variant="outline">Bekijken</Button>
                           </DialogTrigger>
                           <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full max-h-[90vh] overflow-y-auto">
-                            {renderDetail(a, setStatus, downloadCv)}
+                            <Detail a={a} setStatus={setStatus} downloadCv={downloadCv} saveNote={saveNote} logContact={logContact} />
                           </DialogContent>
                         </Dialog>
                       </TableCell>
@@ -181,11 +285,17 @@ export default function AdminApplications() {
   );
 }
 
-function renderDetail(
-  a: App,
-  setStatus: (id: string, status: string) => void,
-  downloadCv: (path: string) => void,
-) {
+function Detail({
+  a, setStatus, downloadCv, saveNote, logContact,
+}: {
+  a: App;
+  setStatus: (id: string, status: string) => void;
+  downloadCv: (path: string) => void;
+  saveNote: (id: string, notes: string) => void;
+  logContact: (id: string) => void;
+}) {
+  const [notes, setNotes] = useState(a.admin_notes || "");
+  const wa = whatsappLink(a.phone);
   return (
     <>
       <DialogHeader>
@@ -194,17 +304,37 @@ function renderDetail(
       <div className="space-y-4 text-sm">
         <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 text-[#0d3b2e]">
           <span className="flex items-center gap-1 min-w-0">
-            <a href={`mailto:${a.email}`} aria-label={`Mail ${a.email}. Werkt de mail-app niet? Gebruik de kopieerknop hiernaast.`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors min-w-0"><Mail className="w-4 h-4 shrink-0" /> <span className="break-all">{a.email}</span></a>
+            <a href={`mailto:${a.email}`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 rounded-md transition-colors min-w-0"><Mail className="w-4 h-4 shrink-0" /> <span className="break-all">{a.email}</span></a>
             <CopyButton type="mail" value={a.email} />
           </span>
           <span className="flex items-center gap-1 min-w-0">
-            <a href={`tel:${a.phone}`} aria-label={`Bel ${a.phone}. Werkt de bel-app niet? Gebruik de kopieerknop hiernaast.`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors min-w-0"><Phone className="w-4 h-4 shrink-0" /> <span className="break-all">{a.phone}</span></a>
+            <a href={`tel:${a.phone}`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 rounded-md transition-colors min-w-0"><Phone className="w-4 h-4 shrink-0" /> <span className="break-all">{a.phone}</span></a>
             <CopyButton type="tel" value={a.phone} />
           </span>
           {a.region && <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 shrink-0" /> {a.region}</span>}
         </div>
 
+        {/* Snelle acties */}
+        <div className="flex flex-wrap gap-2">
+          <Button asChild size="sm" variant="outline" className="min-h-[44px]">
+            <a href={`tel:${a.phone}`}><Phone className="w-4 h-4 mr-1.5" /> Bellen</a>
+          </Button>
+          <Button asChild size="sm" variant="outline" className="min-h-[44px]">
+            <a href={`mailto:${a.email}`}><Mail className="w-4 h-4 mr-1.5" /> Mailen</a>
+          </Button>
+          {wa ? (
+            <Button asChild size="sm" variant="outline" className="min-h-[44px]">
+              <a href={wa} target="_blank" rel="noreferrer"><MessageCircle className="w-4 h-4 mr-1.5" /> WhatsApp</a>
+            </Button>
+          ) : (
+            <Button size="sm" variant="outline" disabled title="Geen geldig telefoonnummer" className="min-h-[44px]">
+              <MessageCircle className="w-4 h-4 mr-1.5" /> WhatsApp
+            </Button>
+          )}
+        </div>
+
         {a.vacancies && (<div className="break-words"><b>Vacature:</b> {a.vacancies.title}</div>)}
+        {!a.vacancies && a.profile && (<div className="break-words"><b>Profiel:</b> {a.profile}</div>)}
         {a.availability && <div className="break-words"><b>Beschikbaarheid:</b> {a.availability}</div>}
         {a.certifications && <div className="break-words"><b>Certificaten:</b> {a.certifications}</div>}
         {a.experience && (
@@ -221,14 +351,39 @@ function renderDetail(
         )}
         {a.cv_url && (
           <Button size="sm" variant="outline" onClick={() => downloadCv(a.cv_url!)} className="w-full sm:w-auto min-h-[44px]">
-            <FileDown className="w-4 h-4 mr-1" /> CV downloaden
+            <FileDown className="w-4 h-4 mr-1" /> CV / certificaten openen
           </Button>
         )}
+
+        {/* Interne notitie */}
+        <div className="pt-4 border-t space-y-2">
+          <label className="text-sm font-medium text-[#0d3b2e]" htmlFor={`notes-${a.id}`}>Interne notitie</label>
+          <Textarea
+            id={`notes-${a.id}`}
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            rows={3}
+            placeholder="Alleen zichtbaar voor beheerders…"
+          />
+          <div className="flex flex-wrap gap-2">
+            <Button size="sm" variant="outline" className="min-h-[44px]" onClick={() => saveNote(a.id, notes)}>
+              <Save className="w-4 h-4 mr-1.5" /> Notitie opslaan
+            </Button>
+            <Button size="sm" variant="outline" className="min-h-[44px]" onClick={() => logContact(a.id)}>
+              <CalendarCheck className="w-4 h-4 mr-1.5" /> Contactmoment vastleggen
+            </Button>
+          </div>
+          {a.last_contacted_at && (
+            <p className="text-xs text-[#6c757d]">
+              Laatste contact: {new Date(a.last_contacted_at).toLocaleString("nl-NL")}
+            </p>
+          )}
+        </div>
 
         <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 pt-4 border-t">
           <span className="text-sm">Status:</span>
           <Select value={a.status} onValueChange={(v) => setStatus(a.id, v)}>
-            <SelectTrigger className="w-full sm:w-[200px] min-h-[44px]"><SelectValue /></SelectTrigger>
+            <SelectTrigger className="w-full sm:w-[220px] min-h-[44px]"><SelectValue /></SelectTrigger>
             <SelectContent>
               {STATUSES.map((s) => (
                 <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>

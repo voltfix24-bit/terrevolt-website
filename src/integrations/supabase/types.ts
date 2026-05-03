@@ -64,6 +64,7 @@ export type Database = {
       }
       job_applications: {
         Row: {
+          admin_notes: string | null
           availability: string | null
           certifications: string | null
           contact_preference: string | null
@@ -72,6 +73,7 @@ export type Database = {
           email: string
           experience: string | null
           id: string
+          last_contacted_at: string | null
           message: string | null
           name: string
           phone: string
@@ -82,6 +84,7 @@ export type Database = {
           vacancy_id: string | null
         }
         Insert: {
+          admin_notes?: string | null
           availability?: string | null
           certifications?: string | null
           contact_preference?: string | null
@@ -90,6 +93,7 @@ export type Database = {
           email: string
           experience?: string | null
           id?: string
+          last_contacted_at?: string | null
           message?: string | null
           name: string
           phone: string
@@ -100,6 +104,7 @@ export type Database = {
           vacancy_id?: string | null
         }
         Update: {
+          admin_notes?: string | null
           availability?: string | null
           certifications?: string | null
           contact_preference?: string | null
@@ -108,6 +113,7 @@ export type Database = {
           email?: string
           experience?: string | null
           id?: string
+          last_contacted_at?: string | null
           message?: string | null
           name?: string
           phone?: string

@@ -59,7 +59,7 @@ export default function AdminLogin() {
         <div className="text-center mb-8">
           <div className="text-[#9ed42e] text-sm uppercase tracking-wider mb-2">TerreVolt</div>
           <h1 className="text-2xl text-[#0d3b2e]">Beheer</h1>
-          <p className="text-sm text-[#6c757d] mt-2">
+          <p className="text-xs text-[#6c757d] mt-2">
             Geen account? Neem contact op met de beheerder.
           </p>
         </div>
