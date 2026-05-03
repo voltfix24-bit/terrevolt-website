@@ -27,7 +27,7 @@ const trust = [
 ];
 
 const Huisaansluitingen = () => {
-  usePageMeta("Huisaansluitingen | TerreVolt BV", "Aanleg, wijziging, sanering en herstel van laagspanningsaansluitingen voor woningen, complexen en bedrijfspanden.");
+  usePageMeta("Huisaansluitingen laagspanningsnet | TerreVolt BV", "Aanleg, wijziging, sanering en herstel van laagspanningsaansluitingen voor woningen, complexen en bedrijfspanden — in opdracht van netbeheer en aannemers.", "/diensten/huisaansluitingen");
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">

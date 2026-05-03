@@ -55,7 +55,7 @@ const intentToRequestType: Record<"project" | "monteur" | "sollicitatie", string
 };
 
 const Contact = () => {
-  usePageMeta("Contact | TerreVolt BV", "Stuur een aanvraag bij TerreVolt: LS/MS-projecten, stationsrenovatie, schakelwerk, aardingsoplossingen, metingen of inzet van monteurs.");
+  usePageMeta("Contact | Project bespreken met TerreVolt BV", "Neem contact op met TerreVolt voor LS/MS-infrastructuur, schakelwerk, stationsrenovatie, netmontage, aarding en metingen.", "/contact");
 
   const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState<File | null>(null);

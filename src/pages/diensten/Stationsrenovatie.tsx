@@ -28,7 +28,7 @@ const trustItems = [
 ];
 
 const Stationsrenovatie = () => {
-  usePageMeta("Stationsrenovatie | TerreVolt BV", "Renovatie en inrichting van MS/LS-stations, technische ruimten en transformatorstations.");
+  usePageMeta("Stationsrenovatie MS/LS | TerreVolt BV", "Renovatie en inrichting van MS/LS-stations, transformatorruimten, LS-rekken en aarding — gefaseerd en aantoonbaar opgeleverd.", "/diensten/stationsrenovatie");
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">

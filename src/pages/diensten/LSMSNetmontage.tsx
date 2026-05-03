@@ -27,7 +27,7 @@ const voorWie = [
 ];
 
 const LSMSNetmontage = () => {
-  usePageMeta("LS/MS Netmontage | TerreVolt BV", "Kabelmontage, moffen, eindsluitingen en aansluitwerk binnen laag- en middenspanningsnetten.");
+  usePageMeta("LS/MS netmontage | Kabelmontage, moffen en eindsluitingen | TerreVolt BV", "Kabelmontage, moffen, eindsluitingen en aansluitwerk binnen laag- en middenspanningsnetten — voor netbeheerders en hoofdaannemers.", "/diensten/ls-ms-netmontage");
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
