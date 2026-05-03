@@ -1092,6 +1092,9 @@ const VacatureDetail = () => {
                 <button
                   type="button"
                   onClick={copyShareLink}
+                  data-cta="Kopieer link"
+                  data-entity-type="vacancy"
+                  data-entity-id={slug}
                   className="inline-flex items-center justify-center gap-2 border-2 border-[#0d3b2e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors"
                 >
                   <LinkIcon className="w-5 h-5" strokeWidth={2.2} />
@@ -1119,6 +1122,9 @@ const VacatureDetail = () => {
           <a
             href="#solliciteren"
             tabIndex={formInView ? -1 : 0}
+            data-cta="Aanmelden voor deze functie"
+            data-entity-type="vacancy"
+            data-entity-id={slug}
             className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors flex items-center justify-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2"
           >
             <span>Aanmelden voor deze functie</span>
