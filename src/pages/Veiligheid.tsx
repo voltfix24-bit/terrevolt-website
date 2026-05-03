@@ -453,9 +453,9 @@ const Veiligheid = () => {
           </div>
           <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-[clamp(1.875rem,7vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6 hyphens-nl text-pretty leading-tight">Iedereen veilig thuis. Altijd.</h2>
-              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty">
-                Geen planning, onderhoudsvenster of commercieel belang is belangrijker dan de veiligheid van mensen. Veiligheid zit in voorbereiding, in gedrag, in elkaar aanspreken en in de beslissing om te stoppen wanneer iets niet klopt.
+              <h2 className="text-[clamp(1.875rem,7vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-6 hyphens-nl text-pretty leading-tight" lang="nl">Als het niet klopt, stoppen we.</h2>
+              <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
+                {softHyphenate("Een onduidelijke opdracht, ontbrekende aanwijzing, onveilige afzetting, twijfel over de spanningstoestand, onduidelijke overdracht of ongeschikte werkplek is reden om te stoppen en af te stemmen. Veiligheid is geen vertraging van het werk; veiligheid is de voorwaarde om te mogen werken.")}
               </p>
               <p className="mt-8 text-xl sm:text-2xl text-[#0d3b2e] italic">
                 &ldquo;We doen het veilig, of we doen het niet.&rdquo;
