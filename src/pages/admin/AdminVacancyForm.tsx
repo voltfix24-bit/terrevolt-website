@@ -3,6 +3,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import { ArrowLeft, Loader2, Save } from "lucide-react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
+import type { TablesInsert } from "@/integrations/supabase/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -129,8 +130,10 @@ export default function AdminVacancyForm() {
       }
     }
     setSaving(true);
-    const payload = {
+    const payload: TablesInsert<"vacancies"> = {
       ...parsed.data,
+      title: parsed.data.title,
+      slug: parsed.data.slug,
       category: form.category || null,
       employment_type: form.employment_type || null,
       region: form.region || null,
