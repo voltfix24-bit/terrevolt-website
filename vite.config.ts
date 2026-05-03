@@ -8,6 +8,8 @@ import contactLinksPlugin from "./scripts/vite-plugin-contact-links.mjs";
 import validateRoutesPlugin from "./scripts/vite-plugin-validate-routes.mjs";
 // @ts-expect-error - .mjs runtime module zonder TS-declaraties.
 import sitemapPlugin from "./scripts/vite-plugin-sitemap.mjs";
+// @ts-expect-error - .mjs runtime module zonder TS-declaraties.
+import responseTimePlugin from "./scripts/vite-plugin-response-time.mjs";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
