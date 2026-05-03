@@ -194,14 +194,15 @@ const Veiligheid = () => {
           <div className="container mx-auto px-4 sm:px-6 lg:px-12">
             <ul className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide -mx-1 px-1 py-2">
               {[
-                { label: "Aanpak", href: "#veiligheidsaanpak" },
+                { label: "Filosofie", href: "#filosofie" },
+                { label: "Aanpak", href: "#aanpak" },
                 { label: "Veilige 5", href: "#veilige-5" },
                 { label: "BEI & VWI", href: "#bei-vwi" },
-                { label: "Werkplek", href: "#werkplekveiligheid" },
-                { label: "Locatie-eisen", href: "#locatie-eisen" },
+                { label: "Werkplek", href: "#werkplek" },
                 { label: "Rollen", href: "#rollen" },
+                { label: "Stoppen", href: "#stoppen" },
                 { label: "FAQ", href: "#faq" },
-                { label: "Contact", href: "/contact#formulier" },
+                { label: "Contact", href: "#contact" },
               ].map((item) => (
                 <li key={item.href} className="flex-shrink-0">
                   <a
