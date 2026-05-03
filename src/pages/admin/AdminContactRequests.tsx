@@ -105,6 +105,18 @@ export default function AdminContactRequests() {
   async function archive(id: string) {
     await setStatus(id, "archived");
   }
+  async function saveScopeFlags(id: string, flags: Record<string, boolean>) {
+    const { error } = await supabase.from("contact_requests").update({ safety_scope_flags: flags }).eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success("Veiligheid & scope opgeslagen");
+    load();
+  }
+  async function setFollowUp(id: string, iso: string | null) {
+    const { error } = await supabase.from("contact_requests").update({ next_follow_up_at: iso }).eq("id", id);
+    if (error) return toast.error(error.message);
+    toast.success(iso ? "Opvolgdatum opgeslagen" : "Opvolgdatum verwijderd");
+    load();
+  }
   async function downloadAttachment(path: string) {
     const { data, error } = await supabase.storage.from("contact-attachments").createSignedUrl(path, 60);
     if (error || !data) return toast.error("Bestand kon niet worden geopend. Controleer of het bestand nog bestaat.");
