@@ -276,7 +276,7 @@ export default function AdminApplications() {
                     <DialogTrigger asChild>
                       <Button variant="outline" className="w-full min-h-[44px]">Bekijken</Button>
                     </DialogTrigger>
-                    <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full max-h-[90vh] overflow-y-auto">
+                    <DialogContent className="max-w-2xl w-[calc(100vw-1rem)] sm:w-full max-h-[90vh] overflow-y-auto p-4 sm:p-6">
                       <Detail a={a} setStatus={setStatus} downloadCv={downloadCv} saveNote={saveNote} logContact={logContact} setFollowUp={setFollowUp} />
                     </DialogContent>
                   </Dialog>
@@ -324,7 +324,7 @@ export default function AdminApplications() {
                           <DialogTrigger asChild>
                             <Button size="sm" variant="outline">Bekijken</Button>
                           </DialogTrigger>
-                          <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full max-h-[90vh] overflow-y-auto">
+                          <DialogContent className="max-w-2xl w-[calc(100vw-1rem)] sm:w-full max-h-[90vh] overflow-y-auto p-4 sm:p-6">
                             <Detail a={a} setStatus={setStatus} downloadCv={downloadCv} saveNote={saveNote} logContact={logContact} setFollowUp={setFollowUp} />
                           </DialogContent>
                         </Dialog>
@@ -448,7 +448,7 @@ function Detail({
         {/* Volgende opvolging */}
         <div className="pt-4 border-t space-y-2">
           <label className="text-sm font-medium text-[#0d3b2e]" htmlFor={`follow-${a.id}`}>Volgende opvolging</label>
-          <div className="flex flex-wrap gap-2 items-center">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:items-center">
             <Input
               id={`follow-${a.id}`}
               type="date"
@@ -456,16 +456,18 @@ function Detail({
               onChange={(e) => setFollowUpState(e.target.value)}
               className="min-h-[44px] w-full sm:w-[200px]"
             />
-            <Button size="sm" variant="outline" className="min-h-[44px]"
-              onClick={() => setFollowUp(a.id, followUp ? new Date(followUp).toISOString() : null)}>
-              <Save className="w-4 h-4 mr-1.5" /> Datum opslaan
-            </Button>
-            {a.next_follow_up_at && (
-              <Button size="sm" variant="ghost" className="min-h-[44px]"
-                onClick={() => { setFollowUpState(""); setFollowUp(a.id, null); }}>
-                <X className="w-4 h-4 mr-1.5" /> Wissen
+            <div className="flex flex-wrap gap-2">
+              <Button size="sm" variant="outline" className="min-h-[44px] flex-1 sm:flex-none"
+                onClick={() => setFollowUp(a.id, followUp ? new Date(followUp).toISOString() : null)}>
+                <Save className="w-4 h-4 mr-1.5" /> Datum opslaan
               </Button>
-            )}
+              {a.next_follow_up_at && (
+                <Button size="sm" variant="ghost" className="min-h-[44px]"
+                  onClick={() => { setFollowUpState(""); setFollowUp(a.id, null); }}>
+                  <X className="w-4 h-4 mr-1.5" /> Wissen
+                </Button>
+              )}
+            </div>
           </div>
           {a.next_follow_up_at && (
             <p className="text-xs text-[#6c757d]">Gepland: {new Date(a.next_follow_up_at).toLocaleDateString("nl-NL")}</p>

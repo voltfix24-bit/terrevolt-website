@@ -247,7 +247,7 @@ export default function AdminContactRequests() {
                     <DialogTrigger asChild>
                       <Button variant="outline" className="w-full min-h-[44px]">Bekijken</Button>
                     </DialogTrigger>
-                    <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full max-h-[90vh] overflow-y-auto">
+                    <DialogContent className="max-w-2xl w-[calc(100vw-1rem)] sm:w-full max-h-[90vh] overflow-y-auto p-4 sm:p-6">
                       <Detail r={r} setStatus={setStatus} saveNote={saveNote} logContact={logContact} archive={archive} downloadAttachment={downloadAttachment} saveScopeFlags={saveScopeFlags} setFollowUp={setFollowUp} />
                     </DialogContent>
                   </Dialog>
@@ -281,7 +281,7 @@ export default function AdminContactRequests() {
                       <TableCell className="text-right">
                         <Dialog>
                           <DialogTrigger asChild><Button size="sm" variant="outline">Bekijken</Button></DialogTrigger>
-                          <DialogContent className="max-w-2xl w-[calc(100vw-2rem)] sm:w-full max-h-[90vh] overflow-y-auto">
+                          <DialogContent className="max-w-2xl w-[calc(100vw-1rem)] sm:w-full max-h-[90vh] overflow-y-auto p-4 sm:p-6">
                             <Detail r={r} setStatus={setStatus} saveNote={saveNote} logContact={logContact} archive={archive} downloadAttachment={downloadAttachment} saveScopeFlags={saveScopeFlags} setFollowUp={setFollowUp} />
                           </DialogContent>
                         </Dialog>
@@ -402,18 +402,19 @@ function Detail({
         <div className="pt-4 border-t space-y-2">
           <div className="text-sm font-medium text-[#0d3b2e]">Veiligheid & scope</div>
           <p className="text-xs text-[#6c757d]">Snelle interne beoordeling. Niet zichtbaar op de website.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
             {SAFETY_FLAGS.map((f) => (
-              <label key={f.key} className="flex items-center gap-2 text-sm cursor-pointer min-h-[36px]">
+              <label key={f.key} className="flex items-center gap-3 text-sm cursor-pointer min-h-[44px] py-2 px-2 -mx-2 rounded-md hover:bg-gray-50 active:bg-gray-100">
                 <Checkbox
+                  className="h-5 w-5 shrink-0"
                   checked={!!flags[f.key]}
                   onCheckedChange={(v) => setFlags((prev) => ({ ...prev, [f.key]: !!v }))}
                 />
-                <span>{f.label}</span>
+                <span className="leading-snug">{f.label}</span>
               </label>
             ))}
           </div>
-          <Button size="sm" variant="outline" className="min-h-[44px]" onClick={() => saveScopeFlags(r.id, flags)}>
+          <Button size="sm" variant="outline" className="w-full sm:w-auto min-h-[44px]" onClick={() => saveScopeFlags(r.id, flags)}>
             <Save className="w-4 h-4 mr-1.5" /> Veiligheid & scope opslaan
           </Button>
         </div>
@@ -421,7 +422,7 @@ function Detail({
         {/* Volgende opvolging */}
         <div className="pt-4 border-t space-y-2">
           <label className="text-sm font-medium text-[#0d3b2e]" htmlFor={`follow-${r.id}`}>Volgende opvolging</label>
-          <div className="flex flex-wrap gap-2 items-center">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:items-center">
             <Input
               id={`follow-${r.id}`}
               type="date"
@@ -429,16 +430,18 @@ function Detail({
               onChange={(e) => setFollowUpState(e.target.value)}
               className="min-h-[44px] w-full sm:w-[200px]"
             />
-            <Button size="sm" variant="outline" className="min-h-[44px]"
-              onClick={() => setFollowUp(r.id, followUp ? new Date(followUp).toISOString() : null)}>
-              <Save className="w-4 h-4 mr-1.5" /> Datum opslaan
-            </Button>
-            {r.next_follow_up_at && (
-              <Button size="sm" variant="ghost" className="min-h-[44px]"
-                onClick={() => { setFollowUpState(""); setFollowUp(r.id, null); }}>
-                <X className="w-4 h-4 mr-1.5" /> Wissen
+            <div className="flex flex-wrap gap-2">
+              <Button size="sm" variant="outline" className="min-h-[44px] flex-1 sm:flex-none"
+                onClick={() => setFollowUp(r.id, followUp ? new Date(followUp).toISOString() : null)}>
+                <Save className="w-4 h-4 mr-1.5" /> Datum opslaan
               </Button>
-            )}
+              {r.next_follow_up_at && (
+                <Button size="sm" variant="ghost" className="min-h-[44px]"
+                  onClick={() => { setFollowUpState(""); setFollowUp(r.id, null); }}>
+                  <X className="w-4 h-4 mr-1.5" /> Wissen
+                </Button>
+              )}
+            </div>
           </div>
           {r.next_follow_up_at && (
             <p className="text-xs text-[#6c757d]">Gepland: {new Date(r.next_follow_up_at).toLocaleDateString("nl-NL")}</p>
