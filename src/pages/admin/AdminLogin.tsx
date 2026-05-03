@@ -18,7 +18,7 @@ const schema = z.object({
 export default function AdminLogin() {
   usePageMeta({ title: "Admin login | TerreVolt", description: "Inloggen voor TerreVolt beheerders.", noindex: true });
   const { user, loading } = useAuth();
-  const location = useLocation() as any;
+  const location = useLocation() as { state?: { from?: { pathname?: string } } };
   const navigate = useNavigate();
   const [busy, setBusy] = useState(false);
 
@@ -46,8 +46,9 @@ export default function AdminLogin() {
       if (error) throw error;
       toast.success("Ingelogd");
       navigate("/admin", { replace: true });
-    } catch (err: any) {
-      toast.error(err.message || "Inloggen mislukt");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Inloggen mislukt";
+      toast.error(message);
     } finally {
       setBusy(false);
     }

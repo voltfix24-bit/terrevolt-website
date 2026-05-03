@@ -108,7 +108,7 @@ export default function AdminContactRequests() {
       .select("*")
       .order("created_at", { ascending: false });
     if (error) toast.error(error.message);
-    setRows((data as any) || []);
+    setRows(((data as Req[] | null) ?? []));
     setLoading(false);
   }
   useEffect(() => { load(); }, []);

@@ -72,7 +72,8 @@ export default function AdminVacancies() {
     // Haal volledige rij op (zonder id/timestamps)
     const { data, error } = await supabase.from("vacancies").select("*").eq("id", v.id).maybeSingle();
     if (error || !data) return toast.error("Kon vacature niet kopiëren");
-    const { id: _id, created_at: _c, updated_at: _u, ...rest } = data as any;
+    const { id: _id, created_at: _c, updated_at: _u, ...rest } =
+      data as Record<string, unknown> & { id: string; created_at: string; updated_at: string };
     const payload = {
       ...rest,
       title: `${data.title} kopie`,

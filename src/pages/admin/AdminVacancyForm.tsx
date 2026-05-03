@@ -28,7 +28,9 @@ const schema = z.object({
 });
 
 const linesToArray = (s: string) => s.split("\n").map((l) => l.trim()).filter(Boolean);
-const arrayToLines = (a: any) => (Array.isArray(a) ? a.join("\n") : "");
+const arrayToLines = (a: unknown) => (Array.isArray(a) ? a.join("\n") : "");
+
+type VacancyStatus = "draft" | "published";
 
 const slugify = (s: string) =>
   s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
@@ -84,7 +86,7 @@ export default function AdminVacancyForm() {
         work_area: data.work_area || "",
         intro: data.intro || "",
         safety_text: data.safety_text || "",
-        status: (data.status as any) || "draft",
+        status: ((data.status as VacancyStatus) || "draft"),
         sort_order: data.sort_order ?? 100,
         is_featured: !!data.is_featured,
       });
@@ -148,13 +150,14 @@ export default function AdminVacancyForm() {
         if (error) throw error;
         toast.success("Vacature bijgewerkt");
       } else {
-        const { error } = await supabase.from("vacancies").insert([payload as any]);
+        const { error } = await supabase.from("vacancies").insert([payload]);
         if (error) throw error;
         toast.success("Vacature aangemaakt");
       }
       navigate("/admin/vacatures");
-    } catch (err: any) {
-      toast.error(err.message || "Er ging iets mis");
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Er ging iets mis";
+      toast.error(message);
     } finally {
       setSaving(false);
     }
@@ -257,7 +260,7 @@ export default function AdminVacancyForm() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
           <div>
             <Label htmlFor="status">Status</Label>
-            <Select value={form.status} onValueChange={(v) => set("status", v as any)}>
+            <Select value={form.status} onValueChange={(v) => set("status", v as VacancyStatus)}>
               <SelectTrigger id="status"><SelectValue /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="draft">Concept</SelectItem>
