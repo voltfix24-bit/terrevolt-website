@@ -96,12 +96,12 @@ export function Header() {
             id="mobile-nav"
             className="lg:hidden bg-white/95 backdrop-blur-sm border-t border-gray-200 max-h-[calc(100dvh-4rem)] sm:max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain"
           >
-            <div className="container mx-auto px-4 sm:px-6 py-4 flex flex-col gap-2">
+            <div className="container mx-auto px-4 sm:px-6 py-3 flex flex-col gap-1.5 pb-[max(env(safe-area-inset-bottom),1rem)]">
               {/* Recruitment-card bovenaan */}
               <Link
                 to="/werken-bij"
                 onClick={() => setOpen(false)}
-                className="block bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] text-white rounded-xl p-4 mb-2 border border-[#9ed42e]/40 hover:from-[#1a4a36] hover:to-[#0d3b2e] transition-colors"
+                className="block bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] text-white rounded-xl p-4 mb-1.5 border border-[#9ed42e]/40 hover:from-[#1a4a36] hover:to-[#0d3b2e] transition-colors"
               >
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 bg-[#9ed42e] rounded-lg flex items-center justify-center flex-shrink-0">
@@ -124,7 +124,7 @@ export function Header() {
                   key={l.href}
                   to={l.href}
                   onClick={() => setOpen(false)}
-                  className="text-[#2d3436] hover:text-[#0d3b2e] transition-colors py-3 px-2 rounded-md hover:bg-[#f0f7e6] min-h-[44px] flex items-center"
+                  className="text-[#2d3436] hover:text-[#0d3b2e] transition-colors py-2.5 px-2 rounded-md hover:bg-[#f0f7e6] min-h-[44px] flex items-center"
                 >
                   {l.label}
                 </Link>
@@ -132,7 +132,7 @@ export function Header() {
               <Link
                 to="/contact"
                 onClick={() => setOpen(false)}
-                className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors text-center mt-1 min-h-[44px] flex items-center justify-center"
+                className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors text-center mt-2 min-h-[48px] flex items-center justify-center"
               >
                 Contact
               </Link>
