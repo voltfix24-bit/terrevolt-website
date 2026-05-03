@@ -16,7 +16,7 @@ const schema = z.object({
 });
 
 export default function AdminLogin() {
-  usePageMeta("Admin login | TerreVolt", "Inloggen voor TerreVolt beheerders.");
+  usePageMeta({ title: "Admin login | TerreVolt", description: "Inloggen voor TerreVolt beheerders.", noindex: true });
   const { user, loading } = useAuth();
   const location = useLocation() as any;
   const navigate = useNavigate();
