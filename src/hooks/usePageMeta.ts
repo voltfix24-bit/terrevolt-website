@@ -52,7 +52,17 @@ function setJsonLd(jsonLd?: Record<string, unknown> | Record<string, unknown>[])
   });
 }
 
-export function usePageMeta(meta: PageMetaInput) {
+export function usePageMeta(meta: PageMetaInput): void;
+export function usePageMeta(title: string, description?: string, canonical?: string): void;
+export function usePageMeta(
+  metaOrTitle: PageMetaInput | string,
+  description?: string,
+  canonical?: string,
+): void {
+  const meta: PageMetaInput =
+    typeof metaOrTitle === "string"
+      ? { title: metaOrTitle, description, canonical }
+      : metaOrTitle;
   useEffect(() => {
     if (typeof document === "undefined") return;
     const origin = typeof window !== "undefined" ? window.location.origin : "";
