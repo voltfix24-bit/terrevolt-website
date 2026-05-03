@@ -44,6 +44,29 @@ const Privacy = () => {
                 tenzij je toestemming geeft voor langere opname in onze talentpool.
               </p>
 
+              <h2 className="text-xl text-[#0d3b2e] mt-8">Websitestatistieken (cookieloos)</h2>
+              <p>
+                Om onze website te verbeteren registreren we beperkte, geanonimiseerde
+                gebruiksstatistieken in onze eigen beveiligde database (Supabase, tabel
+                <code className="mx-1 px-1 py-0.5 bg-[#e9ecef] rounded text-sm">analytics_events</code>).
+                We gebruiken hiervoor <strong>geen cookies</strong> en <strong>geen externe trackers</strong>
+                zoals Google Analytics, Meta Pixel of vergelijkbare diensten.
+              </p>
+              <p>
+                Per gebeurtenis leggen we vast: het type gebeurtenis (bijvoorbeeld een paginabezoek,
+                klik op een CTA of formulierstart), de pagina-URL en -titel, de verwijzende pagina,
+                een willekeurig sessie-ID dat alleen tijdens je bezoek in <em>sessionStorage</em> bewaard
+                blijft, en je user agent (browser- en apparaatinfo). We slaan <strong>geen IP-adressen,
+                geen accounts en geen persoonsgegevens</strong> op in deze tabel, en we koppelen deze data
+                niet aan andere gegevens die je via formulieren met ons deelt.
+              </p>
+              <p>
+                Het sessie-ID verdwijnt automatisch zodra je de browsertab sluit. De geaggregeerde
+                statistieken zijn alleen toegankelijk voor onze beheerders en worden uitsluitend gebruikt
+                om de werking van de website en vacaturepagina's te verbeteren. Tracking-fouten worden
+                stil afgehandeld en hebben geen invloed op je bezoek.
+              </p>
+
               <h2 className="text-xl text-[#0d3b2e] mt-8">Jouw rechten</h2>
               <p>
                 Je hebt recht op inzage, correctie of verwijdering van je gegevens. Stuur hiervoor
