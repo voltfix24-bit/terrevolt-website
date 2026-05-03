@@ -6,6 +6,8 @@ import { componentTagger } from "lovable-tagger";
 import contactLinksPlugin from "./scripts/vite-plugin-contact-links.mjs";
 // @ts-expect-error - .mjs runtime module zonder TS-declaraties.
 import validateRoutesPlugin from "./scripts/vite-plugin-validate-routes.mjs";
+// @ts-expect-error - .mjs runtime module zonder TS-declaraties.
+import sitemapPlugin from "./scripts/vite-plugin-sitemap.mjs";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -24,6 +26,9 @@ export default defineConfig(({ mode }) => ({
     // Build-time lint: faalt de build als <Link to>/<a href>/navigate paden
     // niet matchen met een Route in src/App.tsx.
     validateRoutesPlugin(),
+    // Build-time: voegt /vacatures/:slug entries toe aan dist/sitemap.xml
+    // op basis van gepubliceerde vacatures in Supabase.
+    sitemapPlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {
