@@ -1041,6 +1041,12 @@ const WerkenBij = () => {
               <form
                 ref={formRef}
                 onSubmit={handleSubmit}
+                onFocus={(e) => {
+                  const t = e.target as HTMLElement;
+                  if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT")) {
+                    import("@/lib/analytics").then((m) => m.trackFormStart("werken_bij_form"));
+                  }
+                }}
                 onChange={(e) => {
                   if (submitError) setSubmitError(null);
                   const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
