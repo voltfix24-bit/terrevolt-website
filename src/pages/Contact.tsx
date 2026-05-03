@@ -87,6 +87,9 @@ const Contact = () => {
   const handleIntentChange = (id: "project" | "monteur" | "sollicitatie") => {
     setIntent(id);
     setRequestType(intentToRequestType[id]);
+    const label =
+      id === "project" ? "Project bespreken" : id === "monteur" ? "Monteur / ploeg nodig" : "Sollicitatie / ZZP";
+    import("@/lib/analytics").then((m) => m.trackCTA(label, { intent: id }));
   };
 
   const intents: {
