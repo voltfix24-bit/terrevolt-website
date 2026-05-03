@@ -173,7 +173,7 @@ const Over = () => {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#9ed42e] opacity-75" />
                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#9ed42e]" />
                   </span>
-                  Reageert binnen 2 werkdagen
+                  Direct bereikbaar voor projectvragen
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center mt-6">
                   <a
