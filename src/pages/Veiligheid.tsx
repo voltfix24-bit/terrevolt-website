@@ -242,40 +242,38 @@ const Veiligheid = () => {
           </div>
         </section>
 
-        {/* SECTIE: Veiligheidsaanpak */}
+        {/* SECTIE: Veiligheid en kwaliteit in één aanpak */}
         <section id="veiligheidsaanpak" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="text-center mb-14 sm:mb-16">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Onze veiligheidsaanpak</h2>
-              <p className="text-base sm:text-xl text-[#6c757d] max-w-2xl mx-auto leading-relaxed hyphens-nl text-pretty">
-                Een veilige uitvoering begint vóór de eerste handeling. TerreVolt werkt met een gestructureerde aanpak van voorbereiding tot oplevering.
+            <div className="text-center mb-14 sm:mb-16 max-w-3xl mx-auto">
+              <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty" lang="nl">Veiligheid en kwaliteit in één aanpak</h2>
+              <p className="text-base sm:text-xl text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
+                {softHyphenate("Veilig werken en goed opleveren horen bij elkaar. TerreVolt kijkt niet alleen naar de elektrische installatie, maar ook naar voorbereiding, werkplek, bevoegdheden, uitvoering, controle en overdracht.")}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto relative">
-              <div className="hidden lg:block absolute top-12 left-[10%] right-[10%] h-px bg-gradient-to-r from-[#9ed42e]/0 via-[#9ed42e] to-[#9ed42e]/0" aria-hidden="true" />
-              {stappen.map((step, index) => {
-                const Icon = step.icon;
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+              {pijlers.map((p, index) => {
+                const Icon = p.icon;
                 return (
                   <div
-                    key={step.title}
-                    className="relative bg-white rounded-xl p-6 border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 text-center mt-6 sm:mt-0"
+                    key={p.title}
+                    className="relative bg-white rounded-xl p-6 border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 mt-6 sm:mt-0"
                   >
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-10 h-10 bg-[#0d3b2e] text-[#9ed42e] rounded-full flex items-center justify-center text-sm border-4 border-white">
+                    <div className="absolute -top-4 left-6 w-10 h-10 bg-[#0d3b2e] text-[#9ed42e] rounded-full flex items-center justify-center text-sm border-4 border-white">
                       {index + 1}
                     </div>
-                    <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mx-auto mb-4 mt-2">
-                      <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
+                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-4 mt-2">
+                      <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
                     </div>
-                    <h3 className="text-base text-[#0d3b2e] mb-2">{step.title}</h3>
-                    <p className="text-[#6c757d] text-[15px] leading-[1.7] sm:text-sm sm:leading-relaxed hyphens-nl text-pretty">{softHyphenate(step.description)}</p>
+                    <h3 className="text-base text-[#0d3b2e] mb-2 hyphens-nl text-pretty" lang="nl">{p.title}</h3>
+                    <p className="text-[#6c757d] text-[15px] leading-[1.7] sm:text-sm sm:leading-relaxed hyphens-nl text-pretty" lang="nl">{softHyphenate(p.description)}</p>
                   </div>
                 );
               })}
             </div>
           </div>
         </section>
-
         {/* SECTIE: De Veilige 5 bij schakelwerk */}
         <section id="veilige-5" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
