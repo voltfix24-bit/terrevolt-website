@@ -502,7 +502,7 @@ const VacatureDetail = () => {
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Vacature
               </div>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight hyphens-auto">
+              <h1 className="text-[clamp(1.875rem,7vw,2.5rem)] sm:text-5xl lg:text-6xl text-white mb-6 leading-[1.1] sm:leading-tight hyphens-nl text-pretty" lang="nl">
                 {vacature.title}
               </h1>
               <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-3xl leading-relaxed">
