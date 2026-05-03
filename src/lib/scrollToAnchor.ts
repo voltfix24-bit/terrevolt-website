@@ -5,6 +5,8 @@ export type ProgrammaticScrollDetail = {
   targetId?: string;
 };
 
+let programmaticScrollTimer: number | null = null;
+
 const getAnchorId = (hashOrId: string) => {
   const raw = hashOrId.startsWith("#") ? hashOrId.slice(1) : hashOrId;
   try {
@@ -51,11 +53,18 @@ export const scrollToElement = (element: HTMLElement, behavior: ScrollBehavior =
   const top = Math.max(0, element.getBoundingClientRect().top + window.scrollY - getAnchorScrollOffset());
 
   setProgrammaticScroll(true, targetId);
+  if (programmaticScrollTimer) {
+    window.clearTimeout(programmaticScrollTimer);
+  }
   html.style.scrollBehavior = "auto";
   window.scrollTo({ top, behavior: finalBehavior });
   window.requestAnimationFrame(() => {
     html.style.scrollBehavior = previousInlineScrollBehavior;
   });
+  programmaticScrollTimer = window.setTimeout(
+    () => setProgrammaticScroll(false, targetId),
+    finalBehavior === "smooth" ? 700 : 100,
+  );
 
   return true;
 };
