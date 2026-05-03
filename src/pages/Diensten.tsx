@@ -74,7 +74,7 @@ const steps = [
 ];
 
 const Diensten = () => {
-  usePageMeta("Diensten | TerreVolt BV", "Overzicht van TerreVolt's diensten: LS/MS netmontage, stationsrenovatie, schakelwerk, aardingsoplossingen, meten & beproeven en huisaansluitingen.");
+  usePageMeta("Diensten | LS/MS-netmontage, schakelwerk en aarding | TerreVolt BV", "Bekijk de diensten van TerreVolt: LS/MS-netmontage, stationsrenovatie, schakelwerk, aardingsoplossingen, meten en beproeven en huisaansluitingen.", "/diensten");
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">

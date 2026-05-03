@@ -68,7 +68,7 @@ const faqs = [
 ];
 
 const Veiligheid = () => {
-  usePageMeta("Kwaliteit & veiligheid | TerreVolt BV", "Veiligheid bij TerreVolt: BEI BLS/BHS, VWI's, LMRA, VCA, NEN 1010/3140/3840, projectafspraken en rollen — iedereen veilig thuis.", "/veiligheid");
+  usePageMeta("Veiligheid & kwaliteit | Iedereen veilig thuis | TerreVolt BV", "Veilig werken en aantoonbaar opleveren staan centraal bij TerreVolt. We werken met aandacht voor LMRA, BEI BLS/BHS, VWI's, VCA, NEN 1010/3140/3840 en kwaliteit.", "/veiligheid");
 
   const subnavRef = useRef<HTMLElement | null>(null);
   const isProgrammaticScrollRef = useRef(false);

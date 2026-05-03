@@ -170,8 +170,8 @@ type FieldErrors = Partial<Record<keyof z.infer<typeof formSchema>, string>>;
 
 const WerkenBij = () => {
   usePageMeta(
-    "Werken bij TerreVolt | Vacatures monteurs LS/MS, schakelwerk & aarding",
-    "TerreVolt zoekt monteurs, werkverantwoordelijken en ZZP-ploegen voor LS/MS-projecten binnen de netbeheerwereld. Duidelijke planning, korte lijnen, veiligheid voorop.",
+    "Werken bij TerreVolt | Monteurs en ZZP'ers LS/MS",
+    "Werk via TerreVolt aan LS/MS-projecten, stationsrenovaties, schakelwerk, netmontage en aardingsoplossingen. Voor monteurs, werkverantwoordelijken en ZZP-ploegen.",
     "/werken-bij",
   );
 

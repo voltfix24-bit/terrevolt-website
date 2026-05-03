@@ -25,7 +25,7 @@ const inzet = [
 const badges = ["BEI BLS/BHS", "AVP / VP / VOP / WV", "LMRA", "VCA", "NEN 3140"];
 
 const Schakelwerk = () => {
-  usePageMeta("Schakelwerk & veiligstellen | TerreVolt BV", "Vrijschakelen, veiligstellen, in- en uitbedrijf nemen binnen LS/MS-installaties.");
+  usePageMeta("Schakelwerk & veiligstellen | TerreVolt BV", "TerreVolt ondersteunt bij schakelwerk, vrijschakelen, veiligstellen en in- en uitbedrijf nemen binnen LS/MS-projecten.", "/diensten/schakelwerk");
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">

@@ -30,7 +30,7 @@ const meetbaar = [
 ];
 
 const Aardingsoplossingen = () => {
-  usePageMeta("Aardingsoplossingen | TerreVolt BV", "Aanleg, verbetering, meting en rapportage van aardingsvoorzieningen voor LS/MS-infrastructuur.");
+  usePageMeta("Aardingsoplossingen en aardingsmetingen | TerreVolt BV", "TerreVolt realiseert, verbetert, meet en rapporteert aardingssystemen voor stations, technische ruimten en industriële installaties.", "/diensten/aardingsoplossingen");
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">

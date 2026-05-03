@@ -12,7 +12,7 @@ import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
 
 const Index = () => {
-  usePageMeta("TerreVolt BV | LS/MS-infrastructuur en aardingsoplossingen", "TerreVolt BV ondersteunt netbeheerders, hoofdaannemers en industrie bij LS/MS-netmontage, stationsrenovaties, schakelwerk en aardingsoplossingen.");
+  usePageMeta("TerreVolt BV | Specialist in LS/MS-infrastructuur en aardingsoplossingen", "TerreVolt ondersteunt professionele opdrachtgevers bij LS/MS-netmontage, stationsrenovatie, schakelwerk, aardingsoplossingen, meten en beproeven.", "/");
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">

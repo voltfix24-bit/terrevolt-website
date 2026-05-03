@@ -88,7 +88,7 @@ const rollen = [
 ];
 
 const Projecten = () => {
-  usePageMeta("Projecten | TerreVolt BV", "Projecttypes en praktijkvoorbeelden van TerreVolt binnen LS/MS-infrastructuur, stationsrenovatie, schakelwerk en aarding.");
+  usePageMeta("Projecten | LS/MS-infrastructuur en stationsrenovatie | TerreVolt BV", "Projecttypes en praktijkvoorbeelden van TerreVolt binnen LS/MS-infrastructuur, stationsrenovatie, schakelwerk en aarding.", "/projecten");
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
