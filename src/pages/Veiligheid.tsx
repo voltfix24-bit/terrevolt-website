@@ -286,8 +286,8 @@ const Veiligheid = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
               {[
-                { title: "Scheiden", description: "Het netdeel wordt gescheiden van alle relevante voedingsbronnen volgens opdracht, bedienplan en projectafspraken." },
-                { title: "Beveiligen tegen wederinschakelen", description: "Er worden maatregelen genomen om te voorkomen dat de installatie ongewenst opnieuw kan worden ingeschakeld." },
+                { title: "Scheiden", description: "Het netdeel wordt gescheiden van relevante voedingsbronnen volgens opdracht, bedienplan en projectafspraken." },
+                { title: "Beveiligen tegen wederinschakelen", description: "Er worden maatregelen genomen om ongewenst opnieuw inschakelen te voorkomen." },
                 { title: "Controleren op afwezigheid van spanning", description: "Voordat werkzaamheden starten, wordt gecontroleerd of de installatie of het werkgebied spanningsloos is volgens de geldende instructie." },
                 { title: "Aarden en kortsluiten", description: "Waar van toepassing wordt geaard en kortgesloten om het werkgebied veilig te houden bij onverwachte spanning, inductie of terugvoeding." },
                 { title: "Afschermen en afbakenen", description: "Nabijgelegen onder spanning staande delen worden afgeschermd en het veilige werkgebied wordt duidelijk afgebakend." },
