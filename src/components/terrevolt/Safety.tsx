@@ -1,26 +1,26 @@
-import { ShieldCheck, BadgeCheck, Award, BookOpen } from "lucide-react";
+import { FileSearch, ShieldCheck, BadgeCheck, ClipboardList } from "lucide-react";
 import { Reveal } from "@/components/terrevolt/Reveal";
 
 const certifications = [
   {
+    icon: FileSearch,
+    title: "LMRA & werkhouding",
+    description: "Voor start of hervatting wordt gekeken of de situatie nog klopt. Bij twijfel wordt afgestemd."
+  },
+  {
     icon: ShieldCheck,
-    title: "BEI BLS/BHS",
-    description: "Aanwijzingen en veiligheidsstructuur voor werkzaamheden binnen laag- en middenspanning."
+    title: "BEI BLS/BHS & VWI's",
+    description: "Veilig werken binnen LS/MS-netbeheeromgevingen met passende instructies en projectafspraken."
   },
   {
     icon: BadgeCheck,
-    title: "AVP / VP / VOP / WV",
-    description: "Passende rollen en bevoegdheden afhankelijk van project, opdrachtgever en werkgebied."
+    title: "VCA & werkplekveiligheid",
+    description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving, afzetting en zichtbaarheid."
   },
   {
-    icon: Award,
-    title: "VCA",
-    description: "Veiligheidsbewust werken met aandacht voor mens, installatie en omgeving."
-  },
-  {
-    icon: BookOpen,
-    title: "NEN 1010 / NEN 3140",
-    description: "Werken met aandacht voor geldende installatie- en veiligheidsnormen."
+    icon: ClipboardList,
+    title: "Kwaliteit & oplevering",
+    description: "Controle, rapportage en aantoonbare oplevering met aandacht voor NEN en ISO 9001:2015-principes."
   }
 ];
 
@@ -32,9 +32,9 @@ export function Safety() {
           <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-5 sm:mb-6 tracking-wider uppercase">
             Veiligheid voorop
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-3 sm:mb-4 hyphens-nl">Veiligheid, certificeringen &amp; normen</h2>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-3 sm:mb-4 hyphens-nl">Veiligheid &amp; kwaliteit</h2>
           <p className="text-base sm:text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
-            Werken aan elektrotechnische infrastructuur vraagt om vakbekwaamheid, veiligheidsbewustzijn en duidelijke procedures. TerreVolt werkt met aandacht voor geldende normen, aanwijzingen en projectafspraken.
+            Iedereen veilig thuis. We doen het veilig, of we doen het niet. TerreVolt werkt met aandacht voor LMRA, BEI BLS/BHS, VWI's, VCA, NEN-normen en aantoonbare oplevering.
           </p>
         </Reveal>
 

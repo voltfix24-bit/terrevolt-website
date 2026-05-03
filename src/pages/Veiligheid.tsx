@@ -23,7 +23,7 @@ const beiCards = [
   { icon: ShieldCheck, title: "BEI BLS/BHS", description: "Veilige bedrijfsvoering binnen LS/MS/HS-netbeheeromgevingen, inclusief bijbehorende VWI's en projectafspraken." },
   { icon: BookOpen, title: "VWI's", description: "Veiligheidswerkinstructies voor specifieke werkzaamheden, situaties en risico's." },
   { icon: BadgeCheck, title: "VCA", description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving en risico's." },
-  { icon: FileSearch, title: "LMRA", description: "Laatste-minuut-risicoanalyse voor start of hervatting van werkzaamheden, bij twijfel altijd opnieuw." },
+  { icon: BadgeCheck, title: "Certificaten & aanwijzingen", description: "Persoonlijke certificaten en aanwijzingen worden ingezet afhankelijk van project, opdrachtgever en werkgebied." },
   { icon: FileText, title: "NEN 1010 / 3140 / 3840", description: "Normen die, waar van toepassing, richting geven aan aanleg, bedrijfsvoering, controle en veilig werken." },
   { icon: Award, title: "ISO 9001:2015", description: "Met aandacht voor de principes van ISO 9001:2015: procesbeheersing, klantgerichtheid, risicodenken en continue verbetering." },
 ];
@@ -190,12 +190,12 @@ const Veiligheid = () => {
                 { label: "Filosofie", href: "#filosofie" },
                 { label: "Aanpak", href: "#aanpak" },
                 { label: "Veilige 5", href: "#veilige-5" },
-                { label: "Normen", href: "#bei-vwi" },
+                { label: "Normen & kwaliteit", href: "#bei-vwi" },
                 { label: "Werkplek", href: "#werkplek" },
+                { label: "Locatie-eisen", href: "#locatie-eisen" },
                 { label: "Rollen", href: "#rollen" },
-                { label: "Stoppen", href: "#stoppen" },
                 { label: "FAQ", href: "#faq" },
-                { label: "Contact", href: "#contact" },
+                { label: "Contact", href: "/contact#formulier" },
               ].map((item) => (
                 <li key={item.href} className="flex-shrink-0">
                   <a
@@ -324,9 +324,9 @@ const Veiligheid = () => {
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Normen & bevoegdheden</div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Normen, systemen en bevoegdheden</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Normen, kwaliteitssystemen en bevoegdheden</h2>
               <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
-                {softHyphenate("BEI BLS/BHS, VWI's, VCA, LMRA, NEN-normen en ISO 9001:2015 vormen samen het kader waarbinnen TerreVolt veilig en beheerst werkt. Aanwijzingen en certificaten worden ingezet volgens project, opdrachtgever en werkgebied.")}
+                {softHyphenate("Normen, certificaten en kwaliteitssystemen zijn geen doel op zichzelf. Ze helpen om veilig, beheerst en aantoonbaar te werken.")}
               </p>
             </div>
 
@@ -358,6 +358,7 @@ const Veiligheid = () => {
               </p>
             </div>
 
+            <span id="locatie-eisen" aria-hidden="true" className="block scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]" />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
               {werkplek.map((c) => {
                 const Icon = c.icon;
