@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { vacatures as fallbackVacatures } from "@/data/vacatures";
 import { company, telHref, mailHref } from "@/config/company";
-import { scrollToAnchor, scrollToElement } from "@/lib/scrollToAnchor";
+import { PROGRAMMATIC_SCROLL_EVENT, type ProgrammaticScrollDetail, scrollToAnchor, scrollToElement } from "@/lib/scrollToAnchor";
 import {
   Accordion,
   AccordionContent,
@@ -185,6 +185,65 @@ const WerkenBij = () => {
   const [success, setSuccess] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
   const errorBannerRef = useRef<HTMLDivElement>(null);
+  const subnavRef = useRef<HTMLElement | null>(null);
+  const isProgrammaticScrollRef = useRef(false);
+  const programmaticScrollTimerRef = useRef<number | null>(null);
+  const [activeId, setActiveId] = useState<string>("");
+
+  useEffect(() => {
+    const sectionIds = ["profielen", "zzp", "hoe-het-werkt", "faq", "aanmelden"];
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+
+    const computeActive = () => {
+      if (isProgrammaticScrollRef.current) return;
+      const header = document.querySelector("header");
+      const headerH = header ? header.getBoundingClientRect().height : 0;
+      const subnavH = subnavRef.current ? subnavRef.current.getBoundingClientRect().height : 0;
+      const threshold = headerH + subnavH + 24;
+
+      let current = "";
+      for (const el of sections) {
+        if (el.getBoundingClientRect().top - threshold <= 0) current = el.id;
+      }
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        current = sections[sections.length - 1]?.id ?? current;
+      }
+      setActiveId((previous) => (previous === current ? previous : current));
+    };
+
+    const onProgrammaticScroll = (event: Event) => {
+      const { active, targetId } = (event as CustomEvent<ProgrammaticScrollDetail>).detail || {};
+      isProgrammaticScrollRef.current = Boolean(active);
+      if (targetId && sectionIds.includes(targetId)) {
+        setActiveId((previous) => (previous === targetId ? previous : targetId));
+      }
+      if (programmaticScrollTimerRef.current) {
+        window.clearTimeout(programmaticScrollTimerRef.current);
+      }
+      if (active) {
+        programmaticScrollTimerRef.current = window.setTimeout(() => {
+          isProgrammaticScrollRef.current = false;
+          computeActive();
+        }, 800);
+      }
+    };
+
+    computeActive();
+    window.addEventListener("scroll", computeActive, { passive: true });
+    window.addEventListener("resize", computeActive);
+    window.addEventListener(PROGRAMMATIC_SCROLL_EVENT, onProgrammaticScroll);
+    return () => {
+      window.removeEventListener("scroll", computeActive);
+      window.removeEventListener("resize", computeActive);
+      window.removeEventListener(PROGRAMMATIC_SCROLL_EVENT, onProgrammaticScroll);
+      if (programmaticScrollTimerRef.current) {
+        window.clearTimeout(programmaticScrollTimerRef.current);
+      }
+    };
+  }, []);
+
 
   const clearFieldError = (field: keyof FieldErrors) => {
     setErrors((prev) => {
@@ -540,22 +599,31 @@ const WerkenBij = () => {
 
         {/* STICKY SUBNAV — scroll-navigatie binnen pagina */}
         <nav
+          ref={subnavRef}
           data-hash-scroll-offset
           aria-label="Paginanavigatie Werken bij"
           className="sticky top-16 sm:top-20 z-30 bg-white/90 backdrop-blur-sm border-b border-gray-200"
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-12">
             <ul className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide -mx-1 px-1 py-2">
-              {funnelNav.map((item) => (
-                <li key={item.href} className="flex-shrink-0">
-                  <a
-                    href={item.href}
-                    className="inline-flex items-center min-h-[44px] px-3 sm:px-4 rounded-full text-sm text-[#0d3b2e] hover:bg-[#f0f7e6] hover:text-[#0d3b2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border border-transparent hover:border-[#9ed42e] transition-colors whitespace-nowrap"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
+              {funnelNav.map((item) => {
+                const isActive = item.href.startsWith("#") && item.href.slice(1) === activeId;
+                return (
+                  <li key={item.href} className="flex-shrink-0">
+                    <a
+                      href={item.href}
+                      aria-current={isActive ? "true" : undefined}
+                      className={`inline-flex items-center min-h-[44px] px-3 sm:px-4 rounded-full text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border transition-colors whitespace-nowrap ${
+                        isActive
+                          ? "bg-[#0d3b2e] text-[#9ed42e] border-[#0d3b2e]"
+                          : "text-[#0d3b2e] border-transparent hover:bg-[#f0f7e6] hover:border-[#9ed42e]"
+                      }`}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </nav>
