@@ -89,7 +89,7 @@ export function trackEvent(eventName: string, payload: AnalyticsPayload = {}) {
       element_id: payload.element_id?.slice(0, 200),
       entity_type: payload.entity_type?.slice(0, 100),
       entity_id: payload.entity_id?.slice(0, 200),
-      metadata: (payload.metadata ?? {}) as Record<string, unknown>,
+      metadata: safeMetadata(payload.metadata),
       session_id: getSessionId(),
       user_agent: safeUA(),
     };
