@@ -121,9 +121,9 @@ export function HashScroll() {
       scrollToHash(targetUrl.hash, "smooth");
     };
 
-    document.addEventListener("click", onClick);
+    document.addEventListener("click", onClick, true);
     return () => {
-      document.removeEventListener("click", onClick);
+      document.removeEventListener("click", onClick, true);
       if (programmaticEndTimerRef.current) {
         window.clearTimeout(programmaticEndTimerRef.current);
       }
