@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -52,17 +52,17 @@ const App = () => (
           <Route path="/vacatures/:slug" element={<VacatureDetail />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
-          {/* Aliassen voor leesbare URL's */}
-          <Route path="/veiligheid-certificeringen" element={<Veiligheid />} />
-          <Route path="/over-terrevolt" element={<Over />} />
-          <Route path="/zzp-monteurs" element={<WerkenBij />} />
+          {/* Aliasroutes — 301-equivalent redirect naar canonieke route */}
+          <Route path="/veiligheid-certificeringen" element={<Navigate to="/veiligheid" replace />} />
+          <Route path="/over-terrevolt" element={<Navigate to="/over" replace />} />
+          <Route path="/zzp-monteurs" element={<Navigate to="/werken-bij#zzp" replace />} />
+          <Route path="/diensten/meten-beproeven-rapportage" element={<Navigate to="/diensten/meten-en-beproeven" replace />} />
 
           <Route path="/diensten/ls-ms-netmontage" element={<LSMSNetmontage />} />
           <Route path="/diensten/stationsrenovatie" element={<Stationsrenovatie />} />
           <Route path="/diensten/schakelwerk" element={<Schakelwerk />} />
           <Route path="/diensten/aardingsoplossingen" element={<Aardingsoplossingen />} />
           <Route path="/diensten/meten-en-beproeven" element={<MetenEnBeproeven />} />
-          <Route path="/diensten/meten-beproeven-rapportage" element={<MetenEnBeproeven />} />
           <Route path="/diensten/huisaansluitingen" element={<Huisaansluitingen />} />
 
           {/* Admin */}
