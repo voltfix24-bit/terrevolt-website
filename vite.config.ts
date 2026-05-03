@@ -8,6 +8,8 @@ import contactLinksPlugin from "./scripts/vite-plugin-contact-links.mjs";
 import validateRoutesPlugin from "./scripts/vite-plugin-validate-routes.mjs";
 // @ts-expect-error - .mjs runtime module zonder TS-declaraties.
 import sitemapPlugin from "./scripts/vite-plugin-sitemap.mjs";
+// @ts-expect-error - .mjs runtime module zonder TS-declaraties.
+import responseTimePlugin from "./scripts/vite-plugin-response-time.mjs";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -29,6 +31,9 @@ export default defineConfig(({ mode }) => ({
     // Build-time: voegt /vacatures/:slug entries toe aan dist/sitemap.xml
     // op basis van gepubliceerde vacatures in Supabase.
     sitemapPlugin(),
+    // Build-time lint: faalt de build bij verboden "binnen N werkdagen"
+    // varianten buiten recruitment-context.
+    responseTimePlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {
