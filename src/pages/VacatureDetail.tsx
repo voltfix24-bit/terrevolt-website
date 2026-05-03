@@ -127,6 +127,7 @@ const VacatureDetail = () => {
     });
   const formRef = useRef<HTMLFormElement>(null);
   const errorBannerRef = useRef<HTMLDivElement>(null);
+  const loadedHashScrollRef = useRef("");
 
   const clearFieldError = (field: keyof FieldErrors) => {
     setErrors((prev) => {
@@ -136,6 +137,21 @@ const VacatureDetail = () => {
       return next;
     });
   };
+
+  useEffect(() => {
+    if (!vacature || vacature === "missing" || !window.location.hash) return;
+    const key = `${slug || ""}${window.location.hash}`;
+    if (loadedHashScrollRef.current === key) return;
+
+    const timer = window.setTimeout(() => {
+      if (scrollToAnchor(window.location.hash)) {
+        loadedHashScrollRef.current = key;
+      }
+    }, 100);
+
+    return () => window.clearTimeout(timer);
+  }, [slug, vacature]);
+
   // Verberg de sticky bottom-CTA zodra het sollicitatieformulier OF de footer in beeld is.
   useEffect(() => {
     if (!vacature || vacature === "missing") return;
