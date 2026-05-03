@@ -268,8 +268,12 @@ export default function AdminContactRequests() {
                         {r.request_type ? ` · ${r.request_type}` : ""}
                         {r.location ? ` · ${r.location}` : ""}
                       </div>
+                      <FlagMiniBadges flags={r.safety_scope_flags} />
                     </div>
-                    <Badge variant="secondary" className="shrink-0">{STATUS_LABEL(r.status)}</Badge>
+                    <div className="flex flex-col items-end gap-1 shrink-0">
+                      <Badge variant="secondary">{STATUS_LABEL(r.status)}</Badge>
+                      <ReqFollowUpBadges row={r} />
+                    </div>
                   </div>
                   <Dialog>
                     <DialogTrigger asChild>
