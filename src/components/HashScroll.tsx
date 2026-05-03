@@ -12,6 +12,7 @@ export function HashScroll() {
   const navigate = useNavigate();
   const { pathname, search, hash } = useLocation();
   const locationRef = useRef({ pathname, search, hash });
+  const lastScrolledKeyRef = useRef(lastAutoScrolledKey);
   const programmaticEndTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -63,8 +64,8 @@ export function HashScroll() {
       lastAutoScrolledKey = "";
       return;
     }
-    const scrollKey = `${pathname}${search}${hash}`;
-    if (lastAutoScrolledKey === scrollKey) return;
+    const scrollKey = `${pathname}${hash}`;
+    if (lastScrolledKeyRef.current === scrollKey || lastAutoScrolledKey === scrollKey) return;
 
     let cancelled = false;
     let rafId = 0;
@@ -74,6 +75,7 @@ export function HashScroll() {
     const run = (isRetry = false) => {
       if (cancelled) return;
       if (scrollToHash(hash, "smooth")) {
+        lastScrolledKeyRef.current = scrollKey;
         lastAutoScrolledKey = scrollKey;
         return;
       }
@@ -92,26 +94,29 @@ export function HashScroll() {
       window.clearTimeout(firstTimer);
       window.clearTimeout(retryTimer);
     };
-  }, [pathname, search, hash, scrollToHash]);
+  }, [pathname, hash, scrollToHash]);
 
   useEffect(() => {
     const onClick = (event: MouseEvent) => {
       if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-      const target = (event.target as HTMLElement | null)?.closest('a[href^="#"]') as HTMLAnchorElement | null;
+      const target = (event.target as HTMLElement | null)?.closest('a[href*="#"]') as HTMLAnchorElement | null;
       if (!target) return;
       if (target.target && target.target !== "" && target.target !== "_self") return;
 
-      const targetHash = target.getAttribute("href") || "";
-      if (targetHash.length < 2) return;
+      const href = target.getAttribute("href") || "";
+      if (!href.includes("#")) return;
+
+      const targetUrl = new URL(href, window.location.href);
+      if (targetUrl.origin !== window.location.origin || !targetUrl.hash || targetUrl.hash === "#") return;
 
       event.preventDefault();
       const current = locationRef.current;
-      if (current.hash !== targetHash) {
-        navigate({ pathname: current.pathname, search: current.search, hash: targetHash });
+      if (targetUrl.pathname !== current.pathname || targetUrl.search !== current.search || current.hash !== targetUrl.hash) {
+        navigate({ pathname: targetUrl.pathname, search: targetUrl.search || current.search, hash: targetUrl.hash });
         return;
       }
 
-      scrollToHash(targetHash, "smooth");
+      scrollToHash(targetUrl.hash, "smooth");
     };
 
     document.addEventListener("click", onClick);
