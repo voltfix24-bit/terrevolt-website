@@ -430,6 +430,9 @@ const VacatureDetail = () => {
       } as any]);
       if (insErr) throw insErr;
 
+      import("@/lib/analytics").then((m) =>
+        m.trackFormSubmit("vacature_form", { vacature_slug: vacature?.slug, vacature_id: vacature?.id })
+      );
       toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");
       formRef.current?.reset();
       setFile(null);
@@ -872,6 +875,14 @@ const VacatureDetail = () => {
               <form
                 ref={formRef}
                 onSubmit={handleSubmit}
+                onFocus={(e) => {
+                  const t = e.target as HTMLElement;
+                  if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT")) {
+                    import("@/lib/analytics").then((m) =>
+                      m.trackFormStart("vacature_form", { vacature_slug: vacature?.slug })
+                    );
+                  }
+                }}
                 onChange={(e) => {
                   if (submitError) setSubmitError(null);
                   const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
