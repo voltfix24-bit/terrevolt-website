@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Loader2, Mail, Phone, MapPin, FileDown, Search, X, MessageCircle, Save, CalendarCheck } from "lucide-react";
+import { Loader2, Mail, Phone, MapPin, FileDown, Search, X, MessageCircle, Save, CalendarCheck, Download } from "lucide-react";
 import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +15,8 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { whatsappLink } from "@/lib/whatsapp";
+import { waTemplates, inDateRange, type DateRange } from "@/lib/adminUtils";
+import { downloadCsv } from "@/lib/csvExport";
 
 type App = {
   id: string;
@@ -56,6 +58,8 @@ export default function AdminApplications() {
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [vacancyFilter, setVacancyFilter] = useState<string>("all");
+  const [profileFilter, setProfileFilter] = useState<string>("all");
+  const [dateRange, setDateRange] = useState<DateRange>("all");
 
   async function load() {
     setLoading(true);
@@ -109,6 +113,12 @@ export default function AdminApplications() {
     return Array.from(map.entries()).sort((a, b) => a[1].localeCompare(b[1], "nl"));
   }, [rows]);
 
+  const profiles = useMemo(() => {
+    const set = new Set<string>();
+    rows.forEach((r) => { if (r.profile) set.add(r.profile); });
+    return Array.from(set).sort((a, b) => a.localeCompare(b, "nl"));
+  }, [rows]);
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return rows.filter((r) => {
@@ -118,28 +128,51 @@ export default function AdminApplications() {
       }
       if (statusFilter !== "all" && r.status !== statusFilter) return false;
       if (vacancyFilter !== "all" && r.vacancy_id !== vacancyFilter) return false;
+      if (profileFilter !== "all" && (r.profile ?? "") !== profileFilter) return false;
+      if (!inDateRange(r.created_at, dateRange)) return false;
       return true;
     });
-  }, [rows, query, statusFilter, vacancyFilter]);
+  }, [rows, query, statusFilter, vacancyFilter, profileFilter, dateRange]);
 
-  const hasActiveFilters = query !== "" || statusFilter !== "all" || vacancyFilter !== "all";
+  const hasActiveFilters = query !== "" || statusFilter !== "all" || vacancyFilter !== "all" || profileFilter !== "all" || dateRange !== "all";
   function resetFilters() {
     setQuery("");
     setStatusFilter("all");
     setVacancyFilter("all");
+    setProfileFilter("all");
+    setDateRange("all");
+  }
+
+  function exportCsv() {
+    downloadCsv(
+      `sollicitaties-${new Date().toISOString().slice(0, 10)}.csv`,
+      ["datum", "naam", "telefoon", "email", "profiel/vacature", "regio", "beschikbaarheid", "status", "notitie"],
+      filtered.map((r) => [
+        new Date(r.created_at).toLocaleDateString("nl-NL"),
+        r.name, r.phone, r.email,
+        r.vacancies?.title || r.profile || "",
+        r.region ?? "", r.availability ?? "",
+        STATUS_LABEL(r.status), r.admin_notes ?? "",
+      ]),
+    );
   }
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl sm:text-3xl text-[#0d3b2e]">Sollicitaties</h1>
-        <p className="text-[#6c757d]">Alle binnengekomen aanmeldingen.</p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h1 className="text-2xl sm:text-3xl text-[#0d3b2e]">Sollicitaties</h1>
+          <p className="text-[#6c757d]">Alle binnengekomen aanmeldingen.</p>
+        </div>
+        <Button variant="outline" onClick={exportCsv} className="min-h-[44px] w-full sm:w-auto" disabled={filtered.length === 0}>
+          <Download className="w-4 h-4 mr-1.5" /> Export CSV
+        </Button>
       </div>
 
       {/* Zoek- en filterbalk */}
       <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-3">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-3">
-          <div className="md:col-span-6 relative">
+          <div className="md:col-span-12 lg:col-span-4 relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6c757d]" />
             <Input
               value={query}
@@ -149,25 +182,41 @@ export default function AdminApplications() {
               aria-label="Zoek sollicitaties"
             />
           </div>
-          <div className="md:col-span-3">
+          <div className="md:col-span-6 lg:col-span-2">
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="min-h-[44px]" aria-label="Filter op status"><SelectValue placeholder="Status" /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Alle statussen</SelectItem>
-                {STATUSES.map((s) => (
-                  <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
-                ))}
+                {STATUSES.map((s) => (<SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>))}
               </SelectContent>
             </Select>
           </div>
-          <div className="md:col-span-3">
+          <div className="md:col-span-6 lg:col-span-2">
             <Select value={vacancyFilter} onValueChange={setVacancyFilter}>
               <SelectTrigger className="min-h-[44px]" aria-label="Filter op vacature"><SelectValue placeholder="Vacature" /></SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Alle vacatures</SelectItem>
-                {vacancies.map(([id, title]) => (
-                  <SelectItem key={id} value={id}>{title}</SelectItem>
-                ))}
+                {vacancies.map(([id, title]) => (<SelectItem key={id} value={id}>{title}</SelectItem>))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="md:col-span-6 lg:col-span-2">
+            <Select value={profileFilter} onValueChange={setProfileFilter}>
+              <SelectTrigger className="min-h-[44px]" aria-label="Filter op profiel"><SelectValue placeholder="Profiel" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alle profielen</SelectItem>
+                {profiles.map((p) => (<SelectItem key={p} value={p}>{p}</SelectItem>))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="md:col-span-6 lg:col-span-2">
+            <Select value={dateRange} onValueChange={(v) => setDateRange(v as DateRange)}>
+              <SelectTrigger className="min-h-[44px]" aria-label="Filter op datum"><SelectValue placeholder="Datum" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alles</SelectItem>
+                <SelectItem value="today">Vandaag</SelectItem>
+                <SelectItem value="7d">Laatste 7 dagen</SelectItem>
+                <SelectItem value="30d">Laatste 30 dagen</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -323,9 +372,14 @@ function Detail({
             <a href={`mailto:${a.email}`}><Mail className="w-4 h-4 mr-1.5" /> Mailen</a>
           </Button>
           {wa ? (
-            <Button asChild size="sm" variant="outline" className="min-h-[44px]">
-              <a href={wa} target="_blank" rel="noreferrer"><MessageCircle className="w-4 h-4 mr-1.5" /> WhatsApp</a>
-            </Button>
+            <>
+              <Button asChild size="sm" variant="outline" className="min-h-[44px]">
+                <a href={wa} target="_blank" rel="noreferrer"><MessageCircle className="w-4 h-4 mr-1.5" /> WhatsApp</a>
+              </Button>
+              <Button asChild size="sm" variant="outline" className="min-h-[44px]">
+                <a href={whatsappLink(a.phone, waTemplates.application(a.name))!} target="_blank" rel="noreferrer"><MessageCircle className="w-4 h-4 mr-1.5" /> WhatsApp-template</a>
+              </Button>
+            </>
           ) : (
             <Button size="sm" variant="outline" disabled title="Geen geldig telefoonnummer" className="min-h-[44px]">
               <MessageCircle className="w-4 h-4 mr-1.5" /> WhatsApp

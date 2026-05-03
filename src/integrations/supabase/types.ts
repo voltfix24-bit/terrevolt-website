@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       contact_requests: {
         Row: {
+          admin_notes: string | null
           attachment_url: string | null
           company: string | null
           created_at: string
@@ -24,13 +25,16 @@ export type Database = {
           id: string
           intent: string | null
           intent_label: string | null
+          last_contacted_at: string | null
           location: string | null
           name: string
           phone: string | null
           request_type: string | null
           start_date: string | null
+          status: string
         }
         Insert: {
+          admin_notes?: string | null
           attachment_url?: string | null
           company?: string | null
           created_at?: string
@@ -39,13 +43,16 @@ export type Database = {
           id?: string
           intent?: string | null
           intent_label?: string | null
+          last_contacted_at?: string | null
           location?: string | null
           name: string
           phone?: string | null
           request_type?: string | null
           start_date?: string | null
+          status?: string
         }
         Update: {
+          admin_notes?: string | null
           attachment_url?: string | null
           company?: string | null
           created_at?: string
@@ -54,11 +61,13 @@ export type Database = {
           id?: string
           intent?: string | null
           intent_label?: string | null
+          last_contacted_at?: string | null
           location?: string | null
           name?: string
           phone?: string | null
           request_type?: string | null
           start_date?: string | null
+          status?: string
         }
         Relationships: []
       }
