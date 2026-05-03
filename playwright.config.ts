@@ -33,6 +33,14 @@ export default defineConfig({
     screenshot: "only-on-failure",
     video: "retain-on-failure",
   },
+  // Visuele regressie: tolereer minieme rendering-verschillen, maar flag layout-shift.
+  expect: {
+    toHaveScreenshot: {
+      maxDiffPixelRatio: 0.02,
+      animations: "disabled",
+      caret: "hide",
+    },
+  },
   projects: [
     {
       name: "chromium-mobile",
@@ -50,6 +58,18 @@ export default defineConfig({
     {
       name: "mobile-safari-iphone-14-pro-max",
       use: { ...devices["iPhone 14 Pro Max"] },
+    },
+    // Visuele regressie: één mobile- en één desktop-project,
+    // gebruikt door e2e/visual-regression.spec.ts om pariteit te bewaken.
+    {
+      name: "visual-mobile",
+      use: { ...devices["Pixel 5"], viewport: { width: 390, height: 844 } },
+      testMatch: /visual-regression\.spec\.ts/,
+    },
+    {
+      name: "visual-desktop",
+      use: { ...devices["Desktop Chrome"], viewport: { width: 1366, height: 768 } },
+      testMatch: /visual-regression\.spec\.ts/,
     },
   ],
   webServer: {
