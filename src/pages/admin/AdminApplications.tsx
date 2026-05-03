@@ -273,7 +273,10 @@ export default function AdminApplications() {
                         {a.region ? ` · ${a.region}` : ""}
                       </div>
                     </div>
-                    <Badge variant="secondary" className="shrink-0">{STATUS_LABEL(a.status)}</Badge>
+                    <div className="flex flex-col items-end gap-1 shrink-0">
+                      <Badge variant="secondary">{STATUS_LABEL(a.status)}</Badge>
+                      <FollowUpBadges row={a} />
+                    </div>
                   </div>
                   <div className="space-y-1.5 text-sm">
                     <div className="flex items-center gap-1 min-w-0">
