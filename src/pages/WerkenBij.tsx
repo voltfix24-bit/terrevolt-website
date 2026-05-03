@@ -517,9 +517,9 @@ const WerkenBij = () => {
               <div className="inline-flex items-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 <HardHat className="w-4 h-4" /> Werken bij TerreVolt
               </div>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl text-white mb-6 leading-tight hyphens-nl">
+              <h1 className="text-[clamp(1.875rem,7vw,2.5rem)] sm:text-5xl lg:text-6xl text-white mb-6 leading-[1.1] sm:leading-tight tracking-tight hyphens-nl text-pretty [text-wrap:balance]" lang="nl">
                 Werk mee aan{" "}
-                <span className="text-[#9ed42e]">LS/MS-projecten</span> binnen de netbeheerwereld
+                <span className="text-[#9ed42e] whitespace-nowrap">LS/MS-projecten</span> binnen de netbeheerwereld
               </h1>
               <p className="text-base sm:text-xl lg:text-2xl text-white/85 mb-8 max-w-3xl leading-relaxed">
                 Ben jij monteur, werkverantwoordelijke of ZZP'er met ervaring in laagspanning, middenspanning, kabelwerk, schakelwerk of aarding? TerreVolt zoekt vakmensen voor professionele projecten met duidelijke afspraken, korte lijnen en veiligheid voorop.
@@ -528,14 +528,14 @@ const WerkenBij = () => {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-10">
                 <a
                   href="#aanmelden"
-                  className="group w-full sm:w-auto bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px]"
+                  className="group w-full sm:w-auto bg-[#9ed42e] text-[#0d3b2e] px-6 sm:px-8 py-4 min-h-[56px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Aanmelden als monteur</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
                   href="#profielen"
-                  className="w-full sm:w-auto border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center min-h-[48px] flex items-center justify-center"
+                  className="w-full sm:w-auto border-2 border-[#9ed42e] text-[#9ed42e] px-6 sm:px-8 py-4 min-h-[56px] rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center flex items-center justify-center"
                 >
                   Bekijk profielen
                 </a>
