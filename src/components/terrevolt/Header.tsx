@@ -1,11 +1,14 @@
 import { Zap, Menu, X, HardHat, ArrowRight, Phone, Mail } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { company, telHref, mailHref } from "@/config/company";
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const { pathname } = useLocation();
+  const menuRef = useRef<HTMLElement | null>(null);
+  const toggleButtonRef = useRef<HTMLButtonElement | null>(null);
+  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   // Sluit menu automatisch bij route-change.
   useEffect(() => {
@@ -55,14 +58,81 @@ export function Header() {
     };
   }, [open]);
 
-  // Esc sluit menu.
+  // Focus trap + Escape, zonder focus glitches.
   useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+    if (!open) {
+      // Bij sluiten: focus terug naar de toggle (of de eerder gefocuste element).
+      const target = previouslyFocusedRef.current ?? toggleButtonRef.current;
+      // requestAnimationFrame voorkomt dat focus race't met React's commit/unmount.
+      const raf = requestAnimationFrame(() => {
+        target?.focus({ preventScroll: true });
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+
+    previouslyFocusedRef.current = (document.activeElement as HTMLElement | null) ?? null;
+
+    const getFocusable = (): HTMLElement[] => {
+      const root = menuRef.current;
+      if (!root) return [];
+      const selectors = [
+        "a[href]",
+        "button:not([disabled])",
+        "input:not([disabled])",
+        "select:not([disabled])",
+        "textarea:not([disabled])",
+        '[tabindex]:not([tabindex="-1"])',
+      ].join(",");
+      return Array.from(root.querySelectorAll<HTMLElement>(selectors)).filter(
+        (el) => !el.hasAttribute("hidden") && el.offsetParent !== null,
+      );
     };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+
+    // Initial focus op eerste interactieve element binnen het menu.
+    const initRaf = requestAnimationFrame(() => {
+      const focusable = getFocusable();
+      focusable[0]?.focus({ preventScroll: true });
+    });
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const focusable = getFocusable();
+      if (focusable.length === 0) {
+        e.preventDefault();
+        return;
+      }
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement as HTMLElement | null;
+      const root = menuRef.current;
+
+      // Als focus buiten het menu staat (bv. op de toggle), trek 'm naar binnen.
+      if (!root || !active || !root.contains(active)) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus({ preventScroll: true });
+        return;
+      }
+
+      if (e.shiftKey && active === first) {
+        e.preventDefault();
+        last.focus({ preventScroll: true });
+      } else if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus({ preventScroll: true });
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+    return () => {
+      cancelAnimationFrame(initRaf);
+      document.removeEventListener("keydown", onKey);
+    };
   }, [open]);
 
   return (
