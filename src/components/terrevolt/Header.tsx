@@ -151,7 +151,10 @@ export function Header() {
               aria-label="TerreVolt — naar de homepagina"
               className="flex items-center min-w-0"
             >
-              <Logo className="h-11 sm:h-12 lg:h-14 w-auto" />
+              <Logo
+                className="w-auto"
+                style={{ height: "clamp(44px, 11vw, 56px)" }}
+              />
             </Link>
 
             <nav className="hidden lg:flex items-center gap-6 xl:gap-8">

@@ -11,6 +11,7 @@
  */
 export interface LogoProps {
   className?: string;
+  style?: React.CSSProperties;
   /** Forceer een variant. Default: auto (volgt `dark:` op <html>). */
   variant?: "auto" | "light" | "dark";
   title?: string;
@@ -63,27 +64,27 @@ function LogoSvg({ dark, title }: { dark: boolean; title: string }) {
   );
 }
 
-export function Logo({ className = "h-10", variant = "auto", title = "TerreVolt BV" }: LogoProps) {
+export function Logo({ className = "h-10", style, variant = "auto", title = "TerreVolt BV" }: LogoProps) {
   if (variant === "light") {
     return (
-      <span className={`inline-block ${className}`}>
+      <span className={`inline-block ${className}`} style={style}>
         <LogoSvg dark={false} title={title} />
       </span>
     );
   }
   if (variant === "dark") {
     return (
-      <span className={`inline-block ${className}`}>
+      <span className={`inline-block ${className}`} style={style}>
         <LogoSvg dark title={title} />
       </span>
     );
   }
   return (
     <>
-      <span className={`inline-block dark:hidden ${className}`}>
+      <span className={`inline-block dark:hidden ${className}`} style={style}>
         <LogoSvg dark={false} title={title} />
       </span>
-      <span className={`hidden dark:inline-block ${className}`}>
+      <span className={`hidden dark:inline-block ${className}`} style={style}>
         <LogoSvg dark title={title} />
       </span>
     </>
