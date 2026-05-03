@@ -839,7 +839,7 @@ const VacatureDetail = () => {
         </section>
 
         {/* FORMULIER */}
-        <section id="solliciteren" className="py-16 md:py-24 bg-white">
+        <section id="solliciteren" className="py-16 md:py-24 bg-white scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10 md:mb-12">
