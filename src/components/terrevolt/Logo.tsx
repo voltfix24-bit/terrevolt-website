@@ -37,12 +37,7 @@ export function Logo({ className = "h-10 w-auto", style, title = "TerreVolt BV" 
       {!loaded && (
         <span
           aria-hidden="true"
-          className="absolute inset-0 rounded-md bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 bg-[length:200%_100%] animate-[shimmer_1.4s_ease-in-out_infinite] motion-reduce:animate-none"
-          style={{
-            // Inline keyframes via CSS-variabele werkt niet — fallback op tailwind utility:
-            // we definiëren shimmer in index.css; bij ontbrekende keyframes zie je een
-            // statische lichtgrijze blok, ook prima als skeleton.
-          }}
+          className="absolute inset-0 rounded-md bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 bg-[length:200%_100%] animate-shimmer motion-reduce:animate-none"
         />
       )}
       <img
