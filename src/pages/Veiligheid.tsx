@@ -313,7 +313,7 @@ const Veiligheid = () => {
                 <div>
                   <h3 className="text-xl sm:text-2xl mb-2 text-white">Niet zeker? Niet starten.</h3>
                   <p className="text-[15px] sm:text-base text-white/85 leading-relaxed hyphens-nl text-pretty" lang="nl">
-                    {softHyphenate("Bij onduidelijke opdracht, ontbrekende aanwijzing, twijfel over de spanningstoestand of onveilige werkgrens wordt er niet doorgewerkt. Dan wordt er afgestemd met de juiste verantwoordelijke. We doen het veilig, of we doen het niet.")}
+                    {softHyphenate("Bij onduidelijke opdracht, ontbrekende aanwijzing, twijfel over de spanningstoestand of onveilige werkgrens wordt er niet doorgewerkt. Dan wordt afgestemd met de juiste verantwoordelijke.")}
                   </p>
                 </div>
               </div>
