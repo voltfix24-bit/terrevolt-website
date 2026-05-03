@@ -372,9 +372,14 @@ function Detail({
             <a href={`mailto:${a.email}`}><Mail className="w-4 h-4 mr-1.5" /> Mailen</a>
           </Button>
           {wa ? (
-            <Button asChild size="sm" variant="outline" className="min-h-[44px]">
-              <a href={wa} target="_blank" rel="noreferrer"><MessageCircle className="w-4 h-4 mr-1.5" /> WhatsApp</a>
-            </Button>
+            <>
+              <Button asChild size="sm" variant="outline" className="min-h-[44px]">
+                <a href={wa} target="_blank" rel="noreferrer"><MessageCircle className="w-4 h-4 mr-1.5" /> WhatsApp</a>
+              </Button>
+              <Button asChild size="sm" variant="outline" className="min-h-[44px]">
+                <a href={whatsappLink(a.phone, waTemplates.application(a.name))!} target="_blank" rel="noreferrer"><MessageCircle className="w-4 h-4 mr-1.5" /> WhatsApp-template</a>
+              </Button>
+            </>
           ) : (
             <Button size="sm" variant="outline" disabled title="Geen geldig telefoonnummer" className="min-h-[44px]">
               <MessageCircle className="w-4 h-4 mr-1.5" /> WhatsApp
