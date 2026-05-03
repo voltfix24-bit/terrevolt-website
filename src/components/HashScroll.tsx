@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { scrollToAnchor, setProgrammaticScroll } from "@/lib/scrollToAnchor";
 
 let lastAutoScrolledKey = "";
-
-const PROGRAMMATIC_SCROLL_EVENT = "terrevolt:programmatic-scroll";
 
 /**
  * Eén centrale hash-scroller voor directe page loads, in-app navigatie
@@ -19,22 +18,6 @@ export function HashScroll() {
     locationRef.current = { pathname, search, hash };
   }, [pathname, search, hash]);
 
-  const getOffset = useCallback(() => {
-    const header = document.querySelector("header");
-    const headerH = header ? header.getBoundingClientRect().height : 0;
-    const stickyOffsetElements = Array.from(document.querySelectorAll<HTMLElement>("[data-hash-scroll-offset]"));
-    const stickyOffsetH = stickyOffsetElements.reduce((total, el) => total + el.getBoundingClientRect().height, 0);
-    return Math.round(headerH + stickyOffsetH + 16);
-  }, []);
-
-  const setProgrammaticScroll = useCallback((active: boolean, targetId?: string) => {
-    window.dispatchEvent(
-      new CustomEvent(PROGRAMMATIC_SCROLL_EVENT, {
-        detail: { active, targetId },
-      }),
-    );
-  }, []);
-
   const scrollToHash = useCallback(
     (targetHash: string, behavior: ScrollBehavior = "smooth") => {
       if (!targetHash || targetHash === "#") return false;
@@ -47,26 +30,17 @@ export function HashScroll() {
       }
       if (!id) return false;
 
-      const el = document.getElementById(id);
-      if (!el) return false;
-
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const finalBehavior: ScrollBehavior = prefersReducedMotion ? "auto" : behavior;
-      const y = Math.max(0, el.getBoundingClientRect().top + window.scrollY - getOffset());
-      const html = document.documentElement;
-      const previousInlineScrollBehavior = html.style.scrollBehavior;
 
       if (programmaticEndTimerRef.current) {
         window.clearTimeout(programmaticEndTimerRef.current);
       }
 
-      setProgrammaticScroll(true, id);
-      html.style.scrollBehavior = "auto";
-      window.scrollTo({ top: y, behavior: finalBehavior });
-      window.requestAnimationFrame(() => {
-        html.style.scrollBehavior = previousInlineScrollBehavior;
-      });
+      if (!scrollToAnchor(id, finalBehavior)) return false;
 
+      const el = document.getElementById(id);
+      if (!el) return false;
       const prevTabIndex = el.getAttribute("tabindex");
       if (prevTabIndex === null) el.setAttribute("tabindex", "-1");
       el.focus({ preventScroll: true });
@@ -81,7 +55,7 @@ export function HashScroll() {
 
       return true;
     },
-    [getOffset, setProgrammaticScroll],
+    [],
   );
 
   useEffect(() => {
