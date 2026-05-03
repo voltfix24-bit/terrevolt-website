@@ -153,6 +153,7 @@ export function Header() {
             >
               <Logo
                 className="w-auto"
+                decorative
                 style={{
                   // Fluid hoogte: 36px op smalle telefoons → 56px op desktop.
                   height: "clamp(36px, 9.5vw, 56px)",
