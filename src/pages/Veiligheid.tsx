@@ -539,6 +539,37 @@ const Veiligheid = () => {
           </div>
         </section>
 
+        {/* SECTIE: Korte CTA na FAQ */}
+        <section aria-label="Direct contact" className="py-12 md:py-16 bg-[#f8f9fa] border-t border-gray-200">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="max-w-4xl mx-auto bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-5 shadow-sm">
+              <div className="md:max-w-xl">
+                <h3 className="text-xl sm:text-2xl text-[#0d3b2e] mb-2 hyphens-nl text-pretty" lang="nl">
+                  Vraag, project of twijfel over veilig werken?
+                </h3>
+                <p className="text-[15px] sm:text-base text-[#4a5560] leading-relaxed hyphens-nl text-pretty" lang="nl">
+                  Monteurs en opdrachtgevers kunnen direct schakelen met TerreVolt voor afstemming, planning of een veiligheidsvraag.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 md:flex-shrink-0">
+                <a
+                  href="/contact#formulier"
+                  className="inline-flex items-center justify-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors text-sm sm:text-base font-medium"
+                >
+                  Neem contact op
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+                <a
+                  href="/contact#formulier"
+                  className="inline-flex items-center justify-center border-2 border-[#0d3b2e] text-[#0d3b2e] px-6 py-3 min-h-[48px] rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors text-sm sm:text-base font-medium"
+                >
+                  Project veilig voorbereiden
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="absolute inset-0 opacity-10">
