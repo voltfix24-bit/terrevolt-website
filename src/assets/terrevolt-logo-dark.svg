@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 240">
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@800&amp;display=swap');
+      .logo-text {
+        font-family: 'Manrope', 'Inter', 'Plus Jakarta Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 800;
+        font-size: 100px;
+        fill: #ffffff;
+        letter-spacing: -3px;
+      }
+    </style>
+  </defs>
+
+  <g transform="translate(70, 25) scale(7.2)">
+    <path
+      d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"
+      fill="none"
+      stroke="#9ed42e"
+      stroke-width="2"
+      stroke-linejoin="round"
+      stroke-linecap="round"
+      vector-effect="non-scaling-stroke"
+      style="stroke-width:14"/>
+  </g>
+
+  <g stroke="#f0b41a" stroke-width="6.5" stroke-linecap="round" fill="none">
+    <line x1="225" y1="160" x2="225" y2="178"/>
+    <line x1="202" y1="178" x2="248" y2="178"/>
+    <line x1="209" y1="192" x2="241" y2="192"/>
+    <line x1="216" y1="206" x2="234" y2="206"/>
+  </g>
+
+  <text x="285" y="155" class="logo-text">TerreVolt BV</text>
+</svg>
