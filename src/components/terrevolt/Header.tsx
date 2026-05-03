@@ -5,6 +5,12 @@ import { company, telHref, mailHref } from "@/config/company";
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  // Sluit menu automatisch bij route-change.
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   // "Werken bij" zit los — de overige links blijven plain text.
   const links = [
