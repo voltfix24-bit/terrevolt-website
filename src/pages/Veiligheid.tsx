@@ -11,12 +11,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const voorPlanning = [
-  { icon: HardHat, title: "Voor de monteur", description: "Iedere monteur moet zijn werk veilig kunnen uitvoeren en aan het einde van de dag veilig naar huis." },
-  { icon: Users, title: "Voor de ploeg", description: "Veilig werken betekent elkaar aanspreken, risico's melden en niet wegkijken bij twijfel." },
-  { icon: Briefcase, title: "Voor de opdrachtgever", description: "Een veilige uitvoering vraagt om duidelijke voorbereiding, passende bevoegdheden en heldere communicatie." },
-];
-
 const pijlers = [
   { icon: FileSearch, title: "LMRA bij elk werk", description: "Voor start of hervatting van werkzaamheden wordt de situatie gecontroleerd. Is de situatie gewijzigd, ontbreekt informatie of voelt iets niet veilig? Dan stoppen we, stemmen we af en starten pas wanneer het verantwoord kan." },
   { icon: ShieldCheck, title: "De Veilige 5 bij schakelwerk", description: "Bij schakelwerk werken we met aandacht voor de Veilige 5: scheiden, beveiligen tegen wederinschakelen, controleren op afwezigheid van spanning, aarden en kortsluiten, en afschermen of afbakenen." },
