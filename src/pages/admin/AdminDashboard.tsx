@@ -28,6 +28,14 @@ type RecentReq = {
   created_at: string; status: string; request_type: string | null;
 };
 
+type ActionItem = {
+  id: string;
+  kind: "application" | "request" | "vacancy";
+  title: string;
+  reason: string;
+  to: string;
+};
+
 export default function AdminDashboard() {
   const [stats, setStats] = useState({
     total: 0, published: 0, drafts: 0,
@@ -36,11 +44,14 @@ export default function AdminDashboard() {
   });
   const [recentApps, setRecentApps] = useState<RecentApp[]>([]);
   const [recentReqs, setRecentReqs] = useState<RecentReq[]>([]);
+  const [actions, setActions] = useState<ActionItem[]>([]);
 
   useEffect(() => {
     (async () => {
       const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-      const [v, p, d, a, an7, ans, r, rn7, ro, rns, lastA, lastR] = await Promise.all([
+      const twoBizDaysAgo = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString();
+      const [v, p, d, a, an7, ans, r, rn7, ro, rns, lastA, lastR,
+        appNewAct, reqNewAct, appStaleAct, reqStaleAct, appDocsAct, reqWaitAct, draftsAct] = await Promise.all([
         supabase.from("vacancies").select("id", { count: "exact", head: true }),
         supabase.from("vacancies").select("id", { count: "exact", head: true }).eq("status", "published"),
         supabase.from("vacancies").select("id", { count: "exact", head: true }).eq("status", "draft"),
@@ -53,6 +64,13 @@ export default function AdminDashboard() {
         supabase.from("contact_requests").select("id", { count: "exact", head: true }).eq("status", "new"),
         supabase.from("job_applications").select("id, name, email, phone, created_at, status, profile, vacancies(title)").order("created_at", { ascending: false }).limit(5),
         supabase.from("contact_requests").select("id, name, company, email, phone, created_at, status, request_type").order("created_at", { ascending: false }).limit(5),
+        supabase.from("job_applications").select("id, name, vacancies(title), profile").eq("status", "new").order("created_at", { ascending: true }).limit(20),
+        supabase.from("contact_requests").select("id, name, company").eq("status", "new").order("created_at", { ascending: true }).limit(20),
+        supabase.from("job_applications").select("id, name, vacancies(title), profile").is("last_contacted_at", null).lt("created_at", twoBizDaysAgo).not("status", "in", "(archived,rejected,hired)").limit(20),
+        supabase.from("contact_requests").select("id, name, company").is("last_contacted_at", null).lt("created_at", twoBizDaysAgo).not("status", "in", "(archived,rejected,completed)").limit(20),
+        supabase.from("job_applications").select("id, name, vacancies(title), profile").eq("status", "documents_needed").limit(20),
+        supabase.from("contact_requests").select("id, name, company").eq("status", "waiting_for_client").limit(20),
+        supabase.from("vacancies").select("id, title").eq("status", "draft").limit(20),
       ]);
       setStats({
         total: v.count || 0, published: p.count || 0, drafts: d.count || 0,
@@ -61,6 +79,25 @@ export default function AdminDashboard() {
       });
       setRecentApps((lastA.data as any) || []);
       setRecentReqs((lastR.data as any) || []);
+
+      const acc: ActionItem[] = [];
+      ((appNewAct.data as any[]) || []).forEach((x) =>
+        acc.push({ id: `an-${x.id}`, kind: "application", title: `${x.name} — ${x.vacancies?.title || x.profile || "Open sollicitatie"}`, reason: "Nieuwe sollicitatie", to: "/admin/sollicitaties" }));
+      ((reqNewAct.data as any[]) || []).forEach((x) =>
+        acc.push({ id: `rn-${x.id}`, kind: "request", title: `${x.name}${x.company ? ` · ${x.company}` : ""}`, reason: "Nieuwe contactaanvraag", to: "/admin/contactaanvragen" }));
+      ((appStaleAct.data as any[]) || []).forEach((x) =>
+        acc.push({ id: `as-${x.id}`, kind: "application", title: `${x.name} — ${x.vacancies?.title || x.profile || ""}`, reason: ">2 dagen zonder contact", to: "/admin/sollicitaties" }));
+      ((reqStaleAct.data as any[]) || []).forEach((x) =>
+        acc.push({ id: `rs-${x.id}`, kind: "request", title: `${x.name}${x.company ? ` · ${x.company}` : ""}`, reason: ">2 dagen zonder contact", to: "/admin/contactaanvragen" }));
+      ((appDocsAct.data as any[]) || []).forEach((x) =>
+        acc.push({ id: `ad-${x.id}`, kind: "application", title: `${x.name} — ${x.vacancies?.title || x.profile || ""}`, reason: "Documenten nodig", to: "/admin/sollicitaties" }));
+      ((reqWaitAct.data as any[]) || []).forEach((x) =>
+        acc.push({ id: `rw-${x.id}`, kind: "request", title: `${x.name}${x.company ? ` · ${x.company}` : ""}`, reason: "Wacht op klant", to: "/admin/contactaanvragen" }));
+      ((draftsAct.data as any[]) || []).forEach((x) =>
+        acc.push({ id: `dv-${x.id}`, kind: "vacancy", title: x.title, reason: "Conceptvacature", to: "/admin/vacatures" }));
+      // Dedup by id
+      const seen = new Set<string>();
+      setActions(acc.filter((it) => (seen.has(it.id) ? false : (seen.add(it.id), true))));
     })();
   }, []);
 
