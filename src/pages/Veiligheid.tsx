@@ -358,6 +358,7 @@ const Veiligheid = () => {
               </p>
             </div>
 
+            <span id="locatie-eisen" aria-hidden="true" className="block scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]" />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
               {werkplek.map((c) => {
                 const Icon = c.icon;
