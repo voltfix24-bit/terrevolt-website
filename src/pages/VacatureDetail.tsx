@@ -506,6 +506,9 @@ const VacatureDetail = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   href="#solliciteren"
+                  data-cta="Direct aanmelden"
+                  data-entity-type="vacancy"
+                  data-entity-id={slug}
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   <span>Direct aanmelden</span>
@@ -513,6 +516,9 @@ const VacatureDetail = () => {
                 </a>
                 <a
                   href="#vragen"
+                  data-cta="Eerst vraag stellen"
+                  data-entity-type="vacancy"
+                  data-entity-id={slug}
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
                   Eerst vraag stellen
