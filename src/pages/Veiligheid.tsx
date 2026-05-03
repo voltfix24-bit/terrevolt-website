@@ -526,11 +526,11 @@ const Veiligheid = () => {
 
               <Accordion type="single" collapsible className="bg-[#f8f9fa] rounded-xl border border-gray-200 divide-y divide-gray-200">
                 {faqs.map((f, i) => (
-                  <AccordionItem key={i} value={`faq-${i}`} className="border-b-0 px-5 sm:px-6">
-                    <AccordionTrigger className="text-left text-[#0d3b2e] hover:no-underline py-4 sm:py-5 text-[15px] sm:text-lg leading-snug rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-white">
-                      {f.q}
+                  <AccordionItem key={i} value={`faq-${i}`} className="border-b-0 px-4 sm:px-6">
+                    <AccordionTrigger className="text-left font-semibold text-[#0d3b2e] hover:no-underline py-4 sm:py-5 text-[15px] sm:text-lg leading-[1.4] hyphens-nl text-pretty rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-white" lang="nl">
+                      {softHyphenate(f.q)}
                     </AccordionTrigger>
-                    <AccordionContent className="text-[#6c757d] text-[15px] sm:text-base leading-[1.75] sm:leading-relaxed pb-5 hyphens-nl text-pretty max-w-prose">
+                    <AccordionContent className="text-[#475560] text-[15px] sm:text-base leading-[1.75] sm:leading-relaxed pb-5 hyphens-nl text-pretty max-w-prose" lang="nl">
                       {softHyphenate(f.a)}
                     </AccordionContent>
                   </AccordionItem>
