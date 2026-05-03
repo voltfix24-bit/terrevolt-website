@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import { useEffect as useDocTitle } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -201,10 +200,6 @@ export default function AdminAnalytics() {
 
   return (
     <div className="space-y-6">
-      <Helmet>
-        <title>Analytics — TerreVolt admin</title>
-      </Helmet>
-
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl text-[#0d3b2e]">Analytics</h1>
