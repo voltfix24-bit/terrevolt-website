@@ -71,11 +71,7 @@ export function HashScroll() {
 
     let cancelled = false;
     let rafId = 0;
-    const timers: number[] = [];
-
-    // Probeer meerdere keren: async-data / lazy components mounten soms pas na 200–800ms.
-    // Eerste poging direct na paint, daarna oplopend tot ~1.2s.
-    const attemptDelays = [0, 80, 200, 400, 800, 1200];
+    let timerId = 0;
 
     const tryScroll = () => {
       if (cancelled) return false;
@@ -87,20 +83,19 @@ export function HashScroll() {
       return false;
     };
 
+    // Maximaal 2 pogingen: 1) requestAnimationFrame, 2) setTimeout 100ms. Daarna stoppen.
     rafId = requestAnimationFrame(() => {
-      for (const delay of attemptDelays) {
-        const t = window.setTimeout(() => {
-          if (lastScrolledKeyRef.current === scrollKey) return;
-          tryScroll();
-        }, delay);
-        timers.push(t);
-      }
+      if (tryScroll()) return;
+      timerId = window.setTimeout(() => {
+        if (cancelled || lastScrolledKeyRef.current === scrollKey) return;
+        tryScroll();
+      }, 100);
     });
 
     return () => {
       cancelled = true;
       cancelAnimationFrame(rafId);
-      timers.forEach((t) => window.clearTimeout(t));
+      if (timerId) window.clearTimeout(timerId);
     };
   }, [pathname, hash, scrollToHash]);
 
