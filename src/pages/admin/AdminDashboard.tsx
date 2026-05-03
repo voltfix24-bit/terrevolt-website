@@ -139,6 +139,31 @@ export default function AdminDashboard() {
         })}
       </div>
 
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-lg text-[#0d3b2e]">Vandaag opvolgen</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {actions.length === 0 ? (
+            <p className="text-[#6c757d] text-sm">Niets staat open. Alles afgehandeld.</p>
+          ) : (
+            <ul className="divide-y divide-gray-200">
+              {actions.slice(0, 12).map((it) => (
+                <li key={it.id} className="py-3 flex items-start justify-between gap-3 flex-wrap">
+                  <div className="min-w-0">
+                    <div className="text-[#0d3b2e] font-medium break-words">{it.title}</div>
+                    <div className="text-xs text-[#6c757d] mt-0.5">{it.reason}</div>
+                  </div>
+                  <Button asChild size="sm" variant="outline" className="min-h-[40px]">
+                    <Link to={it.to}>Openen</Link>
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </CardContent>
+      </Card>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Card>
           <CardHeader><CardTitle className="text-lg text-[#0d3b2e]">Laatste sollicitaties</CardTitle></CardHeader>
