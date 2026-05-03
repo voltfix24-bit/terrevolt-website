@@ -440,6 +440,11 @@ function Detail({
         <div className="pt-4 border-t space-y-2">
           <div className="text-sm font-medium text-[#0d3b2e]">Veiligheid & scope</div>
           <p className="text-xs text-[#6c757d]">Snelle interne beoordeling. Niet zichtbaar op de website.</p>
+          {(flags.scope_onvoldoende || flags.bijlage_ontbreekt) && (
+            <div className="rounded-md border border-amber-300 bg-amber-50 px-3 py-2 text-xs text-amber-800">
+              Let op: aanvraag heeft nog aanvullende informatie nodig.
+            </div>
+          )}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
             {SAFETY_FLAGS.map((f) => (
               <label key={f.key} className="flex items-center gap-3 text-sm cursor-pointer min-h-[44px] py-2 px-2 -mx-2 rounded-md hover:bg-gray-50 active:bg-gray-100">
