@@ -8,7 +8,6 @@ export function Header() {
   const { pathname } = useLocation();
   const menuRef = useRef<HTMLElement | null>(null);
   const toggleButtonRef = useRef<HTMLButtonElement | null>(null);
-  const previouslyFocusedRef = useRef<HTMLElement | null>(null);
 
   // Sluit menu automatisch bij route-change.
   useEffect(() => {
