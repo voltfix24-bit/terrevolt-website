@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { useEffect as useDocTitle } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -169,19 +169,17 @@ export default function AdminAnalytics() {
   }, [events]);
 
   function exportCsv() {
-    downloadCsv(
-      "analytics_events.csv",
-      events.map((e) => ({
-        created_at: e.created_at,
-        event_name: e.event_name,
-        page_path: e.page_path ?? "",
-        element_label: e.element_label ?? "",
-        entity_type: e.entity_type ?? "",
-        entity_id: e.entity_id ?? "",
-        metadata: e.metadata ? JSON.stringify(e.metadata) : "",
-      })),
-      ["created_at", "event_name", "page_path", "element_label", "entity_type", "entity_id", "metadata"]
-    );
+    const headers = ["created_at", "event_name", "page_path", "element_label", "entity_type", "entity_id", "metadata"];
+    const rows = events.map((e) => [
+      e.created_at,
+      e.event_name,
+      e.page_path ?? "",
+      e.element_label ?? "",
+      e.entity_type ?? "",
+      e.entity_id ?? "",
+      e.metadata ? JSON.stringify(e.metadata) : "",
+    ]);
+    downloadCsv("analytics_events.csv", headers, rows);
   }
 
   if (loading) {
