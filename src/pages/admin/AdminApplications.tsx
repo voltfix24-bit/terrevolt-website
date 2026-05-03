@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Loader2, Mail, Phone, MapPin, FileDown, Search, X, MessageCircle, Save, CalendarCheck } from "lucide-react";
+import { Loader2, Mail, Phone, MapPin, FileDown, Search, X, MessageCircle, Save, CalendarCheck, Download } from "lucide-react";
 import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +15,8 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { whatsappLink } from "@/lib/whatsapp";
+import { waTemplates, inDateRange, type DateRange } from "@/lib/adminUtils";
+import { downloadCsv } from "@/lib/csvExport";
 
 type App = {
   id: string;
