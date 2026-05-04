@@ -145,7 +145,7 @@ export function Header() {
       </a>
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
         <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-          <div className="flex items-center justify-between h-16 sm:h-20 gap-3">
+          <div className="flex items-center justify-between h-20 sm:h-24 gap-3">
             <Link
               to="/"
               aria-label="TerreVolt — naar de homepagina"
@@ -155,10 +155,10 @@ export function Header() {
                 className="w-auto"
                 decorative
                 style={{
-                  // Fluid hoogte: 36px op smalle telefoons → 56px op desktop.
-                  height: "clamp(36px, 9.5vw, 56px)",
+                  // Fluid hoogte: 56px op smalle telefoons → 80px op desktop.
+                  height: "clamp(56px, 14vw, 80px)",
                   // Voorkom dat 't logo de hamburger uit de viewport drukt.
-                  maxWidth: "min(70vw, 320px)",
+                  maxWidth: "min(75vw, 360px)",
                 }}
               />
             </Link>
@@ -208,7 +208,7 @@ export function Header() {
           aria-label="Mobiele navigatie"
           aria-modal="true"
           role="dialog"
-          className="lg:hidden fixed left-0 right-0 top-16 sm:top-20 bottom-0 z-[9999] bg-white border-t border-gray-200 overflow-y-auto overscroll-contain animate-fade-in motion-reduce:animate-none"
+          className="lg:hidden fixed left-0 right-0 top-20 sm:top-24 bottom-0 z-[9999] bg-white border-t border-gray-200 overflow-y-auto overscroll-contain animate-fade-in motion-reduce:animate-none"
           style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}
         >
           <div className="container mx-auto px-4 sm:px-6 pt-4 pb-[calc(2rem+env(safe-area-inset-bottom))] flex flex-col">
