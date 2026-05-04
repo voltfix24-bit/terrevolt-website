@@ -208,7 +208,7 @@ export function Header() {
           aria-label="Mobiele navigatie"
           aria-modal="true"
           role="dialog"
-          className="lg:hidden fixed left-0 right-0 top-16 sm:top-20 bottom-0 z-[9999] bg-white border-t border-gray-200 overflow-y-auto overscroll-contain animate-fade-in motion-reduce:animate-none"
+          className="lg:hidden fixed left-0 right-0 top-20 sm:top-24 bottom-0 z-[9999] bg-white border-t border-gray-200 overflow-y-auto overscroll-contain animate-fade-in motion-reduce:animate-none"
           style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}
         >
           <div className="container mx-auto px-4 sm:px-6 pt-4 pb-[calc(2rem+env(safe-area-inset-bottom))] flex flex-col">
