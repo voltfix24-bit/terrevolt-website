@@ -14,7 +14,9 @@ export function lazyWithRetry<T extends ComponentType<unknown>>(
   return lazy(async () => {
     const STORAGE_KEY = "lovable:chunk-reloaded";
     try {
-      return await factory();
+      const mod = await factory();
+      if (typeof window !== "undefined") sessionStorage.removeItem(STORAGE_KEY);
+      return mod;
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       const isChunkError =
