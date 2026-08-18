@@ -217,16 +217,17 @@ const Veiligheid = () => {
               ].map((item) => {
                 const isActive = item.href.startsWith("#") && item.href.slice(1) === activeId;
                 return (
-                  <li key={item.href} className="flex-shrink-0">
+                  <li key={item.href} className="flex-shrink-0 snap-start">
                     <a
                       href={item.href}
                       aria-current={isActive ? "true" : undefined}
-                      className={`inline-flex items-center min-h-[44px] px-3 sm:px-4 rounded-full text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border transition-colors whitespace-nowrap ${
+                      className={`inline-flex items-center min-h-[40px] sm:min-h-[44px] px-3 sm:px-4 rounded-full text-sm tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border transition-all duration-200 whitespace-nowrap ${
                         isActive
-                          ? "bg-[#0d3b2e] text-[#9ed42e] border-[#0d3b2e]"
-                          : "text-[#0d3b2e] border-transparent hover:bg-[#f0f7e6] hover:border-[#9ed42e]"
+                          ? "bg-[#0d3b2e] text-[#9ed42e] border-[#0d3b2e] shadow-[0_4px_12px_-6px_rgba(13,59,46,0.6)]"
+                          : "text-[#0d3b2e]/80 border-transparent hover:text-[#0d3b2e] hover:bg-[#f0f7e6] hover:border-[#9ed42e]/40"
                       }`}
                     >
+
                       {item.label}
                     </a>
                   </li>
