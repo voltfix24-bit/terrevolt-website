@@ -39,12 +39,11 @@ const werkplek = [
 ];
 
 const rollen = [
-  { code: "WV", title: "Werkverantwoordelijke", description: "Verantwoordelijk voor de veilige uitvoering van werkzaamheden, afhankelijk van project en opdrachtgever." },
-  { code: "AVP", title: "Allround Vakbekwaam Persoon", description: "Bereidt werkzaamheden voor en geeft opdracht binnen passende aanwijzingen, volgens projectafspraken." },
-  { code: "VP", title: "Vakbekwaam Persoon", description: "Voert werkzaamheden uit binnen de toegekende bevoegdheid en de geldende werkinstructies." },
-  { code: "VOP", title: "Voldoende Onderricht Persoon", description: "Voert begrensde handelingen uit volgens duidelijke instructie en onder verantwoordelijkheid." },
-  { code: "Ploeg", title: "Monteur / ploeg", description: "Voert het werk uit, doet LMRA, spreekt elkaar aan en stopt bij twijfel — volgens projectafspraken." },
-  { code: "OG", title: "Uitvoerder / opdrachtgever", description: "Zorgt voor heldere scope, toegang, vrijgave en randvoorwaarden, afhankelijk van project en locatie." },
+  { code: "WV", title: "Werkverantwoordelijke", description: "BEI-opdrachtgever en direct verantwoordelijk voor de leiding over en het veilige verloop van de uitvoerende activiteiten. De WV stelt werkplannen op of laat deze opstellen, is verantwoordelijk voor de inhoud en verstrekt de opdracht." },
+  { code: "AVP", title: "Allround Vakbekwaam Persoon", description: "Voert binnen de eigen aanwijzing, opdracht en het toegewezen werkgebied bedieningshandelingen, werkzaamheden en bijbehorende veiligheidsmaatregelen uit. Een AVP kan per werk als ploegleider worden aangewezen." },
+  { code: "VP", title: "Vakbekwaam Persoon", description: "Voert de werkzaamheden, handelingen en bijbehorende veiligheidsmaatregelen uit die binnen de specifieke aanwijzing en de toepasselijke VWI zijn toegestaan. Een VP kan als ploegleider worden aangewezen als de aanwijzing toereikend is voor het werk." },
+  { code: "VOP", title: "Voldoend Onderricht Persoon", description: "Assisteert of voert uitsluitend de beperkte werkzaamheden en handelingen uit die binnen de eigen aanwijzing, opdracht en toepasselijke VWI zijn toegestaan." },
+  { code: "PL", title: "Ploegleider", description: "Wordt per werk door de WV aangewezen uit een AVP of VP met een toereikende aanwijzing. De PL geeft leiding op de werkplek, instrueert de ploegleden en zorgt dat de veiligheidsmaatregelen tijdens het werk gehandhaafd blijven." },
 ];
 
 const voorPlanning = [
