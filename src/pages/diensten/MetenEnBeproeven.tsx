@@ -154,13 +154,13 @@ const MetenEnBeproeven = () => {
             <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Van meting naar rapportage</h2>
               <p className="text-xl text-[#6c757d] max-w-2xl mx-auto">
-                Een gestructureerd proces — meten, controleren, rapporteren.
+                Een gestructureerd proces — voorbereiden, meten, controleren, rapporteren.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto relative">
               {/* Verbindingslijn op desktop */}
-              <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-px bg-gradient-to-r from-[#9ed42e]/0 via-[#9ed42e] to-[#9ed42e]/0" aria-hidden="true" />
+              <div className="hidden lg:block absolute top-12 left-[12%] right-[12%] h-px bg-gradient-to-r from-[#9ed42e]/0 via-[#9ed42e] to-[#9ed42e]/0" aria-hidden="true" />
 
               {proces.map((step, index) => {
                 const Icon = step.icon;
