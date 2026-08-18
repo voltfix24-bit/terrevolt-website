@@ -54,7 +54,7 @@ const voorPlanning = [
 
 const faqs = [
   { q: "Geldt LMRA voor al het werk?", a: "Ja. Voor start of hervatting van werkzaamheden wordt gecontroleerd of de situatie nog klopt. Bij twijfel wordt afgestemd voordat er wordt doorgewerkt." },
-  { q: "Wat is de Veilige 5 bij schakelwerk?", a: "De Veilige 5 beschrijft de basisstappen om veilig te kunnen werken: scheiden, beveiligen tegen wederinschakelen, controleren op afwezigheid van spanning, aarden en kortsluiten, en afschermen of afbakenen." },
+  { q: "Wat zijn de vijf eisen bij spanningsloos werken?", a: "De vijf eisen zijn: scheiden, beveiligen tegen opnieuw inschakelen, spanningsloosheid vaststellen, aarden en kortsluiten waar voorgeschreven, en nabijgelegen actieve delen afschermen. Identificatie en de precieze uitvoering volgen uit de toepasselijke BEI en VWI." },
   { q: "Wordt er doorgewerkt als de planning onder druk staat?", a: "Nee. Planning, onderhoudsvensters en deadlines zijn belangrijk, maar niet belangrijker dan veilig werken. Als de situatie niet veilig is, wordt er gestopt en afgestemd." },
   { q: "Wat als een monteur een situatie onveilig vindt?", a: "Dan wordt er niet zomaar doorgewerkt. De situatie wordt gemeld, besproken en pas opgepakt als het verantwoord kan. We doen het veilig, of we doen het niet." },
   { q: "Wat betekent BEI BLS/BHS?", a: "BEI-BLS gaat over laagspanning; BEI-BHS over hoog- en middenspanning binnen de elektriciteitsvoorzieningssystemen van netbeheerders. Voor TerreVolt betekent dit dat werkzaamheden worden voorbereid en uitgevoerd met aandacht voor de juiste rollen, aanwijzingen en instructies." },
