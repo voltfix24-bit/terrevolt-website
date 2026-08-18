@@ -13,7 +13,7 @@ export function SafetyStatement() {
             <div className="min-w-0">
               <h3 className="text-xl text-[#0d3b2e] mb-2">Veiligheid en kwaliteit als standaard</h3>
               <p className="text-[#6c757d] leading-relaxed">
-                TerreVolt werkt bij deze dienst met aandacht voor passende aanwijzingen, bevoegdheden en procedures. Maar de basis blijft altijd hetzelfde: iedereen veilig thuis. Als het niet veilig kan, doen we het niet.
+                Voor ieder project wordt vooraf vastgesteld welke veiligheidsregelgeving van toepassing is. Binnen netbeheeromgevingen werken we volgens de toepasselijke BEI BLS/BHS, VWI's, opdrachten, werk- en bedieningsplannen en bedrijfsspecifieke procedures. Buiten de netbeheeromgeving gelden de door opdrachtgever of beheerder vastgestelde regels. VCA, LMRA, passende PBM's en een veilige werkplek vormen altijd de basis.
               </p>
               <div className="flex flex-wrap gap-2 mt-4">
                 {tags.map((t) => (
