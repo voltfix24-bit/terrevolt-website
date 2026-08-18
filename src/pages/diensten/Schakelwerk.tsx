@@ -7,22 +7,22 @@ import { usePageMeta } from "../../hooks/usePageMeta";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
 
 const taken = [
-  { icon: Power, title: "Vrijschakelen", description: "Installaties of netdelen spanningsloos maken volgens projectafspraken en veiligheidsprocedures." },
-  { icon: Lock, title: "Veiligstellen", description: "Werkgebieden veiligstellen zodat monteurs verantwoord kunnen uitvoeren." },
-  { icon: PlayCircle, title: "In bedrijf nemen", description: "Installaties gecontroleerd terug in bedrijf nemen na uitvoering, controle of renovatie." },
-  { icon: PauseCircle, title: "Uit bedrijf nemen", description: "Netdelen of installaties voorbereiden voor werkzaamheden, vervanging of onderhoud." },
-  { icon: EarthSymbol, title: "Aarden en kortsluiten", description: "Ondersteuning bij veiligheidsmaatregelen rondom werkplekken en installaties." },
-  { icon: ListChecks, title: "Schakelplannen", description: "Uitvoering en afstemming rondom bedienings- en schakelplannen." },
+  { icon: Power, title: "Vrijschakelen", description: "Het net- of installatiedeel volgens het goedgekeurde bedieningsplan van de vereiste voedingsbronnen scheiden. Alleen vrijschakelen betekent nog niet dat het werkgebied veiliggesteld of vrijgegeven is." },
+  { icon: Lock, title: "Veiligstellen", description: "De voorgeschreven veiligheidsmaatregelen treffen, spanningsloosheid vaststellen en het werkgebied volgens werkplan en VWI veilig gereedmaken voor uitvoering." },
+  { icon: PlayCircle, title: "In bedrijf nemen", description: "Het net- of installatiedeel na controle, oplevering en het volgens de juiste volgorde opheffen van de veiligheidsmaatregelen gecontroleerd beschikbaar stellen voor de bedrijfsvoering." },
+  { icon: PauseCircle, title: "Uit bedrijf nemen", description: "Het net- of installatiedeel volgens het goedgekeurde bedieningsplan en de procedures van de netbeheerder voorbereiden op werkzaamheden." },
+  { icon: EarthSymbol, title: "Aarden en kortsluiten", description: "Aardingen en kortsluitingen worden uitsluitend getroffen en opgeheven volgens werkplan, toepasselijke VWI en de voorgeschreven bezetting. Het handmatig aanbrengen of verwijderen van aardingen in HS/MS wordt uitgevoerd door minimaal één AVP of WV samen met minimaal één VP." },
+  { icon: ListChecks, title: "Bedienings- en werkplannen", description: "Uitvoering en afstemming volgens het goedgekeurde bedieningsplan, werkplan, de toepasselijke VWI's en bedrijfsspecifieke procedures." },
 ];
 
 const inzet = [
-  { icon: Building2, title: "Stationsrenovaties", description: "Geplande schakelhandelingen tijdens renovatie van MS/LS-stations." },
+  { icon: Building2, title: "Stationsrenovaties", description: "Toegewezen bedieningshandelingen tijdens renovatie van MS/LS-stations." },
   { icon: Zap, title: "Transformatorwissels", description: "Veilig vrijschakelen, veiligstellen en terugschakelen rondom transformatorwerk." },
-  { icon: Cable, title: "Kabelwerk", description: "Schakelwerk bij kabelmontage, vervanging en aansluitwerk in het net." },
-  { icon: Wrench, title: "Storingen en onderhoud", description: "Schakelondersteuning bij storingsherstel en preventief onderhoud." },
+  { icon: Cable, title: "Kabelwerk", description: "Bedieningshandelingen en veiligheidsmaatregelen bij kabelmontage, vervanging en aansluitwerk in het net." },
+  { icon: Wrench, title: "Storingen en onderhoud", description: "Ondersteuning bij storingsherstel en preventief onderhoud, binnen opdracht en aanwijzing." },
 ];
 
-const badges = ["BEI BLS/BHS", "AVP / VP / VOP / WV", "LMRA", "VCA", "NEN 3140"];
+const badges = ["BEI BLS/BHS waar van toepassing", "Persoonsgebonden aanwijzingen", "VWI's en werkplannen", "LMRA", "VCA", "NEN 3140 / NEN 3840"];
 
 const Schakelwerk = () => {
   usePageMeta("Schakelwerk & veiligstellen | TerreVolt BV", "TerreVolt ondersteunt bij schakelwerk, vrijschakelen, veiligstellen en in- en uitbedrijf nemen binnen LS/MS-projecten.", "/diensten/schakelwerk");
