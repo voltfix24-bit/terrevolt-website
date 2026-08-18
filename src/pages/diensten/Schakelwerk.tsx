@@ -56,8 +56,11 @@ const Schakelwerk = () => {
                 Schakelwerk<br />
                 <span className="text-[#9ed42e]">& veiligstellen</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-6 max-w-3xl leading-relaxed">
                 TerreVolt ondersteunt bij geplande en projectmatige schakelwerkzaamheden binnen laagspannings- en middenspanningsinstallaties. Wij helpen bij veilig in- en uitbedrijf nemen, vrijschakelen, veiligstellen en terugschakelen.
+              </p>
+              <p className="text-base sm:text-lg text-white/75 mb-10 max-w-3xl leading-relaxed">
+                TerreVolt voert bedieningshandelingen en veiligheidsmaatregelen uitsluitend uit binnen de passende persoonsgebonden aanwijzing, opdracht, werkgrenzen en toepasselijke VWI. Bedieningshandelingen worden uitgevoerd volgens het door de netbeheerder goedgekeurde bedieningsplan en de bedrijfsspecifieke procedures. Veiligheidsmaatregelen worden in opdracht van de verantwoordelijke WV getroffen en opgeheven volgens het werkplan en de toepasselijke VWI.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
