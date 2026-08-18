@@ -146,9 +146,9 @@ const Schakelwerk = () => {
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Bevoegdheden, procedures en communicatie</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Aanwijzingen, procedures en communicatie</h2>
               <p className="text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
-                Schakelwerk is geen losse handeling, maar onderdeel van veilige bedrijfsvoering. Het vraagt om voorbereiding, bevoegdheid, risicobeheersing en duidelijke communicatie tussen opdrachtgever, werkverantwoordelijke, uitvoerder en ploeg.
+                Bedieningshandelingen zijn geen losse handeling, maar onderdeel van veilige bedrijfsvoering. Ze vragen om voorbereiding, een passende persoonsgebonden aanwijzing, opdracht, risicobeheersing en duidelijke communicatie tussen de aangewezen WV, de ploegleider, de uitvoerende medewerkers en de bedieningsorganisatie van de netbeheerder.
               </p>
             </div>
 
