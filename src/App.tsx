@@ -63,7 +63,8 @@ const App = () => (
             {/* Aliasroutes — 301-equivalent redirect naar canonieke route */}
             <Route path="/veiligheid-certificeringen" element={<Navigate to="/veiligheid" replace />} />
             <Route path="/over-terrevolt" element={<Navigate to="/over" replace />} />
-            <Route path="/zzp-monteurs" element={<Navigate to="/werken-bij#zzp" replace />} />
+            <Route path="/zzp-monteurs" element={<Navigate to="/werken-bij" replace />} />
+            <Route path="/vacatures/zzp-ploegen" element={<Navigate to="/werken-bij" replace />} />
             <Route path="/diensten/meten-beproeven-rapportage" element={<Navigate to="/diensten/meten-en-beproeven" replace />} />
 
             <Route path="/diensten/ls-ms-netmontage" element={<LSMSNetmontage />} />

@@ -24,7 +24,7 @@ const requestTypes = [
   "Meten & beproeven",
   "Huisaansluitingen",
   "Monteur / ploeg nodig",
-  "Sollicitatie / ZZP",
+  "Sollicitatie",
   "Anders",
 ];
 
@@ -51,7 +51,7 @@ const schema = z.object({
 const intentToRequestType: Record<"project" | "monteur" | "sollicitatie", string> = {
   project: "LS/MS Netmontage",
   monteur: "Monteur / ploeg nodig",
-  sollicitatie: "Sollicitatie / ZZP",
+  sollicitatie: "Sollicitatie",
 };
 
 const Contact = () => {
@@ -88,7 +88,7 @@ const Contact = () => {
     setIntent(id);
     setRequestType(intentToRequestType[id]);
     const label =
-      id === "project" ? "Project bespreken" : id === "monteur" ? "Monteur / ploeg nodig" : "Sollicitatie / ZZP";
+      id === "project" ? "Project bespreken" : id === "monteur" ? "Monteur / ploeg nodig" : "Sollicitatie";
     import("@/lib/analytics").then((m) => m.trackCTA(label, { intent: id }));
   };
 
@@ -100,7 +100,7 @@ const Contact = () => {
   }[] = [
     { id: "project", label: "Project bespreken", icon: Cable, helper: "Voor LS/MS-netmontage, stationsrenovatie, schakelwerk, aarding of metingen." },
     { id: "monteur", label: "Monteur / ploeg nodig", icon: Users, helper: "Voor projectmatige inzet van vakbekwame monteurs of complete ploegen." },
-    { id: "sollicitatie", label: "Sollicitatie / ZZP", icon: BadgeCheck, helper: "Voor monteurs, werkverantwoordelijken en ZZP-ploegen die met TerreVolt willen werken." },
+    { id: "sollicitatie", label: "Sollicitatie", icon: BadgeCheck, helper: "Voor monteurs en werkverantwoordelijken die bij TerreVolt willen werken." },
   ];
 
   const validateFile = (f: File): string | null => {
@@ -190,7 +190,7 @@ const Contact = () => {
 
       const intentLabel =
         intent === "project" ? "Project bespreken" :
-        intent === "monteur" ? "Monteur/ploeg nodig" : "Sollicitatie/ZZP";
+        intent === "monteur" ? "Monteur/ploeg nodig" : "Sollicitatie";
 
       const { error: insErr } = await supabase.from("contact_requests").insert([{
         name: parsed.data.name,
@@ -299,7 +299,7 @@ const Contact = () => {
                   <div className="flex items-start gap-3 min-w-0">
                     <BadgeCheck className="w-5 h-5 text-[#0d3b2e] flex-shrink-0 mt-0.5" strokeWidth={2.2} />
                     <p className="text-sm text-[#0d3b2e] min-w-0">
-                      Voor sollicitaties en ZZP-aanmeldingen heeft TerreVolt een speciaal aanmeldformulier met alle profielen en certificaatvelden. Je kunt hieronder ook gewoon dit formulier invullen als je dat liever hebt.
+                      Voor sollicitaties heeft TerreVolt een apart sollicitatieformulier op de pagina Werken bij. Je kunt hieronder ook gewoon dit formulier invullen als je dat liever hebt.
                     </p>
                   </div>
                   <Link

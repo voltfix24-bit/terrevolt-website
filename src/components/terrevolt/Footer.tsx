@@ -39,7 +39,7 @@ export function Footer() {
               <li><Link to="/projecten" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Projecten</Link></li>
               <li><Link to="/veiligheid" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Veiligheid</Link></li>
               <li><Link to="/werken-bij" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Werken bij ons</Link></li>
-              <li><Link to="/werken-bij#zzp" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">ZZP'ers &amp; monteurs</Link></li>
+              <li><Link to="/werken-bij#vacatures" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Vacatures</Link></li>
             </ul>
           </div>
 

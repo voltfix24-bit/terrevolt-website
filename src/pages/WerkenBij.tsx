@@ -1,1287 +1,264 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowRight, Zap, Cable, PlugZap, Power, ClipboardCheck, Users,
-  Network, Layers, FileText, Briefcase, MessageSquare, ShieldAlert,
-  Award, Loader2, CalendarCheck, Phone as PhoneIcon, HardHat,
-  CheckCircle2, ClipboardList, UserCheck, Layers3, Rocket,
-  Mail as MailIcon, HelpCircle, AlertCircle,
-  Search, X, SlidersHorizontal,
+  ArrowRight, BadgeEuro, CalendarDays, Truck, GraduationCap,
+  MapPin, Clock, FileSignature, Phone, MessageCircle, ShieldCheck,
+  Wrench, Handshake, TrendingUp, CheckCircle2,
 } from "lucide-react";
-import { EarthSymbol } from "@/components/icons/EarthSymbol";
-import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { Reveal } from "@/components/terrevolt/Reveal";
-import { CopyableContactLink } from "@/components/terrevolt/CopyableContactLink";
-import { supabase } from "@/integrations/supabase/client";
-import { CvUploadField, validateCvFile } from "@/components/CvUploadField";
-import { toast } from "sonner";
+import { ApplicationForm } from "@/components/terrevolt/ApplicationForm";
+import { TobeshCard, whatsappHref } from "@/components/terrevolt/TobeshCard";
 import { usePageMeta } from "../hooks/usePageMeta";
-import { vacatures as fallbackVacatures } from "@/data/vacatures";
-import { company, telHref, mailHref } from "@/config/company";
-import { PROGRAMMATIC_SCROLL_EVENT, type ProgrammaticScrollDetail, scrollToAnchor, scrollToElement } from "@/lib/scrollToAnchor";
+import { scrollToAnchor } from "@/lib/scrollToAnchor";
+import { company, telHref } from "@/config/company";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
+  ARBEIDSVOORWAARDEN, CONTRACT_LABEL, REGIO_LABEL, SALARIS_DISCLAIMER,
+  SOLLICITATIEPROCES, UREN_LABEL, formatSalaris, vacatures,
+} from "@/data/vacatures";
+import {
+  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const waLink = `https://wa.me/${company.phone.e164.replace("+", "")}?text=${encodeURIComponent(
-  "Hallo TerreVolt, ik heb interesse om met jullie te werken.",
-)}`;
-
-const funnelNav: { label: string; href: string }[] = [
-  { label: "Profielen", href: "#profielen" },
-  { label: "ZZP & ploegen", href: "#zzp" },
-  { label: "Hoe het werkt", href: "#hoe-het-werkt" },
-  { label: "Veelgestelde vragen", href: "#faq" },
-  { label: "Aanmelden", href: "#aanmelden" },
-];
-
-const stappen = [
-  { icon: ClipboardList, title: "Aanmelden", text: "Je laat je gegevens, ervaring en beschikbaarheid achter. Een CV mag, maar is niet verplicht." },
-  { icon: UserCheck, title: "Kennismaken & check", text: "We bellen je binnen 2 werkdagen op en bespreken je ervaring, certificaten, bevoegdheden en voorkeuren." },
-  { icon: Layers3, title: "Projectmatch", text: "We kijken welke LS/MS-projecten, stationswerkzaamheden, schakelwerk of aardingswerk bij jou passen." },
-  { icon: Rocket, title: "Start op project", text: "Je krijgt duidelijke projectinformatie, planning en afspraken voordat je start." },
-];
-
-const faqs: { q: string; a: string }[] = [
-  { q: "Kan ik ook als ZZP'er reageren?", a: "Ja. TerreVolt werkt ook samen met zelfstandige monteurs en complete ploegen voor projectmatige inzet binnen LS/MS, stationswerk, kabelmontage, schakelwerk en aarding." },
-  { q: "Moet ik BEI BLS of BEI BHS hebben?", a: "Je mag ook reageren als je nog geen aanwijzing hebt. Voor zelfstandige inzet op BEI-plichtige werkzaamheden moet vóór de start een geldige, taak- en gebiedsspecifieke BEI BLS- of BEI BHS-aanwijzing aanwezig zijn. Een opleiding of persoonscertificaat alleen is nog geen aanwijzing. Welke aanwijzing nodig is, hangt af van de werkzaamheden, de VWI, het domein en de netbeheerder." },
-  { q: "Is VCA verplicht?", a: "Je mag ook reageren als je nog geen VCA hebt. Voor veel van onze projecten en voor inzet binnen de netbeheeromgeving is een geldig VCA-certificaat vóór de start vereist. We bespreken dit tijdens de kennismaking." },
-  { q: "Kan ik reageren zonder CV?", a: "Ja. Geen CV bij de hand? Laat gewoon je gegevens achter. Certificaten of documenten kunnen later worden aangevuld." },
-  { q: "In welke regio's werken jullie?", a: "TerreVolt werkt projectmatig in Nederland. Per project stemmen we locatie, reistijd en beschikbaarheid af." },
-  { q: "Hoe snel nemen jullie contact op?", a: "Na je aanmelding nemen we binnen 2 werkdagen contact op om je ervaring, beschikbaarheid en mogelijke projectmatch te bespreken." },
-  { q: "Werken jullie met losse monteurs of complete ploegen?", a: "Beide zijn mogelijk. We kijken per project of een losse specialist, vaste ploeg of ZZP-team passend is." },
-  { q: "Welke documenten hebben jullie nodig?", a: "Dat verschilt per project, maar denk aan VCA, relevante BEI-aanwijzingen, certificaten, KvK-gegevens bij ZZP en eventueel verzekering of ID-check volgens projectvereisten." },
-  { q: "Wat als een situatie op locatie niet veilig voelt?", a: "Dan wordt er niet zomaar doorgewerkt. Veiligheid gaat voor. Bespreek het met je aanspreekpunt, uitvoerder of werkverantwoordelijke. We doen het veilig, of we doen het niet." },
-];
-
-const slugIconMap: Record<string, typeof Zap> = {
-  laagspanningsmonteur: Zap,
-  middenspanningsmonteur: Cable,
-  schakelmonteur: Power,
-  kabelmonteur: Cable,
-  aardingsmonteur: EarthSymbol,
-  "monteur-huisaansluitingen": PlugZap,
-  werkverantwoordelijke: ClipboardCheck,
-  "zzp-ploegen": Users,
-};
-
-/** Vaste 1-regel-omschrijvingen per profiel. */
-const slugDescriptionMap: Record<string, string> = {
-  laagspanningsmonteur: "LS-rekken, aansluitingen, saneringen en kabelwerk.",
-  middenspanningsmonteur: "MS-installaties, kabelafmontage en stationswerk.",
-  schakelmonteur: "Vrijschakelen, veiligstellen en in-/uitbedrijf nemen.",
-  kabelmonteur: "Kabelmontage, moffen, eindsluitingen en afwerking.",
-  aardingsmonteur: "Aardelektroden, stationsaarding en metingen.",
-  "monteur-huisaansluitingen": "Aanleg, wijziging en sanering van LS-aansluitingen.",
-  werkverantwoordelijke: "Veilige voorbereiding, vrijgave en begeleiding.",
-  "zzp-ploegen": "Projectmatige inzet met duidelijke scope en planning.",
-};
-
-/** Snelle keuzehulp — chips scrollen naar profiel-anker (data-slug). */
-const quickNav: { label: string; slugs: string[] }[] = [
-  { label: "LS/MS", slugs: ["laagspanningsmonteur", "middenspanningsmonteur"] },
-  { label: "Schakelwerk", slugs: ["schakelmonteur"] },
-  { label: "Aarding", slugs: ["aardingsmonteur"] },
-  { label: "Huisaansluitingen", slugs: ["monteur-huisaansluitingen"] },
-  { label: "Werkverantwoordelijke", slugs: ["werkverantwoordelijke"] },
-  { label: "ZZP", slugs: ["zzp-ploegen"] },
-];
-
-type ProfielCard = {
-  slug: string;
-  label: string;
-  intro?: string;
-  region?: string;
-  hours?: string;
-  employmentType?: string;
-  level?: string;
-  workArea?: string;
-};
-
-type FilterKey = "region" | "hours" | "employmentType" | "level" | "workArea";
-const FILTER_LABELS: Record<FilterKey, string> = {
-  region: "Regio",
-  hours: "Uren / beschikbaarheid",
-  employmentType: "Dienstverband",
-  level: "Niveau / ervaring",
-  workArea: "Werkgebied",
-};
-
-const trust = [
-  { icon: CalendarCheck, label: "Duidelijke planning" },
-  { icon: PhoneIcon, label: "Korte lijnen" },
-  { icon: Briefcase, label: "Projectmatig werk" },
-  { icon: ShieldAlert, label: "Veiligheid voorop" },
+const voordelenBalk = [
+  { icon: BadgeEuro, label: "Salaris direct zichtbaar" },
+  { icon: CalendarDays, label: "38 vrije dagen" },
+  { icon: Truck, label: "Volledig uitgeruste werkbus" },
+  { icon: GraduationCap, label: "Betaalde vakopleidingen" },
 ];
 
 const waarom = [
-  { icon: Network, title: "Werk binnen de netbeheerwereld", description: "Projecten voor professionele opdrachtgevers en hoofdaannemers." },
-  { icon: Layers, title: "Afwisselende LS/MS-projecten", description: "Van stationsrenovaties tot aarding en netmontage." },
-  { icon: FileText, title: "Duidelijke projectinformatie", description: "Heldere werkomschrijvingen, planning en afspraken vooraf." },
-  { icon: Briefcase, title: "Professionele opdrachtgevers", description: "Partijen die kwaliteit en betrouwbaarheid waarderen." },
-  { icon: ShieldAlert, title: "Veiligheidsgerichte werkomgeving", description: "Binnen netbeheeromgevingen werken volgens de toepasselijke BEI BLS/BHS, VWI's en persoonsgebonden aanwijzingen, met NEN 3140 / NEN 3840 en VCA als basis." },
-  { icon: MessageSquare, title: "Korte lijnen", description: "Direct contact met planning en uitvoering." },
+  { icon: ShieldCheck, title: "Veiligheid boven tempo", text: "We werken volgens duidelijke werkplannen en stoppen wanneer een situatie niet veilig is." },
+  { icon: Wrench, title: "Goed voorbereid op pad", text: "Je krijgt passend gereedschap, gekeurde meetmiddelen, werkkleding, PBM en waar nodig een volledig uitgeruste werkbus." },
+  { icon: Handshake, title: "Duidelijke afspraken", text: "Je weet vooraf waar je werkt, wat je verdient en hoe reisuren, overwerk en eventuele storingsdiensten worden vergoed." },
+  { icon: TrendingUp, title: "Blijven groeien in je vak", text: "TerreVolt betaalt de opleidingen en herhalingen die jij voor je functie nodig hebt." },
 ];
 
-const vereisten = [
-  "Certificaten: geldig VCA en relevante vakcertificaten",
-  "BEI-aanwijzing: afhankelijk van taak, werkgebied en project",
-  "Relevante ervaring",
-  "Veiligheidsbewust",
-  "Betrouwbaar",
-  "Zelfstandig",
-  "Communicatief",
+const faqs = [
+  { q: "Zijn alle vacatures rechtstreeks in loondienst bij TerreVolt?", a: "Ja. Alle functies op deze pagina zijn rechtstreeks in loondienst bij TerreVolt." },
+  { q: "Welk contract krijg ik?", a: "Je start met een jaarcontract met uitzicht op een vast contract." },
+  { q: "In welke regio's werken jullie?", a: "Onze vacatures staan open in Noord-Holland, Zuid-Holland, Gelderland en Flevoland. We bespreken samen welke projecten en reisafstand bij je passen." },
+  { q: "Moet ik direct een cv meesturen?", a: "Nee. Een cv is optioneel. Je kunt ook je contactgegevens achterlaten of direct bellen of WhatsAppen met Tobesh." },
+  { q: "Wat als ik nog niet alle benodigde opleidingen of aanwijzingen heb?", a: "Neem gerust contact op. We bekijken welke kennis en ervaring je al hebt en welke opleiding of instructie nog nodig is. TerreVolt betaalt de functiegerichte opleidingen die we met je afspreken." },
 ];
-
-const profielOpties = [
-  "Laagspanningsmonteur",
-  "Middenspanningsmonteur",
-  "Schakelmonteur",
-  "Kabelmonteur",
-  "Aardingsmonteur",
-  "Monteur huisaansluitingen",
-  "Werkverantwoordelijke",
-  "ZZP-ploeg",
-  "Anders",
-];
-
-const contactVoorkeurOpties = ["Bellen", "WhatsApp", "E-mail", "Maakt niet uit"];
-
-const formSchema = z.object({
-  name: z.string().trim().min(2, "Naam is verplicht").max(100),
-  phone: z.string().trim().min(6, "Telefoonnummer is verplicht").max(30),
-  email: z.string().trim().email("Ongeldig e-mailadres").max(255),
-  profile: z.string().trim().min(1, "Kies een profiel").max(100),
-  region: z.string().trim().max(100).optional(),
-  contact_pref: z.string().trim().max(50).optional(),
-  experience: z.string().trim().max(2000).optional(),
-  certifications: z.string().trim().max(1000).optional(),
-  availability: z.string().trim().max(200).optional(),
-  message: z.string().trim().max(2000).optional(),
-  privacy: z.literal("on", { errorMap: () => ({ message: "Akkoord met privacyverklaring is verplicht" }) }),
-});
-
-type FieldErrors = Partial<Record<keyof z.infer<typeof formSchema>, string>>;
 
 const WerkenBij = () => {
-  usePageMeta(
-    "Werken bij TerreVolt | Monteurs en ZZP'ers LS/MS",
-    "Werk via TerreVolt aan LS/MS-projecten, stationsrenovaties, schakelwerk, netmontage en aardingsoplossingen. Voor monteurs, werkverantwoordelijken en ZZP-ploegen.",
-    "/werken-bij",
-  );
+  const [contactOpen, setContactOpen] = useState(false);
 
-  const [submitting, setSubmitting] = useState(false);
-  const [file, setFile] = useState<File | null>(null);
-  const [fileError, setFileError] = useState<string | null>(null);
-  const [uploadingFile, setUploadingFile] = useState(false);
-  const [profielen, setProfielen] = useState<ProfielCard[]>([]);
-  const [errors, setErrors] = useState<FieldErrors>({});
-  const [submitError, setSubmitError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
-  const errorBannerRef = useRef<HTMLDivElement>(null);
-  const subnavRef = useRef<HTMLElement | null>(null);
-  const isProgrammaticScrollRef = useRef(false);
-  const programmaticScrollTimerRef = useRef<number | null>(null);
-  const [activeId, setActiveId] = useState<string>("");
-
-  useEffect(() => {
-    const sectionIds = ["profielen", "zzp", "hoe-het-werkt", "faq", "aanmelden"];
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => !!el);
-
-    const computeActive = () => {
-      if (isProgrammaticScrollRef.current) return;
-      const header = document.querySelector("header");
-      const headerH = header ? header.getBoundingClientRect().height : 0;
-      const subnavH = subnavRef.current ? subnavRef.current.getBoundingClientRect().height : 0;
-      const threshold = headerH + subnavH + 24;
-
-      let current = "";
-      for (const el of sections) {
-        if (el.getBoundingClientRect().top - threshold <= 0) current = el.id;
-      }
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
-        current = sections[sections.length - 1]?.id ?? current;
-      }
-      setActiveId((previous) => (previous === current ? previous : current));
-    };
-
-    const onProgrammaticScroll = (event: Event) => {
-      const { active, targetId } = (event as CustomEvent<ProgrammaticScrollDetail>).detail || {};
-      isProgrammaticScrollRef.current = Boolean(active);
-      if (targetId && sectionIds.includes(targetId)) {
-        setActiveId((previous) => (previous === targetId ? previous : targetId));
-      }
-      if (programmaticScrollTimerRef.current) {
-        window.clearTimeout(programmaticScrollTimerRef.current);
-      }
-      if (active) {
-        programmaticScrollTimerRef.current = window.setTimeout(() => {
-          isProgrammaticScrollRef.current = false;
-          computeActive();
-        }, 800);
-      }
-    };
-
-    computeActive();
-    window.addEventListener("scroll", computeActive, { passive: true });
-    window.addEventListener("resize", computeActive);
-    window.addEventListener(PROGRAMMATIC_SCROLL_EVENT, onProgrammaticScroll);
-    return () => {
-      window.removeEventListener("scroll", computeActive);
-      window.removeEventListener("resize", computeActive);
-      window.removeEventListener(PROGRAMMATIC_SCROLL_EVENT, onProgrammaticScroll);
-      if (programmaticScrollTimerRef.current) {
-        window.clearTimeout(programmaticScrollTimerRef.current);
-      }
-    };
-  }, []);
-
-
-  const clearFieldError = (field: keyof FieldErrors) => {
-    setErrors((prev) => {
-      if (!prev[field]) return prev;
-      const next = { ...prev };
-      delete next[field];
-      return next;
-    });
-  };
-
-  useEffect(() => {
-    let active = true;
-    (async () => {
-      const { data } = await supabase
-        .from("vacancies")
-        .select("slug,title,intro,region,hours,employment_type,level,work_area")
-        .eq("status", "published")
-        .order("sort_order", { ascending: true })
-        .order("created_at", { ascending: false });
-      if (!active) return;
-      if (data && data.length > 0) {
-        setProfielen(
-          data.map((v: any) => ({
-            slug: v.slug,
-            label: v.title,
-            intro: v.intro ?? undefined,
-            region: v.region ?? undefined,
-            hours: v.hours ?? undefined,
-            employmentType: v.employment_type ?? undefined,
-            level: v.level ?? undefined,
-            workArea: v.work_area ?? undefined,
-          })),
-        );
-      } else {
-        setProfielen(
-          fallbackVacatures.map((v) => ({
-            slug: v.slug,
-            label: v.shortLabel,
-            intro: v.intro,
-            region: v.meta?.regio,
-            hours: v.meta?.uren,
-            employmentType: v.meta?.dienstverband,
-            level: v.meta?.niveau,
-            workArea: v.meta?.werkgebied,
-          })),
-        );
-      }
-    })();
-    return () => { active = false; };
-  }, []);
-
-  // Zoek + filters
-  const [search, setSearch] = useState("");
-  const [filters, setFilters] = useState<Record<FilterKey, string>>({
-    region: "",
-    hours: "",
-    employmentType: "",
-    level: "",
-    workArea: "",
+  usePageMeta({
+    title: "Werken bij TerreVolt | 7 technische vacatures in loondienst",
+    description:
+      "Bekijk 7 technische vacatures bij TerreVolt in Noord-Holland, Zuid-Holland, Gelderland en Flevoland. Salaris direct zichtbaar en een jaarcontract met uitzicht op vast.",
+    canonical: "/werken-bij",
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
   });
-
-  const filterOptions = useMemo(() => {
-    const collect = (key: FilterKey) => {
-      const set = new Set<string>();
-      profielen.forEach((p) => {
-        const v = p[key];
-        if (v && v.trim()) set.add(v.trim());
-      });
-      return Array.from(set).sort((a, b) => a.localeCompare(b, "nl"));
-    };
-    return {
-      region: collect("region"),
-      hours: collect("hours"),
-      employmentType: collect("employmentType"),
-      level: collect("level"),
-      workArea: collect("workArea"),
-    } as Record<FilterKey, string[]>;
-  }, [profielen]);
-
-  const filteredProfielen = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    return profielen.filter((p) => {
-      if (q) {
-        const haystack = [
-          p.label,
-          p.intro,
-          slugDescriptionMap[p.slug],
-          p.region,
-          p.hours,
-          p.employmentType,
-          p.level,
-          p.workArea,
-        ]
-          .filter(Boolean)
-          .join(" ")
-          .toLowerCase();
-        if (!haystack.includes(q)) return false;
-      }
-      for (const key of Object.keys(filters) as FilterKey[]) {
-        const sel = filters[key];
-        if (sel && p[key] !== sel) return false;
-      }
-      return true;
-    });
-  }, [profielen, search, filters]);
-
-  const activeFilterCount = useMemo(
-    () => (search.trim() ? 1 : 0) + Object.values(filters).filter(Boolean).length,
-    [search, filters],
-  );
-
-  const resetFilters = () => {
-    setSearch("");
-    setFilters({ region: "", hours: "", employmentType: "", level: "", workArea: "" });
-  };
-
-  const focusFirstError = (errs: FieldErrors) => {
-    const first = Object.keys(errs)[0];
-    if (!first || !formRef.current) return;
-    const el = formRef.current.querySelector<HTMLElement>(`[name="${first}"]`);
-    el?.focus();
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    const raw = {
-      name: String(fd.get("name") || ""),
-      phone: String(fd.get("phone") || ""),
-      email: String(fd.get("email") || ""),
-      profile: String(fd.get("profile") || ""),
-      region: String(fd.get("region") || ""),
-      contact_pref: String(fd.get("contact_pref") || ""),
-      experience: String(fd.get("experience") || ""),
-      certifications: String(fd.get("certifications") || ""),
-      availability: String(fd.get("availability") || ""),
-      message: String(fd.get("message") || ""),
-      privacy: fd.get("privacy") ? "on" : "",
-    };
-
-    setSubmitError(null);
-    const parsed = formSchema.safeParse(raw);
-    if (!parsed.success) {
-      const fe: FieldErrors = {};
-      parsed.error.errors.forEach((err) => {
-        const k = err.path[0] as keyof FieldErrors;
-        if (k && !fe[k]) fe[k] = err.message;
-      });
-      setErrors(fe);
-      const count = Object.keys(fe).length;
-      toast.error(count === 1 ? parsed.error.errors[0]?.message ?? "Controleer het formulier" : `Controleer ${count} velden`);
-      // Scroll banner in beeld + focus eerste foute veld
-      requestAnimationFrame(() => {
-        if (errorBannerRef.current) scrollToElement(errorBannerRef.current);
-        focusFirstError(fe);
-      });
-      return;
-    }
-    setErrors({});
-    if (file) {
-      const v = validateCvFile(file);
-      if (!v.ok && v.message) {
-        setFileError(v.message);
-        setSubmitError(v.message);
-        toast.error(v.message);
-        return;
-      }
-    }
-
-    setSubmitting(true);
-    try {
-      let cv_url: string | null = null;
-      if (file) {
-        setUploadingFile(true);
-        try {
-          const ext = file.name.split(".").pop() || "bin";
-          const path = `${crypto.randomUUID()}.${ext}`;
-          const { error: upErr } = await supabase.storage
-            .from("job-applications")
-            .upload(path, file, { contentType: file.type || undefined });
-          if (upErr) throw upErr;
-          cv_url = path;
-        } finally {
-          setUploadingFile(false);
-        }
-      }
-
-      const extras = [
-        `Profiel: ${parsed.data.profile}`,
-        parsed.data.contact_pref ? `Contactvoorkeur: ${parsed.data.contact_pref}` : null,
-        `Privacy akkoord: ja`,
-      ].filter(Boolean).join(" | ");
-      const fullMessage = parsed.data.message ? `${extras}\n\n${parsed.data.message}` : extras;
-
-      const { error: insErr } = await supabase.from("job_applications").insert([{
-        name: parsed.data.name,
-        phone: parsed.data.phone,
-        email: parsed.data.email,
-        region: parsed.data.region || null,
-        experience: parsed.data.experience || null,
-        certifications: parsed.data.certifications || null,
-        availability: parsed.data.availability || null,
-        message: fullMessage,
-        cv_url,
-        profile: parsed.data.profile,
-        contact_preference: parsed.data.contact_pref || null,
-        privacy_consent: true,
-      } as any]);
-      if (insErr) throw insErr;
-
-      import("@/lib/analytics").then((m) => m.trackFormSubmit("werken_bij_form"));
-      toast.success("Aanmelding verstuurd. We nemen zo snel mogelijk contact op.");
-      formRef.current?.reset();
-      setFile(null);
-      setFileError(null);
-      setSuccess(true);
-    } catch (err) {
-      console.error(err);
-      const msg = "Versturen lukte niet. Controleer je verbinding en probeer opnieuw, of bel ons direct.";
-      setSubmitError(msg);
-      toast.error(msg);
-      requestAnimationFrame(() => {
-        if (errorBannerRef.current) scrollToElement(errorBannerRef.current);
-      });
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const resetForm = () => {
-    setSuccess(false);
-    setErrors({});
-    setFile(null);
-    setFileError(null);
-    formRef.current?.reset();
-    setTimeout(() => {
-      scrollToAnchor("aanmelden");
-    }, 50);
-  };
-
-  const scrollToSlug = (slugs: string[]) => {
-    const target = slugs.map((s) => document.getElementById(`profiel-${s}`)).find(Boolean);
-    if (target) scrollToElement(target as HTMLElement);
-    else scrollToAnchor("profielen");
-  };
-
-  const profielCards = filteredProfielen;
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
 
       <main id="main-content" className="pt-16 sm:pt-20">
-        {/* HERO */}
-        <section className="relative sm:min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-14 md:py-20">
-          <div className="absolute inset-0 opacity-[0.08] pointer-events-none grid-breathe">
-            <div
-              className="absolute inset-0"
-              style={{
-                backgroundImage: `
-                  linear-gradient(rgba(158, 212, 46, 0.4) 1px, transparent 1px),
-                  linear-gradient(90deg, rgba(158, 212, 46, 0.4) 1px, transparent 1px)
-                `,
-                backgroundSize: "60px 60px",
-              }}
-            />
-          </div>
+        {/* 1. HERO */}
+        <section className="relative overflow-hidden bg-[#0d3b2e]">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-[0.18]"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 20% 20%, #9ed42e 0, transparent 45%), linear-gradient(115deg, transparent 48%, rgba(158,212,46,.5) 49%, transparent 50%), linear-gradient(65deg, transparent 62%, rgba(158,212,46,.35) 63%, transparent 64%)",
+            }}
+          />
+          <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+            <p className="text-xs uppercase tracking-[0.2em] text-[#9ed42e]">Werken bij TerreVolt</p>
+            <h1 className="mt-4 max-w-3xl font-semibold leading-tight text-white" style={{ fontSize: "clamp(1.85rem, 6vw, 3.25rem)" }}>
+              Werk mee aan het energienet van morgen
+            </h1>
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
+              Bij TerreVolt werk je rechtstreeks in loondienst aan veilige en betrouwbare energie-infrastructuur.
+              Je krijgt goed materieel, duidelijke afspraken en de ruimte om je vak verder te ontwikkelen.
+            </p>
 
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
-            <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
-                <HardHat className="w-4 h-4" /> Werken bij TerreVolt
-              </div>
-              <h1 className="text-[clamp(1.875rem,7vw,2.5rem)] sm:text-5xl lg:text-6xl text-white mb-6 leading-[1.1] sm:leading-tight tracking-tight hyphens-nl text-pretty [text-wrap:balance]" lang="nl">
-                Werk mee aan{" "}
-                <span className="text-[#9ed42e] whitespace-nowrap">LS/MS-projecten</span> binnen de netbeheerwereld
-              </h1>
-              <p className="text-base sm:text-xl lg:text-2xl text-white/85 mb-8 max-w-3xl leading-relaxed">
-                Ben jij monteur, werkverantwoordelijke of ZZP'er met ervaring in laagspanning, middenspanning, kabelwerk, schakelwerk of aarding? TerreVolt zoekt vakmensen voor professionele projecten met duidelijke afspraken, korte lijnen en veiligheid voorop.
-              </p>
+            <ul className="mt-7 flex flex-wrap gap-2">
+              {[`${vacatures.length} actuele vacatures`, UREN_LABEL, "Jaarcontract met uitzicht op vast", REGIO_LABEL].map((chip) => (
+                <li key={chip} className="rounded-full border border-white/25 bg-white/10 px-3.5 py-2 text-sm text-white">
+                  {chip}
+                </li>
+              ))}
+            </ul>
 
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-10">
-                <a
-                  href="#aanmelden"
-                  className="group w-full sm:w-auto bg-[#9ed42e] text-[#0d3b2e] px-6 sm:px-8 py-4 min-h-[56px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <button
+                type="button"
+                onClick={() => scrollToAnchor("vacatures")}
+                className="inline-flex min-h-[56px] items-center justify-center gap-2 rounded-lg bg-[#9ed42e] px-7 font-medium text-[#0d3b2e] transition-colors hover:bg-[#8cc022] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e]"
+              >
+                Bekijk de vacatures
+                <ArrowRight className="h-5 w-5" aria-hidden="true" />
+              </button>
+
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setContactOpen((o) => !o)}
+                  aria-expanded={contactOpen}
+                  className="inline-flex min-h-[56px] w-full items-center justify-center gap-2 rounded-lg border border-white/40 px-7 font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:w-auto"
                 >
-                  <span>Aanmelden als monteur</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </a>
-                <a
-                  href="#profielen"
-                  className="w-full sm:w-auto border-2 border-[#9ed42e] text-[#9ed42e] px-6 sm:px-8 py-4 min-h-[56px] rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center flex items-center justify-center"
-                >
-                  Bekijk profielen
-                </a>
-              </div>
-
-              {/* Trust-strip */}
-              <ul className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl">
-                {trust.map((t) => {
-                  const Icon = t.icon;
-                  return (
-                    <li
-                      key={t.label}
-                      className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-white/90 text-sm"
-                    >
-                      <Icon className="w-4 h-4 text-[#9ed42e] flex-shrink-0" strokeWidth={2.2} />
-                      <span className="leading-tight">{t.label}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-
-              <div className="mt-6 max-w-3xl bg-white/5 border border-[#9ed42e]/30 rounded-lg p-4 sm:p-5">
-                <div className="text-[#9ed42e] text-sm uppercase tracking-wider mb-1">Veiligheid boven tempo</div>
-                <p className="text-white/90 text-sm sm:text-base leading-relaxed">
-                  Je krijgt liever ruimte om het werk goed en veilig te doen dan druk om onverantwoord door te gaan. We doen het veilig, of we doen het niet.
-                </p>
-              </div>
-
-              <p className="text-white/65 text-sm mt-4 max-w-xl">
-                Tarieven en salaris bespreken we tijdens de kennismaking — afgestemd op jouw ervaring, bevoegdheden en de manier van samenwerken.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* (Dubbele FUNNEL SUBNAV verwijderd — sticky subnav staat verderop, zie 'Paginanavigatie Werken bij'.) */}
-
-        {/* QUICK NAV CHIPS */}
-        <section className="py-8 md:py-10 bg-white border-b border-gray-100">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="max-w-5xl mx-auto">
-              <div className="text-xs uppercase tracking-wider text-[#6c757d] mb-3 text-center sm:text-left">
-                Snel naar profiel
-              </div>
-              <div role="group" aria-label="Snel naar profiel" className="flex flex-wrap gap-2 sm:gap-3 justify-center sm:justify-start">
-                {quickNav.map((q) => (
-                  <button
-                    key={q.label}
-                    type="button"
-                    onClick={() => scrollToSlug(q.slugs)}
-                    aria-label={`Scroll naar profiel: ${q.label}`}
-                    className="px-4 py-2.5 rounded-full border border-gray-200 bg-[#f8f9fa] text-[#0d3b2e] text-sm hover:border-[#9ed42e] hover:bg-[#f0f7e6] active:scale-[0.98] transition-all min-h-[44px] inline-flex items-center focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:border-[#9ed42e]"
-                  >
-                    {q.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* STICKY SUBNAV — scroll-navigatie binnen pagina */}
-        <nav
-          ref={subnavRef}
-          data-hash-scroll-offset
-          aria-label="Paginanavigatie Werken bij"
-          className="sticky top-16 sm:top-20 z-30 bg-white/90 backdrop-blur-sm border-b border-gray-200"
-        >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-            <ul className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide -mx-1 px-1 py-2">
-              {funnelNav.map((item) => {
-                const isActive = item.href.startsWith("#") && item.href.slice(1) === activeId;
-                return (
-                  <li key={item.href} className="flex-shrink-0">
-                    <a
-                      href={item.href}
-                      aria-current={isActive ? "true" : undefined}
-                      className={`inline-flex items-center min-h-[44px] px-3 sm:px-4 rounded-full text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border transition-colors whitespace-nowrap ${
-                        isActive
-                          ? "bg-[#0d3b2e] text-[#9ed42e] border-[#0d3b2e]"
-                          : "text-[#0d3b2e] border-transparent hover:bg-[#f0f7e6] hover:border-[#9ed42e]"
-                      }`}
-                    >
-                      {item.label}
+                  <Phone className="h-5 w-5" aria-hidden="true" />
+                  Bel of app Tobesh
+                </button>
+                {contactOpen && (
+                  <div className="absolute left-0 right-0 z-10 mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg sm:w-64">
+                    <a href={telHref} className="flex min-h-[52px] items-center gap-2 px-4 text-sm text-[#0d3b2e] hover:bg-[#f0f7e6]">
+                      <Phone className="h-4 w-4" aria-hidden="true" /> Bel {company.phone.display}
                     </a>
-                  </li>
-                );
-              })}
+                    <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="flex min-h-[52px] items-center gap-2 border-t border-gray-100 px-4 text-sm text-[#0d3b2e] hover:bg-[#f0f7e6]">
+                      <MessageCircle className="h-4 w-4" aria-hidden="true" /> WhatsApp Tobesh
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 2. ARBEIDSVOORWAARDENBALK */}
+        <section className="border-b border-gray-200 bg-white">
+          <ul className="mx-auto grid max-w-6xl gap-4 px-4 py-6 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
+            {voordelenBalk.map(({ icon: Icon, label }) => (
+              <li key={label} className="flex items-center gap-3 text-sm font-medium text-[#0d3b2e]">
+                <Icon className="h-5 w-5 flex-shrink-0 text-[#0d3b2e]" aria-hidden="true" />
+                {label}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* 3. VACATURES */}
+        <section id="vacatures" className="scroll-mt-28 py-14 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Zeven actuele vacatures</h2>
+            <p className="mt-3 max-w-2xl text-[#0d3b2e]/80">
+              Alle functies zijn rechtstreeks in loondienst bij TerreVolt, met salaris, uren, contract en regio direct zichtbaar.
+            </p>
+
+            <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {vacatures.map((v) => (
+                <Reveal key={v.slug}>
+                  <article className="flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-6 transition-shadow hover:shadow-[0_10px_30px_-20px_rgba(13,59,46,0.6)]">
+                    <h3 className="text-lg font-semibold text-[#0d3b2e]">{v.title}</h3>
+                    <p className="mt-2 text-xl font-semibold text-[#0d3b2e]">
+                      {formatSalaris(v.salaris)}
+                      <span className="ml-1 text-sm font-normal text-[#0d3b2e]/70">bruto p/m</span>
+                    </p>
+                    <ul className="mt-4 space-y-2 text-sm text-[#0d3b2e]/80">
+                      <li className="flex items-center gap-2"><Clock className="h-4 w-4 flex-shrink-0" aria-hidden="true" />{UREN_LABEL}</li>
+                      <li className="flex items-center gap-2"><FileSignature className="h-4 w-4 flex-shrink-0" aria-hidden="true" />{CONTRACT_LABEL}</li>
+                      <li className="flex items-start gap-2"><MapPin className="mt-0.5 h-4 w-4 flex-shrink-0" aria-hidden="true" />{REGIO_LABEL}</li>
+                    </ul>
+                    <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center">
+                      <Link
+                        to={`/vacatures/${v.slug}`}
+                        className="inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-lg bg-[#0d3b2e] px-4 text-sm font-medium text-white transition-colors hover:bg-[#0a2f24] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2"
+                      >
+                        Bekijk vacature
+                      </Link>
+                      <Link
+                        to={`/vacatures/${v.slug}#solliciteren`}
+                        className="inline-flex min-h-[44px] items-center justify-center px-3 text-sm font-medium text-[#0d3b2e] underline underline-offset-4 hover:text-[#0a2f24] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e]"
+                      >
+                        Solliciteer direct
+                      </Link>
+                    </div>
+                  </article>
+                </Reveal>
+              ))}
+            </div>
+
+            <p className="mt-6 max-w-3xl text-xs leading-relaxed text-[#0d3b2e]/70">{SALARIS_DISCLAIMER}</p>
+          </div>
+        </section>
+
+        {/* 4. WAAROM TERREVOLT */}
+        <section id="waarom" className="scroll-mt-28 bg-white py-14 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Waarom werken bij TerreVolt</h2>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2">
+              {waarom.map(({ icon: Icon, title, text }) => (
+                <div key={title} className="rounded-2xl border border-gray-200 p-6">
+                  <Icon className="h-6 w-6 text-[#0d3b2e]" aria-hidden="true" />
+                  <h3 className="mt-3 text-lg font-semibold text-[#0d3b2e]">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#0d3b2e]/80">{text}</p>
+                </div>
+              ))}
+            </div>
+
+            <h3 className="mt-12 text-lg font-semibold text-[#0d3b2e]">Arbeidsvoorwaarden</h3>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              {ARBEIDSVOORWAARDEN.map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-[#0d3b2e]/85">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#0d3b2e]" aria-hidden="true" />
+                  {item}
+                </li>
+              ))}
             </ul>
           </div>
-        </nav>
-
-        {/* PROFIELEN */}
-        <section id="profielen" className="py-16 md:py-24 bg-white scroll-mt-32">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="text-center mb-10 md:mb-14">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Gezochte profielen</h2>
-              <p className="text-base sm:text-xl text-[#6c757d] max-w-2xl mx-auto">
-                Vakmensen voor uitvoering binnen LS/MS-infrastructuur, schakelwerk en aarding.
-              </p>
-            </div>
-
-            {/* Filter & zoek */}
-            <div
-              role="search"
-              aria-label="Vacatures filteren"
-              className="max-w-5xl mx-auto mb-8 md:mb-10 bg-[#f8f9fa] border border-gray-200 rounded-2xl p-4 sm:p-5"
-            >
-              <div className="flex items-center gap-2 mb-3">
-                <SlidersHorizontal className="w-4 h-4 text-[#0d3b2e]" aria-hidden="true" />
-                <span className="text-xs uppercase tracking-wider text-[#0d3b2e]">Zoek &amp; filter</span>
-                {activeFilterCount > 0 && (
-                  <span className="ml-auto inline-flex items-center gap-2">
-                    <span className="text-xs text-[#0d3b2e] bg-[#9ed42e] rounded-full px-2 py-0.5">
-                      {activeFilterCount} actief
-                    </span>
-                    <button
-                      type="button"
-                      onClick={resetFilters}
-                      className="inline-flex items-center gap-1 text-xs text-[#0d3b2e] underline decoration-[#9ed42e] decoration-2 underline-offset-2 hover:decoration-[#0d3b2e] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e] focus-visible:ring-offset-2 rounded"
-                    >
-                      <X className="w-3 h-3" aria-hidden="true" /> Wis filters
-                    </button>
-                  </span>
-                )}
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                <label className="sm:col-span-2 lg:col-span-3 relative block">
-                  <span className="sr-only">Zoek op trefwoord</span>
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#6c757d]" aria-hidden="true" />
-                  <input
-                    type="search"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Zoek op functie, werkgebied, regio…"
-                    className="w-full pl-10 pr-10 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white text-[#0d3b2e] placeholder:text-[#6c757d] focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition"
-                  />
-                  {search && (
-                    <button
-                      type="button"
-                      onClick={() => setSearch("")}
-                      aria-label="Zoekopdracht wissen"
-                      className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full text-[#6c757d] hover:text-[#0d3b2e] hover:bg-[#f0f7e6] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0d3b2e]"
-                    >
-                      <X className="w-4 h-4" aria-hidden="true" />
-                    </button>
-                  )}
-                </label>
-
-                {(Object.keys(FILTER_LABELS) as FilterKey[]).map((key) => {
-                  const opts = filterOptions[key];
-                  if (opts.length === 0) return null;
-                  return (
-                    <label key={key} className="block">
-                      <span className="block text-xs uppercase tracking-wider text-[#0d3b2e]/80 mb-1">
-                        {FILTER_LABELS[key]}
-                      </span>
-                      <select
-                        value={filters[key]}
-                        onChange={(e) =>
-                          setFilters((prev) => ({ ...prev, [key]: e.target.value }))
-                        }
-                        className="w-full px-3 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white text-[#0d3b2e] focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition"
-                      >
-                        <option value="">Alle</option>
-                        {opts.map((o) => (
-                          <option key={o} value={o}>{o}</option>
-                        ))}
-                      </select>
-                    </label>
-                  );
-                })}
-              </div>
-
-              <div
-                className="mt-3 text-xs text-[#6c757d]"
-                role="status"
-                aria-live="polite"
-              >
-                {profielen.length === 0
-                  ? "Profielen laden…"
-                  : `${filteredProfielen.length} van ${profielen.length} profielen`}
-              </div>
-            </div>
-
-            {profielCards.length === 0 && profielen.length > 0 ? (
-              <div className="max-w-xl mx-auto text-center bg-[#f8f9fa] border border-gray-200 rounded-2xl p-8">
-                <div className="w-12 h-12 bg-[#f0f7e6] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Search className="w-6 h-6 text-[#0d3b2e]" aria-hidden="true" />
-                </div>
-                <h3 className="text-lg text-[#0d3b2e] mb-2">Geen profielen gevonden</h3>
-                <p className="text-sm text-[#6c757d] mb-4">
-                  Probeer een ander trefwoord of wis de actieve filters. Of meld je gewoon open aan — we kijken altijd wat past.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <button
-                    type="button"
-                    onClick={resetFilters}
-                    className="bg-[#0d3b2e] text-white px-5 py-3 min-h-[48px] rounded-lg hover:bg-[#1a4a36] transition-colors"
-                  >
-                    Wis filters
-                  </button>
-                  <a
-                    href="#aanmelden"
-                    className="border-2 border-[#0d3b2e] text-[#0d3b2e] px-5 py-3 min-h-[48px] rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors inline-flex items-center justify-center"
-                  >
-                    Open aanmelden
-                  </a>
-                </div>
-              </div>
-            ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6">
-              {profielCards.map((p, index) => {
-                const Icon = slugIconMap[p.slug] || Briefcase;
-                const desc = slugDescriptionMap[p.slug] || "Bekijk de volledige profielomschrijving.";
-                const isZzp = p.slug === "zzp-ploegen";
-                const labelTag = isZzp ? "Projectbasis" : "Loondienst / ZZP mogelijk";
-                return (
-                  <Reveal key={p.slug} delay={(index % 4) * 80}>
-                    <Link
-                      id={`profiel-${p.slug}`}
-                      to={`/vacatures/${p.slug}`}
-                      aria-label={`Bekijk profiel: ${p.label}`}
-                      className="group card-lift h-full bg-white border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-xl flex flex-col items-center text-center scroll-mt-32 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2"
-                    >
-                      <div className="w-14 h-14 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-xl flex items-center justify-center mb-4 group-hover:scale-105 transition-transform flex-shrink-0">
-                        <Icon className="w-7 h-7 text-[#9ed42e]" strokeWidth={2} />
-                      </div>
-                      <div className="text-[#0d3b2e] text-base sm:text-lg mb-2 hyphens-nl max-w-full" lang="nl">{p.label}</div>
-                      <p className="text-sm text-[#6c757d] leading-snug mb-3 hyphens-nl" lang="nl">{desc}</p>
-                      <span className="inline-block text-[11px] tracking-wider uppercase text-[#0d3b2e] bg-[#f0f7e6] border border-[#9ed42e]/40 rounded-full px-2.5 py-1 mb-4">
-                        {labelTag}
-                      </span>
-                      <div className="text-xs text-[#9ed42e] inline-flex items-center gap-1 group-hover:gap-2 transition-all mt-auto">
-                        Bekijk profiel <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
-                      </div>
-                    </Link>
-                  </Reveal>
-                );
-              })}
-            </div>
-            )}
-          </div>
         </section>
 
-        {/* ZZP-BLOK */}
-        <section id="zzp" className="py-14 md:py-20 bg-[#f0f7e6] scroll-mt-32">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="max-w-5xl mx-auto bg-white rounded-2xl border-2 border-[#9ed42e] shadow-[0_8px_30px_-8px_rgba(13,59,46,0.15)] p-6 sm:p-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-3 py-1.5 rounded-full text-xs mb-4 tracking-wider uppercase">
-                  <Users className="w-3.5 h-3.5" /> ZZP & ploegen
-                </div>
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl text-[#0d3b2e] mb-4 leading-tight">
-                  Beschikbaar als <span className="text-[#0d3b2e]">ZZP'er of complete ploeg</span>?
-                </h2>
-                <p className="text-[#6c757d] leading-relaxed mb-6">
-                  TerreVolt werkt graag samen met betrouwbare zelfstandige monteurs en ploegen binnen LS/MS-netmontage, stationsrenovatie, schakelwerk, kabelmontage en aarding.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3">
-                  <a
-                    href="#aanmelden"
-                    className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors text-center min-h-[44px] flex items-center justify-center"
-                  >
-                    ZZP'er of ploeg aanmelden
-                  </a>
-                  <a
-                    href="/contact"
-                    className="border-2 border-[#0d3b2e] text-[#0d3b2e] px-6 py-3 rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors text-center min-h-[44px] flex items-center justify-center"
-                  >
-                    Samenwerking bespreken
-                  </a>
-                </div>
-              </div>
-              <ul className="space-y-3">
-                {[
-                  "Duidelijke werkopdracht",
-                  "Projectmatige inzet",
-                  "Korte lijnen met planning en uitvoering",
-                  "Heldere afspraken over scope, planning en uren",
-                ].map((b) => (
-                  <li key={b} className="flex items-start gap-3 bg-[#f8f9fa] rounded-lg p-3 border border-gray-100">
-                    <CheckCircle2 className="w-5 h-5 text-[#9ed42e] flex-shrink-0 mt-0.5" />
-                    <span className="text-[#0d3b2e]">{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* WAT VAKMENSEN BELANGRIJK VINDEN */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="text-center mb-10 md:mb-14 max-w-3xl mx-auto">
-              <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
-                Wat vakmensen belangrijk vinden
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Werken via TerreVolt</h2>
-              <p className="text-base sm:text-lg text-[#6c757d]">
-                Wat monteurs en ZZP'ers belangrijk vinden bij projectmatig werk binnen LS/MS, stationswerk, schakelwerk en aarding.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {[
-                { title: "Duidelijke afspraken", text: "Je weet vooraf waar je aan toe bent: werkzaamheden, locatie, planning, scope en veiligheidsafspraken." },
-                { title: "Kennis van het vak", text: "Binnen LS/MS-projecten maakt het verschil als planning en uitvoering begrijpen wat stationswerk, kabelwerk en schakelwerk inhoudt." },
-                { title: "Korte lijnen", text: "Bij vragen op locatie wil je snel iemand spreken die weet waar het over gaat en direct kan meedenken." },
-              ].map((c) => (
-                <div
-                  key={c.title}
-                  className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300"
-                >
-                  <div className="flex items-center gap-3 mb-3">
-                    <span aria-hidden="true" className="w-2.5 h-2.5 rounded-full bg-[#9ed42e] flex-shrink-0" />
-                    <h3 className="text-lg text-[#0d3b2e] leading-snug">{c.title}</h3>
-                  </div>
-                  <p className="text-[#6c757d] text-sm leading-relaxed">{c.text}</p>
-                </div>
+        {/* 5. SOLLICITATIEPROCES */}
+        <section id="proces" className="scroll-mt-28 py-14 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Zo verloopt je sollicitatie</h2>
+            <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              {SOLLICITATIEPROCES.map((stap, i) => (
+                <li key={stap} className="rounded-2xl border border-gray-200 bg-white p-5">
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#0d3b2e] text-sm font-semibold text-[#9ed42e]">{i + 1}</span>
+                  <p className="mt-3 text-sm leading-relaxed text-[#0d3b2e]/85">{stap}</p>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
 
-        {/* HOE HET WERKT */}
-        <section id="hoe-het-werkt" className="py-16 md:py-24 bg-white scroll-mt-32">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="text-center mb-10 md:mb-14 max-w-3xl mx-auto">
-              <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
-                Hoe het werkt
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Hoe werken via TerreVolt eruitziet</h2>
-              <p className="text-base sm:text-lg text-[#6c757d]">
-                Wij houden het graag duidelijk. Je weet vooraf waar je aan toe bent: welke werkzaamheden, welke locatie, welke planning en welke veiligheidsafspraken gelden.
+        {/* 6 + 7. CONTACT & FORMULIER */}
+        <section id="solliciteren" className="scroll-mt-28 bg-white py-14 sm:py-20">
+          <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr]">
+            <div>
+              <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Direct contact</h2>
+              <p className="mt-3 text-[#0d3b2e]/80">
+                Liever eerst even sparren over een functie? Bel, app of mail Tobesh.
               </p>
+              <TobeshCard className="mt-6" />
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 max-w-6xl mx-auto">
-              {stappen.map((s, i) => {
-                const Icon = s.icon;
-                return (
-                  <div
-                    key={s.title}
-                    className="relative bg-[#f8f9fa] rounded-xl p-6 border border-gray-200 hover:border-[#9ed42e] hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="absolute -top-3 -left-3 w-9 h-9 rounded-full bg-[#9ed42e] text-[#0d3b2e] flex items-center justify-center text-sm font-medium shadow-sm">
-                      {i + 1}
-                    </div>
-                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
-                    </div>
-                    <h3 className="text-lg text-[#0d3b2e] mb-2 leading-snug">{s.title}</h3>
-                    <p className="text-[#6c757d] text-sm leading-relaxed">{s.text}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* WAAROM */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="text-center mb-12">
-              <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
-                Waarom TerreVolt
+            <div className="rounded-2xl border border-gray-200 bg-[#f8f9fa] p-6 sm:p-8">
+              <h2 className="text-xl font-semibold text-[#0d3b2e]">Solliciteer</h2>
+              <div className="mt-4">
+                <ApplicationForm source="werken_bij_form" />
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Waarom werken met TerreVolt?</h2>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
-              {waarom.map((w) => {
-                const Icon = w.icon;
-                return (
-                  <div
-                    key={w.title}
-                    className="group bg-[#f8f9fa] rounded-xl p-6 border border-gray-200 hover:border-[#9ed42e] hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="w-12 h-12 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#9ed42e] transition-colors duration-300">
-                      <Icon className="w-6 h-6 text-[#0d3b2e] group-hover:text-white transition-colors duration-300" strokeWidth={2} />
-                    </div>
-                    <h3 className="text-lg text-[#0d3b2e] mb-2 leading-snug">{w.title}</h3>
-                    <p className="text-[#6c757d] text-sm leading-relaxed">{w.description}</p>
-                  </div>
-                );
-              })}
             </div>
           </div>
         </section>
 
-        {/* WAT WIJ BELANGRIJK VINDEN */}
-        <section className="py-16 md:py-24 bg-[#f8f9fa]">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="text-center mb-10 md:mb-12 max-w-3xl mx-auto">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Wat wij belangrijk vinden</h2>
-              <p className="text-base sm:text-lg text-[#6c757d]">
-                Niet alles hoeft perfect te zijn. We kijken vooral naar ervaring, houding, veiligheid en betrouwbaarheid.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-              {vereisten.map((v) => (
-                <div
-                  key={v}
-                  className="flex items-center gap-2 bg-white border border-gray-200 hover:border-[#9ed42e] transition-colors duration-300 rounded-full px-4 py-2.5"
-                >
-                  <Award className="w-4 h-4 text-[#9ed42e]" strokeWidth={2.5} />
-                  <span className="text-[#0d3b2e] text-sm">{v}</span>
-                </div>
+        {/* 8. FAQ */}
+        <section id="faq" className="scroll-mt-28 py-14 sm:py-20">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6">
+            <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Veelgestelde vragen</h2>
+            <Accordion type="single" collapsible className="mt-6">
+              {faqs.map((f, i) => (
+                <AccordionItem key={f.q} value={`faq-${i}`}>
+                  <AccordionTrigger className="min-h-[56px] text-left text-[#0d3b2e]">{f.q}</AccordionTrigger>
+                  <AccordionContent className="text-[#0d3b2e]/80">{f.a}</AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
-          </div>
-        </section>
-
-        {/* AANSPREEKPUNT */}
-        <section id="aanspreekpunt" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-32">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-10 md:mb-12 max-w-3xl mx-auto">
-                <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
-                  Direct contact
-                </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Spreek direct met ons team</h2>
-                <p className="text-base sm:text-lg text-[#6c757d]">
-                  Liever even bellen of appen voor je je aanmeldt? Dat kan. We bespreken je ervaring en kijken samen of er een passende rol of project is.
-                </p>
-              </div>
-
-              <div className="bg-white rounded-2xl border-2 border-[#9ed42e] p-8 sm:p-10 shadow-sm max-w-2xl mx-auto">
-                <div className="text-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-br from-[#0d3b2e] to-[#1a4a36] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <HardHat className="w-8 h-8 text-[#9ed42e]" strokeWidth={2} />
-                  </div>
-                  <div className="text-lg text-[#0d3b2e]">Team TerreVolt</div>
-                  <div className="text-sm text-[#6c757d]">Werving & planning</div>
-                  <div className="inline-flex items-center gap-2 mt-3 text-sm text-[#0d3b2e]">
-                    <span className="relative flex h-2.5 w-2.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#9ed42e] opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#9ed42e]" />
-                    </span>
-                    Reageert binnen 2 werkdagen
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <a
-                    href={telHref}
-                    className="inline-flex items-center justify-center gap-2 bg-[#0d3b2e] text-white px-4 py-3 min-h-[48px] rounded-lg hover:bg-[#1a4a36] transition-colors"
-                  >
-                    <PhoneIcon className="w-4 h-4 text-[#9ed42e]" /> Bel direct
-                  </a>
-                  <a
-                    href={waLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-4 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors"
-                  >
-                    <MessageSquare className="w-4 h-4" /> WhatsApp
-                  </a>
-                  <a
-                    href={mailHref}
-                    className="inline-flex items-center justify-center gap-2 bg-white border-2 border-[#0d3b2e] text-[#0d3b2e] px-4 py-3 min-h-[48px] rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors"
-                  >
-                    <MailIcon className="w-4 h-4" /> Mail ons
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3 justify-center mt-8">
-                <a
-                  href="#aanmelden"
-                  data-cta="Direct aanmelden (werken bij)"
-                  className="w-full sm:w-auto bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 min-h-[48px]"
-                >
-                  Direct aanmelden
-                  <ArrowRight className="w-5 h-5" />
-                </a>
-                <a
-                  href="/contact"
-                  className="w-full sm:w-auto border-2 border-[#0d3b2e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-all duration-300 text-center min-h-[48px] flex items-center justify-center"
-                >
-                  Eerst een vraag stellen
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQ */}
-        <section id="faq" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-32">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-10 md:mb-12">
-                <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
-                  <HelpCircle className="w-4 h-4" /> FAQ
-                </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Veelgestelde vragen</h2>
-                <p className="text-base sm:text-lg text-[#6c757d]">
-                  Antwoorden op de vragen die we het vaakst krijgen van monteurs, werkverantwoordelijken en ZZP-ploegen.
-                </p>
-              </div>
-
-              <Accordion type="single" collapsible className="bg-white border border-gray-200 rounded-2xl divide-y divide-gray-200 overflow-hidden">
-                {faqs.map((f, i) => (
-                  <AccordionItem key={i} value={`faq-${i}`} className="border-b-0">
-                    <AccordionTrigger className="px-5 sm:px-6 py-4 text-left text-[#0d3b2e] hover:no-underline hover:bg-[#f0f7e6]/40 min-h-[56px]">
-                      {f.q}
-                    </AccordionTrigger>
-                    <AccordionContent className="px-5 sm:px-6 pb-5 text-[#6c757d] leading-relaxed">
-                      {f.a}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
-          </div>
-        </section>
-
-        {/* AANMELDFORMULIER */}
-        <section id="aanmelden" className="py-16 md:py-24 bg-white scroll-mt-32">
-          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
-            <div className="max-w-3xl mx-auto">
-              <div className="text-center mb-10 md:mb-12">
-                <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
-                  Open aanmelding
-                </div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Open aanmelding</h2>
-                <p className="text-base sm:text-lg text-[#6c757d]">
-                  Geen passende functie gezien, maar wel ervaring met elektrotechniek, infra, LS/MS, kabelwerk, aarding of aansluitingen? Meld je toch aan. We kijken graag of er een passende rol of projectinzet is.
-                </p>
-                <p className="text-sm text-[#6c757d] mt-3">
-                  Geen CV bij de hand? Geen probleem. Laat je gegevens achter, dan nemen we contact met je op.
-                </p>
-              </div>
-
-              {/* Snel aanmelden via WhatsApp */}
-              <div className="mb-8 bg-[#f0f7e6] border border-[#9ed42e]/50 rounded-xl p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div className="min-w-0">
-                  <div className="text-[#0d3b2e]">Snel aanmelden via WhatsApp</div>
-                  <p className="text-sm text-[#0d3b2e]/80 mt-1 leading-relaxed">
-                    Stuur ons een kort berichtje. We nemen contact op voor een telefonische kennismaking.
-                  </p>
-                </div>
-                <a
-                  href={waLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 bg-[#9ed42e] text-[#0d3b2e] px-5 py-3 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-colors w-full sm:w-auto sm:flex-shrink-0"
-                >
-                  <MessageSquare className="w-4 h-4" /> WhatsApp ons
-                </a>
-              </div>
-
-              {success ? (
-                <div role="status" aria-live="polite" className="bg-[#f0f7e6] border border-[#9ed42e] rounded-2xl p-6 sm:p-10 shadow-sm text-center">
-                  <div className="w-14 h-14 bg-[#9ed42e] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle2 className="w-8 h-8 text-[#0d3b2e]" strokeWidth={2.5} />
-                  </div>
-                  <h3 className="text-2xl text-[#0d3b2e] mb-2">Aanmelding ontvangen</h3>
-                  <p className="text-[#0d3b2e]/80 mb-6 max-w-md mx-auto">
-                    Bedankt! We hebben je gegevens ontvangen. We nemen binnenkort telefonisch of per e-mail contact met je op.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <a href="#profielen" className="bg-[#0d3b2e] text-white px-6 py-3 rounded-lg hover:bg-[#1a4a36] transition-colors min-h-[48px] flex items-center justify-center">
-                      Terug naar profielen
-                    </a>
-                    <button type="button" onClick={resetForm} className="border-2 border-[#0d3b2e] text-[#0d3b2e] px-6 py-3 rounded-lg hover:bg-[#0d3b2e] hover:text-white transition-colors min-h-[48px] flex items-center justify-center">
-                      Nog iemand aanmelden
-                    </button>
-                  </div>
-                </div>
-              ) : (
-              <form
-                ref={formRef}
-                onSubmit={handleSubmit}
-                onFocus={(e) => {
-                  const t = e.target as HTMLElement;
-                  if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT")) {
-                    import("@/lib/analytics").then((m) => m.trackFormStart("werken_bij_form"));
-                  }
-                }}
-                onChange={(e) => {
-                  if (submitError) setSubmitError(null);
-                  const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
-                  const name = target?.name as keyof FieldErrors | undefined;
-                  if (name && errors[name]) clearFieldError(name);
-                }}
-                noValidate
-                aria-describedby={submitError || Object.keys(errors).length > 0 ? "form-error-banner" : undefined}
-                className="bg-[#f8f9fa] rounded-2xl p-5 sm:p-10 border border-gray-200 shadow-sm space-y-6"
-              >
-                {(submitError || Object.keys(errors).length > 0) && (
-                  <div
-                    ref={errorBannerRef}
-                    id="form-error-banner"
-                    role="alert"
-                    aria-live="assertive"
-                    className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-lg p-4"
-                  >
-                    <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                    <div className="min-w-0 flex-1">
-                      <p className="text-sm text-red-800 font-medium">
-                        {submitError
-                          ? "Versturen mislukt"
-                          : Object.keys(errors).length === 1
-                            ? "Controleer 1 veld hieronder"
-                            : `Controleer ${Object.keys(errors).length} velden hieronder`}
-                      </p>
-                      <p className="text-xs text-red-700 mt-1 leading-relaxed">
-                        {submitError ?? "De gemarkeerde velden zijn niet correct ingevuld. Pas ze aan en probeer opnieuw."}
-                      </p>
-                    </div>
-                  </div>
-                )}
-                {/* Blok 1 — Contactgegevens */}
-                <div>
-                  <h3 className="text-xs uppercase tracking-wider text-[#6c757d] mb-3 pb-2 border-b border-gray-200">Contactgegevens</h3>
-                  <div className="flex flex-col gap-4 sm:gap-5">
-                    <div>
-                      <label htmlFor="name" className="block text-sm text-[#0d3b2e] mb-2">Naam *</label>
-                      <input id="name" name="name" required maxLength={100} aria-invalid={!!errors.name}
-                        aria-describedby={errors.name ? "name-error" : undefined}
-                        className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.name ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`} />
-                      {errors.name && <p id="name-error" className="mt-1 text-xs text-red-600">{errors.name}</p>}
-                    </div>
-                    <div>
-                      <label htmlFor="phone" className="block text-sm text-[#0d3b2e] mb-2">Telefoon *</label>
-                      <input id="phone" name="phone" type="tel" required maxLength={30} inputMode="tel" autoComplete="tel" aria-invalid={!!errors.phone}
-                        aria-describedby={errors.phone ? "phone-error" : undefined}
-                        className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.phone ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`} />
-                      {errors.phone && <p id="phone-error" className="mt-1 text-xs text-red-600">{errors.phone}</p>}
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm text-[#0d3b2e] mb-2">E-mail *</label>
-                      <input id="email" name="email" type="email" required maxLength={255} inputMode="email" autoComplete="email" aria-invalid={!!errors.email}
-                        aria-describedby={errors.email ? "email-error" : undefined}
-                        className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.email ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`} />
-                      {errors.email && <p id="email-error" className="mt-1 text-xs text-red-600">{errors.email}</p>}
-                    </div>
-                    <div>
-                      <label htmlFor="contact_pref" className="block text-sm text-[#0d3b2e] mb-2">Hoe wil je het liefst benaderd worden?</label>
-                      <select id="contact_pref" name="contact_pref" defaultValue=""
-                        className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition">
-                        <option value="">Maakt niet uit</option>
-                        {contactVoorkeurOpties.map((o) => (
-                          <option key={o} value={o}>{o}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label htmlFor="region" className="block text-sm text-[#0d3b2e] mb-2">Woonplaats / regio</label>
-                      <input id="region" name="region" maxLength={100} autoComplete="address-level2"
-                        className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Blok 2 — Profiel & ervaring */}
-                <div>
-                  <h3 className="text-xs uppercase tracking-wider text-[#6c757d] mb-3 pb-2 border-b border-gray-200">Profiel &amp; ervaring</h3>
-                  <div className="space-y-4 sm:space-y-5">
-                    <div>
-                      <label htmlFor="profile" className="block text-sm text-[#0d3b2e] mb-2">Profiel waarvoor je je aanmeldt *</label>
-                      <select id="profile" name="profile" required defaultValue="" aria-invalid={!!errors.profile}
-                        aria-describedby={errors.profile ? "profile-error" : undefined}
-                        className={`w-full px-4 py-3 min-h-[48px] rounded-lg border bg-white focus:outline-none focus:ring-2 transition ${errors.profile ? "border-red-500 focus:border-red-500 focus:ring-red-200" : "border-gray-200 focus:border-[#9ed42e] focus:ring-[#9ed42e]/20"}`}>
-                        <option value="" disabled>Maak een keuze</option>
-                        {profielOpties.map((o) => (
-                          <option key={o} value={o}>{o}</option>
-                        ))}
-                      </select>
-                      {errors.profile && <p id="profile-error" className="mt-1 text-xs text-red-600">{errors.profile}</p>}
-                    </div>
-                    <div>
-                      <label htmlFor="experience" className="block text-sm text-[#0d3b2e] mb-2">Ervaring</label>
-                      <textarea id="experience" name="experience" rows={3} maxLength={2000}
-                        placeholder="Bijv. 5 jaar ervaring in MS-stationsrenovaties en LS-aansluitwerk."
-                        className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition resize-y max-h-60" />
-                    </div>
-                    <div>
-                      <label htmlFor="certifications" className="block text-sm text-[#0d3b2e] mb-2">Bevoegdheden / certificaten</label>
-                      <input id="certifications" name="certifications" maxLength={1000}
-                        placeholder="Bijv. VCA, BEI BLS/BHS, NEN 3140 VOP"
-                        className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Blok 3 — Beschikbaarheid & documenten */}
-                <div>
-                  <h3 className="text-xs uppercase tracking-wider text-[#6c757d] mb-3 pb-2 border-b border-gray-200">Beschikbaarheid &amp; documenten</h3>
-                  <div className="space-y-4 sm:space-y-5">
-                    <div>
-                      <label htmlFor="availability" className="block text-sm text-[#0d3b2e] mb-2">Beschikbaarheid</label>
-                      <input id="availability" name="availability" maxLength={200}
-                        placeholder="Bijv. fulltime per direct, of 3 dagen p/w"
-                        className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
-                    </div>
-                    <div>
-                      <label htmlFor="message" className="block text-sm text-[#0d3b2e] mb-2">Bericht</label>
-                      <textarea id="message" name="message" rows={4} maxLength={2000}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition resize-y max-h-72" />
-                    </div>
-                    <CvUploadField
-                      file={file}
-                      setFile={setFile}
-                      uploading={uploadingFile}
-                      fileError={fileError}
-                      setFileError={setFileError}
-                    />
-                  </div>
-                </div>
-
-                {/* Privacy */}
-                <div>
-                  <label className="flex items-start gap-3 cursor-pointer text-sm text-[#0d3b2e] leading-relaxed">
-                    <input type="checkbox" name="privacy" required aria-invalid={!!errors.privacy}
-                      className="mt-0.5 h-6 w-6 rounded border-gray-300 text-[#9ed42e] focus:ring-[#9ed42e] flex-shrink-0" />
-                    <span>
-                      Ik ga akkoord dat TerreVolt mijn gegevens gebruikt om contact met mij op te nemen over werk, projecten of samenwerking.{" "}
-                      <Link to="/privacy" className="underline hover:text-[#0d3b2e]/80">Privacyverklaring</Link>
-                    </span>
-                  </label>
-                  {errors.privacy && <p className="mt-1 text-xs text-red-600">{errors.privacy}</p>}
-                </div>
-
-                <button type="submit" disabled={submitting}
-                  className="group w-full bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 min-h-[48px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
-                  {submitting ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin" />
-                      <span>Versturen...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Verstuur aanmelding</span>
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </>
-                  )}
-                </button>
-              </form>
-              )}
-
-            </div>
+            </Accordion>
           </div>
         </section>
       </main>

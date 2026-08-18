@@ -1,3 +1,55 @@
+/**
+ * Centrale vacaturedata TerreVolt.
+ * Alle zeven functies zijn rechtstreeks in loondienst bij TerreVolt.
+ * Zichtbare tekst, kaarten en JobPosting-schema gebruiken deze waarden.
+ */
+
+export const REGIOS = [
+  "Noord-Holland",
+  "Zuid-Holland",
+  "Gelderland",
+  "Flevoland",
+] as const;
+
+export const REGIO_LABEL = "Noord-Holland, Zuid-Holland, Gelderland en Flevoland";
+export const UREN_LABEL = "32–40 uur";
+export const CONTRACT_LABEL = "Jaarcontract → vast";
+export const CONTRACT_LABEL_LANG = "Jaarcontract met uitzicht op een vast contract";
+export const DIENSTVERBAND_LABEL = "Rechtstreeks in loondienst bij TerreVolt";
+
+export const SALARIS_DISCLAIMER =
+  "Bruto per maand op basis van 40 uur, exclusief 8% vakantiegeld en toeslagen. Afhankelijk van ervaring, opleiding en verantwoordelijkheden. Bij een parttime dienstverband geldt het salaris naar rato.";
+
+/** Arbeidsvoorwaarden — identiek op hoofdpagina en alle vacaturepagina's. */
+export const ARBEIDSVOORWAARDEN: string[] = [
+  "Jaarcontract met uitzicht op een vast contract",
+  "32–40 uur per week",
+  "8% vakantiegeld",
+  "25 vakantiedagen en 13 ADV-dagen bij een fulltime dienstverband, naar rato bij parttime",
+  "Een goede pensioenregeling",
+  "Een volledig uitgeruste werkbus met tank- of laadpas voor functies waarvoor een bus nodig is",
+  "€0,25 per kilometer wanneer je met eigen vervoer reist en geen werkbus gebruikt",
+  "Professioneel gereedschap en gekeurde meetmiddelen",
+  "Werkkleding en alle benodigde persoonlijke beschermingsmiddelen",
+  "Zakelijke telefoon en waar nodig een tablet",
+  "Benodigde vakopleidingen, certificeringen en herhalingsopleidingen volledig betaald door TerreVolt, inclusief opleidingstijd",
+  "Overwerk, reisuren en eventuele storingsdiensten worden apart vergoed; de afspraken staan vooraf in het aanbod en contract",
+];
+
+/** Vijf stappen in het sollicitatieproces. */
+export const SOLLICITATIEPROCES: string[] = [
+  "Reageer online, bel of stuur een WhatsApp.",
+  "Tobesh neemt binnen twee werkdagen contact met je op.",
+  "We bespreken je ervaring, wensen en de werkzaamheden.",
+  "Je ontvangt een duidelijk aanbod met salaris en arbeidsvoorwaarden.",
+  "Na je onboarding en veiligheidsinstructies ga je goed voorbereid aan de slag.",
+];
+
+export const AANWIJZING_TEKST =
+  "Een eerdere BEI-aanwijzing is een voordeel, maar een aanwijzing is werkgevers- en werkzaamhedengebonden. TerreVolt beoordeelt vóór inzet welke aanwijzing nodig is en verstrekt deze pas nadat opleiding, ervaring, instructie en geschiktheid zijn vastgesteld.";
+
+export type Salaris = { min: number; max: number };
+
 export type Vacature = {
   slug: string;
   title: string;
@@ -9,276 +61,248 @@ export type Vacature = {
     | "kabel"
     | "aarding"
     | "huisaansluiting"
-    | "wv"
-    | "zzp";
+    | "wv";
+  /** Publicatie- of laatste inhoudelijke wijzigingsdatum (ISO). */
+  datePosted: string;
+  salaris: Salaris;
   intro: string;
+  /** Korte kernomschrijving voor kaarten en schema. */
+  samenvatting: string;
   meta: {
     regio: string;
     uren: string;
     dienstverband: string;
+    contract: string;
     niveau: string;
     werkgebied: string;
     bevoegdheden: string;
   };
   taken: string[];
   meebrengen: string[];
-  bieden: string[];
   veiligheid: string;
 };
 
+export const formatSalaris = (s: Salaris) =>
+  `€${s.min.toLocaleString("nl-NL")} – €${s.max.toLocaleString("nl-NL")}`;
+
 const standaardMeta = {
-  regio: "Nederland / projectlocaties",
-  uren: "32–40 uur of projectbasis",
-  dienstverband: "Loondienst, projectbasis of ZZP",
+  regio: REGIO_LABEL,
+  uren: UREN_LABEL,
+  dienstverband: DIENSTVERBAND_LABEL,
+  contract: CONTRACT_LABEL_LANG,
   niveau: "MBO / praktijkervaring",
   werkgebied: "LS/MS-infrastructuur, stationswerk, aarding of aansluitwerk",
 };
 
-const standaardBieden = [
-  "Werk binnen professionele projecten in de netbeheeromgeving",
-  "Marktconforme beloning of ZZP-tarief",
-  "Heldere werkomschrijvingen en planning",
-  "Veiligheidsgerichte werkomgeving (BEI BLS/BHS waar van toepassing, NEN 3140 / NEN 3840, VCA)",
-  "Korte lijnen met planning en uitvoering",
-  "Afwisselende projecten binnen LS/MS-infrastructuur",
-];
-
 const standaardVeiligheid =
-  "Bij TerreVolt staat veilig werken voorop. Per project stellen we vast welke veiligheidsregelgeving van toepassing is. Binnen netbeheeromgevingen werken we volgens de toepasselijke BEI BLS/BHS, VWI's, opdrachten en persoonsgebonden aanwijzingen; daarbuiten volgens de regels van opdrachtgever of beheerder, met NEN 3140 / NEN 3840 als basis. VCA, LMRA en passende PBM's horen bij iedere taak.";
+  "Bij TerreVolt staat veilig werken voorop. Per project stellen we vast welke veiligheidsregelgeving van toepassing is. Binnen netbeheeromgevingen werken we volgens de toepasselijke BEI BLS/BHS, VWI's, opdrachten en persoonsgebonden aanwijzingen; daarbuiten volgens de regels van opdrachtgever of beheerder, met NEN 3140 / NEN 3840 als basis. VCA, LMRA en passende PBM's horen bij iedere taak. " +
+  AANWIJZING_TEKST;
 
 export const vacatures: Vacature[] = [
   {
     slug: "laagspanningsmonteur",
     title: "Laagspanningsmonteur",
-    shortLabel: "Laagspanningsmonteurs",
+    shortLabel: "Laagspanningsmonteur",
     iconKey: "ls",
+    datePosted: "2026-08-18",
+    salaris: { min: 3100, max: 4400 },
+    samenvatting:
+      "Aanleggen, aansluiten, onderhouden en controleren van laagspanningsnetten en installaties.",
     intro:
-      "Als laagspanningsmonteur bij TerreVolt werk je aan projecten binnen het LS-net: aansluitingen, verdeelinrichtingen, LS-rekken, kabelwerk en saneringen. Je werkt op projectlocaties voor professionele opdrachtgevers binnen de netbeheerwereld.",
-    meta: { ...standaardMeta, bevoegdheden: "VCA vereist; BEI BLS-aanwijzing afhankelijk van taak en project" },
+      "Als laagspanningsmonteur werk je rechtstreeks in loondienst bij TerreVolt aan laagspanningsnetten en -installaties: aansluitingen, verdeelinrichtingen, LS-rekken, kabelwerk en saneringen.",
+    meta: { ...standaardMeta, bevoegdheden: "VCA; BEI BLS-aanwijzing afhankelijk van taak en werkgebied" },
     taken: [
-      "LS-kabels aansluiten en afwerken",
+      "Laagspanningsnetten en -installaties aanleggen en aansluiten",
+      "LS-kabels aansluiten, afwerken en labelen",
       "Werkzaamheden uitvoeren aan LS-rekken en verdeelinrichtingen",
-      "Ondersteunen bij huisaansluitingen, saneringen en wijzigingen",
-      "Kabels controleren, labelen en netjes opleveren",
-      "Werken volgens veiligheidsprocedures en projectafspraken",
-      "Afstemmen met uitvoerder, werkverantwoordelijke of ploegleider",
+      "Installaties controleren, onderhouden en netjes opleveren",
+      "Werken volgens werkplan, instructies en projectafspraken",
+      "Afstemmen met werkverantwoordelijke, ploegleider en uitvoerder",
     ],
     meebrengen: [
       "Ervaring met laagspanningswerk",
-      "VCA",
+      "VCA of de bereidheid dit te halen (TerreVolt betaalt)",
       "Rijbewijs B",
-      "BEI BLS-aanwijzing afhankelijk van taak en project; opleiding of certificaat is nog geen aanwijzing",
       "Je werkt netjes, veilig en zelfstandig",
-      "Je communiceert duidelijk op projectlocaties",
+      "Je communiceert duidelijk op de werklocatie",
     ],
-    bieden: standaardBieden,
     veiligheid: standaardVeiligheid,
   },
   {
     slug: "middenspanningsmonteur",
     title: "Middenspanningsmonteur",
-    shortLabel: "Middenspanningsmonteurs",
+    shortLabel: "Middenspanningsmonteur",
     iconKey: "ms",
+    datePosted: "2026-08-18",
+    salaris: { min: 3300, max: 4900 },
+    samenvatting:
+      "Werken aan middenspanningskabels, verbindingen, installaties en stations volgens goedgekeurde werkplannen.",
     intro:
-      "Als middenspanningsmonteur werk je aan MS-installaties, kabelafmontage, stationsrenovaties en technische ruimten. Je ondersteunt bij projecten waar veiligheid, vakkennis en nauwkeurige uitvoering essentieel zijn.",
-    meta: { ...standaardMeta, bevoegdheden: "VCA vereist; BEI BHS-aanwijzing afhankelijk van taak en project" },
+      "Als middenspanningsmonteur werk je in loondienst bij TerreVolt aan MS-kabels, verbindingen, installaties en stations. Je werkt altijd volgens goedgekeurde werkplannen.",
+    meta: { ...standaardMeta, bevoegdheden: "VCA; BEI BHS-aanwijzing afhankelijk van taak en werkgebied" },
     taken: [
       "MS-kabels voorbereiden, invoeren en afmonteren",
-      "Ondersteunen bij MS-eindsluitingen en verbindingsmoffen",
+      "MS-eindsluitingen en verbindingsmoffen maken of ondersteunen",
       "Werken aan RMU's, MS-velden en transformatorstations",
       "Ondersteunen bij stationsrenovaties",
-      "Samenwerken met schakelmonteurs, WV/AVP en uitvoerders",
-      "Werkzaamheden controleren en terugkoppelen",
+      "Werken volgens goedgekeurde werkplannen en instructies",
+      "Uitvoering controleren en terugkoppelen",
     ],
     meebrengen: [
       "Ervaring binnen middenspanning of kabelmontage",
-      "VCA",
-      "BEI BHS-aanwijzing afhankelijk van taak en werkgebied; opleiding of certificaat is nog geen aanwijzing",
+      "VCA of de bereidheid dit te halen (TerreVolt betaalt)",
       "Ervaring met MS-eindsluitingen is een pré",
-      "Veiligheidsbewuste en nauwkeurige werkhouding",
+      "Nauwkeurige en veiligheidsbewuste werkhouding",
       "Rijbewijs B",
     ],
-    bieden: standaardBieden,
     veiligheid: standaardVeiligheid,
   },
   {
     slug: "schakelmonteur",
     title: "Schakelmonteur LS/MS",
-    shortLabel: "Schakelmonteurs",
+    shortLabel: "Schakelmonteur LS/MS",
     iconKey: "schakel",
+    datePosted: "2026-08-18",
+    salaris: { min: 3600, max: 5200 },
+    samenvatting:
+      "Veilig uitvoeren en controleren van schakelhandelingen binnen de bevoegdheden en goedgekeurde schakel- en werkplannen.",
     intro:
-      "Als schakelmonteur ondersteun je bij het veilig in- en uitbedrijf nemen, vrijschakelen, veiligstellen en terugschakelen van LS/MS-installaties. Je werkt aan geplande projecten zoals stationsrenovaties, kabelwerk en onderhoud.",
-    meta: { ...standaardMeta, bevoegdheden: "VCA vereist; geldige BEI-aanwijzing passend bij taak en werkgebied" },
+      "Als schakelmonteur voer je in loondienst bij TerreVolt schakelhandelingen uit binnen je bevoegdheden en volgens goedgekeurde schakel- en werkplannen.",
+    meta: { ...standaardMeta, bevoegdheden: "VCA; BEI-aanwijzing passend bij taak en werkgebied" },
     taken: [
-      "Schakelhandelingen voorbereiden en uitvoeren binnen jouw bevoegdheid",
+      "Schakelhandelingen voorbereiden, uitvoeren en controleren binnen je bevoegdheid",
       "Installaties of netdelen vrijschakelen en veiligstellen",
-      "Ondersteunen bij aarden en kortsluiten",
-      "Werken volgens bedieningsplan, werkplan, toepasselijke VWI en projectafspraken",
-      "Communiceren met WV, ploegleider, uitvoerder en monteurs",
+      "Aarden en kortsluiten volgens bedieningsplan",
+      "Werken volgens bedieningsplan, werkplan en toepasselijke VWI",
+      "Communiceren met werkverantwoordelijke, ploegleider en monteurs",
       "Afwijkingen of onveilige situaties direct melden",
     ],
     meebrengen: [
       "Ervaring met schakelwerk binnen LS en/of MS",
-      "Geldige BEI-aanwijzing passend bij taak en werkgebied",
-      "VCA",
-      "Ervaring met netbeheerprocedures is een pré",
+      "VCA of de bereidheid dit te halen (TerreVolt betaalt)",
       "Rust, discipline en duidelijke communicatie",
-      "Bereidheid om projectmatig te werken",
+      "Ervaring met netbeheerprocedures is een pré",
+      "Rijbewijs B",
     ],
-    bieden: standaardBieden,
     veiligheid: standaardVeiligheid,
   },
   {
     slug: "kabelmonteur",
     title: "Kabelmonteur LS/MS",
-    shortLabel: "Kabelmonteurs",
+    shortLabel: "Kabelmonteur LS/MS",
     iconKey: "kabel",
+    datePosted: "2026-08-18",
+    salaris: { min: 3200, max: 5000 },
+    samenvatting:
+      "Leggen, monteren, verbinden, beproeven en onderhouden van energiekabels en kabelverbindingen.",
     intro:
-      "Als kabelmonteur werk je aan kabelverbindingen binnen laag- en middenspanningsprojecten. Je ondersteunt bij aanleg, montage, afwerking en controle van kabelwerk in technische ruimten, stations en tracés.",
-    meta: { ...standaardMeta, bevoegdheden: "VCA, kennis LS/MS-kabelwerk (pré)" },
+      "Als kabelmonteur werk je in loondienst bij TerreVolt aan energiekabels en kabelverbindingen in laag- en middenspanning: leggen, monteren, verbinden, beproeven en onderhouden.",
+    meta: { ...standaardMeta, bevoegdheden: "VCA; kennis van LS/MS-kabelwerk" },
     taken: [
-      "LS- en/of MS-kabels monteren en afwerken",
+      "LS- en MS-kabels leggen, monteren en verbinden",
+      "Verbindingsmoffen, aftakmoffen en eindsluitingen maken",
       "Kabels invoeren in stations en technische ruimten",
-      "Ondersteunen bij verbindingsmoffen, aftakmoffen en eindsluitingen",
-      "Kabels labelen, controleren en opleveren",
+      "Kabelverbindingen beproeven, controleren en onderhouden",
+      "Kabels labelen en werk netjes opleveren",
       "Samenwerken met monteurs, uitvoerders en werkvoorbereiding",
-      "Veilig werken volgens projectafspraken",
     ],
     meebrengen: [
       "Ervaring met kabelmontage",
-      "Kennis van LS/MS-kabelwerk is een pré",
-      "VCA",
+      "Kennis van LS/MS-kabelwerk",
+      "VCA of de bereidheid dit te halen (TerreVolt betaalt)",
       "Rijbewijs B",
-      "Je werkt nauwkeurig en veilig",
-      "Je bent fysiek inzetbaar en praktisch ingesteld",
+      "Je werkt nauwkeurig, veilig en praktisch",
     ],
-    bieden: standaardBieden,
     veiligheid: standaardVeiligheid,
   },
   {
     slug: "aardingsmonteur",
     title: "Aardingsmonteur",
-    shortLabel: "Aardingsmonteurs",
+    shortLabel: "Aardingsmonteur",
     iconKey: "aarding",
+    datePosted: "2026-08-18",
+    salaris: { min: 3000, max: 4000 },
+    samenvatting:
+      "Aanleggen, meten, controleren en onderhouden van aardings- en waar van toepassing bliksembeveiligingsinstallaties, inclusief rapportage van meetresultaten.",
     intro:
-      "Als aardingsmonteur werk je aan de basis van veilige elektrotechnische infrastructuur. Je plaatst, verbetert en controleert aardingsvoorzieningen voor stations, technische ruimten en industriële installaties.",
-    meta: { ...standaardMeta, bevoegdheden: "VCA, ervaring aardingsmetingen (pré)" },
+      "Als aardingsmonteur werk je in loondienst bij TerreVolt aan aardingsinstallaties en, waar van toepassing, bliksembeveiliging. Je meet, controleert en rapporteert je resultaten.",
+    meta: { ...standaardMeta, bevoegdheden: "VCA; ervaring met aardingsmetingen is een pré" },
     taken: [
-      "Aardelektroden plaatsen",
-      "Aardingsvoorzieningen aanleggen of verbeteren",
+      "Aardelektroden plaatsen en aardingsvoorzieningen aanleggen",
       "Potentiaalvereffening aanbrengen",
-      "Ondersteunen bij aardverspreidingsmetingen",
-      "Bestaande aardingssystemen inspecteren",
-      "Meetgegevens en uitvoering terugkoppelen",
+      "Aardverspreidingsweerstand meten en controleren",
+      "Bliksembeveiligingsinstallaties onderhouden waar van toepassing",
+      "Bestaande aardingssystemen inspecteren en verbeteren",
+      "Meetresultaten vastleggen en rapporteren",
     ],
     meebrengen: [
       "Ervaring met elektrotechniek, infra of aarding",
-      "VCA",
-      "Technisch inzicht",
-      "Nauwkeurige en veilige werkhouding",
+      "VCA of de bereidheid dit te halen (TerreVolt betaalt)",
+      "Technisch inzicht en nauwkeurigheid",
       "Rijbewijs B",
       "Ervaring met aardingsmetingen is een pré",
     ],
-    bieden: standaardBieden,
     veiligheid: standaardVeiligheid,
   },
   {
     slug: "monteur-huisaansluitingen",
-    title: "Monteur huisaansluitingen / LS-aansluitwerk",
-    shortLabel: "Monteurs huisaansluitingen",
+    title: "Monteur huisaansluitingen",
+    shortLabel: "Monteur huisaansluitingen",
     iconKey: "huisaansluiting",
+    datePosted: "2026-08-18",
+    salaris: { min: 3100, max: 4300 },
+    samenvatting:
+      "Aanleggen, aanpassen en vervangen van huisaansluitingen en werkzaamheden in of rond de meterkast, met duidelijke communicatie naar bewoners.",
     intro:
-      "Als monteur huisaansluitingen werk je aan aanleg, wijziging, sanering en herstel van laagspanningsaansluitingen. Je werkt projectmatig aan aansluitingen voor woningen, appartementencomplexen en bedrijfspanden.",
-    meta: { ...standaardMeta, bevoegdheden: "VCA vereist; BEI BLS-aanwijzing afhankelijk van taak en project" },
+      "Als monteur huisaansluitingen werk je in loondienst bij TerreVolt aan nieuwe, gewijzigde en vervangen huisaansluitingen. Je werkt in en rond de meterkast en communiceert duidelijk met bewoners.",
+    meta: { ...standaardMeta, bevoegdheden: "VCA; BEI BLS-aanwijzing afhankelijk van taak en werkgebied" },
     taken: [
-      "Nieuwe LS-aansluitingen realiseren",
-      "Bestaande aansluitingen wijzigen of saneren",
-      "Werken aan aansluitkabels en meterkastomgeving",
-      "Ondersteunen bij laagbouw- en hoogbouwprojecten",
-      "Storingen of afwijkingen signaleren",
-      "Werkzaamheden netjes afronden en terugkoppelen",
+      "Nieuwe huisaansluitingen realiseren",
+      "Bestaande aansluitingen aanpassen, vervangen of saneren",
+      "Werken aan aansluitkabels en de meterkastomgeving",
+      "Werken in laagbouw- en hoogbouwprojecten",
+      "Bewoners duidelijk informeren over de werkzaamheden",
+      "Werk netjes afronden en terugkoppelen",
     ],
     meebrengen: [
       "Ervaring met huisaansluitingen of LS-aansluitwerk",
-      "VCA",
-      "BEI BLS-aanwijzing afhankelijk van taak en project; opleiding of certificaat is nog geen aanwijzing",
-      "Klantgerichte maar zakelijke houding",
+      "VCA of de bereidheid dit te halen (TerreVolt betaalt)",
+      "Klantgerichte en zakelijke houding",
       "Rijbewijs B",
-      "Veilig en zelfstandig kunnen werken",
+      "Je werkt veilig en zelfstandig",
     ],
-    bieden: standaardBieden,
     veiligheid: standaardVeiligheid,
   },
   {
     slug: "werkverantwoordelijke",
     title: "Werkverantwoordelijke LS/MS",
-    shortLabel: "Werkverantwoordelijken",
+    shortLabel: "Werkverantwoordelijke LS/MS",
     iconKey: "wv",
+    datePosted: "2026-08-18",
+    salaris: { min: 4300, max: 6200 },
+    samenvatting:
+      "Voorbereiden en beoordelen van werkzaamheden, bewaken van risico's, werk- en schakelplannen, instructies, toezicht, kwaliteit en naleving van de BEI.",
     intro:
-      "Als werkverantwoordelijke ondersteun je bij de veilige voorbereiding en uitvoering van LS/MS-projecten. Je bewaakt de juiste werkmethode, veiligheidsafspraken en afstemming tussen opdrachtgever, uitvoering en monteurs.",
+      "Als werkverantwoordelijke werk je in loondienst bij TerreVolt aan de veilige voorbereiding, beoordeling en begeleiding van LS/MS-werkzaamheden.",
     meta: {
       ...standaardMeta,
       niveau: "MBO 4 elektrotechniek of aantoonbare praktijkervaring",
-      bevoegdheden: "VCA vereist; aanwijzing als werkverantwoordelijke (WV) binnen BEI BLS/BHS",
+      bevoegdheden: "VCA; aanwijzing als werkverantwoordelijke binnen BEI BLS/BHS",
     },
     taken: [
-      "Werkmethodes en risico's beoordelen",
-      "Veiligheidsmaatregelen afstemmen",
-      "Werkplekken vrijgeven binnen de eigen aanwijzing, opdracht en werkgrenzen",
-      "Monteurs begeleiden en aanspreken op veilig werken",
-      "Schakelen met uitvoerders, planners en opdrachtgevers",
+      "Werkzaamheden voorbereiden en beoordelen",
+      "Risico's, werkplannen en schakelplannen bewaken",
+      "Instructies geven en toezicht houden op de werkplek",
+      "Werkplekken vrijgeven binnen je aanwijzing, opdracht en werkgrenzen",
+      "Kwaliteit en naleving van de BEI bewaken",
       "Afwijkingen registreren en opvolgen",
     ],
     meebrengen: [
       "MBO 4 elektrotechniek of aantoonbare praktijkervaring",
-      "Aanwijzing als werkverantwoordelijke (WV) binnen BEI BLS/BHS, passend bij het werkgebied",
       "Ervaring binnen netbeheerprojecten",
-      "Leidinggevende of coördinerende ervaring",
+      "Coördinerende of leidinggevende ervaring",
       "Duidelijke communicatie",
       "Veiligheid staat bij jou altijd op één",
-    ],
-    bieden: standaardBieden,
-    veiligheid: standaardVeiligheid,
-  },
-  {
-    slug: "zzp-ploegen",
-    title: "ZZP-ploegen LS/MS",
-    shortLabel: "ZZP-ploegen",
-    iconKey: "zzp",
-    intro:
-      "TerreVolt werkt samen met zelfstandige monteurs en complete ploegen voor projecten binnen LS/MS-infrastructuur, stationsrenovatie, schakelwerk, kabelmontage en aarding.",
-    meta: {
-      ...standaardMeta,
-      dienstverband: "ZZP / ploeg op projectbasis",
-      bevoegdheden: "VCA en KvK vereist; aanwijzingen passend bij taak en werkgebied",
-    },
-    taken: [
-      "LS/MS-netmontage",
-      "Stationsrenovaties",
-      "LS-rekken vervangen",
-      "Kabelmontage",
-      "Huisaansluitingen",
-      "Aardingswerk",
-      "Meten en opleveren",
-      "Projectmatige ondersteuning",
-    ],
-    meebrengen: [
-      "Aantoonbare ervaring",
-      "VCA",
-      "KvK-inschrijving",
-      "Passende verzekeringen",
-      "Geldige aanwijzingen en certificaten passend bij taak en werkgebied",
-      "Eigen gereedschap waar van toepassing",
-      "Veilig en professioneel werken",
-      "Duidelijke communicatie en betrouwbare inzet",
-    ],
-    bieden: [
-      "Projectmatige inzet",
-      "Duidelijke werkopdracht",
-      "Professionele opdrachtgevers",
-      "Korte lijnen",
-      "Heldere afspraken over planning, scope en uren",
-      "Mogelijkheid tot langdurige samenwerking",
     ],
     veiligheid: standaardVeiligheid,
   },
