@@ -1,11 +1,7 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { redirectToCanonicalDomain } from "./lib/canonicalRedirect";
 import logoSrc from "@/assets/terrevolt-logo.png";
-
-// Stuur bezoekers van *.lovable.app door naar het productiedomein vóór React mount.
-redirectToCanonicalDomain();
 
 // Preload het header-logo zodat de browser 't parallel met JS/CSS ophaalt.
 // Vite hash't de filename → langetermijn-cache (immutable) is automatisch.
