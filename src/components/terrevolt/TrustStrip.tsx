@@ -16,7 +16,7 @@ const items = [
   {
     icon: HardHat,
     label: "Veiligheidsstructuur",
-    value: "BEI BLS / BHS",
+    value: "BEI BLS / BHS waar van toepassing",
   },
   {
     icon: BadgeCheck,
@@ -26,7 +26,7 @@ const items = [
   {
     icon: BookOpen,
     label: "Normen",
-    value: "NEN 3140 / NEN 1010",
+    value: "NEN 3140 / NEN 3840",
   },
 ];
 
