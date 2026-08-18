@@ -91,7 +91,7 @@ export function Footer() {
           <div>© {new Date().getFullYear()} TerreVolt BV. Alle rechten voorbehouden.</div>
           {/* Mobiel: compacte normenregel. Vanaf md: volledige opsomming. */}
           <div className="flex md:hidden text-xs text-gray-600">
-            <span>BEI • VCA • NEN • Veilig werken</span>
+            <span>BEI waar van toepassing • VCA • NEN 3140/3840 • Veilig werken</span>
           </div>
           <div className="hidden md:flex items-center gap-4 text-xs text-gray-600">
             <span>Werken volgens BEI BLS/BHS waar van toepassing</span>

@@ -61,7 +61,7 @@ type FieldErrors = Partial<Record<keyof z.infer<typeof formSchema>, string>>;
 const proces = [
   { icon: UserPlus, title: "Je meldt je aan", text: "Je stuurt je gegevens in. Een CV of certificaat mag, maar is niet verplicht om te starten." },
   { icon: Coffee, title: "Kennismaking", text: "We nemen telefonisch of via WhatsApp contact op en bespreken je ervaring, wensen en beschikbaarheid." },
-  { icon: FileCheck2, title: "Documenten/check", text: "We kijken naar VCA, BEI-aanwijzingen, certificaten en projectvereisten. Voor ZZP kijken we ook naar KvK en verzekering." },
+  { icon: FileCheck2, title: "Documenten/check", text: "We kijken naar VCA, geldige BEI-aanwijzingen, certificaten en projectvereisten. Een opleiding of certificaat is nog geen aanwijzing. Voor ZZP kijken we ook naar KvK en verzekering." },
   { icon: Layers, title: "Projectmatch", text: "We zoeken passende inzet binnen LS/MS, stationswerk, schakelwerk, kabelmontage of aarding." },
   { icon: PlayCircle, title: "Start op project", text: "Je krijgt duidelijke projectinformatie, planning en afspraken voordat je start." },
 ];
@@ -198,7 +198,7 @@ const VacatureDetail = () => {
             dienstverband: data.employment_type || "—",
             niveau: data.level || "—",
             werkgebied: data.work_area || "—",
-            bevoegdheden: "VCA, relevante aanwijzingen",
+            bevoegdheden: "VCA vereist; aanwijzingen passend bij taak en werkgebied",
           },
           taken: Array.isArray(data.what_you_do) ? (data.what_you_do as string[]) : [],
           meebrengen: Array.isArray(data.requirements) ? (data.requirements as string[]) : [],
@@ -995,7 +995,7 @@ const VacatureDetail = () => {
                   <div>
                     <label htmlFor="certifications" className="block text-sm text-[#0d3b2e] mb-2">Bevoegdheden / certificaten</label>
                     <input id="certifications" name="certifications" maxLength={1000}
-                      placeholder="Bijv. VCA, BEI BLS/BHS, NEN 3140 VOP"
+                      placeholder="Bijv. VCA, BEI BLS/BHS-aanwijzing, NEN 3140 VOP"
                       className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
                   </div>
                 </div>
