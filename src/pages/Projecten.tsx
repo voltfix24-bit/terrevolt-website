@@ -83,7 +83,7 @@ const projecten = [
 const rollen = [
   { icon: HardHat, title: "Uitvoering", description: "Projectmatige uitvoering van LS/MS-werkzaamheden, stationsrenovaties en aarding." },
   { icon: Users, title: "Monteurs en ploegen", description: "Vakbekwame monteurs en complete ploegen, inzetbaar als verlengstuk van uw organisatie." },
-  { icon: ShieldAlert, title: "Veiligheid", description: "Werken volgens BEI, NEN 3140, VCA en duidelijke projectafspraken." },
+  { icon: ShieldAlert, title: "Veiligheid", description: "Per project stellen we vooraf vast welke veiligheidsregelgeving, aanwijzing en opdracht gelden. Binnen netbeheeromgevingen werken we volgens de toepasselijke BEI BLS/BHS, VWI's, werk- en bedieningsplannen. VCA, LMRA en passende PBM's vormen altijd de basis." },
   { icon: ClipboardCheck, title: "Oplevering", description: "Controle, meet- en opleverrapportage voor een transparant en compleet dossier." },
 ];
 
