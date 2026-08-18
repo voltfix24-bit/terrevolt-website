@@ -360,24 +360,24 @@ const Veiligheid = () => {
           </div>
         </section>
 
-        {/* SECTIE: De Veilige 5 bij schakelwerk */}
+        {/* SECTIE: De vijf eisen bij spanningsloos werken */}
         <section id="veilige-5" className="py-14 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
-              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Schakelwerk</div>
-              <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty" lang="nl">De Veilige 5 bij schakelwerk</h2>
+              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Spanningsloos werken</div>
+              <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty" lang="nl">De vijf eisen bij spanningsloos werken</h2>
               <p className="text-base sm:text-xl text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
-                {softHyphenate("Schakelwerk vraagt om rust, discipline en duidelijke opdrachtverstrekking. Een netdeel wordt niet 'even' uitgeschakeld; het wordt voorbereid, geschakeld, veiliggesteld en pas vrijgegeven wanneer de situatie klopt.")}
+                {softHyphenate("Bij spanningsloos werken worden de vijf eisen uit de toepasselijke BEI, VWI en bedrijfsspecifieke procedures gevolgd.")}
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
               {[
-                { title: "Scheiden", description: "Het netdeel wordt gescheiden van relevante voedingsbronnen volgens opdracht, bedienplan en projectafspraken." },
-                { title: "Beveiligen tegen wederinschakelen", description: "Er worden maatregelen genomen om ongewenst opnieuw inschakelen te voorkomen." },
-                { title: "Controleren op afwezigheid van spanning", description: "Voordat werkzaamheden starten, wordt gecontroleerd of de installatie of het werkgebied spanningsloos is volgens de geldende instructie." },
-                { title: "Aarden en kortsluiten", description: "Waar van toepassing wordt geaard en kortgesloten om het werkgebied veilig te houden bij onverwachte spanning, inductie of terugvoeding." },
-                { title: "Afschermen en afbakenen", description: "Nabijgelegen onder spanning staande delen worden afgeschermd en het veilige werkgebied wordt duidelijk afgebakend." },
+                { title: "Scheiden", description: "Het deel waaraan wordt gewerkt, wordt van de vereiste voedingsbronnen gescheiden." },
+                { title: "Beveiligen tegen opnieuw inschakelen", description: "Er worden maatregelen getroffen om ongewenst inschakelen te voorkomen." },
+                { title: "Spanningsloosheid vaststellen", description: "Volgens de toepasselijke instructie wordt vastgesteld dat het werkgebied spanningsloos is." },
+                { title: "Aarden, kortsluiten en identificeren", description: "Dit wordt uitgevoerd waar en op de manier waarop de toepasselijke BEI en VWI dit voorschrijven." },
+                { title: "Nabijgelegen actieve delen afschermen", description: "Actieve delen die elektrisch gevaar kunnen opleveren, worden deugdelijk afgeschermd." },
               ].map((step, index) => (
                 <div
                   key={step.title}
@@ -393,6 +393,11 @@ const Veiligheid = () => {
                 </div>
               ))}
             </div>
+
+            <p className="max-w-3xl mx-auto mt-8 text-center text-[15px] sm:text-base text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
+              {softHyphenate("Het afzetten en afbakenen van de werkplek blijft daarnaast een afzonderlijke werkplekmaatregel voor bescherming tegen verkeer, onbevoegden en andere omgevingsrisico's.")}
+            </p>
+
 
             <div className="max-w-3xl mx-auto mt-12 sm:mt-14 bg-[#0d3b2e] text-white rounded-2xl p-6 sm:p-8 border-l-4 border-[#9ed42e]">
               <div className="flex items-start gap-3 sm:gap-4">
