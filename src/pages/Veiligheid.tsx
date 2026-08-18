@@ -25,7 +25,7 @@ const beiCards = [
   { icon: BookOpen, title: "VWI's", description: "Veiligheidswerkinstructies voor specifieke werkzaamheden, situaties en risico's." },
   { icon: BadgeCheck, title: "VCA", description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving en risico's." },
   { icon: BadgeCheck, title: "Certificaten & aanwijzingen", description: "Persoonlijke certificaten en aanwijzingen worden ingezet afhankelijk van project, opdrachtgever en werkgebied." },
-  { icon: FileText, title: "NEN 1010 / 3140 / 3840", description: "Normen die, waar van toepassing, richting geven aan aanleg, bedrijfsvoering, controle en veilig werken." },
+  { icon: FileText, title: "NEN 3140 / NEN 3840 en NEN 1010", description: "NEN 3140 en NEN 3840 geven richting aan veilige bedrijfsvoering van laagspannings- en middenspanningsinstallaties. NEN 1010 geldt bij aanleg, uitbreiding en controle van laagspanningsinstallaties." },
   { icon: Award, title: "ISO 9001:2015", description: "Met aandacht voor de principes van ISO 9001:2015: procesbeheersing, klantgerichtheid, risicodenken en continue verbetering." },
 ];
 
