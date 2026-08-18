@@ -7,22 +7,22 @@ import { usePageMeta } from "../../hooks/usePageMeta";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
 
 const taken = [
-  { icon: Power, title: "Vrijschakelen", description: "Installaties of netdelen spanningsloos maken volgens projectafspraken en veiligheidsprocedures." },
-  { icon: Lock, title: "Veiligstellen", description: "Werkgebieden veiligstellen zodat monteurs verantwoord kunnen uitvoeren." },
-  { icon: PlayCircle, title: "In bedrijf nemen", description: "Installaties gecontroleerd terug in bedrijf nemen na uitvoering, controle of renovatie." },
-  { icon: PauseCircle, title: "Uit bedrijf nemen", description: "Netdelen of installaties voorbereiden voor werkzaamheden, vervanging of onderhoud." },
-  { icon: EarthSymbol, title: "Aarden en kortsluiten", description: "Ondersteuning bij veiligheidsmaatregelen rondom werkplekken en installaties." },
-  { icon: ListChecks, title: "Schakelplannen", description: "Uitvoering en afstemming rondom bedienings- en schakelplannen." },
+  { icon: Power, title: "Vrijschakelen", description: "Het net- of installatiedeel volgens het goedgekeurde bedieningsplan van de vereiste voedingsbronnen scheiden. Alleen vrijschakelen betekent nog niet dat het werkgebied veiliggesteld of vrijgegeven is." },
+  { icon: Lock, title: "Veiligstellen", description: "De voorgeschreven veiligheidsmaatregelen treffen, spanningsloosheid vaststellen en het werkgebied volgens werkplan en VWI veilig gereedmaken voor uitvoering." },
+  { icon: PlayCircle, title: "In bedrijf nemen", description: "Het net- of installatiedeel na controle, oplevering en het volgens de juiste volgorde opheffen van de veiligheidsmaatregelen gecontroleerd beschikbaar stellen voor de bedrijfsvoering." },
+  { icon: PauseCircle, title: "Uit bedrijf nemen", description: "Het net- of installatiedeel volgens het goedgekeurde bedieningsplan en de procedures van de netbeheerder voorbereiden op werkzaamheden." },
+  { icon: EarthSymbol, title: "Aarden en kortsluiten", description: "Aardingen en kortsluitingen worden uitsluitend getroffen en opgeheven volgens werkplan, toepasselijke VWI en de voorgeschreven bezetting. Het handmatig aanbrengen of verwijderen van aardingen in HS/MS wordt uitgevoerd door minimaal één AVP of WV samen met minimaal één VP." },
+  { icon: ListChecks, title: "Bedienings- en werkplannen", description: "Uitvoering en afstemming volgens het goedgekeurde bedieningsplan, werkplan, de toepasselijke VWI's en bedrijfsspecifieke procedures." },
 ];
 
 const inzet = [
-  { icon: Building2, title: "Stationsrenovaties", description: "Geplande schakelhandelingen tijdens renovatie van MS/LS-stations." },
+  { icon: Building2, title: "Stationsrenovaties", description: "Toegewezen bedieningshandelingen tijdens renovatie van MS/LS-stations." },
   { icon: Zap, title: "Transformatorwissels", description: "Veilig vrijschakelen, veiligstellen en terugschakelen rondom transformatorwerk." },
-  { icon: Cable, title: "Kabelwerk", description: "Schakelwerk bij kabelmontage, vervanging en aansluitwerk in het net." },
-  { icon: Wrench, title: "Storingen en onderhoud", description: "Schakelondersteuning bij storingsherstel en preventief onderhoud." },
+  { icon: Cable, title: "Kabelwerk", description: "Bedieningshandelingen en veiligheidsmaatregelen bij kabelmontage, vervanging en aansluitwerk in het net." },
+  { icon: Wrench, title: "Storingen en onderhoud", description: "Ondersteuning bij storingsherstel en preventief onderhoud, binnen opdracht en aanwijzing." },
 ];
 
-const badges = ["BEI BLS/BHS", "AVP / VP / VOP / WV", "LMRA", "VCA", "NEN 3140"];
+const badges = ["BEI BLS/BHS waar van toepassing", "Persoonsgebonden aanwijzingen", "VWI's en werkplannen", "LMRA", "VCA", "NEN 3140 / NEN 3840"];
 
 const Schakelwerk = () => {
   usePageMeta("Schakelwerk & veiligstellen | TerreVolt BV", "TerreVolt ondersteunt bij schakelwerk, vrijschakelen, veiligstellen en in- en uitbedrijf nemen binnen LS/MS-projecten.", "/diensten/schakelwerk");
@@ -56,8 +56,11 @@ const Schakelwerk = () => {
                 Schakelwerk<br />
                 <span className="text-[#9ed42e]">& veiligstellen</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-10 max-w-3xl leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-6 max-w-3xl leading-relaxed">
                 TerreVolt ondersteunt bij geplande en projectmatige schakelwerkzaamheden binnen laagspannings- en middenspanningsinstallaties. Wij helpen bij veilig in- en uitbedrijf nemen, vrijschakelen, veiligstellen en terugschakelen.
+              </p>
+              <p className="text-base sm:text-lg text-white/75 mb-10 max-w-3xl leading-relaxed">
+                TerreVolt voert bedieningshandelingen en veiligheidsmaatregelen uitsluitend uit binnen de passende persoonsgebonden aanwijzing, opdracht, werkgrenzen en toepasselijke VWI. Bedieningshandelingen worden uitgevoerd volgens het door de netbeheerder goedgekeurde bedieningsplan en de bedrijfsspecifieke procedures. Veiligheidsmaatregelen worden in opdracht van de verantwoordelijke WV getroffen en opgeheven volgens het werkplan en de toepasselijke VWI.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -143,9 +146,9 @@ const Schakelwerk = () => {
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Bevoegdheden, procedures en communicatie</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Aanwijzingen, procedures en communicatie</h2>
               <p className="text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
-                Schakelwerk is geen losse handeling, maar onderdeel van veilige bedrijfsvoering. Het vraagt om voorbereiding, bevoegdheid, risicobeheersing en duidelijke communicatie tussen opdrachtgever, werkverantwoordelijke, uitvoerder en ploeg.
+                Bedieningshandelingen zijn geen losse handeling, maar onderdeel van veilige bedrijfsvoering. Ze vragen om voorbereiding, een passende persoonsgebonden aanwijzing, opdracht, risicobeheersing en duidelijke communicatie tussen de aangewezen WV, de ploegleider, de uitvoerende medewerkers en de bedieningsorganisatie van de netbeheerder.
               </p>
             </div>
 
@@ -170,7 +173,7 @@ const Schakelwerk = () => {
             "Bij in- en uitbedrijf nemen",
             "Bij stationsrenovaties",
             "Bij kabelwerk en transformatorwissels",
-            "Bij afstemming met WV, uitvoerder en ploeg",
+            "Bij afstemming met de aangewezen WV, ploegleider en bedieningsorganisatie van de netbeheerder",
           ]}
         />
 

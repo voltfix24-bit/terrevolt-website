@@ -10,17 +10,17 @@ const certifications = [
   {
     icon: ShieldCheck,
     title: "BEI BLS/BHS & VWI's",
-    description: "Veilig werken binnen LS/MS-netbeheeromgevingen met passende instructies en projectafspraken."
+    description: "Binnen netbeheeromgevingen werken we volgens de toepasselijke BEI BLS/BHS, VWI's, opdrachten en persoonsgebonden aanwijzingen."
   },
   {
     icon: BadgeCheck,
     title: "VCA & werkplekveiligheid",
-    description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving, afzetting en zichtbaarheid."
+    description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving, afzetting en zichtbaarheid. VCA is een certificaat en geen aanwijzing."
   },
   {
     icon: ClipboardList,
     title: "Kwaliteit & oplevering",
-    description: "Controle, rapportage en aantoonbare oplevering met aandacht voor NEN en ISO 9001:2015-principes."
+    description: "Controle, rapportage en aantoonbare oplevering met aandacht voor NEN 3140 / NEN 3840 en ISO 9001:2015-principes."
   }
 ];
 
@@ -34,7 +34,7 @@ export function Safety() {
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-3 sm:mb-4 hyphens-nl">Veiligheid &amp; kwaliteit</h2>
           <p className="text-base sm:text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
-            Iedereen veilig thuis. We doen het veilig, of we doen het niet. TerreVolt werkt met aandacht voor LMRA, BEI BLS/BHS, VWI's, VCA, NEN-normen en aantoonbare oplevering.
+            Iedereen veilig thuis. We doen het veilig, of we doen het niet. TerreVolt werkt met aandacht voor LMRA, BEI BLS/BHS waar van toepassing, VWI's, VCA, NEN 3140 / NEN 3840 en aantoonbare oplevering.
           </p>
         </Reveal>
 

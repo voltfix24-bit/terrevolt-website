@@ -14,18 +14,18 @@ import {
 
 const pijlers = [
   { icon: FileSearch, title: "LMRA bij elk werk", description: "Voor start of hervatting van werkzaamheden wordt de situatie gecontroleerd. Is de situatie gewijzigd, ontbreekt informatie of voelt iets niet veilig? Dan stoppen we, stemmen we af en starten pas wanneer het verantwoord kan." },
-  { icon: ShieldCheck, title: "De Veilige 5 bij schakelwerk", description: "Bij schakelwerk werken we met aandacht voor de Veilige 5: scheiden, beveiligen tegen wederinschakelen, controleren op afwezigheid van spanning, aarden en kortsluiten, en afschermen of afbakenen." },
+  { icon: ShieldCheck, title: "De vijf eisen bij spanningsloos werken", description: "Bij spanningsloos werken volgen we de vijf eisen uit de toepasselijke BEI, VWI en bedrijfsspecifieke procedures: scheiden, beveiligen tegen opnieuw inschakelen, spanningsloosheid vaststellen, aarden, kortsluiten en identificeren, en nabijgelegen actieve delen afschermen." },
   { icon: Wrench, title: "Netmontage volgens instructie", description: "Bij LS/MS-netmontage werken monteurs volgens opdracht, werkmethode, VWI's en projectafspraken waar van toepassing. Werkgrenzen, materialen en bevoegdheden moeten vooraf duidelijk zijn." },
   { icon: TrafficCone, title: "Werkplekveiligheid & zichtbaarheid", description: "Veiligheid stopt niet bij de installatie. Afzettingen, zichtbaarheid, looproutes, verlichting, PBM's, materieel, verkeer en andere partijen op locatie worden meegenomen in voorbereiding en LMRA." },
   { icon: ClipboardList, title: "Kwaliteit & aantoonbare oplevering", description: "Werkzaamheden worden gecontroleerd, teruggekoppeld en waar nodig vastgelegd. TerreVolt werkt met aandacht voor ISO 9001:2015-principes, duidelijke werkinstructies, rapportage en continue verbetering." },
 ];
 
 const beiCards = [
-  { icon: ShieldCheck, title: "BEI BLS/BHS", description: "Veilige bedrijfsvoering binnen LS/MS/HS-netbeheeromgevingen, inclusief bijbehorende VWI's en projectafspraken." },
+  { icon: ShieldCheck, title: "BEI BLS/BHS", description: "Binnen elektriciteitsvoorzieningssystemen van netbeheerders werken we volgens de van kracht verklaarde BEI BLS/BHS, de toepasselijke VWI's en de bedrijfsspecifieke procedures. Bij industriële of andere installaties van derden bepaalt de opdrachtgever of beheerder welke veiligheidsregelgeving geldt. BEI BLS/BHS is daar niet automatisch van toepassing." },
   { icon: BookOpen, title: "VWI's", description: "Veiligheidswerkinstructies voor specifieke werkzaamheden, situaties en risico's." },
   { icon: BadgeCheck, title: "VCA", description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving en risico's." },
   { icon: BadgeCheck, title: "Certificaten & aanwijzingen", description: "Persoonlijke certificaten en aanwijzingen worden ingezet afhankelijk van project, opdrachtgever en werkgebied." },
-  { icon: FileText, title: "NEN 1010 / 3140 / 3840", description: "Normen die, waar van toepassing, richting geven aan aanleg, bedrijfsvoering, controle en veilig werken." },
+  { icon: FileText, title: "NEN 3140 / NEN 3840 en NEN 1010", description: "NEN 3140 en NEN 3840 geven richting aan veilige bedrijfsvoering van laagspannings- en middenspanningsinstallaties. NEN 1010 geldt bij aanleg, uitbreiding en controle van laagspanningsinstallaties." },
   { icon: Award, title: "ISO 9001:2015", description: "Met aandacht voor de principes van ISO 9001:2015: procesbeheersing, klantgerichtheid, risicodenken en continue verbetering." },
 ];
 
@@ -39,12 +39,11 @@ const werkplek = [
 ];
 
 const rollen = [
-  { code: "WV", title: "Werkverantwoordelijke", description: "Verantwoordelijk voor de veilige uitvoering van werkzaamheden, afhankelijk van project en opdrachtgever." },
-  { code: "AVP", title: "Allround Vakbekwaam Persoon", description: "Bereidt werkzaamheden voor en geeft opdracht binnen passende aanwijzingen, volgens projectafspraken." },
-  { code: "VP", title: "Vakbekwaam Persoon", description: "Voert werkzaamheden uit binnen de toegekende bevoegdheid en de geldende werkinstructies." },
-  { code: "VOP", title: "Voldoende Onderricht Persoon", description: "Voert begrensde handelingen uit volgens duidelijke instructie en onder verantwoordelijkheid." },
-  { code: "Ploeg", title: "Monteur / ploeg", description: "Voert het werk uit, doet LMRA, spreekt elkaar aan en stopt bij twijfel — volgens projectafspraken." },
-  { code: "OG", title: "Uitvoerder / opdrachtgever", description: "Zorgt voor heldere scope, toegang, vrijgave en randvoorwaarden, afhankelijk van project en locatie." },
+  { code: "WV", title: "Werkverantwoordelijke", description: "BEI-opdrachtgever en direct verantwoordelijk voor de leiding over en het veilige verloop van de uitvoerende activiteiten. De WV stelt werkplannen op of laat deze opstellen, is verantwoordelijk voor de inhoud en verstrekt de opdracht." },
+  { code: "AVP", title: "Allround Vakbekwaam Persoon", description: "Voert binnen de eigen aanwijzing, opdracht en het toegewezen werkgebied bedieningshandelingen, werkzaamheden en bijbehorende veiligheidsmaatregelen uit. Een AVP kan per werk als ploegleider worden aangewezen." },
+  { code: "VP", title: "Vakbekwaam Persoon", description: "Voert de werkzaamheden, handelingen en bijbehorende veiligheidsmaatregelen uit die binnen de specifieke aanwijzing en de toepasselijke VWI zijn toegestaan. Een VP kan als ploegleider worden aangewezen als de aanwijzing toereikend is voor het werk." },
+  { code: "VOP", title: "Voldoend Onderricht Persoon", description: "Assisteert of voert uitsluitend de beperkte werkzaamheden en handelingen uit die binnen de eigen aanwijzing, opdracht en toepasselijke VWI zijn toegestaan." },
+  { code: "PL", title: "Ploegleider", description: "Wordt per werk door de WV aangewezen uit een AVP of VP met een toereikende aanwijzing. De PL geeft leiding op de werkplek, instrueert de ploegleden en zorgt dat de veiligheidsmaatregelen tijdens het werk gehandhaafd blijven." },
 ];
 
 const voorPlanning = [
@@ -55,11 +54,11 @@ const voorPlanning = [
 
 const faqs = [
   { q: "Geldt LMRA voor al het werk?", a: "Ja. Voor start of hervatting van werkzaamheden wordt gecontroleerd of de situatie nog klopt. Bij twijfel wordt afgestemd voordat er wordt doorgewerkt." },
-  { q: "Wat is de Veilige 5 bij schakelwerk?", a: "De Veilige 5 beschrijft de basisstappen om veilig te kunnen werken: scheiden, beveiligen tegen wederinschakelen, controleren op afwezigheid van spanning, aarden en kortsluiten, en afschermen of afbakenen." },
+  { q: "Wat zijn de vijf eisen bij spanningsloos werken?", a: "De vijf eisen zijn: scheiden, beveiligen tegen opnieuw inschakelen, spanningsloosheid vaststellen, aarden en kortsluiten waar voorgeschreven, en nabijgelegen actieve delen afschermen. Identificatie en de precieze uitvoering volgen uit de toepasselijke BEI en VWI." },
   { q: "Wordt er doorgewerkt als de planning onder druk staat?", a: "Nee. Planning, onderhoudsvensters en deadlines zijn belangrijk, maar niet belangrijker dan veilig werken. Als de situatie niet veilig is, wordt er gestopt en afgestemd." },
   { q: "Wat als een monteur een situatie onveilig vindt?", a: "Dan wordt er niet zomaar doorgewerkt. De situatie wordt gemeld, besproken en pas opgepakt als het verantwoord kan. We doen het veilig, of we doen het niet." },
-  { q: "Wat betekent BEI BLS/BHS?", a: "BEI-BLS gaat over laagspanning; BEI-BHS over hoog- en middenspanning binnen de elektriciteitsvoorzieningssystemen van netbeheerders. Voor TerreVolt betekent dit dat werkzaamheden worden voorbereid en uitgevoerd met aandacht voor de juiste rollen, aanwijzingen en instructies." },
-  { q: "Wat zijn VWI's?", a: "VWI's zijn veiligheidswerkinstructies voor specifieke werkzaamheden. Ze geven richting aan hoe werkzaamheden veilig uitgevoerd moeten worden binnen de BEI-structuur." },
+  { q: "Wat betekent BEI BLS/BHS?", a: "BEI BLS regelt de veilige bedrijfsvoering in laagspanningssystemen van netbeheerders. BEI BHS geldt voor hoog- en middenspanningssystemen van netbeheerders. Voor TerreVolt betekent dit dat BEI-plichtige werkzaamheden uitsluitend worden uitgevoerd met de juiste aanwijzing, opdracht, VWI, werkgrenzen en bedrijfsspecifieke procedures." },
+  { q: "Wat zijn VWI's?", a: "VWI's zijn veiligheidstechnische werkinstructies voor specifieke activiteiten. Ze beschrijven onder andere de minimale aanwijzing, opdrachtvorm, risico's, veiligheidsmaatregelen, benodigde middelen en veilige uitvoeringswijze. De toepasselijke VWI en bedrijfsspecifieke procedures moeten worden gevolgd." },
   { q: "Hoe kijkt TerreVolt naar werkplekveiligheid langs wegen?", a: "Bij werkzaamheden langs wegen of op projectlocaties kijken we naar zichtbaarheid, afzettingen, verkeersbewegingen, looproutes, toegang en andere partijen op locatie." },
   { q: "Wat krijgt een opdrachtgever terug na uitvoering?", a: "Afhankelijk van het werk leveren we controle, terugkoppeling, meetrapportage, fotoregistratie of opleverdocumentatie aan. Zo blijft het werk aantoonbaar en overdraagbaar." },
   { q: "Hoe borgt TerreVolt kwaliteit?", a: "Door duidelijke voorbereiding, passende werkinstructies, controle, terugkoppeling, rapportage waar nodig en aandacht voor ISO 9001:2015-principes zoals procesbeheersing en continue verbetering." },
@@ -68,7 +67,7 @@ const faqs = [
 ];
 
 const Veiligheid = () => {
-  usePageMeta("Veiligheid & kwaliteit | Iedereen veilig thuis | TerreVolt BV", "Veilig werken en aantoonbaar opleveren staan centraal bij TerreVolt. We werken met aandacht voor LMRA, BEI BLS/BHS, VWI's, VCA, NEN 1010/3140/3840 en kwaliteit.", "/veiligheid");
+  usePageMeta("Veiligheid & kwaliteit | Iedereen veilig thuis | TerreVolt BV", "Veilig werken en aantoonbaar opleveren staan centraal bij TerreVolt. We werken met aandacht voor LMRA, BEI BLS/BHS, VWI's, VCA, NEN 3140/3840 en NEN 1010.", "/veiligheid");
 
   const subnavRef = useRef<HTMLElement | null>(null);
   const isProgrammaticScrollRef = useRef(false);
@@ -198,7 +197,7 @@ const Veiligheid = () => {
                 { label: "Filosofie", href: "#filosofie" },
                 { label: "Aanpak", href: "#aanpak" },
                 { label: "Praktijk", href: "#praktijk" },
-                { label: "Veilige 5", href: "#veilige-5" },
+                { label: "Vijf eisen", href: "#veilige-5" },
                 { label: "Normen & kwaliteit", href: "#bei-vwi" },
                 { label: "Werkplek", href: "#werkplek" },
                 { label: "Locatie-eisen", href: "#locatie-eisen" },
@@ -318,7 +317,7 @@ const Veiligheid = () => {
                   icon: Briefcase,
                   items: [
                     "Vooraf afstemming over scope, toegang, werkmethode en bevoegdheden.",
-                    "Uitvoering met aandacht voor BEI BLS/BHS, VWI's, VCA en projectafspraken.",
+                    "Binnen netbeheeromgevingen uitvoering volgens de toepasselijke BEI BLS/BHS, VWI's, opdrachten en bedrijfsspecifieke procedures.",
                     "Werkplekveiligheid inclusief afzetting, zichtbaarheid en omgevingsrisico's.",
                     "Controle, terugkoppeling en documentatie waar nodig.",
                     "Afwijkingen worden gemeld en afgestemd.",
@@ -361,24 +360,24 @@ const Veiligheid = () => {
           </div>
         </section>
 
-        {/* SECTIE: De Veilige 5 bij schakelwerk */}
+        {/* SECTIE: De vijf eisen bij spanningsloos werken */}
         <section id="veilige-5" className="py-14 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
-              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Schakelwerk</div>
-              <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty" lang="nl">De Veilige 5 bij schakelwerk</h2>
+              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Spanningsloos werken</div>
+              <h2 className="text-[clamp(1.75rem,6vw,3rem)] sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 leading-[1.15] hyphens-nl text-pretty" lang="nl">De vijf eisen bij spanningsloos werken</h2>
               <p className="text-base sm:text-xl text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
-                {softHyphenate("Schakelwerk vraagt om rust, discipline en duidelijke opdrachtverstrekking. Een netdeel wordt niet 'even' uitgeschakeld; het wordt voorbereid, geschakeld, veiliggesteld en pas vrijgegeven wanneer de situatie klopt.")}
+                {softHyphenate("Bij spanningsloos werken worden de vijf eisen uit de toepasselijke BEI, VWI en bedrijfsspecifieke procedures gevolgd.")}
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
               {[
-                { title: "Scheiden", description: "Het netdeel wordt gescheiden van relevante voedingsbronnen volgens opdracht, bedienplan en projectafspraken." },
-                { title: "Beveiligen tegen wederinschakelen", description: "Er worden maatregelen genomen om ongewenst opnieuw inschakelen te voorkomen." },
-                { title: "Controleren op afwezigheid van spanning", description: "Voordat werkzaamheden starten, wordt gecontroleerd of de installatie of het werkgebied spanningsloos is volgens de geldende instructie." },
-                { title: "Aarden en kortsluiten", description: "Waar van toepassing wordt geaard en kortgesloten om het werkgebied veilig te houden bij onverwachte spanning, inductie of terugvoeding." },
-                { title: "Afschermen en afbakenen", description: "Nabijgelegen onder spanning staande delen worden afgeschermd en het veilige werkgebied wordt duidelijk afgebakend." },
+                { title: "Scheiden", description: "Het deel waaraan wordt gewerkt, wordt van de vereiste voedingsbronnen gescheiden." },
+                { title: "Beveiligen tegen opnieuw inschakelen", description: "Er worden maatregelen getroffen om ongewenst inschakelen te voorkomen." },
+                { title: "Spanningsloosheid vaststellen", description: "Volgens de toepasselijke instructie wordt vastgesteld dat het werkgebied spanningsloos is." },
+                { title: "Aarden, kortsluiten en identificeren", description: "Dit wordt uitgevoerd waar en op de manier waarop de toepasselijke BEI en VWI dit voorschrijven." },
+                { title: "Nabijgelegen actieve delen afschermen", description: "Actieve delen die elektrisch gevaar kunnen opleveren, worden deugdelijk afgeschermd." },
               ].map((step, index) => (
                 <div
                   key={step.title}
@@ -394,6 +393,11 @@ const Veiligheid = () => {
                 </div>
               ))}
             </div>
+
+            <p className="max-w-3xl mx-auto mt-8 text-center text-[15px] sm:text-base text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
+              {softHyphenate("Het afzetten en afbakenen van de werkplek blijft daarnaast een afzonderlijke werkplekmaatregel voor bescherming tegen verkeer, onbevoegden en andere omgevingsrisico's.")}
+            </p>
+
 
             <div className="max-w-3xl mx-auto mt-12 sm:mt-14 bg-[#0d3b2e] text-white rounded-2xl p-6 sm:p-8 border-l-4 border-[#9ed42e]">
               <div className="flex items-start gap-3 sm:gap-4">
@@ -485,9 +489,9 @@ const Veiligheid = () => {
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Rollen &amp; bevoegdheden
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 hyphens-nl text-pretty">Duidelijkheid in rollen en bevoegdheden</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 hyphens-nl text-pretty">Duidelijkheid in rollen en aanwijzingen</h2>
               <p className="text-base sm:text-lg text-white/85 leading-relaxed hyphens-nl text-pretty">
-                {softHyphenate("Veilig werken begint met weten wie waarvoor verantwoordelijk is. TerreVolt werkt met passende rollen, aanwijzingen en bevoegdheden afhankelijk van project, opdrachtgever en werkgebied.")}
+                {softHyphenate("Veilig werken begint met weten wie waarvoor verantwoordelijk is. Aanwijzingen zijn persoonsgebonden en taakgericht en worden ingezet afhankelijk van werkzaamheden, werkgebied, project en netbeheerder.")}
               </p>
             </div>
 
@@ -503,7 +507,7 @@ const Veiligheid = () => {
               ))}
             </div>
             <p className="text-center text-xs sm:text-sm text-white/70 mt-10 max-w-2xl mx-auto">
-              Rollen, aanwijzingen en bevoegdheden worden ingezet volgens projectafspraken en kunnen per opdrachtgever verschillen.
+              De projectorganisatie verzorgt scope, planning, toegang en projectvoorwaarden. Dit is geen BEI-aanwijzing en verandert niets aan de verantwoordelijkheden van de aangewezen WV en uitvoerende medewerkers.
             </p>
           </div>
         </section>

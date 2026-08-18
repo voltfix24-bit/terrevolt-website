@@ -49,8 +49,8 @@ const stappen = [
 
 const faqs: { q: string; a: string }[] = [
   { q: "Kan ik ook als ZZP'er reageren?", a: "Ja. TerreVolt werkt ook samen met zelfstandige monteurs en complete ploegen voor projectmatige inzet binnen LS/MS, stationswerk, kabelmontage, schakelwerk en aarding." },
-  { q: "Moet ik BEI BLS of BEI BHS hebben?", a: "Dat hangt af van de rol en het project. Relevante aanwijzingen zijn vaak een pré of vereiste. We bespreken dit tijdens de kennismaking." },
-  { q: "Is VCA verplicht?", a: "Voor veel projecten is VCA belangrijk of vereist. Heb je dit nog niet, dan kijken we samen wat mogelijk is." },
+  { q: "Moet ik BEI BLS of BEI BHS hebben?", a: "Je mag ook reageren als je nog geen aanwijzing hebt. Voor zelfstandige inzet op BEI-plichtige werkzaamheden moet vóór de start een geldige, taak- en gebiedsspecifieke BEI BLS- of BEI BHS-aanwijzing aanwezig zijn. Een opleiding of persoonscertificaat alleen is nog geen aanwijzing. Welke aanwijzing nodig is, hangt af van de werkzaamheden, de VWI, het domein en de netbeheerder." },
+  { q: "Is VCA verplicht?", a: "Je mag ook reageren als je nog geen VCA hebt. Voor veel van onze projecten en voor inzet binnen de netbeheeromgeving is een geldig VCA-certificaat vóór de start vereist. We bespreken dit tijdens de kennismaking." },
   { q: "Kan ik reageren zonder CV?", a: "Ja. Geen CV bij de hand? Laat gewoon je gegevens achter. Certificaten of documenten kunnen later worden aangevuld." },
   { q: "In welke regio's werken jullie?", a: "TerreVolt werkt projectmatig in Nederland. Per project stemmen we locatie, reistijd en beschikbaarheid af." },
   { q: "Hoe snel nemen jullie contact op?", a: "Na je aanmelding nemen we binnen 2 werkdagen contact op om je ervaring, beschikbaarheid en mogelijke projectmatch te bespreken." },
@@ -124,18 +124,18 @@ const waarom = [
   { icon: Layers, title: "Afwisselende LS/MS-projecten", description: "Van stationsrenovaties tot aarding en netmontage." },
   { icon: FileText, title: "Duidelijke projectinformatie", description: "Heldere werkomschrijvingen, planning en afspraken vooraf." },
   { icon: Briefcase, title: "Professionele opdrachtgevers", description: "Partijen die kwaliteit en betrouwbaarheid waarderen." },
-  { icon: ShieldAlert, title: "Veiligheidsgerichte werkomgeving", description: "Werken volgens BEI, NEN 3140 en VCA." },
+  { icon: ShieldAlert, title: "Veiligheidsgerichte werkomgeving", description: "Binnen netbeheeromgevingen werken volgens de toepasselijke BEI BLS/BHS, VWI's en persoonsgebonden aanwijzingen, met NEN 3140 / NEN 3840 en VCA als basis." },
   { icon: MessageSquare, title: "Korte lijnen", description: "Direct contact met planning en uitvoering." },
 ];
 
 const vereisten = [
-  "VCA",
+  "Certificaten: geldig VCA en relevante vakcertificaten",
+  "BEI-aanwijzing: afhankelijk van taak, werkgebied en project",
   "Relevante ervaring",
   "Veiligheidsbewust",
   "Betrouwbaar",
   "Zelfstandig",
   "Communicatief",
-  "Passende aanwijzingen waar nodig",
 ];
 
 const profielOpties = [

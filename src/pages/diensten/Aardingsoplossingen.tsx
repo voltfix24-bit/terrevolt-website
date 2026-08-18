@@ -132,6 +132,10 @@ const Aardingsoplossingen = () => {
                 );
               })}
             </div>
+
+            <p className="max-w-4xl mx-auto mt-8 text-[15px] sm:text-base text-[#6c757d] leading-relaxed">
+              Bij het onderbreken, verbinden of wijzigen van aardingsvoorzieningen die onderdeel zijn van een bestaand elektriciteitsvoorzieningssysteem worden de risico's van potentiaalverschillen vooraf beoordeeld en worden de voorgeschreven veiligheidsmaatregelen volgens werkplan en toepasselijke instructie getroffen.
+            </p>
           </div>
         </section>
 

@@ -48,8 +48,8 @@ const projecten = [
     tag: "Veiligstellen",
     title: "Vrijschakelen en veiligstellen bij stationswerk",
     situation: "Bij stationswerk of kabelwerk moet een installatie veilig worden vrijgeschakeld voordat werkzaamheden kunnen starten.",
-    approach: "TerreVolt ondersteunt bij vrijschakelen, vergrendelen, veiligstellen en terugschakelen in afstemming met de werkverantwoordelijke en uitvoerende partijen.",
-    result: "Een veilig werkgebied en duidelijke overdracht voor uitvoering en oplevering.",
+    approach: "TerreVolt voert de toegewezen bedieningshandelingen en veiligheidsmaatregelen uit binnen de passende aanwijzingen, opdrachten en werkgrenzen. Bedieningshandelingen volgen het goedgekeurde bedieningsplan en de procedures van de netbeheerder. Veiligheidsmaatregelen worden in opdracht van de verantwoordelijke WV getroffen en opgeheven volgens werkplan en toepasselijke VWI.",
+    result: "Een volgens werkplan veiliggesteld werkgebied, met duidelijke overdracht, gehandhaafde veiligheidsmaatregelen en gecontroleerde oplevering.",
     bullets: ["Vrijschakelen", "Veilig werkgebied", "Terugschakelen en oplevering"],
     rol: ["Schakelwerk", "Veiligstellen"],
     serviceHref: "/diensten/schakelwerk",
@@ -83,7 +83,7 @@ const projecten = [
 const rollen = [
   { icon: HardHat, title: "Uitvoering", description: "Projectmatige uitvoering van LS/MS-werkzaamheden, stationsrenovaties en aarding." },
   { icon: Users, title: "Monteurs en ploegen", description: "Vakbekwame monteurs en complete ploegen, inzetbaar als verlengstuk van uw organisatie." },
-  { icon: ShieldAlert, title: "Veiligheid", description: "Werken volgens BEI, NEN 3140, VCA en duidelijke projectafspraken." },
+  { icon: ShieldAlert, title: "Veiligheid", description: "Per project stellen we vooraf vast welke veiligheidsregelgeving, aanwijzing en opdracht gelden. Binnen netbeheeromgevingen werken we volgens de toepasselijke BEI BLS/BHS, VWI's, werk- en bedieningsplannen. VCA, LMRA en passende PBM's vormen altijd de basis." },
   { icon: ClipboardCheck, title: "Oplevering", description: "Controle, meet- en opleverrapportage voor een transparant en compleet dossier." },
 ];
 

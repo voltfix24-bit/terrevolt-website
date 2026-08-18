@@ -38,13 +38,13 @@ const standaardBieden = [
   "Werk binnen professionele projecten in de netbeheeromgeving",
   "Marktconforme beloning of ZZP-tarief",
   "Heldere werkomschrijvingen en planning",
-  "Veiligheidsgerichte werkomgeving (BEI, NEN 3140, VCA)",
+  "Veiligheidsgerichte werkomgeving (BEI BLS/BHS waar van toepassing, NEN 3140 / NEN 3840, VCA)",
   "Korte lijnen met planning en uitvoering",
   "Afwisselende projecten binnen LS/MS-infrastructuur",
 ];
 
 const standaardVeiligheid =
-  "Bij TerreVolt staat veilig werken voorop. We werken volgens BEI, NEN 3140 en VCA, met duidelijke aanwijzingen, LMRA en passende PBM's voor iedere taak.";
+  "Bij TerreVolt staat veilig werken voorop. Per project stellen we vast welke veiligheidsregelgeving van toepassing is. Binnen netbeheeromgevingen werken we volgens de toepasselijke BEI BLS/BHS, VWI's, opdrachten en persoonsgebonden aanwijzingen; daarbuiten volgens de regels van opdrachtgever of beheerder, met NEN 3140 / NEN 3840 als basis. VCA, LMRA en passende PBM's horen bij iedere taak.";
 
 export const vacatures: Vacature[] = [
   {
@@ -54,7 +54,7 @@ export const vacatures: Vacature[] = [
     iconKey: "ls",
     intro:
       "Als laagspanningsmonteur bij TerreVolt werk je aan projecten binnen het LS-net: aansluitingen, verdeelinrichtingen, LS-rekken, kabelwerk en saneringen. Je werkt op projectlocaties voor professionele opdrachtgevers binnen de netbeheerwereld.",
-    meta: { ...standaardMeta, bevoegdheden: "VCA, BEI BLS (pré)" },
+    meta: { ...standaardMeta, bevoegdheden: "VCA vereist; BEI BLS-aanwijzing afhankelijk van taak en project" },
     taken: [
       "LS-kabels aansluiten en afwerken",
       "Werkzaamheden uitvoeren aan LS-rekken en verdeelinrichtingen",
@@ -67,7 +67,7 @@ export const vacatures: Vacature[] = [
       "Ervaring met laagspanningswerk",
       "VCA",
       "Rijbewijs B",
-      "BEI BLS is een pré",
+      "BEI BLS-aanwijzing afhankelijk van taak en project; opleiding of certificaat is nog geen aanwijzing",
       "Je werkt netjes, veilig en zelfstandig",
       "Je communiceert duidelijk op projectlocaties",
     ],
@@ -81,7 +81,7 @@ export const vacatures: Vacature[] = [
     iconKey: "ms",
     intro:
       "Als middenspanningsmonteur werk je aan MS-installaties, kabelafmontage, stationsrenovaties en technische ruimten. Je ondersteunt bij projecten waar veiligheid, vakkennis en nauwkeurige uitvoering essentieel zijn.",
-    meta: { ...standaardMeta, bevoegdheden: "VCA, BEI BHS (pré)" },
+    meta: { ...standaardMeta, bevoegdheden: "VCA vereist; BEI BHS-aanwijzing afhankelijk van taak en project" },
     taken: [
       "MS-kabels voorbereiden, invoeren en afmonteren",
       "Ondersteunen bij MS-eindsluitingen en verbindingsmoffen",
@@ -93,7 +93,7 @@ export const vacatures: Vacature[] = [
     meebrengen: [
       "Ervaring binnen middenspanning of kabelmontage",
       "VCA",
-      "Relevante BEI BHS-aanwijzing is een pré",
+      "BEI BHS-aanwijzing afhankelijk van taak en werkgebied; opleiding of certificaat is nog geen aanwijzing",
       "Ervaring met MS-eindsluitingen is een pré",
       "Veiligheidsbewuste en nauwkeurige werkhouding",
       "Rijbewijs B",
@@ -108,18 +108,18 @@ export const vacatures: Vacature[] = [
     iconKey: "schakel",
     intro:
       "Als schakelmonteur ondersteun je bij het veilig in- en uitbedrijf nemen, vrijschakelen, veiligstellen en terugschakelen van LS/MS-installaties. Je werkt aan geplande projecten zoals stationsrenovaties, kabelwerk en onderhoud.",
-    meta: { ...standaardMeta, bevoegdheden: "Passende BEI-aanwijzingen, VCA" },
+    meta: { ...standaardMeta, bevoegdheden: "VCA vereist; geldige BEI-aanwijzing passend bij taak en werkgebied" },
     taken: [
       "Schakelhandelingen voorbereiden en uitvoeren binnen jouw bevoegdheid",
       "Installaties of netdelen vrijschakelen en veiligstellen",
       "Ondersteunen bij aarden en kortsluiten",
-      "Werken volgens schakelplan, bedieningsplan en projectafspraken",
-      "Communiceren met WV, uitvoerder en monteurs",
+      "Werken volgens bedieningsplan, werkplan, toepasselijke VWI en projectafspraken",
+      "Communiceren met WV, ploegleider, uitvoerder en monteurs",
       "Afwijkingen of onveilige situaties direct melden",
     ],
     meebrengen: [
       "Ervaring met schakelwerk binnen LS en/of MS",
-      "Passende BEI-aanwijzingen",
+      "Geldige BEI-aanwijzing passend bij taak en werkgebied",
       "VCA",
       "Ervaring met netbeheerprocedures is een pré",
       "Rust, discipline en duidelijke communicatie",
@@ -189,7 +189,7 @@ export const vacatures: Vacature[] = [
     iconKey: "huisaansluiting",
     intro:
       "Als monteur huisaansluitingen werk je aan aanleg, wijziging, sanering en herstel van laagspanningsaansluitingen. Je werkt projectmatig aan aansluitingen voor woningen, appartementencomplexen en bedrijfspanden.",
-    meta: { ...standaardMeta, bevoegdheden: "VCA, BEI BLS (pré)" },
+    meta: { ...standaardMeta, bevoegdheden: "VCA vereist; BEI BLS-aanwijzing afhankelijk van taak en project" },
     taken: [
       "Nieuwe LS-aansluitingen realiseren",
       "Bestaande aansluitingen wijzigen of saneren",
@@ -201,7 +201,7 @@ export const vacatures: Vacature[] = [
     meebrengen: [
       "Ervaring met huisaansluitingen of LS-aansluitwerk",
       "VCA",
-      "BEI BLS is een pré",
+      "BEI BLS-aanwijzing afhankelijk van taak en project; opleiding of certificaat is nog geen aanwijzing",
       "Klantgerichte maar zakelijke houding",
       "Rijbewijs B",
       "Veilig en zelfstandig kunnen werken",
@@ -219,19 +219,19 @@ export const vacatures: Vacature[] = [
     meta: {
       ...standaardMeta,
       niveau: "MBO 4 elektrotechniek of aantoonbare praktijkervaring",
-      bevoegdheden: "BEI WV LS/MS, VCA",
+      bevoegdheden: "VCA vereist; aanwijzing als werkverantwoordelijke (WV) binnen BEI BLS/BHS",
     },
     taken: [
       "Werkmethodes en risico's beoordelen",
       "Veiligheidsmaatregelen afstemmen",
-      "Werkplekken vrijgeven binnen jouw rol en bevoegdheid",
+      "Werkplekken vrijgeven binnen de eigen aanwijzing, opdracht en werkgrenzen",
       "Monteurs begeleiden en aanspreken op veilig werken",
       "Schakelen met uitvoerders, planners en opdrachtgevers",
       "Afwijkingen registreren en opvolgen",
     ],
     meebrengen: [
       "MBO 4 elektrotechniek of aantoonbare praktijkervaring",
-      "Relevante BEI-aanwijzing als WV LS/MS",
+      "Aanwijzing als werkverantwoordelijke (WV) binnen BEI BLS/BHS, passend bij het werkgebied",
       "Ervaring binnen netbeheerprojecten",
       "Leidinggevende of coördinerende ervaring",
       "Duidelijke communicatie",
@@ -250,7 +250,7 @@ export const vacatures: Vacature[] = [
     meta: {
       ...standaardMeta,
       dienstverband: "ZZP / ploeg op projectbasis",
-      bevoegdheden: "VCA, KvK, passende aanwijzingen",
+      bevoegdheden: "VCA en KvK vereist; aanwijzingen passend bij taak en werkgebied",
     },
     taken: [
       "LS/MS-netmontage",
@@ -267,7 +267,7 @@ export const vacatures: Vacature[] = [
       "VCA",
       "KvK-inschrijving",
       "Passende verzekeringen",
-      "Relevante aanwijzingen/certificaten waar nodig",
+      "Geldige aanwijzingen en certificaten passend bij taak en werkgebied",
       "Eigen gereedschap waar van toepassing",
       "Veilig en professioneel werken",
       "Duidelijke communicatie en betrouwbare inzet",
