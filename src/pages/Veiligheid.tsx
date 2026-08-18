@@ -489,9 +489,9 @@ const Veiligheid = () => {
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
                 Rollen &amp; bevoegdheden
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 hyphens-nl text-pretty">Duidelijkheid in rollen en bevoegdheden</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 hyphens-nl text-pretty">Duidelijkheid in rollen en aanwijzingen</h2>
               <p className="text-base sm:text-lg text-white/85 leading-relaxed hyphens-nl text-pretty">
-                {softHyphenate("Veilig werken begint met weten wie waarvoor verantwoordelijk is. TerreVolt werkt met passende rollen, aanwijzingen en bevoegdheden afhankelijk van project, opdrachtgever en werkgebied.")}
+                {softHyphenate("Veilig werken begint met weten wie waarvoor verantwoordelijk is. Aanwijzingen zijn persoonsgebonden en taakgericht en worden ingezet afhankelijk van werkzaamheden, werkgebied, project en netbeheerder.")}
               </p>
             </div>
 
