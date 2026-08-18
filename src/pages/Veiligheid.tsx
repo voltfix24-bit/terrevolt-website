@@ -317,7 +317,7 @@ const Veiligheid = () => {
                   icon: Briefcase,
                   items: [
                     "Vooraf afstemming over scope, toegang, werkmethode en bevoegdheden.",
-                    "Uitvoering met aandacht voor BEI BLS/BHS, VWI's, VCA en projectafspraken.",
+                    "Binnen netbeheeromgevingen uitvoering volgens de toepasselijke BEI BLS/BHS, VWI's, opdrachten en bedrijfsspecifieke procedures.",
                     "Werkplekveiligheid inclusief afzetting, zichtbaarheid en omgevingsrisico's.",
                     "Controle, terugkoppeling en documentatie waar nodig.",
                     "Afwijkingen worden gemeld en afgestemd.",
