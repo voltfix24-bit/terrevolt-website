@@ -10,17 +10,17 @@ const certifications = [
   {
     icon: ShieldCheck,
     title: "BEI BLS/BHS & VWI's",
-    description: "Veilig werken binnen LS/MS-netbeheeromgevingen met passende instructies en projectafspraken."
+    description: "Binnen netbeheeromgevingen werken we volgens de toepasselijke BEI BLS/BHS, VWI's, opdrachten en persoonsgebonden aanwijzingen."
   },
   {
     icon: BadgeCheck,
     title: "VCA & werkplekveiligheid",
-    description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving, afzetting en zichtbaarheid."
+    description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving, afzetting en zichtbaarheid. VCA is een certificaat en geen aanwijzing."
   },
   {
     icon: ClipboardList,
     title: "Kwaliteit & oplevering",
-    description: "Controle, rapportage en aantoonbare oplevering met aandacht voor NEN en ISO 9001:2015-principes."
+    description: "Controle, rapportage en aantoonbare oplevering met aandacht voor NEN 3140 / NEN 3840 en ISO 9001:2015-principes."
   }
 ];
 
