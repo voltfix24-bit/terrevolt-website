@@ -189,10 +189,19 @@ const Veiligheid = () => {
           ref={subnavRef}
           data-hash-scroll-offset
           aria-label="Paginanavigatie Veiligheid"
-          className="sticky top-16 sm:top-20 z-30 bg-white/90 backdrop-blur-sm border-b border-gray-200"
+          className="sticky top-16 sm:top-20 z-30 bg-white/80 supports-[backdrop-filter]:bg-white/65 backdrop-blur-md border-b border-gray-200/80 shadow-[0_6px_16px_-14px_rgba(13,59,46,0.5)]"
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-            <ul className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide -mx-1 px-1 py-2">
+            <ul
+              className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide -mx-1 px-1 py-2 snap-x snap-mandatory"
+              style={{
+                maskImage:
+                  "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
+              }}
+            >
+
               {[
                 { label: "Filosofie", href: "#filosofie" },
                 { label: "Aanpak", href: "#aanpak" },
