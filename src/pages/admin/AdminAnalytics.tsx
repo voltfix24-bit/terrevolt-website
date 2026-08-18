@@ -158,7 +158,7 @@ export default function AdminAnalytics() {
       ).length;
     const project = intent(/project bespreken/i);
     const monteur = intent(/monteur|ploeg/i);
-    const sollicitatie = intent(/sollicitatie|zzp/i);
+    const sollicitatie = intent(/sollicitatie/i);
     const starts = events.filter(
       (e) => e.event_name === "form_start" && ((e.metadata as { form_name?: string })?.form_name === "contact_form")
     ).length;
@@ -302,7 +302,7 @@ export default function AdminAnalytics() {
             <Stat label="/contact views" value={contactPerf.views} />
             <Stat label="Project bespreken" value={contactPerf.project} />
             <Stat label="Monteur / ploeg" value={contactPerf.monteur} />
-            <Stat label="Sollicitatie / ZZP" value={contactPerf.sollicitatie} />
+            <Stat label="Sollicitatie" value={contactPerf.sollicitatie} />
             <Stat label="Form starts" value={contactPerf.starts} />
             <Stat label="Form submits" value={contactPerf.submits} />
             <Stat label="Bel-klikken" value={contactPerf.phone} />
