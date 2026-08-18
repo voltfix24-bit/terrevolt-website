@@ -173,7 +173,7 @@ const Schakelwerk = () => {
             "Bij in- en uitbedrijf nemen",
             "Bij stationsrenovaties",
             "Bij kabelwerk en transformatorwissels",
-            "Bij afstemming met WV, uitvoerder en ploeg",
+            "Bij afstemming met de aangewezen WV, ploegleider en bedieningsorganisatie van de netbeheerder",
           ]}
         />
 
