@@ -21,7 +21,7 @@ const pijlers = [
 ];
 
 const beiCards = [
-  { icon: ShieldCheck, title: "BEI BLS/BHS", description: "Veilige bedrijfsvoering binnen LS/MS/HS-netbeheeromgevingen, inclusief bijbehorende VWI's en projectafspraken." },
+  { icon: ShieldCheck, title: "BEI BLS/BHS", description: "Binnen elektriciteitsvoorzieningssystemen van netbeheerders werken we volgens de van kracht verklaarde BEI BLS/BHS, de toepasselijke VWI's en de bedrijfsspecifieke procedures. Bij industriële of andere installaties van derden bepaalt de opdrachtgever of beheerder welke veiligheidsregelgeving geldt. BEI BLS/BHS is daar niet automatisch van toepassing." },
   { icon: BookOpen, title: "VWI's", description: "Veiligheidswerkinstructies voor specifieke werkzaamheden, situaties en risico's." },
   { icon: BadgeCheck, title: "VCA", description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving en risico's." },
   { icon: BadgeCheck, title: "Certificaten & aanwijzingen", description: "Persoonlijke certificaten en aanwijzingen worden ingezet afhankelijk van project, opdrachtgever en werkgebied." },
