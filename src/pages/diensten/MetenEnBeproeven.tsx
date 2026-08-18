@@ -25,7 +25,8 @@ const wanneer = [
 ];
 
 const proces = [
-  { icon: Activity, title: "Meten", description: "Uitvoeren van metingen op locatie met gekalibreerde apparatuur en vaste werkwijze." },
+  { icon: ClipboardCheck, title: "Voorbereiden", description: "Per meting of beproeving wordt vooraf vastgesteld welke veiligheidsregelgeving, aanwijzing, opdracht en VWI van toepassing zijn. Het meet- of beproevingsgebied wordt veilig ingericht en tijdelijk opgeheven veiligheidsmaatregelen worden gecontroleerd hersteld." },
+  { icon: Activity, title: "Meten", description: "Uitvoeren van metingen op locatie met geschikte en aantoonbaar gecontroleerde meet- en beproevingsapparatuur en een vaste werkwijze." },
   { icon: ClipboardCheck, title: "Controleren", description: "Toetsen van meetwaarden aan eisen, normen en projectafspraken." },
   { icon: FileBarChart, title: "Rapporteren", description: "Heldere meet- en opleverrapportage voor opdrachtgever en dossier." },
 ];
