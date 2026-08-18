@@ -124,18 +124,18 @@ const waarom = [
   { icon: Layers, title: "Afwisselende LS/MS-projecten", description: "Van stationsrenovaties tot aarding en netmontage." },
   { icon: FileText, title: "Duidelijke projectinformatie", description: "Heldere werkomschrijvingen, planning en afspraken vooraf." },
   { icon: Briefcase, title: "Professionele opdrachtgevers", description: "Partijen die kwaliteit en betrouwbaarheid waarderen." },
-  { icon: ShieldAlert, title: "Veiligheidsgerichte werkomgeving", description: "Werken volgens BEI, NEN 3140 en VCA." },
+  { icon: ShieldAlert, title: "Veiligheidsgerichte werkomgeving", description: "Binnen netbeheeromgevingen werken volgens de toepasselijke BEI BLS/BHS, VWI's en persoonsgebonden aanwijzingen, met NEN 3140 / NEN 3840 en VCA als basis." },
   { icon: MessageSquare, title: "Korte lijnen", description: "Direct contact met planning en uitvoering." },
 ];
 
 const vereisten = [
-  "VCA",
+  "Certificaten: geldig VCA en relevante vakcertificaten",
+  "BEI-aanwijzing: afhankelijk van taak, werkgebied en project",
   "Relevante ervaring",
   "Veiligheidsbewust",
   "Betrouwbaar",
   "Zelfstandig",
   "Communicatief",
-  "Passende aanwijzingen waar nodig",
 ];
 
 const profielOpties = [
