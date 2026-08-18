@@ -507,7 +507,7 @@ const Veiligheid = () => {
               ))}
             </div>
             <p className="text-center text-xs sm:text-sm text-white/70 mt-10 max-w-2xl mx-auto">
-              Rollen, aanwijzingen en bevoegdheden worden ingezet volgens projectafspraken en kunnen per opdrachtgever verschillen.
+              De projectorganisatie verzorgt scope, planning, toegang en projectvoorwaarden. Dit is geen BEI-aanwijzing en verandert niets aan de verantwoordelijkheden van de aangewezen WV en uitvoerende medewerkers.
             </p>
           </div>
         </section>
