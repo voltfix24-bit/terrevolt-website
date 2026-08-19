@@ -28,7 +28,6 @@ export const ARBEIDSVOORWAARDEN: string[] = [
   "25 vakantiedagen en 13 ADV-dagen bij een fulltime dienstverband, naar rato bij parttime",
   "Een goede pensioenregeling",
   "Een volledig uitgeruste werkbus met tank- of laadpas voor functies waarvoor een bus nodig is",
-  "€0,25 per kilometer wanneer je met eigen vervoer reist en geen werkbus gebruikt",
   "Professioneel gereedschap en gekeurde meetmiddelen",
   "Werkkleding en alle benodigde persoonlijke beschermingsmiddelen",
   "Zakelijke telefoon en waar nodig een tablet",
