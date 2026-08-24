@@ -6,4 +6,6 @@
 /aarding                        /aarding-aanleggen  301!
 /aarding-slaan                  /aarding-aanleggen  301!
 /aardingsmeting                 /aarding-aanleggen  301!
+/aardpen-slaan                  /aarding-aanleggen  301!
+/aardpen-laten-slaan            /aarding-aanleggen  301!
 /*                              /index.html         200
