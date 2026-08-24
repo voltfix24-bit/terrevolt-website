@@ -211,11 +211,18 @@ const Contact = () => {
       raw.request_type = "Aardingsoplossingen";
       const gekozen = werkzaamheden.length ? `Gewenste werkzaamheden: ${werkzaamheden.join(", ")}.` : "";
       const termijn = String(fd.get("start_date") || "");
-      raw.description = [gekozen, raw.description, termijn ? `Gewenste termijn: ${termijn}.` : ""]
+      const spoed = String(fd.get("urgency") || "");
+      raw.description = [
+        gekozen,
+        raw.description,
+        termijn ? `Gewenste termijn: ${termijn}.` : "",
+        spoed ? `Spoed: ${spoed}.` : "",
+      ]
         .filter(Boolean)
         .join("\n")
         .trim() || "Aanvraag prijsindicatie aarding.";
     }
+
 
     const parsed = (isAarding ? aardingSchema : schema).safeParse(raw);
     if (!parsed.success) {
