@@ -112,8 +112,11 @@ const standaardVeiligheid =
 
 export const vacatures: Vacature[] = [
   {
-    slug: "laagspanningsmonteur",
-    title: "Laagspanningsmonteur",
+    slug: "elektromonteur-laagspanning",
+    aliases: ["laagspanningsmonteur", "vacature-laagspanningsmonteur", "elektromonteur-ls"],
+    title: "Elektromonteur laagspanning (LS)",
+    h1: "Vacature elektromonteur laagspanning (LS)",
+    keywords: ["vacature elektromonteur", "elektromonteur gezocht", "laagspanningsmonteur", "vacature monteur elektrotechniek"],
     shortLabel: "Laagspanningsmonteur",
     iconKey: "ls",
     datePosted: "2026-08-18",
@@ -141,8 +144,11 @@ export const vacatures: Vacature[] = [
     veiligheid: standaardVeiligheid,
   },
   {
-    slug: "middenspanningsmonteur",
-    title: "Middenspanningsmonteur",
+    slug: "elektromonteur-middenspanning",
+    aliases: ["middenspanningsmonteur", "vacature-middenspanningsmonteur", "elektromonteur-ms"],
+    title: "Elektromonteur middenspanning (MS)",
+    h1: "Vacature elektromonteur middenspanning (MS)",
+    keywords: ["vacature elektromonteur middenspanning", "middenspanningsmonteur", "elektromonteur gezocht", "MS-monteur"],
     shortLabel: "Middenspanningsmonteur",
     iconKey: "ms",
     datePosted: "2026-08-18",
@@ -170,8 +176,11 @@ export const vacatures: Vacature[] = [
     veiligheid: standaardVeiligheid,
   },
   {
-    slug: "schakelmonteur",
+    slug: "elektromonteur-laagspanning-middenspanning",
+    aliases: ["schakelmonteur", "schakelmonteur-ls-ms", "vacature-schakelmonteur"],
     title: "Schakelmonteur LS/MS",
+    h1: "Vacature elektromonteur laagspanning en middenspanning (schakelmonteur LS/MS)",
+    keywords: ["vacature elektromonteur", "schakelmonteur", "laagspanning middenspanning", "elektromonteur gezocht"],
     shortLabel: "Schakelmonteur LS/MS",
     iconKey: "schakel",
     datePosted: "2026-08-18",
@@ -200,7 +209,10 @@ export const vacatures: Vacature[] = [
   },
   {
     slug: "aardingsmonteur",
+    aliases: ["vacature-aardingsmonteur", "monteur-aarding"],
     title: "Aardingsmonteur",
+    h1: "Vacature aardingsmonteur",
+    keywords: ["vacature aardingsmonteur", "elektromonteur gezocht", "aarding monteur"],
     shortLabel: "Aardingsmonteur",
     iconKey: "aarding",
     datePosted: "2026-08-18",
@@ -229,7 +241,10 @@ export const vacatures: Vacature[] = [
   },
   {
     slug: "monteur-huisaansluitingen",
+    aliases: ["vacature-monteur-huisaansluitingen", "aansluitmonteur"],
     title: "Monteur huisaansluitingen",
+    h1: "Vacature monteur huisaansluitingen",
+    keywords: ["vacature monteur huisaansluitingen", "aansluitmonteur", "elektromonteur gezocht"],
     shortLabel: "Monteur huisaansluitingen",
     iconKey: "huisaansluiting",
     datePosted: "2026-08-18",
@@ -257,8 +272,11 @@ export const vacatures: Vacature[] = [
     veiligheid: standaardVeiligheid,
   },
   {
-    slug: "werkverantwoordelijke",
+    slug: "werkverantwoordelijke-ls-ms",
+    aliases: ["werkverantwoordelijke", "vacature-werkverantwoordelijke"],
     title: "Werkverantwoordelijke LS/MS",
+    h1: "Vacature werkverantwoordelijke LS/MS (WV)",
+    keywords: ["vacature werkverantwoordelijke", "WV elektrotechniek", "vacature elektromonteur middenspanning"],
     shortLabel: "Werkverantwoordelijke LS/MS",
     iconKey: "wv",
     datePosted: "2026-08-18",
@@ -293,3 +311,7 @@ export const vacatures: Vacature[] = [
 
 export const findVacature = (slug?: string) =>
   vacatures.find((v) => v.slug === slug);
+
+/** Zoek een vacature op oude/zoekwoordvariant van de slug (voor 301-redirect). */
+export const findVacatureByAlias = (slug?: string) =>
+  slug ? vacatures.find((v) => v.aliases?.includes(slug)) : undefined;
