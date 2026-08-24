@@ -57,7 +57,6 @@ export type Vacature = {
     | "ls"
     | "ms"
     | "schakel"
-    | "kabel"
     | "aarding"
     | "huisaansluiting"
     | "wv";
@@ -182,35 +181,6 @@ export const vacatures: Vacature[] = [
       "Rust, discipline en duidelijke communicatie",
       "Ervaring met netbeheerprocedures is een pré",
       "Rijbewijs B",
-    ],
-    veiligheid: standaardVeiligheid,
-  },
-  {
-    slug: "kabelmonteur",
-    title: "Kabelmonteur LS/MS",
-    shortLabel: "Kabelmonteur LS/MS",
-    iconKey: "kabel",
-    datePosted: "2026-08-18",
-    salaris: { min: 3200, max: 5000 },
-    samenvatting:
-      "Leggen, monteren, verbinden, beproeven en onderhouden van energiekabels en kabelverbindingen.",
-    intro:
-      "Als kabelmonteur werk je in loondienst bij TerreVolt aan energiekabels en kabelverbindingen in laag- en middenspanning: leggen, monteren, verbinden, beproeven en onderhouden.",
-    meta: { ...standaardMeta, bevoegdheden: "VCA; kennis van LS/MS-kabelwerk" },
-    taken: [
-      "LS- en MS-kabels leggen, monteren en verbinden",
-      "Verbindingsmoffen, aftakmoffen en eindsluitingen maken",
-      "Kabels invoeren in stations en technische ruimten",
-      "Kabelverbindingen beproeven, controleren en onderhouden",
-      "Kabels labelen en werk netjes opleveren",
-      "Samenwerken met monteurs, uitvoerders en werkvoorbereiding",
-    ],
-    meebrengen: [
-      "Ervaring met kabelmontage",
-      "Kennis van LS/MS-kabelwerk",
-      "VCA of de bereidheid dit te halen (TerreVolt betaalt)",
-      "Rijbewijs B",
-      "Je werkt nauwkeurig, veilig en praktisch",
     ],
     veiligheid: standaardVeiligheid,
   },
