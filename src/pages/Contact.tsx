@@ -262,11 +262,33 @@ const Contact = () => {
       } as any]);
       if (insErr) throw insErr;
 
+      window.localStorage.setItem(THROTTLE_KEY, String(Date.now()));
+
+      // Melding naar kantoor + ontvangstbevestiging naar de aanvrager.
+      void notifyAndConfirm(
+        "contact-notification",
+        "contact-confirmation",
+        {
+          name: parsed.data.name,
+          company: parsed.data.company || "",
+          email: parsed.data.email,
+          phone: parsed.data.phone || "",
+          requestType: parsed.data.request_type || "",
+          location: parsed.data.location || "",
+          startDate: parsed.data.start_date || "",
+          description: parsed.data.description || "",
+          intentLabel,
+          hasAttachment: Boolean(attachment_url),
+        },
+        parsed.data.email,
+      );
+
       import("@/lib/analytics").then((m) =>
         m.trackFormSubmit("contact_form", { aanvraag_type: intent })
       );
       setSubmitSuccess(true);
       resetForm();
+
     } catch (err) {
       console.error(err);
       setSubmitError(`Er ging iets mis. Probeer het later opnieuw of mail ons op ${company.email}.`);
