@@ -15,8 +15,10 @@ import { scrollToAnchor } from "@/lib/scrollToAnchor";
 import { company, telHref } from "@/config/company";
 import {
   ARBEIDSVOORWAARDEN, CONTRACT_LABEL, REGIO_LABEL, SALARIS_DISCLAIMER,
-  SOLLICITATIEPROCES, UREN_LABEL, formatSalaris, vacatures, validThrough,
+  SOLLICITATIEPROCES, UREN_LABEL, formatSalaris, validThrough,
 } from "@/data/vacatures";
+import { useVacatures } from "@/hooks/useVacatures";
+
 import { SITE_URL } from "@/config/company";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
@@ -48,6 +50,8 @@ const faqs = [
 
 const WerkenBij = () => {
   const [contactOpen, setContactOpen] = useState(false);
+  const { vacatures } = useVacatures();
+
 
   usePageMeta({
     title: `Vacature elektromonteur (LS/MS) | ${vacatures.length} vacatures TerreVolt`,

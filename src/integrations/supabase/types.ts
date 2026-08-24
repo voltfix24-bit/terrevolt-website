@@ -333,66 +333,96 @@ export type Database = {
       }
       vacancies: {
         Row: {
+          aliases: string[]
+          authorizations: string | null
           category: string | null
           created_at: string
+          date_posted: string
           employment_type: string | null
+          h1: string | null
           hours: string | null
+          icon_key: string | null
           id: string
           intro: string | null
           is_featured: boolean
+          keywords: string[]
           level: string | null
           offer: Json
           process_steps: Json
           region: string | null
           requirements: Json
           safety_text: string | null
+          salary_max: number | null
+          salary_min: number | null
+          short_label: string | null
           slug: string
           sort_order: number
           status: string
+          summary: string | null
           title: string
           updated_at: string
           what_you_do: Json
           work_area: string | null
         }
         Insert: {
+          aliases?: string[]
+          authorizations?: string | null
           category?: string | null
           created_at?: string
+          date_posted?: string
           employment_type?: string | null
+          h1?: string | null
           hours?: string | null
+          icon_key?: string | null
           id?: string
           intro?: string | null
           is_featured?: boolean
+          keywords?: string[]
           level?: string | null
           offer?: Json
           process_steps?: Json
           region?: string | null
           requirements?: Json
           safety_text?: string | null
+          salary_max?: number | null
+          salary_min?: number | null
+          short_label?: string | null
           slug: string
           sort_order?: number
           status?: string
+          summary?: string | null
           title: string
           updated_at?: string
           what_you_do?: Json
           work_area?: string | null
         }
         Update: {
+          aliases?: string[]
+          authorizations?: string | null
           category?: string | null
           created_at?: string
+          date_posted?: string
           employment_type?: string | null
+          h1?: string | null
           hours?: string | null
+          icon_key?: string | null
           id?: string
           intro?: string | null
           is_featured?: boolean
+          keywords?: string[]
           level?: string | null
           offer?: Json
           process_steps?: Json
           region?: string | null
           requirements?: Json
           safety_text?: string | null
+          salary_max?: number | null
+          salary_min?: number | null
+          short_label?: string | null
           slug?: string
           sort_order?: number
           status?: string
+          summary?: string | null
           title?: string
           updated_at?: string
           what_you_do?: Json

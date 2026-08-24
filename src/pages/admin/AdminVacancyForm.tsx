@@ -229,12 +229,70 @@ export default function AdminVacancyForm() {
             <Label htmlFor="work_area">Werkgebied</Label>
             <Input id="work_area" value={form.work_area} onChange={(e) => set("work_area", e.target.value)} maxLength={150} />
           </div>
+          <div>
+            <Label htmlFor="short_label">Korte label (kaart/menu)</Label>
+            <Input id="short_label" value={form.short_label} onChange={(e) => set("short_label", e.target.value)} maxLength={80} />
+          </div>
+          <div>
+            <Label htmlFor="icon_key">Icoon</Label>
+            <Select value={form.icon_key} onValueChange={(v) => set("icon_key", v)}>
+              <SelectTrigger id="icon_key"><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="ls">Laagspanning</SelectItem>
+                <SelectItem value="ms">Middenspanning</SelectItem>
+                <SelectItem value="schakel">Schakelwerk</SelectItem>
+                <SelectItem value="aarding">Aarding</SelectItem>
+                <SelectItem value="huisaansluiting">Huisaansluitingen</SelectItem>
+                <SelectItem value="wv">Werkverantwoordelijke</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label htmlFor="salary_min">Salaris van (€ p/m)</Label>
+            <Input id="salary_min" type="number" min={0} max={20000} value={form.salary_min}
+              onChange={(e) => set("salary_min", Number(e.target.value) || 0)} />
+          </div>
+          <div>
+            <Label htmlFor="salary_max">Salaris tot (€ p/m)</Label>
+            <Input id="salary_max" type="number" min={0} max={20000} value={form.salary_max}
+              onChange={(e) => set("salary_max", Number(e.target.value) || 0)} />
+          </div>
+          <div>
+            <Label htmlFor="date_posted">Publicatiedatum</Label>
+            <Input id="date_posted" type="date" value={form.date_posted} onChange={(e) => set("date_posted", e.target.value)} />
+          </div>
+          <div>
+            <Label htmlFor="authorizations">Aanwijzingen / bevoegdheden</Label>
+            <Input id="authorizations" value={form.authorizations} onChange={(e) => set("authorizations", e.target.value)} maxLength={200} />
+          </div>
+        </div>
+
+        <div>
+          <Label htmlFor="h1">H1 op de vacaturepagina</Label>
+          <Input id="h1" value={form.h1} onChange={(e) => set("h1", e.target.value)} maxLength={200} />
         </div>
 
         <div>
           <Label htmlFor="intro">Intro</Label>
           <Textarea id="intro" value={form.intro} onChange={(e) => set("intro", e.target.value)} rows={4} maxLength={2000} />
         </div>
+
+        <div>
+          <Label htmlFor="summary">Korte samenvatting (kaarten en Google)</Label>
+          <Textarea id="summary" value={form.summary} onChange={(e) => set("summary", e.target.value)} rows={2} maxLength={400} />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <Label htmlFor="keywords">Zoekwoorden (één per regel)</Label>
+            <Textarea id="keywords" value={keywords} onChange={(e) => setKeywords(e.target.value)} rows={4} />
+          </div>
+          <div>
+            <Label htmlFor="aliases">Oude URL-slugs die hierheen doorverwijzen (één per regel)</Label>
+            <Textarea id="aliases" value={aliases} onChange={(e) => setAliases(e.target.value)} rows={4} />
+          </div>
+        </div>
+
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
