@@ -724,6 +724,22 @@ const Contact = () => {
                       )}
                     </fieldset>
 
+                    <label htmlFor="contact-privacy" className="flex items-start gap-3 text-sm text-[#0d3b2e]">
+                      <input
+                        id="contact-privacy"
+                        name="privacy"
+                        type="checkbox"
+                        required
+                        className="mt-1 h-5 w-5 flex-shrink-0 rounded border-gray-300 text-[#0d3b2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e]"
+                      />
+                      <span className="leading-relaxed">
+                        Ik heb de <Link to="/privacy" className="underline">privacyverklaring</Link> gelezen en ga
+                        akkoord met het verwerken van mijn gegevens voor deze aanvraag. *
+                      </span>
+                    </label>
+
+
+
                     <button
                       type="submit"
                       disabled={submitting}
