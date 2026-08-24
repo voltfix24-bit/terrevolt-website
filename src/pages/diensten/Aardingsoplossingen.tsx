@@ -737,7 +737,42 @@ const Aardingsoplossingen = () => {
                 );
               })}
             </div>
+
+            <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center max-w-5xl mx-auto">
+              <img
+                src={meetrapportFoto}
+                alt="Aardingsmeting met meetrapport door TerreVolt: meetinstrument en aardelektrode naast de woning"
+                width={1280}
+                height={960}
+                loading="lazy"
+                className="w-full h-auto rounded-2xl border border-white/15 object-cover"
+              />
+              <div>
+                <h3 className="text-2xl text-white mb-3">Meetrapport nodig voor uw installateur of keuring?</h3>
+                <p className="text-white/80 leading-relaxed mb-6">
+                  Geef aan waarvoor u het rapport nodig heeft — installateur, netbeheerder, keuring of opleverdossier.
+                  U ontvangt de meetwaarden, meetmethode, datum en locatie op papier.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Link
+                    to="/contact?type=aarding"
+                    data-cta="Prijsindicatie aanvragen (meetrapport)"
+                    className="bg-[#9ed42e] text-[#0d3b2e] px-7 py-4 min-h-[56px] rounded-lg hover:bg-[#8bc41f] transition-colors flex items-center justify-center"
+                  >
+                    Prijsindicatie aanvragen
+                  </Link>
+                  <a
+                    href={telHref}
+                    className="border-2 border-white/40 text-white px-7 py-4 min-h-[56px] rounded-lg hover:border-white transition-colors flex items-center justify-center gap-2"
+                  >
+                    <Phone className="w-5 h-5" aria-hidden="true" />
+                    Bel direct
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
+
         </section>
 
         {/* VOOR WIE */}
