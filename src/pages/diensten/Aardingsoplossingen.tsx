@@ -987,10 +987,53 @@ const Aardingsoplossingen = () => {
             </div>
           </div>
         </section>
+
+        {/* Ruimte zodat de sticky mobiele balk niets afdekt */}
+        <div className="h-20 md:hidden" aria-hidden="true" />
       </main>
+
+      {/* STICKY MOBIELE CTA */}
+      <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-gray-200 px-3 py-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))]">
+        <div className="grid grid-cols-3 gap-2">
+          <a
+            href={telHref}
+            className="flex flex-col items-center justify-center gap-1 min-h-[48px] rounded-lg border border-[#0d3b2e]/20 text-[#0d3b2e] text-xs"
+          >
+            <Phone className="w-4 h-4" aria-hidden="true" />
+            Bel
+          </a>
+          {waLink ? (
+            <a
+              href={waLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center justify-center gap-1 min-h-[48px] rounded-lg border border-[#0d3b2e]/20 text-[#0d3b2e] text-xs"
+            >
+              <MessageCircle className="w-4 h-4" aria-hidden="true" />
+              WhatsApp
+            </a>
+          ) : (
+            <a
+              href={`mailto:${company.email}`}
+              className="flex flex-col items-center justify-center gap-1 min-h-[48px] rounded-lg border border-[#0d3b2e]/20 text-[#0d3b2e] text-xs"
+            >
+              <MessageCircle className="w-4 h-4" aria-hidden="true" />
+              E-mail
+            </a>
+          )}
+          <Link
+            to="/contact?type=aarding"
+            data-cta="Prijsindicatie aanvragen (sticky mobiel)"
+            className="flex items-center justify-center min-h-[48px] rounded-lg bg-[#9ed42e] text-[#0d3b2e] text-xs text-center px-2"
+          >
+            Prijsindicatie
+          </Link>
+        </div>
+      </div>
 
       <Footer />
     </div>
+
   );
 };
 
