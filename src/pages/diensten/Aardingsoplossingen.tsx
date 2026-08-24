@@ -845,6 +845,27 @@ const Aardingsoplossingen = () => {
                 Vestiging: {addressOneLine}
               </p>
             </div>
+
+            <div className="max-w-5xl mx-auto mt-12">
+              <h3 className="text-xl sm:text-2xl text-[#0d3b2e] mb-6 text-center">
+                Aardpen slaan per plaats
+              </h3>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {lokaleGebieden.map((g) => (
+                  <li key={g.slug}>
+                    <Link
+                      to={`/contact?type=aarding&plaats=${g.slug}`}
+                      data-cta={`Aardpen slaan ${g.plaats}`}
+                      className="block h-full bg-white border border-gray-200 rounded-xl p-5 hover:border-[#9ed42e] transition-colors"
+                    >
+                      <span className="block text-[#0d3b2e] mb-1">Aardpen slaan {g.plaats}</span>
+                      <span className="block text-sm text-[#6c757d] leading-relaxed">{g.text}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
           </div>
         </section>
 
