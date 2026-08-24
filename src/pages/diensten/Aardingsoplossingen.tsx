@@ -295,21 +295,14 @@ const Aardingsoplossingen = () => {
               </ul>
 
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
-                <a
-                  href="/contact"
-                  data-cta="Aarding aanvragen (hero)"
+                <Link
+                  to="/contact?type=aarding"
+                  data-cta="Prijsindicatie aanvragen (hero)"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-6 sm:px-8 py-4 min-h-[56px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  <span>Aarding aanvragen</span>
+                  <span>Prijsindicatie aanvragen</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </a>
-                <a
-                  href="/contact"
-                  data-cta="Meetrapport aanvragen (hero)"
-                  className="border-2 border-[#9ed42e] text-[#9ed42e] px-6 sm:px-8 py-4 min-h-[56px] rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 flex items-center justify-center"
-                >
-                  Meetrapport aanvragen
-                </a>
+                </Link>
                 <a
                   href={telHref}
                   aria-label={`Bel TerreVolt: ${company.phone.display}`}
@@ -326,10 +319,15 @@ const Aardingsoplossingen = () => {
                     className="border-2 border-white/40 text-white px-6 sm:px-8 py-4 min-h-[56px] rounded-lg hover:border-white transition-all duration-300 flex items-center justify-center gap-2"
                   >
                     <MessageCircle className="w-5 h-5" aria-hidden="true" />
-                    WhatsApp
+                    WhatsApp foto sturen
                   </a>
                 )}
               </div>
+
+              <p className="mt-5 text-[15px] text-white/80 leading-relaxed max-w-2xl">
+                Stuur uw postcode en eventueel een foto van de meterkast. Wij reageren zo snel mogelijk
+                met een duidelijke prijsindicatie — meestal binnen 1 werkdag.
+              </p>
             </div>
           </div>
         </section>
@@ -405,13 +403,13 @@ const Aardingsoplossingen = () => {
                   duidelijke prijsindicatie — zonder verrassingen achteraf.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <a
-                    href="/contact"
+                  <Link
+                    to="/contact?type=aarding"
                     data-cta="Prijsindicatie aanvragen"
                     className="bg-[#9ed42e] text-[#0d3b2e] px-7 py-4 min-h-[56px] rounded-lg hover:bg-[#8bc41f] transition-colors flex items-center justify-center"
                   >
-                    Prijsindicatie aanvragen
-                  </a>
+                    Vraag binnen 1 minuut een prijsindicatie aan
+                  </Link>
                   <a
                     href={telHref}
                     className="border-2 border-white/40 text-white px-7 py-4 min-h-[56px] rounded-lg hover:border-white transition-colors flex items-center justify-center gap-2"
@@ -684,13 +682,13 @@ const Aardingsoplossingen = () => {
                 Stuur uw situatie door of bel direct. TerreVolt denkt mee over de juiste aanpak, meting en oplevering.
               </p>
               <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 justify-center">
-                <a
-                  href="/contact"
-                  data-cta="Aarding aanvragen (eind-CTA)"
+                <Link
+                  to="/contact?type=aarding"
+                  data-cta="Prijsindicatie aanvragen (eind-CTA)"
                   className="bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 min-h-[56px] rounded-lg hover:bg-[#8bc41f] transition-colors flex items-center justify-center"
                 >
-                  Aarding aanvragen
-                </a>
+                  Prijsindicatie aanvragen
+                </Link>
                 <a
                   href={telHref}
                   className="border-2 border-white/40 text-white px-8 py-4 min-h-[56px] rounded-lg hover:border-white transition-colors flex items-center justify-center gap-2"
@@ -698,13 +696,13 @@ const Aardingsoplossingen = () => {
                   <Phone className="w-5 h-5" aria-hidden="true" />
                   Bel TerreVolt
                 </a>
-                <a
-                  href="/contact"
+                <Link
+                  to="/contact?type=aarding"
                   data-cta="Meetrapport aanvragen (eind-CTA)"
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 min-h-[56px] rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-colors flex items-center justify-center"
                 >
                   Meetrapport aanvragen
-                </a>
+                </Link>
               </div>
             </div>
           </div>
