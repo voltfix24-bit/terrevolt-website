@@ -1,29 +1,47 @@
 import { Award, BadgeCheck, CheckCircle2, FileCheck, GraduationCap, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
+import isoLogo from "@/assets/iso-9001-cetradex.png.asset.json";
+import vcaLogo from "@/assets/vca-cetradex.png.asset.json";
+import sbbLogo from "@/assets/sbb-erkend-leerbedrijf.png.asset.json";
+import isoPdf from "@/assets/terrevolt-iso-9001.pdf.asset.json";
+import vcaPdf from "@/assets/terrevolt-vca.pdf.asset.json";
 
 const certifications = [
   {
     icon: Award,
+    logo: isoLogo.url,
+    logoAlt: "ISO 9001 gecertificeerd keurmerk van Cetradex Certificatie",
     title: "ISO 9001:2015",
     subtitle: "Kwaliteitsmanagement",
     body: "Kwaliteitsmanagementsysteem gecertificeerd door Cetradex Certificatie B.V.",
     facts: ["NEN-EN-ISO 9001:2015", "Certificaat 26062502", "Geldig t/m 24 juni 2029"],
+    pdf: isoPdf.url,
+    pdfLabel: "Bekijk ISO 9001-certificaat (pdf)",
   },
   {
     icon: ShieldCheck,
+    logo: vcaLogo.url,
+    logoAlt: "VCA gecertificeerd keurmerk van Cetradex Certificatie",
     title: "VCA** 2017/6.0",
     subtitle: "Veilig, gezond en milieubewust werken",
     body: "VGM-beheerssysteem gecertificeerd door Cetradex Certificatie B.V.",
     facts: ["Certificaat 26062501", "Geldig t/m 24 juni 2029", "NACE-code F4222"],
+    pdf: vcaPdf.url,
+    pdfLabel: "Bekijk VCA**-certificaat (pdf)",
   },
   {
     icon: GraduationCap,
+    logo: sbbLogo.url,
+    logoAlt: "SBB erkend leerbedrijf - wij leiden vakmensen op",
     title: "SBB erkend leerbedrijf",
     subtitle: "Wij leiden vakmensen op",
     body: "TerreVolt investeert in praktijkontwikkeling en het opleiden van nieuwe vakmensen.",
     facts: ["Erkend leerbedrijf", "Praktijkgericht opleiden", "Instroom in techniek"],
+    pdf: null,
+    pdfLabel: null,
   },
 ];
+
 
 const proofPoints = [
   "Aantoonbare kwaliteitsborging voor projecten en oplevering",
