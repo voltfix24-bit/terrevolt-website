@@ -4,4 +4,4 @@ Allow: /
 Disallow: /admin
 Disallow: /admin/
 
-Sitemap: https://terrevolt.nl/sitemap.xml
+Sitemap: https://terrevolt.lovable.app/sitemap.xml
