@@ -7,6 +7,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { CvUploadField, validateCvFile } from "@/components/CvUploadField";
 import { scrollToElement } from "@/lib/scrollToAnchor";
 import { REGIOS, vacatures } from "@/data/vacatures";
+import { notifyAndConfirm } from "@/lib/notify";
+
 
 /**
  * Compact sollicitatieformulier.
