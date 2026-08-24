@@ -363,7 +363,7 @@ const Aardingsoplossingen = () => {
                 Aarding &amp; aardingsmeting
               </div>
               <h1 className="text-[clamp(1.75rem,6.4vw,2.5rem)] sm:text-4xl lg:text-5xl text-white mb-5 leading-[1.12] hyphens-nl text-pretty" lang="nl">
-                Aardpen laten slaan en aarding laten meten in {company.address.city}{" "}
+                Aardpen laten slaan en aarding laten meten in Amsterdam{" "}
                 <span className="text-[#9ed42e]">en heel Nederland</span>
               </h1>
               <p className="text-[17px] sm:text-lg lg:text-xl text-white/85 mb-6 max-w-3xl leading-relaxed">
