@@ -658,10 +658,13 @@ const Contact = () => {
                                   >
                                     <input
                                       type="checkbox"
+                                      name="werkzaamheden"
+                                      value={w}
                                       checked={checked}
                                       onChange={() => toggleWerkzaamheid(w)}
                                       className="w-4 h-4 accent-[#9ed42e]"
                                     />
+
                                     <span className="text-sm text-[#0d3b2e]">{w}</span>
                                   </label>
                                 );
