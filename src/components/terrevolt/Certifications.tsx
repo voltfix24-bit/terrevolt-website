@@ -72,8 +72,19 @@ export function Certifications() {
             const Icon = item.icon;
             return (
               <article key={item.title} className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-6 flex flex-col h-full">
-                <div className="w-12 h-12 bg-[#0d3b2e] rounded-lg flex items-center justify-center mb-5">
-                  <Icon className="w-6 h-6 text-[#9ed42e]" strokeWidth={2} aria-hidden="true" />
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-12 h-12 bg-[#0d3b2e] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-6 h-6 text-[#9ed42e]" strokeWidth={2} aria-hidden="true" />
+                  </div>
+                  <img
+                    src={item.logo}
+                    alt={item.logoAlt}
+                    width={96}
+                    height={96}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-16 w-auto object-contain"
+                  />
                 </div>
                 <p className="text-xs uppercase tracking-wider text-[#6c757d] mb-2">{item.subtitle}</p>
                 <h3 className="text-xl text-[#0d3b2e] mb-3">{item.title}</h3>
@@ -86,7 +97,19 @@ export function Certifications() {
                     </li>
                   ))}
                 </ul>
+                {item.pdf && (
+                  <a
+                    href={item.pdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-5 inline-flex items-center gap-2 text-sm text-[#0d3b2e] underline underline-offset-4 hover:text-[#1a4a36] min-h-[44px]"
+                  >
+                    <FileCheck className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+                    {item.pdfLabel}
+                  </a>
+                )}
               </article>
+
             );
           })}
         </div>
