@@ -72,6 +72,9 @@ const App = () => (
             <Route path="/aardingsoplossingen" element={<Navigate to="/aarding-aanleggen" replace />} />
             <Route path="/aarding-slaan" element={<Navigate to="/aarding-aanleggen" replace />} />
             <Route path="/aardingsmeting" element={<Navigate to="/aarding-aanleggen" replace />} />
+            <Route path="/aardpen-slaan" element={<Navigate to="/aarding-aanleggen" replace />} />
+            <Route path="/aardpen-laten-slaan" element={<Navigate to="/aarding-aanleggen" replace />} />
+
 
             <Route path="/diensten/ls-ms-netmontage" element={<LSMSNetmontage />} />
             <Route path="/diensten/stationsrenovatie" element={<Stationsrenovatie />} />
