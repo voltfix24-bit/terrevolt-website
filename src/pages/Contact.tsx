@@ -546,6 +546,13 @@ const Contact = () => {
                   >
                     <input type="hidden" name="intent" value={intent} readOnly />
 
+                    {/* Honeypot — verborgen voor mensen, ingevuld door bots. */}
+                    <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                      <label htmlFor="company_website">Laat dit veld leeg</label>
+                      <input id="company_website" name="company_website" type="text" tabIndex={-1} autoComplete="off" />
+                    </div>
+
+
                     {submitError && (
                       <div role="alert" className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-lg p-4">
                         <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" strokeWidth={2.2} />
