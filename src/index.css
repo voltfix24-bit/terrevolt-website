@@ -29,7 +29,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --header-height: 6rem;
+    --header-height: 5rem;
     --subnav-height: 0rem;
     --scroll-offset: calc(var(--header-height) + var(--subnav-height) + 1rem);
 
