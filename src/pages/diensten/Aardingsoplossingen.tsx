@@ -1,4 +1,4 @@
-import { ArrowRight, Home, Phone, Gauge, ShieldCheck, GitBranch, FileBarChart, Building2, Server, Zap, Factory, Construction, Plug, Activity, ClipboardList, FileCheck, CheckCircle2, MessageCircle, Euro, MapPin } from "lucide-react";
+import { ArrowRight, Home, Phone, Gauge, ShieldCheck, GitBranch, FileBarChart, Building2, Server, Zap, Factory, Construction, Plug, Activity, ClipboardList, FileCheck, CheckCircle2, MessageCircle, Euro, MapPin, Clock, Camera, Ruler, Wrench } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { WhenToCall } from "@/components/terrevolt/WhenToCall";
@@ -8,6 +8,9 @@ import { EarthSymbol } from "@/components/icons/EarthSymbol";
 import { Link } from "react-router-dom";
 import { company, SITE_URL, telHref, addressOneLine } from "@/config/company";
 import { whatsappLink } from "@/lib/whatsapp";
+import meterkastFoto from "@/assets/aarding-meterkast.jpg";
+import meetrapportFoto from "@/assets/aarding-meetrapport.jpg";
+import aardpenFoto from "@/assets/aarding-aardpen-slaan.jpg";
 
 const PAGE_URL = `${SITE_URL}/aarding-aanleggen`;
 
@@ -16,6 +19,14 @@ const waLink = whatsappLink(
   "Hallo TerreVolt, ik wil graag een aardpen laten slaan / aarding laten meten.",
 );
 
+/** Bewijspunten direct boven de vouw — kort, concreet en waarmaakbaar. */
+const proofPoints = [
+  { icon: Clock, text: "Reactie meestal binnen 1 werkdag" },
+  { icon: Camera, text: "Foto meterkast meesturen voor snellere prijsindicatie" },
+  { icon: FileCheck, text: "Meetrapport mogelijk voor installateur, keuring of opleverdossier" },
+  { icon: MapPin, text: `Vanuit ${company.address.city} actief in heel Nederland` },
+];
+
 const heroBullets = [
   "Aardpen slaan voor woning, meterkast, laadpaal of zonnepanelen",
   "Aardingsmeting en meetrapport mogelijk",
@@ -23,6 +34,25 @@ const heroBullets = [
   "Voor particulieren, installateurs en zakelijke opdrachtgevers",
   "Veilig gewerkt volgens relevante normen en projectinstructies",
 ];
+
+/** Trust-/proofblok direct na "Wanneer heeft u een aardpen nodig?". */
+const waarom = [
+  { icon: EarthSymbol, title: "Specialist in aarding en metingen", text: "Aarding, aardingsmetingen en LS/MS-infrastructuur zijn ons dagelijkse werk — geen bijzaak." },
+  { icon: Gauge, title: "Aardingsmeting met duidelijke meetwaarden", text: "U krijgt de gemeten aardverspreidingsweerstand zwart-op-wit, niet alleen een mondelinge toezegging." },
+  { icon: ShieldCheck, title: "Veilig volgens relevante normen", text: "Gewerkt volgens de geldende normen, bedrijfsvoeringsregels en projectinstructies." },
+  { icon: Building2, title: "Woning, bedrijfspand of technische ruimte", text: "Geschikt voor woning, bedrijfspand, laadpaal, zonnepanelen en technische ruimten." },
+  { icon: Wrench, title: "Korte lijnen met uitvoering en planning", text: "U spreekt direct iemand die het werk ook echt uitvoert en inplant." },
+];
+
+/** Herkenbare praktijkvoorbeelden — helpt bezoekers hun eigen situatie plaatsen. */
+const voorbeelden = [
+  { icon: Plug, text: "Nieuwe meterkast, installateur vraagt om een meetrapport" },
+  { icon: Home, text: "Oude woning met aarding via de waterleiding" },
+  { icon: Zap, text: "Laadpaal wordt geplaatst, aarding moet gecontroleerd worden" },
+  { icon: ShieldCheck, text: "Zonnepaneleninstallatie vraagt om correcte potentiaalvereffening" },
+  { icon: Factory, text: "Bedrijfspand of technische ruimte heeft periodieke aardingsmeting nodig" },
+];
+
 
 const nodig = [
   { icon: Plug, title: "Nieuwe of vervangen meterkast", text: "Bij een nieuwe meterkast of groepenkast is een deugdelijke aarding voorwaarde voor oplevering." },
