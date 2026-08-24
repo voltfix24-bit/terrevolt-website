@@ -545,12 +545,16 @@ const Aardingsoplossingen = () => {
                   Kosten
                 </div>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl" lang="nl">
-                  Wat kost een aardpen laten slaan?
+                  Prijsindicatie voor aardpen slaan
                 </h2>
                 <p className="text-lg text-[#6c757d] leading-relaxed">
-                  Een eerlijk antwoord: dat verschilt per situatie. Wij noemen liever geen fantasieprijs, maar geven u
-                  vooraf een duidelijke prijsindicatie op basis van uw situatie.
+                  De prijs hangt af van bodem, bereikbaarheid, benodigde diepte, aansluiting en meetrapport. Stuur
+                  postcode en foto&#39;s mee voor een snelle indicatie.
                 </p>
+                <p className="mt-3 text-lg text-[#0d3b2e] leading-relaxed">
+                  Geen verrassingen: u ontvangt vooraf een duidelijke prijsopgave.
+                </p>
+
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
