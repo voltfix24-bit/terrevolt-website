@@ -8,6 +8,10 @@
 /aardingsmeting                 /aarding-aanleggen  301!
 /aardpen-slaan                  /aarding-aanleggen  301!
 /aardpen-laten-slaan            /aarding-aanleggen  301!
+/aardpen-laten-slaan-amsterdam  /aardpen-slaan-amsterdam  301!
+/aarding-amsterdam              /aardpen-slaan-amsterdam  301!
+/aarding-meten-amsterdam        /aardpen-slaan-amsterdam  301!
+/aarding-aanleggen-amsterdam    /aardpen-slaan-amsterdam  301!
 /vacatures/laagspanningsmonteur      /vacatures/elektromonteur-laagspanning                 301!
 /vacatures/middenspanningsmonteur    /vacatures/elektromonteur-middenspanning               301!
 /vacatures/schakelmonteur            /vacatures/elektromonteur-laagspanning-middenspanning  301!
