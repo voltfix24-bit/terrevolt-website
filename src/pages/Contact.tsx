@@ -54,7 +54,15 @@ const schema = z.object({
   location: z.string().trim().max(150).optional(),
   start_date: z.string().trim().max(50).optional(),
   description: z.string().trim().min(5, "Geef een korte omschrijving").max(3000),
+  privacy: z.literal("on", {
+    errorMap: () => ({ message: "Bevestig dat u de privacyverklaring hebt gelezen" }),
+  }),
 });
+
+/** Anti-spam: minimaal 60 seconden tussen twee inzendingen vanaf dit apparaat. */
+const THROTTLE_KEY = "tv_contact_last_submit";
+const THROTTLE_MS = 60_000;
+
 
 const aardingSchema = schema.extend({
   location: z.string().trim().min(2, "Vul uw postcode of plaats in").max(150),
