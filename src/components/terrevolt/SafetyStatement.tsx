@@ -1,7 +1,7 @@
 import { ShieldCheck } from "lucide-react";
 
 export function SafetyStatement() {
-  const tags = ["BEI BLS/BHS waar van toepassing", "VCA", "NEN 3140 / NEN 3840"];
+  const tags = ["ISO 9001:2015", "VCA** 2017/6.0", "BEI BLS/BHS waar van toepassing", "NEN 3140 / NEN 3840"];
   return (
     <section id="veiligheid" className="py-12 md:py-16 bg-[#f8f9fa] scroll-mt-24">
       <div className="container mx-auto px-5 sm:px-6 lg:px-12">
@@ -13,7 +13,7 @@ export function SafetyStatement() {
             <div className="min-w-0">
               <h3 className="text-xl text-[#0d3b2e] mb-2">Veiligheid en kwaliteit als standaard</h3>
               <p className="text-[#6c757d] leading-relaxed">
-                Voor ieder project wordt vooraf vastgesteld welke veiligheidsregelgeving van toepassing is. Binnen netbeheeromgevingen werken we volgens de toepasselijke BEI BLS/BHS, VWI's, opdrachten, werk- en bedieningsplannen en bedrijfsspecifieke procedures. Buiten de netbeheeromgeving gelden de door opdrachtgever of beheerder vastgestelde regels. VCA, LMRA, passende PBM's en een veilige werkplek vormen altijd de basis.
+                TerreVolt is ISO 9001:2015 en VCA** 2017/6.0 gecertificeerd. Voor ieder project wordt vooraf vastgesteld welke veiligheidsregelgeving van toepassing is. Binnen netbeheeromgevingen werken we volgens de toepasselijke BEI BLS/BHS, VWI's, opdrachten, werk- en bedieningsplannen en bedrijfsspecifieke procedures. Buiten de netbeheeromgeving gelden de door opdrachtgever of beheerder vastgestelde regels. LMRA, passende PBM's en een veilige werkplek vormen altijd de basis.
               </p>
               <div className="flex flex-wrap gap-2 mt-4">
                 {tags.map((t) => (
