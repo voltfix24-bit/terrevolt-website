@@ -16,7 +16,7 @@ const Diensten = lazy(() => import("./pages/Diensten.tsx"));
 const LSMSNetmontage = lazy(() => import("./pages/diensten/LSMSNetmontage.tsx"));
 const Stationsrenovatie = lazy(() => import("./pages/diensten/Stationsrenovatie.tsx"));
 const Schakelwerk = lazy(() => import("./pages/diensten/Schakelwerk.tsx"));
-const Aardingsoplossingen = lazy(() => import("./pages/diensten/Aardingsoplossingen.tsx"));
+const AardingAanleggen = lazy(() => import("./pages/diensten/AardingAanleggen.tsx"));
 const AardpenSlaanAmsterdam = lazy(() => import("./pages/diensten/AardpenSlaanAmsterdam.tsx"));
 const MetenEnBeproeven = lazy(() => import("./pages/diensten/MetenEnBeproeven.tsx"));
 const Huisaansluitingen = lazy(() => import("./pages/diensten/Huisaansluitingen.tsx"));
@@ -97,7 +97,7 @@ const App = () => (
             <Route path="/diensten/schakelwerk" element={<Schakelwerk />} />
             <Route path="/diensten/meten-en-beproeven" element={<MetenEnBeproeven />} />
             <Route path="/diensten/huisaansluitingen" element={<Huisaansluitingen />} />
-            <Route path="/aarding-aanleggen" element={<Aardingsoplossingen />} />
+            <Route path="/aarding-aanleggen" element={<AardingAanleggen />} />
             <Route path="/aardpen-slaan-amsterdam" element={<AardpenSlaanAmsterdam />} />
 
             {/* Admin */}
