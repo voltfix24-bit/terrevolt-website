@@ -1,3 +1,4 @@
+import * as React from "react";
 import { ArrowRight, CheckCircle2, ClipboardList, FileSearch, ShieldCheck, PackageCheck, Cable, Building2, Power, Gauge, PlugZap, Users, Briefcase, Zap as ZapIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/terrevolt/Header";
@@ -5,7 +6,16 @@ import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
 
-const services = [
+type ServiceCard = {
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  slug: string;
+  href?: string;
+  title: string;
+  description: string;
+  bullets: string[];
+};
+
+const services: ServiceCard[] = [
   {
     icon: Cable,
     slug: "ls-ms-netmontage",

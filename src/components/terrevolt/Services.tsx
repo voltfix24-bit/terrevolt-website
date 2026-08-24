@@ -1,9 +1,18 @@
+import * as React from "react";
 import { Cable, Building2, Power, Gauge, PlugZap, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Reveal } from "@/components/terrevolt/Reveal";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
 
-const services = [
+type ServiceCard = {
+  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  slug: string;
+  href?: string;
+  title: string;
+  description: string;
+};
+
+const services: ServiceCard[] = [
   {
     icon: Cable,
     slug: "ls-ms-netmontage",
