@@ -9,6 +9,8 @@ import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { company, addressOneLine, telHref, mailHref } from "@/config/company";
 import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
+import { notifyAndConfirm } from "@/lib/notify";
+
 
 const contactCards = [
   { icon: Phone, title: "Bel ons", value: company.phone.display, href: telHref },
@@ -54,7 +56,15 @@ const schema = z.object({
   location: z.string().trim().max(150).optional(),
   start_date: z.string().trim().max(50).optional(),
   description: z.string().trim().min(5, "Geef een korte omschrijving").max(3000),
+  privacy: z.literal("on", {
+    errorMap: () => ({ message: "Bevestig dat u de privacyverklaring hebt gelezen" }),
+  }),
 });
+
+/** Anti-spam: minimaal 60 seconden tussen twee inzendingen vanaf dit apparaat. */
+const THROTTLE_KEY = "tv_contact_last_submit";
+const THROTTLE_MS = 60_000;
+
 
 const aardingSchema = schema.extend({
   location: z.string().trim().min(2, "Vul uw postcode of plaats in").max(150),
@@ -168,6 +178,22 @@ const Contact = () => {
     setSubmitError(null);
 
     const fd = new FormData(e.currentTarget);
+
+    // Stille spambeveiliging (honeypot) — bots vullen dit verborgen veld in.
+    if (String(fd.get("company_website") || "").trim() !== "") {
+      setSubmitSuccess(true);
+      return;
+    }
+
+    // Throttle: voorkomt dubbele of geautomatiseerde inzendingen.
+    const last = Number(window.localStorage.getItem(THROTTLE_KEY) || 0);
+    if (last && Date.now() - last < THROTTLE_MS) {
+      const msg = `U hebt zojuist al een aanvraag verstuurd. Wacht even of bel ons direct op ${company.phone.display}.`;
+      setSubmitError(msg);
+      toast.error(msg);
+      return;
+    }
+
     const raw = {
       name: String(fd.get("name") || ""),
       company: String(fd.get("company") || ""),
@@ -177,7 +203,9 @@ const Contact = () => {
       location: String(fd.get("location") || ""),
       start_date: String(fd.get("start_date") || ""),
       description: String(fd.get("description") || ""),
+      privacy: fd.get("privacy") ? "on" : "",
     };
+
 
     if (isAarding) {
       raw.request_type = "Aardingsoplossingen";
@@ -236,11 +264,33 @@ const Contact = () => {
       } as any]);
       if (insErr) throw insErr;
 
+      window.localStorage.setItem(THROTTLE_KEY, String(Date.now()));
+
+      // Melding naar kantoor + ontvangstbevestiging naar de aanvrager.
+      void notifyAndConfirm(
+        "contact-notification",
+        "contact-confirmation",
+        {
+          name: parsed.data.name,
+          company: parsed.data.company || "",
+          email: parsed.data.email,
+          phone: parsed.data.phone || "",
+          requestType: parsed.data.request_type || "",
+          location: parsed.data.location || "",
+          startDate: parsed.data.start_date || "",
+          description: parsed.data.description || "",
+          intentLabel,
+          hasAttachment: Boolean(attachment_url),
+        },
+        parsed.data.email,
+      );
+
       import("@/lib/analytics").then((m) =>
         m.trackFormSubmit("contact_form", { aanvraag_type: intent })
       );
       setSubmitSuccess(true);
       resetForm();
+
     } catch (err) {
       console.error(err);
       setSubmitError(`Er ging iets mis. Probeer het later opnieuw of mail ons op ${company.email}.`);
@@ -496,6 +546,13 @@ const Contact = () => {
                   >
                     <input type="hidden" name="intent" value={intent} readOnly />
 
+                    {/* Honeypot — verborgen voor mensen, ingevuld door bots. */}
+                    <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                      <label htmlFor="company_website">Laat dit veld leeg</label>
+                      <input id="company_website" name="company_website" type="text" tabIndex={-1} autoComplete="off" />
+                    </div>
+
+
                     {submitError && (
                       <div role="alert" className="flex items-start gap-3 bg-red-50 border border-red-200 rounded-lg p-4">
                         <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" strokeWidth={2.2} />
@@ -673,6 +730,22 @@ const Contact = () => {
                         <p role="alert" className="text-xs text-red-600">{fileError}</p>
                       )}
                     </fieldset>
+
+                    <label htmlFor="contact-privacy" className="flex items-start gap-3 text-sm text-[#0d3b2e]">
+                      <input
+                        id="contact-privacy"
+                        name="privacy"
+                        type="checkbox"
+                        required
+                        className="mt-1 h-5 w-5 flex-shrink-0 rounded border-gray-300 text-[#0d3b2e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e]"
+                      />
+                      <span className="leading-relaxed">
+                        Ik heb de <Link to="/privacy" className="underline">privacyverklaring</Link> gelezen en ga
+                        akkoord met het verwerken van mijn gegevens voor deze aanvraag. *
+                      </span>
+                    </label>
+
+
 
                     <button
                       type="submit"

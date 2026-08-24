@@ -29,6 +29,7 @@ const KennisMiddenspanning = lazy(() => import("./pages/kennis/Middenspanning.ts
 const KennisSpanningsniveaus = lazy(() => import("./pages/kennis/Spanningsniveaus.tsx"));
 const Privacy = lazy(() => import("./pages/Privacy.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
+const Unsubscribe = lazy(() => import("./pages/Unsubscribe.tsx"));
 
 // Admin — volledig lazy zodat het niet in de eerste publieke bundle zit.
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout.tsx"));
@@ -69,6 +70,7 @@ const App = () => (
             <Route path="/elektromonteur-gezocht" element={<Navigate to="/werken-bij" replace />} />
             <Route path="/vacatures" element={<Navigate to="/werken-bij" replace />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/unsubscribe" element={<Unsubscribe />} />
             {/* Aliasroutes — 301-equivalent redirect naar canonieke route */}
             <Route path="/veiligheid-certificeringen" element={<Navigate to="/veiligheid" replace />} />
             <Route path="/over-terrevolt" element={<Navigate to="/over" replace />} />
