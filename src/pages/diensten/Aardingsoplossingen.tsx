@@ -29,8 +29,125 @@ const meetbaar = [
   { icon: FileCheck, title: "Rapporteren", description: "Heldere meetrapportages en opleverdocumentatie voor opdrachtgever en dossier." },
 ];
 
+const doelgroepen = [
+  {
+    icon: Home,
+    title: "Particulieren",
+    intro: "Aarding laten aanleggen of vernieuwen bij uw woning.",
+    items: [
+      "Aardpen slaan bij een woning zonder (goede) aarding",
+      "Aarding voor een laadpaal of zonnepanelen",
+      "Vervangen van een oude of afgekeurde aardleiding",
+      "Aardingsmeting met meetrapport na afkeuring",
+    ],
+  },
+  {
+    icon: Factory,
+    title: "Bedrijven en instellingen",
+    intro: "Aarding voor installaties, panden en technische ruimten.",
+    items: [
+      "Aardingsinstallatie voor bedrijfspanden en werkplaatsen",
+      "Stationsaarding voor MS/LS-stations en trafo's",
+      "Potentiaalvereffening in technische ruimten",
+      "Periodieke aardingsmetingen en opleverdossier",
+    ],
+  },
+];
+
+const faq = [
+  {
+    q: "Wat kost het om aarding te laten aanleggen?",
+    a: "De prijs hangt af van de grondsoort, de benodigde lengte van de aardelektrode en de bereikbaarheid van de meterkast of installatie. Na een korte inventarisatie — vaak telefonisch of met foto's — ontvangt u een vaste prijsopgave voor het slaan van de aardpen, de aansluiting en de eindmeting.",
+  },
+  {
+    q: "Hoe weet ik of mijn woning een goede aarding heeft?",
+    a: "Dat blijkt uit een aardingsmeting. Wij meten de aardverspreidingsweerstand en de doorverbinding naar de hoofdaardrail. U ontvangt de meetwaarden in een rapport, zodat u kunt aantonen dat de installatie voldoet.",
+  },
+  {
+    q: "Hoe diep moet een aardpen de grond in?",
+    a: "In de praktijk wordt meestal gewerkt met gekoppelde aardstaven tot enkele meters diepte. Bepalend is niet de diepte zelf, maar de gemeten aardverspreidingsweerstand: er wordt doorgeslagen of uitgebreid tot de meetwaarde voldoet aan de eis voor de installatie.",
+  },
+  {
+    q: "Is aarding verplicht bij een laadpaal of zonnepanelen?",
+    a: "Een laadpaal- of PV-installatie moet zijn aangesloten op een deugdelijke aarding en potentiaalvereffening. Ontbreekt die of is de weerstand te hoog, dan wordt de installatie afgekeurd. Wij leggen de aarding aan en leveren de meetwaarden aan uw installateur.",
+  },
+  {
+    q: "Krijg ik een meetrapport?",
+    a: "Ja. Elke uitgevoerde aardingsmeting wordt vastgelegd in een rapportage met meetwaarden, meetmethode, datum en locatie — bruikbaar voor uw installateur, verzekeraar of opleverdossier.",
+  },
+  {
+    q: "In welke regio werkt TerreVolt?",
+    a: `TerreVolt werkt vanuit ${company.address.city} in heel Nederland, met de nadruk op de provincie Utrecht en de omliggende regio's.`,
+  },
+];
+
 const Aardingsoplossingen = () => {
-  usePageMeta("Aardingsoplossingen en aardingsmetingen | TerreVolt BV", "TerreVolt realiseert, verbetert, meet en rapporteert aardingssystemen voor stations, technische ruimten en industriële installaties.", "/diensten/aardingsoplossingen");
+  usePageMeta({
+    title: "Aarding aanleggen en aardingsmeting | Particulier & zakelijk | TerreVolt",
+    description:
+      "Aarding laten aanleggen, aardpen slaan, aarding verbeteren en aardingsmeting met meetrapport. Voor particulieren en bedrijven, vanuit Utrecht in heel Nederland.",
+    canonical: "/aarding-aanleggen",
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: "Aarding aanleggen en aardingsmeting",
+        serviceType: "Aardingsinstallatie, aardpen slaan en aardingsmeting",
+        description:
+          "Aanleg, verbetering, meting en rapportage van aardingsvoorzieningen voor woningen, bedrijfspanden, MS/LS-stations en industriële installaties.",
+        url: `${SITE_URL}/aarding-aanleggen`,
+        provider: {
+          "@type": "Organization",
+          name: company.legalName,
+          telephone: company.phone.e164,
+          email: company.email,
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: company.address.street,
+            postalCode: company.address.postalCode,
+            addressLocality: company.address.city,
+            addressCountry: company.address.countryCode,
+          },
+        },
+        areaServed: { "@type": "Country", name: "Nederland" },
+        audience: [
+          { "@type": "Audience", audienceType: "Particulieren" },
+          { "@type": "BusinessAudience", audienceType: "Bedrijven en netbeheerders" },
+        ],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Aardingswerkzaamheden",
+          itemListElement: [
+            "Aardpen slaan en aardelektroden plaatsen",
+            "Aarding verbeteren of vernieuwen",
+            "Aardingsmeting (aardverspreidingsweerstand)",
+            "Potentiaalvereffening",
+            "Stationsaarding MS/LS",
+            "Meetrapportage en opleverdocumentatie",
+          ].map((name) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name } })),
+        },
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faq.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: { "@type": "Answer", text: item.a },
+        })),
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+          { "@type": "ListItem", position: 2, name: "Diensten", item: `${SITE_URL}/diensten` },
+          { "@type": "ListItem", position: 3, name: "Aarding aanleggen", item: `${SITE_URL}/aarding-aanleggen` },
+        ],
+      },
+    ],
+  });
+
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
