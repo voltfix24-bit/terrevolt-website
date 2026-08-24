@@ -8,4 +8,13 @@
 /aardingsmeting                 /aarding-aanleggen  301!
 /aardpen-slaan                  /aarding-aanleggen  301!
 /aardpen-laten-slaan            /aarding-aanleggen  301!
+/vacatures/laagspanningsmonteur      /vacatures/elektromonteur-laagspanning                 301!
+/vacatures/middenspanningsmonteur    /vacatures/elektromonteur-middenspanning               301!
+/vacatures/schakelmonteur            /vacatures/elektromonteur-laagspanning-middenspanning  301!
+/vacatures/werkverantwoordelijke     /vacatures/werkverantwoordelijke-ls-ms                 301!
+/vacature-elektromonteur             /werken-bij                                            301!
+/elektromonteur-gezocht              /werken-bij                                            301!
+/vacatures                           /werken-bij                                            301!
+/middenspanning                      /kennis/middenspanning                                 301!
+/laagspanning-middenspanning-hoogspanning /kennis/laagspanning-middenspanning-hoogspanning  301!
 /*                              /index.html         200
