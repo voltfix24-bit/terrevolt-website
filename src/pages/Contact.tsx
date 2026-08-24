@@ -9,6 +9,8 @@ import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { company, addressOneLine, telHref, mailHref } from "@/config/company";
 import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
+import { notifyAndConfirm } from "@/lib/notify";
+
 
 const contactCards = [
   { icon: Phone, title: "Bel ons", value: company.phone.display, href: telHref },
