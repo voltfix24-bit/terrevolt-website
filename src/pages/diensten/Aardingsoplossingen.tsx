@@ -842,11 +842,13 @@ const Aardingsoplossingen = () => {
                 <MapPin className="w-4 h-4" aria-hidden="true" />
                 Werkgebied
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Aardpen slaan in Utrecht en omgeving</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Aardpen slaan in Amsterdam en omgeving</h2>
               <p className="text-lg text-[#6c757d] leading-relaxed mb-8">
-                TerreVolt werkt vanuit {company.address.city} in heel Nederland, met nadruk op {werkgebied.join(", ")} en
-                omliggende regio&#39;s. Buiten deze regio? Neem gerust contact op — wij plannen werk door heel Nederland in.
+                Amsterdam en de regio eromheen — {werkgebied.slice(0, 8).join(", ")} — vormen ons primaire werkgebied
+                voor aardpennen en aardingsmetingen. Vanuit onze vestiging in {company.address.city} plannen wij
+                daarnaast werk door heel Nederland in; de overige grote steden volgen stap voor stap.
               </p>
+
               <ul className="flex flex-wrap justify-center gap-2 sm:gap-3">
                 {werkgebied.map((plaats) => (
                   <li key={plaats} className="bg-white border border-gray-200 rounded-full px-4 py-2 text-[15px] text-[#0d3b2e]">
