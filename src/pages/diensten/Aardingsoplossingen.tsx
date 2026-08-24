@@ -126,31 +126,36 @@ const doelgroepen = [
 ];
 
 const werkgebied = [
+  "Amsterdam",
+  "Amstelveen",
+  "Diemen",
+  "Zaandam",
+  "Haarlem",
+  "Hoofddorp",
+  "Almere",
+  "Weesp",
   "Utrecht",
-  "Nieuwegein",
-  "Houten",
-  "Maarssen",
-  "Zeist",
-  "De Bilt",
-  "Amersfoort",
-  "Hilversum",
-  "Woerden",
 ];
 
 /**
  * Lokale werkgebiedblokken. `slug` is voorbereid op toekomstige eigen
  * landingspagina's (/aardpen-slaan-<slug>); zolang die er niet zijn, wijst
  * het blok naar de aarding-aanvraagflow met de plaats als context.
+ * Amsterdam en de directe regio staan vooraan; overige grote steden volgen
+ * in een latere uitbreiding.
  */
 const lokaleGebieden = [
+  { plaats: "Amsterdam", slug: "amsterdam", text: "Aardpen slaan en aarding meten in Amsterdam: grachtenpanden, jaren-30-woningen, nieuwbouw en bedrijfspanden." },
+  { plaats: "Amsterdam-Noord", slug: "amsterdam-noord", text: "Aarding aanleggen en controleren bij woningen, laadpalen en werkplaatsen in Amsterdam-Noord." },
+  { plaats: "Amstelveen", slug: "amstelveen", text: "Aardpen laten slaan bij meterkast, PV-installatie of laadpaal in Amstelveen." },
+  { plaats: "Diemen", slug: "diemen", text: "Aardingsmeting met meetrapport voor woning of bedrijf in Diemen." },
+  { plaats: "Zaandam", slug: "zaandam", text: "Aarding via waterleiding vervangen door een gemeten aardelektrode in Zaandam." },
+  { plaats: "Haarlem", slug: "haarlem", text: "Aarding controleren en vernieuwen bij oudere woningen in Haarlem." },
+  { plaats: "Hoofddorp", slug: "hoofddorp", text: "Aardelektrode plaatsen en aansluiten op de hoofdaardrail in Hoofddorp." },
+  { plaats: "Almere", slug: "almere", text: "Aardpen slaan en potentiaalvereffening controleren in Almere." },
   { plaats: "Utrecht", slug: "utrecht", text: "Aardpen slaan en aarding meten in Utrecht stad en de wijken eromheen." },
-  { plaats: "Nieuwegein", slug: "nieuwegein", text: "Aarding voor woningen, laadpalen en bedrijfspanden in Nieuwegein." },
-  { plaats: "Amersfoort", slug: "amersfoort", text: "Aardpen laten slaan bij meterkast of PV-installatie in Amersfoort." },
-  { plaats: "Hilversum", slug: "hilversum", text: "Aarding controleren en vernieuwen bij oudere woningen in Hilversum." },
-  { plaats: "Zeist", slug: "zeist", text: "Aardingsmeting met meetrapport voor woning of bedrijf in Zeist." },
-  { plaats: "Houten", slug: "houten", text: "Aardelektrode plaatsen en aansluiten op de hoofdaardrail in Houten." },
-  { plaats: "Maarssen", slug: "maarssen", text: "Aardpen slaan en potentiaalvereffening controleren in Maarssen." },
 ];
+
 
 
 const faq = [
