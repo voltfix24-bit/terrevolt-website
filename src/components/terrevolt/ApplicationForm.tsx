@@ -153,7 +153,26 @@ export const ApplicationForm = ({ defaultProfile, source = "werken_bij_form", id
       if (insErr) throw insErr;
 
       window.localStorage.setItem(THROTTLE_KEY, String(Date.now()));
+
+      // Melding naar kantoor + ontvangstbevestiging naar de sollicitant.
+      void notifyAndConfirm(
+        "application-notification",
+        "application-confirmation",
+        {
+          name: parsed.data.name,
+          email: parsed.data.email,
+          phone: parsed.data.phone,
+          profile: parsed.data.profile,
+          region: parsed.data.region,
+          message: parsed.data.message || "",
+          hasCv: Boolean(cv_url),
+          source,
+        },
+        parsed.data.email,
+      );
+
       import("@/lib/analytics").then((m) => m.trackFormSubmit(source));
+
       formRef.current?.reset();
       setFile(null);
       setFileError(null);
