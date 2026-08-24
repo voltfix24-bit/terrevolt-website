@@ -17,6 +17,7 @@ const LSMSNetmontage = lazy(() => import("./pages/diensten/LSMSNetmontage.tsx"))
 const Stationsrenovatie = lazy(() => import("./pages/diensten/Stationsrenovatie.tsx"));
 const Schakelwerk = lazy(() => import("./pages/diensten/Schakelwerk.tsx"));
 const Aardingsoplossingen = lazy(() => import("./pages/diensten/Aardingsoplossingen.tsx"));
+const AardpenSlaanAmsterdam = lazy(() => import("./pages/diensten/AardpenSlaanAmsterdam.tsx"));
 const MetenEnBeproeven = lazy(() => import("./pages/diensten/MetenEnBeproeven.tsx"));
 const Huisaansluitingen = lazy(() => import("./pages/diensten/Huisaansluitingen.tsx"));
 const Projecten = lazy(() => import("./pages/Projecten.tsx"));
@@ -85,6 +86,10 @@ const App = () => (
             <Route path="/aardingsmeting" element={<Navigate to="/aarding-aanleggen" replace />} />
             <Route path="/aardpen-slaan" element={<Navigate to="/aarding-aanleggen" replace />} />
             <Route path="/aardpen-laten-slaan" element={<Navigate to="/aarding-aanleggen" replace />} />
+            <Route path="/aardpen-laten-slaan-amsterdam" element={<Navigate to="/aardpen-slaan-amsterdam" replace />} />
+            <Route path="/aarding-amsterdam" element={<Navigate to="/aardpen-slaan-amsterdam" replace />} />
+            <Route path="/aarding-meten-amsterdam" element={<Navigate to="/aardpen-slaan-amsterdam" replace />} />
+            <Route path="/aarding-aanleggen-amsterdam" element={<Navigate to="/aardpen-slaan-amsterdam" replace />} />
 
 
             <Route path="/diensten/ls-ms-netmontage" element={<LSMSNetmontage />} />
@@ -93,6 +98,7 @@ const App = () => (
             <Route path="/diensten/meten-en-beproeven" element={<MetenEnBeproeven />} />
             <Route path="/diensten/huisaansluitingen" element={<Huisaansluitingen />} />
             <Route path="/aarding-aanleggen" element={<Aardingsoplossingen />} />
+            <Route path="/aardpen-slaan-amsterdam" element={<AardpenSlaanAmsterdam />} />
 
             {/* Admin */}
             <Route path="/admin/login" element={<AdminLogin />} />
