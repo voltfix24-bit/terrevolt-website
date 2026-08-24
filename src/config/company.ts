@@ -4,7 +4,7 @@
  */
 
 /** Canoniek productiedomein. Altijd zonder trailing slash. */
-export const SITE_URL = "https://terrevolt.lovable.app";
+export const SITE_URL = "https://terrevolt.nl";
 /** Absoluut pad naar de social-share afbeelding (1216×640). */
 export const SITE_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 /** Absoluut pad naar het logo (gebruikt in Organization JSON-LD). */
