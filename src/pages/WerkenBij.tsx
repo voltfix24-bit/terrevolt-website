@@ -15,8 +15,9 @@ import { scrollToAnchor } from "@/lib/scrollToAnchor";
 import { company, telHref } from "@/config/company";
 import {
   ARBEIDSVOORWAARDEN, CONTRACT_LABEL, REGIO_LABEL, SALARIS_DISCLAIMER,
-  SOLLICITATIEPROCES, UREN_LABEL, formatSalaris, vacatures,
+  SOLLICITATIEPROCES, UREN_LABEL, formatSalaris, vacatures, validThrough,
 } from "@/data/vacatures";
+import { SITE_URL } from "@/config/company";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
@@ -37,6 +38,8 @@ const waarom = [
 
 const faqs = [
   { q: "Zijn alle vacatures rechtstreeks in loondienst bij TerreVolt?", a: "Ja. Alle functies op deze pagina zijn rechtstreeks in loondienst bij TerreVolt." },
+  { q: "Zoeken jullie elektromonteurs voor laagspanning of middenspanning?", a: "Allebei. We hebben vacatures voor elektromonteurs in laagspanning (LS), middenspanning (MS) en gecombineerd LS/MS-schakelwerk. Welke kant je op gaat, hangt af van je ervaring, je opleidingen en de aanwijzing die daarbij hoort." },
+  { q: "Wat is het verschil tussen werken aan laagspanning en middenspanning?", a: "Laagspanning is tot 1.000 volt wisselspanning, middenspanning ligt daarboven tot ongeveer 50 kV. MS-werk vraagt zwaardere procedures, andere montagetechniek en een BEI BHS-aanwijzing; LS-werk valt onder BEI BLS. Lees meer op onze kennispagina over laagspanning, middenspanning en hoogspanning." },
   { q: "Welk contract krijg ik?", a: "Je start met een jaarcontract met uitzicht op een vast contract." },
   { q: "In welke regio's werken jullie?", a: "Onze vacatures staan open in Noord-Holland, Zuid-Holland, Gelderland en Flevoland. We bespreken samen welke projecten en reisafstand bij je passen." },
   { q: "Moet ik direct een cv meesturen?", a: "Nee. Een cv is optioneel. Je kunt ook je contactgegevens achterlaten of direct bellen of WhatsAppen met Tobesh." },
@@ -47,19 +50,67 @@ const WerkenBij = () => {
   const [contactOpen, setContactOpen] = useState(false);
 
   usePageMeta({
-    title: "Werken bij TerreVolt | 7 technische vacatures in loondienst",
+    title: `Vacature elektromonteur (LS/MS) | ${vacatures.length} vacatures TerreVolt`,
     description:
-      "Bekijk 7 technische vacatures bij TerreVolt in Noord-Holland, Zuid-Holland, Gelderland en Flevoland. Salaris direct zichtbaar en een jaarcontract met uitzicht op vast.",
+      `Elektromonteur gezocht: ${vacatures.length} vacatures bij TerreVolt voor laagspanning en middenspanning in Noord-Holland, Zuid-Holland, Gelderland en Flevoland. Salaris direct zichtbaar, loondienst.`,
     canonical: "/werken-bij",
-    jsonLd: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: faqs.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
+    jsonLd: [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.map((f) => ({
+          "@type": "Question",
+          name: f.q,
+          acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Vacatures elektromonteur bij TerreVolt",
+        numberOfItems: vacatures.length,
+        itemListElement: vacatures.map((v, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: `${SITE_URL}/vacatures/${v.slug}`,
+          name: v.title,
+        })),
+      },
+      ...vacatures.map((v) => ({
+        "@context": "https://schema.org",
+        "@type": "JobPosting",
+        title: v.title,
+        description: `${v.intro} ${v.samenvatting}`,
+        datePosted: v.datePosted,
+        validThrough: validThrough(v.datePosted),
+        directApply: true,
+        employmentType: ["FULL_TIME", "PART_TIME"],
+        url: `${SITE_URL}/vacatures/${v.slug}`,
+        industry: "Elektrotechniek en energie-infrastructuur",
+        hiringOrganization: {
+          "@type": "Organization",
+          name: "TerreVolt",
+          url: SITE_URL,
+          sameAs: SITE_URL,
+          logo: `${SITE_URL}/og-image.jpg`,
+        },
+        applicantLocationRequirements: { "@type": "Country", name: "Nederland" },
+        jobLocation: {
+          "@type": "Place",
+          address: { "@type": "PostalAddress", addressRegion: "Noord-Holland", addressCountry: "NL" },
+        },
+        baseSalary: {
+          "@type": "MonetaryAmount",
+          currency: "EUR",
+          value: {
+            "@type": "QuantitativeValue",
+            minValue: v.salaris.min,
+            maxValue: v.salaris.max,
+            unitText: "MONTH",
+          },
+        },
       })),
-    },
+    ],
   });
 
   return (
@@ -80,11 +131,12 @@ const WerkenBij = () => {
           <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
             <p className="text-xs uppercase tracking-[0.2em] text-[#9ed42e]">Werken bij TerreVolt</p>
             <h1 className="mt-4 max-w-3xl font-semibold leading-tight text-white" style={{ fontSize: "clamp(1.85rem, 6vw, 3.25rem)" }}>
-              Werk mee aan het energienet van morgen
+              Vacature elektromonteur laagspanning en middenspanning
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
-              Bij TerreVolt werk je rechtstreeks in loondienst aan veilige en betrouwbare energie-infrastructuur.
-              Je krijgt goed materieel, duidelijke afspraken en de ruimte om je vak verder te ontwikkelen.
+              Elektromonteur gezocht: TerreVolt heeft {vacatures.length} vacatures voor monteurs in laagspanning (LS) en
+              middenspanning (MS). Je werkt rechtstreeks in loondienst aan kabels, stations, schakelwerk, aarding en
+              huisaansluitingen — met goed materieel, duidelijke afspraken en betaalde vakopleidingen.
             </p>
 
             <ul className="mt-7 flex flex-wrap gap-2">
@@ -145,9 +197,12 @@ const WerkenBij = () => {
         {/* 3. VACATURES */}
         <section id="vacatures" className="scroll-mt-28 py-14 sm:py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
-            <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Zeven actuele vacatures</h2>
+            <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">
+              {vacatures.length} actuele vacatures voor elektromonteurs
+            </h2>
             <p className="mt-3 max-w-2xl text-[#0d3b2e]/80">
-              Alle functies zijn rechtstreeks in loondienst bij TerreVolt, met salaris, uren, contract en regio direct zichtbaar.
+              Van laagspanningswerk tot middenspanning en schakelwerk: alle functies zijn rechtstreeks in loondienst bij
+              TerreVolt, met salaris, uren, contract en regio direct zichtbaar.
             </p>
 
             <div className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -244,6 +299,44 @@ const WerkenBij = () => {
                 <ApplicationForm source="werken_bij_form" />
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* 7b. LAAGSPANNING & MIDDENSPANNING */}
+        <section id="ls-ms" className="scroll-mt-28 bg-white py-14 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6">
+            <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">
+              Werken aan laagspanning en middenspanning
+            </h2>
+            <div className="mt-6 grid gap-5 lg:grid-cols-2">
+              <div className="rounded-2xl border border-gray-200 p-6">
+                <h3 className="text-lg font-semibold text-[#0d3b2e]">Laagspanning (LS, tot 1.000 V)</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#0d3b2e]/80">
+                  Aansluitingen, LS-rekken, verdeelinrichtingen, kabelwerk, saneringen en huisaansluitingen. Je werkt
+                  binnen netbeheeromgevingen volgens BEI BLS en daarbuiten met NEN 3140 als basis. Instapniveau voor
+                  monteurs met een elektrotechnische achtergrond; doorgroeien naar MS is goed mogelijk.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-gray-200 p-6">
+                <h3 className="text-lg font-semibold text-[#0d3b2e]">Middenspanning (MS, 1 kV – 50 kV)</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#0d3b2e]/80">
+                  MS-kabels, eindsluitingen, verbindingsmoffen, RMU's, MS-velden en transformatorstations. Werk onder BEI
+                  BHS met goedgekeurde werk- en schakelplannen. Zwaardere procedures, hoger salaris en aanvullende
+                  opleidingen die TerreVolt volledig betaalt.
+                </p>
+              </div>
+            </div>
+            <p className="mt-6 text-sm text-[#0d3b2e]/80">
+              Meer weten over het verschil?{" "}
+              <Link to="/kennis/laagspanning-middenspanning-hoogspanning" className="font-medium text-[#0d3b2e] underline underline-offset-4 hover:text-[#0d3b2e]/70">
+                Laagspanning vs middenspanning vs hoogspanning
+              </Link>{" "}
+              en{" "}
+              <Link to="/kennis/middenspanning" className="font-medium text-[#0d3b2e] underline underline-offset-4 hover:text-[#0d3b2e]/70">
+                Middenspanning: wat is het en wanneer heb je het nodig
+              </Link>
+              .
+            </p>
           </div>
         </section>
 

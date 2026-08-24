@@ -14,11 +14,13 @@
   <url><loc>https://terrevolt.nl/werken-bij</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://terrevolt.nl/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://terrevolt.nl/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://terrevolt.nl/vacatures/laagspanningsmonteur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://terrevolt.nl/vacatures/middenspanningsmonteur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://terrevolt.nl/vacatures/schakelmonteur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/vacatures/elektromonteur-laagspanning</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/vacatures/elektromonteur-middenspanning</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/vacatures/elektromonteur-laagspanning-middenspanning</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   
   <url><loc>https://terrevolt.nl/vacatures/aardingsmonteur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://terrevolt.nl/vacatures/monteur-huisaansluitingen</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://terrevolt.nl/vacatures/werkverantwoordelijke</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/vacatures/werkverantwoordelijke-ls-ms</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/kennis/middenspanning</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://terrevolt.nl/kennis/laagspanning-middenspanning-hoogspanning</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

@@ -40,6 +40,8 @@ export function Footer() {
               <li><Link to="/veiligheid" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Veiligheid</Link></li>
               <li><Link to="/werken-bij" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Werken bij ons</Link></li>
               <li><Link to="/werken-bij#vacatures" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Vacatures</Link></li>
+              <li><Link to="/kennis/middenspanning" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Wat is middenspanning?</Link></li>
+              <li><Link to="/kennis/laagspanning-middenspanning-hoogspanning" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">LS, MS en HS uitgelegd</Link></li>
             </ul>
           </div>
 

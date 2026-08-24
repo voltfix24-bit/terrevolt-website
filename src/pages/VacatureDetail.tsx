@@ -12,14 +12,18 @@ import { usePageMeta } from "../hooks/usePageMeta";
 import { SITE_URL } from "@/config/company";
 import {
   ARBEIDSVOORWAARDEN, CONTRACT_LABEL_LANG, REGIOS, REGIO_LABEL,
-  SALARIS_DISCLAIMER, SOLLICITATIEPROCES, UREN_LABEL, findVacature, formatSalaris,
+  SALARIS_DISCLAIMER, SOLLICITATIEPROCES, UREN_LABEL, findVacature, findVacatureByAlias,
+  formatSalaris, validThrough,
 } from "@/data/vacatures";
 
 const VacatureDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const vacature = findVacature(slug);
+  const alias = vacature ? undefined : findVacatureByAlias(slug);
 
-  const title = vacature ? `${vacature.title} (loondienst) | Vacature TerreVolt` : "Vacature niet gevonden | TerreVolt";
+  const title = vacature
+    ? `Vacature ${vacature.title} | loondienst bij TerreVolt`
+    : "Vacature niet gevonden | TerreVolt";
   const description = vacature
     ? `${vacature.title} bij TerreVolt: ${formatSalaris(vacature.salaris)} bruto per maand, ${UREN_LABEL}, jaarcontract met uitzicht op vast. Werkgebied: ${REGIO_LABEL}.`
     : undefined;
@@ -29,15 +33,34 @@ const VacatureDetail = () => {
         "@context": "https://schema.org",
         "@type": "JobPosting",
         title: vacature.title,
-        description: `${vacature.intro} ${vacature.samenvatting}`,
+        description: `${vacature.intro} ${vacature.samenvatting} Taken: ${vacature.taken.join("; ")}.`,
         datePosted: vacature.datePosted,
+        validThrough: validThrough(vacature.datePosted),
+        industry: "Elektrotechniek en energie-infrastructuur",
+        occupationalCategory: "47-2111.00 Electricians",
+        responsibilities: vacature.taken.join("; "),
+        qualifications: vacature.meebrengen.join("; "),
+        skills: (vacature.keywords ?? []).join(", "),
+        experienceRequirements: vacature.meta.niveau,
+        educationRequirements: vacature.meta.niveau,
+        jobBenefits: ARBEIDSVOORWAARDEN.join("; "),
+        employmentUnit: { "@type": "Organization", name: "TerreVolt" },
+        identifier: {
+          "@type": "PropertyValue",
+          name: "TerreVolt",
+          value: vacature.slug,
+        },
+        url: `${SITE_URL}/vacatures/${vacature.slug}`,
         directApply: true,
         employmentType: ["FULL_TIME", "PART_TIME"],
         hiringOrganization: {
           "@type": "Organization",
           name: "TerreVolt",
           sameAs: SITE_URL,
+          url: SITE_URL,
+          logo: `${SITE_URL}/og-image.jpg`,
         },
+        applicantLocationRequirements: { "@type": "Country", name: "Nederland" },
         jobLocation: REGIOS.map((regio) => ({
           "@type": "Place",
           address: {
@@ -68,7 +91,10 @@ const VacatureDetail = () => {
     jsonLd: jobPosting,
   });
 
-  if (!vacature) return <Navigate to="/werken-bij" replace />;
+  // Oude of zoekwoordvariant van de slug → canonieke URL (301-equivalent).
+  if (!vacature) {
+    return <Navigate to={alias ? `/vacatures/${alias.slug}` : "/werken-bij"} replace />;
+  }
 
   const facts = [
     { icon: BadgeEuro, label: "Salaris", value: `${formatSalaris(vacature.salaris)} bruto p/m` },
@@ -115,7 +141,7 @@ const VacatureDetail = () => {
             </Link>
             <p className="mt-4 text-xs uppercase tracking-[0.2em] text-[#9ed42e]">Rechtstreeks in loondienst bij TerreVolt</p>
             <h1 className="mt-3 font-semibold leading-tight text-white" style={{ fontSize: "clamp(1.75rem, 5.5vw, 3rem)" }}>
-              {vacature.title}
+              {vacature.h1 ?? vacature.title}
             </h1>
             <p className="mt-4 max-w-2xl leading-relaxed text-white/85">{vacature.samenvatting}</p>
 

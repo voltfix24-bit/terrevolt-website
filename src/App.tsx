@@ -25,6 +25,8 @@ const Over = lazy(() => import("./pages/Over.tsx"));
 const WerkenBij = lazy(() => import("./pages/WerkenBij.tsx"));
 const VacatureDetail = lazy(() => import("./pages/VacatureDetail.tsx"));
 const Contact = lazy(() => import("./pages/Contact.tsx"));
+const KennisMiddenspanning = lazy(() => import("./pages/kennis/Middenspanning.tsx"));
+const KennisSpanningsniveaus = lazy(() => import("./pages/kennis/Spanningsniveaus.tsx"));
 const Privacy = lazy(() => import("./pages/Privacy.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 
@@ -59,6 +61,13 @@ const App = () => (
             <Route path="/werken-bij" element={<WerkenBij />} />
             <Route path="/vacatures/:slug" element={<VacatureDetail />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/kennis/middenspanning" element={<KennisMiddenspanning />} />
+            <Route path="/kennis/laagspanning-middenspanning-hoogspanning" element={<KennisSpanningsniveaus />} />
+            <Route path="/middenspanning" element={<Navigate to="/kennis/middenspanning" replace />} />
+            <Route path="/laagspanning-middenspanning-hoogspanning" element={<Navigate to="/kennis/laagspanning-middenspanning-hoogspanning" replace />} />
+            <Route path="/vacature-elektromonteur" element={<Navigate to="/werken-bij" replace />} />
+            <Route path="/elektromonteur-gezocht" element={<Navigate to="/werken-bij" replace />} />
+            <Route path="/vacatures" element={<Navigate to="/werken-bij" replace />} />
             <Route path="/privacy" element={<Privacy />} />
             {/* Aliasroutes — 301-equivalent redirect naar canonieke route */}
             <Route path="/veiligheid-certificeringen" element={<Navigate to="/veiligheid" replace />} />
