@@ -196,16 +196,21 @@ const faq = [
     a: "Ja. Naast bedrijven, installateurs en netbeheerders werken wij ook voor particuliere woningeigenaren: één aardpen bij een woning is net zo goed werk als de aarding van een compleet station.",
   },
   {
+    q: "Werkt TerreVolt in Amsterdam?",
+    a: `Ja. Amsterdam en de directe regio — ${werkgebied.slice(0, 6).join(", ")} — zijn ons primaire werkgebied voor aardpennen en aardingsmetingen. Daarbuiten werken wij door heel Nederland.`,
+  },
+  {
     q: "In welke regio werkt TerreVolt?",
-    a: `TerreVolt werkt vanuit ${company.address.city} in heel Nederland, met nadruk op ${werkgebied.join(", ")} en omliggende regio's.`,
+    a: `Het zwaartepunt ligt in Amsterdam en omgeving (${werkgebied.join(", ")}). Vanuit onze vestiging in ${company.address.city} plannen wij daarnaast werk door heel Nederland in.`,
   },
 ];
 
 const Aardingsoplossingen = () => {
   usePageMeta({
-    title: "Aardpen laten slaan Utrecht | Aarding meten met meetrapport | TerreVolt",
+    title: "Aardpen laten slaan Amsterdam | Aarding meten met meetrapport | TerreVolt",
     description:
-      "Aardpen laten slaan of aarding laten meten? TerreVolt plaatst en controleert aarding voor woningen, laadpalen, zonnepanelen en bedrijven. Vanuit Utrecht in heel Nederland.",
+      "Aardpen laten slaan of aarding laten meten in Amsterdam en omgeving? TerreVolt plaatst en meet aarding voor woningen, meterkasten, laadpalen, zonnepanelen en bedrijven — met meetrapport. Ook in heel Nederland.",
+
     canonical: "/aarding-aanleggen",
     jsonLd: [
       {
