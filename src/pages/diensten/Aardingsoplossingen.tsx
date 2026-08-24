@@ -497,7 +497,7 @@ const Aardingsoplossingen = () => {
               <div className="order-1 lg:order-2">
                 <img
                   src={aardpenFoto}
-                  alt="Aardpen laten slaan bij een woning in Utrecht door een monteur van TerreVolt"
+                  alt="Aardpen laten slaan bij een woning in Amsterdam door een monteur van TerreVolt"
                   width={1280}
                   height={960}
                   loading="lazy"
