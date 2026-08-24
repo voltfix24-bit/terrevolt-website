@@ -176,6 +176,22 @@ const Contact = () => {
     setSubmitError(null);
 
     const fd = new FormData(e.currentTarget);
+
+    // Stille spambeveiliging (honeypot) — bots vullen dit verborgen veld in.
+    if (String(fd.get("company_website") || "").trim() !== "") {
+      setSubmitSuccess(true);
+      return;
+    }
+
+    // Throttle: voorkomt dubbele of geautomatiseerde inzendingen.
+    const last = Number(window.localStorage.getItem(THROTTLE_KEY) || 0);
+    if (last && Date.now() - last < THROTTLE_MS) {
+      const msg = `U hebt zojuist al een aanvraag verstuurd. Wacht even of bel ons direct op ${company.phone.display}.`;
+      setSubmitError(msg);
+      toast.error(msg);
+      return;
+    }
+
     const raw = {
       name: String(fd.get("name") || ""),
       company: String(fd.get("company") || ""),
@@ -185,7 +201,9 @@ const Contact = () => {
       location: String(fd.get("location") || ""),
       start_date: String(fd.get("start_date") || ""),
       description: String(fd.get("description") || ""),
+      privacy: fd.get("privacy") ? "on" : "",
     };
+
 
     if (isAarding) {
       raw.request_type = "Aardingsoplossingen";
