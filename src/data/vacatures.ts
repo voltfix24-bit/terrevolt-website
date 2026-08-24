@@ -51,7 +51,13 @@ export type Salaris = { min: number; max: number };
 
 export type Vacature = {
   slug: string;
+  /** Oude of zoekwoordvarianten van de slug; 301 naar de canonieke slug. */
+  aliases?: string[];
   title: string;
+  /** H1 op de detailpagina — zoekwoordgericht. */
+  h1?: string;
+  /** Zoekwoorden voor metadata en JobPosting-schema. */
+  keywords?: string[];
   shortLabel: string;
   iconKey:
     | "ls"
@@ -82,6 +88,14 @@ export type Vacature = {
 
 export const formatSalaris = (s: Salaris) =>
   `€${s.min.toLocaleString("nl-NL")} – €${s.max.toLocaleString("nl-NL")}`;
+
+/** Vacatures blijven een jaar geldig na plaatsing (JobPosting validThrough). */
+export const validThrough = (datePosted: string) => {
+  const d = new Date(datePosted);
+  d.setFullYear(d.getFullYear() + 1);
+  return d.toISOString().slice(0, 10);
+};
+
 
 const standaardMeta = {
   regio: REGIO_LABEL,
