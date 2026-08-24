@@ -67,13 +67,18 @@ const App = () => (
             <Route path="/vacatures/zzp-ploegen" element={<Navigate to="/werken-bij" replace />} />
             <Route path="/vacatures/kabelmonteur" element={<Navigate to="/werken-bij" replace />} />
             <Route path="/diensten/meten-beproeven-rapportage" element={<Navigate to="/diensten/meten-en-beproeven" replace />} />
+            <Route path="/diensten/aardingsoplossingen" element={<Navigate to="/aarding-aanleggen" replace />} />
+            <Route path="/aarding" element={<Navigate to="/aarding-aanleggen" replace />} />
+            <Route path="/aardingsoplossingen" element={<Navigate to="/aarding-aanleggen" replace />} />
+            <Route path="/aarding-slaan" element={<Navigate to="/aarding-aanleggen" replace />} />
+            <Route path="/aardingsmeting" element={<Navigate to="/aarding-aanleggen" replace />} />
 
             <Route path="/diensten/ls-ms-netmontage" element={<LSMSNetmontage />} />
             <Route path="/diensten/stationsrenovatie" element={<Stationsrenovatie />} />
             <Route path="/diensten/schakelwerk" element={<Schakelwerk />} />
-            <Route path="/diensten/aardingsoplossingen" element={<Aardingsoplossingen />} />
             <Route path="/diensten/meten-en-beproeven" element={<MetenEnBeproeven />} />
             <Route path="/diensten/huisaansluitingen" element={<Huisaansluitingen />} />
+            <Route path="/aarding-aanleggen" element={<Aardingsoplossingen />} />
 
             {/* Admin */}
             <Route path="/admin/login" element={<AdminLogin />} />

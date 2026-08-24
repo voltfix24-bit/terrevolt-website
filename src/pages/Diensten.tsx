@@ -1,3 +1,4 @@
+import * as React from "react";
 import { ArrowRight, CheckCircle2, ClipboardList, FileSearch, ShieldCheck, PackageCheck, Cable, Building2, Power, Gauge, PlugZap, Users, Briefcase, Zap as ZapIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/terrevolt/Header";
@@ -5,7 +6,16 @@ import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
 
-const services = [
+type ServiceCard = {
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  slug: string;
+  href?: string;
+  title: string;
+  description: string;
+  bullets: string[];
+};
+
+const services: ServiceCard[] = [
   {
     icon: Cable,
     slug: "ls-ms-netmontage",
@@ -30,6 +40,7 @@ const services = [
   {
     icon: EarthSymbol,
     slug: "aardingsoplossingen",
+    href: "/aarding-aanleggen",
     title: "Aardingsoplossingen",
     description: "Aanleg, verbetering, meting en rapportage van aardingssystemen.",
     bullets: ["Aardelektroden", "Stationsaarding", "Meetrapportage"],
@@ -144,7 +155,7 @@ const Diensten = () => {
                 return (
                   <Link
                     key={service.slug}
-                    to={`/diensten/${service.slug}`}
+                    to={service.href ?? `/diensten/${service.slug}`}
                     aria-label={`Bekijk dienst: ${service.title}`}
                     className="group flex flex-col bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 active:scale-[0.99]"
                   >

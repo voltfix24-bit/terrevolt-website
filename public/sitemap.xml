@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://terrevolt.lovable.app/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://terrevolt.lovable.app/diensten</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://terrevolt.lovable.app/diensten/ls-ms-netmontage</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://terrevolt.lovable.app/diensten/stationsrenovatie</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://terrevolt.lovable.app/diensten/schakelwerk</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://terrevolt.lovable.app/diensten/aardingsoplossingen</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://terrevolt.lovable.app/diensten/meten-en-beproeven</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://terrevolt.lovable.app/diensten/huisaansluitingen</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://terrevolt.lovable.app/projecten</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://terrevolt.lovable.app/veiligheid</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://terrevolt.lovable.app/over</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://terrevolt.lovable.app/werken-bij</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://terrevolt.lovable.app/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://terrevolt.lovable.app/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://terrevolt.lovable.app/vacatures/laagspanningsmonteur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://terrevolt.lovable.app/vacatures/middenspanningsmonteur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://terrevolt.lovable.app/vacatures/schakelmonteur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://terrevolt.nl/diensten</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://terrevolt.nl/diensten/ls-ms-netmontage</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/diensten/stationsrenovatie</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/diensten/schakelwerk</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/aarding-aanleggen</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/diensten/meten-en-beproeven</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/diensten/huisaansluitingen</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/projecten</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://terrevolt.nl/veiligheid</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://terrevolt.nl/over</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://terrevolt.nl/werken-bij</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://terrevolt.nl/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://terrevolt.nl/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+  <url><loc>https://terrevolt.nl/vacatures/laagspanningsmonteur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/vacatures/middenspanningsmonteur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/vacatures/schakelmonteur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   
-  <url><loc>https://terrevolt.lovable.app/vacatures/aardingsmonteur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://terrevolt.lovable.app/vacatures/monteur-huisaansluitingen</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://terrevolt.lovable.app/vacatures/werkverantwoordelijke</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/vacatures/aardingsmonteur</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/vacatures/monteur-huisaansluitingen</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://terrevolt.nl/vacatures/werkverantwoordelijke</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>

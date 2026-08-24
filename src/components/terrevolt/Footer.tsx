@@ -26,7 +26,7 @@ export function Footer() {
               <li><Link to="/diensten/ls-ms-netmontage" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">LS/MS Netmontage</Link></li>
               <li><Link to="/diensten/stationsrenovatie" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Stationsrenovatie</Link></li>
               <li><Link to="/diensten/schakelwerk" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Schakelwerk</Link></li>
-              <li><Link to="/diensten/aardingsoplossingen" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Aardingsoplossingen</Link></li>
+              <li><Link to="/aarding-aanleggen" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Aardingsoplossingen</Link></li>
               <li><Link to="/diensten/meten-en-beproeven" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Meten &amp; beproeven</Link></li>
               <li><Link to="/diensten/huisaansluitingen" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Huisaansluitingen</Link></li>
             </ul>
