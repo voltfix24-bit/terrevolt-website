@@ -1,4 +1,4 @@
-import { Award, BadgeCheck, CheckCircle2, FileCheck, GraduationCap, ShieldCheck } from "lucide-react";
+import { Award, BadgeCheck, CheckCircle2, Download, FileCheck, GraduationCap, ShieldCheck, type LucideIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import isoLogo from "@/assets/iso-9001-cetradex.png.asset.json";
 import vcaLogo from "@/assets/vca-cetradex.png.asset.json";
@@ -6,7 +6,21 @@ import sbbLogo from "@/assets/sbb-erkend-leerbedrijf.png.asset.json";
 import isoPdf from "@/assets/terrevolt-iso-9001.pdf.asset.json";
 import vcaPdf from "@/assets/terrevolt-vca.pdf.asset.json";
 
-const certifications = [
+type Certification = {
+  icon: LucideIcon;
+  logo: string;
+  logoAlt: string;
+  title: string;
+  subtitle: string;
+  body: string;
+  facts: string[];
+  pdf?: {
+    href: string;
+    label: string;
+  };
+};
+
+const certifications: Certification[] = [
   {
     icon: Award,
     logo: isoLogo.url,
@@ -15,8 +29,10 @@ const certifications = [
     subtitle: "Kwaliteitsmanagement",
     body: "Kwaliteitsmanagementsysteem gecertificeerd door Cetradex Certificatie B.V.",
     facts: ["NEN-EN-ISO 9001:2015", "Certificaat 26062502", "Geldig t/m 24 juni 2029"],
-    pdf: isoPdf.url,
-    pdfLabel: "Bekijk ISO 9001-certificaat (pdf)",
+    pdf: {
+      href: isoPdf.url,
+      label: "Bekijk ISO 9001-certificaat",
+    },
   },
   {
     icon: ShieldCheck,
@@ -26,8 +42,10 @@ const certifications = [
     subtitle: "Veilig, gezond en milieubewust werken",
     body: "VGM-beheerssysteem gecertificeerd door Cetradex Certificatie B.V.",
     facts: ["Certificaat 26062501", "Geldig t/m 24 juni 2029", "NACE-code F4222"],
-    pdf: vcaPdf.url,
-    pdfLabel: "Bekijk VCA**-certificaat (pdf)",
+    pdf: {
+      href: vcaPdf.url,
+      label: "Bekijk VCA**-certificaat",
+    },
   },
   {
     icon: GraduationCap,
@@ -37,11 +55,8 @@ const certifications = [
     subtitle: "Wij leiden vakmensen op",
     body: "TerreVolt investeert in praktijkontwikkeling en het opleiden van nieuwe vakmensen.",
     facts: ["Erkend leerbedrijf", "Praktijkgericht opleiden", "Instroom in techniek"],
-    pdf: null,
-    pdfLabel: null,
   },
 ];
-
 
 const proofPoints = [
   "Aantoonbare kwaliteitsborging voor projecten en oplevering",
@@ -51,14 +66,14 @@ const proofPoints = [
 
 export function Certifications() {
   return (
-    <section id="certificeringen" className="py-14 md:py-20 bg-white">
+    <section id="certificeringen" aria-labelledby="certificeringen-title" className="py-14 md:py-20 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
       <div className="container mx-auto px-5 sm:px-6 lg:px-12">
         <div className="max-w-4xl mx-auto text-center mb-10">
           <div className="inline-flex items-center gap-2 bg-[#f0f7e6] text-[#0d3b2e] px-4 py-2 rounded-full text-sm mb-5 tracking-wider uppercase border border-[#9ed42e]/30">
             <BadgeCheck className="w-4 h-4" aria-hidden="true" />
             Gecertificeerd en erkend
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl" lang="nl">
+          <h2 id="certificeringen-title" className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl" lang="nl">
             Bewijs dat kwaliteit en veiligheid geborgd zijn
           </h2>
           <p className="text-lg text-[#6c757d] leading-relaxed">
@@ -83,7 +98,7 @@ export function Certifications() {
                     height={96}
                     loading="lazy"
                     decoding="async"
-                    className="h-16 w-auto object-contain"
+                    className="h-16 w-auto max-w-[9rem] object-contain"
                   />
                 </div>
                 <p className="text-xs uppercase tracking-wider text-[#6c757d] mb-2">{item.subtitle}</p>
@@ -97,19 +112,23 @@ export function Certifications() {
                     </li>
                   ))}
                 </ul>
-                {item.pdf && (
+                {item.pdf ? (
                   <a
-                    href={item.pdf}
+                    href={item.pdf.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-5 inline-flex items-center gap-2 text-sm text-[#0d3b2e] underline underline-offset-4 hover:text-[#1a4a36] min-h-[44px]"
+                    className="mt-5 inline-flex items-center justify-center gap-2 rounded-lg border border-[#0d3b2e]/20 bg-white px-4 py-3 text-sm text-[#0d3b2e] hover:border-[#9ed42e] hover:bg-[#f0f7e6] transition-colors min-h-[44px]"
                   >
-                    <FileCheck className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
-                    {item.pdfLabel}
+                    <Download className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+                    <span>{item.pdf.label} PDF</span>
                   </a>
+                ) : (
+                  <div className="mt-5 inline-flex items-center gap-2 text-sm text-[#0d3b2e] bg-white border border-gray-200 rounded-lg px-4 py-3 min-h-[44px]">
+                    <BadgeCheck className="w-4 h-4 flex-shrink-0 text-[#9ed42e]" aria-hidden="true" />
+                    Vermeld als erkend leerbedrijf
+                  </div>
                 )}
               </article>
-
             );
           })}
         </div>
