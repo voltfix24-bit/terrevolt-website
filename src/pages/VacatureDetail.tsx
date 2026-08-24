@@ -12,14 +12,17 @@ import { usePageMeta } from "../hooks/usePageMeta";
 import { SITE_URL } from "@/config/company";
 import {
   ARBEIDSVOORWAARDEN, CONTRACT_LABEL_LANG, REGIOS, REGIO_LABEL,
-  SALARIS_DISCLAIMER, SOLLICITATIEPROCES, UREN_LABEL, findVacature, findVacatureByAlias,
+  SALARIS_DISCLAIMER, SOLLICITATIEPROCES, UREN_LABEL,
   formatSalaris, validThrough,
 } from "@/data/vacatures";
+import { findVacatureByAliasIn, findVacatureIn, useVacatures } from "@/hooks/useVacatures";
 
 const VacatureDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const vacature = findVacature(slug);
-  const alias = vacature ? undefined : findVacatureByAlias(slug);
+  const { vacatures, isLoading } = useVacatures();
+  const vacature = findVacatureIn(vacatures, slug);
+  const alias = vacature ? undefined : findVacatureByAliasIn(vacatures, slug);
+
 
   const title = vacature
     ? `Vacature ${vacature.title} | loondienst bij TerreVolt`
@@ -93,8 +96,21 @@ const VacatureDetail = () => {
 
   // Oude of zoekwoordvariant van de slug → canonieke URL (301-equivalent).
   if (!vacature) {
+    if (isLoading) {
+      return (
+        <div className="min-h-screen bg-[#f8f9fa]">
+          <Header />
+          <main id="main-content" className="pt-16 sm:pt-20">
+            <div className="mx-auto max-w-3xl px-4 py-24 text-center text-[#0d3b2e]/70">
+              Vacature laden…
+            </div>
+          </main>
+        </div>
+      );
+    }
     return <Navigate to={alias ? `/vacatures/${alias.slug}` : "/werken-bij"} replace />;
   }
+
 
   const facts = [
     { icon: BadgeEuro, label: "Salaris", value: `${formatSalaris(vacature.salaris)} bruto p/m` },

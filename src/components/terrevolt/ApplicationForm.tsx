@@ -6,7 +6,9 @@ import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { CvUploadField, validateCvFile } from "@/components/CvUploadField";
 import { scrollToElement } from "@/lib/scrollToAnchor";
-import { REGIOS, vacatures } from "@/data/vacatures";
+import { REGIOS } from "@/data/vacatures";
+import { useVacatures } from "@/hooks/useVacatures";
+
 import { notifyAndConfirm } from "@/lib/notify";
 
 
@@ -46,7 +48,9 @@ interface Props {
 }
 
 export const ApplicationForm = ({ defaultProfile, source = "werken_bij_form", id = "sollicitatieformulier" }: Props) => {
+  const { vacatures } = useVacatures();
   const formRef = useRef<HTMLFormElement>(null);
+
   const errorRef = useRef<HTMLDivElement>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [file, setFile] = useState<File | null>(null);
