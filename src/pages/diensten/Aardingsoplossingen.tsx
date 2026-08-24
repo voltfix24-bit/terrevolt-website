@@ -592,9 +592,21 @@ const Aardingsoplossingen = () => {
                     className="border-2 border-white/40 text-white px-7 py-4 min-h-[56px] rounded-lg hover:border-white transition-colors flex items-center justify-center gap-2"
                   >
                     <Phone className="w-5 h-5" aria-hidden="true" />
-                    {company.phone.display}
+                    Bel direct
                   </a>
+                  {waLink && (
+                    <a
+                      href={waLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="border-2 border-white/40 text-white px-7 py-4 min-h-[56px] rounded-lg hover:border-white transition-colors flex items-center justify-center gap-2"
+                    >
+                      <MessageCircle className="w-5 h-5" aria-hidden="true" />
+                      WhatsApp foto sturen
+                    </a>
+                  )}
                 </div>
+
               </div>
             </div>
           </div>
