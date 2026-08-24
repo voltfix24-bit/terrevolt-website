@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowRight, Phone, Mail, MapPin, Upload, Loader2, Network, HardHat, Factory, Briefcase, Users, ShieldCheck, ClipboardCheck, MessageSquare, Cable, BadgeCheck, CheckCircle2, AlertCircle, X } from "lucide-react";
+import { ArrowRight, Phone, Mail, MapPin, Upload, Loader2, Network, HardHat, Factory, Briefcase, Users, ShieldCheck, ClipboardCheck, MessageSquare, Cable, BadgeCheck, CheckCircle2, AlertCircle, X, Zap } from "lucide-react";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
@@ -28,6 +28,14 @@ const requestTypes = [
   "Anders",
 ];
 
+const AARDING_WERKZAAMHEDEN = [
+  "Aardpen slaan",
+  "Aarding meten",
+  "Meetrapport nodig",
+  "Laadpaal / zonnepanelen",
+  "Meterkast / oude woning",
+] as const;
+
 const ALLOWED_EXT = ["pdf", "jpg", "jpeg", "png", "dwg"] as const;
 const MAX_UPLOAD_BYTES = 25 * 1024 * 1024;
 
@@ -46,6 +54,11 @@ const schema = z.object({
   location: z.string().trim().max(150).optional(),
   start_date: z.string().trim().max(50).optional(),
   description: z.string().trim().min(5, "Geef een korte omschrijving").max(3000),
+});
+
+const aardingSchema = schema.extend({
+  location: z.string().trim().min(2, "Vul uw postcode of plaats in").max(150),
+  description: z.string().trim().max(3000).optional(),
 });
 
 const intentToRequestType: Record<"project" | "monteur" | "sollicitatie", string> = {
@@ -71,8 +84,14 @@ const Contact = () => {
     const v = searchParams.get("intent");
     return v === "monteur" || v === "sollicitatie" || v === "project" ? v : "project";
   })();
-  const initialType = searchParams.get("type") || "";
+  const typeParam = searchParams.get("type") || "";
+  const isAarding = typeParam.toLowerCase() === "aarding" || typeParam === "Aardingsoplossingen";
+  const initialType = isAarding ? "Aardingsoplossingen" : typeParam;
   const [intent, setIntent] = useState<"project" | "monteur" | "sollicitatie">(initialIntent);
+  const [werkzaamheden, setWerkzaamheden] = useState<string[]>([]);
+
+  const toggleWerkzaamheid = (label: string) =>
+    setWerkzaamheden((curr) => (curr.includes(label) ? curr.filter((w) => w !== label) : [...curr, label]));
 
   // Sync request_type met de gekozen intent (alleen als gebruiker nog niets handmatig koos).
   useEffect(() => {
@@ -160,7 +179,17 @@ const Contact = () => {
       description: String(fd.get("description") || ""),
     };
 
-    const parsed = schema.safeParse(raw);
+    if (isAarding) {
+      raw.request_type = "Aardingsoplossingen";
+      const gekozen = werkzaamheden.length ? `Gewenste werkzaamheden: ${werkzaamheden.join(", ")}.` : "";
+      const termijn = String(fd.get("start_date") || "");
+      raw.description = [gekozen, raw.description, termijn ? `Gewenste termijn: ${termijn}.` : ""]
+        .filter(Boolean)
+        .join("\n")
+        .trim() || "Aanvraag prijsindicatie aarding.";
+    }
+
+    const parsed = (isAarding ? aardingSchema : schema).safeParse(raw);
     if (!parsed.success) {
       toast.error(parsed.error.errors[0]?.message || "Controleer het formulier");
       return;
@@ -200,7 +229,7 @@ const Contact = () => {
         request_type: parsed.data.request_type || null,
         location: parsed.data.location || null,
         start_date: parsed.data.start_date || null,
-        description: parsed.data.description,
+        description: parsed.data.description || "Aanvraag prijsindicatie aarding.",
         attachment_url,
         intent,
         intent_label: intentLabel,
@@ -243,14 +272,28 @@ const Contact = () => {
           <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-3xl">
               <div className="inline-block bg-[#9ed42e] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-5 tracking-wider uppercase">
-                Aanvraag
+                {isAarding ? "Aarding aanvragen" : "Aanvraag"}
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 leading-tight hyphens-nl">
-                Stuur een <span className="text-[#9ed42e]">aanvraag</span>
-              </h1>
-              <p className="text-base sm:text-lg lg:text-xl text-white/85 max-w-2xl leading-relaxed">
-                Vul het formulier in voor een projectaanvraag, technische vraag of capaciteitsaanvraag binnen LS/MS, stationswerk, schakelwerk, aarding of metingen. We nemen zo snel mogelijk contact op.
-              </p>
+              {isAarding ? (
+                <>
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 leading-tight hyphens-nl">
+                    Vraag een <span className="text-[#9ed42e]">prijsindicatie</span> aan voor uw aarding
+                  </h1>
+                  <p className="text-base sm:text-lg lg:text-xl text-white/85 max-w-2xl leading-relaxed">
+                    Stuur uw postcode en eventueel een foto van de meterkast. Wij reageren zo snel mogelijk met
+                    een duidelijke prijsindicatie voor het slaan van een aardpen, een aardingsmeting of een meetrapport.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-4 leading-tight hyphens-nl">
+                    Stuur een <span className="text-[#9ed42e]">aanvraag</span>
+                  </h1>
+                  <p className="text-base sm:text-lg lg:text-xl text-white/85 max-w-2xl leading-relaxed">
+                    Vul het formulier in voor een projectaanvraag, technische vraag of capaciteitsaanvraag binnen LS/MS, stationswerk, schakelwerk, aarding of metingen. We nemen zo snel mogelijk contact op.
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </section>
@@ -262,6 +305,25 @@ const Contact = () => {
               <div id="keuzehulp-heading" className="sr-only">
                 Waar wilt u het over hebben?
               </div>
+              {isAarding ? (
+                <div className="bg-white border border-gray-200 border-b-4 border-b-[#9ed42e] rounded-xl p-6 sm:p-8 shadow-xl">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-[#9ed42e] flex items-center justify-center flex-shrink-0">
+                      <Zap className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2} />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-base sm:text-lg text-[#0d3b2e] mb-1">Aanvraag: aardingsoplossingen</div>
+                      <p className="text-sm text-[#6c757d] leading-relaxed">
+                        Aardpen slaan, aarding meten of een meetrapport — voor woning, meterkast, laadpaal,
+                        zonnepanelen of bedrijfspand. Vul hieronder uw gegevens in; het duurt ongeveer 1 minuut.
+                      </p>
+                      <Link to="/aarding-aanleggen" className="inline-flex items-center gap-1.5 mt-3 text-sm text-[#0d3b2e] underline underline-offset-4 decoration-[#9ed42e] min-h-[44px]">
+                        Terug naar informatie over aarding <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ) : (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
                 {intents.map((it) => {
                   const Icon = it.icon;
@@ -293,8 +355,9 @@ const Contact = () => {
                   );
                 })}
               </div>
+              )}
 
-              {intent === "sollicitatie" && (
+              {!isAarding && intent === "sollicitatie" && (
                 <div className="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-[#f0f7e6] border border-[#9ed42e] rounded-xl p-4 sm:p-5">
                   <div className="flex items-start gap-3 min-w-0">
                     <BadgeCheck className="w-5 h-5 text-[#0d3b2e] flex-shrink-0 mt-0.5" strokeWidth={2.2} />
@@ -481,6 +544,15 @@ const Contact = () => {
                     <fieldset className="space-y-5 pt-2 border-t border-gray-100">
                       <legend className="text-base sm:text-lg text-[#0d3b2e] mb-1 pt-4">Projectdetails</legend>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        {isAarding ? (
+                          <div>
+                            <span className="block text-sm text-[#0d3b2e] mb-2">Type aanvraag</span>
+                            <div className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-[#9ed42e] bg-[#f0f7e6] text-[#0d3b2e] flex items-center">
+                              Aardingsoplossingen
+                            </div>
+                            <input type="hidden" name="request_type" value="Aardingsoplossingen" readOnly />
+                          </div>
+                        ) : (
                         <div>
                           <label htmlFor="request_type" className="block text-sm text-[#0d3b2e] mb-2">Type aanvraag *</label>
                           <select
@@ -497,22 +569,58 @@ const Contact = () => {
                             ))}
                           </select>
                         </div>
+                        )}
                         <div>
-                          <label htmlFor="location" className="block text-sm text-[#0d3b2e] mb-2">Locatie / regio</label>
-                          <input id="location" name="location" maxLength={150}
-                            placeholder="Bijv. Utrecht, regio Midden-Nederland"
+                          <label htmlFor="location" className="block text-sm text-[#0d3b2e] mb-2">
+                            {isAarding ? "Postcode / plaats *" : "Locatie / regio"}
+                          </label>
+                          <input id="location" name="location" maxLength={150} required={isAarding}
+                            autoComplete={isAarding ? "postal-code" : undefined}
+                            placeholder={isAarding ? "Bijv. 3545 NH Utrecht" : "Bijv. Utrecht, regio Midden-Nederland"}
                             className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
                         </div>
+                        {isAarding && (
+                          <fieldset className="sm:col-span-2">
+                            <legend className="block text-sm text-[#0d3b2e] mb-2">Wat wilt u laten doen?</legend>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                              {AARDING_WERKZAAMHEDEN.map((w) => {
+                                const checked = werkzaamheden.includes(w);
+                                return (
+                                  <label
+                                    key={w}
+                                    className={`flex items-center gap-3 px-4 py-3 min-h-[48px] rounded-lg border cursor-pointer transition ${
+                                      checked ? "border-[#9ed42e] bg-[#f0f7e6]" : "border-gray-200 hover:border-[#9ed42e]"
+                                    }`}
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      checked={checked}
+                                      onChange={() => toggleWerkzaamheid(w)}
+                                      className="w-4 h-4 accent-[#9ed42e]"
+                                    />
+                                    <span className="text-sm text-[#0d3b2e]">{w}</span>
+                                  </label>
+                                );
+                              })}
+                            </div>
+                          </fieldset>
+                        )}
                         <div className="sm:col-span-2">
-                          <label htmlFor="start_date" className="block text-sm text-[#0d3b2e] mb-2">Gewenste startdatum</label>
+                          <label htmlFor="start_date" className="block text-sm text-[#0d3b2e] mb-2">
+                            {isAarding ? "Gewenste termijn" : "Gewenste startdatum"}
+                          </label>
                           <input id="start_date" name="start_date" maxLength={50}
-                            placeholder="Bijv. zo snel mogelijk, of week 12"
+                            placeholder={isAarding ? "Bijv. deze week, binnen 2 weken, in overleg" : "Bijv. zo snel mogelijk, of week 12"}
                             className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
                         </div>
                         <div className="sm:col-span-2">
-                          <label htmlFor="description" className="block text-sm text-[#0d3b2e] mb-2">Korte omschrijving *</label>
-                          <textarea id="description" name="description" rows={5} required maxLength={3000}
-                            placeholder="Vertel kort over het project, scope en eventuele randvoorwaarden."
+                          <label htmlFor="description" className="block text-sm text-[#0d3b2e] mb-2">
+                            {isAarding ? "Toelichting" : "Korte omschrijving *"}
+                          </label>
+                          <textarea id="description" name="description" rows={5} required={!isAarding} maxLength={3000}
+                            placeholder={isAarding
+                              ? "Bijv. woning uit 1960, aarding nu via waterleiding, laadpaal gepland."
+                              : "Vertel kort over het project, scope en eventuele randvoorwaarden."}
                             className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition resize-y" />
                         </div>
                       </div>
@@ -520,7 +628,9 @@ const Contact = () => {
 
                     {/* Groep 3 — Bijlage */}
                     <fieldset className="space-y-3 pt-2 border-t border-gray-100">
-                      <legend className="text-base sm:text-lg text-[#0d3b2e] mb-1 pt-4">Bijlage</legend>
+                      <legend className="text-base sm:text-lg text-[#0d3b2e] mb-1 pt-4">
+                        {isAarding ? "Foto meterkast (aanbevolen)" : "Bijlage"}
+                      </legend>
                       <label
                         htmlFor="attachment"
                         onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
@@ -576,7 +686,7 @@ const Contact = () => {
                         </>
                       ) : (
                         <>
-                          <span>Verstuur aanvraag</span>
+                          <span>{isAarding ? "Prijsindicatie aanvragen" : "Verstuur aanvraag"}</span>
                           <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </>
                       )}
