@@ -24,16 +24,17 @@ const proofPoints = [
   { icon: Clock, text: "Reactie meestal binnen 1 werkdag" },
   { icon: Camera, text: "Foto meterkast meesturen voor snellere prijsindicatie" },
   { icon: FileCheck, text: "Meetrapport mogelijk voor installateur, keuring of opleverdossier" },
-  { icon: MapPin, text: `Vanuit ${company.address.city} actief in heel Nederland` },
+  { icon: MapPin, text: "Actief in Amsterdam en omgeving — en in heel Nederland" },
 ];
 
 const heroBullets = [
   "Aardpen slaan voor woning, meterkast, laadpaal of zonnepanelen",
   "Aardingsmeting en meetrapport mogelijk",
-  `Vanuit ${company.address.city} actief in heel Nederland`,
+  "Werkzaam in Amsterdam en omstreken, en in heel Nederland",
   "Voor particulieren, installateurs en zakelijke opdrachtgevers",
   "Veilig gewerkt volgens relevante normen en projectinstructies",
 ];
+
 
 /** Trust-/proofblok direct na "Wanneer heeft u een aardpen nodig?". */
 const waarom = [
