@@ -23,7 +23,7 @@ export const company = {
 
   address: {
     street: "Overvliet 97",
-    postalCode: "3545 NH",
+    postalCode: "3545 NG",
     city: "Utrecht",
     country: "Nederland",
     countryCode: "NL",
@@ -31,7 +31,7 @@ export const company = {
   },
 } as const;
 
-/** Volledige adresregel op één regel — bv. "Overvliet 97, 3545 NH Utrecht". */
+/** Volledige adresregel op één regel — bv. "Overvliet 97, 3545 NG Utrecht". */
 export const addressOneLine = `${company.address.street}, ${company.address.postalCode} ${company.address.city}`;
 
 /** Adres met expliciet land. */
