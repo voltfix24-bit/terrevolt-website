@@ -21,6 +21,14 @@ const schema = z.object({
   hours: z.string().trim().max(80).optional().or(z.literal("")),
   level: z.string().trim().max(150).optional().or(z.literal("")),
   work_area: z.string().trim().max(150).optional().or(z.literal("")),
+  short_label: z.string().trim().max(80).optional().or(z.literal("")),
+  h1: z.string().trim().max(200).optional().or(z.literal("")),
+  summary: z.string().trim().max(400).optional().or(z.literal("")),
+  icon_key: z.string().trim().max(30).optional().or(z.literal("")),
+  authorizations: z.string().trim().max(200).optional().or(z.literal("")),
+  salary_min: z.number().int().min(0).max(20000),
+  salary_max: z.number().int().min(0).max(20000),
+  date_posted: z.string().trim().max(20).optional().or(z.literal("")),
   intro: z.string().trim().max(2000).optional().or(z.literal("")),
   safety_text: z.string().trim().max(2000).optional().or(z.literal("")),
   status: z.enum(["draft", "published"]),
@@ -37,7 +45,13 @@ const slugify = (s: string) =>
   s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
-const defaultProcess = ["Aanmelden", "Kennismaken", "Documenten/check", "Projectmatch", "Start"];
+const defaultProcess = [
+  "Reageer online, bel of stuur een WhatsApp.",
+  "Tobesh neemt binnen twee werkdagen contact met je op.",
+  "We bespreken je ervaring, wensen en de werkzaamheden.",
+  "Je ontvangt een duidelijk aanbod met salaris en arbeidsvoorwaarden.",
+  "Na je onboarding en veiligheidsinstructies ga je goed voorbereid aan de slag.",
+];
 
 export default function AdminVacancyForm() {
   const { id } = useParams<{ id: string }>();
@@ -51,12 +65,20 @@ export default function AdminVacancyForm() {
     slug: "",
     category: "",
     employment_type: "Rechtstreeks in loondienst bij TerreVolt",
-    region: "Nederland / projectlocaties",
+    region: "Noord-Holland, Zuid-Holland, Gelderland en Flevoland",
     hours: "32–40 uur",
     level: "MBO / praktijkervaring",
     work_area: "",
+    short_label: "",
+    h1: "",
+    summary: "",
+    icon_key: "ls",
+    authorizations: "",
+    salary_min: 3000,
+    salary_max: 4000,
+    date_posted: new Date().toISOString().slice(0, 10),
     intro: "",
-    safety_text: "Bij TerreVolt staat veilig werken voorop. We doen het veilig, of we doen het niet. Afhankelijk van project, opdrachtgever en werkgebied werken we met passende aanwijzingen, LMRA, VCA, BEI/VWI en projectafspraken.",
+    safety_text: "Bij TerreVolt staat veilig werken voorop. Per project stellen we vast welke veiligheidsregelgeving van toepassing is. Binnen netbeheeromgevingen werken we volgens de toepasselijke BEI BLS/BHS, VWI's, opdrachten en persoonsgebonden aanwijzingen; daarbuiten volgens de regels van opdrachtgever of beheerder, met NEN 3140 / NEN 3840 als basis.",
     status: "draft" as "draft" | "published",
     sort_order: 100,
     is_featured: false,
@@ -65,6 +87,8 @@ export default function AdminVacancyForm() {
   const [requirements, setRequirements] = useState("");
   const [offer, setOffer] = useState("");
   const [processSteps, setProcessSteps] = useState(defaultProcess.join("\n"));
+  const [keywords, setKeywords] = useState("");
+  const [aliases, setAliases] = useState("");
   const [originalSlug, setOriginalSlug] = useState<string>("");
 
   useEffect(() => {
@@ -85,6 +109,14 @@ export default function AdminVacancyForm() {
         hours: data.hours || "",
         level: data.level || "",
         work_area: data.work_area || "",
+        short_label: data.short_label || "",
+        h1: data.h1 || "",
+        summary: data.summary || "",
+        icon_key: data.icon_key || "ls",
+        authorizations: data.authorizations || "",
+        salary_min: data.salary_min ?? 0,
+        salary_max: data.salary_max ?? 0,
+        date_posted: data.date_posted || "",
         intro: data.intro || "",
         safety_text: data.safety_text || "",
         status: ((data.status as VacancyStatus) || "draft"),
@@ -95,10 +127,13 @@ export default function AdminVacancyForm() {
       setRequirements(arrayToLines(data.requirements));
       setOffer(arrayToLines(data.offer));
       setProcessSteps(arrayToLines(data.process_steps) || defaultProcess.join("\n"));
+      setKeywords(arrayToLines(data.keywords));
+      setAliases(arrayToLines(data.aliases));
       setOriginalSlug(data.slug);
       setLoading(false);
     })();
   }, [id, isEdit, navigate]);
+
 
   function set<K extends keyof typeof form>(k: K, v: (typeof form)[K]) {
     setForm((f) => ({ ...f, [k]: v }));
