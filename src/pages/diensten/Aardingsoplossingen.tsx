@@ -24,16 +24,17 @@ const proofPoints = [
   { icon: Clock, text: "Reactie meestal binnen 1 werkdag" },
   { icon: Camera, text: "Foto meterkast meesturen voor snellere prijsindicatie" },
   { icon: FileCheck, text: "Meetrapport mogelijk voor installateur, keuring of opleverdossier" },
-  { icon: MapPin, text: `Vanuit ${company.address.city} actief in heel Nederland` },
+  { icon: MapPin, text: "Actief in Amsterdam en omgeving — en in heel Nederland" },
 ];
 
 const heroBullets = [
   "Aardpen slaan voor woning, meterkast, laadpaal of zonnepanelen",
   "Aardingsmeting en meetrapport mogelijk",
-  `Vanuit ${company.address.city} actief in heel Nederland`,
+  "Werkzaam in Amsterdam en omstreken, en in heel Nederland",
   "Voor particulieren, installateurs en zakelijke opdrachtgevers",
   "Veilig gewerkt volgens relevante normen en projectinstructies",
 ];
+
 
 /** Trust-/proofblok direct na "Wanneer heeft u een aardpen nodig?". */
 const waarom = [
@@ -125,31 +126,36 @@ const doelgroepen = [
 ];
 
 const werkgebied = [
+  "Amsterdam",
+  "Amstelveen",
+  "Diemen",
+  "Zaandam",
+  "Haarlem",
+  "Hoofddorp",
+  "Almere",
+  "Weesp",
   "Utrecht",
-  "Nieuwegein",
-  "Houten",
-  "Maarssen",
-  "Zeist",
-  "De Bilt",
-  "Amersfoort",
-  "Hilversum",
-  "Woerden",
 ];
 
 /**
  * Lokale werkgebiedblokken. `slug` is voorbereid op toekomstige eigen
  * landingspagina's (/aardpen-slaan-<slug>); zolang die er niet zijn, wijst
  * het blok naar de aarding-aanvraagflow met de plaats als context.
+ * Amsterdam en de directe regio staan vooraan; overige grote steden volgen
+ * in een latere uitbreiding.
  */
 const lokaleGebieden = [
+  { plaats: "Amsterdam", slug: "amsterdam", text: "Aardpen slaan en aarding meten in Amsterdam: grachtenpanden, jaren-30-woningen, nieuwbouw en bedrijfspanden." },
+  { plaats: "Amsterdam-Noord", slug: "amsterdam-noord", text: "Aarding aanleggen en controleren bij woningen, laadpalen en werkplaatsen in Amsterdam-Noord." },
+  { plaats: "Amstelveen", slug: "amstelveen", text: "Aardpen laten slaan bij meterkast, PV-installatie of laadpaal in Amstelveen." },
+  { plaats: "Diemen", slug: "diemen", text: "Aardingsmeting met meetrapport voor woning of bedrijf in Diemen." },
+  { plaats: "Zaandam", slug: "zaandam", text: "Aarding via waterleiding vervangen door een gemeten aardelektrode in Zaandam." },
+  { plaats: "Haarlem", slug: "haarlem", text: "Aarding controleren en vernieuwen bij oudere woningen in Haarlem." },
+  { plaats: "Hoofddorp", slug: "hoofddorp", text: "Aardelektrode plaatsen en aansluiten op de hoofdaardrail in Hoofddorp." },
+  { plaats: "Almere", slug: "almere", text: "Aardpen slaan en potentiaalvereffening controleren in Almere." },
   { plaats: "Utrecht", slug: "utrecht", text: "Aardpen slaan en aarding meten in Utrecht stad en de wijken eromheen." },
-  { plaats: "Nieuwegein", slug: "nieuwegein", text: "Aarding voor woningen, laadpalen en bedrijfspanden in Nieuwegein." },
-  { plaats: "Amersfoort", slug: "amersfoort", text: "Aardpen laten slaan bij meterkast of PV-installatie in Amersfoort." },
-  { plaats: "Hilversum", slug: "hilversum", text: "Aarding controleren en vernieuwen bij oudere woningen in Hilversum." },
-  { plaats: "Zeist", slug: "zeist", text: "Aardingsmeting met meetrapport voor woning of bedrijf in Zeist." },
-  { plaats: "Houten", slug: "houten", text: "Aardelektrode plaatsen en aansluiten op de hoofdaardrail in Houten." },
-  { plaats: "Maarssen", slug: "maarssen", text: "Aardpen slaan en potentiaalvereffening controleren in Maarssen." },
 ];
+
 
 
 const faq = [
@@ -190,16 +196,21 @@ const faq = [
     a: "Ja. Naast bedrijven, installateurs en netbeheerders werken wij ook voor particuliere woningeigenaren: één aardpen bij een woning is net zo goed werk als de aarding van een compleet station.",
   },
   {
+    q: "Werkt TerreVolt in Amsterdam?",
+    a: `Ja. Amsterdam en de directe regio — ${werkgebied.slice(0, 6).join(", ")} — zijn ons primaire werkgebied voor aardpennen en aardingsmetingen. Daarbuiten werken wij door heel Nederland.`,
+  },
+  {
     q: "In welke regio werkt TerreVolt?",
-    a: `TerreVolt werkt vanuit ${company.address.city} in heel Nederland, met nadruk op ${werkgebied.join(", ")} en omliggende regio's.`,
+    a: `Het zwaartepunt ligt in Amsterdam en omgeving (${werkgebied.join(", ")}). Vanuit onze vestiging in ${company.address.city} plannen wij daarnaast werk door heel Nederland in.`,
   },
 ];
 
 const Aardingsoplossingen = () => {
   usePageMeta({
-    title: "Aardpen laten slaan Utrecht | Aarding meten met meetrapport | TerreVolt",
+    title: "Aardpen laten slaan Amsterdam | Aarding meten met meetrapport | TerreVolt",
     description:
-      "Aardpen laten slaan of aarding laten meten? TerreVolt plaatst en controleert aarding voor woningen, laadpalen, zonnepanelen en bedrijven. Vanuit Utrecht in heel Nederland.",
+      "Aardpen laten slaan of aarding laten meten in Amsterdam en omgeving? TerreVolt plaatst en meet aarding voor woningen, meterkasten, laadpalen, zonnepanelen en bedrijven — met meetrapport. Ook in heel Nederland.",
+
     canonical: "/aarding-aanleggen",
     jsonLd: [
       {
@@ -224,7 +235,9 @@ const Aardingsoplossingen = () => {
         ],
         knowsAbout: [
           "aardpen slaan",
-          "aardpen laten slaan Utrecht",
+          "aardpen laten slaan Amsterdam",
+          "aardingsmeting Amsterdam",
+
           "aarding aanleggen",
           "aardingsmeting met meetrapport",
           "potentiaalvereffening",
@@ -350,7 +363,7 @@ const Aardingsoplossingen = () => {
                 Aarding &amp; aardingsmeting
               </div>
               <h1 className="text-[clamp(1.75rem,6.4vw,2.5rem)] sm:text-4xl lg:text-5xl text-white mb-5 leading-[1.12] hyphens-nl text-pretty" lang="nl">
-                Aardpen laten slaan en aarding laten meten in {company.address.city}{" "}
+                Aardpen laten slaan en aarding laten meten in Amsterdam{" "}
                 <span className="text-[#9ed42e]">en heel Nederland</span>
               </h1>
               <p className="text-[17px] sm:text-lg lg:text-xl text-white/85 mb-6 max-w-3xl leading-relaxed">
@@ -484,7 +497,7 @@ const Aardingsoplossingen = () => {
               <div className="order-1 lg:order-2">
                 <img
                   src={aardpenFoto}
-                  alt="Aardpen laten slaan bij een woning in Utrecht door een monteur van TerreVolt"
+                  alt="Aardpen laten slaan bij een woning in Amsterdam door een monteur van TerreVolt"
                   width={1280}
                   height={960}
                   loading="lazy"
@@ -829,11 +842,13 @@ const Aardingsoplossingen = () => {
                 <MapPin className="w-4 h-4" aria-hidden="true" />
                 Werkgebied
               </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Aardpen slaan in Utrecht en omgeving</h2>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Aardpen slaan in Amsterdam en omgeving</h2>
               <p className="text-lg text-[#6c757d] leading-relaxed mb-8">
-                TerreVolt werkt vanuit {company.address.city} in heel Nederland, met nadruk op {werkgebied.join(", ")} en
-                omliggende regio&#39;s. Buiten deze regio? Neem gerust contact op — wij plannen werk door heel Nederland in.
+                Amsterdam en de regio eromheen — {werkgebied.slice(0, 8).join(", ")} — vormen ons primaire werkgebied
+                voor aardpennen en aardingsmetingen. Vanuit onze vestiging in {company.address.city} plannen wij
+                daarnaast werk door heel Nederland in; de overige grote steden volgen stap voor stap.
               </p>
+
               <ul className="flex flex-wrap justify-center gap-2 sm:gap-3">
                 {werkgebied.map((plaats) => (
                   <li key={plaats} className="bg-white border border-gray-200 rounded-full px-4 py-2 text-[15px] text-[#0d3b2e]">
