@@ -260,7 +260,6 @@ const Aardingsoplossingen = () => {
             "@type": "ServiceChannel",
             name: "Prijsindicatie aanvragen",
             serviceUrl: `${SITE_URL}/contact?type=aarding`,
-government: undefined,
           },
           {
             "@type": "ServiceChannel",
