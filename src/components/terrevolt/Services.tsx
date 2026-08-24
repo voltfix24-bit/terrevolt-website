@@ -25,6 +25,7 @@ const services = [
   {
     icon: EarthSymbol,
     slug: "aardingsoplossingen",
+    href: "/aarding-aanleggen",
     title: "Aardingsoplossingen",
     description: "Aanleg, verbetering, meting en rapportage van aardingssystemen voor stations en technische ruimten."
   },
@@ -59,7 +60,7 @@ export function Services() {
             return (
               <Reveal key={service.slug} delay={index * 90}>
                 <Link
-                  to={`/diensten/${service.slug}`}
+                  to={service.href ?? `/diensten/${service.slug}`}
                   aria-label={`Bekijk dienst: ${service.title}`}
                   className="group card-lift h-full flex flex-col bg-white border border-gray-200 rounded-xl p-6 md:p-8 hover:border-[#9ed42e] hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2"
                 >

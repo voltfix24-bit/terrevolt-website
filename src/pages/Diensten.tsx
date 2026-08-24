@@ -30,6 +30,7 @@ const services = [
   {
     icon: EarthSymbol,
     slug: "aardingsoplossingen",
+    href: "/aarding-aanleggen",
     title: "Aardingsoplossingen",
     description: "Aanleg, verbetering, meting en rapportage van aardingssystemen.",
     bullets: ["Aardelektroden", "Stationsaarding", "Meetrapportage"],
@@ -144,7 +145,7 @@ const Diensten = () => {
                 return (
                   <Link
                     key={service.slug}
-                    to={`/diensten/${service.slug}`}
+                    to={service.href ?? `/diensten/${service.slug}`}
                     aria-label={`Bekijk dienst: ${service.title}`}
                     className="group flex flex-col bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 active:scale-[0.99]"
                   >
