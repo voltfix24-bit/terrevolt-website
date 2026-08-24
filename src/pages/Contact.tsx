@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ArrowRight, Phone, Mail, MapPin, Upload, Loader2, Network, HardHat, Factory, Briefcase, Users, ShieldCheck, ClipboardCheck, MessageSquare, Cable, BadgeCheck, CheckCircle2, AlertCircle, X } from "lucide-react";
+import { ArrowRight, Phone, Mail, MapPin, Upload, Loader2, Network, HardHat, Factory, Briefcase, Users, ShieldCheck, ClipboardCheck, MessageSquare, Cable, BadgeCheck, CheckCircle2, AlertCircle, X, Zap } from "lucide-react";
 import { z } from "zod";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
@@ -28,6 +28,14 @@ const requestTypes = [
   "Anders",
 ];
 
+const AARDING_WERKZAAMHEDEN = [
+  "Aardpen slaan",
+  "Aarding meten",
+  "Meetrapport nodig",
+  "Laadpaal / zonnepanelen",
+  "Meterkast / oude woning",
+] as const;
+
 const ALLOWED_EXT = ["pdf", "jpg", "jpeg", "png", "dwg"] as const;
 const MAX_UPLOAD_BYTES = 25 * 1024 * 1024;
 
@@ -46,6 +54,11 @@ const schema = z.object({
   location: z.string().trim().max(150).optional(),
   start_date: z.string().trim().max(50).optional(),
   description: z.string().trim().min(5, "Geef een korte omschrijving").max(3000),
+});
+
+const aardingSchema = schema.extend({
+  location: z.string().trim().min(2, "Vul uw postcode of plaats in").max(150),
+  description: z.string().trim().max(3000).optional(),
 });
 
 const intentToRequestType: Record<"project" | "monteur" | "sollicitatie", string> = {
@@ -71,8 +84,14 @@ const Contact = () => {
     const v = searchParams.get("intent");
     return v === "monteur" || v === "sollicitatie" || v === "project" ? v : "project";
   })();
-  const initialType = searchParams.get("type") || "";
+  const typeParam = searchParams.get("type") || "";
+  const isAarding = typeParam.toLowerCase() === "aarding" || typeParam === "Aardingsoplossingen";
+  const initialType = isAarding ? "Aardingsoplossingen" : typeParam;
   const [intent, setIntent] = useState<"project" | "monteur" | "sollicitatie">(initialIntent);
+  const [werkzaamheden, setWerkzaamheden] = useState<string[]>([]);
+
+  const toggleWerkzaamheid = (label: string) =>
+    setWerkzaamheden((curr) => (curr.includes(label) ? curr.filter((w) => w !== label) : [...curr, label]));
 
   // Sync request_type met de gekozen intent (alleen als gebruiker nog niets handmatig koos).
   useEffect(() => {
@@ -160,7 +179,17 @@ const Contact = () => {
       description: String(fd.get("description") || ""),
     };
 
-    const parsed = schema.safeParse(raw);
+    if (isAarding) {
+      raw.request_type = "Aardingsoplossingen";
+      const gekozen = werkzaamheden.length ? `Gewenste werkzaamheden: ${werkzaamheden.join(", ")}.` : "";
+      const termijn = String(fd.get("start_date") || "");
+      raw.description = [gekozen, raw.description, termijn ? `Gewenste termijn: ${termijn}.` : ""]
+        .filter(Boolean)
+        .join("\n")
+        .trim() || "Aanvraag prijsindicatie aarding.";
+    }
+
+    const parsed = (isAarding ? aardingSchema : schema).safeParse(raw);
     if (!parsed.success) {
       toast.error(parsed.error.errors[0]?.message || "Controleer het formulier");
       return;
@@ -200,7 +229,7 @@ const Contact = () => {
         request_type: parsed.data.request_type || null,
         location: parsed.data.location || null,
         start_date: parsed.data.start_date || null,
-        description: parsed.data.description,
+        description: parsed.data.description || "Aanvraag prijsindicatie aarding.",
         attachment_url,
         intent,
         intent_label: intentLabel,
