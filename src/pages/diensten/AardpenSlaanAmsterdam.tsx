@@ -262,7 +262,7 @@ const AardpenSlaanAmsterdam = () => {
                     data-cta="Prijsindicatie aanvragen Amsterdam hero"
                     className="group bg-[#9ed42e] text-[#0d3b2e] px-6 sm:px-8 py-4 min-h-[56px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                   >
-                    <span>Prijsindicatie Amsterdam</span>
+                    <span>Prijsindicatie aanvragen</span>
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   </Link>
                   <a
@@ -413,8 +413,8 @@ const AardpenSlaanAmsterdam = () => {
                 Kosten aardpen slaan in Amsterdam
               </h2>
               <p className="text-lg text-[#6c757d] leading-relaxed">
-                Concurrenten tonen vaak scherpe vanafprijzen. TerreVolt kiest voor een duidelijke prijsindicatie vooraf,
-                gebaseerd op uw echte situatie, zodat diepte, bereikbaarheid en rapportage meteen goed zijn meegenomen.
+                Elke Amsterdamse locatie is anders. TerreVolt geeft daarom vooraf een duidelijke prijsindicatie op basis
+                van uw echte situatie, zodat diepte, bereikbaarheid en rapportage meteen goed zijn meegenomen.
               </p>
             </div>
 
@@ -686,7 +686,7 @@ const AardpenSlaanAmsterdam = () => {
             <Phone className="w-4 h-4" aria-hidden="true" />
             Bel
           </a>
-          {waLink && (
+          {waLink ? (
             <a
               href={waLink}
               target="_blank"
@@ -695,6 +695,14 @@ const AardpenSlaanAmsterdam = () => {
             >
               <MessageCircle className="w-4 h-4" aria-hidden="true" />
               WhatsApp
+            </a>
+          ) : (
+            <a
+              href={`mailto:${company.email}`}
+              className="flex flex-col items-center justify-center gap-1 min-h-[48px] rounded-lg border border-[#0d3b2e]/20 text-[#0d3b2e] text-xs"
+            >
+              <MessageCircle className="w-4 h-4" aria-hidden="true" />
+              E-mail
             </a>
           )}
           <Link
