@@ -5,7 +5,7 @@ import { Reveal } from "@/components/terrevolt/Reveal";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
 
 type ServiceCard = {
-  icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   slug: string;
   href?: string;
   title: string;
