@@ -112,6 +112,8 @@ export default function AdminVacancyForm() {
     if (linesToArray(requirements).length < 3) return "Minimaal 3 eisen vereist.";
     if (linesToArray(offer).length < 3) return "Minimaal 3 voordelen vereist.";
     if (!form.safety_text.trim()) return "Veiligheidstekst ontbreekt.";
+    if (!form.salary_min || !form.salary_max) return "Salarisindicatie ontbreekt.";
+    if (form.salary_max < form.salary_min) return "Salaris tot moet hoger zijn dan salaris van.";
     return null;
   }
 
@@ -142,11 +144,22 @@ export default function AdminVacancyForm() {
       work_area: form.work_area || null,
       intro: form.intro || null,
       safety_text: form.safety_text || null,
+      short_label: form.short_label || form.title,
+      h1: form.h1 || null,
+      summary: form.summary || null,
+      icon_key: form.icon_key || null,
+      authorizations: form.authorizations || null,
+      salary_min: form.salary_min || null,
+      salary_max: form.salary_max || null,
+      date_posted: form.date_posted || null,
+      keywords: linesToArray(keywords),
+      aliases: linesToArray(aliases),
       what_you_do: linesToArray(whatYouDo),
       requirements: linesToArray(requirements),
       offer: linesToArray(offer),
       process_steps: linesToArray(processSteps),
     };
+
     try {
       if (isEdit) {
         const { error } = await supabase.from("vacancies").update(payload).eq("id", id!);
