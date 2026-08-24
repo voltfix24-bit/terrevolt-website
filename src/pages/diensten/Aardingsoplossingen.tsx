@@ -136,6 +136,22 @@ const werkgebied = [
   "Woerden",
 ];
 
+/**
+ * Lokale werkgebiedblokken. `slug` is voorbereid op toekomstige eigen
+ * landingspagina's (/aardpen-slaan-<slug>); zolang die er niet zijn, wijst
+ * het blok naar de aarding-aanvraagflow met de plaats als context.
+ */
+const lokaleGebieden = [
+  { plaats: "Utrecht", slug: "utrecht", text: "Aardpen slaan en aarding meten in Utrecht stad en de wijken eromheen." },
+  { plaats: "Nieuwegein", slug: "nieuwegein", text: "Aarding voor woningen, laadpalen en bedrijfspanden in Nieuwegein." },
+  { plaats: "Amersfoort", slug: "amersfoort", text: "Aardpen laten slaan bij meterkast of PV-installatie in Amersfoort." },
+  { plaats: "Hilversum", slug: "hilversum", text: "Aarding controleren en vernieuwen bij oudere woningen in Hilversum." },
+  { plaats: "Zeist", slug: "zeist", text: "Aardingsmeting met meetrapport voor woning of bedrijf in Zeist." },
+  { plaats: "Houten", slug: "houten", text: "Aardelektrode plaatsen en aansluiten op de hoofdaardrail in Houten." },
+  { plaats: "Maarssen", slug: "maarssen", text: "Aardpen slaan en potentiaalvereffening controleren in Maarssen." },
+];
+
+
 const faq = [
   {
     q: "Wat kost een aardpen laten slaan?",
