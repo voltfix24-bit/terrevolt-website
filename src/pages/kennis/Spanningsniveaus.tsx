@@ -126,7 +126,7 @@ const Spanningsniveaus = () => {
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
 
-      <main id="main-content" className="pt-16 sm:pt-20">
+      <main id="main-content" className="pt-20 sm:pt-24">
         <section className="bg-[#0d3b2e]">
           <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6 sm:py-20">
             <p className="text-xs uppercase tracking-[0.2em] text-[#9ed42e]">Kennisbank</p>

@@ -13,7 +13,7 @@ const Privacy = () => {
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
-      <main id="main-content" className="pt-16 sm:pt-20">
+      <main id="main-content" className="pt-20 sm:pt-24">
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12 max-w-3xl">
             <Link to="/" className="text-sm text-[#0d3b2e] hover:underline">← Terug naar home</Link>

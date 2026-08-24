@@ -100,7 +100,7 @@ const VacatureDetail = () => {
       return (
         <div className="min-h-screen bg-[#f8f9fa]">
           <Header />
-          <main id="main-content" className="pt-16 sm:pt-20">
+          <main id="main-content" className="pt-20 sm:pt-24">
             <div className="mx-auto max-w-3xl px-4 py-24 text-center text-[#0d3b2e]/70">
               Vacature laden…
             </div>
@@ -144,7 +144,7 @@ const VacatureDetail = () => {
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
 
-      <main id="main-content" className="pt-16 sm:pt-20">
+      <main id="main-content" className="pt-20 sm:pt-24">
         {/* 1. KOP MET KERNGEGEVENS */}
         <section className="bg-[#0d3b2e]">
           <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">

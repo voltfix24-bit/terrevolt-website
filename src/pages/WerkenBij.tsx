@@ -121,7 +121,7 @@ const WerkenBij = () => {
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
 
-      <main id="main-content" className="pt-16 sm:pt-20">
+      <main id="main-content" className="pt-20 sm:pt-24">
         {/* 1. HERO */}
         <section className="relative overflow-hidden bg-[#0d3b2e]">
           <div
