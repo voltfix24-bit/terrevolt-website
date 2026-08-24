@@ -224,11 +224,23 @@ const Aardingsoplossingen = () => {
         ],
         knowsAbout: [
           "aardpen slaan",
+          "aardpen laten slaan Utrecht",
           "aarding aanleggen",
-          "aardingsmeting",
+          "aardingsmeting met meetrapport",
           "potentiaalvereffening",
           "meterkast aarden",
+          "aarding laadpaal",
+          "zonnepanelen aarden",
+          "aarding via waterleiding vervangen",
         ],
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "customer service",
+          telephone: company.phone.e164,
+          email: company.email,
+          areaServed: "NL",
+          availableLanguage: ["nl"],
+        },
       },
       {
         "@context": "https://schema.org",
@@ -239,7 +251,24 @@ const Aardingsoplossingen = () => {
           "Plaatsen van aardpennen en aardelektroden, verbeteren van bestaande aarding, potentiaalvereffening en aardingsmeting met meetrapport voor woningen, laadpalen, zonnepanelen, bedrijfspanden en MS/LS-stations.",
         url: PAGE_URL,
         provider: { "@id": `${SITE_URL}/#organization` },
-        areaServed: { "@type": "Country", name: "Nederland" },
+        areaServed: [
+          { "@type": "Country", name: "Nederland" },
+          ...werkgebied.map((city) => ({ "@type": "City", name: city })),
+        ],
+        availableChannel: [
+          {
+            "@type": "ServiceChannel",
+            name: "Prijsindicatie aanvragen",
+            serviceUrl: `${SITE_URL}/contact?type=aarding`,
+government: undefined,
+          },
+          {
+            "@type": "ServiceChannel",
+            name: "Telefonisch contact",
+            servicePhone: { "@type": "ContactPoint", telephone: company.phone.e164 },
+          },
+        ],
+
         audience: [
           { "@type": "Audience", audienceType: "Particulieren" },
           { "@type": "BusinessAudience", audienceType: "Installateurs, bedrijven en netbeheerders" },
