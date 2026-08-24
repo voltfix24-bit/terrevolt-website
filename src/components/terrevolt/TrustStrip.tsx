@@ -1,27 +1,27 @@
 import { ShieldCheck, BadgeCheck, HardHat, BookOpen } from "lucide-react";
 
 /**
- * Compacte trust-strip onder de hero. Toont in één oogopslag waar
- * TerreVolt voor staat: filosofie, structuur, veilig werken en normen.
- * Geen volledige sectie — bedoeld als visuele brug tussen Hero en Services.
+ * Compacte trust-strip onder de hero. Toont in een oogopslag waar
+ * TerreVolt voor staat: kwaliteit, veilig werken, netomgeving en normen.
+ * Geen volledige sectie, maar een visuele brug tussen Hero en Services.
  *
  * Layout: 2 kolommen op mobiel, 4 op desktop.
  */
 const items = [
   {
+    icon: BadgeCheck,
+    label: "Kwaliteit",
+    value: "ISO 9001:2015",
+  },
+  {
     icon: ShieldCheck,
-    label: "Veiligheidsfilosofie",
-    value: "We doen het veilig",
+    label: "Veilig werken",
+    value: "VCA** 2017/6.0",
   },
   {
     icon: HardHat,
-    label: "Veiligheidsstructuur",
-    value: "BEI BLS / BHS waar van toepassing",
-  },
-  {
-    icon: BadgeCheck,
-    label: "Veilig werken",
-    value: "VCA",
+    label: "Netomgeving",
+    value: "BEI waar van toepassing",
   },
   {
     icon: BookOpen,
@@ -33,7 +33,7 @@ const items = [
 export function TrustStrip() {
   return (
     <section
-      aria-label="Veiligheid en normen"
+      aria-label="Certificeringen, veiligheid en normen"
       className="bg-white border-b border-gray-100"
     >
       <div className="container mx-auto px-5 sm:px-6 lg:px-12 py-6 sm:py-7">
