@@ -399,12 +399,32 @@ const Aardingsoplossingen = () => {
               </div>
 
               <p className="mt-5 text-[15px] text-white/80 leading-relaxed max-w-2xl">
-                Stuur uw postcode en eventueel een foto van de meterkast. Wij reageren zo snel mogelijk
-                met een duidelijke prijsindicatie — meestal binnen 1 werkdag.
+                Stuur postcode en foto van de meterkast. Wij reageren meestal binnen 1 werkdag
+                met een duidelijke prijsindicatie.
               </p>
             </div>
           </div>
         </section>
+
+        {/* BEWIJS BOVEN DE VOUW */}
+        <section className="bg-white border-b border-gray-200">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 py-6 sm:py-8">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {proofPoints.map((p) => {
+                const Icon = p.icon;
+                return (
+                  <li key={p.text} className="flex items-start gap-3">
+                    <span className="w-9 h-9 flex-shrink-0 rounded-lg bg-[#f0f7e6] flex items-center justify-center">
+                      <Icon className="w-[18px] h-[18px] text-[#0d3b2e]" strokeWidth={2} aria-hidden="true" />
+                    </span>
+                    <span className="text-[15px] text-[#495057] leading-snug">{p.text}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section>
+
 
         {/* WANNEER NODIG */}
         <section id="wanneer-nodig" className="py-16 md:py-24 bg-white scroll-mt-24">
