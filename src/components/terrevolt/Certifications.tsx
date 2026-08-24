@@ -1,29 +1,47 @@
 import { Award, BadgeCheck, CheckCircle2, FileCheck, GraduationCap, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
+import isoLogo from "@/assets/iso-9001-cetradex.png.asset.json";
+import vcaLogo from "@/assets/vca-cetradex.png.asset.json";
+import sbbLogo from "@/assets/sbb-erkend-leerbedrijf.png.asset.json";
+import isoPdf from "@/assets/terrevolt-iso-9001.pdf.asset.json";
+import vcaPdf from "@/assets/terrevolt-vca.pdf.asset.json";
 
 const certifications = [
   {
     icon: Award,
+    logo: isoLogo.url,
+    logoAlt: "ISO 9001 gecertificeerd keurmerk van Cetradex Certificatie",
     title: "ISO 9001:2015",
     subtitle: "Kwaliteitsmanagement",
     body: "Kwaliteitsmanagementsysteem gecertificeerd door Cetradex Certificatie B.V.",
     facts: ["NEN-EN-ISO 9001:2015", "Certificaat 26062502", "Geldig t/m 24 juni 2029"],
+    pdf: isoPdf.url,
+    pdfLabel: "Bekijk ISO 9001-certificaat (pdf)",
   },
   {
     icon: ShieldCheck,
+    logo: vcaLogo.url,
+    logoAlt: "VCA gecertificeerd keurmerk van Cetradex Certificatie",
     title: "VCA** 2017/6.0",
     subtitle: "Veilig, gezond en milieubewust werken",
     body: "VGM-beheerssysteem gecertificeerd door Cetradex Certificatie B.V.",
     facts: ["Certificaat 26062501", "Geldig t/m 24 juni 2029", "NACE-code F4222"],
+    pdf: vcaPdf.url,
+    pdfLabel: "Bekijk VCA**-certificaat (pdf)",
   },
   {
     icon: GraduationCap,
+    logo: sbbLogo.url,
+    logoAlt: "SBB erkend leerbedrijf - wij leiden vakmensen op",
     title: "SBB erkend leerbedrijf",
     subtitle: "Wij leiden vakmensen op",
     body: "TerreVolt investeert in praktijkontwikkeling en het opleiden van nieuwe vakmensen.",
     facts: ["Erkend leerbedrijf", "Praktijkgericht opleiden", "Instroom in techniek"],
+    pdf: null,
+    pdfLabel: null,
   },
 ];
+
 
 const proofPoints = [
   "Aantoonbare kwaliteitsborging voor projecten en oplevering",
@@ -54,8 +72,19 @@ export function Certifications() {
             const Icon = item.icon;
             return (
               <article key={item.title} className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-6 flex flex-col h-full">
-                <div className="w-12 h-12 bg-[#0d3b2e] rounded-lg flex items-center justify-center mb-5">
-                  <Icon className="w-6 h-6 text-[#9ed42e]" strokeWidth={2} aria-hidden="true" />
+                <div className="flex items-center gap-4 mb-5">
+                  <div className="w-12 h-12 bg-[#0d3b2e] rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon className="w-6 h-6 text-[#9ed42e]" strokeWidth={2} aria-hidden="true" />
+                  </div>
+                  <img
+                    src={item.logo}
+                    alt={item.logoAlt}
+                    width={96}
+                    height={96}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-16 w-auto object-contain"
+                  />
                 </div>
                 <p className="text-xs uppercase tracking-wider text-[#6c757d] mb-2">{item.subtitle}</p>
                 <h3 className="text-xl text-[#0d3b2e] mb-3">{item.title}</h3>
@@ -68,7 +97,19 @@ export function Certifications() {
                     </li>
                   ))}
                 </ul>
+                {item.pdf && (
+                  <a
+                    href={item.pdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-5 inline-flex items-center gap-2 text-sm text-[#0d3b2e] underline underline-offset-4 hover:text-[#1a4a36] min-h-[44px]"
+                  >
+                    <FileCheck className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+                    {item.pdfLabel}
+                  </a>
+                )}
               </article>
+
             );
           })}
         </div>
