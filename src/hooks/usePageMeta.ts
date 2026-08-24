@@ -95,10 +95,16 @@ export function usePageMeta(
     if (meta.description) upsertMeta("name", "twitter:description", meta.description);
     upsertMeta("name", "twitter:image", meta.ogImage ?? DEFAULT_OG_IMAGE);
 
-    // Alleen het productiedomein mag geïndexeerd worden; preview-omgevingen op noindex.
-    const isProduction =
-      typeof window !== "undefined" && window.location.hostname === new URL(SITE_URL).hostname;
-    upsertMeta("name", "robots", meta.noindex || !isProduction ? "noindex, nofollow" : "index, follow");
+    // Alleen preview-/sandbox-omgevingen op noindex; alle live domeinen indexeerbaar.
+    const host = typeof window !== "undefined" ? window.location.hostname : "";
+    const isPreviewHost =
+      host === "localhost" ||
+      host === "127.0.0.1" ||
+      host.includes("-preview--") ||
+      host.endsWith(".lovableproject.com") ||
+      host.endsWith(".sandbox.lovable.dev");
+    upsertMeta("name", "robots", meta.noindex || isPreviewHost ? "noindex, nofollow" : "index, follow");
+
 
     setJsonLd(meta.jsonLd);
 
