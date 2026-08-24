@@ -680,6 +680,22 @@ const Contact = () => {
                             placeholder={isAarding ? "Bijv. deze week, binnen 2 weken, in overleg" : "Bijv. zo snel mogelijk, of week 12"}
                             className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
                         </div>
+                        {isAarding && (
+                          <div className="sm:col-span-2">
+                            <label htmlFor="urgency" className="block text-sm text-[#0d3b2e] mb-2">Heeft u spoed?</label>
+                            <select
+                              id="urgency"
+                              name="urgency"
+                              defaultValue="Nee"
+                              className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition"
+                            >
+                              <option value="Nee">Nee</option>
+                              <option value="Binnen 1 week">Binnen 1 week</option>
+                              <option value="Zo snel mogelijk">Zo snel mogelijk</option>
+                            </select>
+                          </div>
+                        )}
+
                         <div className="sm:col-span-2">
                           <label htmlFor="description" className="block text-sm text-[#0d3b2e] mb-2">
                             {isAarding ? "Toelichting" : "Korte omschrijving *"}
