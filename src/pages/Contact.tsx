@@ -211,11 +211,18 @@ const Contact = () => {
       raw.request_type = "Aardingsoplossingen";
       const gekozen = werkzaamheden.length ? `Gewenste werkzaamheden: ${werkzaamheden.join(", ")}.` : "";
       const termijn = String(fd.get("start_date") || "");
-      raw.description = [gekozen, raw.description, termijn ? `Gewenste termijn: ${termijn}.` : ""]
+      const spoed = String(fd.get("urgency") || "");
+      raw.description = [
+        gekozen,
+        raw.description,
+        termijn ? `Gewenste termijn: ${termijn}.` : "",
+        spoed ? `Spoed: ${spoed}.` : "",
+      ]
         .filter(Boolean)
         .join("\n")
         .trim() || "Aanvraag prijsindicatie aarding.";
     }
+
 
     const parsed = (isAarding ? aardingSchema : schema).safeParse(raw);
     if (!parsed.success) {
@@ -651,10 +658,13 @@ const Contact = () => {
                                   >
                                     <input
                                       type="checkbox"
+                                      name="werkzaamheden"
+                                      value={w}
                                       checked={checked}
                                       onChange={() => toggleWerkzaamheid(w)}
                                       className="w-4 h-4 accent-[#9ed42e]"
                                     />
+
                                     <span className="text-sm text-[#0d3b2e]">{w}</span>
                                   </label>
                                 );
@@ -670,6 +680,22 @@ const Contact = () => {
                             placeholder={isAarding ? "Bijv. deze week, binnen 2 weken, in overleg" : "Bijv. zo snel mogelijk, of week 12"}
                             className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
                         </div>
+                        {isAarding && (
+                          <div className="sm:col-span-2">
+                            <label htmlFor="urgency" className="block text-sm text-[#0d3b2e] mb-2">Heeft u spoed?</label>
+                            <select
+                              id="urgency"
+                              name="urgency"
+                              defaultValue="Nee"
+                              className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 bg-white focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition"
+                            >
+                              <option value="Nee">Nee</option>
+                              <option value="Binnen 1 week">Binnen 1 week</option>
+                              <option value="Zo snel mogelijk">Zo snel mogelijk</option>
+                            </select>
+                          </div>
+                        )}
+
                         <div className="sm:col-span-2">
                           <label htmlFor="description" className="block text-sm text-[#0d3b2e] mb-2">
                             {isAarding ? "Toelichting" : "Korte omschrijving *"}

@@ -1,4 +1,4 @@
-import { ArrowRight, Home, Phone, Gauge, ShieldCheck, GitBranch, FileBarChart, Building2, Server, Zap, Factory, Construction, Plug, Activity, ClipboardList, FileCheck, CheckCircle2, MessageCircle, Euro, MapPin } from "lucide-react";
+import { ArrowRight, Home, Phone, Gauge, ShieldCheck, GitBranch, FileBarChart, Building2, Server, Zap, Factory, Construction, Plug, Activity, ClipboardList, FileCheck, CheckCircle2, MessageCircle, Euro, MapPin, Clock, Camera, Ruler, Wrench } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { WhenToCall } from "@/components/terrevolt/WhenToCall";
@@ -8,6 +8,9 @@ import { EarthSymbol } from "@/components/icons/EarthSymbol";
 import { Link } from "react-router-dom";
 import { company, SITE_URL, telHref, addressOneLine } from "@/config/company";
 import { whatsappLink } from "@/lib/whatsapp";
+import meterkastFoto from "@/assets/aarding-meterkast.jpg";
+import meetrapportFoto from "@/assets/aarding-meetrapport.jpg";
+import aardpenFoto from "@/assets/aarding-aardpen-slaan.jpg";
 
 const PAGE_URL = `${SITE_URL}/aarding-aanleggen`;
 
@@ -16,6 +19,14 @@ const waLink = whatsappLink(
   "Hallo TerreVolt, ik wil graag een aardpen laten slaan / aarding laten meten.",
 );
 
+/** Bewijspunten direct boven de vouw — kort, concreet en waarmaakbaar. */
+const proofPoints = [
+  { icon: Clock, text: "Reactie meestal binnen 1 werkdag" },
+  { icon: Camera, text: "Foto meterkast meesturen voor snellere prijsindicatie" },
+  { icon: FileCheck, text: "Meetrapport mogelijk voor installateur, keuring of opleverdossier" },
+  { icon: MapPin, text: `Vanuit ${company.address.city} actief in heel Nederland` },
+];
+
 const heroBullets = [
   "Aardpen slaan voor woning, meterkast, laadpaal of zonnepanelen",
   "Aardingsmeting en meetrapport mogelijk",
@@ -23,6 +34,25 @@ const heroBullets = [
   "Voor particulieren, installateurs en zakelijke opdrachtgevers",
   "Veilig gewerkt volgens relevante normen en projectinstructies",
 ];
+
+/** Trust-/proofblok direct na "Wanneer heeft u een aardpen nodig?". */
+const waarom = [
+  { icon: EarthSymbol, title: "Specialist in aarding en metingen", text: "Aarding, aardingsmetingen en LS/MS-infrastructuur zijn ons dagelijkse werk — geen bijzaak." },
+  { icon: Gauge, title: "Aardingsmeting met duidelijke meetwaarden", text: "U krijgt de gemeten aardverspreidingsweerstand zwart-op-wit, niet alleen een mondelinge toezegging." },
+  { icon: ShieldCheck, title: "Veilig volgens relevante normen", text: "Gewerkt volgens de geldende normen, bedrijfsvoeringsregels en projectinstructies." },
+  { icon: Building2, title: "Woning, bedrijfspand of technische ruimte", text: "Geschikt voor woning, bedrijfspand, laadpaal, zonnepanelen en technische ruimten." },
+  { icon: Wrench, title: "Korte lijnen met uitvoering en planning", text: "U spreekt direct iemand die het werk ook echt uitvoert en inplant." },
+];
+
+/** Herkenbare praktijkvoorbeelden — helpt bezoekers hun eigen situatie plaatsen. */
+const voorbeelden = [
+  { icon: Plug, text: "Nieuwe meterkast, installateur vraagt om een meetrapport" },
+  { icon: Home, text: "Oude woning met aarding via de waterleiding" },
+  { icon: Zap, text: "Laadpaal wordt geplaatst, aarding moet gecontroleerd worden" },
+  { icon: ShieldCheck, text: "Zonnepaneleninstallatie vraagt om correcte potentiaalvereffening" },
+  { icon: Factory, text: "Bedrijfspand of technische ruimte heeft periodieke aardingsmeting nodig" },
+];
+
 
 const nodig = [
   { icon: Plug, title: "Nieuwe of vervangen meterkast", text: "Bij een nieuwe meterkast of groepenkast is een deugdelijke aarding voorwaarde voor oplevering." },
@@ -106,6 +136,22 @@ const werkgebied = [
   "Woerden",
 ];
 
+/**
+ * Lokale werkgebiedblokken. `slug` is voorbereid op toekomstige eigen
+ * landingspagina's (/aardpen-slaan-<slug>); zolang die er niet zijn, wijst
+ * het blok naar de aarding-aanvraagflow met de plaats als context.
+ */
+const lokaleGebieden = [
+  { plaats: "Utrecht", slug: "utrecht", text: "Aardpen slaan en aarding meten in Utrecht stad en de wijken eromheen." },
+  { plaats: "Nieuwegein", slug: "nieuwegein", text: "Aarding voor woningen, laadpalen en bedrijfspanden in Nieuwegein." },
+  { plaats: "Amersfoort", slug: "amersfoort", text: "Aardpen laten slaan bij meterkast of PV-installatie in Amersfoort." },
+  { plaats: "Hilversum", slug: "hilversum", text: "Aarding controleren en vernieuwen bij oudere woningen in Hilversum." },
+  { plaats: "Zeist", slug: "zeist", text: "Aardingsmeting met meetrapport voor woning of bedrijf in Zeist." },
+  { plaats: "Houten", slug: "houten", text: "Aardelektrode plaatsen en aansluiten op de hoofdaardrail in Houten." },
+  { plaats: "Maarssen", slug: "maarssen", text: "Aardpen slaan en potentiaalvereffening controleren in Maarssen." },
+];
+
+
 const faq = [
   {
     q: "Wat kost een aardpen laten slaan?",
@@ -178,11 +224,23 @@ const Aardingsoplossingen = () => {
         ],
         knowsAbout: [
           "aardpen slaan",
+          "aardpen laten slaan Utrecht",
           "aarding aanleggen",
-          "aardingsmeting",
+          "aardingsmeting met meetrapport",
           "potentiaalvereffening",
           "meterkast aarden",
+          "aarding laadpaal",
+          "zonnepanelen aarden",
+          "aarding via waterleiding vervangen",
         ],
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "customer service",
+          telephone: company.phone.e164,
+          email: company.email,
+          areaServed: "NL",
+          availableLanguage: ["nl"],
+        },
       },
       {
         "@context": "https://schema.org",
@@ -193,7 +251,23 @@ const Aardingsoplossingen = () => {
           "Plaatsen van aardpennen en aardelektroden, verbeteren van bestaande aarding, potentiaalvereffening en aardingsmeting met meetrapport voor woningen, laadpalen, zonnepanelen, bedrijfspanden en MS/LS-stations.",
         url: PAGE_URL,
         provider: { "@id": `${SITE_URL}/#organization` },
-        areaServed: { "@type": "Country", name: "Nederland" },
+        areaServed: [
+          { "@type": "Country", name: "Nederland" },
+          ...werkgebied.map((city) => ({ "@type": "City", name: city })),
+        ],
+        availableChannel: [
+          {
+            "@type": "ServiceChannel",
+            name: "Prijsindicatie aanvragen",
+            serviceUrl: `${SITE_URL}/contact?type=aarding`,
+          },
+          {
+            "@type": "ServiceChannel",
+            name: "Telefonisch contact",
+            servicePhone: { "@type": "ContactPoint", telephone: company.phone.e164 },
+          },
+        ],
+
         audience: [
           { "@type": "Audience", audienceType: "Particulieren" },
           { "@type": "BusinessAudience", audienceType: "Installateurs, bedrijven en netbeheerders" },
@@ -325,12 +399,32 @@ const Aardingsoplossingen = () => {
               </div>
 
               <p className="mt-5 text-[15px] text-white/80 leading-relaxed max-w-2xl">
-                Stuur uw postcode en eventueel een foto van de meterkast. Wij reageren zo snel mogelijk
-                met een duidelijke prijsindicatie — meestal binnen 1 werkdag.
+                Stuur postcode en foto van de meterkast. Wij reageren meestal binnen 1 werkdag
+                met een duidelijke prijsindicatie.
               </p>
             </div>
           </div>
         </section>
+
+        {/* BEWIJS BOVEN DE VOUW */}
+        <section className="bg-white border-b border-gray-200">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12 py-6 sm:py-8">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {proofPoints.map((p) => {
+                const Icon = p.icon;
+                return (
+                  <li key={p.text} className="flex items-start gap-3">
+                    <span className="w-9 h-9 flex-shrink-0 rounded-lg bg-[#f0f7e6] flex items-center justify-center">
+                      <Icon className="w-[18px] h-[18px] text-[#0d3b2e]" strokeWidth={2} aria-hidden="true" />
+                    </span>
+                    <span className="text-[15px] text-[#495057] leading-snug">{p.text}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </section>
+
 
         {/* WANNEER NODIG */}
         <section id="wanneer-nodig" className="py-16 md:py-24 bg-white scroll-mt-24">
@@ -362,6 +456,85 @@ const Aardingsoplossingen = () => {
           </div>
         </section>
 
+        {/* WAAROM TERREVOLT */}
+        <section id="waarom-terrevolt" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+              <div className="order-2 lg:order-1">
+                <h2 className="text-3xl sm:text-4xl text-[#0d3b2e] mb-6 hyphens-nl" lang="nl">
+                  Waarom klanten TerreVolt inschakelen
+                </h2>
+                <ul className="space-y-5">
+                  {waarom.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <li key={item.title} className="flex items-start gap-4">
+                        <span className="w-11 h-11 flex-shrink-0 rounded-lg bg-[#0d3b2e] flex items-center justify-center">
+                          <Icon className="w-5 h-5 text-[#9ed42e]" strokeWidth={2} aria-hidden="true" />
+                        </span>
+                        <div>
+                          <h3 className="text-lg text-[#0d3b2e] mb-1 hyphens-nl" lang="nl">{item.title}</h3>
+                          <p className="text-[#6c757d] text-[15px] leading-relaxed">{item.text}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+              <div className="order-1 lg:order-2">
+                <img
+                  src={aardpenFoto}
+                  alt="Aardpen laten slaan bij een woning in Utrecht door een monteur van TerreVolt"
+                  width={1280}
+                  height={960}
+                  loading="lazy"
+                  className="w-full h-auto rounded-2xl border border-gray-200 object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* VOORBEELDEN VAN AANVRAGEN */}
+        <section id="voorbeelden" className="py-16 md:py-24 bg-white scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+              <div>
+                <img
+                  src={meterkastFoto}
+                  alt="Aardleiding aansluiten op de hoofdaardrail in een meterkast — aardpen slaan bij meterkast"
+                  width={1280}
+                  height={960}
+                  loading="lazy"
+                  className="w-full h-auto rounded-2xl border border-gray-200 object-cover"
+                />
+              </div>
+              <div>
+                <h2 className="text-3xl sm:text-4xl text-[#0d3b2e] mb-4 hyphens-nl" lang="nl">
+                  Voorbeelden van aanvragen
+                </h2>
+                <p className="text-[#6c757d] leading-relaxed mb-6">
+                  Herkent u uw eigen situatie hieronder? Dan weten wij meestal met postcode en een foto van de
+                  meterkast al wat er nodig is.
+                </p>
+                <ul className="space-y-3">
+                  {voorbeelden.map((v) => {
+                    const Icon = v.icon;
+                    return (
+                      <li key={v.text} className="flex items-start gap-3 bg-[#f8f9fa] border border-gray-200 rounded-xl p-4">
+                        <Icon className="w-5 h-5 text-[#0d3b2e] flex-shrink-0 mt-0.5" strokeWidth={2} aria-hidden="true" />
+                        <span className="text-[15px] text-[#495057] leading-relaxed">{v.text}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
         {/* KOSTEN */}
         <section id="kosten" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
@@ -372,12 +545,16 @@ const Aardingsoplossingen = () => {
                   Kosten
                 </div>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl" lang="nl">
-                  Wat kost een aardpen laten slaan?
+                  Prijsindicatie voor aardpen slaan
                 </h2>
                 <p className="text-lg text-[#6c757d] leading-relaxed">
-                  Een eerlijk antwoord: dat verschilt per situatie. Wij noemen liever geen fantasieprijs, maar geven u
-                  vooraf een duidelijke prijsindicatie op basis van uw situatie.
+                  De prijs hangt af van bodem, bereikbaarheid, benodigde diepte, aansluiting en meetrapport. Stuur
+                  postcode en foto&#39;s mee voor een snelle indicatie.
                 </p>
+                <p className="mt-3 text-lg text-[#0d3b2e] leading-relaxed">
+                  Geen verrassingen: u ontvangt vooraf een duidelijke prijsopgave.
+                </p>
+
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
@@ -415,9 +592,21 @@ const Aardingsoplossingen = () => {
                     className="border-2 border-white/40 text-white px-7 py-4 min-h-[56px] rounded-lg hover:border-white transition-colors flex items-center justify-center gap-2"
                   >
                     <Phone className="w-5 h-5" aria-hidden="true" />
-                    {company.phone.display}
+                    Bel direct
                   </a>
+                  {waLink && (
+                    <a
+                      href={waLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="border-2 border-white/40 text-white px-7 py-4 min-h-[56px] rounded-lg hover:border-white transition-colors flex items-center justify-center gap-2"
+                    >
+                      <MessageCircle className="w-5 h-5" aria-hidden="true" />
+                      WhatsApp foto sturen
+                    </a>
+                  )}
                 </div>
+
               </div>
             </div>
           </div>
@@ -548,7 +737,42 @@ const Aardingsoplossingen = () => {
                 );
               })}
             </div>
+
+            <div className="mt-12 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center max-w-5xl mx-auto">
+              <img
+                src={meetrapportFoto}
+                alt="Aardingsmeting met meetrapport door TerreVolt: meetinstrument en aardelektrode naast de woning"
+                width={1280}
+                height={960}
+                loading="lazy"
+                className="w-full h-auto rounded-2xl border border-white/15 object-cover"
+              />
+              <div>
+                <h3 className="text-2xl text-white mb-3">Meetrapport nodig voor uw installateur of keuring?</h3>
+                <p className="text-white/80 leading-relaxed mb-6">
+                  Geef aan waarvoor u het rapport nodig heeft — installateur, netbeheerder, keuring of opleverdossier.
+                  U ontvangt de meetwaarden, meetmethode, datum en locatie op papier.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Link
+                    to="/contact?type=aarding"
+                    data-cta="Prijsindicatie aanvragen (meetrapport)"
+                    className="bg-[#9ed42e] text-[#0d3b2e] px-7 py-4 min-h-[56px] rounded-lg hover:bg-[#8bc41f] transition-colors flex items-center justify-center"
+                  >
+                    Prijsindicatie aanvragen
+                  </Link>
+                  <a
+                    href={telHref}
+                    className="border-2 border-white/40 text-white px-7 py-4 min-h-[56px] rounded-lg hover:border-white transition-colors flex items-center justify-center gap-2"
+                  >
+                    <Phone className="w-5 h-5" aria-hidden="true" />
+                    Bel direct
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
+
         </section>
 
         {/* VOOR WIE */}
@@ -621,6 +845,27 @@ const Aardingsoplossingen = () => {
                 Vestiging: {addressOneLine}
               </p>
             </div>
+
+            <div className="max-w-5xl mx-auto mt-12">
+              <h3 className="text-xl sm:text-2xl text-[#0d3b2e] mb-6 text-center">
+                Aardpen slaan per plaats
+              </h3>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {lokaleGebieden.map((g) => (
+                  <li key={g.slug}>
+                    <Link
+                      to={`/contact?type=aarding&plaats=${g.slug}`}
+                      data-cta={`Aardpen slaan ${g.plaats}`}
+                      className="block h-full bg-white border border-gray-200 rounded-xl p-5 hover:border-[#9ed42e] transition-colors"
+                    >
+                      <span className="block text-[#0d3b2e] mb-1">Aardpen slaan {g.plaats}</span>
+                      <span className="block text-sm text-[#6c757d] leading-relaxed">{g.text}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
           </div>
         </section>
 
@@ -641,8 +886,43 @@ const Aardingsoplossingen = () => {
                 </details>
               ))}
             </div>
+
+            <div className="max-w-3xl mx-auto mt-10 bg-[#f8f9fa] border border-gray-200 rounded-2xl p-6 sm:p-8 text-center">
+              <p className="text-[#0d3b2e] text-lg mb-5">
+                Staat uw vraag er niet bij? Stuur postcode en een foto van de meterkast — dan weten wij meestal
+                meteen wat er nodig is.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link
+                  to="/contact?type=aarding"
+                  data-cta="Prijsindicatie aanvragen (na FAQ)"
+                  className="bg-[#9ed42e] text-[#0d3b2e] px-7 py-4 min-h-[56px] rounded-lg hover:bg-[#8bc41f] transition-colors flex items-center justify-center"
+                >
+                  Prijsindicatie aanvragen
+                </Link>
+                <a
+                  href={telHref}
+                  className="border-2 border-[#0d3b2e]/25 text-[#0d3b2e] px-7 py-4 min-h-[56px] rounded-lg hover:border-[#0d3b2e] transition-colors flex items-center justify-center gap-2"
+                >
+                  <Phone className="w-5 h-5" aria-hidden="true" />
+                  Bel direct
+                </a>
+                {waLink && (
+                  <a
+                    href={waLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border-2 border-[#0d3b2e]/25 text-[#0d3b2e] px-7 py-4 min-h-[56px] rounded-lg hover:border-[#0d3b2e] transition-colors flex items-center justify-center gap-2"
+                  >
+                    <MessageCircle className="w-5 h-5" aria-hidden="true" />
+                    WhatsApp foto sturen
+                  </a>
+                )}
+              </div>
+            </div>
           </div>
         </section>
+
 
         <WhenToCall
           variant="muted"
@@ -707,10 +987,53 @@ const Aardingsoplossingen = () => {
             </div>
           </div>
         </section>
+
+        {/* Ruimte zodat de sticky mobiele balk niets afdekt */}
+        <div className="h-20 md:hidden" aria-hidden="true" />
       </main>
+
+      {/* STICKY MOBIELE CTA */}
+      <div className="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-gray-200 px-3 py-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))]">
+        <div className="grid grid-cols-3 gap-2">
+          <a
+            href={telHref}
+            className="flex flex-col items-center justify-center gap-1 min-h-[48px] rounded-lg border border-[#0d3b2e]/20 text-[#0d3b2e] text-xs"
+          >
+            <Phone className="w-4 h-4" aria-hidden="true" />
+            Bel
+          </a>
+          {waLink ? (
+            <a
+              href={waLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center justify-center gap-1 min-h-[48px] rounded-lg border border-[#0d3b2e]/20 text-[#0d3b2e] text-xs"
+            >
+              <MessageCircle className="w-4 h-4" aria-hidden="true" />
+              WhatsApp
+            </a>
+          ) : (
+            <a
+              href={`mailto:${company.email}`}
+              className="flex flex-col items-center justify-center gap-1 min-h-[48px] rounded-lg border border-[#0d3b2e]/20 text-[#0d3b2e] text-xs"
+            >
+              <MessageCircle className="w-4 h-4" aria-hidden="true" />
+              E-mail
+            </a>
+          )}
+          <Link
+            to="/contact?type=aarding"
+            data-cta="Prijsindicatie aanvragen (sticky mobiel)"
+            className="flex items-center justify-center min-h-[48px] rounded-lg bg-[#9ed42e] text-[#0d3b2e] text-xs text-center px-2"
+          >
+            Prijsindicatie
+          </Link>
+        </div>
+      </div>
 
       <Footer />
     </div>
+
   );
 };
 
