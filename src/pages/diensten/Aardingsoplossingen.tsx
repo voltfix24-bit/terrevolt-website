@@ -235,7 +235,9 @@ const Aardingsoplossingen = () => {
         ],
         knowsAbout: [
           "aardpen slaan",
-          "aardpen laten slaan Utrecht",
+          "aardpen laten slaan Amsterdam",
+          "aardingsmeting Amsterdam",
+
           "aarding aanleggen",
           "aardingsmeting met meetrapport",
           "potentiaalvereffening",
