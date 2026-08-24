@@ -886,8 +886,43 @@ const Aardingsoplossingen = () => {
                 </details>
               ))}
             </div>
+
+            <div className="max-w-3xl mx-auto mt-10 bg-[#f8f9fa] border border-gray-200 rounded-2xl p-6 sm:p-8 text-center">
+              <p className="text-[#0d3b2e] text-lg mb-5">
+                Staat uw vraag er niet bij? Stuur postcode en een foto van de meterkast — dan weten wij meestal
+                meteen wat er nodig is.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link
+                  to="/contact?type=aarding"
+                  data-cta="Prijsindicatie aanvragen (na FAQ)"
+                  className="bg-[#9ed42e] text-[#0d3b2e] px-7 py-4 min-h-[56px] rounded-lg hover:bg-[#8bc41f] transition-colors flex items-center justify-center"
+                >
+                  Prijsindicatie aanvragen
+                </Link>
+                <a
+                  href={telHref}
+                  className="border-2 border-[#0d3b2e]/25 text-[#0d3b2e] px-7 py-4 min-h-[56px] rounded-lg hover:border-[#0d3b2e] transition-colors flex items-center justify-center gap-2"
+                >
+                  <Phone className="w-5 h-5" aria-hidden="true" />
+                  Bel direct
+                </a>
+                {waLink && (
+                  <a
+                    href={waLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="border-2 border-[#0d3b2e]/25 text-[#0d3b2e] px-7 py-4 min-h-[56px] rounded-lg hover:border-[#0d3b2e] transition-colors flex items-center justify-center gap-2"
+                  >
+                    <MessageCircle className="w-5 h-5" aria-hidden="true" />
+                    WhatsApp foto sturen
+                  </a>
+                )}
+              </div>
+            </div>
           </div>
         </section>
+
 
         <WhenToCall
           variant="muted"
