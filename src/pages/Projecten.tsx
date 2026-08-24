@@ -94,7 +94,7 @@ const Projecten = () => {
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
 
-      <main id="main-content" className="pt-16 sm:pt-20">
+      <main id="main-content" className="pt-20 sm:pt-24">
         {/* HERO */}
         <section className="relative sm:min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-14 sm:py-20">
           <div className="absolute inset-0 opacity-[0.08]">

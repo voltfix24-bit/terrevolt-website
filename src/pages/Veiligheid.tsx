@@ -135,7 +135,7 @@ const Veiligheid = () => {
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
 
-      <main id="main-content" className="pt-16 sm:pt-20">
+      <main id="main-content" className="pt-20 sm:pt-24">
         {/* HERO */}
         <section className="relative sm:min-h-[60vh] flex items-center overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] pt-12 pb-16 sm:py-20">
           <div className="absolute inset-0 opacity-[0.08]">
@@ -189,7 +189,7 @@ const Veiligheid = () => {
           ref={subnavRef}
           data-hash-scroll-offset
           aria-label="Paginanavigatie Veiligheid"
-          className="sticky top-16 sm:top-20 z-30 bg-white/80 supports-[backdrop-filter]:bg-white/65 backdrop-blur-md border-b border-gray-200/80 shadow-[0_6px_16px_-14px_rgba(13,59,46,0.5)]"
+          className="sticky top-20 sm:top-24 z-30 bg-white/80 supports-[backdrop-filter]:bg-white/65 backdrop-blur-md border-b border-gray-200/80 shadow-[0_6px_16px_-14px_rgba(13,59,46,0.5)]"
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-12">
             <ul
@@ -238,7 +238,7 @@ const Veiligheid = () => {
         </nav>
 
         {/* SECTIE: Veiligheid vóór planning */}
-        <section id="filosofie" className="py-14 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="filosofie" className="py-14 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-14">
               <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Onze houding</div>
@@ -266,7 +266,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Veiligheid en kwaliteit in één aanpak */}
-        <section id="aanpak" className="py-14 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="aanpak" className="py-14 md:py-24 bg-[#f8f9fa] scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-14 sm:mb-16 max-w-3xl mx-auto">
               <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">5 pijlers</div>
@@ -299,7 +299,7 @@ const Veiligheid = () => {
           </div>
         </section>
         {/* SECTIE: Wat veiligheid en kwaliteit in de praktijk betekenen */}
-        <section id="praktijk" className="py-14 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="praktijk" className="py-14 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-12 sm:mb-14">
               <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">In de praktijk</div>
@@ -371,7 +371,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: De vijf eisen bij spanningsloos werken */}
-        <section id="veilige-5" className="py-14 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="veilige-5" className="py-14 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Spanningsloos werken</div>
@@ -424,7 +424,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: BEI & VWI */}
-        <section id="bei-vwi" className="py-14 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="bei-vwi" className="py-14 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Normen & bevoegdheden</div>
@@ -452,7 +452,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Werkplekveiligheid */}
-        <section id="werkplek" className="py-14 md:py-24 bg-[#f8f9fa] scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="werkplek" className="py-14 md:py-24 bg-[#f8f9fa] scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
               <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Uitvoering</div>
@@ -462,7 +462,7 @@ const Veiligheid = () => {
               </p>
             </div>
 
-            <span id="locatie-eisen" aria-hidden="true" className="block scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]" />
+            <span id="locatie-eisen" aria-hidden="true" className="block scroll-mt-[10rem] sm:scroll-mt-[11.5rem]" />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 max-w-6xl mx-auto">
               {werkplek.map((c) => {
                 const Icon = c.icon;
@@ -481,7 +481,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Rollen (donker) */}
-        <section id="rollen" className="relative py-14 md:py-24 bg-[#0d3b2e] overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="rollen" className="relative py-14 md:py-24 bg-[#0d3b2e] overflow-hidden scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="absolute inset-0 opacity-[0.05]">
             <div
               className="absolute inset-0"
@@ -523,7 +523,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: Statement */}
-        <section id="stoppen" className="relative py-20 md:py-28 bg-[#f8f9fa] overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="stoppen" className="relative py-20 md:py-28 bg-[#f8f9fa] overflow-hidden scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center select-none">
             <span className="text-[18vw] sm:text-[14vw] lg:text-[12rem] font-bold tracking-tight text-[#0d3b2e]/[0.04] uppercase whitespace-nowrap">
               Veilig werken
@@ -543,7 +543,7 @@ const Veiligheid = () => {
         </section>
 
         {/* SECTIE: FAQ */}
-        <section id="faq" className="py-16 md:py-24 bg-white scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="faq" className="py-16 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto">
               <div className="text-center mb-10 sm:mb-12">
@@ -598,7 +598,7 @@ const Veiligheid = () => {
         </section>
 
         {/* CTA */}
-        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-[8.5rem] sm:scroll-mt-[9.5rem]">
+        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"

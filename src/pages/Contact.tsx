@@ -310,7 +310,7 @@ const Contact = () => {
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
 
-      <main id="main-content" className="pt-16 sm:pt-20">
+      <main id="main-content" className="pt-20 sm:pt-24">
         {/* HERO — donker, technisch, met overlappende keuzecards */}
         <section className="relative overflow-hidden bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] py-16 sm:py-24 md:py-32 pb-24 sm:pb-32 md:pb-40">
           <div className="absolute inset-0 opacity-[0.08]">
