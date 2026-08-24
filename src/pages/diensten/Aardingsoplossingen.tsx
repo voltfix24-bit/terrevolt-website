@@ -1,10 +1,12 @@
-import { ArrowRight, Gauge, ShieldCheck, GitBranch, FileBarChart, Building2, Server, Zap, Factory, Construction, Plug, Activity, ClipboardList, FileCheck } from "lucide-react";
+import { ArrowRight, Home, Phone, Gauge, ShieldCheck, GitBranch, FileBarChart, Building2, Server, Zap, Factory, Construction, Plug, Activity, ClipboardList, FileCheck } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
 import { WhenToCall } from "@/components/terrevolt/WhenToCall";
 import { SafetyStatement } from "@/components/terrevolt/SafetyStatement";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
+import { Link } from "react-router-dom";
+import { company, SITE_URL, telHref } from "@/config/company";
 
 const fundament = [
   { icon: EarthSymbol, title: "Aardelektroden", description: "Plaatsen van aardelektroden en aardingsvoorzieningen voor technische installaties." },
@@ -196,11 +198,11 @@ const Aardingsoplossingen = () => {
                 Specialisme
               </div>
               <h1 className="text-[clamp(1.875rem,7vw,2.625rem)] sm:text-5xl lg:text-6xl text-white mb-6 leading-[1.1] sm:leading-tight hyphens-nl text-pretty">
-                Aardingsoplossingen<br />
-                <span className="text-[#9ed42e]">voor LS/MS-infrastructuur</span>
+                Aarding aanleggen en meten<br />
+                <span className="text-[#9ed42e]">voor particulier en bedrijf</span>
               </h1>
               <p className="text-lg sm:text-xl lg:text-2xl text-white/85 mb-10 max-w-3xl leading-relaxed">
-                TerreVolt realiseert, verbetert, meet en rapporteert aardingsvoorzieningen voor laagspannings- en middenspanningsinstallaties, stations, technische ruimten en industriële installaties.
+                Aardpen slaan, aarding verbeteren, potentiaalvereffening en aardingsmeting met meetrapport. TerreVolt werkt voor woningeigenaren, installateurs, bedrijven en netbeheerders — vanuit {company.address.city} in heel Nederland.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -208,7 +210,7 @@ const Aardingsoplossingen = () => {
                   href="/contact"
                   className="group bg-[#9ed42e] text-[#0d3b2e] px-8 py-4 rounded-lg hover:bg-[#8bc41f] transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  <span>Aarding bespreken</span>
+                  <span>Aarding aanvragen</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </a>
                 <a
@@ -216,6 +218,13 @@ const Aardingsoplossingen = () => {
                   className="border-2 border-[#9ed42e] text-[#9ed42e] px-8 py-4 rounded-lg hover:bg-[#9ed42e] hover:text-[#0d3b2e] transition-all duration-300 text-center"
                 >
                   Meetrapportage aanvragen
+                </a>
+                <a
+                  href={telHref}
+                  className="border-2 border-white/40 text-white px-8 py-4 rounded-lg hover:border-white transition-all duration-300 text-center flex items-center justify-center gap-2"
+                >
+                  <Phone className="w-5 h-5" />
+                  {company.phone.display}
                 </a>
               </div>
             </div>
@@ -333,6 +342,67 @@ const Aardingsoplossingen = () => {
             </div>
           </div>
         </section>
+
+        {/* SECTIE: Voor wie */}
+        <section id="voor-wie" className="py-16 md:py-24 bg-white scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Aarding laten aanleggen: particulier of zakelijk</h2>
+              <p className="text-lg sm:text-xl text-[#6c757d] max-w-3xl mx-auto leading-relaxed">
+                Of het nu gaat om één aardpen bij een woning of om de complete aarding van een station: het werk wordt gemeten opgeleverd.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+              {doelgroepen.map((groep) => {
+                const Icon = groep.icon;
+                return (
+                  <div key={groep.title} className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-7">
+                    <div className="w-12 h-12 bg-[#0d3b2e] rounded-lg flex items-center justify-center mb-4">
+                      <Icon className="w-6 h-6 text-[#9ed42e]" strokeWidth={2} />
+                    </div>
+                    <h3 className="text-xl text-[#0d3b2e] mb-1">{groep.title}</h3>
+                    <p className="text-[#6c757d] text-sm mb-4">{groep.intro}</p>
+                    <ul className="space-y-2">
+                      {groep.items.map((item) => (
+                        <li key={item} className="flex gap-2 text-[#495057] text-[15px] leading-relaxed">
+                          <span className="text-[#9ed42e] mt-0.5">&#8226;</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+
+            <p className="max-w-4xl mx-auto mt-10 text-[15px] sm:text-base text-[#6c757d] leading-relaxed text-center">
+              Werkgebied: vanuit {company.address.city} werkt TerreVolt in heel Nederland, met nadruk op de provincie Utrecht en omliggende regio&#39;s.
+              Meer over metingen leest u op <Link to="/diensten/meten-en-beproeven" className="text-[#0d3b2e] underline underline-offset-4 hover:text-[#9ed42e]">meten &amp; beproeven</Link>.
+            </p>
+          </div>
+        </section>
+
+        {/* SECTIE: FAQ */}
+        <section id="veelgestelde-vragen" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Veelgestelde vragen over aarding</h2>
+            </div>
+            <div className="max-w-3xl mx-auto space-y-4">
+              {faq.map((item) => (
+                <details key={item.q} className="group bg-white border border-gray-200 rounded-xl p-5 open:border-[#9ed42e]">
+                  <summary className="cursor-pointer list-none text-[#0d3b2e] text-lg flex items-start justify-between gap-4 min-h-[44px]">
+                    <h3 className="text-lg text-[#0d3b2e]">{item.q}</h3>
+                    <span className="text-[#9ed42e] transition-transform group-open:rotate-45 text-2xl leading-none">+</span>
+                  </summary>
+                  <p className="mt-3 text-[#6c757d] leading-relaxed">{item.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Wanneer schakelt u TerreVolt in? */}
         <WhenToCall
           variant="muted"
