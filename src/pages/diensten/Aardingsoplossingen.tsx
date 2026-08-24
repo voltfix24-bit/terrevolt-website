@@ -456,6 +456,85 @@ const Aardingsoplossingen = () => {
           </div>
         </section>
 
+        {/* WAAROM TERREVOLT */}
+        <section id="waarom-terrevolt" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+              <div className="order-2 lg:order-1">
+                <h2 className="text-3xl sm:text-4xl text-[#0d3b2e] mb-6 hyphens-nl" lang="nl">
+                  Waarom klanten TerreVolt inschakelen
+                </h2>
+                <ul className="space-y-5">
+                  {waarom.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <li key={item.title} className="flex items-start gap-4">
+                        <span className="w-11 h-11 flex-shrink-0 rounded-lg bg-[#0d3b2e] flex items-center justify-center">
+                          <Icon className="w-5 h-5 text-[#9ed42e]" strokeWidth={2} aria-hidden="true" />
+                        </span>
+                        <div>
+                          <h3 className="text-lg text-[#0d3b2e] mb-1 hyphens-nl" lang="nl">{item.title}</h3>
+                          <p className="text-[#6c757d] text-[15px] leading-relaxed">{item.text}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+              <div className="order-1 lg:order-2">
+                <img
+                  src={aardpenFoto}
+                  alt="Aardpen laten slaan bij een woning in Utrecht door een monteur van TerreVolt"
+                  width={1280}
+                  height={960}
+                  loading="lazy"
+                  className="w-full h-auto rounded-2xl border border-gray-200 object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* VOORBEELDEN VAN AANVRAGEN */}
+        <section id="voorbeelden" className="py-16 md:py-24 bg-white scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+              <div>
+                <img
+                  src={meterkastFoto}
+                  alt="Aardleiding aansluiten op de hoofdaardrail in een meterkast — aardpen slaan bij meterkast"
+                  width={1280}
+                  height={960}
+                  loading="lazy"
+                  className="w-full h-auto rounded-2xl border border-gray-200 object-cover"
+                />
+              </div>
+              <div>
+                <h2 className="text-3xl sm:text-4xl text-[#0d3b2e] mb-4 hyphens-nl" lang="nl">
+                  Voorbeelden van aanvragen
+                </h2>
+                <p className="text-[#6c757d] leading-relaxed mb-6">
+                  Herkent u uw eigen situatie hieronder? Dan weten wij meestal met postcode en een foto van de
+                  meterkast al wat er nodig is.
+                </p>
+                <ul className="space-y-3">
+                  {voorbeelden.map((v) => {
+                    const Icon = v.icon;
+                    return (
+                      <li key={v.text} className="flex items-start gap-3 bg-[#f8f9fa] border border-gray-200 rounded-xl p-4">
+                        <Icon className="w-5 h-5 text-[#0d3b2e] flex-shrink-0 mt-0.5" strokeWidth={2} aria-hidden="true" />
+                        <span className="text-[15px] text-[#495057] leading-relaxed">{v.text}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
         {/* KOSTEN */}
         <section id="kosten" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
