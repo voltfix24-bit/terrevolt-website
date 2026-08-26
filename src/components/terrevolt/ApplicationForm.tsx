@@ -9,7 +9,7 @@ import { scrollToElement } from "@/lib/scrollToAnchor";
 import { REGIOS } from "@/data/vacatures";
 import { useVacatures } from "@/hooks/useVacatures";
 
-import { notifyAndConfirm } from "@/lib/notify";
+import { notifySubmission } from "@/lib/notify";
 
 
 /**
@@ -142,7 +142,7 @@ export const ApplicationForm = ({ defaultProfile, source = "werken_bij_form", id
       const extras = `Functie: ${parsed.data.profile} | Regio: ${parsed.data.region} | Privacy akkoord: ja | Bewaren 12 maanden: ${bewaren}`;
       const fullMessage = parsed.data.message ? `${extras}\n\n${parsed.data.message}` : extras;
 
-      const { error: insErr } = await supabase.from("job_applications").insert([
+      const { data: inserted, error: insErr } = await supabase.from("job_applications").insert([
         {
           name: parsed.data.name,
           phone: parsed.data.phone,
@@ -153,27 +153,13 @@ export const ApplicationForm = ({ defaultProfile, source = "werken_bij_form", id
           profile: parsed.data.profile,
           privacy_consent: true,
         },
-      ]);
+      ]).select("id").single();
       if (insErr) throw insErr;
 
       window.localStorage.setItem(THROTTLE_KEY, String(Date.now()));
 
       // Melding naar kantoor + ontvangstbevestiging naar de sollicitant.
-      void notifyAndConfirm(
-        "application-notification",
-        "application-confirmation",
-        {
-          name: parsed.data.name,
-          email: parsed.data.email,
-          phone: parsed.data.phone,
-          profile: parsed.data.profile,
-          region: parsed.data.region,
-          message: parsed.data.message || "",
-          hasCv: Boolean(cv_url),
-          source,
-        },
-        parsed.data.email,
-      );
+      if (inserted?.id) void notifySubmission("application", inserted.id);
 
       import("@/lib/analytics").then((m) => m.trackFormSubmit(source));
 

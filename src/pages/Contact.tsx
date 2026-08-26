@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { company, addressOneLine, telHref, mailHref } from "@/config/company";
 import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
-import { notifyAndConfirm } from "@/lib/notify";
+import { notifySubmission } from "@/lib/notify";
 
 
 const contactCards = [
@@ -256,7 +256,7 @@ const Contact = () => {
         intent === "project" ? "Project bespreken" :
         intent === "monteur" ? "Monteur/ploeg nodig" : "Sollicitatie";
 
-      const { error: insErr } = await supabase.from("contact_requests").insert([{
+      const { data: inserted, error: insErr } = await supabase.from("contact_requests").insert([{
         name: parsed.data.name,
         company: parsed.data.company || null,
         phone: parsed.data.phone || null,
@@ -268,29 +268,13 @@ const Contact = () => {
         attachment_url,
         intent,
         intent_label: intentLabel,
-      } as any]);
+      } as any]).select("id").single();
       if (insErr) throw insErr;
 
       window.localStorage.setItem(THROTTLE_KEY, String(Date.now()));
 
       // Melding naar kantoor + ontvangstbevestiging naar de aanvrager.
-      void notifyAndConfirm(
-        "contact-notification",
-        "contact-confirmation",
-        {
-          name: parsed.data.name,
-          company: parsed.data.company || "",
-          email: parsed.data.email,
-          phone: parsed.data.phone || "",
-          requestType: parsed.data.request_type || "",
-          location: parsed.data.location || "",
-          startDate: parsed.data.start_date || "",
-          description: parsed.data.description || "",
-          intentLabel,
-          hasAttachment: Boolean(attachment_url),
-        },
-        parsed.data.email,
-      );
+      if (inserted?.id) void notifySubmission("contact", inserted.id);
 
       import("@/lib/analytics").then((m) =>
         m.trackFormSubmit("contact_form", { aanvraag_type: intent })
