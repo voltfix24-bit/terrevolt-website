@@ -276,6 +276,57 @@ const AardingAanleggen = () => {
           </div>
         </section>
 
+        <section id="amsterdam" className="py-16 md:py-24 bg-[#f0f7e6] scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center max-w-6xl mx-auto">
+              <div className="order-2 lg:order-1">
+                <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-5 tracking-wider uppercase">
+                  <MapPin className="w-4 h-4" aria-hidden="true" />
+                  Amsterdam
+                </div>
+                <h2 className="text-3xl sm:text-4xl text-[#0d3b2e] mb-5 hyphens-nl" lang="nl">
+                  Aardpen slaan en aarding meten in Amsterdam
+                </h2>
+                <p className="text-[#6c757d] leading-relaxed mb-5">
+                  Amsterdam is de eerste stad waar we een volledige landingspagina hebben ingericht voor aardpen slaan,
+                  aardingsmeting en meetrapportage. Denk aan oude woningen, nieuwe meterkasten, laadpalen,
+                  zonnepanelen, VvE's en bedrijfspanden.
+                </p>
+                <ul className="space-y-2 mb-7">
+                  {[
+                    "Scherpe prijsindicatie op basis van postcode en foto's",
+                    "Ook voor appartementen, winkels, VvE's en technische ruimten",
+                    "Meetrapport voor installateur, keuring of opleverdossier",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-[15px] text-[#495057] leading-relaxed">
+                      <CheckCircle2 className="w-5 h-5 text-[#9ed42e] flex-shrink-0 mt-0.5" strokeWidth={2.5} aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to="/aardpen-slaan-amsterdam"
+                  data-cta="Aardpen slaan Amsterdam teaser"
+                  className="group inline-flex items-center gap-2 bg-[#0d3b2e] text-white px-7 py-4 min-h-[56px] rounded-lg hover:bg-[#1a4a36] transition-colors"
+                >
+                  Bekijk Amsterdam-pagina
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                </Link>
+              </div>
+              <div className="order-1 lg:order-2">
+                <img
+                  src={aardpenFoto}
+                  alt="Aardpen laten slaan in Amsterdam door TerreVolt"
+                  width={1280}
+                  height={960}
+                  loading="lazy"
+                  className="w-full h-auto rounded-2xl border border-[#9ed42e]/30 object-cover shadow-xl"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="situaties" className="py-16 md:py-24 bg-white scroll-mt-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-4xl mx-auto text-center mb-12">
