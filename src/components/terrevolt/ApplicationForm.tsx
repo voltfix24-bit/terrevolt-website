@@ -142,8 +142,10 @@ export const ApplicationForm = ({ defaultProfile, source = "werken_bij_form", id
       const extras = `Functie: ${parsed.data.profile} | Regio: ${parsed.data.region} | Privacy akkoord: ja | Bewaren 12 maanden: ${bewaren}`;
       const fullMessage = parsed.data.message ? `${extras}\n\n${parsed.data.message}` : extras;
 
-      const { data: inserted, error: insErr } = await supabase.from("job_applications").insert([
+      const submissionId = crypto.randomUUID();
+      const { error: insErr } = await supabase.from("job_applications").insert([
         {
+          id: submissionId,
           name: parsed.data.name,
           phone: parsed.data.phone,
           email: parsed.data.email,
@@ -153,13 +155,13 @@ export const ApplicationForm = ({ defaultProfile, source = "werken_bij_form", id
           profile: parsed.data.profile,
           privacy_consent: true,
         },
-      ]).select("id").single();
+      ]);
       if (insErr) throw insErr;
 
       window.localStorage.setItem(THROTTLE_KEY, String(Date.now()));
 
       // Melding naar kantoor + ontvangstbevestiging naar de sollicitant.
-      if (inserted?.id) void notifySubmission("application", inserted.id);
+      void notifySubmission("application", submissionId);
 
       import("@/lib/analytics").then((m) => m.trackFormSubmit(source));
 

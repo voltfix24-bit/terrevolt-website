@@ -256,7 +256,9 @@ const Contact = () => {
         intent === "project" ? "Project bespreken" :
         intent === "monteur" ? "Monteur/ploeg nodig" : "Sollicitatie";
 
-      const { data: inserted, error: insErr } = await supabase.from("contact_requests").insert([{
+      const submissionId = crypto.randomUUID();
+      const { error: insErr } = await supabase.from("contact_requests").insert([{
+        id: submissionId,
         name: parsed.data.name,
         company: parsed.data.company || null,
         phone: parsed.data.phone || null,
@@ -268,13 +270,13 @@ const Contact = () => {
         attachment_url,
         intent,
         intent_label: intentLabel,
-      } as any]).select("id").single();
+      } as any]);
       if (insErr) throw insErr;
 
       window.localStorage.setItem(THROTTLE_KEY, String(Date.now()));
 
       // Melding naar kantoor + ontvangstbevestiging naar de aanvrager.
-      if (inserted?.id) void notifySubmission("contact", inserted.id);
+      void notifySubmission("contact", submissionId);
 
       import("@/lib/analytics").then((m) =>
         m.trackFormSubmit("contact_form", { aanvraag_type: intent })
