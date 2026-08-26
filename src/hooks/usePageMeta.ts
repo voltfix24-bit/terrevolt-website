@@ -18,10 +18,14 @@ const DEFAULT_OG_IMAGE = SITE_OG_IMAGE;
 
 const CANONICAL_PATH_ALIASES = new Map<string, string>([["/aarding-aanleggen", "/aarding"]]);
 
+function replaceAllCompat(value: string, search: string, replacement: string) {
+  return value.split(search).join(replacement);
+}
+
 function normalizeUrlValue(value: string) {
   let normalized = value;
   CANONICAL_PATH_ALIASES.forEach((target, source) => {
-    normalized = normalized.replaceAll(`${SITE_URL}${source}`, `${SITE_URL}${target}`);
+    normalized = replaceAllCompat(normalized, `${SITE_URL}${source}`, `${SITE_URL}${target}`);
     if (normalized === source) normalized = target;
   });
   return normalized;
