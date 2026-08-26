@@ -6,9 +6,9 @@ import { test, expect } from "@playwright/test";
  * mobiele en desktop breedtes.
  *
  * De clamp() in src/components/terrevolt/Header.tsx zorgt voor:
- *   height: clamp(48px, 10vw, 70px)
- * Op smalle telefoons blijft het logo 48px, op desktop cap't 't op 70px.
- * Breedte is ~3.89x de hoogte, dus desktop ongeveer 272px.
+ *   height: clamp(44px, 9vw, 62px)
+ * Op smalle telefoons blijft het logo 44px, op desktop cap't 't op 62px.
+ * Breedte is ~3.89x de hoogte, dus desktop ongeveer 241px.
  * Eerste run: `npx playwright test logo-visual --update-snapshots`.
  */
 const WIDTHS = [320, 360, 375, 390, 414, 480, 640, 768, 1024, 1280, 1366];
@@ -46,8 +46,8 @@ for (const width of WIDTHS) {
     });
     expect(svgInfo).not.toBeNull();
     // Hoogte moet binnen clamp-bereik liggen (kleine subpixel-marge).
-    expect(svgInfo!.height).toBeGreaterThanOrEqual(47);
-    expect(svgInfo!.height).toBeLessThanOrEqual(71);
+    expect(svgInfo!.height).toBeGreaterThanOrEqual(43);
+    expect(svgInfo!.height).toBeLessThanOrEqual(63);
     // 4 aardings-lijnen + 1 bliksem-path moeten altijd aanwezig zijn.
     expect(svgInfo!.lines).toBe(4);
     expect(svgInfo!.paths).toBeGreaterThanOrEqual(1);

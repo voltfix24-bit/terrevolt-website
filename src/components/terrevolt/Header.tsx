@@ -155,10 +155,10 @@ export function Header() {
                 className="w-auto"
                 decorative
                 style={{
-                  // Rustiger formaat: 48px op mobiel → 70px op desktop.
-                  height: "clamp(48px, 10vw, 70px)",
+                  // Nog iets subtieler: 44px op mobiel → 62px op desktop.
+                  height: "clamp(44px, 9vw, 62px)",
                   // Voorkom dat 't logo de hamburger uit de viewport drukt.
-                  maxWidth: "min(72vw, 280px)",
+                  maxWidth: "min(68vw, 250px)",
                 }}
               />
             </Link>
