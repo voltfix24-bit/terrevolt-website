@@ -1,9 +1,9 @@
-import { useEffect } from "react";
 import { Navigate, Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { Loader2, LogOut, Briefcase, Inbox, LayoutDashboard, MessageSquare, BarChart3 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/terrevolt/Logo";
 
 export default function AdminLayout() {
   const { user, isAdmin, loading } = useAuth();

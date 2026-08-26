@@ -1,7 +1,7 @@
-import { Zap } from "lucide-react";
 import { Link } from "react-router-dom";
 import { company, telHref, mailHref } from "@/config/company";
 import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
+import { Logo } from "@/components/terrevolt/Logo";
 
 export function Footer() {
   return (

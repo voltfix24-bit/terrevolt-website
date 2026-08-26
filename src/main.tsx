@@ -55,14 +55,4 @@ function prefillContactLocationFromQuery() {
     return true;
   };
 
-  if (fillLocation()) return;
-  const observer = new MutationObserver(() => {
-    if (fillLocation()) observer.disconnect();
-  });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
-}
-
-preloadLogo();
-prefillContactLocationFromQuery();
-
-createRoot(document.getElementById("root")!).render(<App />);
+function prefillContactLocationFromQuery() {
