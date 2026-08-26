@@ -124,6 +124,7 @@ const AardingAanleggen = () => {
         description:
           "Plaatsen van aardpennen, aarding meten en meetrapportage voor woningen, meterkasten, laadpalen, zonnepanelen, VvE's en bedrijven.",
         url: PAGE_URL,
+        relatedLink: [`${SITE_URL}/aardpen-slaan-amsterdam`],
         provider: { "@id": `${SITE_URL}/#organization` },
         areaServed: { "@type": "Country", name: "Nederland" },
         availableChannel: [
