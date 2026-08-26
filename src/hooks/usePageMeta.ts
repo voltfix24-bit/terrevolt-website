@@ -14,7 +14,97 @@ export interface PageMetaInput {
   noindex?: boolean;
 }
 
+type SeoMetaOverride = Required<Pick<PageMetaInput, "title" | "description">>;
+
 const DEFAULT_OG_IMAGE = SITE_OG_IMAGE;
+
+const META_OVERRIDES: Record<string, SeoMetaOverride> = {
+  "/": {
+    title: "TerreVolt BV | LS/MS-infrastructuur en aarding",
+    description:
+      "TerreVolt helpt met LS/MS-netmontage, stationsrenovatie, schakelwerk, aarding, metingen en huisaansluitingen.",
+  },
+  "/diensten": {
+    title: "Diensten | LS/MS, schakelwerk en aarding | TerreVolt",
+    description:
+      "Bekijk LS/MS-netmontage, stationsrenovatie, schakelwerk, aarding, meten en beproeven en huisaansluitingen van TerreVolt.",
+  },
+  "/diensten/ls-ms-netmontage": {
+    title: "LS/MS netmontage | Kabelmontage | TerreVolt",
+    description:
+      "Kabelmontage, moffen, eindsluitingen en aansluitwerk in laag- en middenspanningsnetten voor netbeheerders, aannemers en industrie.",
+  },
+  "/diensten/stationsrenovatie": {
+    title: "Stationsrenovatie MS/LS | TerreVolt",
+    description:
+      "Renovatie van MS/LS-stations, transformatorruimten, LS-rekken en aarding, gefaseerd uitgevoerd en aantoonbaar opgeleverd.",
+  },
+  "/diensten/schakelwerk": {
+    title: "Schakelwerk en veiligstellen | TerreVolt",
+    description:
+      "Schakelwerk, vrijschakelen, veiligstellen en in- en uitbedrijf nemen binnen LS/MS-projecten volgens duidelijke procedures.",
+  },
+  "/aarding": {
+    title: "Aardpen laten slaan | Aarding meten | TerreVolt",
+    description:
+      "Aardpen laten slaan of aarding meten? TerreVolt helpt bij meterkast, laadpaal, zonnepanelen, woning, VvE en bedrijf. Meetrapport mogelijk.",
+  },
+  "/aardpen-slaan-amsterdam": {
+    title: "Aardpen slaan Amsterdam | Aarding meten | TerreVolt",
+    description:
+      "Aardpen laten slaan in Amsterdam? TerreVolt helpt met aarding meten, meetrapport, meterkast, laadpaal, zonnepanelen, VvE en bedrijf.",
+  },
+  "/diensten/meten-en-beproeven": {
+    title: "Meten en beproeven | Aardingsmetingen | TerreVolt",
+    description:
+      "Aardingsmetingen, kabelmetingen, controlemetingen en opleverrapportages voor LS/MS-installaties, aarding en projectdossiers.",
+  },
+  "/diensten/huisaansluitingen": {
+    title: "Huisaansluitingen en LS-aansluitwerk | TerreVolt",
+    description:
+      "Aanleg, wijziging en sanering van huisaansluitingen en aansluitwerk op het laagspanningsnet voor woningen en projecten.",
+  },
+  "/projecten": {
+    title: "Projecten | Elektrotechnische infra | TerreVolt",
+    description:
+      "Projecttypes en praktijkvoorbeelden binnen LS/MS-infrastructuur, stationsrenovatie, schakelwerk, aarding en metingen.",
+  },
+  "/veiligheid": {
+    title: "Veiligheid en certificeringen | TerreVolt",
+    description:
+      "Veilig werken, ISO 9001, VCA**, SBB erkend leerbedrijf en aantoonbare kwaliteit bij TerreVolt.",
+  },
+  "/over": {
+    title: "Over TerreVolt BV | Elektrotechniek Utrecht",
+    description:
+      "TerreVolt BV uit Utrecht is uitvoerend specialist in LS/MS-infrastructuur, netmontage, aarding, schakelwerk en technische projecten.",
+  },
+  "/werken-bij": {
+    title: "Werken bij TerreVolt | Vacatures elektrotechniek",
+    description:
+      "Bekijk vacatures voor elektrotechniek, laagspanning, middenspanning, aarding, huisaansluitingen en werkverantwoordelijkheid bij TerreVolt.",
+  },
+  "/contact": {
+    title: "Contact | Project bespreken met TerreVolt",
+    description:
+      "Neem contact op met TerreVolt voor LS/MS-infrastructuur, schakelwerk, stationsrenovatie, netmontage, aarding en metingen.",
+  },
+  "/privacy": {
+    title: "Privacyverklaring | TerreVolt",
+    description:
+      "Privacyverklaring van TerreVolt over contactaanvragen, sollicitaties, uploads en gegevensverwerking via de website.",
+  },
+  "/kennis/middenspanning": {
+    title: "Middenspanning uitgelegd | TerreVolt",
+    description:
+      "Wat is middenspanning, wanneer heb je een MS-aansluiting nodig en wie mag eraan werken? Uitleg over MS-netten, stations, BEI BHS en NEN 3840.",
+  },
+  "/kennis/laagspanning-middenspanning-hoogspanning": {
+    title: "Laagspanning, middenspanning en hoogspanning | TerreVolt",
+    description:
+      "Het verschil tussen laagspanning, middenspanning en hoogspanning uitgelegd voor aansluitingen, netten en elektrotechnische projecten.",
+  },
+};
 
 const CANONICAL_PATH_ALIASES = new Map<string, string>([["/aarding-aanleggen", "/aarding"]]);
 
@@ -38,6 +128,16 @@ function normalizeUrlValue(value: string) {
     normalized = normalizePathAlias(normalized, source, target);
   });
   return normalized;
+}
+
+function canonicalPathKey(value: string) {
+  const normalized = normalizeUrlValue(value);
+  try {
+    const url = normalized.startsWith("http") ? new URL(normalized) : new URL(normalized, SITE_URL);
+    return url.pathname || "/";
+  } catch {
+    return normalized.split(/[?#]/)[0] || "/";
+  }
 }
 
 function normalizeCanonical(canonical: string | undefined, currentPath: string) {
@@ -113,27 +213,30 @@ export function usePageMeta(
     // Canonicals/og:url moeten ALTIJD het productiedomein gebruiken,
     // ongeacht of we draaien op preview-, lovable.app- of custom domain.
     const origin = SITE_URL;
-
-    document.title = meta.title;
-    if (meta.description) upsertMeta("name", "description", meta.description);
-
     const path = typeof window !== "undefined" ? window.location.pathname : "/";
     const canonicalValue = normalizeCanonical(meta.canonical, path);
     const canonicalHref = canonicalValue.startsWith("http") ? canonicalValue : origin + canonicalValue;
+    const metaOverride = META_OVERRIDES[canonicalPathKey(canonicalValue)];
+    const pageTitle = metaOverride?.title ?? meta.title;
+    const pageDescription = metaOverride?.description ?? meta.description;
+
+    document.title = pageTitle;
+    if (pageDescription) upsertMeta("name", "description", pageDescription);
+
     upsertLink("canonical", canonicalHref);
 
     upsertMeta("property", "og:site_name", "TerreVolt");
     upsertMeta("property", "og:locale", "nl_NL");
-    upsertMeta("property", "og:title", meta.title);
-    if (meta.description) upsertMeta("property", "og:description", meta.description);
+    upsertMeta("property", "og:title", pageTitle);
+    if (pageDescription) upsertMeta("property", "og:description", pageDescription);
     upsertMeta("property", "og:type", meta.ogType ?? "website");
     upsertMeta("property", "og:url", canonicalHref);
     upsertMeta("property", "og:image", meta.ogImage ?? DEFAULT_OG_IMAGE);
-    upsertMeta("property", "og:image:alt", meta.title);
+    upsertMeta("property", "og:image:alt", pageTitle);
 
     upsertMeta("name", "twitter:card", "summary_large_image");
-    upsertMeta("name", "twitter:title", meta.title);
-    if (meta.description) upsertMeta("name", "twitter:description", meta.description);
+    upsertMeta("name", "twitter:title", pageTitle);
+    if (pageDescription) upsertMeta("name", "twitter:description", pageDescription);
     upsertMeta("name", "twitter:image", meta.ogImage ?? DEFAULT_OG_IMAGE);
 
     // Alleen preview-/sandbox-omgevingen op noindex; alle live domeinen indexeerbaar.
