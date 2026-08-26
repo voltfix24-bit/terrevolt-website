@@ -1,96 +1,111 @@
-import { useState } from "react";
-import logoSrc from "@/assets/terrevolt-logo.png";
-
 /**
- * TerreVolt-logo — geüploade PNG (1376×768, ratio ≈1.792).
+ * TerreVolt-logo — inline SVG zonder lettertype-afhankelijkheid.
+ *
+ * De tekst is geconverteerd naar vectorpaden, zodat het logo op elk scherm
+ * haarscherp blijft zonder dat het Plus Jakarta Sans-lettertype hoeft te laden.
  *
  * Toegankelijkheid:
- *  - Standaard `alt` beschrijft het merk + activiteit (i.p.v. enkel "logo").
- *  - `decorative` zet de afbeelding op `alt=""` + `aria-hidden`, voor gebruik
- *    binnen een al gelabeld element (bv. `<Link aria-label="...">`), zodat
- *    schermlezers het logo niet dubbel aankondigen.
- *  - `role="img"` + `aria-label` op de wrapper houdt de semantiek correct
- *    terwijl de skeleton-placeholder zichtbaar is.
- *  - Skeleton heeft `aria-hidden` en is puur visueel.
- *  - `<title>`-element via `aria-labelledby`-vriendelijke setup voor
- *    hover-tooltip op desktop (native browser tooltip via `title`-attribuut).
+ *  - Standaard `alt` beschrijft het merk + activiteit.
+ *  - `decorative` zet de afbeelding op `aria-hidden`, voor gebruik binnen een
+ *    al gelabeld element (bv. `<Link aria-label="...">`).
+ *  - `role="img"` + `aria-label` op de wrapper houdt de semantiek correct.
  */
-const NATIVE_WIDTH = 1376;
-const NATIVE_HEIGHT = 768;
-const ASPECT_RATIO = NATIVE_WIDTH / NATIVE_HEIGHT; // ≈ 1.7917
-
 const DEFAULT_ALT =
   "TerreVolt BV — specialist in laag- en middenspanning, aarding en netmontage";
 
 export interface LogoProps {
   className?: string;
   style?: React.CSSProperties;
+  /**
+   * `auto` kiest op basis van `variant` een geschikte kleur:
+   * - `dark`: donkere tekst voor lichte achtergronden
+   * - `light`: witte tekst voor donkere achtergronden
+   */
   variant?: "auto" | "light" | "dark";
+  /** Alleen het bolt/icoon-merkteken (voor footer, admin, favicon-context). */
+  mark?: "wordmark" | "icon";
   /** Beschrijvende alt-tekst. Wordt genegeerd als `decorative` true is. */
   alt?: string;
   /** Native browser-tooltip op hover. */
   title?: string;
-  /**
-   * Zet op `true` wanneer 't logo binnen een al gelabeld element staat
-   * (bv. `<Link aria-label="...">`). Voorkomt dubbele aankondiging door
-   * schermlezers.
-   */
+  /** Zet op `true` wanneer 't logo binnen een al gelabeld element staat. */
   decorative?: boolean;
 }
 
 export function Logo({
   className = "h-10 w-auto",
   style,
+  variant = "auto",
+  mark = "wordmark",
   alt = DEFAULT_ALT,
   title = "TerreVolt BV",
   decorative = false,
 }: LogoProps) {
-  const [loaded, setLoaded] = useState(false);
-
-  // Wanneer decoratief: img krijgt lege alt + aria-hidden, en de wrapper
-  // krijgt géén role/label (het ouder-element levert de naam al).
-  // Anders: wrapper krijgt role="img" met label zodat ook tijdens 't laden
-  // (skeleton zichtbaar) een duidelijke naam beschikbaar is.
+  const fill = variant === "light" ? "#FFFFFF" : "#081C33";
   const wrapperA11y = decorative
     ? { "aria-hidden": true as const }
     : { role: "img" as const, "aria-label": alt };
 
+  const boltPath =
+    "M235 166 L244 167 L252 173 L255 187 L224 280 L331 282 L340 288 L344 296 " +
+    "L344 308 L338 319 L240 418 L181 477 L175 480 L163 479 L155 472 L153 461 " +
+    "L187 357 L87 356 L76 348 L72 338 L77 320 L227 169 L234 167 Z M217 216 " +
+    "L196 281 L198 296 L204 303 L214 308 L312 308 L203 419 L191 429 L215 359 " +
+    "L215 345 L207 334 L197 330 L104 330 L216 217 Z";
+
+  const wordmarkPaths = [
+    "m 482,368 v -91.5 h -28.35 v -20.25 h 79.5 v 20.25 h -27.9 V 368 Z m 86.00005,1.8 q -13.05,0 -22.65,-5.7 -9.6,-5.85 -14.85,-15.6 -5.25,-9.75 -5.25,-21.6 0,-12.3 5.4,-21.9 5.55,-9.6 14.85,-15.15 9.3,-5.55 21,-5.55 9.75,0 17.25,3.15 7.5,3 12.6,8.55 5.25,5.55 7.95,12.9 2.7,7.2 2.7,15.75 0,2.4 -0.3,4.8 -0.15,2.25 -0.75,3.9 h -61.35 v -16.5 h 48.6 l -10.65,7.8 q 1.5,-6.45 -0.15,-11.4 -1.65,-5.1 -5.85,-7.95 -4.05,-3 -10.05,-3 -5.85,0 -10.05,2.85 -4.2,2.85 -6.3,8.4 -2.1,5.55 -1.65,13.5 -0.6,6.9 1.65,12.15 2.25,5.25 6.9,8.25 4.65,2.85 11.25,2.85 6,0 10.2,-2.4 4.35,-2.4 6.75,-6.6 l 18,8.55 q -2.4,6 -7.65,10.5 -5.1,4.5 -12.15,7.05 -7.05,2.4 -15.45,2.4 z m 48.20001,-1.8 v -81.9 h 21 v 19.65 l -1.5,-2.85 q 2.7,-10.35 8.85,-13.95 6.3,-3.75 14.85,-3.75 h 4.8 v 19.5 h -7.05 q -8.25,0 -13.35,5.1 -5.1,4.95 -5.1,14.1 V 368 Z m 53.89995,0 v -81.9 h 21 v 19.65 l -1.5,-2.85 q 2.7,-10.35 8.85,-13.95 6.3,-3.75 14.85,-3.75 h 4.8 v 19.5 h -7.05 q -8.25,0 -13.35,5.1 -5.1,4.95 -5.1,14.1 V 368 Z m 93.34996,1.8 q -13.05,0 -22.65,-5.7 -9.6,-5.85 -14.85,-15.6 -5.25,-9.75 -5.25,-21.6 0,-12.3 5.4,-21.9 5.55,-9.6 14.85,-15.15 9.3,-5.55 21,-5.55 9.75,0 17.25,3.15 7.5,3 12.6,8.55 5.25,5.55 7.95,12.9 2.7,7.2 2.7,15.75 0,2.4 -0.3,4.8 -0.15,2.25 -0.75,3.9 h -61.35 v -16.5 h 48.6 l -10.65,7.8 q 1.5,-6.45 -0.15,-11.4 -1.65,-5.1 -5.85,-7.95 -4.05,-3 -10.05,-3 -5.85,0 -10.05,2.85 -4.2,2.85 -6.3,8.4 -2.1,5.55 -1.65,13.5 -0.6,6.9 1.65,12.15 2.25,5.25 6.9,8.25 4.65,2.85 11.25,2.85 6,0 10.2,-2.4 4.35,-2.4 6.75,-6.6 l 18,8.55 q -2.4,6 -7.65,10.5 -5.1,4.5 -12.15,7.05 -7.05,2.4 -15.45,2.4 z m 79.84999,-1.8 -38.25,-111.75 h 25.5 l 28.8,89.7 h -5.1 l 28.8,-89.7 h 25.5 l -38.25,111.75 z m 104.30011,1.8 q -12.15,0 -22.2,-5.55 -9.9,-5.55 -15.9,-15.15 -5.85,-9.75 -5.85,-22.05 0,-12.45 5.85,-22.05 6,-9.6 15.9,-15.15 10.05,-5.55 22.2,-5.55 12.15,0 22.05,5.55 9.9,5.55 15.75,15.15 6,9.6 6,22.05 0,12.3 -6,22.05 -5.85,9.6 -15.75,15.15 -9.9,5.55 -22.05,5.55 z m 0,-20.25 q 6.15,0 10.65,-2.85 4.65,-2.85 7.2,-7.95 2.7,-5.1 2.7,-11.7 0,-6.6 -2.7,-11.55 -2.55,-5.1 -7.2,-7.95 -4.5,-3 -10.65,-3 -6.15,0 -10.8,3 -4.65,2.85 -7.35,7.95 -2.55,4.95 -2.55,11.55 0,6.6 2.55,11.7 2.7,5.1 7.35,7.95 4.65,2.85 10.8,2.85 z M 1000.6002,368 V 254.45 h 22.5 V 368 Z m 74.45,0.9 q -14.85,0 -23.1,-7.95 -8.1,-8.1 -8.1,-22.5 V 305.6 h -13.8 v -19.5 h 0.75 q 6.3,0 9.6,-3.15 3.45,-3.15 3.45,-9.45 v -6 h 22.5 v 18.6 h 19.2 v 19.5 h -19.2 v 31.35 q 0,4.2 1.5,7.05 1.5,2.7 4.65,4.05 3.15,1.35 7.8,1.35 1.05,0 2.4,-0.15 1.35,-0.15 2.85,-0.3 V 368 q -2.25,0.3 -5.1,0.6 -2.85,0.3 -5.4,0.3 z",
+    "M 1119.3002,368 V 256.25 h 47.1 q 11.1,0 18.9,3.9 7.95,3.75 12.15,10.8 4.35,6.9 4.35,16.8 0,7.65 -4.2,14.4 -4.05,6.6 -13.05,10.95 v -9.45 q 8.25,3.15 13.05,7.8 4.8,4.65 6.75,10.35 1.95,5.7 1.95,12 0,16.05 -10.65,25.2 -10.5,9 -29.25,9 z m 20.4,-18 h 28.8 q 7.95,0 12.6,-4.35 4.8,-4.5 4.8,-11.85 0,-7.35 -4.8,-11.85 -4.65,-4.5 -12.6,-4.5 h -28.8 z m 0,-50.4 h 27.75 q 6.3,0 10.05,-3.6 3.75,-3.75 3.75,-9.6 0,-5.85 -3.75,-9.3 -3.75,-3.45 -10.05,-3.45 h -27.75 z m 106.0999,68.4 -39,-111.75 h 22.2 l 30.6,92.55 h -4.35 l 30.6,-92.55 h 22.2 l -38.85,111.75 z",
+  ];
+
   return (
     <span
-      className={`${className} relative inline-block align-middle`}
-      style={{
-        aspectRatio: `${ASPECT_RATIO}`,
-        ...style,
-      }}
+      className={`${className} relative inline-flex items-center align-middle`}
+      style={style}
       title={title}
       {...wrapperA11y}
     >
-      {/* Skeleton-placeholder — zelfde footprint, voorkomt layout-shift */}
-      {!loaded && (
-        <span
+      {mark === "wordmark" ? (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1400"
+          height="360"
+          viewBox="47 145 1400 360"
+          className="h-full w-auto"
+          fill="none"
           aria-hidden="true"
-          className="absolute inset-0 rounded-md bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 bg-[length:200%_100%] animate-shimmer motion-reduce:animate-none"
-        />
+        >
+          <path fill="#18A84A" fillRule="evenodd" d={boltPath} />
+          <g stroke="#F5B400" strokeLinecap="round">
+            <path d="M334 385 L334 406" strokeWidth="19" />
+            <path d="M295 424 L373 424" strokeWidth="18" />
+            <path d="M310 450 L358 450" strokeWidth="18" />
+            <path d="M331 477 L337 477" strokeWidth="18" />
+          </g>
+          <g fill={fill}>
+            <path d={wordmarkPaths[0]} />
+            <path d={wordmarkPaths[1]} />
+          </g>
+        </svg>
+      ) : (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="360"
+          height="360"
+          viewBox="47 145 360 360"
+          className="h-full w-auto"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path fill="#18A84A" fillRule="evenodd" d={boltPath} />
+          <g stroke="#F5B400" strokeLinecap="round">
+            <path d="M334 385 L334 406" strokeWidth="19" />
+            <path d="M295 424 L373 424" strokeWidth="18" />
+            <path d="M310 450 L358 450" strokeWidth="18" />
+            <path d="M331 477 L337 477" strokeWidth="18" />
+          </g>
+        </svg>
       )}
-      <img
-        src={logoSrc}
-        // Img is altijd 'presentational' op DOM-niveau: de wrapper draagt
-        // de toegankelijke naam (of het ouder-element bij `decorative`).
-        alt=""
-        aria-hidden="true"
-        width={NATIVE_WIDTH}
-        height={NATIVE_HEIGHT}
-        onLoad={() => setLoaded(true)}
-        onError={() => setLoaded(true)}
-        className={`relative block h-full w-full object-contain select-none transition-opacity duration-200 ${
-          loaded ? "opacity-100" : "opacity-0"
-        }`}
-        style={{ imageRendering: "auto" }}
-        draggable={false}
-        decoding="async"
-        loading="eager"
-        fetchPriority="high"
-      />
     </span>
   );
 }

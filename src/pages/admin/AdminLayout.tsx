@@ -4,6 +4,7 @@ import { Loader2, LogOut, Briefcase, Inbox, LayoutDashboard, MessageSquare, BarC
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/terrevolt/Logo";
 
 export default function AdminLayout() {
   const { user, isAdmin, loading } = useAuth();
@@ -57,9 +58,15 @@ export default function AdminLayout() {
     <div className="min-h-screen bg-[#f8f9fa]">
       <header className="bg-[#0d3b2e] text-white">
         <div className="container mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
-          <Link to="/admin" className="flex items-center gap-2 min-w-0">
-            <span className="text-[#9ed42e]">TerreVolt</span>
-            <span className="text-sm opacity-80 hidden sm:inline">Beheer</span>
+          <Link to="/admin" className="flex items-center gap-2 min-w-0" aria-label="TerreVolt beheer">
+            <Logo
+              mark="icon"
+              className="h-7 w-auto"
+              variant="light"
+              decorative
+              title="TerreVolt Beheer"
+            />
+            <span className="text-white hidden sm:inline">Beheer</span>
           </Link>
           <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             <Link to="/" className="text-sm hover:text-[#9ed42e]">→ Site</Link>
