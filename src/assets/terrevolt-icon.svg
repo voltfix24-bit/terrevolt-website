@@ -1,0 +1,9 @@
+<svg width="360" height="360" viewBox="47 145 360 360" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#18A84A" fill-rule="evenodd" d="M235 166 L244 167 L252 173 L255 187 L224 280 L331 282 L340 288 L344 296 L344 308 L338 319 L240 418 L181 477 L175 480 L163 479 L155 472 L153 461 L187 357 L87 356 L76 348 L72 338 L77 320 L227 169 L234 167 Z M217 216 L196 281 L198 296 L204 303 L214 308 L312 308 L203 419 L191 429 L215 359 L215 345 L207 334 L197 330 L104 330 L216 217 Z"></path>
+  <g stroke="#F5B400" stroke-linecap="round" fill="none">
+    <path d="M334 385 L334 406" stroke-width="19"></path>
+    <path d="M295 424 L373 424" stroke-width="18"></path>
+    <path d="M310 450 L358 450" stroke-width="18"></path>
+    <path d="M331 477 L337 477" stroke-width="18"></path>
+  </g>
+</svg>
