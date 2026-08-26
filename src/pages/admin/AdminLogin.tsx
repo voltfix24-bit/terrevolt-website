@@ -60,7 +60,7 @@ export default function AdminLogin() {
       <div className="w-full max-w-md bg-white rounded-2xl border border-gray-200 p-8 shadow-sm">
         <div className="text-center mb-8">
           <div className="flex justify-center mb-4">
-            <Logo mark="icon" className="h-10 w-auto" decorative title="TerreVolt Beheer" />
+            <Logo mark="icon" className="h-10 w-auto" alt="TerreVolt BV" title="TerreVolt Beheer" />
           </div>
           <h1 className="text-2xl text-[#0d3b2e]">Beheer</h1>
           <p className="text-xs text-[#6c757d] mt-2">
