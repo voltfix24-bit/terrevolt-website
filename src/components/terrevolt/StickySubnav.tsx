@@ -94,7 +94,7 @@ export function StickySubnav({ items, ariaLabel }: StickySubnavProps) {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-12">
         <ul
-          className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide -mx-1 px-1 py-2 snap-x snap-mandatory"
+          className="flex gap-1 sm:gap-2 justify-center overflow-x-auto scrollbar-hide -mx-1 px-1 py-2 snap-x snap-mandatory"
           style={{
             maskImage:
               "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
