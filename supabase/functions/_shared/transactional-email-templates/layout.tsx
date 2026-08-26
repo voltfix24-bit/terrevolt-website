@@ -37,9 +37,15 @@ export function Shell({
       <Body style={{ backgroundColor: '#f8f9fa', fontFamily: 'Arial, Helvetica, sans-serif', margin: 0, padding: '24px 0' }}>
         <Container style={{ backgroundColor: '#ffffff', borderRadius: '12px', maxWidth: '600px', overflow: 'hidden', border: '1px solid #e6e9e7' }}>
           <Section style={{ backgroundColor: BRAND.green, padding: '20px 28px' }}>
-            <Text style={{ color: '#ffffff', fontSize: '18px', fontWeight: 700, margin: 0, letterSpacing: '0.5px' }}>
-              Terre<span style={{ color: BRAND.lime }}>Volt</span>
-            </Text>
+            <Link href={BRAND.site} style={{ display: 'inline-block' }}>
+              <img
+                src={`${BRAND.site}/__l5e/assets-v1/599ea27b-e1bf-4959-b6e7-d43a29e41717/terrevolt-logo-email.png`}
+                alt="TerreVolt BV"
+                width="150"
+                height="36"
+                style={{ display: 'block', border: 0, outline: 'none' }}
+              />
+            </Link>
           </Section>
           <Section style={{ padding: '28px' }}>
             <Heading style={{ color: BRAND.green, fontSize: '20px', margin: '0 0 16px' }}>{heading}</Heading>
