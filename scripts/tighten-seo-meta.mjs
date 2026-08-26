@@ -57,9 +57,9 @@ const META_OVERRIDES = {
       "Projecttypes en praktijkvoorbeelden binnen LS/MS-infrastructuur, stationsrenovatie, schakelwerk, aarding en metingen.",
   },
   "/veiligheid": {
-    title: "Veiligheid en certificeringen | TerreVolt",
+    title: "Veiligheid, BEI en VCA** | TerreVolt",
     description:
-      "Veilig werken, ISO 9001, VCA**, SBB erkend leerbedrijf en aantoonbare kwaliteit bij TerreVolt.",
+      "Veilig werken met BEI BLS/BHS, VWI's, LMRA, VCA** 2017/6.0, ISO 9001:2015 en SBB erkend leerbedrijf.",
   },
   "/over": {
     title: "Over TerreVolt BV | Elektrotechniek Utrecht",
