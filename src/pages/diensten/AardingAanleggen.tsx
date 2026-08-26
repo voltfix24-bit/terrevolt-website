@@ -11,7 +11,7 @@ import aardpenFoto from "@/assets/aarding-aardpen-slaan.jpg";
 import meetrapportFoto from "@/assets/aarding-meetrapport.jpg";
 import meterkastFoto from "@/assets/aarding-meterkast.jpg";
 
-const PAGE_PATH = "/aarding-aanleggen";
+const PAGE_PATH = "/aarding";
 const PAGE_URL = `${SITE_URL}${PAGE_PATH}`;
 const CONTACT_URL = "/contact?type=aarding";
 
@@ -49,6 +49,11 @@ const situaties = [
     icon: Zap,
     title: "Laadpaal of zonnepanelen",
     text: "Een laadpaal of PV-installatie vraagt om goede aarding en potentiaalvereffening. Wij meten en leggen de waarden vast als dat nodig is.",
+  },
+  {
+    icon: Wrench,
+    title: "CV-ketel storing of slecht vlamsignaal",
+    text: "Sommige cv-ketels, waaronder Intergas-toestellen, kunnen gevoelig reageren op ontbrekende of slechte aarding. Wij kunnen de aarding meten en verbeteren.",
   },
   {
     icon: ShieldCheck,
@@ -93,7 +98,11 @@ const faq = [
   },
   {
     q: "Wanneer heb ik een aardpen nodig?",
-    a: "Een aardpen is vaak nodig bij een oude woning zonder betrouwbare aarding, een nieuwe meterkast, een laadpaal, zonnepanelen, afkeuring of wanneer aarding via de waterleiding niet meer betrouwbaar is.",
+    a: "Een aardpen is vaak nodig bij een oude woning zonder betrouwbare aarding, een nieuwe meterkast, een laadpaal, zonnepanelen, afkeuring, cv-ketelstoringen door mogelijk slechte aarding of wanneer aarding via de waterleiding niet meer betrouwbaar is.",
+  },
+  {
+    q: "Kan slechte aarding een cv-ketel storing veroorzaken?",
+    a: "Ja, dat kan. Sommige cv-ketels controleren de vlam via een ionisatiesignaal. Als de ketel, het stopcontact of de meterkast niet goed geaard is, kan dat signaal verstoord raken. TerreVolt repareert geen cv-ketel, maar kan wel de aarding meten en waar nodig verbeteren.",
   },
   {
     q: "Krijg ik een meetrapport?",
@@ -122,7 +131,7 @@ const AardingAanleggen = () => {
         name: "Aardpen laten slaan en aarding meten",
         serviceType: "Aardpen slaan, aarding aanleggen en aardingsmeting met meetrapport",
         description:
-          "Plaatsen van aardpennen, aarding meten en meetrapportage voor woningen, meterkasten, laadpalen, zonnepanelen, VvE's en bedrijven.",
+          "Plaatsen van aardpennen, aarding meten en meetrapportage voor woningen, meterkasten, cv-ketels, laadpalen, zonnepanelen, VvE's en bedrijven.",
         url: PAGE_URL,
         relatedLink: [`${SITE_URL}/aardpen-slaan-amsterdam`],
         provider: { "@id": `${SITE_URL}/#organization` },
@@ -218,25 +227,25 @@ const AardingAanleggen = () => {
                     >
                       <MessageCircle className="w-5 h-5" aria-hidden="true" />
                       WhatsApp foto
-                  </a>
-                )}
+                    </a>
+                  )}
+                </div>
+                <p className="mt-4 text-[15px] text-white/80 flex items-start gap-2 max-w-3xl">
+                  <MapPin className="w-4 h-4 mt-0.5 text-[#9ed42e] flex-shrink-0" aria-hidden="true" />
+                  <span>
+                    Woont u in{" "}
+                    <Link
+                      to="/aardpen-slaan-amsterdam"
+                      className="underline decoration-[#9ed42e] underline-offset-4 hover:text-white"
+                    >
+                      Amsterdam
+                    </Link>
+                    ? Bekijk onze gespecialiseerde pagina voor aardpen slaan en aarding meten in Amsterdam.
+                  </span>
+                </p>
               </div>
-              <p className="mt-4 text-[15px] text-white/80 flex items-start gap-2 max-w-3xl">
-                <MapPin className="w-4 h-4 mt-0.5 text-[#9ed42e] flex-shrink-0" aria-hidden="true" />
-                <span>
-                  Woont u in{" "}
-                  <Link
-                    to="/aardpen-slaan-amsterdam"
-                    className="underline decoration-[#9ed42e] underline-offset-4 hover:text-white"
-                  >
-                    Amsterdam
-                  </Link>
-                  ? Bekijk onze gespecialiseerde pagina voor aardpen slaan en aarding meten in Amsterdam.
-                </span>
-              </p>
-            </div>
 
-            <div className="relative">
+              <div className="relative">
                 <img
                   src={aardpenFoto}
                   alt="Aardpen laten slaan en aarding meten door TerreVolt"
@@ -351,6 +360,42 @@ const AardingAanleggen = () => {
                   </div>
                 );
               })}
+            </div>
+
+            <div className="mt-8 max-w-6xl mx-auto bg-[#f8f9fa] border border-gray-200 rounded-xl p-6 sm:p-8">
+              <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-7 lg:gap-10 items-start">
+                <div>
+                  <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-4 tracking-wider uppercase">
+                    <Wrench className="w-4 h-4" aria-hidden="true" />
+                    CV-ketel storing
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl text-[#0d3b2e] mb-4 hyphens-nl" lang="nl">
+                    CV-ketel storing door slechte aarding?
+                  </h3>
+                  <p className="text-[#495057] leading-relaxed mb-4">
+                    Sommige cv-ketels gebruiken een vlamsignaal of ionisatiesignaal om veilig te controleren of de brander goed werkt. Bij een ontbrekende of slechte aarding kan dat signaal verstoord raken. Dat kan bij bepaalde toestellen, waaronder Intergas-ketels, terugkomen als storing rond geen of slecht vlamsignaal.
+                  </p>
+                  <p className="text-[#495057] leading-relaxed">
+                    TerreVolt repareert geen cv-ketel en sleutelt niet aan gasblok, brander of rookgasafvoer. Wij kunnen wel de aarding van de meterkast, het stopcontact, de hoofdaardrail en de aardpen controleren, meten en waar nodig verbeteren.
+                  </p>
+                </div>
+                <div className="bg-white border border-gray-200 rounded-xl p-5">
+                  <h4 className="text-lg text-[#0d3b2e] mb-4">Wat kunnen wij controleren?</h4>
+                  <ul className="space-y-3">
+                    {[
+                      "Geaard stopcontact bij de cv-ketel",
+                      "Hoofdaardrail en meterkastaarding",
+                      "Aardpen en aardverspreidingsweerstand",
+                      "Meetrapport voor installateur of dossier",
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-[#495057] leading-relaxed">
+                        <CheckCircle2 className="w-5 h-5 text-[#9ed42e] flex-shrink-0 mt-0.5" strokeWidth={2.5} aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -507,6 +552,7 @@ const AardingAanleggen = () => {
             "Bij het slaan van een aardpen of aardelektrode",
             "Bij aarding via oude waterleiding",
             "Bij aarding voor laadpaal of zonnepanelen",
+            "Bij cv-ketel storing door mogelijk slechte aarding",
             "Bij aardingsmeting en meetrapportage",
             "Bij meterkastvervanging of afkeuring",
             "Bij bedrijfspand, VvE of technische ruimte",
