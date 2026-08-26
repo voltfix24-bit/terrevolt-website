@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { SITE_OG_IMAGE, SITE_URL } from "@/config/company";
 
 export interface PageMetaInput {
   title: string;
@@ -13,9 +14,39 @@ export interface PageMetaInput {
   noindex?: boolean;
 }
 
-import { SITE_OG_IMAGE, SITE_URL } from "@/config/company";
-
 const DEFAULT_OG_IMAGE = SITE_OG_IMAGE;
+
+const CANONICAL_PATH_ALIASES = new Map<string, string>([["/aarding-aanleggen", "/aarding"]]);
+
+function normalizeUrlValue(value: string) {
+  let normalized = value;
+  CANONICAL_PATH_ALIASES.forEach((target, source) => {
+    normalized = normalized.replaceAll(`${SITE_URL}${source}`, `${SITE_URL}${target}`);
+    if (normalized === source) normalized = target;
+  });
+  return normalized;
+}
+
+function normalizeCanonical(canonical: string | undefined, currentPath: string) {
+  const value = canonical || currentPath;
+  return normalizeUrlValue(value);
+}
+
+function normalizeStructuredValue(value: unknown): unknown {
+  if (typeof value === "string") return normalizeUrlValue(value);
+  if (Array.isArray(value)) return value.map(normalizeStructuredValue);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(
+      Object.entries(value as Record<string, unknown>).map(([key, entry]) => [key, normalizeStructuredValue(entry)]),
+    );
+  }
+  return value;
+}
+
+function normalizeJsonLd(jsonLd?: Record<string, unknown> | Record<string, unknown>[]) {
+  if (!jsonLd) return undefined;
+  return normalizeStructuredValue(jsonLd) as Record<string, unknown> | Record<string, unknown>[];
+}
 
 function upsertMeta(attr: "name" | "property", key: string, content: string) {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
@@ -74,11 +105,8 @@ export function usePageMeta(
     if (meta.description) upsertMeta("name", "description", meta.description);
 
     const path = typeof window !== "undefined" ? window.location.pathname : "/";
-    const canonicalHref = meta.canonical
-      ? meta.canonical.startsWith("http")
-        ? meta.canonical
-        : origin + meta.canonical
-      : origin + path;
+    const canonicalValue = normalizeCanonical(meta.canonical, path);
+    const canonicalHref = canonicalValue.startsWith("http") ? canonicalValue : origin + canonicalValue;
     upsertLink("canonical", canonicalHref);
 
     upsertMeta("property", "og:site_name", "TerreVolt");
@@ -105,8 +133,7 @@ export function usePageMeta(
       host.endsWith(".sandbox.lovable.dev");
     upsertMeta("name", "robots", meta.noindex || isPreviewHost ? "noindex, nofollow" : "index, follow");
 
-
-    setJsonLd(meta.jsonLd);
+    setJsonLd(normalizeJsonLd(meta.jsonLd));
 
     return () => {
       // Reset page-scoped JSON-LD on unmount so the next page starts clean.
