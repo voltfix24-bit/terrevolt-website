@@ -34,7 +34,7 @@ function ApplicationNotification(props: Props) {
         </Text>
       ) : null}
       <Button
-        href={`${BRAND.site}/admin/applications`}
+        href={`${BRAND.site}/admin/sollicitaties`}
         style={{ backgroundColor: BRAND.lime, borderRadius: '8px', color: BRAND.green, display: 'inline-block', fontSize: '14px', fontWeight: 700, marginTop: '24px', padding: '12px 20px', textDecoration: 'none' }}
       >
         Bekijk in beheer
