@@ -46,8 +46,8 @@ for (const width of WIDTHS) {
     });
     expect(svgInfo).not.toBeNull();
     // Hoogte moet binnen clamp-bereik liggen (kleine subpixel-marge).
-    expect(svgInfo!.height).toBeGreaterThanOrEqual(47);
-    expect(svgInfo!.height).toBeLessThanOrEqual(71);
+    expect(svgInfo!.height).toBeGreaterThanOrEqual(43);
+    expect(svgInfo!.height).toBeLessThanOrEqual(63);
     // 4 aardings-lijnen + 1 bliksem-path moeten altijd aanwezig zijn.
     expect(svgInfo!.lines).toBe(4);
     expect(svgInfo!.paths).toBeGreaterThanOrEqual(1);
