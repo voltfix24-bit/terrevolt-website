@@ -6,6 +6,7 @@ import {
   Wrench, Handshake, TrendingUp, CheckCircle2,
 } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
+import { StickySubnav } from "@/components/terrevolt/StickySubnav";
 import { Footer } from "@/components/terrevolt/Footer";
 import { Reveal } from "@/components/terrevolt/Reveal";
 import { ApplicationForm } from "@/components/terrevolt/ApplicationForm";
@@ -186,6 +187,19 @@ const WerkenBij = () => {
           </div>
         </section>
 
+        <StickySubnav
+          ariaLabel="Paginanavigatie Werken bij"
+          items={[
+            { label: "Vacatures", href: "#vacatures" },
+            { label: "Waarom TerreVolt", href: "#waarom" },
+            { label: "Sollicitatieproces", href: "#proces" },
+            { label: "Solliciteren", href: "#solliciteren" },
+            { label: "LS/MS-werk", href: "#ls-ms" },
+            { label: "FAQ", href: "#faq" },
+          ]}
+        />
+
+
         {/* 2. ARBEIDSVOORWAARDENBALK */}
         <section className="border-b border-gray-200 bg-white">
           <ul className="mx-auto grid max-w-6xl gap-4 px-4 py-6 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
@@ -199,7 +213,7 @@ const WerkenBij = () => {
         </section>
 
         {/* 3. VACATURES */}
-        <section id="vacatures" className="scroll-mt-28 py-14 sm:py-20">
+        <section id="vacatures" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem] py-14 sm:py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">
               {vacatures.length} actuele vacatures voor elektromonteurs
@@ -247,7 +261,7 @@ const WerkenBij = () => {
         </section>
 
         {/* 4. WAAROM TERREVOLT */}
-        <section id="waarom" className="scroll-mt-28 bg-white py-14 sm:py-20">
+        <section id="waarom" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem] bg-white py-14 sm:py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Waarom werken bij TerreVolt</h2>
             <div className="mt-8 grid gap-5 sm:grid-cols-2">
@@ -273,7 +287,7 @@ const WerkenBij = () => {
         </section>
 
         {/* 5. SOLLICITATIEPROCES */}
-        <section id="proces" className="scroll-mt-28 py-14 sm:py-20">
+        <section id="proces" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem] py-14 sm:py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Zo verloopt je sollicitatie</h2>
             <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
@@ -288,7 +302,7 @@ const WerkenBij = () => {
         </section>
 
         {/* 6 + 7. CONTACT & FORMULIER */}
-        <section id="solliciteren" className="scroll-mt-28 bg-white py-14 sm:py-20">
+        <section id="solliciteren" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem] bg-white py-14 sm:py-20">
           <div className="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr]">
             <div>
               <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Direct contact</h2>
@@ -307,7 +321,7 @@ const WerkenBij = () => {
         </section>
 
         {/* 7b. LAAGSPANNING & MIDDENSPANNING */}
-        <section id="ls-ms" className="scroll-mt-28 bg-white py-14 sm:py-20">
+        <section id="ls-ms" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem] bg-white py-14 sm:py-20">
           <div className="mx-auto max-w-6xl px-4 sm:px-6">
             <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">
               Werken aan laagspanning en middenspanning
@@ -345,7 +359,7 @@ const WerkenBij = () => {
         </section>
 
         {/* 8. FAQ */}
-        <section id="faq" className="scroll-mt-28 py-14 sm:py-20">
+        <section id="faq" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem] py-14 sm:py-20">
           <div className="mx-auto max-w-3xl px-4 sm:px-6">
             <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Veelgestelde vragen</h2>
             <Accordion type="single" collapsible className="mt-6">

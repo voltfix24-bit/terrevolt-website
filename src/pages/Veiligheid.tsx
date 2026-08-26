@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, Wrench, ClipboardList, HardHat, DoorOpen, FileText, Users, Briefcase, TrafficCone, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { StickySubnav } from "@/components/terrevolt/StickySubnav";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { softHyphenate } from "@/lib/softHyphen";
-import { PROGRAMMATIC_SCROLL_EVENT, type ProgrammaticScrollDetail } from "@/lib/scrollToAnchor";
 import {
   Accordion,
   AccordionContent,
@@ -69,68 +68,6 @@ const faqs = [
 const Veiligheid = () => {
   usePageMeta("Veiligheid & kwaliteit | Iedereen veilig thuis | TerreVolt BV", "Veilig werken en aantoonbaar opleveren staan centraal bij TerreVolt. We werken met aandacht voor LMRA, BEI BLS/BHS, VWI's, VCA, NEN 3140/3840 en NEN 1010.", "/veiligheid");
 
-  const subnavRef = useRef<HTMLElement | null>(null);
-  const isProgrammaticScrollRef = useRef(false);
-  const programmaticScrollTimerRef = useRef<number | null>(null);
-  const [activeId, setActiveId] = useState<string>("");
-
-  useEffect(() => {
-    const sectionIds = ["filosofie", "aanpak", "praktijk", "veilige-5", "bei-vwi", "werkplek", "locatie-eisen", "rollen", "stoppen", "faq"];
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => !!el);
-
-    const computeActive = () => {
-      if (isProgrammaticScrollRef.current) return;
-      const header = document.querySelector("header");
-      const headerH = header ? header.getBoundingClientRect().height : 0;
-      const subnavH = subnavRef.current ? subnavRef.current.getBoundingClientRect().height : 0;
-      const threshold = headerH + subnavH + 24;
-
-      let current = "";
-      for (const el of sections) {
-        if (el.getBoundingClientRect().top - threshold <= 0) {
-          current = el.id;
-        }
-      }
-      // Bottom-of-page fallback: highlight last section
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
-        current = sections[sections.length - 1]?.id ?? current;
-      }
-      setActiveId((previous) => (previous === current ? previous : current));
-    };
-
-    const onProgrammaticScroll = (event: Event) => {
-      const { active, targetId } = (event as CustomEvent<ProgrammaticScrollDetail>).detail || {};
-      isProgrammaticScrollRef.current = Boolean(active);
-      if (targetId) {
-        setActiveId((previous) => (previous === targetId ? previous : targetId));
-      }
-      if (programmaticScrollTimerRef.current) {
-        window.clearTimeout(programmaticScrollTimerRef.current);
-      }
-      if (active) {
-        programmaticScrollTimerRef.current = window.setTimeout(() => {
-          isProgrammaticScrollRef.current = false;
-          computeActive();
-        }, 800);
-      }
-    };
-
-    computeActive();
-    window.addEventListener("scroll", computeActive, { passive: true });
-    window.addEventListener("resize", computeActive);
-    window.addEventListener(PROGRAMMATIC_SCROLL_EVENT, onProgrammaticScroll);
-    return () => {
-      window.removeEventListener("scroll", computeActive);
-      window.removeEventListener("resize", computeActive);
-      window.removeEventListener(PROGRAMMATIC_SCROLL_EVENT, onProgrammaticScroll);
-      if (programmaticScrollTimerRef.current) {
-        window.clearTimeout(programmaticScrollTimerRef.current);
-      }
-    };
-  }, []);
-
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
       <Header />
@@ -185,57 +122,22 @@ const Veiligheid = () => {
 
 
         {/* STICKY SUBNAV */}
-        <nav
-          ref={subnavRef}
-          data-hash-scroll-offset
-          aria-label="Paginanavigatie Veiligheid"
-          className="sticky top-20 sm:top-24 z-30 bg-white/80 supports-[backdrop-filter]:bg-white/65 backdrop-blur-md border-b border-gray-200/80 shadow-[0_6px_16px_-14px_rgba(13,59,46,0.5)]"
-        >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-            <ul
-              className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide -mx-1 px-1 py-2 snap-x snap-mandatory"
-              style={{
-                maskImage:
-                  "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
-                WebkitMaskImage:
-                  "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
-              }}
-            >
-
-              {[
-                { label: "Filosofie", href: "#filosofie" },
-                { label: "Aanpak", href: "#aanpak" },
-                { label: "Praktijk", href: "#praktijk" },
-                { label: "Vijf eisen", href: "#veilige-5" },
-                { label: "Normen & kwaliteit", href: "#bei-vwi" },
-                { label: "Werkplek", href: "#werkplek" },
-                { label: "Locatie-eisen", href: "#locatie-eisen" },
-                { label: "Rollen", href: "#rollen" },
-                { label: "Bij twijfel", href: "#stoppen" },
-                { label: "FAQ", href: "#faq" },
-                { label: "Contact", href: "/contact#formulier" },
-              ].map((item) => {
-                const isActive = item.href.startsWith("#") && item.href.slice(1) === activeId;
-                return (
-                  <li key={item.href} className="flex-shrink-0 snap-start">
-                    <a
-                      href={item.href}
-                      aria-current={isActive ? "true" : undefined}
-                      className={`inline-flex items-center min-h-[40px] sm:min-h-[44px] px-3 sm:px-4 rounded-full text-sm tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border transition-all duration-200 whitespace-nowrap ${
-                        isActive
-                          ? "bg-[#0d3b2e] text-[#9ed42e] border-[#0d3b2e] shadow-[0_4px_12px_-6px_rgba(13,59,46,0.6)]"
-                          : "text-[#0d3b2e]/80 border-transparent hover:text-[#0d3b2e] hover:bg-[#f0f7e6] hover:border-[#9ed42e]/40"
-                      }`}
-                    >
-
-                      {item.label}
-                    </a>
-                  </li>
-                );
-              })}
-              </ul>
-          </div>
-        </nav>
+        <StickySubnav
+          ariaLabel="Paginanavigatie Veiligheid"
+          items={[
+            { label: "Filosofie", href: "#filosofie" },
+            { label: "Aanpak", href: "#aanpak" },
+            { label: "Praktijk", href: "#praktijk" },
+            { label: "Vijf eisen", href: "#veilige-5" },
+            { label: "Normen & kwaliteit", href: "#bei-vwi" },
+            { label: "Werkplek", href: "#werkplek" },
+            { label: "Locatie-eisen", href: "#locatie-eisen" },
+            { label: "Rollen", href: "#rollen" },
+            { label: "Bij twijfel", href: "#stoppen" },
+            { label: "FAQ", href: "#faq" },
+            { label: "Contact", href: "/contact#formulier" },
+          ]}
+        />
 
         {/* SECTIE: Veiligheid vóór planning */}
         <section id="filosofie" className="py-14 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">

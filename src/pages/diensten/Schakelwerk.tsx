@@ -1,5 +1,6 @@
 import { ArrowRight, Power, Lock, PlayCircle, PauseCircle, ListChecks, Building2, Zap, Cable, Wrench, ShieldCheck } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
+import { StickySubnav } from "@/components/terrevolt/StickySubnav";
 import { Footer } from "@/components/terrevolt/Footer";
 import { WhenToCall } from "@/components/terrevolt/WhenToCall";
 import { SafetyStatement } from "@/components/terrevolt/SafetyStatement";
@@ -83,7 +84,18 @@ const Schakelwerk = () => {
         </section>
 
         {/* SECTIE 1: Wat valt onder schakelwerk */}
-        <section id="werkzaamheden" className="py-16 md:py-24 bg-white scroll-mt-24">
+        <StickySubnav
+          ariaLabel="Paginanavigatie Schakelwerk"
+          items={[
+            { label: "Werkzaamheden", href: "#werkzaamheden" },
+            { label: "Projecten", href: "#projecten" },
+            { label: "Procedures", href: "#procedures" },
+            { label: "Contact", href: "#contact" },
+          ]}
+        />
+
+
+        <section id="werkzaamheden" className="py-16 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Veilig werken begint met gecontroleerd schakelen</h2>
@@ -113,7 +125,7 @@ const Schakelwerk = () => {
         </section>
 
         {/* SECTIE 2: Wanneer wordt TerreVolt ingezet */}
-        <section className="py-16 md:py-24 bg-[#f8f9fa]">
+        <section id="projecten" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
@@ -143,7 +155,7 @@ const Schakelwerk = () => {
         </section>
 
         {/* SECTIE 3: Veiligheid en bevoegdheden */}
-        <section className="py-16 md:py-24 bg-white">
+        <section id="procedures" className="py-16 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Aanwijzingen, procedures en communicatie</h2>
@@ -181,7 +193,7 @@ const Schakelwerk = () => {
         <SafetyStatement />
 
         {/* CTA */}
-        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-24">
+        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"

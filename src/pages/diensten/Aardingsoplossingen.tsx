@@ -1,5 +1,6 @@
 import { ArrowRight, Home, Phone, Gauge, ShieldCheck, GitBranch, FileBarChart, Building2, Server, Zap, Factory, Construction, Plug, Activity, ClipboardList, FileCheck, CheckCircle2, MessageCircle, Euro, MapPin, Clock, Camera, Ruler, Wrench } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
+import { StickySubnav } from "@/components/terrevolt/StickySubnav";
 import { Footer } from "@/components/terrevolt/Footer";
 import { WhenToCall } from "@/components/terrevolt/WhenToCall";
 import { SafetyStatement } from "@/components/terrevolt/SafetyStatement";
@@ -420,6 +421,23 @@ const Aardingsoplossingen = () => {
         </section>
 
         {/* BEWIJS BOVEN DE VOUW */}
+        <StickySubnav
+          ariaLabel="Paginanavigatie Aardingsoplossingen"
+          items={[
+            { label: "Wanneer nodig", href: "#wanneer-nodig" },
+            { label: "Waarom TerreVolt", href: "#waarom-terrevolt" },
+            { label: "Voorbeelden", href: "#voorbeelden" },
+            { label: "Kosten", href: "#kosten" },
+            { label: "Werkwijze", href: "#werkwijze" },
+            { label: "Werkzaamheden", href: "#werkzaamheden" },
+            { label: "Voor wie", href: "#voor-wie" },
+            { label: "Werkgebied", href: "#werkgebied" },
+            { label: "FAQ", href: "#veelgestelde-vragen" },
+            { label: "Contact", href: "#contact" },
+          ]}
+        />
+
+
         <section className="bg-white border-b border-gray-200">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12 py-6 sm:py-8">
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -440,7 +458,7 @@ const Aardingsoplossingen = () => {
 
 
         {/* WANNEER NODIG */}
-        <section id="wanneer-nodig" className="py-16 md:py-24 bg-white scroll-mt-24">
+        <section id="wanneer-nodig" className="py-16 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl" lang="nl">
@@ -470,7 +488,7 @@ const Aardingsoplossingen = () => {
         </section>
 
         {/* WAAROM TERREVOLT */}
-        <section id="waarom-terrevolt" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
+        <section id="waarom-terrevolt" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
               <div className="order-2 lg:order-1">
@@ -509,7 +527,7 @@ const Aardingsoplossingen = () => {
         </section>
 
         {/* VOORBEELDEN VAN AANVRAGEN */}
-        <section id="voorbeelden" className="py-16 md:py-24 bg-white scroll-mt-24">
+        <section id="voorbeelden" className="py-16 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
               <div>
@@ -549,7 +567,7 @@ const Aardingsoplossingen = () => {
 
 
         {/* KOSTEN */}
-        <section id="kosten" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
+        <section id="kosten" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-4xl mx-auto">
               <div className="text-center mb-10">
@@ -626,7 +644,7 @@ const Aardingsoplossingen = () => {
         </section>
 
         {/* WERKWIJZE */}
-        <section id="werkwijze" className="py-16 md:py-24 bg-white scroll-mt-24">
+        <section id="werkwijze" className="py-16 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Zo werkt TerreVolt</h2>
@@ -650,7 +668,7 @@ const Aardingsoplossingen = () => {
         </section>
 
         {/* WERKZAAMHEDEN */}
-        <section id="werkzaamheden" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
+        <section id="werkzaamheden" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Aarding als basis van een veilige installatie</h2>
@@ -789,7 +807,7 @@ const Aardingsoplossingen = () => {
         </section>
 
         {/* VOOR WIE */}
-        <section id="voor-wie" className="py-16 md:py-24 bg-white scroll-mt-24">
+        <section id="voor-wie" className="py-16 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl" lang="nl">
@@ -835,7 +853,7 @@ const Aardingsoplossingen = () => {
         </section>
 
         {/* WERKGEBIED */}
-        <section id="werkgebied" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
+        <section id="werkgebied" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-4xl mx-auto text-center">
               <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-5 tracking-wider uppercase">
@@ -885,7 +903,7 @@ const Aardingsoplossingen = () => {
         </section>
 
         {/* FAQ */}
-        <section id="veelgestelde-vragen" className="py-16 md:py-24 bg-white scroll-mt-24">
+        <section id="veelgestelde-vragen" className="py-16 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Veelgestelde vragen over aarding</h2>
@@ -954,7 +972,7 @@ const Aardingsoplossingen = () => {
         <SafetyStatement />
 
         {/* EIND-CTA */}
-        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-24">
+        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"

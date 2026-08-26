@@ -4,6 +4,7 @@ import {
   ShieldAlert, ListChecks, Award, Gift,
 } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
+import { StickySubnav } from "@/components/terrevolt/StickySubnav";
 import { Footer } from "@/components/terrevolt/Footer";
 import { Reveal } from "@/components/terrevolt/Reveal";
 import { ApplicationForm } from "@/components/terrevolt/ApplicationForm";
@@ -120,7 +121,7 @@ const VacatureDetail = () => {
   ];
 
   const Section = ({ id, icon: Icon, title: h, children }: { id: string; icon: typeof ListChecks; title: string; children: React.ReactNode }) => (
-    <section id={id} className="scroll-mt-28">
+    <section id={id} className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
       <h2 className="flex items-center gap-2 text-xl font-semibold text-[#0d3b2e] sm:text-2xl">
         <Icon className="h-5 w-5" aria-hidden="true" />
         {h}
@@ -182,6 +183,19 @@ const VacatureDetail = () => {
           </div>
         </section>
 
+        <StickySubnav
+          ariaLabel="Paginanavigatie Vacature"
+          items={[
+            { label: "Taken", href: "#taken" },
+            { label: "Meenemen", href: "#meebrengen" },
+            { label: "Arbeidsvoorwaarden", href: "#arbeidsvoorwaarden" },
+            { label: "Veiligheid", href: "#veiligheid" },
+            { label: "Proces", href: "#proces" },
+            { label: "Solliciteren", href: "#solliciteren" },
+          ]}
+        />
+
+
         <div className="mx-auto max-w-5xl space-y-12 px-4 py-12 sm:px-6 sm:py-16">
           {/* 2. INTRODUCTIE */}
           <Reveal>
@@ -223,13 +237,13 @@ const VacatureDetail = () => {
           </Section>
 
           {/* 8. CONTACT */}
-          <section id="contact" className="scroll-mt-28">
+          <section id="contact" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
             <h2 className="text-xl font-semibold text-[#0d3b2e] sm:text-2xl">Vragen over deze vacature?</h2>
             <TobeshCard className="mt-4" />
           </section>
 
           {/* 9. FORMULIER */}
-          <section id="solliciteren" className="scroll-mt-28 rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
+          <section id="solliciteren" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem] rounded-2xl border border-gray-200 bg-white p-6 sm:p-8">
             <h2 className="text-xl font-semibold text-[#0d3b2e] sm:text-2xl">Solliciteer op {vacature.title}</h2>
             <div className="mt-4">
               <ApplicationForm defaultProfile={vacature.title} source="vacature_form" id={`sollicitatie-${vacature.slug}`} />
