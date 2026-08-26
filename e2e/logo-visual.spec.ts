@@ -6,9 +6,9 @@ import { test, expect } from "@playwright/test";
  * mobiele en desktop breedtes.
  *
  * De clamp() in src/components/terrevolt/Header.tsx zorgt voor:
- *   height: clamp(44px, 11vw, 56px)
- * Onder ~400px CSS-px schaalt 11vw mee, daarboven cap't 't op 56px.
- *
+ *   height: clamp(48px, 10vw, 70px)
+ * Op smalle telefoons blijft het logo 48px, op desktop cap't 't op 70px.
+ * Breedte is ~3.89x de hoogte, dus desktop ongeveer 272px.
  * Eerste run: `npx playwright test logo-visual --update-snapshots`.
  */
 const WIDTHS = [320, 360, 375, 390, 414, 480, 640, 768, 1024, 1280, 1366];
