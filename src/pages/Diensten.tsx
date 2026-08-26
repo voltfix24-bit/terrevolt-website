@@ -2,6 +2,7 @@ import * as React from "react";
 import { ArrowRight, CheckCircle2, ClipboardList, FileSearch, ShieldCheck, PackageCheck, Cable, Building2, Power, Gauge, PlugZap, Users, Briefcase, Zap as ZapIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Header } from "@/components/terrevolt/Header";
+import { StickySubnav } from "@/components/terrevolt/StickySubnav";
 import { Footer } from "@/components/terrevolt/Footer";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
@@ -139,8 +140,19 @@ const Diensten = () => {
           </div>
         </section>
 
+        <StickySubnav
+          ariaLabel="Paginanavigatie Diensten"
+          items={[
+            { label: "Diensten", href: "#diensten" },
+            { label: "Keuzehulp", href: "#keuzehulp" },
+            { label: "Werkwijze", href: "#werkwijze" },
+            { label: "Contact", href: "#contact" },
+          ]}
+        />
+
+
         {/* DIENSTEN GRID */}
-        <section id="diensten" className="py-16 md:py-24 bg-white scroll-mt-24">
+        <section id="diensten" className="py-16 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Onze diensten</h2>
@@ -186,7 +198,7 @@ const Diensten = () => {
         </section>
 
         {/* KEUZEHULP — Niet zeker welke ondersteuning u nodig heeft? */}
-        <section className="py-16 md:py-20 bg-[#0d3b2e] relative overflow-hidden">
+        <section id="keuzehulp" className="py-16 md:py-20 bg-[#0d3b2e] relative overflow-hidden scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="absolute inset-0 opacity-[0.04] pointer-events-none" aria-hidden="true" style={{
             backgroundImage:
               "linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)",
@@ -253,7 +265,7 @@ const Diensten = () => {
         </section>
 
         {/* WERKWIJZE */}
-        <section className="py-16 md:py-24 bg-[#f8f9fa]">
+        <section id="werkwijze" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-16">
               <div className="inline-block bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-6 tracking-wider uppercase">
@@ -289,7 +301,7 @@ const Diensten = () => {
         </section>
 
         {/* CTA */}
-        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-24">
+        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="absolute inset-0 opacity-10">
             <div
               className="absolute inset-0"

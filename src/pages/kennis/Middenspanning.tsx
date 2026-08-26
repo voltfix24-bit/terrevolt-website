@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
+import { StickySubnav } from "@/components/terrevolt/StickySubnav";
 import { Footer } from "@/components/terrevolt/Footer";
 import { Reveal } from "@/components/terrevolt/Reveal";
 import { usePageMeta } from "../../hooks/usePageMeta";
@@ -129,9 +130,21 @@ const Middenspanning = () => {
           </div>
         </section>
 
+        <StickySubnav
+          ariaLabel="Paginanavigatie Kennisbank"
+          items={[
+            { label: "Wat is het", href: "#wat-is-het" },
+            { label: "Wanneer", href: "#wanneer" },
+            { label: "Werkzaamheden", href: "#werkzaamheden" },
+            { label: "Veiligheid", href: "#veiligheid" },
+            { label: "FAQ", href: "#faq" },
+          ]}
+        />
+
+
         <div className="mx-auto max-w-4xl space-y-14 px-4 py-12 sm:px-6 sm:py-16">
           <Reveal>
-            <section id="wat-is-het" className="scroll-mt-28">
+            <section id="wat-is-het" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
               <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Wat is middenspanning precies?</h2>
               <p className="mt-4 leading-relaxed text-[#0d3b2e]/85">
                 Het Nederlandse elektriciteitsnet werkt met verschillende spanningsniveaus. Hoogspanning transporteert
@@ -157,7 +170,7 @@ const Middenspanning = () => {
           </Reveal>
 
           <Reveal>
-            <section id="wanneer" className="scroll-mt-28">
+            <section id="wanneer" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
               <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">
                 Wanneer heb je een middenspanningsaansluiting nodig?
               </h2>
@@ -178,7 +191,7 @@ const Middenspanning = () => {
           </Reveal>
 
           <Reveal>
-            <section id="werkzaamheden" className="scroll-mt-28">
+            <section id="werkzaamheden" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
               <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">
                 Welk werk komt er bij middenspanning kijken?
               </h2>
@@ -194,7 +207,7 @@ const Middenspanning = () => {
           </Reveal>
 
           <Reveal>
-            <section id="veiligheid" className="scroll-mt-28">
+            <section id="veiligheid" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
               <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Wie mag aan middenspanning werken?</h2>
               <p className="mt-4 leading-relaxed text-[#0d3b2e]/85">
                 Werken aan of nabij middenspanning mag alleen met een passende, persoonsgebonden aanwijzing. Binnen
@@ -214,7 +227,7 @@ const Middenspanning = () => {
           </Reveal>
 
           <Reveal>
-            <section id="faq" className="scroll-mt-28">
+            <section id="faq" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
               <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Veelgestelde vragen over middenspanning</h2>
               <Accordion type="single" collapsible className="mt-6">
                 {faqs.map((f, i) => (

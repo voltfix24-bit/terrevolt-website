@@ -2,6 +2,7 @@ import { ArrowRight, Building2, Camera, CheckCircle2, Clock, Euro, Factory, File
 import { Link } from "react-router-dom";
 import { Footer } from "@/components/terrevolt/Footer";
 import { Header } from "@/components/terrevolt/Header";
+import { StickySubnav } from "@/components/terrevolt/StickySubnav";
 import { SafetyStatement } from "@/components/terrevolt/SafetyStatement";
 import { WhenToCall } from "@/components/terrevolt/WhenToCall";
 import { company, SITE_URL, telHref } from "@/config/company";
@@ -267,6 +268,20 @@ const AardingAanleggen = () => {
           </div>
         </section>
 
+        <StickySubnav
+          ariaLabel="Paginanavigatie Aarding aanleggen"
+          items={[
+            { label: "Amsterdam", href: "#amsterdam" },
+            { label: "Situaties", href: "#situaties" },
+            { label: "Kosten", href: "#kosten" },
+            { label: "Meetrapport", href: "#meetrapport" },
+            { label: "Werkgebied", href: "#werkgebied" },
+            { label: "FAQ", href: "#veelgestelde-vragen" },
+            { label: "Contact", href: "#contact" },
+          ]}
+        />
+
+
         <section className="bg-white border-b border-gray-200">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12 py-6 sm:py-8">
             <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -285,7 +300,7 @@ const AardingAanleggen = () => {
           </div>
         </section>
 
-        <section id="amsterdam" className="py-16 md:py-24 bg-[#f0f7e6] scroll-mt-24">
+        <section id="amsterdam" className="py-16 md:py-24 bg-[#f0f7e6] scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center max-w-6xl mx-auto">
               <div className="order-2 lg:order-1">
@@ -336,7 +351,7 @@ const AardingAanleggen = () => {
           </div>
         </section>
 
-        <section id="situaties" className="py-16 md:py-24 bg-white scroll-mt-24">
+        <section id="situaties" className="py-16 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-4xl mx-auto text-center mb-12">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl" lang="nl">
@@ -400,7 +415,7 @@ const AardingAanleggen = () => {
           </div>
         </section>
 
-        <section id="kosten" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
+        <section id="kosten" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center max-w-6xl mx-auto">
               <div>
@@ -436,7 +451,7 @@ const AardingAanleggen = () => {
           </div>
         </section>
 
-        <section id="meetrapport" className="py-16 md:py-24 bg-[#0d3b2e] scroll-mt-24">
+        <section id="meetrapport" className="py-16 md:py-24 bg-[#0d3b2e] scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center max-w-6xl mx-auto">
               <img
@@ -471,7 +486,7 @@ const AardingAanleggen = () => {
           </div>
         </section>
 
-        <section id="werkgebied" className="py-16 md:py-24 bg-white scroll-mt-24">
+        <section id="werkgebied" className="py-16 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-4xl mx-auto text-center mb-12">
               <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-5 tracking-wider uppercase">
@@ -527,7 +542,7 @@ const AardingAanleggen = () => {
           </div>
         </section>
 
-        <section id="veelgestelde-vragen" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-24">
+        <section id="veelgestelde-vragen" className="py-16 md:py-24 bg-[#f8f9fa] scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="text-center mb-12">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4">Veelgestelde vragen over aarding</h2>
@@ -561,7 +576,7 @@ const AardingAanleggen = () => {
 
         <SafetyStatement />
 
-        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-24">
+        <section id="contact" className="py-16 md:py-24 bg-gradient-to-br from-[#0d3b2e] via-[#1a4a36] to-[#0d3b2e] relative overflow-hidden scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl text-white mb-6 hyphens-nl" lang="nl">

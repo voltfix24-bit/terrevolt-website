@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
+import { StickySubnav } from "@/components/terrevolt/StickySubnav";
 import { Footer } from "@/components/terrevolt/Footer";
 import { Reveal } from "@/components/terrevolt/Reveal";
 import { usePageMeta } from "../../hooks/usePageMeta";
@@ -144,9 +145,20 @@ const Spanningsniveaus = () => {
           </div>
         </section>
 
+        <StickySubnav
+          ariaLabel="Paginanavigatie Kennisbank"
+          items={[
+            { label: "Vergelijking", href: "#vergelijking" },
+            { label: "Waarom", href: "#waarom" },
+            { label: "Bevoegdheden", href: "#bevoegdheden" },
+            { label: "FAQ", href: "#faq" },
+          ]}
+        />
+
+
         <div className="mx-auto max-w-4xl space-y-14 px-4 py-12 sm:px-6 sm:py-16">
           <Reveal>
-            <section id="vergelijking" className="scroll-mt-28">
+            <section id="vergelijking" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
               <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">De drie niveaus vergeleken</h2>
 
               {/* Tabel op desktop */}
@@ -191,7 +203,7 @@ const Spanningsniveaus = () => {
           </Reveal>
 
           <Reveal>
-            <section id="waarom" className="scroll-mt-28">
+            <section id="waarom" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
               <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Waarom bestaan er meerdere niveaus?</h2>
               <p className="mt-4 leading-relaxed text-[#0d3b2e]/85">
                 Bij een hogere spanning is voor hetzelfde vermogen minder stroom nodig, en transportverliezen nemen
@@ -217,7 +229,7 @@ const Spanningsniveaus = () => {
           </Reveal>
 
           <Reveal>
-            <section id="bevoegdheden" className="scroll-mt-28">
+            <section id="bevoegdheden" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
               <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Normen en bevoegdheden per niveau</h2>
               <p className="mt-4 leading-relaxed text-[#0d3b2e]/85">
                 Voor het aanleggen van laagspanningsinstallaties geldt NEN 1010; voor veilige bedrijfsvoering NEN 3140.
@@ -234,7 +246,7 @@ const Spanningsniveaus = () => {
           </Reveal>
 
           <Reveal>
-            <section id="faq" className="scroll-mt-28">
+            <section id="faq" className="scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
               <h2 className="text-2xl font-semibold text-[#0d3b2e] sm:text-3xl">Veelgestelde vragen</h2>
               <Accordion type="single" collapsible className="mt-6">
                 {faqs.map((f, i) => (
