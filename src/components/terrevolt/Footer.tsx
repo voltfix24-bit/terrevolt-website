@@ -9,10 +9,14 @@ export function Footer() {
       <div className="container mx-auto px-5 sm:px-6 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
-            <Link to="/" className="inline-flex items-center gap-2 mb-4 min-h-[44px] py-2">
-              <div className="w-8 h-8 bg-[#0d3b2e] rounded-lg flex items-center justify-center">
-                <Zap className="w-5 h-5 text-[#9ed42e]" strokeWidth={2.5} />
-              </div>
+            <Link to="/" className="inline-flex items-center gap-2 mb-4 min-h-[44px] py-2" aria-label="TerreVolt — naar de homepagina">
+              <Logo
+                mark="icon"
+                className="h-8 w-auto"
+                variant="light"
+                decorative
+                title="TerreVolt BV"
+              />
               <span className="text-white">TerreVolt BV</span>
             </Link>
             <p className="text-sm leading-relaxed">
