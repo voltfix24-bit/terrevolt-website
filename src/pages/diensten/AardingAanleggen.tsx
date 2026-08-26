@@ -218,12 +218,25 @@ const AardingAanleggen = () => {
                     >
                       <MessageCircle className="w-5 h-5" aria-hidden="true" />
                       WhatsApp foto
-                    </a>
-                  )}
-                </div>
+                  </a>
+                )}
               </div>
+              <p className="mt-4 text-[15px] text-white/80 flex items-start gap-2 max-w-3xl">
+                <MapPin className="w-4 h-4 mt-0.5 text-[#9ed42e] flex-shrink-0" aria-hidden="true" />
+                <span>
+                  Woont u in{" "}
+                  <Link
+                    to="/aardpen-slaan-amsterdam"
+                    className="underline decoration-[#9ed42e] underline-offset-4 hover:text-white"
+                  >
+                    Amsterdam
+                  </Link>
+                  ? Bekijk onze gespecialiseerde pagina voor aardpen slaan en aarding meten in Amsterdam.
+                </span>
+              </p>
+            </div>
 
-              <div className="relative">
+            <div className="relative">
                 <img
                   src={aardpenFoto}
                   alt="Aardpen laten slaan en aarding meten door TerreVolt"
