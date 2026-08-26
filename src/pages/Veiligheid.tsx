@@ -122,57 +122,22 @@ const Veiligheid = () => {
 
 
         {/* STICKY SUBNAV */}
-        <nav
-          ref={subnavRef}
-          data-hash-scroll-offset
-          aria-label="Paginanavigatie Veiligheid"
-          className="sticky top-20 sm:top-24 z-30 bg-white/80 supports-[backdrop-filter]:bg-white/65 backdrop-blur-md border-b border-gray-200/80 shadow-[0_6px_16px_-14px_rgba(13,59,46,0.5)]"
-        >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-            <ul
-              className="flex gap-1 sm:gap-2 overflow-x-auto scrollbar-hide -mx-1 px-1 py-2 snap-x snap-mandatory"
-              style={{
-                maskImage:
-                  "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
-                WebkitMaskImage:
-                  "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
-              }}
-            >
-
-              {[
-                { label: "Filosofie", href: "#filosofie" },
-                { label: "Aanpak", href: "#aanpak" },
-                { label: "Praktijk", href: "#praktijk" },
-                { label: "Vijf eisen", href: "#veilige-5" },
-                { label: "Normen & kwaliteit", href: "#bei-vwi" },
-                { label: "Werkplek", href: "#werkplek" },
-                { label: "Locatie-eisen", href: "#locatie-eisen" },
-                { label: "Rollen", href: "#rollen" },
-                { label: "Bij twijfel", href: "#stoppen" },
-                { label: "FAQ", href: "#faq" },
-                { label: "Contact", href: "/contact#formulier" },
-              ].map((item) => {
-                const isActive = item.href.startsWith("#") && item.href.slice(1) === activeId;
-                return (
-                  <li key={item.href} className="flex-shrink-0 snap-start">
-                    <a
-                      href={item.href}
-                      aria-current={isActive ? "true" : undefined}
-                      className={`inline-flex items-center min-h-[40px] sm:min-h-[44px] px-3 sm:px-4 rounded-full text-sm tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border transition-all duration-200 whitespace-nowrap ${
-                        isActive
-                          ? "bg-[#0d3b2e] text-[#9ed42e] border-[#0d3b2e] shadow-[0_4px_12px_-6px_rgba(13,59,46,0.6)]"
-                          : "text-[#0d3b2e]/80 border-transparent hover:text-[#0d3b2e] hover:bg-[#f0f7e6] hover:border-[#9ed42e]/40"
-                      }`}
-                    >
-
-                      {item.label}
-                    </a>
-                  </li>
-                );
-              })}
-              </ul>
-          </div>
-        </nav>
+        <StickySubnav
+          ariaLabel="Paginanavigatie Veiligheid"
+          items={[
+            { label: "Filosofie", href: "#filosofie" },
+            { label: "Aanpak", href: "#aanpak" },
+            { label: "Praktijk", href: "#praktijk" },
+            { label: "Vijf eisen", href: "#veilige-5" },
+            { label: "Normen & kwaliteit", href: "#bei-vwi" },
+            { label: "Werkplek", href: "#werkplek" },
+            { label: "Locatie-eisen", href: "#locatie-eisen" },
+            { label: "Rollen", href: "#rollen" },
+            { label: "Bij twijfel", href: "#stoppen" },
+            { label: "FAQ", href: "#faq" },
+            { label: "Contact", href: "/contact#formulier" },
+          ]}
+        />
 
         {/* SECTIE: Veiligheid vóór planning */}
         <section id="filosofie" className="py-14 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
