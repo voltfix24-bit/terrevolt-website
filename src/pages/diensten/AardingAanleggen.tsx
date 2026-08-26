@@ -447,8 +447,19 @@ const AardingAanleggen = () => {
                 <Link
                   key={pagina.path}
                   to={pagina.path}
-                  className="block bg-[#f8f9fa] border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300"
+                  data-cta={`Aardpen slaan ${pagina.plaats} werkgebied`}
+                  className={`block rounded-xl p-6 transition-all duration-300 ${
+                    pagina.plaats === "Amsterdam"
+                      ? "bg-[#f0f7e6] border-2 border-[#9ed42e] hover:shadow-xl"
+                      : "bg-[#f8f9fa] border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl"
+                  }`}
                 >
+                  {pagina.plaats === "Amsterdam" && (
+                    <span className="inline-flex items-center gap-1.5 bg-[#0d3b2e] text-[#9ed42e] text-[10px] uppercase tracking-wider rounded-full px-3 py-1 mb-3">
+                      <MapPin className="w-3 h-3" aria-hidden="true" />
+                      Actief
+                    </span>
+                  )}
                   <h3 className="text-xl text-[#0d3b2e] mb-2">Aardpen slaan {pagina.plaats}</h3>
                   <p className="text-[#6c757d] leading-relaxed mb-4">{pagina.text}</p>
                   <span className="inline-flex items-center gap-2 text-[#0d3b2e] underline underline-offset-4 decoration-[#9ed42e]">
