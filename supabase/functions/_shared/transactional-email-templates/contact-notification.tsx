@@ -36,7 +36,7 @@ function ContactNotification(props: Props) {
         {p.description || '(geen omschrijving)'}
       </Text>
       <Button
-        href={`${BRAND.site}/admin/contact-requests`}
+        href={`${BRAND.site}/admin/contactaanvragen`}
         style={{ backgroundColor: BRAND.lime, borderRadius: '8px', color: BRAND.green, display: 'inline-block', fontSize: '14px', fontWeight: 700, marginTop: '24px', padding: '12px 20px', textDecoration: 'none' }}
       >
         Bekijk in beheer
