@@ -1,10 +1,9 @@
-import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ShieldCheck, BadgeCheck, Award, BookOpen, FileSearch, Wrench, ClipboardList, HardHat, DoorOpen, FileText, Users, Briefcase, TrafficCone, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Header } from "@/components/terrevolt/Header";
 import { Footer } from "@/components/terrevolt/Footer";
+import { StickySubnav } from "@/components/terrevolt/StickySubnav";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { softHyphenate } from "@/lib/softHyphen";
-import { PROGRAMMATIC_SCROLL_EVENT, type ProgrammaticScrollDetail } from "@/lib/scrollToAnchor";
 import {
   Accordion,
   AccordionContent,
