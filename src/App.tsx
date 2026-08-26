@@ -11,7 +11,7 @@ import { RouteTracker } from "./components/analytics/RouteTracker.tsx";
 import { RouteFallback } from "./components/RouteFallback.tsx";
 import Index from "./pages/Index.tsx";
 
-// Publieke pagina's — Index blijft eager voor snelle LCP op de homepage.
+// Publieke pagina's - Index blijft eager voor snelle LCP op de homepage.
 const Diensten = lazy(() => import("./pages/Diensten.tsx"));
 const LSMSNetmontage = lazy(() => import("./pages/diensten/LSMSNetmontage.tsx"));
 const Stationsrenovatie = lazy(() => import("./pages/diensten/Stationsrenovatie.tsx"));
@@ -32,7 +32,7 @@ const Privacy = lazy(() => import("./pages/Privacy.tsx"));
 const NotFound = lazy(() => import("./pages/NotFound.tsx"));
 const Unsubscribe = lazy(() => import("./pages/Unsubscribe.tsx"));
 
-// Admin — volledig lazy zodat het niet in de eerste publieke bundle zit.
+// Admin - volledig lazy zodat het niet in de eerste publieke bundle zit.
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout.tsx"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin.tsx"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard.tsx"));
@@ -72,32 +72,32 @@ const App = () => (
             <Route path="/vacatures" element={<Navigate to="/werken-bij" replace />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/unsubscribe" element={<Unsubscribe />} />
-            {/* Aliasroutes — 301-equivalent redirect naar canonieke route */}
+
+            {/* Aliasroutes naar canonieke routes */}
             <Route path="/veiligheid-certificeringen" element={<Navigate to="/veiligheid" replace />} />
             <Route path="/over-terrevolt" element={<Navigate to="/over" replace />} />
             <Route path="/zzp-monteurs" element={<Navigate to="/werken-bij" replace />} />
             <Route path="/vacatures/zzp-ploegen" element={<Navigate to="/werken-bij" replace />} />
             <Route path="/vacatures/kabelmonteur" element={<Navigate to="/werken-bij" replace />} />
             <Route path="/diensten/meten-beproeven-rapportage" element={<Navigate to="/diensten/meten-en-beproeven" replace />} />
-            <Route path="/diensten/aardingsoplossingen" element={<Navigate to="/aarding-aanleggen" replace />} />
-            <Route path="/aarding" element={<Navigate to="/aarding-aanleggen" replace />} />
-            <Route path="/aardingsoplossingen" element={<Navigate to="/aarding-aanleggen" replace />} />
-            <Route path="/aarding-slaan" element={<Navigate to="/aarding-aanleggen" replace />} />
-            <Route path="/aardingsmeting" element={<Navigate to="/aarding-aanleggen" replace />} />
-            <Route path="/aardpen-slaan" element={<Navigate to="/aarding-aanleggen" replace />} />
-            <Route path="/aardpen-laten-slaan" element={<Navigate to="/aarding-aanleggen" replace />} />
+            <Route path="/aarding-aanleggen" element={<Navigate to="/aarding" replace />} />
+            <Route path="/diensten/aardingsoplossingen" element={<Navigate to="/aarding" replace />} />
+            <Route path="/aardingsoplossingen" element={<Navigate to="/aarding" replace />} />
+            <Route path="/aarding-slaan" element={<Navigate to="/aarding" replace />} />
+            <Route path="/aardingsmeting" element={<Navigate to="/aarding" replace />} />
+            <Route path="/aardpen-slaan" element={<Navigate to="/aarding" replace />} />
+            <Route path="/aardpen-laten-slaan" element={<Navigate to="/aarding" replace />} />
             <Route path="/aardpen-laten-slaan-amsterdam" element={<Navigate to="/aardpen-slaan-amsterdam" replace />} />
             <Route path="/aarding-amsterdam" element={<Navigate to="/aardpen-slaan-amsterdam" replace />} />
             <Route path="/aarding-meten-amsterdam" element={<Navigate to="/aardpen-slaan-amsterdam" replace />} />
             <Route path="/aarding-aanleggen-amsterdam" element={<Navigate to="/aardpen-slaan-amsterdam" replace />} />
-
 
             <Route path="/diensten/ls-ms-netmontage" element={<LSMSNetmontage />} />
             <Route path="/diensten/stationsrenovatie" element={<Stationsrenovatie />} />
             <Route path="/diensten/schakelwerk" element={<Schakelwerk />} />
             <Route path="/diensten/meten-en-beproeven" element={<MetenEnBeproeven />} />
             <Route path="/diensten/huisaansluitingen" element={<Huisaansluitingen />} />
-            <Route path="/aarding-aanleggen" element={<AardingAanleggen />} />
+            <Route path="/aarding" element={<AardingAanleggen />} />
             <Route path="/aardpen-slaan-amsterdam" element={<AardpenSlaanAmsterdam />} />
 
             {/* Admin */}
