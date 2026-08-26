@@ -124,6 +124,7 @@ const AardingAanleggen = () => {
         description:
           "Plaatsen van aardpennen, aarding meten en meetrapportage voor woningen, meterkasten, laadpalen, zonnepanelen, VvE's en bedrijven.",
         url: PAGE_URL,
+        relatedLink: [`${SITE_URL}/aardpen-slaan-amsterdam`],
         provider: { "@id": `${SITE_URL}/#organization` },
         areaServed: { "@type": "Country", name: "Nederland" },
         availableChannel: [
@@ -217,12 +218,25 @@ const AardingAanleggen = () => {
                     >
                       <MessageCircle className="w-5 h-5" aria-hidden="true" />
                       WhatsApp foto
-                    </a>
-                  )}
-                </div>
+                  </a>
+                )}
               </div>
+              <p className="mt-4 text-[15px] text-white/80 flex items-start gap-2 max-w-3xl">
+                <MapPin className="w-4 h-4 mt-0.5 text-[#9ed42e] flex-shrink-0" aria-hidden="true" />
+                <span>
+                  Woont u in{" "}
+                  <Link
+                    to="/aardpen-slaan-amsterdam"
+                    className="underline decoration-[#9ed42e] underline-offset-4 hover:text-white"
+                  >
+                    Amsterdam
+                  </Link>
+                  ? Bekijk onze gespecialiseerde pagina voor aardpen slaan en aarding meten in Amsterdam.
+                </span>
+              </p>
+            </div>
 
-              <div className="relative">
+            <div className="relative">
                 <img
                   src={aardpenFoto}
                   alt="Aardpen laten slaan en aarding meten door TerreVolt"
@@ -259,6 +273,57 @@ const AardingAanleggen = () => {
                 );
               })}
             </ul>
+          </div>
+        </section>
+
+        <section id="amsterdam" className="py-16 md:py-24 bg-[#f0f7e6] scroll-mt-24">
+          <div className="container mx-auto px-5 sm:px-6 lg:px-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center max-w-6xl mx-auto">
+              <div className="order-2 lg:order-1">
+                <div className="inline-flex items-center gap-2 bg-[#0d3b2e] text-[#9ed42e] px-4 py-2 rounded-full text-sm mb-5 tracking-wider uppercase">
+                  <MapPin className="w-4 h-4" aria-hidden="true" />
+                  Amsterdam
+                </div>
+                <h2 className="text-3xl sm:text-4xl text-[#0d3b2e] mb-5 hyphens-nl" lang="nl">
+                  Aardpen slaan en aarding meten in Amsterdam
+                </h2>
+                <p className="text-[#6c757d] leading-relaxed mb-5">
+                  Amsterdam is de eerste stad waar we een volledige landingspagina hebben ingericht voor aardpen slaan,
+                  aardingsmeting en meetrapportage. Denk aan oude woningen, nieuwe meterkasten, laadpalen,
+                  zonnepanelen, VvE's en bedrijfspanden.
+                </p>
+                <ul className="space-y-2 mb-7">
+                  {[
+                    "Scherpe prijsindicatie op basis van postcode en foto's",
+                    "Ook voor appartementen, winkels, VvE's en technische ruimten",
+                    "Meetrapport voor installateur, keuring of opleverdossier",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-[15px] text-[#495057] leading-relaxed">
+                      <CheckCircle2 className="w-5 h-5 text-[#9ed42e] flex-shrink-0 mt-0.5" strokeWidth={2.5} aria-hidden="true" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to="/aardpen-slaan-amsterdam"
+                  data-cta="Aardpen slaan Amsterdam teaser"
+                  className="group inline-flex items-center gap-2 bg-[#0d3b2e] text-white px-7 py-4 min-h-[56px] rounded-lg hover:bg-[#1a4a36] transition-colors"
+                >
+                  Bekijk Amsterdam-pagina
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                </Link>
+              </div>
+              <div className="order-1 lg:order-2">
+                <img
+                  src={aardpenFoto}
+                  alt="Aardpen laten slaan in Amsterdam door TerreVolt"
+                  width={1280}
+                  height={960}
+                  loading="lazy"
+                  className="w-full h-auto rounded-2xl border border-[#9ed42e]/30 object-cover shadow-xl"
+                />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -382,8 +447,19 @@ const AardingAanleggen = () => {
                 <Link
                   key={pagina.path}
                   to={pagina.path}
-                  className="block bg-[#f8f9fa] border border-gray-200 rounded-xl p-6 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300"
+                  data-cta={`Aardpen slaan ${pagina.plaats} werkgebied`}
+                  className={`block rounded-xl p-6 transition-all duration-300 ${
+                    pagina.plaats === "Amsterdam"
+                      ? "bg-[#f0f7e6] border-2 border-[#9ed42e] hover:shadow-xl"
+                      : "bg-[#f8f9fa] border border-gray-200 hover:border-[#9ed42e] hover:shadow-xl"
+                  }`}
                 >
+                  {pagina.plaats === "Amsterdam" && (
+                    <span className="inline-flex items-center gap-1.5 bg-[#0d3b2e] text-[#9ed42e] text-[10px] uppercase tracking-wider rounded-full px-3 py-1 mb-3">
+                      <MapPin className="w-3 h-3" aria-hidden="true" />
+                      Actief
+                    </span>
+                  )}
                   <h3 className="text-xl text-[#0d3b2e] mb-2">Aardpen slaan {pagina.plaats}</h3>
                   <p className="text-[#6c757d] leading-relaxed mb-4">{pagina.text}</p>
                   <span className="inline-flex items-center gap-2 text-[#0d3b2e] underline underline-offset-4 decoration-[#9ed42e]">
