@@ -16,16 +16,25 @@ const pijlers = [
   { icon: ShieldCheck, title: "De vijf eisen bij spanningsloos werken", description: "Bij spanningsloos werken volgen we de vijf eisen uit de toepasselijke BEI, VWI en bedrijfsspecifieke procedures: scheiden, beveiligen tegen opnieuw inschakelen, spanningsloosheid vaststellen, aarden, kortsluiten en identificeren, en nabijgelegen actieve delen afschermen." },
   { icon: Wrench, title: "Netmontage volgens instructie", description: "Bij LS/MS-netmontage werken monteurs volgens opdracht, werkmethode, VWI's en projectafspraken waar van toepassing. Werkgrenzen, materialen en bevoegdheden moeten vooraf duidelijk zijn." },
   { icon: TrafficCone, title: "Werkplekveiligheid & zichtbaarheid", description: "Veiligheid stopt niet bij de installatie. Afzettingen, zichtbaarheid, looproutes, verlichting, PBM's, materieel, verkeer en andere partijen op locatie worden meegenomen in voorbereiding en LMRA." },
-  { icon: ClipboardList, title: "Kwaliteit & aantoonbare oplevering", description: "Werkzaamheden worden gecontroleerd, teruggekoppeld en waar nodig vastgelegd. TerreVolt werkt met aandacht voor ISO 9001:2015-principes, duidelijke werkinstructies, rapportage en continue verbetering." },
+  { icon: ClipboardList, title: "VGM-borging & aantoonbare kwaliteit", description: "Naast de technische veiligheidsregels werkt TerreVolt met VCA** 2017/6.0 en ISO 9001:2015-principes: risico's beheersen, medewerkers instrueren, afwijkingen opvolgen en werkzaamheden aantoonbaar opleveren." },
 ];
 
 const beiCards = [
   { icon: ShieldCheck, title: "BEI BLS/BHS", description: "Binnen elektriciteitsvoorzieningssystemen van netbeheerders werken we volgens de van kracht verklaarde BEI BLS/BHS, de toepasselijke VWI's en de bedrijfsspecifieke procedures. Bij industriële of andere installaties van derden bepaalt de opdrachtgever of beheerder welke veiligheidsregelgeving geldt. BEI BLS/BHS is daar niet automatisch van toepassing." },
   { icon: BookOpen, title: "VWI's", description: "Veiligheidswerkinstructies voor specifieke werkzaamheden, situaties en risico's." },
-  { icon: BadgeCheck, title: "VCA", description: "Veiligheidsbewust werken met aandacht voor mens, installatie, omgeving en risico's." },
-  { icon: BadgeCheck, title: "Certificaten & aanwijzingen", description: "Persoonlijke certificaten en aanwijzingen worden ingezet afhankelijk van project, opdrachtgever en werkgebied." },
+  { icon: BadgeCheck, title: "VCA** 2017/6.0", description: "TerreVolt is VCA** gecertificeerd: een bedrijfscertificering voor het VGM-beheerssysteem. Dat gaat verder dan veilig werken op de werkvloer en raakt ook beleid, risico-inventarisatie, instructie, inspectie, incidentopvolging en samenwerking met partijen op projectlocaties." },
+  { icon: BadgeCheck, title: "Certificaten & aanwijzingen", description: "Persoonlijke certificaten, aanwijzingen en projectbevoegdheden worden ingezet afhankelijk van opdracht, opdrachtgever, werkgebied en geldende procedures." },
   { icon: FileText, title: "NEN 3140 / NEN 3840 en NEN 1010", description: "NEN 3140 en NEN 3840 geven richting aan veilige bedrijfsvoering van laagspannings- en middenspanningsinstallaties. NEN 1010 geldt bij aanleg, uitbreiding en controle van laagspanningsinstallaties." },
-  { icon: Award, title: "ISO 9001:2015", description: "Met aandacht voor de principes van ISO 9001:2015: procesbeheersing, klantgerichtheid, risicodenken en continue verbetering." },
+  { icon: Award, title: "ISO 9001:2015", description: "ISO 9001 is de kwaliteitslaag naast veiligheid: procesbeheersing, klantgerichtheid, risicodenken, vastlegging, beoordeling en continue verbetering." },
+  { icon: ClipboardList, title: "Aantoonbare scope", description: "De certificeringsscope voor ISO/VCA sluit aan op het aanleggen en monteren van data- en energiekabels met inbegrip van civiele werkzaamheden." },
+  { icon: Users, title: "SBB erkend leerbedrijf", description: "Als erkend leerbedrijf investeert TerreVolt in praktijkontwikkeling en het opleiden van nieuwe vakmensen. Dat past bij veilig werken, vakmanschap en overdracht van kennis op de werkvloer." },
+];
+
+const borgingslagen = [
+  { title: "BEI en VWI", description: "Regelen de elektrotechnische veiligheidsaanpak: opdracht, aanwijzing, werkgrenzen, spanningsloos werken en veilige uitvoering." },
+  { title: "VCA**", description: "Borgt veiligheid, gezondheid en milieu als organisatieproces: risico's vooraf beheersen, instrueren, inspecteren, melden en verbeteren." },
+  { title: "ISO 9001", description: "Borgt kwaliteit: duidelijke afspraken, procesbeheersing, controle, oplevering, terugkoppeling en continue verbetering." },
+  { title: "SBB", description: "Ondersteunt vakmanschap door praktijkgericht opleiden en het ontwikkelen van nieuwe technische mensen." },
 ];
 
 const werkplek = [
@@ -58,15 +67,17 @@ const faqs = [
   { q: "Wat als een monteur een situatie onveilig vindt?", a: "Dan wordt er niet zomaar doorgewerkt. De situatie wordt gemeld, besproken en pas opgepakt als het verantwoord kan. We doen het veilig, of we doen het niet." },
   { q: "Wat betekent BEI BLS/BHS?", a: "BEI BLS regelt de veilige bedrijfsvoering in laagspanningssystemen van netbeheerders. BEI BHS geldt voor hoog- en middenspanningssystemen van netbeheerders. Voor TerreVolt betekent dit dat BEI-plichtige werkzaamheden uitsluitend worden uitgevoerd met de juiste aanwijzing, opdracht, VWI, werkgrenzen en bedrijfsspecifieke procedures." },
   { q: "Wat zijn VWI's?", a: "VWI's zijn veiligheidstechnische werkinstructies voor specifieke activiteiten. Ze beschrijven onder andere de minimale aanwijzing, opdrachtvorm, risico's, veiligheidsmaatregelen, benodigde middelen en veilige uitvoeringswijze. De toepasselijke VWI en bedrijfsspecifieke procedures moeten worden gevolgd." },
+  { q: "Wat betekent VCA** voor opdrachtgevers?", a: "VCA** laat zien dat TerreVolt veiligheid, gezondheid en milieu niet alleen op de werkvloer bekijkt, maar ook als VGM-beheerssysteem organiseert. Denk aan risico's vooraf beoordelen, medewerkers instrueren, werkplekinspecties, incidentmelding, opvolging van verbeterpunten en afstemming met partijen op locatie." },
+  { q: "Is ISO 9001 hetzelfde als VCA**?", a: "Nee. VCA** gaat over veiligheid, gezondheid en milieu binnen het werk en de organisatie. ISO 9001 gaat over kwaliteitsmanagement: duidelijke processen, klantafspraken, controle, documentatie, terugkoppeling en continue verbetering. Samen geven ze een completer beeld van beheerst en aantoonbaar werken." },
   { q: "Hoe kijkt TerreVolt naar werkplekveiligheid langs wegen?", a: "Bij werkzaamheden langs wegen of op projectlocaties kijken we naar zichtbaarheid, afzettingen, verkeersbewegingen, looproutes, toegang en andere partijen op locatie." },
   { q: "Wat krijgt een opdrachtgever terug na uitvoering?", a: "Afhankelijk van het werk leveren we controle, terugkoppeling, meetrapportage, fotoregistratie of opleverdocumentatie aan. Zo blijft het werk aantoonbaar en overdraagbaar." },
-  { q: "Hoe borgt TerreVolt kwaliteit?", a: "Door duidelijke voorbereiding, passende werkinstructies, controle, terugkoppeling, rapportage waar nodig en aandacht voor ISO 9001:2015-principes zoals procesbeheersing en continue verbetering." },
+  { q: "Hoe borgt TerreVolt kwaliteit?", a: "Door duidelijke voorbereiding, passende werkinstructies, controle, terugkoppeling, rapportage waar nodig en aandacht voor ISO 9001:2015-principes zoals procesbeheersing, risicodenken en continue verbetering." },
   { q: "Werkt TerreVolt volgens netbeheerderseisen?", a: "TerreVolt sluit aan op projectafspraken, opdrachtgeverseisen en bedrijfsspecifieke procedures waar die van toepassing zijn." },
   
 ];
 
 const Veiligheid = () => {
-  usePageMeta("Veiligheid & kwaliteit | Iedereen veilig thuis | TerreVolt BV", "Veilig werken en aantoonbaar opleveren staan centraal bij TerreVolt. We werken met aandacht voor LMRA, BEI BLS/BHS, VWI's, VCA, NEN 3140/3840 en NEN 1010.", "/veiligheid");
+  usePageMeta("Veiligheid, BEI en VCA** | TerreVolt BV", "Veilig werken en aantoonbaar opleveren met BEI BLS/BHS, VWI's, LMRA, VCA** 2017/6.0, ISO 9001:2015 en SBB erkend leerbedrijf.", "/veiligheid");
 
   return (
     <div className="min-h-screen bg-[#f8f9fa]">
@@ -129,7 +140,7 @@ const Veiligheid = () => {
             { label: "Aanpak", href: "#aanpak" },
             { label: "Praktijk", href: "#praktijk" },
             { label: "Vijf eisen", href: "#veilige-5" },
-            { label: "Normen & kwaliteit", href: "#bei-vwi" },
+            { label: "BEI, VCA & ISO", href: "#bei-vwi" },
             { label: "Werkplek", href: "#werkplek" },
             { label: "Locatie-eisen", href: "#locatie-eisen" },
             { label: "Rollen", href: "#rollen" },
@@ -325,14 +336,14 @@ const Veiligheid = () => {
           </div>
         </section>
 
-        {/* SECTIE: BEI & VWI */}
+        {/* SECTIE: BEI, VCA en kwaliteit */}
         <section id="bei-vwi" className="py-14 md:py-24 bg-white scroll-mt-[10rem] sm:scroll-mt-[11.5rem]">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-16">
-              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">Normen & bevoegdheden</div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Normen, kwaliteitssystemen en bevoegdheden</h2>
+              <div className="inline-block bg-[#f0f7e6] text-[#0d3b2e] px-4 py-1.5 rounded-full text-xs sm:text-sm mb-4 tracking-wider uppercase">BEI, VCA &amp; kwaliteit</div>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mb-4 hyphens-nl text-pretty" lang="nl">Veiligheid technisch én organisatorisch geborgd</h2>
               <p className="text-base sm:text-lg text-[#6c757d] leading-relaxed hyphens-nl text-pretty" lang="nl">
-                {softHyphenate("Normen, certificaten en kwaliteitssystemen zijn geen doel op zichzelf. Ze helpen om veilig, beheerst en aantoonbaar te werken.")}
+                {softHyphenate("BEI en VWI's sturen de veilige elektrotechnische uitvoering. VCA** borgt veiligheid, gezondheid en milieu breder in de organisatie. ISO 9001 ondersteunt de kwaliteitskant: processen, controle, terugkoppeling en verbetering.")}
               </p>
             </div>
 
@@ -349,6 +360,26 @@ const Veiligheid = () => {
                   </div>
                 );
               })}
+            </div>
+
+            <div className="max-w-6xl mx-auto mt-10 sm:mt-12 bg-[#0d3b2e] text-white rounded-2xl p-6 sm:p-8 border-l-4 border-[#9ed42e]">
+              <div className="max-w-3xl mb-6">
+                <h3 className="text-xl sm:text-2xl mb-3 text-white hyphens-nl text-pretty" lang="nl">Zo vullen de systemen elkaar aan</h3>
+                <p className="text-[15px] sm:text-base text-white/85 leading-relaxed hyphens-nl text-pretty" lang="nl">
+                  {softHyphenate("Voor opdrachtgevers is vooral belangrijk dat veiligheid niet afhankelijk is van één moment of één persoon. TerreVolt combineert werkmethode, bevoegdheden, VGM-borging en kwaliteitsafspraken in één praktische aanpak.")}
+                </p>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {borgingslagen.map((laag) => (
+                  <div key={laag.title} className="border border-white/15 bg-white/5 rounded-xl p-4">
+                    <h4 className="text-[#9ed42e] text-base mb-2">{laag.title}</h4>
+                    <p className="text-sm text-white/80 leading-relaxed hyphens-nl text-pretty" lang="nl">{softHyphenate(laag.description)}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs sm:text-sm text-white/70 mt-6">
+                TerreVolt vermeldt op de website onder andere VCA** 2017/6.0 certificaat 26062501 en ISO 9001:2015 certificaat 26062502, beide geldig t/m 24 juni 2029.
+              </p>
             </div>
           </div>
         </section>
