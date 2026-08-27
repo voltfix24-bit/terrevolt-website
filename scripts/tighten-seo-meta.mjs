@@ -109,6 +109,24 @@ const AARDING_CV_SECTION = `<section>
         <ul><li>Geaard stopcontact bij de cv-ketel controleren</li><li>Hoofdaardrail en meterkastaarding meten</li><li>Aardpen en aardverspreidingsweerstand controleren</li><li>Meetrapport voor installateur of dossier</li></ul>
       </section>`;
 
+const VEILIGHEID_PRERENDER_MAIN = `<main id="seo-prerender" class="seo-prerender" aria-label="Pagina samenvatting">
+      <nav class="seo-prerender__nav" aria-label="Belangrijke links"><a href="/aarding">Aardpen slaan en aarding meten</a> <a href="/aardpen-slaan-amsterdam">Aardpen slaan Amsterdam</a> <a href="/diensten">Alle diensten</a> <a href="/veiligheid">Veiligheid, BEI en VCA**</a> <a href="/contact?type=aarding">Prijsindicatie aanvragen</a></nav>
+      <h1>Veiligheid, BEI en VCA**</h1>
+      <p>Veilig werken en aantoonbaar opleveren met BEI BLS/BHS, VWI's, LMRA, VCA** 2017/6.0, ISO 9001:2015 en SBB erkend leerbedrijf.</p>
+      <section>
+        <h2>BEI, VCA** en kwaliteit in een aanpak</h2>
+        <p>TerreVolt werkt aan veilige uitvoering met LMRA, BEI BLS/BHS, VWI's, duidelijke aanwijzingen, werkgrenzen en bedrijfsspecifieke procedures waar die van toepassing zijn.</p>
+        <p>VCA** 2017/6.0 borgt het VGM-beheerssysteem breder in de organisatie: risico's vooraf beoordelen, medewerkers instrueren, werkplekinspecties, incidentopvolging en verbeteren.</p>
+        <p>ISO 9001:2015 vult dit aan als kwaliteitsmanagementlaag voor procesbeheersing, klantafspraken, controle, oplevering, terugkoppeling en continue verbetering. SBB erkend leerbedrijf past bij het ontwikkelen van vakmensen.</p>
+        <ul><li>BEI BLS/BHS</li><li>VWI's</li><li>LMRA</li><li>VCA** 2017/6.0</li><li>ISO 9001:2015</li><li>SBB erkend leerbedrijf</li><li>VGM-beheerssysteem</li><li>Aantoonbare oplevering</li></ul>
+      </section>
+      <section>
+        <h2>Certificaten en scope</h2>
+        <p>TerreVolt vermeldt VCA** 2017/6.0 certificaat 26062501 en ISO 9001:2015 certificaat 26062502, beide geldig t/m 24 juni 2029.</p>
+        <p>De certificeringsscope sluit aan op het aanleggen en monteren van data- en energiekabels met inbegrip van civiele werkzaamheden.</p>
+      </section>
+    </main>`;
+
 function escapeHtml(value) {
   return value
     .replace(/&/g, "&amp;")
@@ -229,6 +247,11 @@ function insertAardingCvContent(html) {
   return html.replace(/\s*<\/main>/i, `\n      ${AARDING_CV_SECTION}\n    </main>`);
 }
 
+function replaceVeiligheidPrerenderContent(html) {
+  if (html.includes("BEI, VCA** en kwaliteit in een aanpak")) return html;
+  return html.replace(/<main id="seo-prerender"[\s\S]*?<\/main>/i, VEILIGHEID_PRERENDER_MAIN);
+}
+
 let updatedPages = 0;
 
 for (const [route, meta] of Object.entries(META_OVERRIDES)) {
@@ -249,6 +272,10 @@ for (const [route, meta] of Object.entries(META_OVERRIDES)) {
   if (route === "/aarding") {
     html = appendAardingCvFaqJsonLd(html);
     html = insertAardingCvContent(html);
+  }
+
+  if (route === "/veiligheid") {
+    html = replaceVeiligheidPrerenderContent(html);
   }
 
   if (html !== original) {
