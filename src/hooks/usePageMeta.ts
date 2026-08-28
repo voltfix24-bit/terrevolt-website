@@ -80,9 +80,9 @@ const META_OVERRIDES: Record<string, SeoMetaOverride> = {
       "TerreVolt BV uit Utrecht is uitvoerend specialist in LS/MS-infrastructuur, netmontage, aarding, schakelwerk en technische projecten.",
   },
   "/werken-bij": {
-    title: "Werken bij TerreVolt | Vacatures elektrotechniek",
+    title: "Vacature elektromonteur LS/MS | Werken bij TerreVolt",
     description:
-      "Bekijk vacatures voor elektrotechniek, laagspanning, middenspanning, aarding, huisaansluitingen en werkverantwoordelijkheid bij TerreVolt.",
+      "Bekijk 6 vacatures in loondienst: elektromonteur LS/MS, aardingsmonteur, huisaansluitingen en werkverantwoordelijke. Salaris zichtbaar, opleidingen betaald.",
   },
   "/contact": {
     title: "Contact | Project bespreken met TerreVolt",

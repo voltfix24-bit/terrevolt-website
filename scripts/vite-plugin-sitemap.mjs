@@ -11,7 +11,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const SITE_ORIGIN = "https://terrevolt.lovable.app";
+const SITE_ORIGIN = "https://terrevolt.nl";
 const VACATURE_PATH = "/vacatures";
 const PLACEHOLDER_COMMENT =
   "<!-- TODO: dynamische /vacatures/:slug entries automatisch genereren bij build of via edge function. -->";

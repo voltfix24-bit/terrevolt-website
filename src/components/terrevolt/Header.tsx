@@ -227,7 +227,7 @@ export function Header() {
                     Werk mee aan LS/MS-infrastructuur
                   </div>
                   <div className="text-white/85 text-xs mt-1 leading-snug line-clamp-2">
-                    Zeven vacatures in loondienst voor monteurs en werkverantwoordelijken.
+                    Actuele vacatures in loondienst voor monteurs en werkverantwoordelijken.
                   </div>
                   <div className="inline-flex items-center gap-1.5 text-[#9ed42e] text-sm mt-2 font-medium">
                     Werken bij bekijken <ArrowRight className="w-3.5 h-3.5" />
