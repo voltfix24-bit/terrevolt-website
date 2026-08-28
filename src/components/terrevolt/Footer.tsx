@@ -30,7 +30,7 @@ export function Footer() {
               <li><Link to="/diensten/ls-ms-netmontage" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">LS/MS Netmontage</Link></li>
               <li><Link to="/diensten/stationsrenovatie" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Stationsrenovatie</Link></li>
               <li><Link to="/diensten/schakelwerk" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Schakelwerk</Link></li>
-              <li><Link to="/aarding-aanleggen" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Aardingsoplossingen</Link></li>
+              <li><Link to="/aarding" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Aardingsoplossingen</Link></li>
               <li><Link to="/diensten/meten-en-beproeven" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Meten &amp; beproeven</Link></li>
               <li><Link to="/diensten/huisaansluitingen" className="block min-h-[44px] py-2.5 hover:text-[#9ed42e] transition-colors">Huisaansluitingen</Link></li>
             </ul>
@@ -52,11 +52,11 @@ export function Footer() {
           <div>
             <h4 className="text-white mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
-              <li className="flex items-center gap-1">
+              <li className="flex min-w-0 items-center gap-1">
                 <a
                   href={telHref}
                   aria-label={`Bel TerreVolt op ${company.phone.display}. Werkt de bel-app niet? Gebruik de kopieerknop hiernaast.`}
-                  className="inline-flex items-center min-h-[44px] -my-1 py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 active:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] rounded-md transition-colors"
+                  className="inline-flex items-center min-h-[44px] -my-1 py-2 whitespace-nowrap hover:text-[#9ed42e] hover:underline underline-offset-4 active:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] rounded-md transition-colors"
                 >
                   {company.phone.display}
                 </a>
@@ -64,21 +64,21 @@ export function Footer() {
                   type="tel"
                   value={company.phone.e164}
                   ariaLabel={`Telefoonnummer kopiëren: ${company.phone.display}`}
-                  className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2.5 rounded-md text-current/70 hover:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] transition-colors"
+                  className="inline-flex flex-shrink-0 items-center justify-center min-h-[44px] min-w-[44px] p-2.5 rounded-md text-current/70 hover:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] transition-colors"
                 />
               </li>
-              <li className="flex items-center gap-1">
+              <li className="flex min-w-0 items-center gap-1">
                 <a
                   href={mailHref}
                   aria-label={`Mail TerreVolt op ${company.email}. Werkt de mail-app niet? Gebruik de kopieerknop hiernaast.`}
-                  className="inline-flex items-center min-h-[44px] -my-1 py-2 break-all hover:text-[#9ed42e] hover:underline underline-offset-4 active:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] rounded-md transition-colors"
+                  className="inline-flex min-w-0 items-center min-h-[44px] -my-1 py-2 break-words [overflow-wrap:anywhere] hover:text-[#9ed42e] hover:underline underline-offset-4 active:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] rounded-md transition-colors"
                 >
                   {company.email}
                 </a>
                 <CopyButton
                   type="mail"
                   value={company.email}
-                  className="inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2.5 rounded-md text-current/70 hover:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] transition-colors"
+                  className="inline-flex flex-shrink-0 items-center justify-center min-h-[44px] min-w-[44px] p-2.5 rounded-md text-current/70 hover:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d3b2e] transition-colors"
                 />
               </li>
               <li className="not-italic">
