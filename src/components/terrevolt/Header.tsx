@@ -165,7 +165,7 @@ export function Header() {
 
             <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
               {links.map((l) => (
-                <Link key={l.href} to={l.href} className="text-[#2d3436] hover:text-[#0d3b2e] transition-colors">
+                <Link key={l.href} to={l.href} className="inline-flex min-h-[44px] items-center whitespace-nowrap text-[#2d3436] hover:text-[#0d3b2e] transition-colors">
                   {l.label}
                 </Link>
               ))}
@@ -279,17 +279,17 @@ export function Header() {
                 <a
                   href={telHref}
                   onClick={() => setOpen(false)}
-                  className="inline-flex items-center gap-2 text-sm text-[#0d3b2e] hover:underline min-h-[36px] px-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1"
+                  className="inline-flex items-center gap-2 text-sm text-[#0d3b2e] hover:underline min-h-[44px] px-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1"
                 >
-                  <Phone className="w-4 h-4" />
-                  <span>{company.phone.display}</span>
+                  <Phone className="w-4 h-4 flex-shrink-0" />
+                  <span className="whitespace-nowrap">{company.phone.display}</span>
                 </a>
                 <a
                   href={mailHref}
                   onClick={() => setOpen(false)}
-                  className="inline-flex items-center gap-2 text-sm text-[#0d3b2e] hover:underline min-h-[36px] break-all px-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1"
+                  className="inline-flex min-w-0 items-center gap-2 text-sm text-[#0d3b2e] hover:underline min-h-[44px] break-words [overflow-wrap:anywhere] px-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1"
                 >
-                  <Mail className="w-4 h-4" />
+                  <Mail className="w-4 h-4 flex-shrink-0" />
                   <span>{company.email}</span>
                 </a>
               </div>
