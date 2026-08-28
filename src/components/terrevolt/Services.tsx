@@ -34,7 +34,7 @@ const services: ServiceCard[] = [
   {
     icon: EarthSymbol,
     slug: "aardingsoplossingen",
-    href: "/aarding-aanleggen",
+    href: "/aarding",
     title: "Aardingsoplossingen",
     description: "Aanleg, verbetering, meting en rapportage van aardingssystemen voor stations en technische ruimten."
   },
