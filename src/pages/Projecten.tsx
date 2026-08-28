@@ -40,7 +40,7 @@ const projecten = [
     result: "Een aantoonbaar verbeterde aardingsvoorziening met duidelijke meetrapportage en opleverdocumentatie.",
     bullets: ["Inspectie en verbetering aarding", "Meting aardverspreidingsweerstand", "Opleverdocumentatie"],
     rol: ["Uitvoering", "Meting", "Rapportage"],
-    serviceHref: "/aarding-aanleggen",
+    serviceHref: "/aarding",
   },
   {
     icon: ShieldCheck,
