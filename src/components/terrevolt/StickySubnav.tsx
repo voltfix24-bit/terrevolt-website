@@ -94,7 +94,7 @@ export function StickySubnav({ items, ariaLabel }: StickySubnavProps) {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-12">
         <ul
-          className="flex gap-1 sm:gap-2 justify-center overflow-x-auto scrollbar-hide -mx-1 px-1 py-2 snap-x snap-mandatory"
+          className="flex gap-1.5 sm:gap-2 justify-start lg:justify-center overflow-x-auto scrollbar-hide -mx-1 px-1 py-2.5 snap-x snap-mandatory"
           style={{
             maskImage:
               "linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%)",
@@ -109,7 +109,7 @@ export function StickySubnav({ items, ariaLabel }: StickySubnavProps) {
                 <a
                   href={item.href}
                   aria-current={isActive ? "true" : undefined}
-                  className={`inline-flex items-center min-h-[40px] sm:min-h-[44px] px-3 sm:px-4 rounded-full text-sm tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border transition-all duration-200 whitespace-nowrap ${
+                  className={`inline-flex items-center min-h-[44px] px-3.5 sm:px-4 rounded-full text-sm leading-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-1 border transition-all duration-200 whitespace-nowrap ${
                     isActive
                       ? "bg-[#0d3b2e] text-[#9ed42e] border-[#0d3b2e] shadow-[0_4px_12px_-6px_rgba(13,59,46,0.6)]"
                       : "text-[#0d3b2e]/80 border-transparent hover:text-[#0d3b2e] hover:bg-[#f0f7e6] hover:border-[#9ed42e]/40"
