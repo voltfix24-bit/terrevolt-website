@@ -292,7 +292,7 @@ const Spanningsniveaus = () => {
                   { to: "/kennis/middenspanning", label: "Middenspanning: wat is het en wanneer heb je het nodig" },
                   { to: "/diensten/ls-ms-netmontage", label: "LS/MS-netmontage" },
                   { to: "/diensten/schakelwerk", label: "Schakelwerk LS/MS" },
-                  { to: "/aarding-aanleggen", label: "Aarding aanleggen en meten" },
+                  { to: "/aarding", label: "Aarding aanleggen en meten" },
                 ].map((l) => (
                   <li key={l.to}>
                     <Link to={l.to} className="inline-flex min-h-[44px] items-center text-[#0d3b2e] underline underline-offset-4 hover:text-[#0d3b2e]/70">
