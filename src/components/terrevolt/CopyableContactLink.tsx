@@ -58,7 +58,7 @@ export const CopyButton = ({
       title={`${label} kopiëren`}
       className={
         className ??
-        "inline-flex items-center justify-center min-h-[40px] min-w-[40px] p-1.5 rounded-md text-current/80 hover:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] transition-colors"
+        "inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2 rounded-md text-current/80 hover:text-[#9ed42e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] transition-colors"
       }
     >
       {copied ? (
