@@ -34,13 +34,14 @@ export const TobeshCard = ({ photoSrc, className = "" }: Props) => (
       </div>
     </div>
 
-    <div className="mt-6 grid gap-3 sm:grid-cols-3">
+    <div className="mt-6 grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr))]">
       <a
         href={telHref}
-        className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg bg-[#0d3b2e] px-4 text-sm font-medium text-white transition-colors hover:bg-[#0a2f24] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2"
+        aria-label={`Bel Tobesh via ${company.phone.display}`}
+        className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg bg-[#0d3b2e] px-5 text-sm font-medium text-white transition-colors hover:bg-[#0a2f24] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2"
       >
-        <Phone className="h-4 w-4" aria-hidden="true" />
-        {company.phone.display}
+        <Phone className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
+        <span className="whitespace-nowrap">{company.phone.display}</span>
       </a>
       <a
         href={whatsappHref}
@@ -48,15 +49,16 @@ export const TobeshCard = ({ photoSrc, className = "" }: Props) => (
         rel="noopener noreferrer"
         className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg border border-[#0d3b2e] px-4 text-sm font-medium text-[#0d3b2e] transition-colors hover:bg-[#f0f7e6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2"
       >
-        <MessageCircle className="h-4 w-4" aria-hidden="true" />
-        WhatsApp
+        <MessageCircle className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
+        <span className="whitespace-nowrap">WhatsApp</span>
       </a>
       <a
         href={mailHref}
+        aria-label={`Mail TerreVolt via ${company.email}`}
         className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-lg border border-[#0d3b2e] px-4 text-sm font-medium text-[#0d3b2e] transition-colors hover:bg-[#f0f7e6] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] focus-visible:ring-offset-2"
       >
-        <Mail className="h-4 w-4" aria-hidden="true" />
-        {company.email}
+        <Mail className="h-4 w-4 flex-shrink-0" aria-hidden="true" />
+        <span className="whitespace-nowrap">{company.email}</span>
       </a>
     </div>
   </div>
