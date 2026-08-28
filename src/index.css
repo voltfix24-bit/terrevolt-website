@@ -14,6 +14,67 @@ html {
   }
 }
 
+/* Sitebrede UI-polish voor terugkerende kleine oneffenheden:
+   contactregels, kopieerknoppen, sticky mobiele CTA's en sectienavigatie. */
+a[href^="tel:"] {
+  white-space: nowrap;
+}
+
+a[href^="mailto:"] {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+button[title$="kopiëren"] {
+  min-height: 44px !important;
+  min-width: 44px !important;
+  padding: 0.5rem !important;
+  flex-shrink: 0;
+}
+
+nav[aria-label^="Paginanavigatie"] a {
+  min-height: 44px !important;
+  align-items: center;
+  line-height: 1;
+}
+
+.fixed.bottom-0.inset-x-0 a {
+  min-height: 52px;
+}
+
+@media (max-width: 639px) {
+  a[data-cta] {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+img[alt*="ISO 9001"],
+img[alt*="VCA"] {
+  max-height: 7rem;
+  max-width: 10rem;
+  object-fit: contain;
+}
+
+img[alt*="SBB"] {
+  max-height: 5rem;
+  max-width: 14rem;
+  object-fit: contain;
+}
+
+@media (max-width: 639px) {
+  img[alt*="ISO 9001"],
+  img[alt*="VCA"] {
+    max-height: 6rem;
+    max-width: 9rem;
+  }
+
+  img[alt*="SBB"] {
+    max-height: 4rem;
+    max-width: 12rem;
+  }
+}
+
 /* Verberg scrollbar op horizontaal scrollbare subnav (mobiel) */
 .scrollbar-hide {
   -ms-overflow-style: none;
@@ -335,4 +396,3 @@ All colors MUST be HSL.
     }
   }
 }
-
