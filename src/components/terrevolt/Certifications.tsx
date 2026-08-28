@@ -27,7 +27,7 @@ const certifications: Certification[] = [
     icon: Award,
     logo: isoLogo.url,
     logoAlt: "ISO 9001 gecertificeerd keurmerk van Cetradex Certificatie",
-    logoClassName: "h-28 w-auto max-w-[10rem]",
+    logoClassName: "h-24 sm:h-28 w-auto max-w-[9rem] sm:max-w-[10rem]",
     title: "ISO 9001:2015",
     subtitle: "Kwaliteitsmanagement",
     body: "Kwaliteitsmanagementsysteem gecertificeerd door Cetradex Certificatie B.V.",
@@ -41,7 +41,7 @@ const certifications: Certification[] = [
     icon: ShieldCheck,
     logo: vcaLogo.url,
     logoAlt: "VCA gecertificeerd keurmerk van Cetradex Certificatie",
-    logoClassName: "h-28 w-auto max-w-[10rem]",
+    logoClassName: "h-24 sm:h-28 w-auto max-w-[9rem] sm:max-w-[10rem]",
     title: "VCA** 2017/6.0",
     subtitle: "Veilig, gezond en milieubewust werken",
     body: "VGM-beheerssysteem gecertificeerd door Cetradex Certificatie B.V.",
@@ -55,7 +55,7 @@ const certifications: Certification[] = [
     icon: GraduationCap,
     logo: sbbLogo.url,
     logoAlt: "SBB erkend leerbedrijf - wij leiden vakmensen op",
-    logoClassName: "h-20 w-auto max-w-[14rem]",
+    logoClassName: "h-16 sm:h-20 w-auto max-w-[12rem] sm:max-w-[14rem]",
     title: "SBB erkend leerbedrijf",
     subtitle: "Wij leiden vakmensen op",
     body: "TerreVolt investeert in praktijkontwikkeling en het opleiden van nieuwe vakmensen.",
@@ -93,7 +93,7 @@ export function Certifications() {
             const Icon = item.icon;
             return (
               <article key={item.title} className="bg-[#f8f9fa] border border-gray-200 rounded-xl p-5 sm:p-6 flex flex-col h-full shadow-sm">
-                <div className="relative mb-5 min-h-[132px] rounded-xl border border-gray-200 bg-white flex items-center justify-center overflow-hidden">
+                <div className="relative mb-5 min-h-[120px] sm:min-h-[132px] rounded-xl border border-gray-200 bg-white flex items-center justify-center overflow-hidden">
                   <span className="absolute left-3 top-3 w-10 h-10 bg-[#0d3b2e] rounded-lg flex items-center justify-center">
                     <Icon className="w-5 h-5 text-[#9ed42e]" strokeWidth={2} aria-hidden="true" />
                   </span>
@@ -127,13 +127,13 @@ export function Certifications() {
                     href={item.pdf.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-5 inline-flex items-center justify-center gap-2 rounded-lg border border-[#0d3b2e]/20 bg-white px-4 py-3 text-sm text-[#0d3b2e] hover:border-[#9ed42e] hover:bg-[#f0f7e6] transition-colors min-h-[44px]"
+                    className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-lg border border-[#0d3b2e]/20 bg-white px-4 py-3 text-sm leading-snug text-[#0d3b2e] hover:border-[#9ed42e] hover:bg-[#f0f7e6] transition-colors min-h-[48px] text-center"
                   >
                     <Download className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
                     <span>{item.pdf.label}</span>
                   </a>
                 ) : (
-                  <div className="mt-5 inline-flex items-center justify-center gap-2 text-sm text-[#0d3b2e] bg-white border border-gray-200 rounded-lg px-4 py-3 min-h-[44px]">
+                  <div className="mt-5 inline-flex w-full items-center justify-center gap-2 text-sm leading-snug text-[#0d3b2e] bg-white border border-gray-200 rounded-lg px-4 py-3 min-h-[48px] text-center">
                     <BadgeCheck className="w-4 h-4 flex-shrink-0 text-[#9ed42e]" aria-hidden="true" />
                     <span>{item.proofLabel}</span>
                   </div>
@@ -155,7 +155,7 @@ export function Certifications() {
           </div>
           <Link
             to="/veiligheid"
-            className="inline-flex items-center justify-center rounded-lg border-2 border-white/35 px-5 py-3 text-white hover:border-white transition-colors min-h-[48px] whitespace-nowrap"
+            className="inline-flex w-full items-center justify-center rounded-lg border-2 border-white/35 px-5 py-3 text-center text-white hover:border-white transition-colors min-h-[48px] sm:w-auto"
           >
             Veiligheid bekijken
           </Link>
