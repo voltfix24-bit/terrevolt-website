@@ -25,8 +25,8 @@ export function CTA() {
             Of het nu gaat om netmontage, stationsrenovatie, schakelwerk of aarding: TerreVolt denkt graag mee over de juiste aanpak.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 md:gap-8 mb-10 sm:mb-12">
-            <div className="relative">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8 mb-10 sm:mb-12">
+            <div className="relative min-w-0">
               <a
                 href={telHref}
                 aria-label={`Bel TerreVolt op ${company.phone.display}. Werkt de bel-app niet? Gebruik de kopieerknop om het nummer te kopiëren.`}
@@ -35,16 +35,16 @@ export function CTA() {
                 <div className="w-12 h-12 bg-[#9ed42e] rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
                   <Phone className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.5} />
                 </div>
-                <span className="text-base sm:text-lg group-hover:text-[#9ed42e] group-hover:underline underline-offset-4 transition-colors break-all text-center">{company.phone.display}</span>
+                <span className="text-base sm:text-lg group-hover:text-[#9ed42e] group-hover:underline underline-offset-4 transition-colors whitespace-nowrap text-center">{company.phone.display}</span>
               </a>
               <CopyButton
                 type="tel"
                 value={company.phone.e164}
                 ariaLabel={`Telefoonnummer kopiëren: ${company.phone.display}`}
-                className="absolute top-1 right-1 inline-flex items-center justify-center min-h-[40px] min-w-[40px] p-2 rounded-md text-white/80 hover:text-[#9ed42e] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] transition-colors"
+                className="absolute top-1 right-1 inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2 rounded-md text-white/80 hover:text-[#9ed42e] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] transition-colors"
               />
             </div>
-            <div className="relative">
+            <div className="relative min-w-0">
               <a
                 href={mailHref}
                 aria-label={`Mail TerreVolt op ${company.email}. Werkt de mail-app niet? Gebruik de kopieerknop om het adres te kopiëren.`}
@@ -53,15 +53,15 @@ export function CTA() {
                 <div className="w-12 h-12 bg-[#9ed42e] rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
                   <Mail className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.5} />
                 </div>
-                <span className="text-base sm:text-lg group-hover:text-[#9ed42e] group-hover:underline underline-offset-4 transition-colors break-all text-center">{company.email}</span>
+                <span className="text-base sm:text-lg group-hover:text-[#9ed42e] group-hover:underline underline-offset-4 transition-colors break-words [overflow-wrap:anywhere] text-center">{company.email}</span>
               </a>
               <CopyButton
                 type="mail"
                 value={company.email}
-                className="absolute top-1 right-1 inline-flex items-center justify-center min-h-[40px] min-w-[40px] p-2 rounded-md text-white/80 hover:text-[#9ed42e] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] transition-colors"
+                className="absolute top-1 right-1 inline-flex items-center justify-center min-h-[44px] min-w-[44px] p-2 rounded-md text-white/80 hover:text-[#9ed42e] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] transition-colors"
               />
             </div>
-            <div className="flex flex-col items-center gap-3 text-white">
+            <div className="flex min-w-0 flex-col items-center gap-3 text-white sm:col-span-2 lg:col-span-1">
               <div className="w-12 h-12 bg-[#9ed42e] rounded-full flex items-center justify-center">
                 <MapPin className="w-6 h-6 text-[#0d3b2e]" strokeWidth={2.5} />
               </div>
@@ -69,7 +69,7 @@ export function CTA() {
             </div>
           </div>
 
-          <a href="/contact" className="inline-flex items-center justify-center w-full sm:w-auto max-w-xs mx-auto bg-[#9ed42e] text-[#0d3b2e] px-8 sm:px-10 py-3 sm:py-4 min-h-[54px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-base sm:text-lg">
+          <a href="/contact" className="inline-flex items-center justify-center w-full sm:w-auto max-w-xs mx-auto bg-[#9ed42e] text-[#0d3b2e] px-8 sm:px-10 py-3 sm:py-4 min-h-[54px] rounded-lg hover:bg-[#8bc41f] transition-all duration-300 text-base sm:text-lg text-center">
             Neem contact op
           </a>
         </div>
