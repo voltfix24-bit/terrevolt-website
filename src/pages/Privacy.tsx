@@ -16,7 +16,7 @@ const Privacy = () => {
       <main id="main-content" className="pt-20 sm:pt-24">
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-5 sm:px-6 lg:px-12 max-w-3xl">
-            <Link to="/" className="text-sm text-[#0d3b2e] hover:underline">← Terug naar home</Link>
+            <Link to="/" className="inline-flex min-h-[44px] items-center text-sm text-[#0d3b2e] hover:underline">← Terug naar home</Link>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl text-[#0d3b2e] mt-6 mb-6">Privacyverklaring</h1>
             <div className="space-y-5 text-[#2d3436] leading-relaxed">
               <p>
