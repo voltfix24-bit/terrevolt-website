@@ -231,7 +231,7 @@ export default function AdminVacancyForm() {
 
       <form onSubmit={save} className="space-y-6 bg-white p-6 sm:p-8 rounded-xl border border-gray-200">
         {form.slug && (
-          <div className="rounded-md border border-[#9ed42e]/40 bg-[#9ed42e]/5 px-3 py-2 text-sm text-[#0d3b2e] break-all">
+          <div className="rounded-md border border-[#9ed42e]/40 bg-[#9ed42e]/5 px-3 py-2 text-sm text-[#0d3b2e] break-words [overflow-wrap:anywhere]">
             <span className="text-[#6c757d]">Live URL:</span> /vacatures/{form.slug}
           </div>
         )}
