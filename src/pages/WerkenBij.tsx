@@ -13,7 +13,7 @@ import { ApplicationForm } from "@/components/terrevolt/ApplicationForm";
 import { TobeshCard, whatsappHref } from "@/components/terrevolt/TobeshCard";
 import { usePageMeta } from "../hooks/usePageMeta";
 import { scrollToAnchor } from "@/lib/scrollToAnchor";
-import { company, telHref } from "@/config/company";
+import { company, SITE_URL, telHref } from "@/config/company";
 import {
   ARBEIDSVOORWAARDEN, CONTRACT_LABEL, REGIO_LABEL, SALARIS_DISCLAIMER,
   SOLLICITATIEPROCES, UREN_LABEL, formatSalaris, validThrough,
