@@ -59,6 +59,7 @@ const WerkenBij = () => {
     description:
       `Elektromonteur gezocht: ${vacatures.length} vacatures bij TerreVolt voor laagspanning en middenspanning in Noord-Holland, Zuid-Holland, Gelderland en Flevoland. Salaris direct zichtbaar, loondienst.`,
     canonical: "/werken-bij",
+    ogImage: `${SITE_URL}/og-vacature.jpg`,
     jsonLd: [
       {
         "@context": "https://schema.org",

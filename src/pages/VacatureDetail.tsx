@@ -14,7 +14,7 @@ import { SITE_URL } from "@/config/company";
 import {
   ARBEIDSVOORWAARDEN, CONTRACT_LABEL_LANG, REGIOS, REGIO_LABEL,
   SALARIS_DISCLAIMER, SOLLICITATIEPROCES, UREN_LABEL,
-  formatSalaris, validThrough, VACATURE_META_DESCRIPTIONS,
+  formatSalaris, validThrough, VACATURE_META_DESCRIPTIONS, VACATURE_META_TITLES,
 } from "@/data/vacatures";
 import { findVacatureByAliasIn, findVacatureIn, useVacatures } from "@/hooks/useVacatures";
 
@@ -26,7 +26,8 @@ const VacatureDetail = () => {
 
 
   const title = vacature
-    ? `Vacature ${vacature.title} | loondienst bij TerreVolt`
+    ? VACATURE_META_TITLES[vacature.slug] ??
+      `Vacature ${vacature.title} | loondienst bij TerreVolt`
     : "Vacature niet gevonden | TerreVolt";
   const description = vacature
     ? VACATURE_META_DESCRIPTIONS[vacature.slug] ??
@@ -93,6 +94,7 @@ const VacatureDetail = () => {
     description,
     canonical: vacature ? `/vacatures/${vacature.slug}` : undefined,
     ogType: "article",
+    ogImage: `${SITE_URL}/og-vacature.jpg`,
     jsonLd: jobPosting,
   });
 
