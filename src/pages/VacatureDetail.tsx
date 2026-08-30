@@ -14,7 +14,7 @@ import { SITE_URL } from "@/config/company";
 import {
   ARBEIDSVOORWAARDEN, CONTRACT_LABEL_LANG, REGIOS, REGIO_LABEL,
   SALARIS_DISCLAIMER, SOLLICITATIEPROCES, UREN_LABEL,
-  formatSalaris, validThrough,
+  formatSalaris, validThrough, VACATURE_META_DESCRIPTIONS,
 } from "@/data/vacatures";
 import { findVacatureByAliasIn, findVacatureIn, useVacatures } from "@/hooks/useVacatures";
 
@@ -29,7 +29,8 @@ const VacatureDetail = () => {
     ? `Vacature ${vacature.title} | loondienst bij TerreVolt`
     : "Vacature niet gevonden | TerreVolt";
   const description = vacature
-    ? `${vacature.title} bij TerreVolt: ${formatSalaris(vacature.salaris)} bruto per maand, ${UREN_LABEL}, jaarcontract met uitzicht op vast. Werkgebied: ${REGIO_LABEL}.`
+    ? VACATURE_META_DESCRIPTIONS[vacature.slug] ??
+      `${vacature.title} bij TerreVolt: ${formatSalaris(vacature.salaris)} bruto per maand, ${UREN_LABEL}, jaarcontract met uitzicht op vast. Werkgebied: ${REGIO_LABEL}.`
     : undefined;
 
   const jobPosting = vacature

@@ -309,6 +309,20 @@ export const vacatures: Vacature[] = [
   },
 ];
 
+/** Strakke meta descriptions (±120-155 tekens) per vacatureslug. */
+export const VACATURE_META_DESCRIPTIONS: Record<string, string> = {
+  "elektromonteur-middenspanning":
+    "Vacature elektromonteur middenspanning bij TerreVolt. Werk aan MS-installaties, schakelwerk en netbeheerprojecten. Salaris en opleiding duidelijk.",
+  "elektromonteur-laagspanning-middenspanning":
+    "Vacature elektromonteur LS/MS bij TerreVolt. Werk aan laag- en middenspanning, schakelwerk en netmontage. Direct in loondienst.",
+  "aardingsmonteur":
+    "Vacature aardingsmonteur bij TerreVolt. Werk aan aardpennen, aardingsmetingen en veilige installaties. Opleiding en doorgroei mogelijk.",
+  "monteur-huisaansluitingen":
+    "Vacature monteur huisaansluitingen bij TerreVolt. Werk aan aansluitingen in de regio met duidelijke voorwaarden, begeleiding en opleiding.",
+  "werkverantwoordelijke-ls-ms":
+    "Vacature werkverantwoordelijke LS/MS bij TerreVolt. Borg veiligheid, aanwijzingen en uitvoering binnen laag- en middenspanningsprojecten.",
+};
+
 export const findVacature = (slug?: string) =>
   vacatures.find((v) => v.slug === slug);
 
