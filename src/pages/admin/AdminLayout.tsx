@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Navigate, Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import { Loader2, LogOut, Briefcase, Inbox, LayoutDashboard, MessageSquare, BarChart3 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useAdminRealtimeNotifications } from "@/hooks/useAdminRealtimeNotifications";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/terrevolt/Logo";
@@ -10,6 +11,9 @@ export default function AdminLayout() {
   const { user, isAdmin, loading } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+
+  useAdminRealtimeNotifications(Boolean(user && isAdmin));
+
 
   // Aanvullende sessie-check: redirect direct als de Supabase-sessie ontbreekt.
   // Voorkomt dat een admin-shell kort wordt getoond na uitloggen of bij verlopen tokens.
