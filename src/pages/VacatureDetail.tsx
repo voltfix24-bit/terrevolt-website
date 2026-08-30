@@ -14,7 +14,7 @@ import { SITE_URL } from "@/config/company";
 import {
   ARBEIDSVOORWAARDEN, CONTRACT_LABEL_LANG, REGIOS, REGIO_LABEL,
   SALARIS_DISCLAIMER, SOLLICITATIEPROCES, UREN_LABEL,
-  formatSalaris, validThrough,
+  formatSalaris, validThrough, VACATURE_META_DESCRIPTIONS,
 } from "@/data/vacatures";
 import { findVacatureByAliasIn, findVacatureIn, useVacatures } from "@/hooks/useVacatures";
 
