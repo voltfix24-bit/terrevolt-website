@@ -1,5 +1,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2'
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
+import { sendTemplateEmail } from '../_shared/transactional-email-templates/send-email.ts'
+
 
 // Publiek aanroepbaar endpoint dat GEEN e-mailinhoud van de caller accepteert.
 // De caller geeft alleen het type + id van een zojuist aangemaakte rij door.
@@ -120,16 +122,35 @@ Deno.serve(async (req) => {
   const confirmationTemplate = type === 'contact' ? 'contact-confirmation' : 'application-confirmation'
 
   async function send(templateName: string, recipientEmail?: string) {
-    const res = await fetch(`${supabaseUrl}/functions/v1/send-transactional-email`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${serviceKey}`,
-      },
-      body: JSON.stringify({ templateName, recipientEmail, templateData }),
-    })
-    if (!res.ok) {
-      console.error('send-transactional-email failed', { templateName, status: res.status })
+    const target = recipientEmail ?? ''
+    try {
+      const result = await sendTemplateEmail(templateName, target, {
+        templateData,
+        idempotencyKey: `${templateName}-${type}-${id}`,
+      })
+
+      const { error: logError } = await supabase.from('email_send_log').insert({
+        message_id: null,
+        template_name: templateName,
+        recipient_email: target,
+        status: result.sent ? 'sent' : 'suppressed',
+      })
+      if (logError) {
+        console.error('Failed to write email_send_log', { templateName, code: logError.code })
+      }
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error)
+      console.error('Email send failed', { templateName, message })
+      const { error: logError } = await supabase.from('email_send_log').insert({
+        message_id: null,
+        template_name: templateName,
+        recipient_email: target,
+        status: 'failed',
+        error_message: message,
+      })
+      if (logError) {
+        console.error('Failed to write email_send_log', { templateName, code: logError.code })
+      }
     }
   }
 
@@ -137,6 +158,7 @@ Deno.serve(async (req) => {
     send(notificationTemplate),
     recipient ? send(confirmationTemplate, recipient) : Promise.resolve(),
   ])
+
 
   return json({ success: true })
 })
