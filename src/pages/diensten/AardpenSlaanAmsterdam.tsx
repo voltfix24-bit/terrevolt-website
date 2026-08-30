@@ -210,7 +210,7 @@ const AardpenSlaanAmsterdam = () => {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
-          { "@type": "ListItem", position: 2, name: "Aarding", item: `${SITE_URL}/aarding-aanleggen` },
+          { "@type": "ListItem", position: 2, name: "Aarding", item: `${SITE_URL}/aarding` },
           { "@type": "ListItem", position: 3, name: "Aardpen slaan Amsterdam", item: PAGE_URL },
         ],
       },

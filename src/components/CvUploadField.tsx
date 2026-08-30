@@ -112,7 +112,7 @@ export const CvUploadField = ({
             <div className="text-xs uppercase tracking-wider text-[#6c757d]">
               {showSuccess ? "Bestand klaar om te versturen" : "Bestand geselecteerd"}
             </div>
-            <div className="text-sm text-[#0d3b2e] break-all">
+            <div className="text-sm text-[#0d3b2e] break-words [overflow-wrap:anywhere]">
               {file.name}{" "}
               <span className="text-[#6c757d]">({formatSize(file.size)})</span>
             </div>
