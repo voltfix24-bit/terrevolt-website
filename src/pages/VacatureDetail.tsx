@@ -26,7 +26,8 @@ const VacatureDetail = () => {
 
 
   const title = vacature
-    ? `Vacature ${vacature.title} | loondienst bij TerreVolt`
+    ? VACATURE_META_TITLES[vacature.slug] ??
+      `Vacature ${vacature.title} | loondienst bij TerreVolt`
     : "Vacature niet gevonden | TerreVolt";
   const description = vacature
     ? VACATURE_META_DESCRIPTIONS[vacature.slug] ??

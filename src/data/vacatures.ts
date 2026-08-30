@@ -309,6 +309,22 @@ export const vacatures: Vacature[] = [
   },
 ];
 
+/** Zoekwoordsterke paginatitels (≤60 tekens waar mogelijk) per vacatureslug. */
+export const VACATURE_META_TITLES: Record<string, string> = {
+  "elektromonteur-laagspanning":
+    "Vacature Elektromonteur Laagspanning | TerreVolt",
+  "elektromonteur-middenspanning":
+    "Vacature Elektromonteur Middenspanning | TerreVolt",
+  "elektromonteur-laagspanning-middenspanning":
+    "Vacature Elektromonteur LS/MS | TerreVolt",
+  "aardingsmonteur":
+    "Vacature Aardingsmonteur | Aardpennen & metingen | TerreVolt",
+  "monteur-huisaansluitingen":
+    "Vacature Monteur Huisaansluitingen | TerreVolt",
+  "werkverantwoordelijke-ls-ms":
+    "Vacature Werkverantwoordelijke LS/MS | TerreVolt",
+};
+
 /** Strakke meta descriptions (±120-155 tekens) per vacatureslug. */
 export const VACATURE_META_DESCRIPTIONS: Record<string, string> = {
   "elektromonteur-middenspanning":
