@@ -1,5 +1,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2'
 import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
+import { sendTemplateEmail } from '../_shared/transactional-email-templates/send-email.ts'
+
 
 // Publiek aanroepbaar endpoint dat GEEN e-mailinhoud van de caller accepteert.
 // De caller geeft alleen het type + id van een zojuist aangemaakte rij door.
