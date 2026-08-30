@@ -169,16 +169,16 @@ const WerkenBij = () => {
                   aria-expanded={contactOpen}
                   className="inline-flex min-h-[56px] w-full items-center justify-center gap-2 rounded-lg border border-white/40 px-7 font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:w-auto"
                 >
-                  <Phone className="h-5 w-5" aria-hidden="true" />
+                  <Phone className="h-5 w-5 shrink-0" aria-hidden="true" />
                   Bel of app Tobesh
                 </button>
                 {contactOpen && (
                   <div className="absolute left-0 right-0 z-10 mt-2 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-lg sm:w-64">
                     <a href={telHref} className="flex min-h-[52px] items-center gap-2 px-4 text-sm text-[#0d3b2e] hover:bg-[#f0f7e6]">
-                      <Phone className="h-4 w-4" aria-hidden="true" /> Bel {company.phone.display}
+                      <Phone className="h-4 w-4 shrink-0" aria-hidden="true" /> Bel {company.phone.display}
                     </a>
                     <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="flex min-h-[52px] items-center gap-2 border-t border-gray-100 px-4 text-sm text-[#0d3b2e] hover:bg-[#f0f7e6]">
-                      <MessageCircle className="h-4 w-4" aria-hidden="true" /> WhatsApp Tobesh
+                      <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" /> WhatsApp Tobesh
                     </a>
                   </div>
                 )}

@@ -365,12 +365,12 @@ function Detail({
       <div className="space-y-4 text-sm">
         <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 text-[#0d3b2e]">
           <span className="flex items-center gap-1 min-w-0">
-            <a href={`mailto:${r.email}`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline rounded-md min-w-0"><Mail className="w-4 h-4 shrink-0" /> <span className="break-all">{r.email}</span></a>
+            <a href={`mailto:${r.email}`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline rounded-md min-w-0"><Mail className="w-4 h-4 shrink-0" /> <span className="break-words [overflow-wrap:anywhere]">{r.email}</span></a>
             <CopyButton type="mail" value={r.email} />
           </span>
           {r.phone && (
             <span className="flex items-center gap-1 min-w-0">
-              <a href={`tel:${r.phone}`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline rounded-md min-w-0"><Phone className="w-4 h-4 shrink-0" /> <span className="break-all">{r.phone}</span></a>
+              <a href={`tel:${r.phone}`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline rounded-md min-w-0"><Phone className="w-4 h-4 shrink-0" /> <span className="break-words [overflow-wrap:anywhere]">{r.phone}</span></a>
               <CopyButton type="tel" value={r.phone} />
             </span>
           )}

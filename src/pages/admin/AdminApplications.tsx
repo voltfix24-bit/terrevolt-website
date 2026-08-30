@@ -280,11 +280,11 @@ export default function AdminApplications() {
                   </div>
                   <div className="space-y-1.5 text-sm">
                     <div className="flex items-center gap-1 min-w-0">
-                      <a href={`tel:${a.phone}`} aria-label={`Bel ${a.phone}.`} className="inline-flex items-center gap-1.5 min-h-[40px] py-1 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors min-w-0"><Phone className="w-4 h-4 shrink-0" /> <span className="break-all">{a.phone}</span></a>
+                      <a href={`tel:${a.phone}`} aria-label={`Bel ${a.phone}.`} className="inline-flex items-center gap-1.5 min-h-[40px] py-1 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors min-w-0"><Phone className="w-4 h-4 shrink-0" /> <span className="break-words [overflow-wrap:anywhere]">{a.phone}</span></a>
                       <CopyButton type="tel" value={a.phone} />
                     </div>
                     <div className="flex items-center gap-1 min-w-0">
-                      <a href={`mailto:${a.email}`} aria-label={`Mail ${a.email}.`} className="inline-flex items-center gap-1.5 min-h-[40px] py-1 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors min-w-0"><Mail className="w-4 h-4 shrink-0" /> <span className="break-all">{a.email}</span></a>
+                      <a href={`mailto:${a.email}`} aria-label={`Mail ${a.email}.`} className="inline-flex items-center gap-1.5 min-h-[40px] py-1 hover:text-[#9ed42e] hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9ed42e] rounded-md transition-colors min-w-0"><Mail className="w-4 h-4 shrink-0" /> <span className="break-words [overflow-wrap:anywhere]">{a.email}</span></a>
                       <CopyButton type="mail" value={a.email} />
                     </div>
                   </div>
@@ -329,7 +329,7 @@ export default function AdminApplications() {
                       </TableCell>
                       <TableCell>
                         <span className="inline-flex items-center gap-1">
-                          <a href={`mailto:${a.email}`} className="inline-flex items-center min-h-[40px] py-1 break-all hover:text-[#9ed42e] hover:underline underline-offset-4 rounded-md transition-colors">{a.email}</a>
+                          <a href={`mailto:${a.email}`} className="inline-flex items-center min-h-[40px] py-1 break-words [overflow-wrap:anywhere] hover:text-[#9ed42e] hover:underline underline-offset-4 rounded-md transition-colors">{a.email}</a>
                           <CopyButton type="mail" value={a.email} />
                         </span>
                       </TableCell>
@@ -385,11 +385,11 @@ function Detail({
       <div className="space-y-4 text-sm">
         <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 text-[#0d3b2e]">
           <span className="flex items-center gap-1 min-w-0">
-            <a href={`mailto:${a.email}`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 rounded-md transition-colors min-w-0"><Mail className="w-4 h-4 shrink-0" /> <span className="break-all">{a.email}</span></a>
+            <a href={`mailto:${a.email}`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 rounded-md transition-colors min-w-0"><Mail className="w-4 h-4 shrink-0" /> <span className="break-words [overflow-wrap:anywhere]">{a.email}</span></a>
             <CopyButton type="mail" value={a.email} />
           </span>
           <span className="flex items-center gap-1 min-w-0">
-            <a href={`tel:${a.phone}`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 rounded-md transition-colors min-w-0"><Phone className="w-4 h-4 shrink-0" /> <span className="break-all">{a.phone}</span></a>
+            <a href={`tel:${a.phone}`} className="flex items-center gap-1.5 min-h-[44px] py-2 hover:text-[#9ed42e] hover:underline underline-offset-4 rounded-md transition-colors min-w-0"><Phone className="w-4 h-4 shrink-0" /> <span className="break-words [overflow-wrap:anywhere]">{a.phone}</span></a>
             <CopyButton type="tel" value={a.phone} />
           </span>
           {a.region && <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4 shrink-0" /> {a.region}</span>}

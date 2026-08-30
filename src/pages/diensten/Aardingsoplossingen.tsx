@@ -396,7 +396,7 @@ const Aardingsoplossingen = () => {
                   aria-label={`Bel TerreVolt: ${company.phone.display}`}
                   className="border-2 border-white/40 text-white px-6 sm:px-8 py-4 min-h-[56px] rounded-lg hover:border-white transition-all duration-300 flex items-center justify-center gap-2"
                 >
-                  <Phone className="w-5 h-5" aria-hidden="true" />
+                  <Phone className="w-5 h-5 shrink-0" aria-hidden="true" />
                   {company.phone.display}
                 </a>
                 {waLink && (
@@ -406,7 +406,7 @@ const Aardingsoplossingen = () => {
                     rel="noopener noreferrer"
                     className="border-2 border-white/40 text-white px-6 sm:px-8 py-4 min-h-[56px] rounded-lg hover:border-white transition-all duration-300 flex items-center justify-center gap-2"
                   >
-                    <MessageCircle className="w-5 h-5" aria-hidden="true" />
+                    <MessageCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
                     WhatsApp foto sturen
                   </a>
                 )}
@@ -622,7 +622,7 @@ const Aardingsoplossingen = () => {
                     href={telHref}
                     className="border-2 border-white/40 text-white px-7 py-4 min-h-[56px] rounded-lg hover:border-white transition-colors flex items-center justify-center gap-2"
                   >
-                    <Phone className="w-5 h-5" aria-hidden="true" />
+                    <Phone className="w-5 h-5 shrink-0" aria-hidden="true" />
                     Bel direct
                   </a>
                   {waLink && (
@@ -632,7 +632,7 @@ const Aardingsoplossingen = () => {
                       rel="noopener noreferrer"
                       className="border-2 border-white/40 text-white px-7 py-4 min-h-[56px] rounded-lg hover:border-white transition-colors flex items-center justify-center gap-2"
                     >
-                      <MessageCircle className="w-5 h-5" aria-hidden="true" />
+                      <MessageCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
                       WhatsApp foto sturen
                     </a>
                   )}
@@ -796,7 +796,7 @@ const Aardingsoplossingen = () => {
                     href={telHref}
                     className="border-2 border-white/40 text-white px-7 py-4 min-h-[56px] rounded-lg hover:border-white transition-colors flex items-center justify-center gap-2"
                   >
-                    <Phone className="w-5 h-5" aria-hidden="true" />
+                    <Phone className="w-5 h-5 shrink-0" aria-hidden="true" />
                     Bel direct
                   </a>
                 </div>
@@ -937,7 +937,7 @@ const Aardingsoplossingen = () => {
                   href={telHref}
                   className="border-2 border-[#0d3b2e]/25 text-[#0d3b2e] px-7 py-4 min-h-[56px] rounded-lg hover:border-[#0d3b2e] transition-colors flex items-center justify-center gap-2"
                 >
-                  <Phone className="w-5 h-5" aria-hidden="true" />
+                  <Phone className="w-5 h-5 shrink-0" aria-hidden="true" />
                   Bel direct
                 </a>
                 {waLink && (
@@ -947,7 +947,7 @@ const Aardingsoplossingen = () => {
                     rel="noopener noreferrer"
                     className="border-2 border-[#0d3b2e]/25 text-[#0d3b2e] px-7 py-4 min-h-[56px] rounded-lg hover:border-[#0d3b2e] transition-colors flex items-center justify-center gap-2"
                   >
-                    <MessageCircle className="w-5 h-5" aria-hidden="true" />
+                    <MessageCircle className="w-5 h-5 shrink-0" aria-hidden="true" />
                     WhatsApp foto sturen
                   </a>
                 )}
@@ -1006,7 +1006,7 @@ const Aardingsoplossingen = () => {
                   href={telHref}
                   className="border-2 border-white/40 text-white px-8 py-4 min-h-[56px] rounded-lg hover:border-white transition-colors flex items-center justify-center gap-2"
                 >
-                  <Phone className="w-5 h-5" aria-hidden="true" />
+                  <Phone className="w-5 h-5 shrink-0" aria-hidden="true" />
                   Bel TerreVolt
                 </a>
                 <Link
@@ -1030,9 +1030,9 @@ const Aardingsoplossingen = () => {
         <div className="grid grid-cols-3 gap-2">
           <a
             href={telHref}
-            className="flex flex-col items-center justify-center gap-1 min-h-[48px] rounded-lg border border-[#0d3b2e]/20 text-[#0d3b2e] text-xs"
+            className="flex flex-col items-center justify-center gap-1 min-h-[52px] rounded-lg border border-[#0d3b2e]/20 text-[#0d3b2e] text-xs"
           >
-            <Phone className="w-4 h-4" aria-hidden="true" />
+            <Phone className="w-4 h-4 shrink-0" aria-hidden="true" />
             Bel
           </a>
           {waLink ? (
@@ -1040,24 +1040,24 @@ const Aardingsoplossingen = () => {
               href={waLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center justify-center gap-1 min-h-[48px] rounded-lg border border-[#0d3b2e]/20 text-[#0d3b2e] text-xs"
+              className="flex flex-col items-center justify-center gap-1 min-h-[52px] rounded-lg border border-[#0d3b2e]/20 text-[#0d3b2e] text-xs"
             >
-              <MessageCircle className="w-4 h-4" aria-hidden="true" />
+              <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
               WhatsApp
             </a>
           ) : (
             <a
               href={`mailto:${company.email}`}
-              className="flex flex-col items-center justify-center gap-1 min-h-[48px] rounded-lg border border-[#0d3b2e]/20 text-[#0d3b2e] text-xs"
+              className="flex flex-col items-center justify-center gap-1 min-h-[52px] rounded-lg border border-[#0d3b2e]/20 text-[#0d3b2e] text-xs"
             >
-              <MessageCircle className="w-4 h-4" aria-hidden="true" />
+              <MessageCircle className="w-4 h-4 shrink-0" aria-hidden="true" />
               E-mail
             </a>
           )}
           <Link
             to="/contact?type=aarding"
             data-cta="Prijsindicatie aanvragen (sticky mobiel)"
-            className="flex items-center justify-center min-h-[48px] rounded-lg bg-[#9ed42e] text-[#0d3b2e] text-xs text-center px-2"
+            className="flex items-center justify-center min-h-[52px] rounded-lg bg-[#9ed42e] text-[#0d3b2e] text-xs text-center px-2"
           >
             Prijsindicatie
           </Link>

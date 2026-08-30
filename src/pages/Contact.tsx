@@ -361,8 +361,8 @@ const Contact = () => {
                         Aardpen slaan, aarding meten of een meetrapport — voor woning, meterkast, laadpaal,
                         zonnepanelen of bedrijfspand. Vul hieronder uw gegevens in; het duurt ongeveer 1 minuut.
                       </p>
-                      <Link to="/aarding-aanleggen" className="inline-flex items-center gap-1.5 mt-3 text-sm text-[#0d3b2e] underline underline-offset-4 decoration-[#9ed42e] min-h-[44px]">
-                        Terug naar informatie over aarding <ArrowRight className="w-4 h-4" />
+<Link to="/aarding" className="inline-flex items-center gap-1.5 mt-3 text-sm text-[#0d3b2e] underline underline-offset-4 decoration-[#9ed42e] min-h-[44px]">
+                        Terug naar informatie over aarding <ArrowRight className="w-4 h-4 shrink-0" />
                       </Link>
                     </div>
                   </div>
