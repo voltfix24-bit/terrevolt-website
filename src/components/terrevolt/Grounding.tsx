@@ -1,4 +1,6 @@
-import { Gauge, ShieldCheck, GitBranch, FileBarChart } from "lucide-react";
+import { ArrowRight, Gauge, ShieldCheck, GitBranch, FileBarChart } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/terrevolt/Reveal";
 import { EarthSymbol } from "@/components/icons/EarthSymbol";
 
@@ -53,6 +55,14 @@ export function Grounding() {
             Een betrouwbare aarding is de basis van veilige elektrotechnische infrastructuur. TerreVolt realiseert, verbetert, meet en rapporteert aardingssystemen voor LS/MS-stations, technische ruimten en industriële installaties.
           </p>
         </Reveal>
+
+        <div className="flex justify-center mb-10 sm:mb-14">
+          <Button asChild variant="secondary" className="h-auto min-h-[52px] w-full sm:w-auto px-5 py-3 whitespace-normal text-center">
+            <Link to="/aardpen-slaan-amsterdam">
+              Aardpen slaan in Amsterdam <ArrowRight aria-hidden="true" />
+            </Link>
+          </Button>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 sm:gap-6">
           {groundingServices.map((service, index) => {
