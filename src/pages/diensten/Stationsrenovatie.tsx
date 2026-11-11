@@ -6,6 +6,7 @@ import { WhenToCall } from "@/components/terrevolt/WhenToCall";
 import { SafetyStatement } from "@/components/terrevolt/SafetyStatement";
 import rmuPhoto from "@/assets/stationsrenovatie-nieuwe-rmu.jpg.asset.json";
 import lsRekPhoto from "@/assets/laagspanningsrek-vervangen.jpg.asset.json";
+import transformatorPhoto from "@/assets/transformatorruimte-aanpassen.jpg.asset.json";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
 const werkzaamheden = [
@@ -20,7 +21,7 @@ const werkzaamheden = [
 const projecttypes = [
   { icon: Building2, title: "MS/LS-stationsrenovatie", description: "Volledige renovatie en inrichting van middenspannings- en laagspanningsstations.", image: { src: rmuPhoto.url, alt: "Nieuw geplaatste RMU-middenspanningsinstallatie in een gerenoveerd MS/LS-station", position: "65% 60%" } },
   { icon: Layers, title: "Laagspanningsrek vervangen", description: "Vervanging van LS-verdeling inclusief kabelafwerking, controle en oplevering.", image: { src: lsRekPhoto.url, alt: "Vervangen laagspanningsrek in een netstation met nieuwe LS-verdeling en kabelafwerking", position: "center 55%" } },
-  { icon: Boxes, title: "Transformatorruimte aanpassen", description: "Aanpassen, herinrichten of uitbreiden van transformatorruimten en technische ruimten." },
+  { icon: Boxes, title: "Transformatorruimte aanpassen", description: "Aanpassen, herinrichten of uitbreiden van transformatorruimten en technische ruimten.", image: { src: transformatorPhoto.url, alt: "Transformator met koelribben en bovenaansluitingen in een aangepaste transformatorruimte", position: "center 50%" } },
 ];
 
 const trustItems = [
