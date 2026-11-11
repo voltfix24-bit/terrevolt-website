@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { secureUpload } from "@/lib/secureUpload";
 import { Link, useSearchParams } from "react-router-dom";
 import { ArrowRight, Phone, Mail, MapPin, Upload, Loader2, Network, HardHat, Factory, Briefcase, Users, ShieldCheck, ClipboardCheck, MessageSquare, Cable, BadgeCheck, CheckCircle2, AlertCircle, X, Zap } from "lucide-react";
 import { z } from "zod";
@@ -244,13 +245,7 @@ const Contact = () => {
     try {
       let attachment_url: string | null = null;
       if (file) {
-        const ext = (file.name.split(".").pop() || "bin").toLowerCase();
-        const path = `${crypto.randomUUID()}.${ext}`;
-        const { error: upErr } = await supabase.storage
-          .from("contact-attachments")
-          .upload(path, file, { contentType: file.type || undefined });
-        if (upErr) throw upErr;
-        attachment_url = path;
+        attachment_url = await secureUpload("contact-attachments", file);
       }
 
       const intentLabel =

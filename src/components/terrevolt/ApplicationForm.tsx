@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { secureUpload } from "@/lib/secureUpload";
 import { z } from "zod";
 import { AlertCircle, CheckCircle2, Loader2, Send } from "lucide-react";
 import { toast } from "sonner";
@@ -126,13 +127,7 @@ export const ApplicationForm = ({ defaultProfile, source = "werken_bij_form", id
       if (file) {
         setUploading(true);
         try {
-          const ext = (file.name.split(".").pop() || "bin").toLowerCase();
-          const path = `${crypto.randomUUID()}.${ext}`;
-          const { error: upErr } = await supabase.storage
-            .from("job-applications")
-            .upload(path, file, { contentType: file.type || undefined });
-          if (upErr) throw upErr;
-          cv_url = path;
+          cv_url = await secureUpload("job-applications", file);
         } finally {
           setUploading(false);
         }
