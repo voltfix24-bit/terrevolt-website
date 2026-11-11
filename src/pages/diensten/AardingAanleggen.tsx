@@ -9,7 +9,7 @@ import { company, SITE_URL, telHref } from "@/config/company";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { whatsappLink } from "@/lib/whatsapp";
 import aardpenEigenFoto from "@/assets/aardpen-slaan-terrevolt.jpg.asset.json";
-import aardpenFoto from "@/assets/aarding-aardpen-slaan.jpg";
+import aardpenFoto from "@/assets/aardpen-slaan-sleuf-terrevolt.jpg.asset.json";
 import meetrapportFoto from "@/assets/aarding-meetrapport.jpg";
 import meterkastFoto from "@/assets/aarding-meterkast.jpg";
 
