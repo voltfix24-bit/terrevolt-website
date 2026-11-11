@@ -4,6 +4,7 @@ import { StickySubnav } from "@/components/terrevolt/StickySubnav";
 import { Footer } from "@/components/terrevolt/Footer";
 import { WhenToCall } from "@/components/terrevolt/WhenToCall";
 import { SafetyStatement } from "@/components/terrevolt/SafetyStatement";
+import rmuPhoto from "@/assets/stationsrenovatie-nieuwe-rmu.jpg.asset.json";
 import lsRekPhoto from "@/assets/laagspanningsrek-vervangen.jpg.asset.json";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
@@ -17,8 +18,8 @@ const werkzaamheden = [
 ];
 
 const projecttypes = [
-  { icon: Building2, title: "MS/LS-stationsrenovatie", description: "Volledige renovatie en inrichting van middenspannings- en laagspanningsstations." },
-  { icon: Layers, title: "Laagspanningsrek vervangen", description: "Vervanging van LS-verdeling inclusief kabelafwerking, controle en oplevering.", image: { src: lsRekPhoto.url, alt: "Vervangen laagspanningsrek in een netstation met nieuwe LS-verdeling en kabelafwerking" } },
+  { icon: Building2, title: "MS/LS-stationsrenovatie", description: "Volledige renovatie en inrichting van middenspannings- en laagspanningsstations.", image: { src: rmuPhoto.url, alt: "Nieuw geplaatste RMU-middenspanningsinstallatie in een gerenoveerd MS/LS-station", position: "65% 60%" } },
+  { icon: Layers, title: "Laagspanningsrek vervangen", description: "Vervanging van LS-verdeling inclusief kabelafwerking, controle en oplevering.", image: { src: lsRekPhoto.url, alt: "Vervangen laagspanningsrek in een netstation met nieuwe LS-verdeling en kabelafwerking", position: "center 55%" } },
   { icon: Boxes, title: "Transformatorruimte aanpassen", description: "Aanpassen, herinrichten of uitbreiden van transformatorruimten en technische ruimten." },
 ];
 
@@ -145,7 +146,7 @@ const Stationsrenovatie = () => {
                   >
                     {"image" in item && item.image && (
                       <div className="relative aspect-[4/3] overflow-hidden">
-                        <img src={item.image.src} alt={item.image.alt} loading="lazy" className="w-full h-full object-cover object-[center_55%] transition-transform duration-500 group-hover:scale-105" />
+                        <img src={item.image.src} alt={item.image.alt} loading="lazy" style={{ objectPosition: item.image.position }} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                         <span className="absolute bottom-3 left-3 bg-[#0d3b2e]/85 text-[#9ed42e] text-xs tracking-wider uppercase px-3 py-1 rounded-full">Uitgevoerd project</span>
                       </div>
                     )}
