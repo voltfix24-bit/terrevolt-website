@@ -9,7 +9,7 @@ import { company, SITE_URL, telHref } from "@/config/company";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { whatsappLink } from "@/lib/whatsapp";
 import aardpenEigenFoto from "@/assets/aardpen-slaan-terrevolt.jpg.asset.json";
-import aardpenFoto from "@/assets/aarding-aardpen-slaan.jpg";
+import aardpenFoto from "@/assets/aardpen-slaan-sleuf-terrevolt.jpg.asset.json";
 import meetrapportFoto from "@/assets/aarding-meetrapport.jpg";
 import meterkastFoto from "@/assets/aarding-meterkast.jpg";
 
@@ -340,12 +340,13 @@ const AardingAanleggen = () => {
               </div>
               <div className="order-1 lg:order-2">
                 <img
-                  src={aardpenFoto}
-                  alt="Aardpen laten slaan in Amsterdam door TerreVolt"
-                  width={1280}
-                  height={960}
+                  src={aardpenFoto.url}
+                  alt="TerreVolt-monteur slaat een aardpen in een sleuf"
+                  width={1200}
+                  height={1600}
                   loading="lazy"
-                  className="w-full h-auto rounded-2xl border border-[#9ed42e]/30 object-cover shadow-xl"
+                  style={{ objectPosition: "center 35%" }}
+                  className="w-full aspect-[4/3] rounded-2xl border border-[#9ed42e]/30 object-cover shadow-xl"
                 />
               </div>
             </div>
