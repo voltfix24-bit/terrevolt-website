@@ -11,11 +11,12 @@ import fotorapportPhoto from "@/assets/fotorapport-oplevering.jpg.asset.json";
 import stationsaardingPhoto from "@/assets/stationsaarding-aardpen-slaan.jpg.asset.json";
 import kabelmontagePhoto from "@/assets/kabelmontage-kabelmof.jpg.asset.json";
 import transformatorenPhoto from "@/assets/transformatoren-transformatorruimte.jpg.asset.json";
+import msInstallatiesPhoto from "@/assets/ms-installaties-kabelaansluitingen.jpg.asset.json";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
 const werkzaamheden = [
   { icon: Server, title: "LS-rekken vervangen", description: "Ondersteuning bij demontage, montage, kabelafwerking en oplevering van laagspanningsverdelingen." },
-  { icon: Cpu, title: "MS-installaties", description: "Aansluitwerk en ondersteuning bij RMU's, MS-velden en schakelinstallaties." },
+  { icon: Cpu, title: "MS-installaties", description: "Aansluitwerk en ondersteuning bij RMU's, MS-velden en schakelinstallaties.", image: { src: msInstallatiesPhoto.url, alt: "Afgemonteerde MS-kabelaansluitingen in een middenspanningsveld", position: "center 45%" } },
   { icon: Zap, title: "Transformatoren", description: "Ondersteuning bij transformatorwissels, aansluitwerk en controle van voorzieningen.", image: { src: transformatorenPhoto.url, alt: "Transformator met bovenaansluitingen in een nette transformatorruimte", position: "center 45%" } },
   { icon: Cable, title: "Kabelmontage", description: "Kabelinvoer, afmontage en aansluiting binnen technische ruimten.", image: { src: kabelmontagePhoto.url, alt: "Afgemonteerde kabelmof in een sleuf tijdens kabelmontage", position: "center 45%" } },
   { icon: Gauge, title: "Stationsaarding", description: "Aardingsvoorzieningen voor stations, transformatorruimten en technische installaties.", image: { src: stationsaardingPhoto.url, alt: "TerreVolt-monteur slaat een aardpen in een sleuf voor stationsaarding", position: "center 40%" } },
