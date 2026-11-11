@@ -12,6 +12,7 @@ import { usePageMeta } from "../hooks/usePageMeta";
 import { company, addressOneLine, telHref, mailHref } from "@/config/company";
 import { CopyButton } from "@/components/terrevolt/CopyableContactLink";
 import { notifySubmission } from "@/lib/notify";
+import { getContactLocation } from "@/lib/contactLocation";
 
 
 const contactCards = [
@@ -632,6 +633,7 @@ const Contact = () => {
                             {isAarding ? "Postcode / plaats *" : "Locatie / regio"}
                           </label>
                           <input id="location" name="location" maxLength={150} required={isAarding}
+                            defaultValue={getContactLocation(searchParams)}
                             autoComplete={isAarding ? "postal-code" : undefined}
                             placeholder={isAarding ? "Bijv. 3545 NH Utrecht" : "Bijv. Utrecht, regio Midden-Nederland"}
                             className="w-full px-4 py-3 min-h-[48px] rounded-lg border border-gray-200 focus:border-[#9ed42e] focus:outline-none focus:ring-2 focus:ring-[#9ed42e]/20 transition" />
