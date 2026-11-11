@@ -114,13 +114,21 @@ const Stationsrenovatie = () => {
                 return (
                   <div
                     key={item.title}
-                    className="group bg-white border border-gray-200 rounded-xl p-8 hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300"
+                    className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-[#9ed42e] hover:shadow-xl transition-all duration-300"
                   >
+                    {"image" in item && item.image && (
+                      <div className="relative aspect-[4/3] overflow-hidden">
+                        <img src={item.image.src} alt={item.image.alt} loading="lazy" style={{ objectPosition: item.image.position }} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                        <span className="absolute bottom-3 left-3 bg-[#0d3b2e]/85 text-[#9ed42e] text-xs tracking-wider uppercase px-3 py-1 rounded-full">Uitgevoerd project</span>
+                      </div>
+                    )}
+                    <div className="p-8">
                     <div className="w-14 h-14 bg-[#f0f7e6] rounded-lg flex items-center justify-center mb-6 group-hover:bg-[#9ed42e] transition-colors duration-300">
                       <Icon className="w-7 h-7 text-[#0d3b2e] group-hover:text-white transition-colors duration-300" strokeWidth={2} />
                     </div>
                     <h3 className="text-xl text-[#0d3b2e] mb-3">{item.title}</h3>
                     <p className="text-[#6c757d] leading-relaxed">{item.description}</p>
+                    </div>
                   </div>
                 );
               })}
