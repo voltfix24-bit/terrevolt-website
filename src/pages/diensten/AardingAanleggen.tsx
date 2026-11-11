@@ -10,7 +10,7 @@ import { usePageMeta } from "../../hooks/usePageMeta";
 import { whatsappLink } from "@/lib/whatsapp";
 import aardpenEigenFoto from "@/assets/aardpen-slaan-terrevolt.jpg.asset.json";
 import aardpenFoto from "@/assets/aardpen-slaan-sleuf-terrevolt.jpg.asset.json";
-import meetrapportFoto from "@/assets/aarding-meetrapport.jpg";
+import meetrapportFoto from "@/assets/meetrapport-aardingsmeting.jpg.asset.json";
 import meterkastFoto from "@/assets/aarding-meterkast.jpg";
 
 const PAGE_PATH = "/aarding";
@@ -457,10 +457,10 @@ const AardingAanleggen = () => {
           <div className="container mx-auto px-5 sm:px-6 lg:px-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center max-w-6xl mx-auto">
               <img
-                src={meetrapportFoto}
-                alt="Aardingsmeting met meetrapport door TerreVolt"
-                width={1280}
-                height={960}
+                src={meetrapportFoto.url}
+                alt="Digitale aardmeter meet 1,97 ohm tijdens aardingsmeting door TerreVolt"
+                width={1440}
+                height={1080}
                 loading="lazy"
                 className="w-full h-auto rounded-2xl border border-white/15 object-cover"
               />
