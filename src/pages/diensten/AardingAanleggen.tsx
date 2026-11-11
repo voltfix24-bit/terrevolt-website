@@ -8,6 +8,7 @@ import { WhenToCall } from "@/components/terrevolt/WhenToCall";
 import { company, SITE_URL, telHref } from "@/config/company";
 import { usePageMeta } from "../../hooks/usePageMeta";
 import { whatsappLink } from "@/lib/whatsapp";
+import aardpenEigenFoto from "@/assets/aardpen-slaan-terrevolt.jpg.asset.json";
 import aardpenFoto from "@/assets/aarding-aardpen-slaan.jpg";
 import meetrapportFoto from "@/assets/aarding-meetrapport.jpg";
 import meterkastFoto from "@/assets/aarding-meterkast.jpg";
@@ -248,12 +249,12 @@ const AardingAanleggen = () => {
 
               <div className="relative">
                 <img
-                  src={aardpenFoto}
-                  alt="Aardpen laten slaan en aarding meten door TerreVolt"
-                  width={1280}
-                  height={960}
+                  src={aardpenEigenFoto.url}
+                  alt="TerreVolt-monteur slaat aardpennen in een bouwput"
+                  width={1200}
+                  height={1600}
                   loading="eager"
-                  className="w-full h-auto rounded-2xl border border-white/15 object-cover shadow-2xl"
+                  className="w-full aspect-[4/3] lg:aspect-[5/6] object-[center_45%] rounded-2xl border border-white/15 object-cover shadow-2xl"
                 />
                 <div className="absolute left-4 right-4 bottom-4 bg-white/95 backdrop-blur rounded-xl p-4 border border-white/60">
                   <div className="flex items-start gap-3">
