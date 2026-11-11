@@ -8,6 +8,7 @@ import rmuPhoto from "@/assets/stationsrenovatie-nieuwe-rmu.jpg.asset.json";
 import lsRekPhoto from "@/assets/laagspanningsrek-vervangen.jpg.asset.json";
 import transformatorPhoto from "@/assets/transformatorruimte-aanpassen.jpg.asset.json";
 import fotorapportPhoto from "@/assets/fotorapport-oplevering.jpg.asset.json";
+import stationsaardingPhoto from "@/assets/stationsaarding-aardpen-slaan.jpg.asset.json";
 import { usePageMeta } from "../../hooks/usePageMeta";
 
 const werkzaamheden = [
@@ -15,7 +16,7 @@ const werkzaamheden = [
   { icon: Cpu, title: "MS-installaties", description: "Aansluitwerk en ondersteuning bij RMU's, MS-velden en schakelinstallaties." },
   { icon: Zap, title: "Transformatoren", description: "Ondersteuning bij transformatorwissels, aansluitwerk en controle van voorzieningen." },
   { icon: Cable, title: "Kabelmontage", description: "Kabelinvoer, afmontage en aansluiting binnen technische ruimten." },
-  { icon: Gauge, title: "Stationsaarding", description: "Aardingsvoorzieningen voor stations, transformatorruimten en technische installaties." },
+  { icon: Gauge, title: "Stationsaarding", description: "Aardingsvoorzieningen voor stations, transformatorruimten en technische installaties.", image: { src: stationsaardingPhoto.url, alt: "TerreVolt-monteur slaat een aardpen in een sleuf voor stationsaarding", position: "center 40%" } },
   { icon: ClipboardCheck, title: "Oplevering", description: "Controle, rapportage en duidelijke terugkoppeling na uitvoering.", image: { src: fotorapportPhoto.url, alt: "Voorpagina van een TerreVolt-fotorapport voor de technische oplevering van een station", position: "center 30%" } },
 ];
 
