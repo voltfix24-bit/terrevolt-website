@@ -118,7 +118,6 @@ const Stationsrenovatie = () => {
                     </div>
                     <h3 className="text-xl text-[#0d3b2e] mb-3">{item.title}</h3>
                     <p className="text-[#6c757d] leading-relaxed">{item.description}</p>
-                    </div>
                   </div>
                 );
               })}
@@ -156,6 +155,7 @@ const Stationsrenovatie = () => {
                     </div>
                     <h3 className="text-2xl text-[#0d3b2e] mb-4">{item.title}</h3>
                     <p className="text-[#6c757d] leading-relaxed">{item.description}</p>
+                    </div>
                   </div>
                 );
               })}
